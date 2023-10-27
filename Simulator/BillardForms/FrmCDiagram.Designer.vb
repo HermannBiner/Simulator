@@ -9,6 +9,7 @@ Partial Class FrmCDiagram
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
             End If
+            CDiagram.Dispose()
         Finally
             MyBase.Dispose(disposing)
         End Try
@@ -30,7 +31,7 @@ Partial Class FrmCDiagram
         Me.LblVmax = New System.Windows.Forms.Label()
         Me.TxtVMin = New System.Windows.Forms.TextBox()
         Me.LblVmin = New System.Windows.Forms.Label()
-        Me.LblValueRange = New System.Windows.Forms.Label()
+        Me.LblValueParameter = New System.Windows.Forms.Label()
         Me.LblPrecision = New System.Windows.Forms.Label()
         Me.TrbPrecision = New System.Windows.Forms.TrackBar()
         Me.CboFunction = New System.Windows.Forms.ComboBox()
@@ -41,9 +42,12 @@ Partial Class FrmCDiagram
         Me.LblParameterRange = New System.Windows.Forms.Label()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.BtnStartIteration = New System.Windows.Forms.Button()
-        Me.CboValueRange = New System.Windows.Forms.ComboBox()
+        Me.CboValueParameter = New System.Windows.Forms.ComboBox()
+        Me.LblStartValues = New System.Windows.Forms.Label()
+        Me.TrbPositionStartValues = New System.Windows.Forms.TrackBar()
         CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrbPrecision, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TrbPositionStartValues, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PicDiagram
@@ -116,20 +120,20 @@ Partial Class FrmCDiagram
         Me.LblVmin.TabIndex = 57
         Me.LblVmin.Text = "V Min ="
         '
-        'LblValueRange
+        'LblValueParameter
         '
-        Me.LblValueRange.AutoSize = True
-        Me.LblValueRange.Location = New System.Drawing.Point(1277, 302)
-        Me.LblValueRange.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblValueRange.Name = "LblValueRange"
-        Me.LblValueRange.Size = New System.Drawing.Size(243, 25)
-        Me.LblValueRange.TabIndex = 56
-        Me.LblValueRange.Text = "ExaminatedValueRange"
+        Me.LblValueParameter.AutoSize = True
+        Me.LblValueParameter.Location = New System.Drawing.Point(1277, 302)
+        Me.LblValueParameter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblValueParameter.Name = "LblValueParameter"
+        Me.LblValueParameter.Size = New System.Drawing.Size(279, 25)
+        Me.LblValueParameter.TabIndex = 56
+        Me.LblValueParameter.Text = "ExaminatedValueParameter"
         '
         'LblPrecision
         '
         Me.LblPrecision.AutoSize = True
-        Me.LblPrecision.Location = New System.Drawing.Point(1277, 570)
+        Me.LblPrecision.Location = New System.Drawing.Point(1280, 756)
         Me.LblPrecision.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblPrecision.Name = "LblPrecision"
         Me.LblPrecision.Size = New System.Drawing.Size(173, 25)
@@ -138,7 +142,7 @@ Partial Class FrmCDiagram
         '
         'TrbPrecision
         '
-        Me.TrbPrecision.Location = New System.Drawing.Point(1283, 623)
+        Me.TrbPrecision.Location = New System.Drawing.Point(1281, 799)
         Me.TrbPrecision.Margin = New System.Windows.Forms.Padding(4)
         Me.TrbPrecision.Maximum = 100
         Me.TrbPrecision.Minimum = 1
@@ -219,7 +223,7 @@ Partial Class FrmCDiagram
         '
         'BtnStartIteration
         '
-        Me.BtnStartIteration.Location = New System.Drawing.Point(1285, 782)
+        Me.BtnStartIteration.Location = New System.Drawing.Point(1280, 923)
         Me.BtnStartIteration.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnStartIteration.Name = "BtnStartIteration"
         Me.BtnStartIteration.Size = New System.Drawing.Size(396, 51)
@@ -227,28 +231,49 @@ Partial Class FrmCDiagram
         Me.BtnStartIteration.Text = "StartIteration"
         Me.BtnStartIteration.UseVisualStyleBackColor = True
         '
-        'CboValueRange
+        'CboValueParameter
         '
-        Me.CboValueRange.FormattingEnabled = True
-        Me.CboValueRange.Items.AddRange(New Object() {"ValueRange1", "ValueRange2"})
-        Me.CboValueRange.Location = New System.Drawing.Point(1360, 342)
-        Me.CboValueRange.Name = "CboValueRange"
-        Me.CboValueRange.Size = New System.Drawing.Size(317, 33)
-        Me.CboValueRange.TabIndex = 61
+        Me.CboValueParameter.FormattingEnabled = True
+        Me.CboValueParameter.Items.AddRange(New Object() {"ValueRange1", "ValueRange2"})
+        Me.CboValueParameter.Location = New System.Drawing.Point(1360, 342)
+        Me.CboValueParameter.Name = "CboValueParameter"
+        Me.CboValueParameter.Size = New System.Drawing.Size(317, 33)
+        Me.CboValueParameter.TabIndex = 61
+        '
+        'LblStartValues
+        '
+        Me.LblStartValues.AutoSize = True
+        Me.LblStartValues.Location = New System.Drawing.Point(1275, 556)
+        Me.LblStartValues.Name = "LblStartValues"
+        Me.LblStartValues.Size = New System.Drawing.Size(243, 25)
+        Me.LblStartValues.TabIndex = 62
+        Me.LblStartValues.Text = "Position Start Value 2: 4"
+        '
+        'TrbPositionStartValues
+        '
+        Me.TrbPositionStartValues.Location = New System.Drawing.Point(1280, 609)
+        Me.TrbPositionStartValues.Maximum = 12
+        Me.TrbPositionStartValues.Minimum = 1
+        Me.TrbPositionStartValues.Name = "TrbPositionStartValues"
+        Me.TrbPositionStartValues.Size = New System.Drawing.Size(396, 90)
+        Me.TrbPositionStartValues.TabIndex = 63
+        Me.TrbPositionStartValues.Value = 4
         '
         'FrmCDiagram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(2349, 1180)
-        Me.Controls.Add(Me.CboValueRange)
+        Me.Controls.Add(Me.TrbPositionStartValues)
+        Me.Controls.Add(Me.LblStartValues)
+        Me.Controls.Add(Me.CboValueParameter)
         Me.Controls.Add(Me.LblDeltaV)
         Me.Controls.Add(Me.LblDeltaC)
         Me.Controls.Add(Me.TxtVMax)
         Me.Controls.Add(Me.LblVmax)
         Me.Controls.Add(Me.TxtVMin)
         Me.Controls.Add(Me.LblVmin)
-        Me.Controls.Add(Me.LblValueRange)
+        Me.Controls.Add(Me.LblValueParameter)
         Me.Controls.Add(Me.LblPrecision)
         Me.Controls.Add(Me.TrbPrecision)
         Me.Controls.Add(Me.CboFunction)
@@ -263,8 +288,10 @@ Partial Class FrmCDiagram
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmCDiagram"
         Me.Text = "C-Diagram"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TrbPrecision, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TrbPositionStartValues, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -277,7 +304,7 @@ Partial Class FrmCDiagram
     Friend WithEvents LblVmax As Label
     Friend WithEvents TxtVMin As TextBox
     Friend WithEvents LblVmin As Label
-    Friend WithEvents LblValueRange As Label
+    Friend WithEvents LblValueParameter As Label
     Friend WithEvents LblPrecision As Label
     Friend WithEvents TrbPrecision As TrackBar
     Friend WithEvents CboFunction As ComboBox
@@ -288,5 +315,7 @@ Partial Class FrmCDiagram
     Friend WithEvents LblParameterRange As Label
     Friend WithEvents BtnReset As Button
     Friend WithEvents BtnStartIteration As Button
-    Friend WithEvents CboValueRange As ComboBox
+    Friend WithEvents CboValueParameter As ComboBox
+    Friend WithEvents LblStartValues As Label
+    Friend WithEvents TrbPositionStartValues As TrackBar
 End Class

@@ -25,6 +25,9 @@ Partial Class Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.MnuMain = New System.Windows.Forms.MenuStrip()
         Me.MnuFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuLanguage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuEnglish = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuGerman = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuUnimodal = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuIteration = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,9 +48,6 @@ Partial Class Main
         Me.MnuManual = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuMathematics = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuInfo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuLanguage = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuEnglish = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuGerman = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,10 +70,29 @@ Partial Class Main
         Me.MnuFile.Size = New System.Drawing.Size(83, 45)
         Me.MnuFile.Text = "File"
         '
+        'MnuLanguage
+        '
+        Me.MnuLanguage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuEnglish, Me.MnuGerman})
+        Me.MnuLanguage.Name = "MnuLanguage"
+        Me.MnuLanguage.Size = New System.Drawing.Size(285, 50)
+        Me.MnuLanguage.Text = "Language"
+        '
+        'MnuEnglish
+        '
+        Me.MnuEnglish.Name = "MnuEnglish"
+        Me.MnuEnglish.Size = New System.Drawing.Size(260, 50)
+        Me.MnuEnglish.Text = "English"
+        '
+        'MnuGerman
+        '
+        Me.MnuGerman.Name = "MnuGerman"
+        Me.MnuGerman.Size = New System.Drawing.Size(260, 50)
+        Me.MnuGerman.Text = "German"
+        '
         'MnuClose
         '
         Me.MnuClose.Name = "MnuClose"
-        Me.MnuClose.Size = New System.Drawing.Size(359, 50)
+        Me.MnuClose.Size = New System.Drawing.Size(285, 50)
         Me.MnuClose.Text = "Close"
         '
         'MnuUnimodal
@@ -123,19 +142,19 @@ Partial Class Main
         'MnuBillard
         '
         Me.MnuBillard.Name = "MnuBillard"
-        Me.MnuBillard.Size = New System.Drawing.Size(289, 50)
+        Me.MnuBillard.Size = New System.Drawing.Size(359, 50)
         Me.MnuBillard.Text = "Billard"
         '
         'MnuPendulum
         '
         Me.MnuPendulum.Name = "MnuPendulum"
-        Me.MnuPendulum.Size = New System.Drawing.Size(289, 50)
+        Me.MnuPendulum.Size = New System.Drawing.Size(359, 50)
         Me.MnuPendulum.Text = "Pendulum"
         '
         'MnuCDiagram
         '
         Me.MnuCDiagram.Name = "MnuCDiagram"
-        Me.MnuCDiagram.Size = New System.Drawing.Size(289, 50)
+        Me.MnuCDiagram.Size = New System.Drawing.Size(359, 50)
         Me.MnuCDiagram.Text = "CDiagram"
         '
         'MnuKomplexIteration
@@ -168,6 +187,7 @@ Partial Class Main
         Me.MnuTest.Name = "MnuTest"
         Me.MnuTest.Size = New System.Drawing.Size(90, 45)
         Me.MnuTest.Text = "Test"
+        Me.MnuTest.Visible = False
         '
         'MnuDocumentation
         '
@@ -179,39 +199,20 @@ Partial Class Main
         'MnuManual
         '
         Me.MnuManual.Name = "MnuManual"
-        Me.MnuManual.Size = New System.Drawing.Size(359, 50)
+        Me.MnuManual.Size = New System.Drawing.Size(325, 50)
         Me.MnuManual.Text = "Manual"
         '
         'MnuMathematics
         '
         Me.MnuMathematics.Name = "MnuMathematics"
-        Me.MnuMathematics.Size = New System.Drawing.Size(359, 50)
+        Me.MnuMathematics.Size = New System.Drawing.Size(325, 50)
         Me.MnuMathematics.Text = "Mathematics"
         '
         'MnuInfo
         '
         Me.MnuInfo.Name = "MnuInfo"
-        Me.MnuInfo.Size = New System.Drawing.Size(359, 50)
+        Me.MnuInfo.Size = New System.Drawing.Size(325, 50)
         Me.MnuInfo.Text = "Info"
-        '
-        'MnuLanguage
-        '
-        Me.MnuLanguage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuEnglish, Me.MnuGerman})
-        Me.MnuLanguage.Name = "MnuLanguage"
-        Me.MnuLanguage.Size = New System.Drawing.Size(359, 50)
-        Me.MnuLanguage.Text = "Language"
-        '
-        'MnuEnglish
-        '
-        Me.MnuEnglish.Name = "MnuEnglish"
-        Me.MnuEnglish.Size = New System.Drawing.Size(359, 50)
-        Me.MnuEnglish.Text = "English"
-        '
-        'MnuGerman
-        '
-        Me.MnuGerman.Name = "MnuGerman"
-        Me.MnuGerman.Size = New System.Drawing.Size(359, 50)
-        Me.MnuGerman.Text = "German"
         '
         'Main
         '

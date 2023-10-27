@@ -64,6 +64,8 @@ Public Class FrmTwoDimensions
         BtnNext10.Text = Main.LM.GetString("Next10Steps")
         GrpStartpoint.Text = Main.LM.GetString("CoordinatesStartpoint")
         CboFunction.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))

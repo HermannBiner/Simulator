@@ -145,6 +145,10 @@
     <value>Billardtisch</value>
     <comment>Lbl</comment>
   </data>
+  <data name="C-Diagram" xml:space="preserve">
+    <value>C-Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ColoredDiagram" xml:space="preserve">
     <value>Farbiges Diagramm</value>
     <comment>Lbl</comment>
@@ -181,12 +185,16 @@
     <value>Elliptisch</value>
     <comment>Lbl</comment>
   </data>
+  <data name="EllipticBillard" xml:space="preserve">
+    <value>Elliptisches Billard</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
     <value>Untersuchter Parameterbereich</value>
     <comment>Lbl</comment>
   </data>
-  <data name="ExaminatedValueRange" xml:space="preserve">
-    <value>Untersuchter Wertebereich</value>
+  <data name="ExaminatedValueParameter" xml:space="preserve">
+    <value>Untersuchter Werteparameter</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExperimentNo" xml:space="preserve">
@@ -211,6 +219,10 @@
   </data>
   <data name="Histogram" xml:space="preserve">
     <value>Histogramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="HitPoint" xml:space="preserve">
+    <value>Stosspunkt Parameter t</value>
     <comment>Lbl</comment>
   </data>
   <data name="InvalidDualNumberDigits" xml:space="preserve">
@@ -247,6 +259,10 @@
   </data>
   <data name="LogisticGrowth" xml:space="preserve">
     <value>Logistisches Wachstum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="LowerPendulumAngle" xml:space="preserve">
+    <value>Winkel des unteren Pendels</value>
     <comment>Lbl</comment>
   </data>
   <data name="MailTo" xml:space="preserve">
@@ -393,6 +409,10 @@
     <value>Wenn das Verhalten nicht chaotisch ist, wird das erwartete Resultat nicht auftreten.</value>
     <comment>Msg</comment>
   </data>
+  <data name="NoStartPointSet" xml:space="preserve">
+    <value>Kein Startpunkt gesetzt!</value>
+    <comment>Msg</comment>
+  </data>
   <data name="NotAlllowedValue" xml:space="preserve">
     <value>nicht erlaubt. Er muss im Intervall sein:</value>
     <comment>Msg</comment>
@@ -417,6 +437,10 @@
     <value>Oval</value>
     <comment>Lbl</comment>
   </data>
+  <data name="OvalBillard" xml:space="preserve">
+    <value>Ovales Billard</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Parabola" xml:space="preserve">
     <value>Parabel</value>
     <comment>Lbl</comment>
@@ -433,6 +457,10 @@
     <value>Phasenportrait t, alfa</value>
     <comment>Lbl</comment>
   </data>
+  <data name="PositionStartValue2" xml:space="preserve">
+    <value>Position Startwert 2:</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="PositiveNumber" xml:space="preserve">
     <value>muss eine positive Zahl sein!</value>
     <comment>Msg</comment>
@@ -447,6 +475,10 @@
   </data>
   <data name="ProgramVersion" xml:space="preserve">
     <value>Program Version 0.6 - 30.09.2023</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ReflexionAngle" xml:space="preserve">
+    <value>Reflexionswinkel</value>
     <comment>Lbl</comment>
   </data>
   <data name="ResetIteration" xml:space="preserve">
@@ -475,6 +507,10 @@
   </data>
   <data name="Stadium" xml:space="preserve">
     <value>Stadion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StadiumBillard" xml:space="preserve">
+    <value>Billard im Stadion</value>
     <comment>Lbl</comment>
   </data>
   <data name="StartIteration" xml:space="preserve">
@@ -512,6 +548,9 @@
   <data name="StretchingParameterInterval" xml:space="preserve">
     <value>Der Dehnparameter muss im Intervall sein:</value>
     <comment>Msg</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="TakeOver" xml:space="preserve">
     <value>Übernehme Startparameter</value>
@@ -551,6 +590,10 @@
   </data>
   <data name="UnimodalFunctions" xml:space="preserve">
     <value>Unimodale Funktionen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperPendulumAngle" xml:space="preserve">
+    <value>Winkel des oberen Pendels</value>
     <comment>Lbl</comment>
   </data>
   <data name="ValueList1" xml:space="preserve">

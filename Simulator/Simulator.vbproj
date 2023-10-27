@@ -112,6 +112,7 @@
     <Compile Include="BillardClassLibrary\ClsStadiumBillardtable.vb" />
     <Compile Include="BillardClassLibrary\IBillardball.vb" />
     <Compile Include="BillardClassLibrary\IBillardtable.vb" />
+    <Compile Include="BillardClassLibrary\ICDiagram.vb" />
     <Compile Include="BillardForms\FrmCDiagram.Designer.vb">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>
     </Compile>
@@ -123,6 +124,8 @@
     <Compile Include="GeneralClassLibrary\ClsCheckIsInterval.vb" />
     <Compile Include="GeneralClassLibrary\ClsLanguageManager.vb" />
     <Compile Include="GeneralClassLibrary\ClsMathpoint.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValueParameter.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValueTupel.vb" />
     <Compile Include="GeneralForms\FrmTests.Designer.vb">
       <DependentUpon>FrmTests.vb</DependentUpon>
     </Compile>

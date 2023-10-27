@@ -94,6 +94,8 @@ Public Class FrmIteration
         LblStartValue.Text = Main.LM.GetString("StartValue") & " = "
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         CboFunction.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))

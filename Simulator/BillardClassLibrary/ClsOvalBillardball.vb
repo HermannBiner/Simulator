@@ -13,7 +13,7 @@
 Imports System.Globalization
 
 Public Class ClsOvalBillardball
-    Implements IBillardball
+    Implements IBillardball, ICDiagram
 
     'The actual position of the Ball is drawned into this PictureBox
     'and shown by the Refresh-Method
@@ -39,9 +39,12 @@ Public Class ClsOvalBillardball
     'Value Range of the Parameter t that defines the Hit Point, in [0, 2*pi[
     Private ReadOnly MyTValuerange As ClsInterval
 
+    'Collection of ValueRanges for C-Diagram
+    Private ReadOnly MyValueParameters As List(Of ClsValueParameter)
+
     'The Value Range of the Mathematical Coordinates - Standard is the Interval [-1,1]
     'and the Coordinate System as Square [-1,1] x [-1,1]
-    Private ReadOnly MyOvalValuerange As ClsInterval
+    Private ReadOnly MyMathValuerange As ClsInterval
 
     'The class for general mathematical Calculations
     Private ReadOnly MyMathhelper As ClsMathhelperBillard
@@ -86,23 +89,32 @@ Public Class ClsOvalBillardball
     Public Sub New()
 
         MyMathhelper = New ClsMathhelperBillard
-        MyOvalValuerange = New ClsInterval(-1, 1)
+        MyMathValuerange = New ClsInterval(-1, 1)
         MyAlfaValuerange = New ClsInterval(0, CDec(Math.PI))
         MyTValuerange = New ClsInterval(0, CDec(Math.PI * 2))
+
+        MyValueParameters = New List(Of ClsValueParameter)
+
+        Dim ValueRange As ClsValueParameter
+        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValuerange)
+        MyValueParameters.Add(ValueRange)
+
+        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
+        MyValueParameters.Add(ValueRange)
 
     End Sub
 
     WriteOnly Property Billardtable As PictureBox Implements IBillardball.Billardtable
         Set(value As PictureBox)
             MyBillardtable = value
-            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyOvalValuerange, MyOvalValuerange)
+            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
     WriteOnly Property MapBillardtable As Bitmap Implements IBillardball.MapBillardtable
         Set(value As Bitmap)
             MyMapBillardtable = value
-            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyOvalValuerange, MyOvalValuerange)
+            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
@@ -123,6 +135,18 @@ Public Class ClsOvalBillardball
             UserEndposition = New ClsMathpoint(a + b, 0)
 
             'these Parameters are set later by the by moving the Mouse
+
+        End Set
+    End Property
+
+    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+        Set(value As Decimal)
+            MyC = value
+
+            'for better visibility, a + b is set = 1.9 (instead of 2)
+            a = CDec(1.9) * Math.Min(1 / (1 + MyC), 1 / (2 * MyC))
+            b = MyC * a
+            m = (a - b) / 2
 
         End Set
     End Property
@@ -229,6 +253,18 @@ Public Class ClsOvalBillardball
         Set(value As Boolean)
             MyStartangleSet = value
         End Set
+    End Property
+
+    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagram.CParameterRange
+        Get
+            CParameterRange = New ClsInterval(CDec(0.5), CDec(2))
+        End Get
+    End Property
+
+    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagram.ValueParameters
+        Get
+            ValueParameters = MyValueParameters
+        End Get
     End Property
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
@@ -374,6 +410,31 @@ Public Class ClsOvalBillardball
 
     End Sub
 
+    Public Function GetNextPoint(ActualPoint As ClsValueTupel) As ClsValueTupel Implements ICDiagram.GetNextPoint
+
+        MyT = ActualPoint.X
+        Dim alfa As Decimal = ActualPoint.Y
+
+        'first, we calculate the angle between tangent in the hit point
+        'and the positive xaxis
+        Dim psi As Decimal = MyMathhelper.AngleInNullTwoPi(CalculatePsi(MyT))
+
+        'Now the angle between the next moving-direction and the positive x-axis is:
+        MyPhi = psi + alfa
+
+        'Parameter of the next Enpoint of the actual part of the Orbit
+        Dim nextT As Decimal = ParameterOfNextHitPoint(MyT, MyPhi)
+
+        'in addition, we calculate the angle of the following movement
+        MyPhi = CalculateNextPhi(nextT, MyPhi)
+
+        alfa = CalculateAlfa(nextT, MyPhi)
+
+        Dim NextPoint As New ClsValueTupel(nextT, alfa)
+
+        Return NextPoint
+
+    End Function
 
     'SECTOR BALL MOVEMENT
 
@@ -389,7 +450,7 @@ Public Class ClsOvalBillardball
         Dim i As Integer = 0
 
         'The following StepWide was defined by an Experiment
-        Dim Stepwide As Decimal = MyOvalValuerange.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Decimal = MyMathValuerange.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1

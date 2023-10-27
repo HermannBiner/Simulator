@@ -63,6 +63,8 @@ Public Class FrmBillardtable
         LblParameterc.Text = Main.LM.GetString("FactorC")
         BtnDrawBillardTable.Text = Main.LM.GetString("DrawBillardTable")
         CboBillardTable.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboBillardTable.Items.Add(Main.LM.GetString("Elliptic"))
         CboBillardTable.Items.Add(Main.LM.GetString("Stadium"))
         CboBillardTable.Items.Add(Main.LM.GetString("Oval"))

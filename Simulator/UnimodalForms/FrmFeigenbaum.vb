@@ -28,16 +28,16 @@ Public Class FrmFeigenbaum
     Private Valuerange As ClsInterval
 
     'For the Check if the Definitions of the Ranges by the User is OK
-    Private IsUserinputValid As Boolean
+    Private IsUserSelectionValid As Boolean
 
     'Variables for the definition of the Ranges by a selection-rectangle
     Private IsMousedown As Boolean = False
 
     'Point where the left mouse button was pushed down
-    Private Startpoint As Point
+    Private UserSelectionStartpoint As Point
 
     'Point where the left mouse button was released
-    Private Endpoint As Point
+    Private UserSelectionEndpoint As Point
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -63,11 +63,11 @@ Public Class FrmFeigenbaum
         BtnStartIteration.Text = Main.LM.GetString("StartIteration")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         CboFunction.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
-
-
 
     End Sub
 
@@ -81,9 +81,6 @@ Public Class FrmFeigenbaum
         }
 
         'Default Settings
-        Parameterrange = Iterator.ParameterInterval
-        Valuerange = Iterator.IterationInterval
-        MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
         CboFunction.SelectedIndex = 1
         CboFunction.Select()
 
@@ -94,28 +91,33 @@ Public Class FrmFeigenbaum
 
     Private Sub SetDefaultValues()
 
-        TxtAMin.Text = Iterator.ParameterInterval.A.ToString(CultureInfo.CurrentCulture)
-        TxtAMax.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaA.Text = Main.LM.GetString("Delta") & " = " & Iterator.ParameterInterval.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        'if there where User-defined ranges,
+        'or the iterator had changed
+        'the ranges are reset to the standard
+        Parameterrange = Iterator.ParameterInterval
+        Valuerange = Iterator.IterationInterval
+        MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
 
-        TxtXMin.Text = Iterator.IterationInterval.A.ToString(CultureInfo.CurrentCulture)
-        TxtXMax.Text = Iterator.IterationInterval.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Iterator.IterationInterval.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        TxtAMin.Text = Parameterrange.A.ToString(CultureInfo.CurrentCulture)
+        TxtAMax.Text = Parameterrange.B.ToString(CultureInfo.CurrentCulture)
+        LblDeltaA.Text = Main.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        IsUserinputValid = True
-
-    End Sub
-
-    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        TxtXMin.Text = Valuerange.A.ToString(CultureInfo.CurrentCulture)
+        TxtXMax.Text = Valuerange.B.ToString(CultureInfo.CurrentCulture)
+        LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
         'The display is cleared
         MyBitmapGraphics.Clear(Color.White)
         PicDiagram.Refresh()
 
-        'Reset the ranges
-        Parameterrange = Iterator.ParameterInterval
-        Valuerange = Iterator.IterationInterval
-        MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
+        IsUserSelectionValid = True
+
+    End Sub
+
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+
+        'Reset ranges and Default Values
+        SetDefaultValues()
 
     End Sub
 
@@ -125,6 +127,7 @@ Public Class FrmFeigenbaum
 
         'The user chooses the type of iteration
         type = CboFunction.SelectedIndex
+
         Select Case type
             Case 0  'Tentmap
                 Iterator = New ClsTentmap
@@ -136,14 +139,8 @@ Public Class FrmFeigenbaum
 
         Iterator.Power = 1
 
-        'Reset ranges
-        Parameterrange = Iterator.ParameterInterval
-        Valuerange = Iterator.IterationInterval
-        MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
-
+        'Reset ranges and Default Values
         SetDefaultValues()
-
-        MyBitmapGraphics.Clear(Color.White)
 
     End Sub
 
@@ -161,7 +158,7 @@ Public Class FrmFeigenbaum
         'Check and set the Ranges, defined by the user
         CheckUserRanges()
 
-        If IsUserinputValid Then
+        If IsUserSelectionValid Then
 
             MyBitmapGraphics.Clear(Color.White)
 
@@ -172,8 +169,8 @@ Public Class FrmFeigenbaum
 
                 'for each p, the according paranmetervalue a is calculated
                 'and then the iteration runs until RuntimeUntilCycle
-                'finally, the cycle is drawn
-                DrawCycle(p)
+                'finally, the iteration cycle is drawn
+                DrawIterationCycle(p)
 
             Next
 
@@ -190,7 +187,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub DrawCycle(p As Integer)
+    Private Sub DrawIterationCycle(p As Integer)
 
         'The startvalue for the iteration is not important - we choose somtehing
         Dim x As Decimal = CDec(Valuerange.A + (Valuerange.IntervalWidth * 0.31415926535))
@@ -206,7 +203,7 @@ Public Class FrmFeigenbaum
         Next
 
         'After that, the number of iterations must be big enough to draw the cycle
-        Dim LengthOfCycle As Integer = CInt(PicDiagram.Height * Iterator.IterationInterval.IntervalWidth _
+        Dim LengthOfCycle As Integer = CInt(PicDiagram.Height * Valuerange.IntervalWidth _
             * TrbPrecision.Value / 25 / Math.Max(Valuerange.IntervalWidth, 0.01))
 
         '..but not bigger than the y-axis allows
@@ -254,7 +251,7 @@ Public Class FrmFeigenbaum
 
         'e guarantees, that the mouse position is relative to PicDiagram
         'and the Startpoint is the position, where the left mouse button was first pushed down
-        Startpoint = e.Location
+        UserSelectionStartpoint = e.Location
 
     End Sub
 
@@ -263,7 +260,7 @@ Public Class FrmFeigenbaum
         If IsMousedown Then
 
             'the endpoint is on the actual mouse position
-            Endpoint = e.Location
+            UserSelectionEndpoint = e.Location
 
             'this refreshing launches the paint-event of e and the selection-rectangle is drawn
             'in the actual position
@@ -278,8 +275,8 @@ Public Class FrmFeigenbaum
         If IsMousedown Then
 
             'the selection-rectangle is dranw in its actual position
-            Dim rect As New Rectangle(Math.Min(Startpoint.X, Endpoint.X), Math.Min(Startpoint.Y, Endpoint.Y),
-                                      Math.Abs(Startpoint.X - Endpoint.X), Math.Abs(Startpoint.Y - Endpoint.Y))
+            Dim rect As New Rectangle(Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X), Math.Min(UserSelectionStartpoint.Y, UserSelectionEndpoint.Y),
+                                      Math.Abs(UserSelectionStartpoint.X - UserSelectionEndpoint.X), Math.Abs(UserSelectionStartpoint.Y - UserSelectionEndpoint.Y))
             Using MyPen As New Pen(Color.Red)
                 e.Graphics.DrawRectangle(MyPen, rect)
             End Using
@@ -293,32 +290,32 @@ Public Class FrmFeigenbaum
         IsMousedown = False
 
         'Now, the final EndPoint is set on the position, where the mouse button was released
-        Endpoint = e.Location
+        UserSelectionEndpoint = e.Location
 
         'We have to check, if the selection-rectangle shows a valid selection
-        If Startpoint <> Endpoint Then
+        If UserSelectionStartpoint <> UserSelectionEndpoint Then
 
             'The selection is OK
 
             'Now, we adjust the interval of p. p moves between pMin and pMax
-            Dim pMin As Integer = Math.Min(Startpoint.X, Endpoint.X)
-            Dim pMax As Integer = Math.Max(Startpoint.X, Endpoint.X)
+            Dim pMin As Integer = Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
+            Dim pMax As Integer = Math.Max(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
 
             'as well, in direction of the y-axis we have to adjust the relevant interval
-            Dim qMin As Integer = Math.Min(PicDiagram.Height - Startpoint.Y, PicDiagram.Height - Endpoint.Y)
-            Dim qMax As Integer = Math.Max(PicDiagram.Height - Startpoint.Y, PicDiagram.Height - Endpoint.Y)
+            Dim qMin As Integer = Math.Min(PicDiagram.Height - UserSelectionStartpoint.Y, PicDiagram.Height - UserSelectionEndpoint.Y)
+            Dim qMax As Integer = Math.Max(PicDiagram.Height - UserSelectionStartpoint.Y, PicDiagram.Height - UserSelectionEndpoint.Y)
 
             'This rectangle surrounds the selected range
             Dim rect As New Rectangle(pMin, qMin, pMax - pMin, qMax - qMin)
 
             'transmit the selection to the parameter range
-            TxtAMin.Text = Math.Max(PixelToA(pMin), Iterator.ParameterInterval.A).ToString(CultureInfo.CurrentCulture)
-            TxtAMax.Text = Math.Min(PixelToA(pMax), Iterator.ParameterInterval.B).ToString(CultureInfo.CurrentCulture)
+            TxtAMin.Text = Math.Max(PixelToA(pMin), Parameterrange.A).ToString(CultureInfo.CurrentCulture)
+            TxtAMax.Text = Math.Min(PixelToA(pMax), Parameterrange.B).ToString(CultureInfo.CurrentCulture)
             LblDeltaA.Text = "Delta = " & (PixelToA(pMax) - PixelToA(pMin)).ToString(CultureInfo.CurrentCulture)
 
             'transmit the selection to the value range of x
-            TxtXMin.Text = Math.Max(PixelToX(qMin), Iterator.IterationInterval.A).ToString(CultureInfo.CurrentCulture)
-            TxtXMax.Text = Math.Min(PixelToX(qMax), Iterator.IterationInterval.B).ToString(CultureInfo.CurrentCulture)
+            TxtXMin.Text = Math.Max(PixelToX(qMin), Valuerange.A).ToString(CultureInfo.CurrentCulture)
+            TxtXMax.Text = Math.Min(PixelToX(qMax), Valuerange.B).ToString(CultureInfo.CurrentCulture)
             LblDeltaX.Text = "Delta = " & (PixelToX(qMax) - PixelToX(qMin)).ToString(CultureInfo.CurrentCulture)
 
         End If
@@ -374,15 +371,17 @@ Public Class FrmFeigenbaum
         If CheckParameterrange.IsIntervalValid Then
 
             'if [a,b] is an interval, then the parameter interval is constructed
-            Parameterrange = New ClsInterval(CheckParameterrange.A, CheckParameterrange.B)
+            Dim TempParameterrange = New ClsInterval(CheckParameterrange.A, CheckParameterrange.B)
 
             'is the parameter range part of the allowed parameter interval?
-            If Iterator.ParameterInterval.IsInterval2PartOfInterval(Parameterrange) Then
+            If Parameterrange.IsInterval2PartOfInterval(TempParameterrange) Then
                 IsParameterrangeValid = True
+                'take over
+                Parameterrange = TempParameterrange
             Else
                 MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
-                   Iterator.ParameterInterval.A.ToString(CultureInfo.CurrentCulture) &
-                   ", " & Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture) &
+                   Parameterrange.A.ToString(CultureInfo.CurrentCulture) &
+                   ", " & Parameterrange.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
                 IsParameterrangeValid = False
             End If
@@ -390,36 +389,45 @@ Public Class FrmFeigenbaum
             IsParameterrangeValid = False
         End If
 
-        'Analogue, the range of the x-value is checked
-        Dim CheckValuerange As New ClsCheckIsInterval(TxtXMin, TxtXMax)
-        Dim IsValuerangeValid As Boolean
+        Dim IsValuerangeValid As Boolean = False
 
-        'are the interval borders numeric and is a < b
-        If CheckValuerange.IsIntervalValid Then
+        If IsParameterrangeValid Then
 
-            'in that case, the value range is constructed
-            Valuerange = New ClsInterval(CheckValuerange.A, CheckValuerange.B)
+            'Analogue, the range of the x-value is checked
+            Dim CheckValuerange As New ClsCheckIsInterval(TxtXMin, TxtXMax)
 
-            'Is the value range part of the allowed value interval?
-            If Iterator.IterationInterval.IsInterval2PartOfInterval(Valuerange) Then
-                IsValuerangeValid = True
+            'are the interval borders numeric and is a < b
+            If CheckValuerange.IsIntervalValid Then
+
+                'in that case, the value range is constructed
+                Dim TempValuerange = New ClsInterval(CheckValuerange.A, CheckValuerange.B)
+
+                'Is the value range part of the allowed value interval?
+                If Valuerange.IsInterval2PartOfInterval(TempValuerange) Then
+                    IsValuerangeValid = True
+                    'take over
+                    Valuerange = TempValuerange
+                Else
+                    MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
+                       Valuerange.A.ToString(CultureInfo.CurrentCulture) &
+                       ", " & Valuerange.B.ToString(CultureInfo.CurrentCulture) &
+                       "] ")
+                    IsValuerangeValid = False
+                End If
             Else
-                MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
-                   Iterator.IterationInterval.A.ToString(CultureInfo.CurrentCulture) &
-                   ", " & Iterator.IterationInterval.B.ToString(CultureInfo.CurrentCulture) &
-                   "] ")
                 IsValuerangeValid = False
             End If
-        Else
-            IsValuerangeValid = False
         End If
 
-        IsUserinputValid = IsParameterrangeValid And IsValuerangeValid
+        IsUserSelectionValid = IsParameterrangeValid And IsValuerangeValid
 
-        If IsUserinputValid Then
+        If IsUserSelectionValid Then
             LblDeltaA.Text = Main.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
+        Else
+            'reset to Default
+            SetDefaultValues()
         End If
 
     End Sub
@@ -428,7 +436,7 @@ Public Class FrmFeigenbaum
 
     Private Sub DrawSplitPoints()
 
-        If IsUserinputValid Then
+        If IsUserSelectionValid Then
 
             'the first split points are marked by vertical lines
             Dim Splitpoints As List(Of Decimal) = Iterator.Splitpoints

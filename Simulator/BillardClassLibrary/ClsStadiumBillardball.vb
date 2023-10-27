@@ -10,10 +10,11 @@
 
 'Status Checke
 
+Imports System.ComponentModel
 Imports System.Globalization
 
 Public Class ClsStadiumBillardball
-    Implements IBillardball
+    Implements IBillardball, ICDiagram
 
     'The actual position of the Ball is drawned into this PictureBox
     'and shown by the Refresh-Method
@@ -43,9 +44,12 @@ Public Class ClsStadiumBillardball
     'here it is the distance between the Hit Point and a Zero Point on the Border of the Table
     Private MyTValuerange As ClsInterval
 
+    'Collection of ValueRanges for C-Diagram
+    Private ReadOnly MyValueParameters As List(Of ClsValueParameter)
+
     'The Value Range of the Mathematical Coordinates - Standard is the Interval [-1,1]
     'and the Coordinate System as Square [-1,1] x [-1,1]
-    Private ReadOnly MyStadiumValuerange As ClsInterval
+    Private ReadOnly MyMathValuerange As ClsInterval
 
     'Parameter that defines the actual hit point
     'see mathematical documentation
@@ -87,26 +91,35 @@ Public Class ClsStadiumBillardball
     Public Sub New()
 
         MyMathhelper = New ClsMathhelperBillard
-        MyStadiumValuerange = New ClsInterval(-1, 1)
+        MyMathValuerange = New ClsInterval(-1, 1)
         MyAlfaValuerange = New ClsInterval(0, CDec(Math.PI))
 
         'The ValueRange of MyT is only known, after a, b and C are set
+        'here is set as default C = 1 (a = b)
+        MyTValuerange = New ClsInterval(0, CDec(0.95 * (4 + 2 * Math.PI)))
 
-        MyT = 0
+        MyValueParameters = New List(Of ClsValueParameter)
+
+        Dim ValueRange As ClsValueParameter
+        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValuerange)
+        MyValueParameters.Add(ValueRange)
+
+        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
+        MyValueParameters.Add(ValueRange)
 
     End Sub
 
     WriteOnly Property Billardtable As PictureBox Implements IBillardball.Billardtable
         Set(value As PictureBox)
             MyBillardtable = value
-            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyStadiumValuerange, MyStadiumValuerange)
+            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
     WriteOnly Property MapBillardtable As Bitmap Implements IBillardball.MapBillardtable
         Set(value As Bitmap)
             MyMapBillardtable = value
-            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyStadiumValuerange, MyStadiumValuerange)
+            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
@@ -128,6 +141,31 @@ Public Class ClsStadiumBillardball
 
             'the final EndPosition is set later
             UserEndposition = New ClsMathpoint(-a, -b)
+
+        End Set
+    End Property
+
+
+    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+        Set(value As Decimal)
+
+            MyC = value
+
+            'Because of better visibility we set a = 0.95 (instead of 1)
+            a = CDec(0.95) / (1 + MyC)
+            b = MyC * a
+
+            'Now, the perimeter of the Billard Table is known and that is the Value Range of T
+            MyTValuerange = New ClsInterval(0, 4 * a + 2 * b * CDec(Math.PI))
+            MyValueParameters.Clear()
+
+            'Update ValueParameters
+            Dim ValueRange As ClsValueParameter
+            ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValuerange)
+            MyValueParameters.Add(ValueRange)
+
+            ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
+            MyValueParameters.Add(ValueRange)
 
         End Set
     End Property
@@ -200,6 +238,18 @@ Public Class ClsStadiumBillardball
             DrawUserStartposition(True)
             MyStartpositionSet = True
         End Set
+    End Property
+
+    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagram.CParameterRange
+        Get
+            CParameterRange = New ClsInterval(CDec(0.5), CDec(2))
+        End Get
+    End Property
+
+    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagram.ValueParameters
+        Get
+            ValueParameters = MyValueParameters
+        End Get
     End Property
 
     WriteOnly Property Startangle As Decimal Implements IBillardball.Startangle
@@ -379,6 +429,32 @@ Public Class ClsStadiumBillardball
 
     End Sub
 
+    Public Function GetNextPoint(ActualPoint As ClsValueTupel) As ClsValueTupel Implements ICDiagram.GetNextPoint
+
+        MyT = ActualPoint.X
+        Dim alfa As Decimal = ActualPoint.Y
+
+        'first, we calculate the angle between tangent in the hit point
+        'and the positive xaxis
+        Dim psi As Decimal = MyMathhelper.AngleInNullTwoPi(CalculatePsi(MyT))
+
+        'Now the angle between the next moving-direction and the positive x-axis is:
+        MyPhi = psi + alfa
+
+        'Parameter of the next Enpoint of the actual part of the Orbit
+        Dim nextT As Decimal = ParameterOfNextHitpoint(MyT, MyPhi)
+
+        'in addition, we calculate the angle of the following movement
+        MyPhi = CalculateNextPhi(nextT, MyPhi)
+
+        alfa = CalculateAlfa(nextT, MyPhi)
+
+        Dim NextPoint As New ClsValueTupel(nextT, alfa)
+
+        Return NextPoint
+
+    End Function
+
     'SECTOR BALL MOVEMENT
 
     Private Sub MoveOnOrbitPart(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
@@ -393,7 +469,7 @@ Public Class ClsStadiumBillardball
         Dim i As Integer = 0
 
         'The following StepWide was defined by an Experiment
-        Dim Stepwide As Decimal = MyStadiumValuerange.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Decimal = MyMathValuerange.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1

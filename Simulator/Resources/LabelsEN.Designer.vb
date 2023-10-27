@@ -128,6 +128,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die C-Diagram ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property C_Diagram() As String
+            Get
+                Return ResourceManager.GetString("C-Diagram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Colored Diagram ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ColoredDiagram() As String
@@ -209,6 +218,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billard ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property EllipticBillard() As String
+            Get
+                Return ResourceManager.GetString("EllipticBillard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Examinated Parameter Range: ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ExaminatedParameterRange() As String
@@ -218,11 +236,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Range: ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Parameter: ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property ExaminatedValueRange() As String
+        Friend Shared ReadOnly Property ExaminatedValueParameter() As String
             Get
-                Return ResourceManager.GetString("ExaminatedValueRange", resourceCulture)
+                Return ResourceManager.GetString("ExaminatedValueParameter", resourceCulture)
             End Get
         End Property
         
@@ -277,6 +295,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Histogram() As String
             Get
                 Return ResourceManager.GetString("Histogram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Hitpont Parameter t ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property HitPoint() As String
+            Get
+                Return ResourceManager.GetString("HitPoint", resourceCulture)
             End Get
         End Property
         
@@ -358,6 +385,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property LogisticGrowth() As String
             Get
                 Return ResourceManager.GetString("LogisticGrowth", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Angle of lower Pendulum ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property LowerPendulumAngle() As String
+            Get
+                Return ResourceManager.GetString("LowerPendulumAngle", resourceCulture)
             End Get
         End Property
         
@@ -686,6 +722,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die No Startpoint set! ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property NoStartPointSet() As String
+            Get
+                Return ResourceManager.GetString("NoStartPointSet", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die is not allowed. It has to be in the Interval ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NotAlllowedValue() As String
@@ -740,6 +785,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Oval Billard ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property OvalBillard() As String
+            Get
+                Return ResourceManager.GetString("OvalBillard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Parabola ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Parabola() As String
@@ -776,6 +830,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Position Start Value 2: ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property PositionStartValue2() As String
+            Get
+                Return ResourceManager.GetString("PositionStartValue2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number! ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property PositiveNumber() As String
@@ -808,6 +871,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ProgramVersion() As String
             Get
                 Return ResourceManager.GetString("ProgramVersion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Reflexion Angle ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ReflexionAngle() As String
+            Get
+                Return ResourceManager.GetString("ReflexionAngle", resourceCulture)
             End Get
         End Property
         
@@ -871,6 +943,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Stadium() As String
             Get
                 Return ResourceManager.GetString("Stadium", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Stadium Billard ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property StadiumBillard() As String
+            Get
+                Return ResourceManager.GetString("StadiumBillard", resourceCulture)
             End Get
         End Property
         
@@ -1042,6 +1123,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property UnimodalFunctions() As String
             Get
                 Return ResourceManager.GetString("UnimodalFunctions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Angle of upper Pendulum ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property UpperPendulumAngle() As String
+            Get
+                Return ResourceManager.GetString("UpperPendulumAngle", resourceCulture)
             End Get
         End Property
         

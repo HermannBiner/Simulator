@@ -120,7 +120,7 @@ Public Class Main
     End Sub
 
     Private Sub MnuCDiagram_Click(sender As Object, e As EventArgs) Handles MnuCDiagram.Click
-        MessageBox.Show(LM.GetString("Not implemented"))
+        FrmCDiagram.Show()
     End Sub
 
     Private Sub MnuEnglish_Click(sender As Object, e As EventArgs) Handles MnuEnglish.Click

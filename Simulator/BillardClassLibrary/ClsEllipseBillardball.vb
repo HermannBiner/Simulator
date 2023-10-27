@@ -13,7 +13,7 @@
 Imports System.Globalization
 
 Public Class ClsEllipseBillardball
-    Implements IBillardball
+    Implements IBillardball, ICDiagram
 
     'The actual position of the Ball is drawned into this PictureBox
     'and shown by the Refresh-Method
@@ -34,14 +34,17 @@ Public Class ClsEllipseBillardball
     'The Value Ranges of the relevant Parameters
     'Reflexion Angle between the Ball-Movement-Vector and the Ellipse-Tangent in the Hit Point
     'it is in ]0, pi[
-    Private ReadOnly MyAlfaValuerange As ClsInterval
+    Private ReadOnly MyAlfaValueRange As ClsInterval
 
     'Value Range of the Parameter t that defines the Hit Point, in [0, 2*pi[
-    Private ReadOnly MyTValuerange As ClsInterval
+    Private ReadOnly MyTValueRange As ClsInterval
+
+    'Collection of ValueRanges for C-Diagram
+    Private ReadOnly MyValueParameters As List(Of ClsValueParameter)
 
     'The Value Range of the Mathematical Coordinates - Standard is the Interval [-1,1]
     'and the Coordinate System as Square [-1,1] x [-1,1]
-    Private ReadOnly MyEllipseValuerange As ClsInterval
+    Private ReadOnly MyMathValueRange As ClsInterval
 
     'The class for general mathematical Calculations
     Private ReadOnly MyMathhelper As ClsMathhelperBillard
@@ -84,23 +87,32 @@ Public Class ClsEllipseBillardball
     Public Sub New()
 
         MyMathhelper = New ClsMathhelperBillard
-        MyEllipseValuerange = New ClsInterval(-1, 1)
-        MyAlfaValuerange = New ClsInterval(0, CDec(Math.PI))
-        MyTValuerange = New ClsInterval(0, CDec(Math.PI * 2))
+        MyMathValueRange = New ClsInterval(-1, 1)
+        MyAlfaValueRange = New ClsInterval(0, CDec(Math.PI))
+        MyTValueRange = New ClsInterval(0, CDec(Math.PI * 2))
+
+        MyValueParameters = New List(Of ClsValueParameter)
+
+        Dim ValueRange As ClsValueParameter
+        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValueRange)
+        MyValueParameters.Add(ValueRange)
+
+        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValueRange)
+        MyValueParameters.Add(ValueRange)
 
     End Sub
 
     WriteOnly Property Billardtable As PictureBox Implements IBillardball.Billardtable
         Set(value As PictureBox)
             MyBillardtable = value
-            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyEllipseValuerange, MyEllipseValuerange)
+            MyBillardtableGraphics = New ClsGraphicTool(MyBillardtable, MyMathValueRange, MyMathValueRange)
         End Set
     End Property
 
     WriteOnly Property MapBillardtable As Bitmap Implements IBillardball.MapBillardtable
         Set(value As Bitmap)
             MyMapBillardtable = value
-            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyEllipseValuerange, MyEllipseValuerange)
+            MyMapBillardtableGraphics = New ClsGraphicTool(MyMapBillardtable, MyMathValueRange, MyMathValueRange)
         End Set
     End Property
 
@@ -127,15 +139,33 @@ Public Class ClsEllipseBillardball
             'and Endposition (a,0)
             UserEndposition = New ClsMathpoint(a, 0)
 
-            'these Parameters are set later by the by mocing the Mouse
+            'these Parameters are set later by the by moving the Mouse
 
+        End Set
+    End Property
+
+    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+        Set(value As Decimal)
+            MyC = value
+
+            If MyC <= 1 Then
+
+                'a > b, , for better visibility a = 0.99 instead of 1
+                a = CDec(0.99)
+                b = MyC * a
+            Else
+
+                'b > a, for better visibility b = 0.99 instead of 1
+                b = CDec(0.99)
+                a = b / MyC
+            End If
         End Set
     End Property
 
     WriteOnly Property Phaseportrait As PictureBox Implements IBillardball.Phaseportrait
         Set(value As PictureBox)
             MyPhaseportrait = value
-            MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, MyTValuerange, MyAlfaValuerange)
+            MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, MyTValueRange, MyAlfaValueRange)
         End Set
     End Property
 
@@ -229,6 +259,18 @@ Public Class ClsEllipseBillardball
         Set(value As Boolean)
             MyStartangleSet = value
         End Set
+    End Property
+
+    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagram.CParameterRange
+        Get
+            CParameterRange = New ClsInterval(CDec(0.5), CDec(2))
+        End Get
+    End Property
+
+    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagram.ValueParameters
+        Get
+            ValueParameters = MyValueParameters
+        End Get
     End Property
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
@@ -374,6 +416,31 @@ Public Class ClsEllipseBillardball
 
     End Sub
 
+    Public Function GetNextPoint(ActualPoint As ClsValueTupel) As ClsValueTupel Implements ICDiagram.GetNextPoint
+
+        MyT = ActualPoint.X
+        Dim alfa As Decimal = ActualPoint.Y
+
+        'first, we calculate the angle between tangent in the hit point
+        'and the positive xaxis
+        Dim psi As Decimal = MyMathhelper.AngleInNullTwoPi(CalculatePsi(MyT))
+
+        'Now the angle between the next moving-direction and the positive x-axis is:
+        MyPhi = psi + alfa
+
+        'Parameter of the next Enpoint of the actual part of the Orbit
+        Dim nextT As Decimal = ParameterOfNextHitPoint(MyT, MyPhi)
+
+        'in addition, we calculate the angle of the following movement
+        MyPhi = CalculateNextPhi(nextT, MyPhi)
+
+        alfa = CalculateAlfa(nextT, MyPhi)
+
+        Dim NextPoint As New ClsValueTupel(nextT, Alfa)
+        Return NextPoint
+
+    End Function
+
 
     'SECTOR BALL MOVEMENT
 
@@ -389,7 +456,7 @@ Public Class ClsEllipseBillardball
         Dim i As Integer = 0
 
         'The following Stepwide was defined by an Experiment
-        Dim Stepwide As Decimal = MyEllipseValuerange.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Decimal = MyMathValueRange.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1

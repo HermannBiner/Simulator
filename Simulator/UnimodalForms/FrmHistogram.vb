@@ -54,6 +54,8 @@ Public Class FrmHistogram
         LblStartValue.Text = Main.LM.GetString("StartValue") & " ="
         LblParameter.Text = Main.LM.GetString("Parameter") & " = "
         CboFunction.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))

@@ -76,6 +76,8 @@ Public Class FrmSensitivity
         LblValueList1.Text = Main.LM.GetString("ValueList1")
         LblIterationDepth.Text = Main.LM.GetString("IterationDepth")
         CboFunction.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
