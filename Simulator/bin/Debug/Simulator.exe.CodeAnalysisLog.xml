@@ -2,11 +2,11 @@
 <?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="17.0">
  <Targets>
-  <Target Name="C:\Users\hbine\OneDrive\Dokumente\Chaos\Simulator\Simulator\bin\Debug\Simulator.exe">
+  <Target Name="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Simulator.exe">
    <Modules>
     <Module Name="simulator.exe">
      <Messages>
-      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-10-28 07:26:38Z" FixCategory="NonBreaking">
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-10-28 10:37:14Z" FixCategory="NonBreaking">
        <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Signieren Sie "'Simulator.exe'" mit einem Schlüssel mit starkem Namen.</Issue>
       </Message>
      </Messages>
