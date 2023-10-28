@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FC33857-9191-4D26-8121-4CFA2407A1A5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Simulator.My.MyApplication</StartupObject>
+    <RootNamespace>Simulator</RootNamespace>
+    <AssemblyName>Simulator</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>de-CH</TargetCulture>
+    <ProductName>Chaos Simulator</ProductName>
+    <PublisherName>Hermann Biner Zermatt</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.6.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Simulator.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Simulator.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Simulator.My.Resources" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BillardClassLibrary\ClsEllipseBillardtable.vb" />
+    <Compile Include="BillardClassLibrary\ClsOvalBillardball.vb" />
+    <Compile Include="BillardClassLibrary\ClsOvalBillardtable.vb" />
+    <Compile Include="BillardClassLibrary\ClsStadiumBillardball.vb" />
+    <Compile Include="BillardClassLibrary\ClsStadiumBillardtable.vb" />
+    <Compile Include="BillardClassLibrary\IBillardball.vb" />
+    <Compile Include="BillardClassLibrary\IBillardtable.vb" />
+    <Compile Include="BillardClassLibrary\ICDiagram.vb" />
+    <Compile Include="BillardForms\FrmCDiagram.Designer.vb">
+      <DependentUpon>FrmCDiagram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BillardForms\FrmCDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralClassLibrary\ClsInterval.vb" />
+    <Compile Include="GeneralClassLibrary\ClsCheckIsNumeric.vb" />
+    <Compile Include="GeneralClassLibrary\ClsCheckIsInterval.vb" />
+    <Compile Include="GeneralClassLibrary\ClsLanguageManager.vb" />
+    <Compile Include="GeneralClassLibrary\ClsMathpoint.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValueParameter.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValueTupel.vb" />
+    <Compile Include="GeneralForms\FrmTests.Designer.vb">
+      <DependentUpon>FrmTests.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralForms\FrmTests.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BillardClassLibrary\ClsMathhelperBillard.vb" />
+    <Compile Include="BillardClassLibrary\ClsEllipseBillardball.vb" />
+    <Compile Include="Resources\LabelsDE.Designer.vb">
+      <DependentUpon>LabelsDE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\LabelsEN.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LabelsEN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalClassLibrary\ClsTentmap.vb" />
+    <Compile Include="UnimodalClassLibrary\ClsParabola.vb" />
+    <Compile Include="UnimodalClassLibrary\ClsLogisticGrowth.vb" />
+    <Compile Include="GeneralClassLibrary\ClsGraphicTool.vb" />
+    <Compile Include="UnimodalClassLibrary\ClsMathhelperUnimodal.vb" />
+    <Compile Include="BillardForms\FrmBillardtable.Designer.vb">
+      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BillardForms\FrmBillardtable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralForms\FrmInfo.Designer.vb">
+      <DependentUpon>FrmInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralForms\FrmInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnimodalClassLibrary\IIteration.vb" />
+    <Compile Include="UnimodalForms\FrmSensitivity.Designer.vb">
+      <DependentUpon>FrmSensitivity.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmSensitivity.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmHistogram.Designer.vb">
+      <DependentUpon>FrmHistogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmHistogram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmFeigenbaum.Designer.vb">
+      <DependentUpon>FrmFeigenbaum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmFeigenbaum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralForms\Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralForms\Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmIteration.Designer.vb">
+      <DependentUpon>FrmIteration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmIteration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmTwoDimensions.Designer.vb">
+      <DependentUpon>FrmTwoDimensions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnimodalForms\FrmTwoDimensions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BillardForms\FrmCDiagram.resx">
+      <DependentUpon>FrmCDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralForms\FrmTests.resx">
+      <DependentUpon>FrmTests.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillardForms\FrmBillardtable.resx">
+      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LabelsDE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LabelsDE.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LabelsEN.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LabelsEN.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnimodalForms\FrmFeigenbaum.resx">
+      <DependentUpon>FrmFeigenbaum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralForms\FrmInfo.resx">
+      <DependentUpon>FrmInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralForms\Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnimodalForms\FrmHistogram.resx">
+      <DependentUpon>FrmHistogram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnimodalForms\FrmIteration.resx">
+      <DependentUpon>FrmIteration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnimodalForms\FrmSensitivity.resx">
+      <DependentUpon>FrmSensitivity.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnimodalForms\FrmTwoDimensions.resx">
+      <DependentUpon>FrmTwoDimensions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\Simulator.My.Resources.Labels.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zermatt.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zermatt3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dokumentation\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
