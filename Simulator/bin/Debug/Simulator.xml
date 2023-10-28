@@ -1,0 +1,1303 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Simulator
+</name>
+</assembly>
+<members>
+<member name="T:Simulator.My.Resources.Resources">
+<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.Resources.ResourceManager">
+<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.Resources.Culture">
+<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.Resources.Zermatt">
+<summary>
+  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.Resources.Zermatt31">
+<summary>
+  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="T:Simulator.My.Resources.LabelsDE">
+<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ResourceManager">
+<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Culture">
+<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.AboutSimulator">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Info Simulator ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ActionStopped">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Aktion abgebrochen! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Alfa">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Alfa ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.BallColor">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Farbe der nächsten Kugel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.BallSpeed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Kugelgeschwindigkeit ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Billard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.BillardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billardtisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.C_Diagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die C-Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ColoredDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Farbiges Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.CoordinatesStartpoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Startpunkt Koordinaten ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Delta">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Difference12">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Differenzx2 - x1 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.DinStretching">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die d in [0,10] = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.DrawBillardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zwischne Billardtisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.DrawFunctionGraph">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeichne Funktionsgraph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.DrMathETH">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dr. math. ETHZ Hermann Biner, Zermatt ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Elliptic">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.EllipticBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ExaminatedParameterRange">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Parameterbereich ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Werteparameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ExperimentNo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Experiment No ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.FactorC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Faktor C ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Feedback">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Feedback ist willkommen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.FeigenbaumDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Feigenbaum Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.FunctionGraph">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Funktionsgraph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Histogram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Histogramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.HitPoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stosspunkt Parameter t ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.InvalidDualNumberDigits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Eine Dualzahl kann nur die Ziffern 0 und 1 enthalten ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.InvalidParameterOrIterationValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Ungültiger Parameterwert oder Startwert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.InvalidProtocolDigits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Das Protokoll kann nur die Zeichen 0 und 1 enthalten ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.InvalidUserRanges">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Ungültiges Wertebereich ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Iteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.IterationDepth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iterationstiefe ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.LeftSmallerRight">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Die linke Intervallgrenze muss kleiner sein als die rechte ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Log">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Log ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.LogisticGrowth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Logistisches Wachstum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.LowerPendulumAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Winkel des unteren Pendels ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MailTo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Gerne per Mail an h.biner@bluewin.ch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Manual">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Manual Simulator.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuCDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;C-Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuClose">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Schliessen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuDocumentation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Dokumentation ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuEnglish">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Englisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuFeigenbaum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Feigenbaum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuFile">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;File ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuFractals">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Fraktale ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuGerman">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Deutsch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuHistogram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Histogramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuInfo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Info ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuJuliaSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Julia Menge ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuKomplexIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Komplexe Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuLanguage">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Sprache ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuMain">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Hauptmenu ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuMandelbrotSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Mandelbrot Menge ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuManual">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Handbuch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuMathematics">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die M&amp;athematik ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuMechanics">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Mechanik ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Pendel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuSensitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Sensitivität ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuTest">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Test ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuTwoDimensions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Zweidimensional ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MnuUnimodal">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Unimodale Funktionen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NewBall">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Neue Kugel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Next100Steps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Nächste 100 Schritte ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Next10Steps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Nächste 10 Schritte ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NextDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Nächstes Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NextStep">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Nächster Schritt ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NoBallsOnTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Es gibt keine Kugeln auf dem Billardtisch! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NoIntersectionPoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Kein Schnittpunkt gefunden! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NonChaoticBehaviour">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Wenn das Verhalten nicht chaotisch ist, wird das erwartete Resultat nicht auftreten. ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NoStartPointSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Kein Startpunkt gesetzt! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NotAlllowedValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die nicht erlaubt. Er muss im Intervall sein: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NotImplemented">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Diese Funktion ist momentan nicht implementiert! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NumberOfSteps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Anzahl Schritte ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NumericValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Das muss ein numerischer Wert sein! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.OnlyDecAndInt">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die In diesem Projekt sind nur Zahlen vom Typ Integer oder Decimal erlaubt. ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Oval">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.OvalBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Ovales Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Parabola">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parabel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Parameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ParameterRangeNotAllowed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dieser PArameterbereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.PhasePortrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Phasenportrait t, alfa ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.PositionStartValue2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Position Startwert 2: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.PositiveNumber">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die muss eine positive Zahl sein! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Precision">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Präzision ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Presentation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Präsentation ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ProgramVersion">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Program Version 0.6 - 30.09.2023 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ReflexionAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reflexionswinkel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ResetIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration zurücksetzen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Sensitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Sensitivität ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.SetStartPosition">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Setze die Startposition mit der Maus! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ShowSplitPoints">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeige die ersten Splitpunkte ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Simulator">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Simulator ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.SingleOrbits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Einzelne Orbits ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Stadium">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stadion ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StadiumBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Parameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartPositionNotSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Die Startposition ist nicht für alle Kugeln gesetzt! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Startwert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartValue1">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Startwert 1 = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartValue2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Startwert 2 = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartvalueForProtocol">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Vorschlag Startwert für dieses Protokoll ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StartvalueForTargetvalue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Vorschlag Startwert für diesen Zielwert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StretchingParameterInterval">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Der Dehnparameter muss im Intervall sein: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.String1">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TakeOver">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Übernehme Startparameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TargetProtocol">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zielprotokoll ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TargetValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zielwert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Tentmap">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeltabbildung ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Test">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Test ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TheValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Der Wert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TimeAxis">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeitachse ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Transitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Transitivität ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TwoDimensions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration in zwei Dimensionen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.UnimodalFunctions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Unimodale Funktionen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.UpperPendulumAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Winkel des oberen Pendels ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ValueList1">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Wertliste 1 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ValueList2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Wertliste 2 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.xStretching">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die x-Dehnung der Zeitachse ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.XValues">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die x-Werte ähnelt.
+</summary>
+</member>
+<member name="T:Simulator.My.Resources.LabelsEN">
+<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ResourceManager">
+<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Culture">
+<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.AboutSimulator">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die About Simulator ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ActionStopped">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Action Stopped! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Alfa">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Alfa ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.BallColor">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Color of the next Ball ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.BallSpeed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Speed of all Balls ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Billard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.BillardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billard Table ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.C_Diagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die C-Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ColoredDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Colored Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.CoordinatesStartpoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Coordinates of the Startpoint ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Delta">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Difference12">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Difference x2 - x1 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.DinStretching">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die d in [0,10] = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.DrawBillardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Draw Billard Table ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.DrawFunctionGraph">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Draw Function Graph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.DrMathETH">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dr. math. ETHZ Hermann Biner, Zermatt ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Elliptic">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptic ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.EllipticBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Examinated Parameter Range: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ExaminatedValueParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Parameter: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ExperimentNo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Experiment No ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.FactorC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Factor C ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Feedback">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Feedback is appreciated ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.FeigenbaumDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Feigenbaum Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.FunctionGraph">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Function Graph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Histogram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Histogram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.HitPoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Hitpont Parameter t ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.InvalidDualNumberDigits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die A Dual Number can only contain the Digits 0 and 1 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.InvalidParameterOrIterationValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Invalid Parameter Value or Iteration Value! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.InvalidProtocolDigits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die The Protocol can only contain the Digits 0 and 1! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.InvalidUserRanges">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Invalid User Ranges! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Iteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.IterationDepth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration Depth ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.LeftSmallerRight">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die The left interval border must be smaller than the right interval border! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Log">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Log ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.LogisticGrowth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Logistic Growth ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.LowerPendulumAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Angle of lower Pendulum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MailTo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Please by Mail to h.biner@bluewin.ch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Manual">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Manual Simulator.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuCDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;C-Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuClose">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Close ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuDocumentation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Documentation ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuEnglish">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die English ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuFeigenbaum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Feigenbaum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuFile">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;File ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuFractals">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Fractals ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuGerman">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die German ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuHistogram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Histogram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuInfo">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Info ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuJuliaSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Julia Set ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuKomplexIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Komplex Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuLanguage">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Language ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuMain">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Main ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuMandelbrotSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Mandelbrot Set ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuManual">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Manual ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuMathematics">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die M&amp;athematics ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuMechanics">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Mechanics ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Pendulum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuSensitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Sensitivity ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuTest">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Test ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuTwoDimensions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Two Dimensions ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MnuUnimodal">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Unimodal Functions ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NewBall">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die New Ball ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Next100Steps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Next 100 Steps ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Next10Steps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Next 10 Steps ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NextDiagram">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Next Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NextStep">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Next Step ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NoBallsOnTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die There are no Balls on the Table! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NoIntersectionPoint">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die No Intersection Point found! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NonChaoticBehaviour">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die If the behaviour is not chaotic, the result will not be as expected! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NoStartPointSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die No Startpoint set! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NotAlllowedValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die is not allowed. It has to be in the Interval ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NotImplemented">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die This function is not implemented yet! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NumberOfSteps">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Number of Steps ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NumericValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.OnlyDecAndInt">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die In this project, only numbers of type Integer and Decimal are allowed ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Oval">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.OvalBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Oval Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Parabola">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parabola ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Parameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ParameterRangeNotAllowed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die This Parameter Range is not allowed! It must be part of the interval ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.PhasePortrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Phase Portrait t, alfa ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.PositionStartValue2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Position Start Value 2: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.PositiveNumber">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Precision">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Precision ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Presentation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Presentation ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ProgramVersion">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Program Version 0.6 - 30.09.2023 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ReflexionAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reflexion Angle ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ResetIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reset Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Sensitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Sensitivity ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.SetStartPosition">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ShowSplitPoints">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Show first Splitpoints ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Simulator">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Simulator ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.SingleOrbits">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Single Orbits ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Stadium">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stadium ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StadiumBillard">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stadium Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartIteration">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Parameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartPositionNotSet">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die The Startposition is not set for all Balls! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die StartValue ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartValue1">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Value 1 = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartValue2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start Value 2 = ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartvalueForProtocol">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Propose a Startvalue for this Protocol ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StartvalueForTargetvalue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Propose a Startvalue for this Targetvalue ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StretchingParameterInterval">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die The Stetching Parameter has to be in the Interval ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TakeOver">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Take over Start Parameter ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TargetProtocol">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Target Protocol ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TargetValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Targetvalue ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Tentmap">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Tentmap ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Test">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Test ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TheValue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die The Value ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TimeAxis">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Time Axis ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Transitivity">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Transitivity ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TwoDimensions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Iteration in two Dimensions ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.UnimodalFunctions">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Unimodal Functions ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.UpperPendulumAngle">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Angle of upper Pendulum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ValueList1">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Value List 1 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ValueList2">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Value List 2 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.xStretching">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die x-Stretching of Time Axis ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.XValues">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die x-Values ähnelt.
+</summary>
+</member>
+</members>
+</doc>
