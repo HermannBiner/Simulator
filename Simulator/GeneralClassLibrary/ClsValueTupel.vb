@@ -1,7 +1,9 @@
 ﻿'In cases where the dynamic system is described by multiple Value-Parameters
 'This class allows to communicate these parameters in one object
 'at the moment, there are only two parameters supported
-'that is easy to change by overloading to mor that two parameters
+'that is easy to change by overloading to more than two parameters
+
+'Status checked
 
 Public Class ClsValueTupel
 

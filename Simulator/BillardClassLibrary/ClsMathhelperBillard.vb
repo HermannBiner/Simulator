@@ -1,5 +1,6 @@
-﻿'This class contains mathematicel Methods 
+﻿'This class contains mathematical Methods 
 'that are used by all Billard Tables or Billard Balls
+
 'Status Checked
 
 Public Class ClsMathhelperBillard

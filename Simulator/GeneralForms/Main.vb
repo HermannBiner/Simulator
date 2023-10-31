@@ -1,5 +1,5 @@
 ﻿'This is the start window for the program
-Imports System.Resources
+'Status checked
 
 Public Class Main
 
@@ -11,6 +11,8 @@ Public Class Main
         InitializeComponent()
 
         'Initialize Language - Standard Language is English
+        'the LM Language Manager is used allover the program
+
         LM = New ClsLanguageManager With {
             .Language = ClsLanguageManager.LanguageEnum.English
         }
@@ -80,6 +82,9 @@ Public Class Main
 
     Private Sub MnuMathematics_Click(sender As Object, e As EventArgs) Handles MnuMathematics.Click
         Try
+            'The document with the mathematical documentation
+            'has to be in the same folder like the exe-File
+            'the mathematical documentation is already only in German
             Process.Start(LM.GetString("MathDoc"))
         Catch ex As ArgumentException
             MessageBox.Show(ex.Message)
@@ -88,6 +93,9 @@ Public Class Main
 
     Private Sub MnuManual_Click(sender As Object, e As EventArgs) Handles MnuManual.Click
         Try
+            'The manual for the use of the "Simulator"
+            'has to be in the same folder like the exe-File
+            'manuel exists in German or English
             Process.Start(LM.GetString("Manual"))
         Catch ex As ArgumentException
             MessageBox.Show(ex.Message)

@@ -8,6 +8,8 @@
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
 'Therefore, more cases of unimodal functions could be easely implemented
 
+'Status Checked
+
 Imports System.Globalization
 
 Public Class FrmFeigenbaum
@@ -40,6 +42,7 @@ Public Class FrmFeigenbaum
     Private UserSelectionEndpoint As Point
 
     'SECTOR INITIALIZATION
+
     Public Sub New()
 
         'This is necessary for the designer
@@ -65,6 +68,7 @@ Public Class FrmFeigenbaum
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of itendifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -139,7 +143,7 @@ Public Class FrmFeigenbaum
 
         Iterator.Power = 1
 
-        'Reset ranges and Default Values
+        'Reset ranges and default Values
         SetDefaultValues()
 
     End Sub
@@ -223,7 +227,8 @@ Public Class FrmFeigenbaum
 
     Private Function SetColor(n As Integer) As Brush
 
-        'There is the possibility to use two colors
+        'There is the possibility to use two colors for the image
+
         Dim MyBrush As Brush
 
         If ChkColored.Checked Then
@@ -408,7 +413,7 @@ Public Class FrmFeigenbaum
                     'take over
                     Valuerange = TempValuerange
                 Else
-                    MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
+                    MessageBox.Show(Main.LM.GetString("ValueRangeNotAllowed") & " [" &
                        Valuerange.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & Valuerange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")

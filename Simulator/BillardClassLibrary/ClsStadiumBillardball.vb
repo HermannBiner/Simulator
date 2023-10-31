@@ -8,7 +8,7 @@
 'important: this class works with mathematical coordinates
 'the Instance of the GraphicTool transforms these in Pixel-Coordinates
 
-'Status Checke
+'Status Checked
 
 Imports System.ComponentModel
 Imports System.Globalization
@@ -16,7 +16,7 @@ Imports System.Globalization
 Public Class ClsStadiumBillardball
     Implements IBillardball, ICDiagram
 
-    'The actual position of the Ball is drawned into this PictureBox
+    'The actual position of the Ball is drawn into this PictureBox
     'and shown by the Refresh-Method
     Private MyBillardtable As PictureBox
     Private MyBillardtableGraphics As ClsGraphicTool
@@ -468,7 +468,7 @@ Public Class ClsStadiumBillardball
 
         Dim i As Integer = 0
 
-        'The following StepWide was defined by an Experiment
+        'The following Stepwide was defined by an Experiment
         Dim Stepwide As Decimal = MyMathValuerange.IntervalWidth * MySpeed / 1000
 
         Do
@@ -641,7 +641,7 @@ Public Class ClsStadiumBillardball
 
         'Note to Math.Abs(t) > 0.0000001
         'if we would write Math.Abs(t) > 0
-        'then, it could be possible tht for very small t the last hit point is found
+        'then, it could be possible that for very small t the last hit point is found
         'as solution of the intersect equation
         'the limit 0.0000001 is bigger than the rounding-effects
         'but smaller than the pixel-unit
@@ -677,7 +677,8 @@ Public Class ClsStadiumBillardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, 2)
-            MyParameterListbox.Items.Add(MyTrackcolor.Name & " s/phi = " & MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+            MyParameterListbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+                                         MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterListbox.Refresh()
         End If
 

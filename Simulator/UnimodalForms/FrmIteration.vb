@@ -3,17 +3,19 @@
 'a parameter a, that steeres the iteration function, can be defined
 'the behaviour of the iteration depends on that parametere
 'in certain cases, the behaviour is chaotic
-'in that caee, any protocol of the iteration is possible
+'in that case, any protocol of the iteration is possible
 'if an arbitrary protocol is given by the user
-'the program calculaes a startvalue for the iteration, that produces this protocol
+'the program calculates a startvalue for the iteration, that produces this protocol
 'in addition, any target value can be defined by the user
 'and the program adapts the startvalue a little bit
-'so that the iteration approaches this target value in soma iteration steps
+'so that the iteration approaches this target value in some iteration steps
 'see as well the mathematical documentation
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
 'Therefore, more cases of unimodal functions could be easely implemented
+
+'Status Checked
 
 Imports System.Globalization
 
@@ -96,6 +98,7 @@ Public Class FrmIteration
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of itendifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -121,7 +124,9 @@ Public Class FrmIteration
         Iterator.Power = 1
 
         Presentation = PresentationEnum.Functionsgraph
-        TxtXStretching.Enabled = False
+        TxtXStretching.Visible = False
+        LblStretching.Visible = False
+        LblxStretching.Visible = False
 
         LblNumberOfSteps.Text = "0"
         n = 0
@@ -175,7 +180,7 @@ Public Class FrmIteration
         End Select
 
         'The function is repeated 1x in each iteration step, that is the standard
-        Iterator.Power = 1
+        Iterator.Power = CInt(CboIterationDepth.SelectedItem)
 
         'The MyGraphics Object needs to know the iteration interval depending on the type of iteration
         MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
@@ -226,15 +231,19 @@ Public Class FrmIteration
         'The type of presentation has changed
         If OptFunctionGraph.Checked Then
             Presentation = PresentationEnum.Functionsgraph
-            TxtXStretching.Enabled = False
+            TxtXStretching.Visible = False
             TxtXStretching.Text = ""
+            LblStretching.Visible = False
+            LblxStretching.Visible = False
             BtnNext10Steps.Text = Main.LM.GetString("Next10Steps")
             BtnNextStep.Visible = True
         Else
             Presentation = PresentationEnum.TimeAxis
-            TxtXStretching.Enabled = True
+            TxtXStretching.Visible = True
             TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
             XStretching = XStretchingDefault
+            LblStretching.Visible = True
+            LblxStretching.Visible = True
             BtnNextStep.Visible = False
             BtnNext10Steps.Text = Main.LM.GetString("NextDiagram")
         End If
@@ -306,6 +315,7 @@ Public Class FrmIteration
     End Function
 
     'SECTOR FUNCTIONSGRAPH
+
     Private Sub BtnDrawDiagramm_Click(sender As Object, e As EventArgs) Handles BtnDrawDiagram.Click
 
         'Checks the parametervalue and draws the graph of the function
@@ -314,8 +324,7 @@ Public Class FrmIteration
             'Initialization was successful
             PrepareDiagram()
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+            'There is already a message generated
             SetDefaultValues()
         End If
 
@@ -368,6 +377,8 @@ Public Class FrmIteration
 
         'Calculates a startvalue that produces a given protocol
         ResetIteration()
+        CboIterationDepth.SelectedIndex = 0
+        Iterator.Power = 1
         CalculateStartvalueForProtocol()
 
     End Sub
@@ -382,7 +393,7 @@ Public Class FrmIteration
             If Iterator.IsBehaviourChaotic Then
                 'OK, nothing to do
             Else
-                MessageBox.Show(Main.LM.GetString("NonChaoticBehaviour"))
+                'There is already a message generated
             End If
 
             Dim targetprotocol As String = TxtTargetProtocol.Text
@@ -394,8 +405,7 @@ Public Class FrmIteration
                 TxtTargetProtocol.Select()
             End If
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+            'There is already a message generated
             SetDefaultValues()
         End If
 
@@ -411,6 +421,8 @@ Public Class FrmIteration
 
         'The iteration starts from the beginning
         ResetIteration()
+        CboIterationDepth.SelectedIndex = 0
+        Iterator.Power = 1
 
         Dim CheckTargetvalue As New ClsCheckIsNumeric(TxtTargetValue)
 
@@ -435,8 +447,7 @@ Public Class FrmIteration
                 'A message is already generated
             End If
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+            'There is already a message generated
             SetDefaultValues()
         End If
 
@@ -459,8 +470,7 @@ Public Class FrmIteration
                 End If
                 NextLoop(1)
             Else
-                MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+                'There is already a message generated
                 SetDefaultValues()
             End If
         Else
@@ -485,8 +495,7 @@ Public Class FrmIteration
                 End If
                 NextLoop(10)
             Else
-                MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+                'There is already a message generated
                 SetDefaultValues()
             End If
         Else
@@ -527,7 +536,6 @@ Public Class FrmIteration
 
         Do
             n += 1
-            LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
 
             'Transmit the actual iteration value x to the LstValueList
             UpdateListboxes(x)
@@ -553,6 +561,8 @@ Public Class FrmIteration
 
         Loop Until i > EndOfLoop
 
+        LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
+
     End Sub
 
     Private Sub ShowFullDiagram()
@@ -576,6 +586,8 @@ Public Class FrmIteration
         Dim nextP As New ClsMathpoint(u + deltaU, Iterator.FN(x))
 
         Do
+            n += 1
+
             MyGraphics.DrawLine(P, nextP, Color.Red, 1)
 
             'transmit the actual iteration value to the LstValueList
@@ -594,6 +606,8 @@ Public Class FrmIteration
             nextP.Y = Iterator.FN(x)
 
         Loop Until u >= Iterator.IterationInterval.B
+
+        LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
 
     End Sub
 

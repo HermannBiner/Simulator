@@ -1,14 +1,18 @@
-﻿'Suppose an experimantator works in a two dimensional room an chooses a startpoint for his experiment
+﻿'Suppose an experimantator works in a two dimensional space and chooses a startpoint for his experiment
 'and suppose, the exactness of his measure instruments is limited
 'in that case, two startpoints that are a little bit different are measured as identical
 'but if the behaviour is chaotic, this little difference leads to completely different orbits
 'for the experimentator, the experiment looks like random
+'because in his view, he starts always at the same startpoint
+'but the generated orbits are completely different
 'Iterated are unimodal functions like Tentmap, Logistic Growth or Parabola
 'see as well the mathematical documentation
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
 'Therefore, more cases of unimodal functions could be easely implemented
+
+'Status Checked
 
 Imports System.Globalization
 
@@ -66,6 +70,7 @@ Public Class FrmTwoDimensions
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of itendifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -85,7 +90,6 @@ Public Class FrmTwoDimensions
 
         'Default settings
         Diagramsize = Math.Min(PicDiagram.Width, PicDiagram.Height)
-        deltaX = CDec(Rastersize / Diagramsize)
         CboFunction.SelectedIndex = 1
         CboFunction.Select()
 
@@ -122,9 +126,9 @@ Public Class FrmTwoDimensions
     Private Sub SetDefaultValues()
 
         TxtX.Text = (Iterator.IterationInterval.A +
-            (Iterator.IterationInterval.IntervalWidth * 0.3)).ToString(CultureInfo.CurrentCulture)
+            (Iterator.IterationInterval.IntervalWidth * 0.414)).ToString(CultureInfo.CurrentCulture)
         TxtY.Text = (Iterator.IterationInterval.A +
-            (Iterator.IterationInterval.IntervalWidth * 0.4)).ToString(CultureInfo.CurrentCulture)
+            (Iterator.IterationInterval.IntervalWidth * 0.407)).ToString(CultureInfo.CurrentCulture)
         TxtParameter.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
         CboExperiment.SelectedIndex = 0
         MyBrush = Brushes.Black
@@ -152,8 +156,9 @@ Public Class FrmTwoDimensions
 
     Private Sub CboExperiment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboExperiment.SelectedIndexChanged
 
-        'To show the effect of different experiments, there are 5 possible
-        'and are shown with different colors
+        'To show the effect of different experiments,
+        'there are 5 possible startpoints in different colors
+
         IsNewExperiment = True
         Select Case CboExperiment.SelectedIndex
             Case 0
@@ -178,7 +183,7 @@ Public Class FrmTwoDimensions
     Private Sub DrawRaster()
 
         'The raster shows the measure exactness of the experimentator
-        'one square in the raster has 5x5 üpixel points
+        'one square in the raster has 5x5 pixel points
         'that corresponds to a measure exactness of about 0.004 for the x- and y-values
 
         'Counter
@@ -187,16 +192,21 @@ Public Class FrmTwoDimensions
         'Corresponding x- and y-coordinates
         Dim u As Decimal
 
+        'Adapting DeltaX to the Iteration.Interval.Width
+        'that all type of Iteration Functions have the same Raster
+        deltaX = CDec(Rastersize / Diagramsize) * Iterator.IterationInterval.IntervalWidth
+
         Do
-            'lines parallel to the x-axis
-            u = Iterator.IterationInterval.A + (i * deltaX)
-            Dim X1 As New ClsMathpoint(u, Iterator.IterationInterval.B)
-            Dim X2 As New ClsMathpoint(u, Diagramsize)
-            MyGraphics.DrawLine(X1, X2, Color.Aqua, 1)
 
             'lines parallel to the y-axis
+            u = Iterator.IterationInterval.A + (i * deltaX)
+            Dim X1 As New ClsMathpoint(u, Iterator.IterationInterval.A)
+            Dim X2 As New ClsMathpoint(u, Iterator.IterationInterval.B)
+            MyGraphics.DrawLine(X1, X2, Color.Aqua, 1)
+
+            'lines parallel to the x-axis
             Dim Y1 As New ClsMathpoint(Iterator.IterationInterval.A, u)
-            Dim Y2 As New ClsMathpoint(Diagramsize, u)
+            Dim Y2 As New ClsMathpoint(Iterator.IterationInterval.B, u)
             MyGraphics.DrawLine(Y1, Y2, Color.Aqua, 1)
 
             i += 1

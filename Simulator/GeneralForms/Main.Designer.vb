@@ -150,6 +150,7 @@ Partial Class Main
         Me.MnuPendulum.Name = "MnuPendulum"
         Me.MnuPendulum.Size = New System.Drawing.Size(359, 50)
         Me.MnuPendulum.Text = "Pendulum"
+        Me.MnuPendulum.Visible = False
         '
         'MnuCDiagram
         '
@@ -163,23 +164,24 @@ Partial Class Main
         Me.MnuKomplexIteration.Name = "MnuKomplexIteration"
         Me.MnuKomplexIteration.Size = New System.Drawing.Size(264, 45)
         Me.MnuKomplexIteration.Text = "KomplexIteration"
+        Me.MnuKomplexIteration.Visible = False
         '
         'MnuFractals
         '
         Me.MnuFractals.Name = "MnuFractals"
-        Me.MnuFractals.Size = New System.Drawing.Size(353, 50)
+        Me.MnuFractals.Size = New System.Drawing.Size(359, 50)
         Me.MnuFractals.Text = "Fractals"
         '
         'MnuJuliaSet
         '
         Me.MnuJuliaSet.Name = "MnuJuliaSet"
-        Me.MnuJuliaSet.Size = New System.Drawing.Size(353, 50)
+        Me.MnuJuliaSet.Size = New System.Drawing.Size(359, 50)
         Me.MnuJuliaSet.Text = "JuliaSet"
         '
         'MnuMandelbrotSet
         '
         Me.MnuMandelbrotSet.Name = "MnuMandelbrotSet"
-        Me.MnuMandelbrotSet.Size = New System.Drawing.Size(353, 50)
+        Me.MnuMandelbrotSet.Size = New System.Drawing.Size(359, 50)
         Me.MnuMandelbrotSet.Text = "MandelbrotSet"
         '
         'MnuTest

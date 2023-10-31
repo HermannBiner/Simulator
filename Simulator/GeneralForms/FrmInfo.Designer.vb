@@ -38,9 +38,9 @@ Partial Class FrmInfo
         Me.LblPersonalData.Location = New System.Drawing.Point(16, 169)
         Me.LblPersonalData.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblPersonalData.Name = "LblPersonalData"
-        Me.LblPersonalData.Size = New System.Drawing.Size(540, 36)
+        Me.LblPersonalData.Size = New System.Drawing.Size(1030, 72)
         Me.LblPersonalData.TabIndex = 0
-        Me.LblPersonalData.Text = "Dr.Math.ETHZ"
+        Me.LblPersonalData.Text = "Author: Dr.math.ETHZ Hermann Biner"
         '
         'LblFeedback
         '
@@ -49,7 +49,7 @@ Partial Class FrmInfo
         Me.LblFeedback.Location = New System.Drawing.Point(16, 61)
         Me.LblFeedback.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblFeedback.Name = "LblFeedback"
-        Me.LblFeedback.Size = New System.Drawing.Size(426, 36)
+        Me.LblFeedback.Size = New System.Drawing.Size(145, 36)
         Me.LblFeedback.TabIndex = 1
         Me.LblFeedback.Text = "Feedback"
         '
@@ -60,7 +60,7 @@ Partial Class FrmInfo
         Me.LblMail.Location = New System.Drawing.Point(17, 114)
         Me.LblMail.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblMail.Name = "LblMail"
-        Me.LblMail.Size = New System.Drawing.Size(514, 36)
+        Me.LblMail.Size = New System.Drawing.Size(105, 36)
         Me.LblMail.TabIndex = 2
         Me.LblMail.Text = "MailTo"
         '
@@ -71,7 +71,7 @@ Partial Class FrmInfo
         Me.LblVersion.Location = New System.Drawing.Point(16, 11)
         Me.LblVersion.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblVersion.Name = "LblVersion"
-        Me.LblVersion.Size = New System.Drawing.Size(476, 36)
+        Me.LblVersion.Size = New System.Drawing.Size(231, 36)
         Me.LblVersion.TabIndex = 3
         Me.LblVersion.Text = "ProgramVersion"
         '

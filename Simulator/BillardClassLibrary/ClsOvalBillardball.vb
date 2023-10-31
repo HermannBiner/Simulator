@@ -15,12 +15,12 @@ Imports System.Globalization
 Public Class ClsOvalBillardball
     Implements IBillardball, ICDiagram
 
-    'The actual position of the Ball is drawned into this PictureBox
+    'The actual position of the Ball is drawn into this PictureBox
     'and shown by the Refresh-Method
     Private MyBillardtable As PictureBox
     Private MyBillardtableGraphics As ClsGraphicTool
 
-    'The permanent Orbit of the Ball is drawned into the BitMap
+    'The permanent Orbit of the Ball is drawn into the BitMap
     Private MyMapBillardtable As Bitmap '
     Private MyMapBillardtableGraphics As ClsGraphicTool
 
@@ -123,7 +123,7 @@ Public Class ClsOvalBillardball
             MyC = value
 
             'for better visibility, a + b is set = 1.9 (instead of 2)
-            a = CDec(1.9) * Math.Min(1 / (1 + MyC), 1 / (2 * MyC))
+            a = CDec(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
             b = MyC * a
             m = (a - b) / 2
 
@@ -134,7 +134,7 @@ Public Class ClsOvalBillardball
             'and Endposition (a+b,0)
             UserEndposition = New ClsMathpoint(a + b, 0)
 
-            'these Parameters are set later by the by moving the Mouse
+            'these Parameters are set later by moving the Mouse
 
         End Set
     End Property
@@ -361,7 +361,7 @@ Public Class ClsOvalBillardball
         Else
             MyBillardtable.Refresh()
 
-            'The actual Ballposition is dran only into the PicDiagram
+            'The actual Ballposition is drawn only into the PicDiagram
             MyBillardtableGraphics.DrawPoint(UserEndposition, MyColor, MySize)
             MyBillardtableGraphics.DrawLine(UserStartposition, UserEndposition, MyTrackcolor, 1)
         End If
@@ -449,7 +449,7 @@ Public Class ClsOvalBillardball
 
         Dim i As Integer = 0
 
-        'The following StepWide was defined by an Experiment
+        'The following Stepwide was defined by an Experiment
         Dim Stepwide As Decimal = MyMathValuerange.IntervalWidth * MySpeed / 1000
 
         Do
@@ -490,7 +490,7 @@ Public Class ClsOvalBillardball
             OK = Math.Pow(Ballposition.X - m, 2) + Math.Pow(Ballposition.Y, 2) <= b * b
         Else
 
-            'CheckTheEllipse
+            'Check the Ellipse
             OK = Math.Pow((Ballposition.X - m) / a, 2) + Math.Pow(Ballposition.Y / b, 2) <= 1
         End If
 
@@ -663,7 +663,8 @@ Public Class ClsOvalBillardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, 2)
-            MyParameterlistbox.Items.Add(MyTrackcolor.Name & " t/phi = " & MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+            MyParameterlistbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+                                         MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterlistbox.Refresh()
         End If
 

@@ -1,5 +1,6 @@
 ﻿'Contains mathematical help functions for all kind of unimodal functions
 'see mathematical documentation
+
 'Status Checked
 
 Public Class ClsMathhelperUnimodal
@@ -39,7 +40,7 @@ Public Class ClsMathhelperUnimodal
 
     End Function
 
-    'Overloading if midofingerval is not given
+    'Overloading if MidofInterval is not given
     Public Function DualStringToDecimalNumber(dualstring As String) As Decimal
 
         Return DualStringToDecimalNumber(dualstring, False)
@@ -156,10 +157,13 @@ Public Class ClsMathhelperUnimodal
         For position = 1 To dualnumber.Length
             digit = Mid(dualnumber, position, 1)
             If Not (digit = "0" Or digit = "1") Then
-                MessageBox.Show(Main.LM.GetString("InvalidDualNumberDigits"))
                 IsFormatValid = False
             End If
         Next
+
+        If Not IsFormatValid Then
+            MessageBox.Show(Main.LM.GetString("InvalidDualNumberDigits"))
+        End If
 
         Return IsFormatValid
 

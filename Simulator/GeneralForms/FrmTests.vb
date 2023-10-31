@@ -1,4 +1,5 @@
 ﻿'This form allows testing graphical methods
+'Status checked
 
 Public Class FrmTests
 

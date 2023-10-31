@@ -1,5 +1,6 @@
 ﻿'This is the Billard Table for the elliptic Billard
 'see mathematical documentation
+
 'Status Checked
 
 Public Class ClsEllipseBillardtable
@@ -13,10 +14,10 @@ Public Class ClsEllipseBillardtable
     'The parameter C defines the profile of the ellipse: b = C*a
     Private MyC As Decimal
 
-    'The table is dranw into the Bitmap
+    'The table is drawn into the Bitmap
     Private MyBitmapGraphics As ClsGraphicTool
 
-    'The Ellipse is drawn into the square ValueRange x ValueRange, STandard is [-1,1] x [-1,1]
+    'The Ellipse is drawn into the square ValueRange x ValueRange, Standard is [-1,1] x [-1,1]
     Private Valuerange As ClsInterval
 
     Public WriteOnly Property C As Decimal Implements IBillardtable.C
@@ -65,7 +66,7 @@ Public Class ClsEllipseBillardtable
     Public Sub DrawBillardtable() Implements IBillardtable.DrawBillardtable
 
         'Coordinate System
-        'MyBitmapGraphics.DrawCoordinateSystem(New ClsMathPoint(0, 0), Color.Black, 1)
+        MyBitmapGraphics.DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
 
         'The MidPoint of the Ellipse is always (0/0)
         MyBitmapGraphics.DrawEllipse(New ClsMathpoint(0, 0), a, b, Color.Blue, 1)

@@ -55,7 +55,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ActionStopped">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Aktion abgebrochen! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Aktion abgebrochen ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Alfa">
@@ -81,6 +81,16 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.BillardTable">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billardtisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Black">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Schwarz ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Blue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Blau ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.C_Diagram">
@@ -143,9 +153,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Untersuchter Parameterbereich ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueParameter">
+<member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueRange">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Werteparameter ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Wertebereich ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExperimentNo">
@@ -171,6 +181,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.FunctionGraph">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Funktionsgraph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Green">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Grün ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Histogram">
@@ -233,6 +248,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Winkel des unteren Pendels ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Magenta">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Magenta ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.MailTo">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Gerne per Mail an h.biner@bluewin.ch ähnelt.
@@ -240,7 +260,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Manual">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Manual Simulator.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
@@ -400,12 +420,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NoBallsOnTable">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Es gibt keine Kugeln auf dem Billardtisch! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Es gibt keine Kugeln auf dem Billardtisch ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NoIntersectionPoint">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Kein Schnittpunkt gefunden! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Kein Schnittpunkt gefunden ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NonChaoticBehaviour">
@@ -415,12 +435,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NoStartPointSet">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Kein Startpunkt gesetzt! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Kein Startpunkt gesetzt ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NotAlllowedValue">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die nicht erlaubt. Er muss im Intervall sein: ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die  ist nicht erlaubt. Er muss im Intervall sein:  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NotImplemented">
@@ -465,7 +485,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ParameterRangeNotAllowed">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dieser PArameterbereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PhasePortrait">
@@ -493,9 +513,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Präsentation ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.ProgramVersion">
+<member name="P:Simulator.My.Resources.LabelsDE.Red">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Program Version 0.6 - 30.09.2023 ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Rot ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ReflexionAngle">
@@ -515,7 +535,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.SetStartPosition">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Setze die Startposition mit der Maus! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Setze die Startposition mit der Maus ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ShowSplitPoints">
@@ -555,7 +575,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.StartPositionNotSet">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Die Startposition ist nicht für alle Kugeln gesetzt! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Die Startposition ist nicht für alle Kugeln gesetzt ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.StartValue">
@@ -620,7 +640,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.TheValue">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Der Wert ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Der Wert  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.TimeAxis">
@@ -658,6 +678,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Wertliste 2 ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ValueRangeNotAllowed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Dieser Wertebereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.xStretching">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die x-Dehnung der Zeitachse ähnelt.
@@ -691,7 +716,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ActionStopped">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Action Stopped! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Action Stopped ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Alfa">
@@ -717,6 +742,16 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.BillardTable">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billard Table ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Black">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Black ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Blue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Blue ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.C_Diagram">
@@ -779,9 +814,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Examinated Parameter Range: ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.ExaminatedValueParameter">
+<member name="P:Simulator.My.Resources.LabelsEN.ExaminatedValueRange">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Parameter: ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Range: ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExperimentNo">
@@ -807,6 +842,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.FunctionGraph">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Function Graph ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Green">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Green ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Histogram">
@@ -836,7 +876,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.InvalidUserRanges">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Invalid User Ranges! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Invalid User Ranges ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Iteration">
@@ -869,6 +909,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Angle of lower Pendulum ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Magenta">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Magenta ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.MailTo">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Please by Mail to h.biner@bluewin.ch ähnelt.
@@ -876,7 +921,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Manual">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Manual Simulator.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
@@ -1036,12 +1081,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NoBallsOnTable">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die There are no Balls on the Table! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die There are no Balls on the Table ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NoIntersectionPoint">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die No Intersection Point found! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die No Intersection Point found ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NonChaoticBehaviour">
@@ -1056,12 +1101,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NotAlllowedValue">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die is not allowed. It has to be in the Interval ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die  is not allowed. It has to be in the Interval:  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NotImplemented">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die This function is not implemented yet! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die This function is not implemented yet ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumberOfSteps">
@@ -1071,7 +1116,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumericValue">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.OnlyDecAndInt">
@@ -1116,7 +1161,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PositiveNumber">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Precision">
@@ -1129,9 +1174,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Presentation ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.ProgramVersion">
+<member name="P:Simulator.My.Resources.LabelsEN.Red">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Program Version 0.6 - 30.09.2023 ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Red ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ReflexionAngle">
@@ -1151,7 +1196,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.SetStartPosition">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ShowSplitPoints">
@@ -1191,7 +1236,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.StartPositionNotSet">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die The Startposition is not set for all Balls! ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die The Startposition is not set for all Balls ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.StartValue">
@@ -1251,7 +1296,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.TheValue">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die The Value ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die The Value  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.TimeAxis">
@@ -1287,6 +1332,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.ValueList2">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Value List 2 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ValueRangeNotAllowed">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die This Valuerange is not allowed! It must be part of the interval ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.xStretching">

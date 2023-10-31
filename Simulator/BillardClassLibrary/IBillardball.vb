@@ -1,6 +1,7 @@
 ﻿'Interface for all kind of billard balls
 'a ball knows the profile of "its" billard table and all rules for its movement
 'the billard ball can move itself on the billard table
+
 'Status Checked
 
 Public Interface IBillardball
@@ -35,7 +36,7 @@ Public Interface IBillardball
 
     'The following method receives a mouse position relative to the bitmap
     'It pulls the ball according to the mouse position on its start position
-    'and gives the parameter t back that defines the ball position
+    'and gives the parameter t back that defines the start position of the Ball
     'see mathematical documentation
     Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal
 

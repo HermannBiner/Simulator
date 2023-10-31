@@ -1,6 +1,7 @@
 ﻿'Implements the interface IIteration for the parabola
 'with the Iteration Formula: f(x) = 1 - a*x*x, x in [-1,1], a in ]0,2]
 'and "knows" everything about this kind of iteration
+
 'Status Checked
 
 Imports System.Globalization
@@ -125,11 +126,13 @@ Public Class ClsParabola
     Public Function FN(x As Decimal) As Decimal _
         Implements IIteration.FN
 
+        'This Function is the
+        'Power-iterated function of the original function
+
         Dim IsIterationvaluevalid As Boolean = IterationInterval.IsNumberInInterval(x)
 
         If IsMyParametervalid And IsIterationvaluevalid Then
 
-            'Power-iterated function of the original function
             Dim i As Integer
 
             For i = 1 To MyPower
@@ -151,6 +154,7 @@ Public Class ClsParabola
     End Function
 
     'SECTOR CALCULATION
+
     Public Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal _
         Implements IIteration.CalculateStartValueForProtocol
 
@@ -165,7 +169,6 @@ Public Class ClsParabola
                 Mathhelper.ProcotolToTentmapStartValueAsString(TargetProtocol)
 
             'The next step converts the dual startvalue of the tentmap in its according decimal startvalue
-
             Dim DecimalTentmapStartvalue As Decimal =
                 Mathhelper.DualStringToDecimalNumber(BinaryTentmapStartvalue, True)
 
@@ -206,7 +209,7 @@ Public Class ClsParabola
         Dim TentmapDualTargetvalue As String =
             Mathhelper.DecimalNumberToDualString(TentmapDecimalTargetvalue)
 
-        ''Nun Zielwert bearbeiten gemäss mathematischer Dokumentation
+        'No the target value is adapted - see mathematical documentation
         Dim NumerOfOnesInTentmapStartvalue As Integer =
             Mathhelper.NumberOfOnesInaDualNumber(TentmapDualStartvalue)
         If NumerOfOnesInTentmapStartvalue Mod 2 = 1 Then

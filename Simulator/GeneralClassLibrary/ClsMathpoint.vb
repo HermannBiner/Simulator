@@ -13,7 +13,9 @@ Public Class ClsMathpoint
     End Sub
 
     Public Sub New()
-        'If X and Y are defined later
+
+        'If X and Y are set after the Initialization
+
     End Sub
 
     Public Property X As Decimal

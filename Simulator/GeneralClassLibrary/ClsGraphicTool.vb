@@ -5,17 +5,17 @@ Public Class ClsGraphicTool
 
     'First option: this class can draw into a PictureBox
     'used when the drawings are not persistent and dynamic e.g. to show a moving ball
-    'in this case, the reference to the PictureBox is transmitted to the constructor
+    'in this case, the reference to the PictureBox is transmitted in the constructor
     'by PictureBox.refresh in the upper class, the image is updated
 
     'Second option: this class draws into a Bitmap
     'used when the drawing has to be persistent, e.g. to show the track of the ball
-    'in this case, the reference of the Bitmap is transmitted to the constructor
+    'in this case, the reference of the Bitmap is transmitted in the constructor
 
     'All classes using this ClsGraphicTool are working with mathematical coordinates
     'that means, the X-coordinate is in an interval [Xmin, Xmax] =: MyMathXInterval
     'and the Y-coordinate is in an interval [Ymin, Ymax] =: MyMathYInterval
-    'this ranges are committed to the constructor as well
+    'this intervals are committed to the constructor as well
 
     'the ClsGraphictool "knows" the size of the PictureBox / Bitmap
     'and when knowing the X-range and Y-range, the matemathical coordinates are transformed
@@ -46,6 +46,7 @@ Public Class ClsGraphicTool
     Private ReadOnly MyMathYInterval As ClsInterval
 
     'the upper right corner point of the PictureBox / Bitmap
+    'it defines the size of the PictureBox / Bitmap
     Private MyDiagramCornerpoint As Point
 
     'SECTOR CONSTRUCTOR
@@ -56,7 +57,8 @@ Public Class ClsGraphicTool
         MyPicturebox = Picturebox
         Graphs = MyPicturebox.CreateGraphics
 
-        'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
+        'Because of better visibility in the User-Form,
+        'the maximal ImageRange and DiagramSize are reduced by -1
         Imagerange = New Rectangle(1, MyPicturebox.Height - 1, MyPicturebox.Width - 1, MyPicturebox.Height - 1)
         MyDiagramCornerpoint = New Point(Picturebox.Width - 1, Picturebox.Height - 1)
 

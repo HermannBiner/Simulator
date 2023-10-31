@@ -1,6 +1,7 @@
 ﻿
 'This is the Billard Table for the Billard in a Stadium
 'see mathematical documentation
+
 'Status Checked
 
 Public Class ClsStadiumBillardtable

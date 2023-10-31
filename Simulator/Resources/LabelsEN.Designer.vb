@@ -74,7 +74,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Action Stopped! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Action Stopped ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ActionStopped() As String
             Get
@@ -124,6 +124,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property BillardTable() As String
             Get
                 Return ResourceManager.GetString("BillardTable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Black ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Black() As String
+            Get
+                Return ResourceManager.GetString("Black", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Blue ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Blue() As String
+            Get
+                Return ResourceManager.GetString("Blue", resourceCulture)
             End Get
         End Property
         
@@ -236,11 +254,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Parameter: ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Range: ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property ExaminatedValueParameter() As String
+        Friend Shared ReadOnly Property ExaminatedValueRange() As String
             Get
-                Return ResourceManager.GetString("ExaminatedValueParameter", resourceCulture)
+                Return ResourceManager.GetString("ExaminatedValueRange", resourceCulture)
             End Get
         End Property
         
@@ -290,6 +308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Green ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Green() As String
+            Get
+                Return ResourceManager.GetString("Green", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Histogram ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Histogram() As String
@@ -335,7 +362,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Invalid User Ranges! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Invalid User Ranges ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property InvalidUserRanges() As String
             Get
@@ -398,6 +425,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Magenta ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Magenta() As String
+            Get
+                Return ResourceManager.GetString("Magenta", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Please by Mail to h.biner@bluewin.ch ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MailTo() As String
@@ -407,7 +443,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Manual Simulator.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Manual() As String
             Get
@@ -695,7 +731,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die There are no Balls on the Table! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die There are no Balls on the Table ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NoBallsOnTable() As String
             Get
@@ -704,7 +740,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die No Intersection Point found! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die No Intersection Point found ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NoIntersectionPoint() As String
             Get
@@ -731,7 +767,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die is not allowed. It has to be in the Interval ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die  is not allowed. It has to be in the Interval:  ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NotAlllowedValue() As String
             Get
@@ -740,7 +776,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die This function is not implemented yet! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die This function is not implemented yet ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NotImplemented() As String
             Get
@@ -758,7 +794,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NumericValue() As String
             Get
@@ -839,7 +875,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die must be a positive Number ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property PositiveNumber() As String
             Get
@@ -866,11 +902,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Program Version 0.6 - 30.09.2023 ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Red ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property ProgramVersion() As String
+        Friend Shared ReadOnly Property Red() As String
             Get
-                Return ResourceManager.GetString("ProgramVersion", resourceCulture)
+                Return ResourceManager.GetString("Red", resourceCulture)
             End Get
         End Property
         
@@ -902,7 +938,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property SetStartPosition() As String
             Get
@@ -974,7 +1010,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die The Startposition is not set for all Balls! ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die The Startposition is not set for all Balls ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property StartPositionNotSet() As String
             Get
@@ -1082,7 +1118,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die The Value ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die The Value  ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property TheValue() As String
             Get
@@ -1150,6 +1186,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ValueList2() As String
             Get
                 Return ResourceManager.GetString("ValueList2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die This Valuerange is not allowed! It must be part of the interval ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ValueRangeNotAllowed() As String
+            Get
+                Return ResourceManager.GetString("ValueRangeNotAllowed", resourceCulture)
             End Get
         End Property
         

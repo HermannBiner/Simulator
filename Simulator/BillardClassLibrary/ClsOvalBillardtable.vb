@@ -1,5 +1,6 @@
 ﻿'This is the Billard Table for the oval Billard
 'see mathematical documentation
+
 'Status Checked
 
 Public Class ClsOvalBillardtable

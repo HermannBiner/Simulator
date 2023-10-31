@@ -9,6 +9,8 @@
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
 'Therefore, more cases of unimodal functions could be easely implemented
 
+'Status Checked
+
 Imports System.Globalization
 
 Public Class FrmHistogram
@@ -56,6 +58,7 @@ Public Class FrmHistogram
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of itendifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -257,8 +260,7 @@ Public Class FrmHistogram
                 MyGraphics.FillRectangle(A, B, Brush)
             Next
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+            'there is already a message generated
             SetDefaultValues()
         End If
     End Sub

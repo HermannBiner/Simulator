@@ -5,6 +5,8 @@
 'see mathematical documentation
 'if other Billards are programmed, the according classes have just to implement these interfaces
 
+'Status Checked
+
 Imports System.Globalization
 
 Public Class FrmBillardtable
@@ -29,10 +31,9 @@ Public Class FrmBillardtable
     Private IsMousedown As Boolean = False
 
     'Standard Value for Parameter C
-    Private StandardC As Decimal = CDec(0.8)
+    Private StandardC As Decimal = 0.8
 
     'SECTOR INITIALIZATION
-
 
     Public Sub New()
 
@@ -62,9 +63,21 @@ Public Class FrmBillardtable
         BtnNextStep.Text = Main.LM.GetString("NextStep")
         LblParameterc.Text = Main.LM.GetString("FactorC")
         BtnDrawBillardTable.Text = Main.LM.GetString("DrawBillardTable")
+
+        CboBallColor.Items.Clear()
+
+        'the following order of adding the iteration type is relevant!
+        'there is at the moment no better concept implemented to identify the kind of Billard
+        CboBallColor.Items.Add(Main.LM.GetString("Red"))
+        CboBallColor.Items.Add(Main.LM.GetString("Green"))
+        CboBallColor.Items.Add(Main.LM.GetString("Blue"))
+        CboBallColor.Items.Add(Main.LM.GetString("Black"))
+        CboBallColor.Items.Add(Main.LM.GetString("Magenta"))
+
         CboBillardTable.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'there is at the moment no better concept implemented to identify the kind of Billard
         CboBillardTable.Items.Add(Main.LM.GetString("Elliptic"))
         CboBillardTable.Items.Add(Main.LM.GetString("Stadium"))
         CboBillardTable.Items.Add(Main.LM.GetString("Oval"))
@@ -244,7 +257,7 @@ Public Class FrmBillardtable
             MyBillardballCollection.Add(Billardball)
 
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
+            'There is already a message generated
         End If
 
     End Sub
@@ -343,7 +356,7 @@ Public Class FrmBillardtable
 
     Private Sub MouseMoving(e As MouseEventArgs)
 
-        'Because the Corsor is "Hand", the Mouse Position is adjusted a bit
+        'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
         Dim Mouseposition As New Point With {
             .X = e.X + 2,
             .Y = e.Y - 25
@@ -417,12 +430,15 @@ Public Class FrmBillardtable
         Select Case CboBillardTable.SelectedIndex
             Case 0
                 Billardtable = New ClsEllipseBillardtable
+                StandardC = 0.8
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
             Case 1
                 Billardtable = New ClsStadiumBillardtable
+                StandardC = 2
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
             Case Else
                 Billardtable = New ClsOvalBillardtable
+                StandardC = 0.5
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
         End Select
 

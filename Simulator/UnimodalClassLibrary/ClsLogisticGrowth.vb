@@ -1,6 +1,7 @@
 ﻿'Implements the interface IIteration for the logistic growth
 'with the iteration formula: f(x) = a*x*(1-x), x in [0,1], a in ]0,4]
 'and "knows" everything about this kind of iteration
+
 'Status Checked
 
 Imports System.Globalization
@@ -30,6 +31,7 @@ Public Class ClsLogisticGrowth
 
 
     'SECTOR INITIALISATION
+
     Public Sub New()
 
         'Generate the needed objects
@@ -127,11 +129,13 @@ Public Class ClsLogisticGrowth
     Public Function FN(x As Decimal) As Decimal _
         Implements IIteration.FN
 
+        'This Function is the
+        'Power-iterated function of the original function
+
         Dim IsIterationswertValid As Boolean = IterationInterval.IsNumberInInterval(x)
 
         If IsMyParameterValid And IsIterationswertValid Then
 
-            'Power-iterated function of the original function
             Dim i As Integer
 
             For i = 1 To MyPower

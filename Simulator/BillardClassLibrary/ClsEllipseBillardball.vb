@@ -1,12 +1,12 @@
-﻿'This class contains all Properties of the Billard Ball on an elliptic Billard Table
+﻿'This class contains all properties of the Billard Ball on an elliptic Billard Table
 'and all Methods, this Ball has to know
 'including its movement on the table and setting its start position
-'therefore, many Balls can be intanced on the Table
+'therefore, many Balls can be instanced on the Table
 'with different colors (to be distinguished)
 'See mathematical documentation
 
 'important: this class works with mathematical coordinates
-'the Instance of the GraphicTool transforms these in Pixel-Coordinates
+'the Instance of the GraphicTool transforms them in Pixel-Coordinates
 
 'Status Checked
 
@@ -15,12 +15,12 @@ Imports System.Globalization
 Public Class ClsEllipseBillardball
     Implements IBillardball, ICDiagram
 
-    'The actual position of the Ball is drawned into this PictureBox
+    'The actual position of the Ball is drawn into this PictureBox
     'and shown by the Refresh-Method
     Private MyBillardtable As PictureBox
     Private MyBillardtableGraphics As ClsGraphicTool
 
-    'The permanent Orbit of the Ball is drawned into the BitMap
+    'The permanent Orbit of the Ball is drawn into the BitMap
     Private MyMapBillardtable As Bitmap
     Private MyMapBillardtableGraphics As ClsGraphicTool
 
@@ -123,12 +123,12 @@ Public Class ClsEllipseBillardball
             If MyC <= 1 Then
 
                 'a > b, , for better visibility a = 0.99 instead of 1
-                a = CDec(0.99)
+                a = 0.99
                 b = MyC * a
             Else
 
                 'b > a, for better visibility b = 0.99 instead of 1
-                b = CDec(0.99)
+                b = 0.99
                 a = b / MyC
             End If
 
@@ -151,12 +151,12 @@ Public Class ClsEllipseBillardball
             If MyC <= 1 Then
 
                 'a > b, , for better visibility a = 0.99 instead of 1
-                a = CDec(0.99)
+                a = 0.99
                 b = MyC * a
             Else
 
                 'b > a, for better visibility b = 0.99 instead of 1
-                b = CDec(0.99)
+                b = 0.99
                 a = b / MyC
             End If
         End Set
@@ -547,7 +547,8 @@ Public Class ClsEllipseBillardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, 2)
-            MyParameterListbox.Items.Add(MyTrackcolor.Name & " t/phi = " & MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+            MyParameterListbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+                                         MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterListbox.Refresh()
         End If
 

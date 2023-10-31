@@ -1,5 +1,8 @@
 ﻿'Is the place holder for any kind of iteration
 'for unimodal functions
+'To program a new unimodal function
+'just this interface has to be implemented
+
 'Status Checked
 
 Public Interface IIteration

@@ -1,4 +1,5 @@
 ﻿'Represents an interval of real numbers [A,B] with A < B
+'Status Checked
 
 Public Class ClsInterval
 

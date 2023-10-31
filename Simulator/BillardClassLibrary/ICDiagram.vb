@@ -3,6 +3,10 @@
 'to their parameters like Hitpoins or Angles
 'describing their dynamic behaviour
 
+'the C-Diagram corresponds to the Feigenbaum Diagramm for Unimodal Functions
+
+'Status Checked
+
 
 Public Interface ICDiagram
 

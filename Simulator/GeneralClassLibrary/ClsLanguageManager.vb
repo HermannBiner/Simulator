@@ -1,4 +1,5 @@
 ﻿'This class provides Labels, Messages and any other text in the actual language
+'Status Checked
 
 Imports System.Resources
 
@@ -18,7 +19,7 @@ Public Class ClsLanguageManager
             Select Case MyLanguage
                 Case LanguageEnum.Deutsch
                     RM = New ResourceManager("Simulator.LabelsDE", GetType(LabelsDE).Assembly)
-                Case Else
+                Case Else 'English
                     RM = New ResourceManager("Simulator.LabelsEN", GetType(LabelsEN).Assembly)
             End Select
         End Set
