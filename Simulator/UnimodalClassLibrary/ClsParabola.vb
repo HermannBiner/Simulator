@@ -39,7 +39,7 @@ Public Class ClsParabola
         'Setting split points
         MySplitpoints = New List(Of Decimal) From {
             CDec(0.75), 'first 2-cycle
-        CDec(1.24995), 'first 4-cycle
+            CDec(1.24995), 'first 4-cycle
             CDec(1.3681), 'first 8-cycle
             CDec(1.39405), 'first 16-cycle
             CDec(1.401155) 'limit value of the period doubling

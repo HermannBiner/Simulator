@@ -27,11 +27,6 @@ Simulator
   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.Resources.Zermatt31">
-<summary>
-  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-</summary>
-</member>
 <member name="T:Simulator.My.Resources.LabelsDE">
 <summary>
   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.

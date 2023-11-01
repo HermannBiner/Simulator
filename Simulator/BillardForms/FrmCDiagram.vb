@@ -8,6 +8,7 @@
 
 Imports System.Globalization
 
+
 Public Class FrmCDiagram
 
     'Prepare basic objects
@@ -28,7 +29,11 @@ Public Class FrmCDiagram
 
     'Value Range for the Iteration Value to be învestigated
     'selected by the CboValueRange
+    'We need the original one
     Private MyValueParameter As ClsValueParameter
+
+    'and the ad hoc defined my the user when choosing a selection
+    Private MyUserValueParameter As ClsValueParameter
 
     'Aktuelles Parameter-Paar
     Private MyParameterPair As ClsValueTupel
@@ -44,7 +49,6 @@ Public Class FrmCDiagram
 
     'Point where the left mouse button was released
     Private UserSelectionEndpoint As Point
-
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -91,11 +95,11 @@ Public Class FrmCDiagram
         'set the standard
         Iterator = New ClsEllipseBillardball
 
-        'additional default settings
-        SetDefaultValues()
-
         CboFunction.SelectedIndex = 0
         CboFunction.Select()
+
+        'additional default settings
+        SetDefaultValues()
 
     End Sub
 
@@ -130,19 +134,17 @@ Public Class FrmCDiagram
         'Setting not by reference to not change the original ValueParameter of the Iterator
         SetMyValueParameterByValue(MyValueParameters.Item(CboValueParameter.SelectedIndex))
 
-        MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyValueParameter.Range)
+        MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyUserValueParameter.Range)
 
         TxtCMin.Text = MyParameterRange.A.ToString(CultureInfo.CurrentCulture)
         TxtCMax.Text = MyParameterRange.B.ToString(CultureInfo.CurrentCulture)
         LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        TxtVMin.Text = MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
-        TxtVMax.Text = MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        TxtVMin.Text = MyUserValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
+        TxtVMax.Text = MyUserValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
+        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        'The display is cleared
-        MyBitmapGraphics.Clear(Color.White)
-        PicDiagram.Refresh()
+        ResetIteration()
 
         IsUserSelectionValid = True
 
@@ -154,7 +156,11 @@ Public Class FrmCDiagram
         'then, the original data of MyValueParameters(Index) is changed as well
         'if MyValueParameter is changed
         'therefore, we set it like here
+        'the next ValueParameter is not changed by the user
         MyValueParameter = New ClsValueParameter(ValueParameter.Tag, ValueParameter.Name, ValueParameter.Range)
+
+        'and this one is changed when the user does a selection in the diagram
+        MyUserValueParameter = New ClsValueParameter(ValueParameter.Tag, ValueParameter.Name, ValueParameter.Range)
 
     End Sub
 
@@ -162,6 +168,17 @@ Public Class FrmCDiagram
 
         'Reset ranges and Default Values
         SetDefaultValues()
+
+    End Sub
+
+    Sub ResetIteration()
+
+        'The display is cleared
+        'While loading, the MyBitmapGraphics is maybe not inizialized
+        If MyBitmapGraphics IsNot Nothing Then
+            MyBitmapGraphics.Clear(Color.White)
+        End If
+        PicDiagram.Refresh()
 
     End Sub
 
@@ -193,7 +210,7 @@ Public Class FrmCDiagram
 
         TxtVMin.Text = MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
         TxtVMax.Text = MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
     End Sub
 
@@ -224,25 +241,6 @@ Public Class FrmCDiagram
 
             MyBitmapGraphics.Clear(Color.White)
 
-            'Setting the Start-Parameterpair for the Iteration
-            'Standard for the first Value
-            Dim V1 As Decimal = MyValueParameters.Item(0).Range.A + MyValueParameters.Item(0).Range.IntervalWidth / 3
-            '.. and the second value depending on TrbPositionSTartValues
-            Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 12
-
-            'Now overwrite V1, V2 depending on the selected ValueParameter
-            If MyValueParameter.Tag = 1 Then
-                'the selected ValueParameter is Item(0)
-                V1 = MyValueParameter.Range.A + MyValueParameter.Range.IntervalWidth / 3
-                'V2 is already set
-            Else
-                'the selected ValueParameter is Item(1)
-                'V1 is already set
-                V2 = MyValueParameter.Range.A + TrbPositionStartValues.Value * MyValueParameter.Range.IntervalWidth / 12
-            End If
-
-            MyParameterPair = New ClsValueTupel(V1, V2)
-
             'In the direction of the x-axis, we work with pixel coordinates
             Dim p As Integer
 
@@ -262,35 +260,40 @@ Public Class FrmCDiagram
             PicDiagram.Refresh()
 
         Else
-
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-            SetDefaultValues()
+            'there is already a message generated
         End If
 
     End Sub
 
     Private Sub DrawIterationValues(p As Integer)
 
-        'Calculate the parameter C for the iteration depending on p
-        Dim C As Decimal = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / PicDiagram.Width)
-        Iterator.CParameter = C
-
-        Dim NextPair As ClsValueTupel
-
-        'After that, the number of iterations must be big enough to draw the cycle
-        Dim LengthOfCycle As Integer = CInt(PicDiagram.Height * MyValueParameter.Range.IntervalWidth _
-            * TrbPrecision.Value / 25 / Math.Max(MyValueParameter.Range.IntervalWidth, 0.01))
+        'the number of iterations must be big enough to draw the cycle
+        Dim LengthOfCycle As Integer = CInt(PicDiagram.Height * MyUserValueParameter.Range.IntervalWidth _
+           * TrbPrecision.Value / 25 / Math.Max(MyUserValueParameter.Range.IntervalWidth, 0.01))
 
         '..but not bigger than the y-axis allows
         LengthOfCycle = Math.Min(LengthOfCycle, 5 * PicDiagram.Height)
 
+        'Then, C is calculated
+        Dim C As Decimal = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / PicDiagram.Width)
+        Iterator.CParameter = C
+
+        'Setting the Start-Parameterpair for the Iteration
+        'We use always the same Startpoint to avoid effects if the MyParameterRange is changed
+        Dim V1 As Decimal = MyValueParameters.Item(0).Range.A + MyValueParameters.Item(0).Range.IntervalWidth / 3
+        '.. and the second value depending on TrbPositionStartValues
+        Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 12
+
+        MyParameterPair = New ClsValueTupel(V1, V2)
+
         'Finally , the cycle is drawn
 
         Dim DrawPoint As New ClsMathpoint(C, 0)
+        Dim NextPair As ClsValueTupel
 
         For n = 0 To LengthOfCycle
 
-            Select Case MyValueParameter.Tag
+            Select Case MyUserValueParameter.Tag
                 Case 1
                     DrawPoint.Y = MyParameterPair.X
                 Case Else
@@ -311,7 +314,7 @@ Public Class FrmCDiagram
 
     'SECTOR MANAGE USER RANGES
 
-    Private Sub PicDiagram_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseDown
+    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
         'The user can choose a range by a flexible rectangle
         IsMousedown = True
@@ -322,7 +325,7 @@ Public Class FrmCDiagram
 
     End Sub
 
-    Private Sub PicDiagram_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseMove
+    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
 
@@ -337,7 +340,7 @@ Public Class FrmCDiagram
 
     End Sub
 
-    Private Sub PicDiagram_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles PicDiagram.Paint
+    Private Sub PicDiagram_Paint(sender As Object, e As PaintEventArgs) Handles PicDiagram.Paint
 
         If IsMousedown Then
 
@@ -352,7 +355,7 @@ Public Class FrmCDiagram
 
     End Sub
 
-    Private Sub PicDiagram_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseUp
+    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         IsMousedown = False
 
@@ -381,8 +384,8 @@ Public Class FrmCDiagram
             LblDeltaC.Text = "Delta = " & (PixelToA(pMax) - PixelToA(pMin)).ToString(CultureInfo.CurrentCulture)
 
             'transmit the selection to the value range of x
-            TxtVMin.Text = Math.Max(PixelToX(qMin), MyValueParameter.Range.A).ToString(CultureInfo.CurrentCulture)
-            TxtVMax.Text = Math.Min(PixelToX(qMax), MyValueParameter.Range.B).ToString(CultureInfo.CurrentCulture)
+            TxtVMin.Text = Math.Max(PixelToX(qMin), MyUserValueParameter.Range.A).ToString(CultureInfo.CurrentCulture)
+            TxtVMax.Text = Math.Min(PixelToX(qMax), MyUserValueParameter.Range.B).ToString(CultureInfo.CurrentCulture)
             LblDeltaV.Text = "Delta = " & (PixelToX(qMax) - PixelToX(qMin)).ToString(CultureInfo.CurrentCulture)
 
         End If
@@ -401,29 +404,11 @@ Public Class FrmCDiagram
     Private Function PixelToX(q As Integer) As Decimal
 
         'calculates the x-value that belongs to a q-pixel coordinate in y-axis direction
-        Dim x As Decimal = CDec(MyValueParameter.Range.A + (q * MyValueParameter.Range.IntervalWidth / (PicDiagram.Height * 0.99)))
+        Dim x As Decimal = CDec(MyUserValueParameter.Range.A + (q * MyUserValueParameter.Range.IntervalWidth / (PicDiagram.Height * 0.99)))
 
         Return x
 
     End Function
-
-    'MANUALLY SET USER RANGES
-
-    Private Sub TxtCMax_LostFocus(sender As Object, e As EventArgs) Handles TxtCMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtCMin_LostFocus(sender As Object, e As EventArgs) Handles TxtCMin.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtVMax_LostFocus(sender As Object, e As EventArgs) Handles TxtVMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtVMin_LostFocus(sender As Object, e As EventArgs) Handles TxtVMin.LostFocus
-        CheckUserRanges()
-    End Sub
 
     'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 
@@ -472,7 +457,7 @@ Public Class FrmCDiagram
                 If MyValueParameter.Range.IsInterval2PartOfInterval(TempValuerange) Then
                     IsValuerangeValid = True
                     'take over
-                    MyValueParameter.Range = TempValuerange
+                    MyUserValueParameter.Range = TempValuerange
                 Else
                     MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
                    MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture) &
@@ -489,11 +474,10 @@ Public Class FrmCDiagram
 
         If IsUserSelectionValid Then
             LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
-            LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
-            MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyValueParameter.Range)
+            LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyUserValueParameter.Range)
         Else
-            'reset to default
-            SetDefaultValues()
+            'Nothing
         End If
 
     End Sub

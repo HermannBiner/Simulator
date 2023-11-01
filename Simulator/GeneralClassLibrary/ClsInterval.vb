@@ -47,15 +47,15 @@ Public Class ClsInterval
         End Get
     End Property
 
-    Public Function IsNumberInInterval(ByVal number As Object) As Boolean
+    Public Function IsNumberInInterval(number As Object) As Boolean
 
         'Checks if the Number belongs to the interval [A,B]
 
         If TypeOf number Is Integer Then
-            Dim IntNumber As Integer = DirectCast(number, Integer)
+            Dim IntNumber As Integer = CInt(number)
             Return IntNumber >= MyA And IntNumber <= MyB
         ElseIf TypeOf number Is Decimal Then
-            Dim DecNumber As Decimal = DirectCast(number, Decimal)
+            Dim DecNumber As Decimal = CDec(number)
             Return DecNumber >= MyA And DecNumber <= MyB
         Else
             MessageBox.Show(Main.LM.GetString("OnlyDecAndInt"))
