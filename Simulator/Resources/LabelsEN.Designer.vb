@@ -443,7 +443,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Manual() As String
             Get
@@ -452,7 +452,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MathDoc() As String
             Get

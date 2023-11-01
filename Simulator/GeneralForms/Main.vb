@@ -96,7 +96,8 @@ Public Class Main
             'The manual for the use of the "Simulator"
             'has to be in the same folder like the exe-File
             'manuel exists in German or English
-            Process.Start(LM.GetString("Manual"))
+            Dim Manual As String = LM.GetString("Manual")
+            Process.Start(Manual)
         Catch ex As ArgumentException
             MessageBox.Show(ex.Message)
         End Try

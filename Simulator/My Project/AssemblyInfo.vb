@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Simulator")>
-<Assembly: AssemblyDescription("Simulation chaotischer Systeme")>
+<Assembly: AssemblyDescription("Simulation dynamischer Systeme")>
 <Assembly: AssemblyCompany("Hermann Biner Zermatt")>
 <Assembly: AssemblyProduct("Simulator")>
 <Assembly: AssemblyCopyright("Copyright ©  2023")>

@@ -97,3 +97,4 @@ C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Simulator.
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\obj\Debug\Simulator.TrustInfo.xml
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\obj\Debug\Simulator.exe.manifest
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\obj\Debug\Simulator.application
+C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Handbuch.pdf

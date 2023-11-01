@@ -265,7 +265,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuBillard">
@@ -921,12 +921,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Manual">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuBillard">
