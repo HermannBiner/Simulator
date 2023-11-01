@@ -6,7 +6,7 @@
    <Modules>
     <Module Name="simulator.exe">
      <Messages>
-      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-11-01 11:04:11Z" FixCategory="NonBreaking">
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-11-01 18:52:48Z" FixCategory="NonBreaking">
        <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Signieren Sie "'Simulator.exe'" mit einem Schlüssel mit starkem Namen.</Issue>
       </Message>
      </Messages>
@@ -17,8 +17,8 @@
          <Members>
           <Member Name="#TrbPositionStartValues_ValueChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message Id="System.Windows.Forms.Label.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-01 11:04:11Z" FixCategory="DependsOnFix">
-             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\BillardForms" File="FrmCDiagram.vb" Line="211">Die Methode "'FrmCDiagram.TrbPositionStartValues_ValueChanged(Object, EventArgs)'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "/12".</Issue>
+            <Message Id="System.Windows.Forms.Label.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-01 18:52:48Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\BillardForms" File="FrmCDiagram.vb" Line="225">Die Methode "'FrmCDiagram.TrbPositionStartValues_ValueChanged(Object, EventArgs)'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "/12".</Issue>
             </Message>
            </Messages>
           </Member>

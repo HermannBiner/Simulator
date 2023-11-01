@@ -47,7 +47,7 @@ Public Class ClsInterval
         End Get
     End Property
 
-    Public Function IsNumberInInterval(ByVal number As Object) As Boolean
+    Public Function IsNumberInInterval(number As Object) As Boolean
 
         'Checks if the Number belongs to the interval [A,B]
 

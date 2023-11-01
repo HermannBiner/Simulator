@@ -110,9 +110,7 @@ Public Class FrmFeigenbaum
         TxtXMax.Text = Valuerange.B.ToString(CultureInfo.CurrentCulture)
         LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        'The display is cleared
-        MyBitmapGraphics.Clear(Color.White)
-        PicDiagram.Refresh()
+        Resetiteration()
 
         IsUserSelectionValid = True
 
@@ -120,11 +118,21 @@ Public Class FrmFeigenbaum
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        'Reset ranges and Default Values
-        SetDefaultValues()
+        Resetiteration()
 
     End Sub
 
+    Sub Resetiteration()
+
+        'The display is cleared
+        'When loading the form, MyBitmapGraphics is maybe not inizialized
+        If Not IsNothing(MyBitmapGraphics) Then
+            MyBitmapGraphics.Clear(Color.White)
+        End If
+
+        PicDiagram.Refresh()
+
+    End Sub
     Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
         Dim type As Integer
@@ -184,17 +192,15 @@ Public Class FrmFeigenbaum
             End If
 
         Else
-
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-            SetDefaultValues()
+            'There is already a message generated
         End If
 
     End Sub
 
     Private Sub DrawIterationCycle(p As Integer)
 
-        'The startvalue for the iteration is not important - we choose somtehing
-        Dim x As Decimal = CDec(Valuerange.A + (Valuerange.IntervalWidth * 0.31415926535))
+        'The startvalue for the iteration should be the same for all values of a
+        Dim x As Decimal = CDec(Iterator.IterationInterval.A + (Valuerange.IntervalWidth * 0.31415926535))
 
         'Calculate the parameter a for the iteration depending on p
         Dim a As Decimal = Parameterrange.A + (Parameterrange.IntervalWidth * p / PicDiagram.Width)
@@ -345,24 +351,6 @@ Public Class FrmFeigenbaum
 
     End Function
 
-    'MANUALLY SET USER RANGES
-
-    Private Sub TxtAMax_LostFocus(sender As Object, e As EventArgs) Handles TxtAMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtAMin_LostFocus(sender As Object, e As EventArgs) Handles TxtAMin.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
-        CheckUserRanges()
-    End Sub
-
     'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 
     Private Sub CheckUserRanges()
@@ -379,14 +367,14 @@ Public Class FrmFeigenbaum
             Dim TempParameterrange = New ClsInterval(CheckParameterrange.A, CheckParameterrange.B)
 
             'is the parameter range part of the allowed parameter interval?
-            If Parameterrange.IsInterval2PartOfInterval(TempParameterrange) Then
+            If Iterator.ParameterInterval.IsInterval2PartOfInterval(TempParameterrange) Then
                 IsParameterrangeValid = True
                 'take over
                 Parameterrange = TempParameterrange
             Else
                 MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
-                   Parameterrange.A.ToString(CultureInfo.CurrentCulture) &
-                   ", " & Parameterrange.B.ToString(CultureInfo.CurrentCulture) &
+                   Iterator.ParameterInterval.A.ToString(CultureInfo.CurrentCulture) &
+                   ", " & Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
                 IsParameterrangeValid = False
             End If
@@ -408,14 +396,14 @@ Public Class FrmFeigenbaum
                 Dim TempValuerange = New ClsInterval(CheckValuerange.A, CheckValuerange.B)
 
                 'Is the value range part of the allowed value interval?
-                If Valuerange.IsInterval2PartOfInterval(TempValuerange) Then
+                If Iterator.IterationInterval.IsInterval2PartOfInterval(TempValuerange) Then
                     IsValuerangeValid = True
                     'take over
                     Valuerange = TempValuerange
                 Else
                     MessageBox.Show(Main.LM.GetString("ValueRangeNotAllowed") & " [" &
-                       Valuerange.A.ToString(CultureInfo.CurrentCulture) &
-                       ", " & Valuerange.B.ToString(CultureInfo.CurrentCulture) &
+                       Iterator.IterationInterval.A.ToString(CultureInfo.CurrentCulture) &
+                       ", " & Iterator.IterationInterval.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
                     IsValuerangeValid = False
                 End If
@@ -431,8 +419,7 @@ Public Class FrmFeigenbaum
             LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
         Else
-            'reset to Default
-            SetDefaultValues()
+            'nothing
         End If
 
     End Sub
@@ -462,8 +449,7 @@ Public Class FrmFeigenbaum
             Next
 
         Else
-            MessageBox.Show(Main.LM.GetString("InvalidUserRanges"))
-            SetDefaultValues()
+            'there is already a message generated
         End If
     End Sub
 

@@ -123,12 +123,12 @@ Public Class ClsEllipseBillardball
             If MyC <= 1 Then
 
                 'a > b, , for better visibility a = 0.99 instead of 1
-                a = 0.99
+                a = CDec(0.99)
                 b = MyC * a
             Else
 
                 'b > a, for better visibility b = 0.99 instead of 1
-                b = 0.99
+                b = CDec(0.99)
                 a = b / MyC
             End If
 
@@ -151,12 +151,12 @@ Public Class ClsEllipseBillardball
             If MyC <= 1 Then
 
                 'a > b, , for better visibility a = 0.99 instead of 1
-                a = 0.99
+                a = CDec(0.99)
                 b = MyC * a
             Else
 
                 'b > a, for better visibility b = 0.99 instead of 1
-                b = 0.99
+                b = CDec(0.99)
                 a = b / MyC
             End If
         End Set
