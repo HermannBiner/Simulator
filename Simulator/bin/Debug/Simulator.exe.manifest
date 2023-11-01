@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5348800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5448640">
       <assemblyIdentity name="Simulator" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NEWn6dj9Y1S31PWTG/U2D/tw7w6W5cAde0Oi4jd0h+g=</dsig:DigestValue>
+        <dsig:DigestValue>Yam7NfjEPBjSN5iGfvJMNEsTMENURJ8FeorVeFn/4oY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,13 +63,13 @@
       <dsig:DigestValue>Zf+EcXnAvXIMeTo+m5kND6ToxakeiUQJSETSkmDBwg4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Handbuch.pdf" size="3177821">
+  <file name="Handbuch.pdf" size="2548365">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>84XShdw56DOBFCj8C+8kug5kmAu/CbecViCJlt9DeNc=</dsig:DigestValue>
+      <dsig:DigestValue>fx/E4yUli0GCvvqvSBgvWhBXJWc31DmBsXBve8EVhok=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Simulator.exe.config" size="183">

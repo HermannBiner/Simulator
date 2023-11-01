@@ -40,7 +40,7 @@ Public Class ClsLogisticGrowth
 
         'Setting split points
         MySplitpoints = New List(Of Decimal) From {
-            3, 'first 2-cycle
+            CDec(3), 'first 2-cycle
             CDec(3.449449), 'first 4-cycle
             CDec(3.54409), 'first 8-cycle
             CDec(3.564407), 'first 16-cycle

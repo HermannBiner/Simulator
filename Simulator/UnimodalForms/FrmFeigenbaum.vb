@@ -110,7 +110,9 @@ Public Class FrmFeigenbaum
         TxtXMax.Text = Valuerange.B.ToString(CultureInfo.CurrentCulture)
         LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        ResetIteration()
+        'The display is cleared
+        MyBitmapGraphics.Clear(Color.White)
+        PicDiagram.Refresh()
 
         IsUserSelectionValid = True
 
@@ -118,15 +120,8 @@ Public Class FrmFeigenbaum
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        ResetIteration()
-
-    End Sub
-
-    Sub ResetIteration()
-
-        'The display is cleared
-        MyBitmapGraphics.Clear(Color.White)
-        PicDiagram.Refresh()
+        'Reset ranges and Default Values
+        SetDefaultValues()
 
     End Sub
 
@@ -189,17 +184,17 @@ Public Class FrmFeigenbaum
             End If
 
         Else
-            'There is already a message generated
+
+            MessageBox.Show(Main.LM.GetString("ActionStopped"))
+            SetDefaultValues()
         End If
 
     End Sub
 
     Private Sub DrawIterationCycle(p As Integer)
 
-        'The startvalue for the iteration has to be for each cyrcle
-        'and each value of the parameter a the same
-        'to avoid effects if the ValueParameter is increasing
-        Dim x As Decimal = CDec(Iterator.IterationInterval.A + (Iterator.IterationInterval.IntervalWidth * 0.31415926535))
+        'The startvalue for the iteration is not important - we choose somtehing
+        Dim x As Decimal = CDec(Valuerange.A + (Valuerange.IntervalWidth * 0.31415926535))
 
         'Calculate the parameter a for the iteration depending on p
         Dim a As Decimal = Parameterrange.A + (Parameterrange.IntervalWidth * p / PicDiagram.Width)
@@ -254,7 +249,7 @@ Public Class FrmFeigenbaum
 
     'SECTOR MANAGE USER RANGES
 
-    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
+    Private Sub PicDiagram_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseDown
 
         'The user can choose a range by a flexible rectangle
         IsMousedown = True
@@ -265,7 +260,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
+    Private Sub PicDiagram_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
 
@@ -280,7 +275,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_Paint(sender As Object, e As PaintEventArgs) Handles PicDiagram.Paint
+    Private Sub PicDiagram_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles PicDiagram.Paint
 
         If IsMousedown Then
 
@@ -295,7 +290,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
+    Private Sub PicDiagram_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         IsMousedown = False
 
@@ -350,6 +345,24 @@ Public Class FrmFeigenbaum
 
     End Function
 
+    'MANUALLY SET USER RANGES
+
+    Private Sub TxtAMax_LostFocus(sender As Object, e As EventArgs) Handles TxtAMax.LostFocus
+        CheckUserRanges()
+    End Sub
+
+    Private Sub TxtAMin_LostFocus(sender As Object, e As EventArgs) Handles TxtAMin.LostFocus
+        CheckUserRanges()
+    End Sub
+
+    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+        CheckUserRanges()
+    End Sub
+
+    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+        CheckUserRanges()
+    End Sub
+
     'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 
     Private Sub CheckUserRanges()
@@ -366,7 +379,7 @@ Public Class FrmFeigenbaum
             Dim TempParameterrange = New ClsInterval(CheckParameterrange.A, CheckParameterrange.B)
 
             'is the parameter range part of the allowed parameter interval?
-            If Iterator.ParameterInterval.IsInterval2PartOfInterval(TempParameterrange) Then
+            If Parameterrange.IsInterval2PartOfInterval(TempParameterrange) Then
                 IsParameterrangeValid = True
                 'take over
                 Parameterrange = TempParameterrange
@@ -395,7 +408,7 @@ Public Class FrmFeigenbaum
                 Dim TempValuerange = New ClsInterval(CheckValuerange.A, CheckValuerange.B)
 
                 'Is the value range part of the allowed value interval?
-                If Iterator.IterationInterval.IsInterval2PartOfInterval(TempValuerange) Then
+                If Valuerange.IsInterval2PartOfInterval(TempValuerange) Then
                     IsValuerangeValid = True
                     'take over
                     Valuerange = TempValuerange
@@ -418,7 +431,8 @@ Public Class FrmFeigenbaum
             LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
         Else
-            'nothing
+            'reset to Default
+            SetDefaultValues()
         End If
 
     End Sub

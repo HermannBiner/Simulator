@@ -31,7 +31,7 @@ Public Class FrmBillardtable
     Private IsMousedown As Boolean = False
 
     'Standard Value for Parameter C
-    Private StandardC As Decimal = CDec(0.8)
+    Private StandardC As Decimal = 0.8
 
     'SECTOR INITIALIZATION
 
@@ -430,7 +430,7 @@ Public Class FrmBillardtable
         Select Case CboBillardTable.SelectedIndex
             Case 0
                 Billardtable = New ClsEllipseBillardtable
-                StandardC = CDec(0.8)
+                StandardC = 0.8
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
             Case 1
                 Billardtable = New ClsStadiumBillardtable
@@ -438,7 +438,7 @@ Public Class FrmBillardtable
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
             Case Else
                 Billardtable = New ClsOvalBillardtable
-                StandardC = CDec(0.5)
+                StandardC = 0.5
                 TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
         End Select
 
