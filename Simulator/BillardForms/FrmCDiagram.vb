@@ -64,7 +64,8 @@ Public Class FrmCDiagram
         LblDeltaC.Text = Main.LM.GetString("Delta") & " = "
         LblValueParameter.Text = Main.LM.GetString("ExaminatedValueParameter")
         LblPrecision.Text = Main.LM.GetString("Precision") & ": " & (TrbPrecision.Value * 1000).ToString(CultureInfo.CurrentCulture)
-        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") & TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture)
+        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
+            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/12"
         LblParameterRange.Text = Main.LM.GetString("ExaminatedParameterRange")
         BtnStartIteration.Text = Main.LM.GetString("StartIteration")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
@@ -116,7 +117,7 @@ Public Class FrmCDiagram
 
         If CboValueParameter.SelectedIndex < 0 Then
             If MyValueParameter Is Nothing Then
-                CboValueParameter.SelectedIndex = 0
+                CboValueParameter.SelectedIndex = 1
             Else
                 If MyValueParameter.Tag = 1 Then
                     CboValueParameter.SelectedIndex = 0
@@ -207,7 +208,8 @@ Public Class FrmCDiagram
 
         'The position of the start values is a number "pos" between 0 and 12
         'each startvalue is then set = ValueRange.A + pos * ValueRange.IntervalWidth / 12
-        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") & TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture)
+        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
+            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/12"
 
     End Sub
 
@@ -224,14 +226,18 @@ Public Class FrmCDiagram
 
             'Setting the Start-Parameterpair for the Iteration
             'Standard for the first Value
-            Dim V1 As Decimal = MyValueParameters.Item(0).Range.A + MyValueParameters.Item(0).Range.IntervalWidth / 4
+            Dim V1 As Decimal = MyValueParameters.Item(0).Range.A + MyValueParameters.Item(0).Range.IntervalWidth / 3
             '.. and the second value depending on TrbPositionSTartValues
             Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 12
 
-            'Now overwrite the selected ValueRange
+            'Now overwrite V1, V2 depending on the selected ValueParameter
             If MyValueParameter.Tag = 1 Then
-                V1 = MyValueParameter.Range.A + MyValueParameter.Range.IntervalWidth / 4
+                'the selected ValueParameter is Item(0)
+                V1 = MyValueParameter.Range.A + MyValueParameter.Range.IntervalWidth / 3
+                'V2 is already set
             Else
+                'the selected ValueParameter is Item(1)
+                'V1 is already set
                 V2 = MyValueParameter.Range.A + TrbPositionStartValues.Value * MyValueParameter.Range.IntervalWidth / 12
             End If
 

@@ -254,6 +254,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Untersuchtert Werteparameter ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ExaminatedValueParameter() As String
+            Get
+                Return ResourceManager.GetString("ExaminatedValueParameter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Wertebereich ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ExaminatedValueRange() As String
@@ -866,7 +875,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Position Startwert 2: ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Position Startwert 2:  ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property PositionStartValue2() As String
             Get

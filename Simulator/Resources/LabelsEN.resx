@@ -201,6 +201,10 @@
     <value>Examinated Parameter Range:</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ExaminatedValueParameter" xml:space="preserve">
+    <value>Examinated Value Parameter</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ExaminatedValueRange" xml:space="preserve">
     <value>Examinated Value Range:</value>
     <comment>Lbl</comment>
@@ -474,7 +478,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="PositionStartValue2" xml:space="preserve">
-    <value>Position Start Value 2:</value>
+    <value>Position Start Value 2: </value>
     <comment>Lbl</comment>
   </data>
   <data name="PositiveNumber" xml:space="preserve">

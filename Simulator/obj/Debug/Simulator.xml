@@ -153,6 +153,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Untersuchter Parameterbereich ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Untersuchtert Werteparameter ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueRange">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Untersuchter Wertebereich ähnelt.
@@ -495,7 +500,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PositionStartValue2">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Position Startwert 2: ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Position Startwert 2:  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PositiveNumber">
@@ -812,6 +817,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Examinated Parameter Range: ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ExaminatedValueParameter">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Examinated Value Parameter ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedValueRange">
@@ -1156,7 +1166,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PositionStartValue2">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Position Start Value 2: ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Position Start Value 2:  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PositiveNumber">
