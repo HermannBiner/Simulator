@@ -1,19 +1,20 @@
 ﻿'This form is the user interface for investigations of the iteration
 'of unimodal functions like Tentmap, Logistic Growth or Parabola
 'a parameter a, that steeres the iteration function, can be defined
-'the behaviour of the iteration depends on that parametere
+'the behaviour of the iteration depends on that parameter
 'in certain cases, the behaviour is chaotic
 'in that case, any protocol of the iteration is possible
 'if an arbitrary protocol is given by the user
 'the program calculates a startvalue for the iteration, that produces this protocol
 'in addition, any target value can be defined by the user
-'and the program adapts the startvalue a little bit
-'so that the iteration approaches this target value in some iteration steps
-'see as well the mathematical documentation
+'and the program adapts the startvalue a little bit different from the original one
+'so that the iteration approaches the given target value during the iteration
+'see the mathematical documentation
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'just by implementing this interface
 
 'Status Checked
 
@@ -27,7 +28,8 @@ Public Class FrmIteration
     Private Iterator As IIteration
 
     'The upper right point of the diagram
-    'because the left lower point is (0,0), the size fo the Diagram is defined
+    'because the left lower point is (0,0), the size of the Diagram is defined
+    ''by the right upper point
     Private DiagramSize As Point
 
     'Private global variables
@@ -52,7 +54,7 @@ Public Class FrmIteration
         Functionsgraph
 
         'The iteration is shown on the time-axis
-        'the iteration steps increases on that X-axis and the iteration value is on the Y-coordinate
+        'the iteration steps increases on that X-axis and the iteration value is on the Y-axis
         TimeAxis
 
     End Enum
@@ -98,7 +100,7 @@ Public Class FrmIteration
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
-        'at the moment, no better concept of itendifying the unimodal function is implemented
+        'at the moment, no better concept of identifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -179,7 +181,7 @@ Public Class FrmIteration
                 Iterator = New ClsParabola
         End Select
 
-        'The function is repeated 1x in each iteration step, that is the standard
+        'As standard, the function is repeated 1x in each iteration step
         Iterator.Power = CInt(CboIterationDepth.SelectedItem)
 
         'The MyGraphics Object needs to know the iteration interval depending on the type of iteration
@@ -188,7 +190,7 @@ Public Class FrmIteration
         'And the parameter and startvalue are depending on the tpe of iteration as well
         SetDefaultValues()
 
-        'If the type of iteration changes, everything has tp be reset
+        'If the type of iteration changes, everything has to be reset
         ResetIteration()
 
     End Sub
@@ -292,7 +294,7 @@ Public Class FrmIteration
             End If
         End If
 
-        'Checks and sets X-Stretching
+        'Checks and sets the X-Stretching
         If Presentation = PresentationEnum.TimeAxis And OK Then
 
             Dim CheckXStretching As New ClsCheckIsNumeric(TxtXStretching)
@@ -358,7 +360,7 @@ Public Class FrmIteration
         'counter
         Dim m As Integer
 
-        'X and XPlus are increased stepwise and the line betweens those points is drawed
+        'X and XPlus are increased stepwise and the line betweens these points is drawn
         For m = 0 To DiagramSize.X - 1
 
             X.X = Iterator.IterationInterval.A + (m * deltaX)
@@ -419,7 +421,7 @@ Public Class FrmIteration
         'The original startvalue should be adapted minimally
         'So that the target value will be reached nearly during the iteration
 
-        'The iteration starts from the beginning
+        'Reset an existing iteration
         ResetIteration()
         CboIterationDepth.SelectedIndex = 0
         Iterator.Power = 1
@@ -559,7 +561,7 @@ Public Class FrmIteration
 
             i += 1
 
-        Loop Until i > EndOfLoop
+        Loop Until i >= EndOfLoop
 
         LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
 
@@ -568,7 +570,7 @@ Public Class FrmIteration
     Private Sub ShowFullDiagram()
 
         'If a Target Value is set, it is already checked while the Initialization
-        'in that case, a green line is set on the Diagram
+        'in that case, a horizontal green line is set on the Diagram to mark the target value
         If TxtTargetValue.Text <> "" Then
             Dim A As New ClsMathpoint(Iterator.IterationInterval.A, Targetvalue)
             Dim B As New ClsMathpoint(Iterator.IterationInterval.B, Targetvalue)

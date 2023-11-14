@@ -4,9 +4,10 @@
 'for certain parameter values, the behaviour is chaotic
 'see as well the mathematical documentation
 
-'The form is based on an Interface IIteration 
+'The form is based on the Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'by implementing this interface
 
 'Status Checked
 
@@ -68,7 +69,7 @@ Public Class FrmFeigenbaum
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
-        'at the moment, no better concept of itendifying the unimodal function is implemented
+        'at the moment, no better concept of identifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -96,7 +97,7 @@ Public Class FrmFeigenbaum
     Private Sub SetDefaultValues()
 
         'if there where User-defined ranges,
-        'or the iterator had changed
+        'or the iterator has changed
         'the ranges are reset to the standard
         Parameterrange = Iterator.ParameterInterval
         Valuerange = Iterator.IterationInterval
@@ -118,7 +119,7 @@ Public Class FrmFeigenbaum
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        Resetiteration()
+        SetDefaultValues()
 
     End Sub
 
@@ -133,6 +134,7 @@ Public Class FrmFeigenbaum
         PicDiagram.Refresh()
 
     End Sub
+
     Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
         Dim type As Integer
@@ -179,8 +181,8 @@ Public Class FrmFeigenbaum
 
             For p = 1 To PicDiagram.Width
 
-                'for each p, the according paranmetervalue a is calculated
-                'and then the iteration runs until RuntimeUntilCycle
+                'for each p, the according parametervalue a is calculated
+                'and then, the iteration runs until RuntimeUntilCycle
                 'finally, the iteration cycle is drawn
                 DrawIterationCycle(p)
 
@@ -199,7 +201,7 @@ Public Class FrmFeigenbaum
 
     Private Sub DrawIterationCycle(p As Integer)
 
-        'The startvalue for the iteration should be the same for all values of a
+        'The startvalue x for the iteration should be the same for all values of a
         Dim x As Decimal = CDec(Iterator.IterationInterval.A + (Valuerange.IntervalWidth * 0.31415926535))
 
         'Calculate the parameter a for the iteration depending on p
@@ -233,7 +235,8 @@ Public Class FrmFeigenbaum
 
     Private Function SetColor(n As Integer) As Brush
 
-        'There is the possibility to use two colors for the image
+        'It's possible to use two colors for the image
+        'The reader can add more colors by programming
 
         Dim MyBrush As Brush
 
@@ -255,7 +258,7 @@ Public Class FrmFeigenbaum
 
     'SECTOR MANAGE USER RANGES
 
-    Private Sub PicDiagram_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseDown
+    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
         'The user can choose a range by a flexible rectangle
         IsMousedown = True
@@ -266,7 +269,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseMove
+    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
 
@@ -281,7 +284,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles PicDiagram.Paint
+    Private Sub PicDiagram_Paint(sender As Object, e As PaintEventArgs) Handles PicDiagram.Paint
 
         If IsMousedown Then
 
@@ -296,7 +299,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseUp
+    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         IsMousedown = False
 
@@ -336,7 +339,7 @@ Public Class FrmFeigenbaum
 
     Private Function PixelToA(p As Integer) As Decimal
 
-        'calculates the parametervalue a according to 
+        'calculates the parametervalue a according to p
         Dim a As Decimal = Parameterrange.A + ((p - 1) * Parameterrange.IntervalWidth / PicDiagram.Width)
         Return a
 

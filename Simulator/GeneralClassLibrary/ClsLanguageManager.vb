@@ -14,6 +14,8 @@ Public Class ClsLanguageManager
     Private RM As ResourceManager
 
     Property Language As LanguageEnum
+
+        'The language is set in the main menu of FrmMain
         Set(value As LanguageEnum)
             MyLanguage = value
             Select Case MyLanguage
@@ -30,6 +32,7 @@ Public Class ClsLanguageManager
 
     Public Function GetString(Identifier As String) As String
 
+        'The texts are in the resource-files LabelsDE and LabelsEN
         Dim Text As String = RM.GetString(Identifier)
 
         If Text = "" Then

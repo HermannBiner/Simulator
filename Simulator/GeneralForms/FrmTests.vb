@@ -1,10 +1,13 @@
-﻿'This form allows testing graphical methods
+﻿'This form allows testing graphical or other methods
+'normally, the menu to open this form in FrmMain is not visible
 'Status checked
 
 Public Class FrmTests
 
     Private MyMathXIntervall As ClsInterval
     Private MyMathYIntervall As ClsInterval
+    Private g As ClsGraphicTool
+
     Public Sub New()
 
         'This is necessary for the designer
@@ -12,6 +15,11 @@ Public Class FrmTests
 
         'Initialize Language
         InitializeLanguage()
+
+        'This is a test
+        MyMathXIntervall = New ClsInterval(CDec(-0.1), CDec(1.1))
+        MyMathYIntervall = New ClsInterval(CDec(-0.1), CDec(1.1))
+        g = New ClsGraphicTool(PicDiagram, MyMathXIntervall, MyMathYIntervall)
 
     End Sub
 
@@ -24,13 +32,17 @@ Public Class FrmTests
 
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
-        'This is a test
-        MyMathXIntervall = New ClsInterval(0, 1)
-        MyMathYIntervall = New ClsInterval(0, 1)
-        Dim g As New ClsGraphicTool(PicDiagram, MyMathXIntervall, MyMathYIntervall)
-        Dim A As New ClsMathpoint(CDec(0.1), CDec(0.1))
-        Dim C As New ClsMathpoint(CDec(0.9), CDec(0.9))
-        g.DrawEllipticArc(A, C, 0, CDec(6 * Math.PI / 4), Color.Red, 2)
+        'Example: Show the graph of a curve
+        g.Clear(Color.White)
+        Dim MidPoint As New ClsMathpoint(0, 0)
+        g.DrawCoordinateSystem(MidPoint, Color.Black, 1)
+
+        Dim p As Integer
+        For p = 1 To 1000
+            Dim t As Decimal = CDec(Math.PI * p / 1000)
+            Dim Gamma As New ClsMathpoint(CDec(Math.Cos(t) * Math.Cos(t)), CDec(Math.Sin(t)))
+            g.DrawPoint(Gamma, Brushes.Blue, 1)
+        Next
 
     End Sub
 End Class

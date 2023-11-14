@@ -22,7 +22,7 @@ Public Class ClsInterval
 
     Public Sub New(MyInterval As ClsInterval)
 
-        'Alternativ an existing interval is transmitted
+        'Alternatively, an existing interval is transmitted
 
         MyA = MyInterval.A
         MyB = MyInterval.B

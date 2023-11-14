@@ -73,12 +73,12 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Kugelgeschwindigkeit ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.Billard">
+<member name="P:Simulator.My.Resources.LabelsDE.Billiard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.BillardTable">
+<member name="P:Simulator.My.Resources.LabelsDE.BilliardTable">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billardtisch ähnelt.
 </summary>
@@ -115,7 +115,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Difference12">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Differenzx2 - x1 ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Differenz x2 - x1 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.DinStretching">
@@ -123,9 +123,14 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die d in [0,10] = ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.DrawBillardTable">
+<member name="P:Simulator.My.Resources.LabelsDE.DocumentNotFound">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Zwischne Billardtisch ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Das Dokument konnte nicht gefunden werden:  ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.DrawBilliardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeichne Billardtisch ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.DrawFunctionGraph">
@@ -143,7 +148,7 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptisch ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.EllipticBillard">
+<member name="P:Simulator.My.Resources.LabelsDE.EllipticBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
 </summary>
@@ -155,7 +160,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueParameter">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Untersuchtert Werteparameter ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Werteparameter ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedValueRange">
@@ -220,7 +225,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.InvalidUserRanges">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Ungültiges Wertebereich ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Ungültiger Wertebereich ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Iteration">
@@ -270,10 +275,10 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.MnuBillard">
+<member name="P:Simulator.My.Resources.LabelsDE.MnuBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
 </summary>
@@ -473,7 +478,7 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.OvalBillard">
+<member name="P:Simulator.My.Resources.LabelsDE.OvalBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Ovales Billard ähnelt.
 </summary>
@@ -563,7 +568,7 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Stadion ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.StadiumBillard">
+<member name="P:Simulator.My.Resources.LabelsDE.StadiumBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
 </summary>
@@ -611,11 +616,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.StretchingParameterInterval">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Der Dehnparameter muss im Intervall sein: ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.String1">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.TakeOver">
@@ -739,14 +739,14 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Speed of all Balls ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.Billard">
+<member name="P:Simulator.My.Resources.LabelsEN.Billiard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Billiard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.BillardTable">
+<member name="P:Simulator.My.Resources.LabelsEN.BilliardTable">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Billard Table ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Billiard Table ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Black">
@@ -789,9 +789,14 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die d in [0,10] = ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.DrawBillardTable">
+<member name="P:Simulator.My.Resources.LabelsEN.DocumentNotFound">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Draw Billard Table ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die The document was not found:  ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.DrawBilliardTable">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Draw Billiard Table ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.DrawFunctionGraph">
@@ -801,7 +806,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.DrMathETH">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dr. math. ETHZ Hermann Biner, Zermatt ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Ph.D. in Math. ETHZ Hermann Biner, Zermatt ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Elliptic">
@@ -809,9 +814,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptic ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.EllipticBillard">
+<member name="P:Simulator.My.Resources.LabelsEN.EllipticBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billard ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -931,17 +936,17 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Manual">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.MnuBillard">
+<member name="P:Simulator.My.Resources.LabelsEN.MnuBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuCDiagram">
@@ -1006,7 +1011,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuKomplexIteration">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;Komplex Iteration ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Complex Iteration ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuLanguage">
@@ -1139,9 +1144,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.OvalBillard">
+<member name="P:Simulator.My.Resources.LabelsEN.OvalBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Oval Billard ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Oval Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Parabola">
@@ -1229,9 +1234,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Stadium ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.StadiumBillard">
+<member name="P:Simulator.My.Resources.LabelsEN.StadiumBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Stadium Billard ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Stadium Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.StartIteration">

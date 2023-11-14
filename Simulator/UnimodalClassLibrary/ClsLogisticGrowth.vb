@@ -10,7 +10,7 @@ Public Class ClsLogisticGrowth
     Implements IIteration
 
     'This is the steering parameter for the iteration
-    'in the mathematical documentation: a
+    '"a" in the mathematical documentation 
     Private MyParameter As Decimal
 
     'in whitch Interval the Parameter a should be
@@ -19,8 +19,8 @@ Public Class ClsLogisticGrowth
     'in whitch Interval the iterated Value x should be
     Private ReadOnly MyIterationInterval As ClsInterval
 
-    'Power of the iteration function F:
-    'How many times the iteration function F is performed in one iteration step
+    'Power of the iteration function f:
+    'How many times the iteration function f is performed in one iteration step
     Private MyPower As Integer
 
     'Checking if the steering parameter is OK
@@ -38,7 +38,7 @@ Public Class ClsLogisticGrowth
         MyParameterInterval = New ClsInterval(0, 4)
         MyIterationInterval = New ClsInterval(0, 1)
 
-        'Setting split points
+        'Setting split points to be drawn in the image
         MySplitpoints = New List(Of Decimal) From {
             CDec(3), 'first 2-cycle
             CDec(3.449449), 'first 4-cycle
@@ -171,6 +171,7 @@ Public Class ClsLogisticGrowth
                 Mathhelper.ProcotolToTentmapStartValueAsString(TargetProtocol)
 
             'The next step converts the dual startvalue of the tentmap in its according decimal startvalue
+            'for the tent map
             Dim DecimalTentmapStartvalue As Decimal =
                 Mathhelper.DualStringToDecimalNumber(BinaryTentmapStartvalue, True)
 
@@ -190,14 +191,14 @@ Public Class ClsLogisticGrowth
         Dim Mathhelper As New ClsMathhelperUnimodal
 
         'Startvalue is the original start value 
-        'It has to be conjugated to the tentmap
+        'We need the conjugated startvalue of the tentmap
         Dim TentmapDecimalStartvalue As Decimal = LogisticGrowthToTentmap(StartValue)
 
-        'As well, we conjugate the targetvalue
+        'As well, we need the conjugated targetvalue of the tentmap
         Dim TentmapDecimalTargetvalue As Decimal = LogisticGrowthToTentmap(TargetValue)
 
         'Next, we consider the tentmap startvalue in dual string format
-        'The conjugates of the iteration chain by the tentmap is identical 
+        'The conjugates of the iteration chain of the tentmap is identical 
         'with the iteration chain of the logistic growth
         Dim TentmapDualStartvalue As String = Mathhelper.DecimalNumberToDualString(TentmapDecimalStartvalue)
 

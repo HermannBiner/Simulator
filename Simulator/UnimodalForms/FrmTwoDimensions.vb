@@ -1,16 +1,17 @@
-﻿'Suppose an experimantator works in a two dimensional space and chooses a startpoint for his experiment
+﻿'Suppose an experimentator works in a two dimensional space and chooses a startpoint for his experiment
 'and suppose, the exactness of his measure instruments is limited
-'in that case, two startpoints that are a little bit different are measured as identical
+'in that case, two startpoints that are a little bit different, are measured as identical startpoints
 'but if the behaviour is chaotic, this little difference leads to completely different orbits
 'for the experimentator, the experiment looks like random
 'because in his view, he starts always at the same startpoint
 'but the generated orbits are completely different
 'Iterated are unimodal functions like Tentmap, Logistic Growth or Parabola
-'see as well the mathematical documentation
+'see the mathematical documentation
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'just by implementing hits interface
 
 'Status Checked
 
@@ -184,7 +185,7 @@ Public Class FrmTwoDimensions
 
         'The raster shows the measure exactness of the experimentator
         'one square in the raster has 5x5 pixel points
-        'that corresponds to a measure exactness of about 0.004 for the x- and y-values
+        'that corresponds to a measure exactness of about 0.00825 for the x- and y-values
 
         'Counter
         Dim i As Integer
@@ -332,7 +333,7 @@ Public Class FrmTwoDimensions
 
     Private Sub IterationLoop(EndOfLoop As Integer)
 
-        'the next steps ot the iteration are performed
+        'the next steps of the iteration are performed
         Dim i As Integer
         For i = 1 To EndOfLoop
 

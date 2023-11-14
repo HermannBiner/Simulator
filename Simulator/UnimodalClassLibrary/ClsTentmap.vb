@@ -1,5 +1,6 @@
 ﻿'Implements the interface IIteration for the tentmap
-'with the Iteration Formula: f(x) = 2*x if x in [0,0.5] and f(x) = 2*(1-x) if x in ]0.5,1]
+'with the Iteration Formula: f(x) = a*x if x in [0,0.5] and f(x) = a*(1-x) if x in ]0.5,1]
+'a in ]0,2]. Interesting is only the case a = 2
 'and "knows" everything about this kind of iteration
 
 'Status Checked
@@ -10,7 +11,7 @@ Public Class ClsTentmap
     Implements IIteration
 
     'This is the steering parameter for the iteration
-    'in the mathematical documentation: a
+    '"a" in the mathematical documentation
     Private MyParameter As Decimal
 
     'in whitch Interval the Parameter a should be

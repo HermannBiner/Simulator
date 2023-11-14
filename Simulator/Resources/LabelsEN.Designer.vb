@@ -110,20 +110,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Billiard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property Billard() As String
+        Friend Shared ReadOnly Property Billiard() As String
             Get
-                Return ResourceManager.GetString("Billard", resourceCulture)
+                Return ResourceManager.GetString("Billiard", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Billard Table ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Billiard Table ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property BillardTable() As String
+        Friend Shared ReadOnly Property BilliardTable() As String
             Get
-                Return ResourceManager.GetString("BillardTable", resourceCulture)
+                Return ResourceManager.GetString("BilliardTable", resourceCulture)
             End Get
         End Property
         
@@ -200,11 +200,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Draw Billard Table ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die The document was not found:  ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property DrawBillardTable() As String
+        Friend Shared ReadOnly Property DocumentNotFound() As String
             Get
-                Return ResourceManager.GetString("DrawBillardTable", resourceCulture)
+                Return ResourceManager.GetString("DocumentNotFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Draw Billiard Table ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property DrawBilliardTable() As String
+            Get
+                Return ResourceManager.GetString("DrawBilliardTable", resourceCulture)
             End Get
         End Property
         
@@ -218,7 +227,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Dr. math. ETHZ Hermann Biner, Zermatt ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Ph.D. in Math. ETHZ Hermann Biner, Zermatt ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property DrMathETH() As String
             Get
@@ -236,11 +245,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billard ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property EllipticBillard() As String
+        Friend Shared ReadOnly Property EllipticBilliard() As String
             Get
-                Return ResourceManager.GetString("EllipticBillard", resourceCulture)
+                Return ResourceManager.GetString("EllipticBilliard", resourceCulture)
             End Get
         End Property
         
@@ -452,7 +461,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Manual() As String
             Get
@@ -461,7 +470,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MathDoc() As String
             Get
@@ -470,11 +479,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Billiard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property MnuBillard() As String
+        Friend Shared ReadOnly Property MnuBilliard() As String
             Get
-                Return ResourceManager.GetString("MnuBillard", resourceCulture)
+                Return ResourceManager.GetString("MnuBilliard", resourceCulture)
             End Get
         End Property
         
@@ -587,7 +596,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Komplex Iteration ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Complex Iteration ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MnuKomplexIteration() As String
             Get
@@ -830,11 +839,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Oval Billard ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Oval Billiard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property OvalBillard() As String
+        Friend Shared ReadOnly Property OvalBilliard() As String
             Get
-                Return ResourceManager.GetString("OvalBillard", resourceCulture)
+                Return ResourceManager.GetString("OvalBilliard", resourceCulture)
             End Get
         End Property
         
@@ -992,11 +1001,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Stadium Billard ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Stadium Billiard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property StadiumBillard() As String
+        Friend Shared ReadOnly Property StadiumBilliard() As String
             Get
-                Return ResourceManager.GetString("StadiumBillard", resourceCulture)
+                Return ResourceManager.GetString("StadiumBilliard", resourceCulture)
             End Get
         End Property
         

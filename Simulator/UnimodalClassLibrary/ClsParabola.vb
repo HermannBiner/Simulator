@@ -10,7 +10,7 @@ Public Class ClsParabola
     Implements IIteration
 
     'This is the steering parameter for the iteration
-    'in the mathematical documentation: a
+    '"a" bzw. "mu" in the mathematical documentation
     Private MyParameter As Decimal
 
     'in whitch Interval the Parameter a should be
@@ -29,6 +29,7 @@ Public Class ClsParabola
     'SplitPoints
     Private ReadOnly MySplitpoints As List(Of Decimal)
 
+
     'SECTOR INITIALISATION
     Public Sub New()
 
@@ -36,7 +37,7 @@ Public Class ClsParabola
         MyParameterInterval = New ClsInterval(0, 2)
         MyIterationInterval = New ClsInterval(-1, 1)
 
-        'Setting split points
+        'Setting split points to be drawn in the image
         MySplitpoints = New List(Of Decimal) From {
             CDec(0.75), 'first 2-cycle
         CDec(1.24995), 'first 4-cycle
@@ -187,14 +188,14 @@ Public Class ClsParabola
         Dim Mathhelper As New ClsMathhelperUnimodal
 
         'Startvalue is the original start value 
-        'It has to be conjugated to the tentmap
+        'We need the conjugated startvalue of the tentmap
         Dim TentmapDecimalStartvalue As Decimal = ParabolaToTentmap(StartValue)
 
         'As well, we conjugate the targetvalue
         Dim TentmapDecimalTargetvalue As Decimal = ParabolaToTentmap(TargetValue)
 
         'Next, we consider the tentmap startvalue in dual string format
-        'The conjugates of the iteration chain by the tentmap is identical 
+        'The conjugates of the iteration chain of the tentmap is identical 
         'with the iteration chain of the logistic growth
         Dim TentmapDualStartvalue As String = Mathhelper.DecimalNumberToDualString(TentmapDecimalStartvalue)
 
@@ -209,7 +210,7 @@ Public Class ClsParabola
         Dim TentmapDualTargetvalue As String =
             Mathhelper.DecimalNumberToDualString(TentmapDecimalTargetvalue)
 
-        'No the target value is adapted - see mathematical documentation
+        'Now, the target value is adapted - see mathematical documentation
         Dim NumerOfOnesInTentmapStartvalue As Integer =
             Mathhelper.NumberOfOnesInaDualNumber(TentmapDualStartvalue)
         If NumerOfOnesInTentmapStartvalue Mod 2 = 1 Then

@@ -1,12 +1,13 @@
-﻿'This form is the user interface for investigations of the sensitivity
+﻿'This form is the user interface for the investigation of the sensitivity
 'of unimodal functions like Tentmap, Logistic Growth or Parabola
 'if the behaviour of the iteration is chaotic, then a little differenc between two startvalues
 'leads to big differences of their orbits
-'see as well the mathematical documentation
+'see the mathematical documentation
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'just by implementing this interface
 
 'Status Checked
 
@@ -79,7 +80,7 @@ Public Class FrmSensitivity
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
-        'at the moment, no better concept of itendifying the unimodal function is implemented
+        'at the moment, no better concept of identifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -156,7 +157,7 @@ Public Class FrmSensitivity
                 Iterator = New ClsParabola
         End Select
 
-        'The function is repeated 1x in each iteration step, that is the standard
+        'As standard, the function is repeated 1x in each iteration step
         Iterator.Power = 1
 
         'The MyGraphics Object needs to know the iteration interval depending on the type of iteration
@@ -310,7 +311,7 @@ Public Class FrmSensitivity
             'and must be initialized
             If InitializeIteration() Then
 
-                'The initialization was succesful
+                'The initialization was successful
                 If Iterator.IsBehaviourChaotic Then
                     GenerateDiagram()
                 Else
@@ -346,7 +347,7 @@ Public Class FrmSensitivity
         Do
 
             'P1.X is the coordinate on the x-axis
-            'and increased by one pixel*xstretching in each iterations tep
+            'and increased by one pixel*xstretching in each iteration step
             P1.X = p * XStretching
             'P1.Y is the y-coordinate and equal to the iteration of x1
             P1.Y = x1

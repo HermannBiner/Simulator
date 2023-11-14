@@ -112,18 +112,18 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Billard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property Billard() As String
+        Friend Shared ReadOnly Property Billiard() As String
             Get
-                Return ResourceManager.GetString("Billard", resourceCulture)
+                Return ResourceManager.GetString("Billiard", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Billardtisch ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property BillardTable() As String
+        Friend Shared ReadOnly Property BilliardTable() As String
             Get
-                Return ResourceManager.GetString("BillardTable", resourceCulture)
+                Return ResourceManager.GetString("BilliardTable", resourceCulture)
             End Get
         End Property
         
@@ -182,7 +182,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Differenzx2 - x1 ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Differenz x2 - x1 ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Difference12() As String
             Get
@@ -200,11 +200,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Zwischne Billardtisch ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Das Dokument konnte nicht gefunden werden:  ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property DrawBillardTable() As String
+        Friend Shared ReadOnly Property DocumentNotFound() As String
             Get
-                Return ResourceManager.GetString("DrawBillardTable", resourceCulture)
+                Return ResourceManager.GetString("DocumentNotFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Zeichne Billardtisch ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property DrawBilliardTable() As String
+            Get
+                Return ResourceManager.GetString("DrawBilliardTable", resourceCulture)
             End Get
         End Property
         
@@ -238,9 +247,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property EllipticBillard() As String
+        Friend Shared ReadOnly Property EllipticBilliard() As String
             Get
-                Return ResourceManager.GetString("EllipticBillard", resourceCulture)
+                Return ResourceManager.GetString("EllipticBilliard", resourceCulture)
             End Get
         End Property
         
@@ -254,7 +263,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Untersuchtert Werteparameter ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Untersuchter Werteparameter ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ExaminatedValueParameter() As String
             Get
@@ -371,7 +380,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Ungültiges Wertebereich ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Ungültiger Wertebereich ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property InvalidUserRanges() As String
             Get
@@ -461,7 +470,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Dokumentation Simulator.pdf ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MathDoc() As String
             Get
@@ -472,9 +481,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property MnuBillard() As String
+        Friend Shared ReadOnly Property MnuBilliard() As String
             Get
-                Return ResourceManager.GetString("MnuBillard", resourceCulture)
+                Return ResourceManager.GetString("MnuBilliard", resourceCulture)
             End Get
         End Property
         
@@ -832,9 +841,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Ovales Billard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property OvalBillard() As String
+        Friend Shared ReadOnly Property OvalBilliard() As String
             Get
-                Return ResourceManager.GetString("OvalBillard", resourceCulture)
+                Return ResourceManager.GetString("OvalBilliard", resourceCulture)
             End Get
         End Property
         
@@ -994,9 +1003,9 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property StadiumBillard() As String
+        Friend Shared ReadOnly Property StadiumBilliard() As String
             Get
-                Return ResourceManager.GetString("StadiumBillard", resourceCulture)
+                Return ResourceManager.GetString("StadiumBilliard", resourceCulture)
             End Get
         End Property
         
@@ -1078,15 +1087,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property StretchingParameterInterval() As String
             Get
                 Return ResourceManager.GetString("StretchingParameterInterval", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
-        '''</summary>
-        Friend Shared ReadOnly Property String1() As String
-            Get
-                Return ResourceManager.GetString("String1", resourceCulture)
             End Get
         End Property
         

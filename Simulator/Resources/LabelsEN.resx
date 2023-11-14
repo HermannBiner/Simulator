@@ -137,12 +137,12 @@
     <value>Speed of all Balls</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Billard" xml:space="preserve">
-    <value>Billard</value>
+  <data name="Billiard" xml:space="preserve">
+    <value>Billiard</value>
     <comment>Lbl</comment>
   </data>
-  <data name="BillardTable" xml:space="preserve">
-    <value>Billard Table</value>
+  <data name="BilliardTable" xml:space="preserve">
+    <value>Billiard Table</value>
     <comment>Lbl</comment>
   </data>
   <data name="Black" xml:space="preserve">
@@ -177,8 +177,12 @@
     <value>d in [0,10] =</value>
     <comment>Lbl</comment>
   </data>
-  <data name="DrawBillardTable" xml:space="preserve">
-    <value>Draw Billard Table</value>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>The document was not found: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="DrawBilliardTable" xml:space="preserve">
+    <value>Draw Billiard Table</value>
     <comment>Lbl</comment>
   </data>
   <data name="DrawFunctionGraph" xml:space="preserve">
@@ -186,15 +190,15 @@
     <comment>Lbl</comment>
   </data>
   <data name="DrMathETH" xml:space="preserve">
-    <value>Dr. math. ETHZ Hermann Biner, Zermatt</value>
+    <value>Ph.D. in Math. ETHZ Hermann Biner, Zermatt</value>
     <comment>Lbl</comment>
   </data>
   <data name="Elliptic" xml:space="preserve">
     <value>Elliptic</value>
     <comment>Lbl</comment>
   </data>
-  <data name="EllipticBillard" xml:space="preserve">
-    <value>Elliptic Billard</value>
+  <data name="EllipticBilliard" xml:space="preserve">
+    <value>Elliptic Billiard</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -290,15 +294,15 @@
     <comment>Lbl</comment>
   </data>
   <data name="Manual" xml:space="preserve">
-    <value>Handbuch.pdf</value>
+    <value>Manual.pdf</value>
     <comment>Doc</comment>
   </data>
   <data name="MathDoc" xml:space="preserve">
-    <value>Dokumentation Simulator.pdf</value>
+    <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
   </data>
-  <data name="MnuBillard" xml:space="preserve">
-    <value>&amp;Billard</value>
+  <data name="MnuBilliard" xml:space="preserve">
+    <value>&amp;Billiard</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuCDiagram" xml:space="preserve">
@@ -350,7 +354,7 @@
     <comment>Mnu</comment>
   </data>
   <data name="MnuKomplexIteration" xml:space="preserve">
-    <value>&amp;Komplex Iteration</value>
+    <value>&amp;Complex Iteration</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuLanguage" xml:space="preserve">
@@ -457,8 +461,8 @@
     <value>Oval</value>
     <comment>Lbl</comment>
   </data>
-  <data name="OvalBillard" xml:space="preserve">
-    <value>Oval Billard</value>
+  <data name="OvalBilliard" xml:space="preserve">
+    <value>Oval Billiard</value>
     <comment>Lbl</comment>
   </data>
   <data name="Parabola" xml:space="preserve">
@@ -529,8 +533,8 @@
     <value>Stadium</value>
     <comment>Lbl</comment>
   </data>
-  <data name="StadiumBillard" xml:space="preserve">
-    <value>Stadium Billard</value>
+  <data name="StadiumBilliard" xml:space="preserve">
+    <value>Stadium Billiard</value>
     <comment>Lbl</comment>
   </data>
   <data name="StartIteration" xml:space="preserve">

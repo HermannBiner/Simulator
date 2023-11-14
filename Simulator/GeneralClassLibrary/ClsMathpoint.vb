@@ -8,13 +8,16 @@ Public Class ClsMathpoint
     Private MyY As Decimal
 
     Public Sub New(x As Decimal, y As Decimal)
+
+        'If the math. coordinates of the point are set when initializing
         MyX = x
         MyY = y
+
     End Sub
 
     Public Sub New()
 
-        'If X and Y are set after the Initialization
+        'If the math. coordinates X and Y are set after the Initialization
 
     End Sub
 

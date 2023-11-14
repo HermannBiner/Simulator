@@ -137,11 +137,11 @@
     <value>Kugelgeschwindigkeit</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Billard" xml:space="preserve">
+  <data name="Billiard" xml:space="preserve">
     <value>Billard</value>
     <comment>Lbl</comment>
   </data>
-  <data name="BillardTable" xml:space="preserve">
+  <data name="BilliardTable" xml:space="preserve">
     <value>Billardtisch</value>
     <comment>Lbl</comment>
   </data>
@@ -170,15 +170,19 @@
     <comment>Lbl</comment>
   </data>
   <data name="Difference12" xml:space="preserve">
-    <value>Differenzx2 - x1</value>
+    <value>Differenz x2 - x1</value>
     <comment>Lbl</comment>
   </data>
   <data name="DinStretching" xml:space="preserve">
     <value>d in [0,10] =</value>
     <comment>Lbl</comment>
   </data>
-  <data name="DrawBillardTable" xml:space="preserve">
-    <value>Zwischne Billardtisch</value>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Das Dokument konnte nicht gefunden werden: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="DrawBilliardTable" xml:space="preserve">
+    <value>Zeichne Billardtisch</value>
     <comment>Lbl</comment>
   </data>
   <data name="DrawFunctionGraph" xml:space="preserve">
@@ -193,7 +197,7 @@
     <value>Elliptisch</value>
     <comment>Lbl</comment>
   </data>
-  <data name="EllipticBillard" xml:space="preserve">
+  <data name="EllipticBilliard" xml:space="preserve">
     <value>Elliptisches Billard</value>
     <comment>Lbl</comment>
   </data>
@@ -202,7 +206,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedValueParameter" xml:space="preserve">
-    <value>Untersuchtert Werteparameter</value>
+    <value>Untersuchter Werteparameter</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedValueRange" xml:space="preserve">
@@ -254,7 +258,7 @@
     <comment>Msg</comment>
   </data>
   <data name="InvalidUserRanges" xml:space="preserve">
-    <value>Ungültiges Wertebereich</value>
+    <value>Ungültiger Wertebereich</value>
     <comment>Msg</comment>
   </data>
   <data name="Iteration" xml:space="preserve">
@@ -294,10 +298,10 @@
     <comment>Doc</comment>
   </data>
   <data name="MathDoc" xml:space="preserve">
-    <value>Dokumentation Simulator.pdf</value>
+    <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
   </data>
-  <data name="MnuBillard" xml:space="preserve">
+  <data name="MnuBilliard" xml:space="preserve">
     <value>&amp;Billard</value>
     <comment>Mnu</comment>
   </data>
@@ -457,7 +461,7 @@
     <value>Oval</value>
     <comment>Lbl</comment>
   </data>
-  <data name="OvalBillard" xml:space="preserve">
+  <data name="OvalBilliard" xml:space="preserve">
     <value>Ovales Billard</value>
     <comment>Lbl</comment>
   </data>
@@ -529,7 +533,7 @@
     <value>Stadion</value>
     <comment>Lbl</comment>
   </data>
-  <data name="StadiumBillard" xml:space="preserve">
+  <data name="StadiumBilliard" xml:space="preserve">
     <value>Billard im Stadion</value>
     <comment>Lbl</comment>
   </data>
@@ -568,9 +572,6 @@
   <data name="StretchingParameterInterval" xml:space="preserve">
     <value>Der Dehnparameter muss im Intervall sein:</value>
     <comment>Msg</comment>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="TakeOver" xml:space="preserve">
     <value>Übernehme Startparameter</value>

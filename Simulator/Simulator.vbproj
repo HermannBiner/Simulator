@@ -121,18 +121,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BillardClassLibrary\ClsEllipseBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ClsOvalBillardball.vb" />
-    <Compile Include="BillardClassLibrary\ClsOvalBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ClsStadiumBillardball.vb" />
-    <Compile Include="BillardClassLibrary\ClsStadiumBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\IBillardball.vb" />
-    <Compile Include="BillardClassLibrary\IBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ICDiagram.vb" />
-    <Compile Include="BillardForms\FrmCDiagram.Designer.vb">
+    <Compile Include="BilliardClassLibrary\ClsEllipseBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ClsOvalBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsOvalBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ClsStadiumBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsStadiumBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\IBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\IBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ICDiagram.vb" />
+    <Compile Include="BilliardForms\FrmCDiagram.Designer.vb">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>
     </Compile>
-    <Compile Include="BillardForms\FrmCDiagram.vb">
+    <Compile Include="BilliardForms\FrmCDiagram.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GeneralClassLibrary\ClsInterval.vb" />
@@ -154,8 +154,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="BillardClassLibrary\ClsMathhelperBillard.vb" />
-    <Compile Include="BillardClassLibrary\ClsEllipseBillardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsMathhelperBilliard.vb" />
+    <Compile Include="BilliardClassLibrary\ClsEllipseBilliardball.vb" />
     <Compile Include="Resources\LabelsDE.Designer.vb">
       <DependentUpon>LabelsDE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -171,10 +171,10 @@
     <Compile Include="UnimodalClassLibrary\ClsLogisticGrowth.vb" />
     <Compile Include="GeneralClassLibrary\ClsGraphicTool.vb" />
     <Compile Include="UnimodalClassLibrary\ClsMathhelperUnimodal.vb" />
-    <Compile Include="BillardForms\FrmBillardtable.Designer.vb">
-      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    <Compile Include="BilliardForms\FrmBilliardtable.Designer.vb">
+      <DependentUpon>FrmBilliardtable.vb</DependentUpon>
     </Compile>
-    <Compile Include="BillardForms\FrmBillardtable.vb">
+    <Compile Include="BilliardForms\FrmBilliardtable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GeneralForms\FrmInfo.Designer.vb">
@@ -233,24 +233,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BillardForms\FrmCDiagram.resx">
+    <EmbeddedResource Include="BilliardForms\FrmCDiagram.resx">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralForms\FrmTests.resx">
       <DependentUpon>FrmTests.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BillardForms\FrmBillardtable.resx">
-      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    <EmbeddedResource Include="BilliardForms\FrmBilliardtable.resx">
+      <DependentUpon>FrmBilliardtable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsDE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LabelsDE.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsEN.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LabelsEN.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UnimodalForms\FrmFeigenbaum.resx">
       <DependentUpon>FrmFeigenbaum.vb</DependentUpon>
@@ -281,9 +283,24 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Handbuch.pdf">
+    <None Include="bin\Debug\Dynamische Systeme.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="bin\Debug\Handbuch.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="bin\Debug\Manual.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Dynamische Systeme.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Handbuch.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Manual.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
