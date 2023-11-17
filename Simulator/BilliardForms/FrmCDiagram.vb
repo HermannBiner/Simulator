@@ -344,7 +344,7 @@ Public Class FrmCDiagram
             'the selection-rectangle is dranw in its actual position
             Dim rect As New Rectangle(Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X), Math.Min(UserSelectionStartpoint.Y, UserSelectionEndpoint.Y),
                                       Math.Abs(UserSelectionStartpoint.X - UserSelectionEndpoint.X), Math.Abs(UserSelectionStartpoint.Y - UserSelectionEndpoint.Y))
-            Using MyPen As New Pen(Color.Red)
+            Using MyPen As New Pen(Color.Red, 2)
                 e.Graphics.DrawRectangle(MyPen, rect)
             End Using
 

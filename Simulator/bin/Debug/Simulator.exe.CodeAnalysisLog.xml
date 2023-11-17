@@ -6,7 +6,7 @@
    <Modules>
     <Module Name="simulator.exe">
      <Messages>
-      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-11-14 08:50:58Z" FixCategory="NonBreaking">
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-11-17 08:10:53Z" FixCategory="NonBreaking">
        <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Signieren Sie "'Simulator.exe'" mit einem Schlüssel mit starkem Namen.</Issue>
       </Message>
      </Messages>
