@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Gear.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Simulator" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="Simulator" version="1.0.0.0" publicKeyToken="0C1F5579C1838C03" language="neutral" processorArchitecture="amd64" />
     <commandLine file="Simulator.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5462976">
-      <assemblyIdentity name="Simulator" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5463488">
+      <assemblyIdentity name="Simulator" version="1.0.0.0" publicKeyToken="0C1F5579C1838C03" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6zQcvg0/ics4KW6MaWLxkC0t2kqqKAlO885q+jjTlME=</dsig:DigestValue>
+        <dsig:DigestValue>4F3FEyce1rL88knxRNnWvG4Yh/nPDYfcAQccuu3ts8s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

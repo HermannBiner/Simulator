@@ -1,31 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="17.0">
- <Targets>
-  <Target Name="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Simulator.exe">
-   <Modules>
-    <Module Name="simulator.exe">
-     <Messages>
-      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2023-11-17 08:10:53Z" FixCategory="NonBreaking">
-       <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Signieren Sie "'Simulator.exe'" mit einem Schlüssel mit starkem Namen.</Issue>
-      </Message>
-     </Messages>
-    </Module>
-   </Modules>
-  </Target>
- </Targets>
- <Rules>
-  <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
-   <Name>Assemblys müssen gültige starke Namen aufweisen</Name>
-   <Description>Entweder verfügt die Assembly nicht über einen starken Namen, über einen ungültigen Namen, oder der starke Name ist nur aufgrund der Computerkonfiguration gültig. In diesem Zustand sollte die Assembly nicht bereitgestellt werden. Die häufigsten Ursachen hierfür sind: 1) Der Inhalt der Assembly wurde nach der Signierung geändert. 2) Bei der Signierung ist ein Fehler aufgetreten. 3) Die Assembly wurde verzögert signiert. 4) Es war ein Registrierungsschlüssel vorhanden, der eine erfolgreiche Überprüfung ermöglichte, die andernfalls nicht möglich gewesen wäre.</Description>
-   <Resolution Name="NoStrongName">Signieren Sie "{0}" mit einem Schlüssel mit starkem Namen.</Resolution>
-   <Owner />
-   <Url>http://msdn.microsoft.com/library/ms182127.aspx</Url>
-   <Email>[none]</Email>
-   <MessageLevel Certainty="95">CriticalError</MessageLevel>
-   <File Name="designrules.dll" Version="17.0.0.0" />
-  </Rule>
- </Rules>
  <Localized>
   <String Key="Category">Kategorie</String>
   <String Key="Certainty">Sicherheit</String>
