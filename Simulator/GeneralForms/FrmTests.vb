@@ -2,11 +2,31 @@
 'normally, the menu to open this form in FrmMain is not visible
 'Status checked
 
+Imports System.ComponentModel
+Imports System.Threading
+
 Public Class FrmTests
 
-    Private MyMathXIntervall As ClsInterval
-    Private MyMathYIntervall As ClsInterval
-    Private g As ClsGraphicTool
+    Private MyMathRange As ClsInterval
+    Private MyDiagramSize As Integer
+
+    Private MyPictureBoxDrawer As ClsGraphicTool
+
+    Private MyBitmap As Bitmap
+    Private MyShiftedBitmap As Bitmap
+    Private MyBitmapDrawer As ClsGraphicTool
+
+    Private StopIteration As Boolean
+    Private Start As Boolean = True
+
+    'Iteration
+    Private Angle As Decimal
+    Private XShift As Integer
+    Private DeltaAngle As Decimal
+
+    Private Pendulum As ClsMathpoint
+    Private Trace As ClsMathpoint
+    Private NextTrace As ClsMathpoint
 
     Public Sub New()
 
@@ -15,11 +35,6 @@ Public Class FrmTests
 
         'Initialize Language
         InitializeLanguage()
-
-        'This is a test
-        MyMathXIntervall = New ClsInterval(CDec(-0.1), CDec(1.1))
-        MyMathYIntervall = New ClsInterval(CDec(-0.1), CDec(1.1))
-        g = New ClsGraphicTool(PicDiagram, MyMathXIntervall, MyMathYIntervall)
 
     End Sub
 
@@ -30,19 +45,85 @@ Public Class FrmTests
 
     End Sub
 
-    Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
+    Private Sub FrmTests_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        'Example: Show the graph of a curve
-        g.Clear(Color.White)
-        Dim MidPoint As New ClsMathpoint(0, 0)
-        g.DrawCoordinateSystem(MidPoint, Color.Black, 1)
+        'Initialize Bitmap
+        MyDiagramSize = Math.Min(PicDiagram.Width, PicDiagram.Height)
+        MyBitmap = New Bitmap(MyDiagramSize, MyDiagramSize)
+        PicDiagram.Image = MyBitmap
 
-        Dim p As Integer
-        For p = 1 To 1000
-            Dim t As Decimal = CDec(Math.PI * p / 1000)
-            Dim Gamma As New ClsMathpoint(CDec(Math.Cos(t) * Math.Cos(t)), CDec(Math.Sin(t)))
-            g.DrawPoint(Gamma, Brushes.Blue, 1)
-        Next
+
+        'Initialize GraphicTools
+        MyMathRange = New ClsInterval(CDec(-1), CDec(1))
+        MyPictureBoxDrawer = New ClsGraphicTool(PicDiagram, MyMathRange, MyMathRange)
+        MyBitmapDrawer = New ClsGraphicTool(MyBitmap, MyMathRange, MyMathRange)
+        MyBitmapDrawer.Clear(Color.White)
 
     End Sub
+
+
+    Private Async Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
+
+        StopIteration = False
+        Await IterationLoopTest(Start)
+        Start = False
+
+    End Sub
+
+    Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
+
+        StopIteration = True
+
+    End Sub
+
+    Private Async Function IterationLoopTest(Start As Boolean) As Task
+
+        If Start Then
+
+            'Initializing only in the beginning
+            'that gives the possibility to continue after an interrupt
+            Angle = 0
+            DeltaAngle = CDec(0.05)
+            XShift = 1
+
+            Pendulum = New ClsMathpoint(CDec(-0.95), 0)
+            Trace = New ClsMathpoint(Pendulum.X, 0)
+            NextTrace = New ClsMathpoint(Pendulum.X - CDec(XShift * MyMathRange.IntervalWidth / MyDiagramSize), CDec(Math.Sin(DeltaAngle)))
+            Start = False
+        End If
+
+
+        Do
+
+            'copy the bitmap
+            MyShiftedBitmap = New Bitmap(MyBitmap)
+
+            'Draw the copy right-shifted into the bitmap
+            MyBitmapDrawer.Clear(Color.White)
+            MyBitmapDrawer.DrawImage(MyShiftedBitmap, XShift, 0)
+
+            'Draw the line into the bitmap
+            MyBitmapDrawer.DrawLine(Trace, NextTrace, Color.Blue, 1)
+
+            'update the Picdiagram
+            PicDiagram.Invalidate()
+            MyPictureBoxDrawer.DrawPoint(Pendulum, Brushes.Red, 3)
+
+            'prepare the next point
+            Angle += DeltaAngle
+            Angle = Angle Mod CDec(Math.PI * 2)
+
+            Pendulum.Y = CDec(Math.Sin(Angle))
+
+            Trace.Y = NextTrace.Y
+            NextTrace.Y = Pendulum.Y
+
+            LstValues.Items.Add(Trace.X.ToString & ", " & Trace.Y.ToString)
+
+            Await Task.Delay(10)
+
+        Loop Until StopIteration
+
+    End Function
+
 End Class
