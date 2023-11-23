@@ -52,10 +52,10 @@ Public Class FrmBilliardtable
         LblNumber.Text = Main.LM.GetString("NumberOfSteps")
         LblBilliardTable.Text = Main.LM.GetString("BilliardTable")
         LblAlfa.Text = Main.LM.GetString("Alfa")
-        BtnUseStartParameter.Text = Main.LM.GetString("TakeOver")
+        BtnTakeOverStartParameter.Text = Main.LM.GetString("TakeOver")
         GrpStartParameter.Text = Main.LM.GetString("StartParameter")
         LblPhasePortrait.Text = Main.LM.GetString("PhasePortrait")
-        LblSpeed.Text = Main.LM.GetString("BallSpeed")
+        LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
         LblBallColor.Text = Main.LM.GetString("BallColor")
         BtnNewBall.Text = Main.LM.GetString("NewBall")
         BtnNext10.Text = Main.LM.GetString("Next10Steps")
@@ -378,7 +378,7 @@ Public Class FrmBilliardtable
         End If
     End Sub
 
-    Private Sub BtnUseStartParameter_Click(sender As Object, e As EventArgs) Handles BtnUseStartParameter.Click
+    Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
 
         'The Start Parameters are transmitted to the Ball and then, the Ball uses them as Start Parameters
         If Billiardball Is Nothing Then
@@ -485,4 +485,7 @@ Public Class FrmBilliardtable
 
     End Sub
 
+    Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
+        LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+    End Sub
 End Class

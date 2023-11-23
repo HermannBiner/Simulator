@@ -188,7 +188,6 @@ Partial Class Main
         Me.MnuTest.Name = "MnuTest"
         Me.MnuTest.Size = New System.Drawing.Size(39, 22)
         Me.MnuTest.Text = "Test"
-        Me.MnuTest.Visible = False
         '
         'MnuDocumentation
         '
@@ -200,19 +199,19 @@ Partial Class Main
         'MnuManual
         '
         Me.MnuManual.Name = "MnuManual"
-        Me.MnuManual.Size = New System.Drawing.Size(143, 22)
+        Me.MnuManual.Size = New System.Drawing.Size(180, 22)
         Me.MnuManual.Text = "Manual"
         '
         'MnuMathematics
         '
         Me.MnuMathematics.Name = "MnuMathematics"
-        Me.MnuMathematics.Size = New System.Drawing.Size(143, 22)
+        Me.MnuMathematics.Size = New System.Drawing.Size(180, 22)
         Me.MnuMathematics.Text = "Mathematics"
         '
         'MnuInfo
         '
         Me.MnuInfo.Name = "MnuInfo"
-        Me.MnuInfo.Size = New System.Drawing.Size(143, 22)
+        Me.MnuInfo.Size = New System.Drawing.Size(180, 22)
         Me.MnuInfo.Text = "Info"
         '
         'Main

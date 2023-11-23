@@ -33,8 +33,12 @@ Public Class ClsGraphicTool
     'in the pixel-coordinate-system, the Y-axis shows downwards
     'but the programmer doesn't have to take care of that
 
+    'but of course, of there is drawing in pixel coordinates needed
+    'at least to draw a point is possible by overloading
+
     Private ReadOnly MyPicturebox As PictureBox
     Private ReadOnly MyBitmap As Bitmap
+    Private ReadOnly MyImage As Image
 
     'the Graphic object of the .NET library
     Private ReadOnly Graphs As Graphics
@@ -82,6 +86,21 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub New(Image As Image, MathXInterval As ClsInterval, MathYInterval As ClsInterval)
+
+        'In this case, ClsGraphics draws into a Bitmap
+        MyImage = Image
+        Graphs = Graphics.FromImage(MyImage)
+
+        'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
+        Imagerange = New Rectangle(1, MyImage.Height - 1, MyImage.Width - 1, MyImage.Height - 1)
+        MyDiagramCornerpoint = New Point(MyImage.Width - 1, MyImage.Height - 1)
+
+        MyMathXInterval = MathXInterval
+        MyMathYInterval = MathYInterval
+
+    End Sub
+
     'SECTOR GRAPHICS
 
     Public Sub Clear(color As Color)
@@ -122,12 +141,20 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawPoint(Point As ClsMathpoint, brush As Brush, wide As Integer)
+    Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As Brush, wide As Integer)
 
         'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
         Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / MyDiagramCornerpoint.X
-        FillCircle(Point, size, brush)
+        FillCircle(MathPoint, size, brush)
+
+    End Sub
+
+    Public Sub DrawPoint(PixelPoint As Point, brush As Brush, wide As Integer)
+
+        'Draws a point in pixel coordinates filled with Brush, Wide = 1 is about one pixel
+
+        FillCircle(PixelPoint, wide, brush)
 
     End Sub
 
@@ -188,6 +215,17 @@ Public Class ClsGraphicTool
 
         'The object Graphs expects a rectangle where the circle is drawed into
         Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+        Graphs.FillEllipse(brush, rect)
+
+    End Sub
+
+    Public Sub FillCircle(PixelMidPoint As Point, radius As Integer, brush As Brush)
+
+        'Draws a circle with MidPoint and Radius in pixel coordinates
+        'and fills the circle with Brush
+
+        'The object Graphs expects a rectangle where the circle is drawed into
+        Dim rect As New Rectangle(PixelMidPoint.X - radius, PixelMidPoint.Y - radius, 2 * radius, 2 * radius)
         Graphs.FillEllipse(brush, rect)
 
     End Sub
@@ -276,6 +314,13 @@ Public Class ClsGraphicTool
             Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
         End Using
 
+
+    End Sub
+
+    Public Sub DrawImage(Image As Bitmap, XShift As Integer, YShift As Integer)
+
+        'Draws an image on position (XShift, YShift) in Pixel Coordinates
+        Graphs.DrawImage(Image, XShift, YShift)
 
     End Sub
 

@@ -53,30 +53,30 @@ Partial Class FrmCDiagram
         'PicDiagram
         '
         Me.PicDiagram.BackColor = System.Drawing.Color.White
-        Me.PicDiagram.Location = New System.Drawing.Point(13, 13)
-        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(4)
+        Me.PicDiagram.Location = New System.Drawing.Point(6, 7)
+        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(2)
         Me.PicDiagram.Name = "PicDiagram"
-        Me.PicDiagram.Size = New System.Drawing.Size(1243, 1150)
+        Me.PicDiagram.Size = New System.Drawing.Size(622, 598)
         Me.PicDiagram.TabIndex = 3
         Me.PicDiagram.TabStop = False
         '
         'LblDeltaV
         '
         Me.LblDeltaV.AutoSize = True
-        Me.LblDeltaV.Location = New System.Drawing.Point(1275, 510)
-        Me.LblDeltaV.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblDeltaV.Location = New System.Drawing.Point(638, 265)
+        Me.LblDeltaV.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblDeltaV.Name = "LblDeltaV"
-        Me.LblDeltaV.Size = New System.Drawing.Size(86, 25)
+        Me.LblDeltaV.Size = New System.Drawing.Size(44, 13)
         Me.LblDeltaV.TabIndex = 60
         Me.LblDeltaV.Text = "Delta = "
         '
         'LblDeltaC
         '
         Me.LblDeltaC.AutoSize = True
-        Me.LblDeltaC.Location = New System.Drawing.Point(1277, 247)
-        Me.LblDeltaC.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblDeltaC.Location = New System.Drawing.Point(638, 128)
+        Me.LblDeltaC.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblDeltaC.Name = "LblDeltaC"
-        Me.LblDeltaC.Size = New System.Drawing.Size(86, 25)
+        Me.LblDeltaC.Size = New System.Drawing.Size(44, 13)
         Me.LblDeltaC.TabIndex = 59
         Me.LblDeltaC.Text = "Delta = "
         '
@@ -84,19 +84,19 @@ Partial Class FrmCDiagram
         '
         Me.TxtVMax.AcceptsReturn = True
         Me.TxtVMax.AcceptsTab = True
-        Me.TxtVMax.Location = New System.Drawing.Point(1360, 449)
-        Me.TxtVMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtVMax.Location = New System.Drawing.Point(680, 233)
+        Me.TxtVMax.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtVMax.Name = "TxtVMax"
-        Me.TxtVMax.Size = New System.Drawing.Size(317, 31)
+        Me.TxtVMax.Size = New System.Drawing.Size(160, 20)
         Me.TxtVMax.TabIndex = 55
         '
         'LblVmax
         '
         Me.LblVmax.AutoSize = True
-        Me.LblVmax.Location = New System.Drawing.Point(1277, 456)
-        Me.LblVmax.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblVmax.Location = New System.Drawing.Point(638, 237)
+        Me.LblVmax.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblVmax.Name = "LblVmax"
-        Me.LblVmax.Size = New System.Drawing.Size(91, 25)
+        Me.LblVmax.Size = New System.Drawing.Size(46, 13)
         Me.LblVmax.TabIndex = 58
         Me.LblVmax.Text = "V Max ="
         '
@@ -104,50 +104,50 @@ Partial Class FrmCDiagram
         '
         Me.TxtVMin.AcceptsReturn = True
         Me.TxtVMin.AcceptsTab = True
-        Me.TxtVMin.Location = New System.Drawing.Point(1360, 395)
-        Me.TxtVMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtVMin.Location = New System.Drawing.Point(680, 205)
+        Me.TxtVMin.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtVMin.Name = "TxtVMin"
-        Me.TxtVMin.Size = New System.Drawing.Size(317, 31)
+        Me.TxtVMin.Size = New System.Drawing.Size(160, 20)
         Me.TxtVMin.TabIndex = 54
         '
         'LblVmin
         '
         Me.LblVmin.AutoSize = True
-        Me.LblVmin.Location = New System.Drawing.Point(1277, 403)
-        Me.LblVmin.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblVmin.Location = New System.Drawing.Point(638, 210)
+        Me.LblVmin.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblVmin.Name = "LblVmin"
-        Me.LblVmin.Size = New System.Drawing.Size(85, 25)
+        Me.LblVmin.Size = New System.Drawing.Size(43, 13)
         Me.LblVmin.TabIndex = 57
         Me.LblVmin.Text = "V Min ="
         '
         'LblValueParameter
         '
         Me.LblValueParameter.AutoSize = True
-        Me.LblValueParameter.Location = New System.Drawing.Point(1277, 302)
-        Me.LblValueParameter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblValueParameter.Location = New System.Drawing.Point(638, 157)
+        Me.LblValueParameter.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblValueParameter.Name = "LblValueParameter"
-        Me.LblValueParameter.Size = New System.Drawing.Size(279, 25)
+        Me.LblValueParameter.Size = New System.Drawing.Size(137, 13)
         Me.LblValueParameter.TabIndex = 56
         Me.LblValueParameter.Text = "ExaminatedValueParameter"
         '
         'LblPrecision
         '
         Me.LblPrecision.AutoSize = True
-        Me.LblPrecision.Location = New System.Drawing.Point(1280, 756)
-        Me.LblPrecision.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblPrecision.Location = New System.Drawing.Point(640, 393)
+        Me.LblPrecision.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblPrecision.Name = "LblPrecision"
-        Me.LblPrecision.Size = New System.Drawing.Size(173, 25)
+        Me.LblPrecision.Size = New System.Drawing.Size(86, 13)
         Me.LblPrecision.TabIndex = 53
         Me.LblPrecision.Text = "Precision: 25000"
         '
         'TrbPrecision
         '
-        Me.TrbPrecision.Location = New System.Drawing.Point(1281, 799)
-        Me.TrbPrecision.Margin = New System.Windows.Forms.Padding(4)
+        Me.TrbPrecision.Location = New System.Drawing.Point(640, 415)
+        Me.TrbPrecision.Margin = New System.Windows.Forms.Padding(2)
         Me.TrbPrecision.Maximum = 100
         Me.TrbPrecision.Minimum = 1
         Me.TrbPrecision.Name = "TrbPrecision"
-        Me.TrbPrecision.Size = New System.Drawing.Size(396, 90)
+        Me.TrbPrecision.Size = New System.Drawing.Size(198, 45)
         Me.TrbPrecision.TabIndex = 52
         Me.TrbPrecision.Value = 25
         '
@@ -155,29 +155,29 @@ Partial Class FrmCDiagram
         '
         Me.CboFunction.FormattingEnabled = True
         Me.CboFunction.Items.AddRange(New Object() {"Elliptic Billiard", "Stadium Billiard", "Oval Billiard"})
-        Me.CboFunction.Location = New System.Drawing.Point(1285, 13)
-        Me.CboFunction.Margin = New System.Windows.Forms.Padding(4)
+        Me.CboFunction.Location = New System.Drawing.Point(642, 7)
+        Me.CboFunction.Margin = New System.Windows.Forms.Padding(2)
         Me.CboFunction.Name = "CboFunction"
-        Me.CboFunction.Size = New System.Drawing.Size(395, 33)
+        Me.CboFunction.Size = New System.Drawing.Size(200, 21)
         Me.CboFunction.TabIndex = 51
         '
         'TxtCMax
         '
         Me.TxtCMax.AcceptsReturn = True
         Me.TxtCMax.AcceptsTab = True
-        Me.TxtCMax.Location = New System.Drawing.Point(1362, 184)
-        Me.TxtCMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtCMax.Location = New System.Drawing.Point(681, 96)
+        Me.TxtCMax.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtCMax.Name = "TxtCMax"
-        Me.TxtCMax.Size = New System.Drawing.Size(315, 31)
+        Me.TxtCMax.Size = New System.Drawing.Size(160, 20)
         Me.TxtCMax.TabIndex = 45
         '
         'LblCmax
         '
         Me.LblCmax.AutoSize = True
-        Me.LblCmax.Location = New System.Drawing.Point(1277, 192)
-        Me.LblCmax.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblCmax.Location = New System.Drawing.Point(638, 100)
+        Me.LblCmax.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblCmax.Name = "LblCmax"
-        Me.LblCmax.Size = New System.Drawing.Size(92, 25)
+        Me.LblCmax.Size = New System.Drawing.Size(46, 13)
         Me.LblCmax.TabIndex = 50
         Me.LblCmax.Text = "C Max ="
         '
@@ -185,48 +185,48 @@ Partial Class FrmCDiagram
         '
         Me.TxtCMin.AcceptsReturn = True
         Me.TxtCMin.AcceptsTab = True
-        Me.TxtCMin.Location = New System.Drawing.Point(1362, 132)
-        Me.TxtCMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtCMin.Location = New System.Drawing.Point(681, 69)
+        Me.TxtCMin.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtCMin.Name = "TxtCMin"
-        Me.TxtCMin.Size = New System.Drawing.Size(315, 31)
+        Me.TxtCMin.Size = New System.Drawing.Size(160, 20)
         Me.TxtCMin.TabIndex = 44
         '
         'LblCmin
         '
         Me.LblCmin.AutoSize = True
-        Me.LblCmin.Location = New System.Drawing.Point(1279, 139)
-        Me.LblCmin.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblCmin.Location = New System.Drawing.Point(640, 72)
+        Me.LblCmin.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblCmin.Name = "LblCmin"
-        Me.LblCmin.Size = New System.Drawing.Size(86, 25)
+        Me.LblCmin.Size = New System.Drawing.Size(43, 13)
         Me.LblCmin.TabIndex = 49
         Me.LblCmin.Text = "C Min ="
         '
         'LblParameterRange
         '
         Me.LblParameterRange.AutoSize = True
-        Me.LblParameterRange.Location = New System.Drawing.Point(1279, 92)
-        Me.LblParameterRange.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblParameterRange.Location = New System.Drawing.Point(640, 48)
+        Me.LblParameterRange.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblParameterRange.Name = "LblParameterRange"
-        Me.LblParameterRange.Size = New System.Drawing.Size(287, 25)
+        Me.LblParameterRange.Size = New System.Drawing.Size(142, 13)
         Me.LblParameterRange.TabIndex = 48
         Me.LblParameterRange.Text = "ExaminatedParameterRange"
         '
         'BtnReset
         '
-        Me.BtnReset.Location = New System.Drawing.Point(1285, 1112)
-        Me.BtnReset.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnReset.Location = New System.Drawing.Point(642, 578)
+        Me.BtnReset.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(396, 51)
+        Me.BtnReset.Size = New System.Drawing.Size(198, 27)
         Me.BtnReset.TabIndex = 47
         Me.BtnReset.Text = "ResetIteration"
         Me.BtnReset.UseVisualStyleBackColor = True
         '
         'BtnStartIteration
         '
-        Me.BtnStartIteration.Location = New System.Drawing.Point(1280, 923)
-        Me.BtnStartIteration.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnStartIteration.Location = New System.Drawing.Point(640, 480)
+        Me.BtnStartIteration.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnStartIteration.Name = "BtnStartIteration"
-        Me.BtnStartIteration.Size = New System.Drawing.Size(396, 51)
+        Me.BtnStartIteration.Size = New System.Drawing.Size(198, 27)
         Me.BtnStartIteration.TabIndex = 46
         Me.BtnStartIteration.Text = "StartIteration"
         Me.BtnStartIteration.UseVisualStyleBackColor = True
@@ -235,35 +235,38 @@ Partial Class FrmCDiagram
         '
         Me.CboValueParameter.FormattingEnabled = True
         Me.CboValueParameter.Items.AddRange(New Object() {"ValueRange1", "ValueRange2"})
-        Me.CboValueParameter.Location = New System.Drawing.Point(1360, 342)
+        Me.CboValueParameter.Location = New System.Drawing.Point(680, 178)
+        Me.CboValueParameter.Margin = New System.Windows.Forms.Padding(2)
         Me.CboValueParameter.Name = "CboValueParameter"
-        Me.CboValueParameter.Size = New System.Drawing.Size(317, 33)
+        Me.CboValueParameter.Size = New System.Drawing.Size(160, 21)
         Me.CboValueParameter.TabIndex = 61
         '
         'LblStartValues
         '
         Me.LblStartValues.AutoSize = True
-        Me.LblStartValues.Location = New System.Drawing.Point(1275, 556)
+        Me.LblStartValues.Location = New System.Drawing.Point(638, 289)
+        Me.LblStartValues.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblStartValues.Name = "LblStartValues"
-        Me.LblStartValues.Size = New System.Drawing.Size(243, 25)
+        Me.LblStartValues.Size = New System.Drawing.Size(120, 13)
         Me.LblStartValues.TabIndex = 62
         Me.LblStartValues.Text = "Position Start Value 2: 4"
         '
         'TrbPositionStartValues
         '
-        Me.TrbPositionStartValues.Location = New System.Drawing.Point(1280, 609)
-        Me.TrbPositionStartValues.Maximum = 11
+        Me.TrbPositionStartValues.Location = New System.Drawing.Point(640, 317)
+        Me.TrbPositionStartValues.Margin = New System.Windows.Forms.Padding(2)
+        Me.TrbPositionStartValues.Maximum = 119
         Me.TrbPositionStartValues.Minimum = 1
         Me.TrbPositionStartValues.Name = "TrbPositionStartValues"
-        Me.TrbPositionStartValues.Size = New System.Drawing.Size(396, 90)
+        Me.TrbPositionStartValues.Size = New System.Drawing.Size(198, 45)
         Me.TrbPositionStartValues.TabIndex = 63
         Me.TrbPositionStartValues.Value = 4
         '
         'FrmCDiagram
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2349, 1180)
+        Me.ClientSize = New System.Drawing.Size(1174, 614)
         Me.Controls.Add(Me.TrbPositionStartValues)
         Me.Controls.Add(Me.LblStartValues)
         Me.Controls.Add(Me.CboValueParameter)
@@ -286,6 +289,7 @@ Partial Class FrmCDiagram
         Me.Controls.Add(Me.BtnStartIteration)
         Me.Controls.Add(Me.PicDiagram)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FrmCDiagram"
         Me.Text = "C-Diagram"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

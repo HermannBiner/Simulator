@@ -69,7 +69,7 @@ Public Class FrmCDiagram
         LblValueParameter.Text = Main.LM.GetString("ExaminatedValueParameter")
         LblPrecision.Text = Main.LM.GetString("Precision") & ": " & (TrbPrecision.Value * 1000).ToString(CultureInfo.CurrentCulture)
         LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
-            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/12"
+            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
         LblParameterRange.Text = Main.LM.GetString("ExaminatedParameterRange")
         BtnStartIteration.Text = Main.LM.GetString("StartIteration")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
@@ -218,9 +218,9 @@ Public Class FrmCDiagram
     Private Sub TrbPositionStartValues_ValueChanged(sender As Object, e As EventArgs) Handles TrbPositionStartValues.ValueChanged
 
         'The position of the start values is a number "pos" between 1 and 11
-        'each startvalue is then set = ValueRange.A + pos * ValueRange.IntervalWidth / 12
+        'each startvalue is then set = ValueRange.A + pos * ValueRange.IntervalWidth / 120
         LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
-            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/12"
+            TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
 
     End Sub
 
@@ -271,7 +271,7 @@ Public Class FrmCDiagram
         Dim V1 As Decimal = MyValueParameters.Item(0).Range.A + MyValueParameters.Item(0).Range.IntervalWidth / 3
 
         '.. and the second value depending on TrbPositionStartValues
-        Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 12
+        Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 120
 
         MyParameterPair = New ClsValueTupel(V1, V2)
 
