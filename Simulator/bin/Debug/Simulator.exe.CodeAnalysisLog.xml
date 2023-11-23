@@ -12,10 +12,10 @@
          <Members>
           <Member Name="#.ctor(System.Drawing.Image,Simulator.ClsInterval,Simulator.ClsInterval)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="Image" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message Id="Image" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Image" im Parameternamen 'Image' in image.</Issue>
             </Message>
-            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Math" im Parameternamen 'MathXInterval' in math.</Issue>
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Math" im Parameternamen 'MathYInterval' in math.</Issue>
             </Message>
@@ -23,40 +23,29 @@
           </Member>
           <Member Name="#DrawImage(System.Drawing.Bitmap,System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Certainty="50" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="320">Ändern Sie den Typ des 'Image'-Parameters in 'ClsGraphicTool.DrawImage(Bitmap, Integer, Integer)' von 'Bitmap' in den Basistyp 'Image'. Für diese Methode sind scheinbar nur Basisklassenmember in der Implementierung erforderlich. Unterdrücken Sie diese Verletzung, wenn es Gründe gibt, den stärker abgeleiteten Typ in der Methodensignatur erforderlich zu machen.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#DrawPoint(Simulator.ClsMathpoint,System.Drawing.Brush,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="144">Korrigieren Sie im Member 'ClsGraphicTool.DrawPoint(ClsMathpoint, Brush, Integer)' die Schreibweise von "Math" im Parameternamen 'MathPoint' in math.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#DrawPoint(System.Drawing.Point,System.Drawing.Brush,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="153">Korrigieren Sie im Member 'ClsGraphicTool.DrawPoint(Point, Brush, Integer)' die Schreibweise von "Pixel" im Parameternamen 'PixelPoint' in pixel.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#FillCircle(System.Drawing.Point,System.Int32,System.Drawing.Brush)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="Breaking">
+            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-23 10:27:25Z" FixCategory="Breaking">
              <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="222">Korrigieren Sie im Member 'ClsGraphicTool.FillCircle(Point, Integer, Brush)' die Schreibweise von "Pixel" im Parameternamen 'PixelMidPoint' in pixel.</Issue>
-            </Message>
-           </Messages>
-          </Member>
-         </Members>
-        </Type>
-        <Type Name="FrmTests" Kind="Class" Accessibility="Public" ExternallyVisible="True">
-         <Members>
-          <Member Name="#IterationLoopTest(System.Boolean)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
-           <Messages>
-            <Message Id="Start" TypeName="VariableNamesShouldNotMatchFieldNames" Category="Microsoft.Maintainability" CheckId="CA1500" Status="Active" Created="2023-11-22 16:58:20Z" FixCategory="NonBreaking">
-             <Issue Name="Parameter" Certainty="95" Level="Error">'Start', ein in 'FrmTests.IterationLoopTest(Boolean)' deklarierter Parameter, hat denselben Namen wie ein Instanzenfeld für den Typ. Ändern Sie den Namen eines dieser Elemente.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -89,16 +78,6 @@
    <Email>[none]</Email>
    <MessageLevel Certainty="85">Error</MessageLevel>
    <File Name="namingrules.dll" Version="17.0.0.0" />
-  </Rule>
-  <Rule TypeName="VariableNamesShouldNotMatchFieldNames" Category="Microsoft.Maintainability" CheckId="CA1500">
-   <Name>Variablennamen sollten nicht mit Feldnamen übereinstimmen</Name>
-   <Description>Namen von Instanzfeldern und Variablen sollten innerhalb desselben Bereichs nicht identisch sein.</Description>
-   <Resolution Name="Parameter">{0}, ein in {1} deklarierter Parameter, hat denselben Namen wie ein Instanzenfeld für den Typ. Ändern Sie den Namen eines dieser Elemente.</Resolution>
-   <Owner />
-   <Url>http://msdn.microsoft.com/library/ms182216.aspx</Url>
-   <Email>[none]</Email>
-   <MessageLevel Certainty="95">Error</MessageLevel>
-   <File Name="maintainabilityrules.dll" Version="17.0.0.0" />
   </Rule>
  </Rules>
  <Localized>

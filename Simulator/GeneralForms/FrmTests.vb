@@ -64,9 +64,11 @@ Public Class FrmTests
 
     Private Async Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
-        StopIteration = False
-        Await IterationLoopTest(Start)
-        Start = False
+        If Start Then
+            StopIteration = False
+            Await IterationLoopTest()
+            Start = False
+        End If
 
     End Sub
 
@@ -76,7 +78,7 @@ Public Class FrmTests
 
     End Sub
 
-    Private Async Function IterationLoopTest(Start As Boolean) As Task
+    Private Async Function IterationLoopTest() As Task
 
         If Start Then
 
@@ -126,4 +128,12 @@ Public Class FrmTests
 
     End Function
 
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        MyBitmapDrawer.Clear(Color.White)
+        MyBitmapDrawer.Clear(Color.White)
+        PicDiagram.Refresh()
+        LstValues.Items.Clear()
+        Start = True
+
+    End Sub
 End Class
