@@ -147,7 +147,8 @@
     <Compile Include="GeneralClassLibrary\ClsLanguageManager.vb" />
     <Compile Include="GeneralClassLibrary\ClsMathpoint.vb" />
     <Compile Include="GeneralClassLibrary\ClsValueParameter.vb" />
-    <Compile Include="GeneralClassLibrary\ClsValueTupel.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValuePair.vb" />
+    <Compile Include="GeneralClassLibrary\ClsVector.vb" />
     <Compile Include="GeneralForms\FrmTests.Designer.vb">
       <DependentUpon>FrmTests.vb</DependentUpon>
     </Compile>
@@ -162,6 +163,13 @@
     </Compile>
     <Compile Include="BilliardClassLibrary\ClsMathhelperBilliard.vb" />
     <Compile Include="BilliardClassLibrary\ClsEllipseBilliardball.vb" />
+    <Compile Include="PendulumClassLibrary\INumericMethod.vb" />
+    <Compile Include="PendulumForms\FrmSpringPendulum.Designer.vb">
+      <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PendulumForms\FrmSpringPendulum.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Resources\LabelsDE.Designer.vb">
       <DependentUpon>LabelsDE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -247,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BilliardForms\FrmBilliardtable.resx">
       <DependentUpon>FrmBilliardtable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PendulumForms\FrmSpringPendulum.resx">
+      <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsDE.resx">
       <Generator>ResXFileCodeGenerator</Generator>

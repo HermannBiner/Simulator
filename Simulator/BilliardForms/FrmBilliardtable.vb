@@ -291,12 +291,15 @@ Public Class FrmBilliardtable
 
         If Billiardball IsNot Nothing Then
 
-            Cursor = Cursors.Hand
-            IsMousedown = True
+            If Not (Billiardball.IsStartpositionSet And Billiardball.IsStartangleSet) Then
 
-            'Now, Moving the Mouse moves the Ball as well
-            MouseMoving(e)
+                Cursor = Cursors.Hand
+                IsMousedown = True
 
+                'Now, Moving the Mouse moves the Ball as well
+                MouseMoving(e)
+
+            End If
         End If
 
     End Sub

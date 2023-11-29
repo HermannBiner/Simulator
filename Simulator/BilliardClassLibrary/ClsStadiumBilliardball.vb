@@ -428,7 +428,7 @@ Public Class ClsStadiumBilliardball
 
     End Sub
 
-    Public Function GetNextPoint(ActualPoint As ClsValueTupel) As ClsValueTupel Implements ICDiagram.GetNextPoint
+    Public Function GetNextPoint(ActualPoint As ClsValuePair) As ClsValuePair Implements ICDiagram.GetNextPoint
 
         MyT = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y
@@ -448,7 +448,7 @@ Public Class ClsStadiumBilliardball
 
         alfa = CalculateAlfa(nextT, MyPhi)
 
-        Dim NextPoint As New ClsValueTupel(nextT, alfa)
+        Dim NextPoint As New ClsValuePair(nextT, alfa)
 
         Return NextPoint
 

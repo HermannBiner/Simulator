@@ -51,6 +51,7 @@ Public Class Main
         MnuEnglish.Text = LM.GetString("MnuEnglish")
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
+        MnuNumericMethods.Text = Main.LM.GetString("NumericMethods")
 
     End Sub
 
@@ -96,6 +97,10 @@ Public Class Main
 
     Private Sub MnuBilliard_Click(sender As Object, e As EventArgs) Handles MnuBilliard.Click
         FrmBilliardtable.Show()
+    End Sub
+
+    Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
+        FrmSpringPendulum.Show()
     End Sub
 
     Private Sub MnuPendulum_Click(sender As Object, e As EventArgs) Handles MnuPendulum.Click

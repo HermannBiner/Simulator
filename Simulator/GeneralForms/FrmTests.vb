@@ -64,11 +64,13 @@ Public Class FrmTests
 
     Private Async Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
+        StopIteration = False
+        Await IterationLoopTest()
+
         If Start Then
-            StopIteration = False
-            Await IterationLoopTest()
             Start = False
         End If
+
 
     End Sub
 
