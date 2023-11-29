@@ -65,6 +65,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property _Stop() As String
+            Get
+                Return ResourceManager.GetString("Stop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die About Simulator ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property AboutSimulator() As String
@@ -182,6 +191,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Difference ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Difference() As String
+            Get
+                Return ResourceManager.GetString("Difference", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Difference x2 - x1 ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Difference12() As String
@@ -250,6 +268,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property EllipticBilliard() As String
             Get
                 Return ResourceManager.GetString("EllipticBilliard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Euler() As String
+            Get
+                Return ResourceManager.GetString("Euler", resourceCulture)
             End Get
         End Property
         
@@ -812,6 +839,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Numeric Method ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property NumericMethod() As String
+            Get
+                Return ResourceManager.GetString("NumericMethod", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Numeric Methods ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property NumericMethods() As String
+            Get
+                Return ResourceManager.GetString("NumericMethods", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NumericValue() As String
@@ -938,11 +983,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Reset ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Reset() As String
+            Get
+                Return ResourceManager.GetString("Reset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Reset Iteration ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ResetIteration() As String
             Get
                 Return ResourceManager.GetString("ResetIteration", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property RungeKutta3() As String
+            Get
+                Return ResourceManager.GetString("RungeKutta3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property RungeKutta4() As String
+            Get
+                Return ResourceManager.GetString("RungeKutta4", resourceCulture)
             End Get
         End Property
         
@@ -992,6 +1064,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property SpringPendulum() As String
+            Get
+                Return ResourceManager.GetString("SpringPendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Stadium ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Stadium() As String
@@ -1006,6 +1087,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property StadiumBilliard() As String
             Get
                 Return ResourceManager.GetString("StadiumBilliard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Start ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Start() As String
+            Get
+                Return ResourceManager.GetString("Start", resourceCulture)
             End Get
         End Property
         
@@ -1078,6 +1168,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property StartvalueForTargetvalue() As String
             Get
                 Return ResourceManager.GetString("StartvalueForTargetvalue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Step Width ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property StepWidth() As String
+            Get
+                Return ResourceManager.GetString("StepWidth", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Stretched Mode ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property StretchedMode() As String
+            Get
+                Return ResourceManager.GetString("StretchedMode", resourceCulture)
             End Get
         End Property
         

@@ -105,7 +105,6 @@ Public Class FrmIteration
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
 
-
     End Sub
 
     Private Sub FrmIteration_Load(sender As Object, e As EventArgs) Handles MyBase.Load

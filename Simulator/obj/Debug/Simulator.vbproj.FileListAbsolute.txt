@@ -100,3 +100,4 @@ C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\obj\Debug\Simulator.
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Dynamische Systeme.pdf
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Handbuch.pdf
 C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Manual.pdf
+C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\obj\Debug\Simulator.FrmSpringPendulum.resources

@@ -35,7 +35,7 @@ Public Class FrmCDiagram
     Private MyUserValueParameter As ClsValueParameter
 
     'Actual parameter pair
-    Private MyParameterPair As ClsValueTupel
+    Private MyParameterPair As ClsValuePair
 
     'For the Check if the Definitions of the Ranges by the User is OK
     Private IsUserSelectionValid As Boolean
@@ -273,9 +273,9 @@ Public Class FrmCDiagram
         '.. and the second value depending on TrbPositionStartValues
         Dim V2 As Decimal = MyValueParameters.Item(1).Range.A + TrbPositionStartValues.Value * MyValueParameters.Item(1).Range.IntervalWidth / 120
 
-        MyParameterPair = New ClsValueTupel(V1, V2)
+        MyParameterPair = New ClsValuePair(V1, V2)
 
-        Dim NextPair As ClsValueTupel
+        Dim NextPair As ClsValuePair
 
         'After that, the number of iterations must be big enough before drawing the cycle
         Dim LengthOfCycle As Integer = CInt(PicDiagram.Height * MyUserValueParameter.Range.IntervalWidth _

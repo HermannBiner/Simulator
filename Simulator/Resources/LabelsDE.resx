@@ -169,6 +169,10 @@
     <value>Delta</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Difference" xml:space="preserve">
+    <value>Differenz</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Difference12" xml:space="preserve">
     <value>Differenz x2 - x1</value>
     <comment>Lbl</comment>
@@ -199,6 +203,10 @@
   </data>
   <data name="EllipticBilliard" xml:space="preserve">
     <value>Elliptisches Billard</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Euler" xml:space="preserve">
+    <value>Euler</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -449,6 +457,14 @@
     <value>Anzahl Schritte</value>
     <comment>Lbl</comment>
   </data>
+  <data name="NumericMethod" xml:space="preserve">
+    <value>Numerisches Verfahren</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericMethods" xml:space="preserve">
+    <value>Numerische Methoden</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="NumericValue" xml:space="preserve">
     <value>Das muss ein numerischer Wert sein!</value>
     <comment>Msg</comment>
@@ -505,8 +521,20 @@
     <value>Reflexionswinkel</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ResetIteration" xml:space="preserve">
     <value>Iteration zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RungeKutta3" xml:space="preserve">
+    <value>Runge Kutta 3</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RungeKutta4" xml:space="preserve">
+    <value>Runge Kutta 4</value>
     <comment>Lbl</comment>
   </data>
   <data name="Sensitivity" xml:space="preserve">
@@ -529,12 +557,20 @@
     <value>Einzelne Orbits</value>
     <comment>Lbl</comment>
   </data>
+  <data name="SpringPendulum" xml:space="preserve">
+    <value>Federpendel</value>
+    <comment>lbl</comment>
+  </data>
   <data name="Stadium" xml:space="preserve">
     <value>Stadion</value>
     <comment>Lbl</comment>
   </data>
   <data name="StadiumBilliard" xml:space="preserve">
     <value>Billard im Stadion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
     <comment>Lbl</comment>
   </data>
   <data name="StartIteration" xml:space="preserve">
@@ -567,6 +603,18 @@
   </data>
   <data name="StartvalueForTargetvalue" xml:space="preserve">
     <value>Vorschlag Startwert für diesen Zielwert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StepWidth" xml:space="preserve">
+    <value>Schrittweite</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StretchedMode" xml:space="preserve">
+    <value>Gestreckte Anzeige</value>
     <comment>Lbl</comment>
   </data>
   <data name="StretchingParameterInterval" xml:space="preserve">
