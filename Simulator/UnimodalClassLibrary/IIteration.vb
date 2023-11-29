@@ -1,11 +1,14 @@
-﻿'Is the place holder for any kind of iteration
+﻿'Is the interface for any kind of iteration
 'for unimodal functions
+'To program a new unimodal function
+'just this interface has to be implemented
+
 'Status Checked
 
 Public Interface IIteration
 
-    'Steering parameter value of the iteration
-    'in the mathematical documentaiton: a
+    'Steering parameter of the iteration
+    '"a" in the mathematical documentation
     WriteOnly Property Parameter As Decimal
 
     'Allowed interval for the steering parameter
@@ -17,10 +20,10 @@ Public Interface IIteration
     'Splitpoints of the Feigenbaum diagram
     ReadOnly Property Splitpoints As List(Of Decimal)
 
-    'the interval in which the iteration happens
+    'the interval in which the iteration values are
     ReadOnly Property IterationInterval As ClsInterval
 
-    'Check if the parameter is in the allowed parameter interval
+    'Check if the steering parameter is in the allowed parameter interval
     Function IsParameterAllowed(Parameter As Decimal) As Boolean
 
     'Check if the start value if the iteration is in the allowed iteration interval
@@ -28,12 +31,13 @@ Public Interface IIteration
 
     'If there is a given protocol by the user
     'the program should calculate an appropriate start value (in case of chaos)
+    'that delivers this protocol
     'see the mathematical documentation
     Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal
 
     'If there is a given target value for the iteration by the user
     'the program should calculate an appropriate start value (in case of chaos)
-    'X0 is the original start value
+    'that approaches the target value
     'see the mathematical documentation
     Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal
 

@@ -4,9 +4,12 @@
 'for certain parameter values, the behaviour is chaotic
 'see as well the mathematical documentation
 
-'The form is based on an Interface IIteration 
+'The form is based on the Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'by implementing this interface
+
+'Status Checked
 
 Imports System.Globalization
 
@@ -40,6 +43,7 @@ Public Class FrmFeigenbaum
     Private UserSelectionEndpoint As Point
 
     'SECTOR INITIALIZATION
+
     Public Sub New()
 
         'This is necessary for the designer
@@ -65,6 +69,7 @@ Public Class FrmFeigenbaum
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of identifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -92,7 +97,7 @@ Public Class FrmFeigenbaum
     Private Sub SetDefaultValues()
 
         'if there where User-defined ranges,
-        'or the iterator had changed
+        'or the iterator has changed
         'the ranges are reset to the standard
         Parameterrange = Iterator.ParameterInterval
         Valuerange = Iterator.IterationInterval
@@ -106,9 +111,7 @@ Public Class FrmFeigenbaum
         TxtXMax.Text = Valuerange.B.ToString(CultureInfo.CurrentCulture)
         LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
-        'The display is cleared
-        MyBitmapGraphics.Clear(Color.White)
-        PicDiagram.Refresh()
+        Resetiteration()
 
         IsUserSelectionValid = True
 
@@ -116,8 +119,19 @@ Public Class FrmFeigenbaum
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        'Reset ranges and Default Values
         SetDefaultValues()
+
+    End Sub
+
+    Sub Resetiteration()
+
+        'The display is cleared
+        'When loading the form, MyBitmapGraphics is maybe not inizialized
+        If Not IsNothing(MyBitmapGraphics) Then
+            MyBitmapGraphics.Clear(Color.White)
+        End If
+
+        PicDiagram.Refresh()
 
     End Sub
 
@@ -139,7 +153,7 @@ Public Class FrmFeigenbaum
 
         Iterator.Power = 1
 
-        'Reset ranges and Default Values
+        'Reset ranges and default Values
         SetDefaultValues()
 
     End Sub
@@ -167,8 +181,8 @@ Public Class FrmFeigenbaum
 
             For p = 1 To PicDiagram.Width
 
-                'for each p, the according paranmetervalue a is calculated
-                'and then the iteration runs until RuntimeUntilCycle
+                'for each p, the according parametervalue a is calculated
+                'and then, the iteration runs until RuntimeUntilCycle
                 'finally, the iteration cycle is drawn
                 DrawIterationCycle(p)
 
@@ -180,17 +194,15 @@ Public Class FrmFeigenbaum
             End If
 
         Else
-
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-            SetDefaultValues()
+            'There is already a message generated
         End If
 
     End Sub
 
     Private Sub DrawIterationCycle(p As Integer)
 
-        'The startvalue for the iteration is not important - we choose somtehing
-        Dim x As Decimal = CDec(Valuerange.A + (Valuerange.IntervalWidth * 0.31415926535))
+        'The startvalue x for the iteration should be the same for all values of a
+        Dim x As Decimal = CDec(Iterator.IterationInterval.A + (Valuerange.IntervalWidth * 0.31415926535))
 
         'Calculate the parameter a for the iteration depending on p
         Dim a As Decimal = Parameterrange.A + (Parameterrange.IntervalWidth * p / PicDiagram.Width)
@@ -223,7 +235,9 @@ Public Class FrmFeigenbaum
 
     Private Function SetColor(n As Integer) As Brush
 
-        'There is the possibility to use two colors
+        'It's possible to use two colors for the image
+        'The reader can add more colors by programming
+
         Dim MyBrush As Brush
 
         If ChkColored.Checked Then
@@ -244,7 +258,7 @@ Public Class FrmFeigenbaum
 
     'SECTOR MANAGE USER RANGES
 
-    Private Sub PicDiagram_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseDown
+    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
         'The user can choose a range by a flexible rectangle
         IsMousedown = True
@@ -255,7 +269,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseMove
+    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
 
@@ -270,14 +284,14 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles PicDiagram.Paint
+    Private Sub PicDiagram_Paint(sender As Object, e As PaintEventArgs) Handles PicDiagram.Paint
 
         If IsMousedown Then
 
             'the selection-rectangle is dranw in its actual position
             Dim rect As New Rectangle(Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X), Math.Min(UserSelectionStartpoint.Y, UserSelectionEndpoint.Y),
                                       Math.Abs(UserSelectionStartpoint.X - UserSelectionEndpoint.X), Math.Abs(UserSelectionStartpoint.Y - UserSelectionEndpoint.Y))
-            Using MyPen As New Pen(Color.Red)
+            Using MyPen As New Pen(Color.Red, 2)
                 e.Graphics.DrawRectangle(MyPen, rect)
             End Using
 
@@ -285,7 +299,7 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-    Private Sub PicDiagram_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PicDiagram.MouseUp
+    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         IsMousedown = False
 
@@ -325,7 +339,7 @@ Public Class FrmFeigenbaum
 
     Private Function PixelToA(p As Integer) As Decimal
 
-        'calculates the parametervalue a according to 
+        'calculates the parametervalue a according to p
         Dim a As Decimal = Parameterrange.A + ((p - 1) * Parameterrange.IntervalWidth / PicDiagram.Width)
         Return a
 
@@ -339,24 +353,6 @@ Public Class FrmFeigenbaum
         Return x
 
     End Function
-
-    'MANUALLY SET USER RANGES
-
-    Private Sub TxtAMax_LostFocus(sender As Object, e As EventArgs) Handles TxtAMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtAMin_LostFocus(sender As Object, e As EventArgs) Handles TxtAMin.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
-        CheckUserRanges()
-    End Sub
-
-    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
-        CheckUserRanges()
-    End Sub
 
     'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 
@@ -374,14 +370,14 @@ Public Class FrmFeigenbaum
             Dim TempParameterrange = New ClsInterval(CheckParameterrange.A, CheckParameterrange.B)
 
             'is the parameter range part of the allowed parameter interval?
-            If Parameterrange.IsInterval2PartOfInterval(TempParameterrange) Then
+            If Iterator.ParameterInterval.IsInterval2PartOfInterval(TempParameterrange) Then
                 IsParameterrangeValid = True
                 'take over
                 Parameterrange = TempParameterrange
             Else
                 MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
-                   Parameterrange.A.ToString(CultureInfo.CurrentCulture) &
-                   ", " & Parameterrange.B.ToString(CultureInfo.CurrentCulture) &
+                   Iterator.ParameterInterval.A.ToString(CultureInfo.CurrentCulture) &
+                   ", " & Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
                 IsParameterrangeValid = False
             End If
@@ -403,14 +399,14 @@ Public Class FrmFeigenbaum
                 Dim TempValuerange = New ClsInterval(CheckValuerange.A, CheckValuerange.B)
 
                 'Is the value range part of the allowed value interval?
-                If Valuerange.IsInterval2PartOfInterval(TempValuerange) Then
+                If Iterator.IterationInterval.IsInterval2PartOfInterval(TempValuerange) Then
                     IsValuerangeValid = True
                     'take over
                     Valuerange = TempValuerange
                 Else
-                    MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
-                       Valuerange.A.ToString(CultureInfo.CurrentCulture) &
-                       ", " & Valuerange.B.ToString(CultureInfo.CurrentCulture) &
+                    MessageBox.Show(Main.LM.GetString("ValueRangeNotAllowed") & " [" &
+                       Iterator.IterationInterval.A.ToString(CultureInfo.CurrentCulture) &
+                       ", " & Iterator.IterationInterval.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
                     IsValuerangeValid = False
                 End If
@@ -426,8 +422,7 @@ Public Class FrmFeigenbaum
             LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(FeigenbaumDiagram, Parameterrange, Valuerange)
         Else
-            'reset to Default
-            SetDefaultValues()
+            'nothing
         End If
 
     End Sub
@@ -457,8 +452,7 @@ Public Class FrmFeigenbaum
             Next
 
         Else
-            MessageBox.Show(Main.LM.GetString("InvalidUserRanges"))
-            SetDefaultValues()
+            'there is already a message generated
         End If
     End Sub
 

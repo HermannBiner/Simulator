@@ -1,4 +1,5 @@
 ﻿'Represents an interval of real numbers [A,B] with A < B
+'Status Checked
 
 Public Class ClsInterval
 
@@ -21,7 +22,7 @@ Public Class ClsInterval
 
     Public Sub New(MyInterval As ClsInterval)
 
-        'Alternativ an existing interval is transmitted
+        'Alternatively, an existing interval is transmitted
 
         MyA = MyInterval.A
         MyB = MyInterval.B
@@ -46,7 +47,7 @@ Public Class ClsInterval
         End Get
     End Property
 
-    Public Function IsNumberInInterval(ByVal number As Object) As Boolean
+    Public Function IsNumberInInterval(number As Object) As Boolean
 
         'Checks if the Number belongs to the interval [A,B]
 

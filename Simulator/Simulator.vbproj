@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,9 +28,10 @@
     <TargetCulture>de-CH</TargetCulture>
     <ProductName>Chaos Simulator</ProductName>
     <PublisherName>Hermann Biner Zermatt</PublisherName>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.6.0.%2a</ApplicationVersion>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -78,6 +79,27 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Gear.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>83B659AC0C75A5AB7864179B2C75CB75DA607B91</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Simulator_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Simulator_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -105,18 +127,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BillardClassLibrary\ClsEllipseBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ClsOvalBillardball.vb" />
-    <Compile Include="BillardClassLibrary\ClsOvalBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ClsStadiumBillardball.vb" />
-    <Compile Include="BillardClassLibrary\ClsStadiumBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\IBillardball.vb" />
-    <Compile Include="BillardClassLibrary\IBillardtable.vb" />
-    <Compile Include="BillardClassLibrary\ICDiagram.vb" />
-    <Compile Include="BillardForms\FrmCDiagram.Designer.vb">
+    <Compile Include="BilliardClassLibrary\ClsEllipseBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ClsOvalBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsOvalBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ClsStadiumBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsStadiumBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\IBilliardball.vb" />
+    <Compile Include="BilliardClassLibrary\IBilliardtable.vb" />
+    <Compile Include="BilliardClassLibrary\ICDiagram.vb" />
+    <Compile Include="BilliardForms\FrmCDiagram.Designer.vb">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>
     </Compile>
-    <Compile Include="BillardForms\FrmCDiagram.vb">
+    <Compile Include="BilliardForms\FrmCDiagram.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GeneralClassLibrary\ClsInterval.vb" />
@@ -125,7 +147,8 @@
     <Compile Include="GeneralClassLibrary\ClsLanguageManager.vb" />
     <Compile Include="GeneralClassLibrary\ClsMathpoint.vb" />
     <Compile Include="GeneralClassLibrary\ClsValueParameter.vb" />
-    <Compile Include="GeneralClassLibrary\ClsValueTupel.vb" />
+    <Compile Include="GeneralClassLibrary\ClsValuePair.vb" />
+    <Compile Include="GeneralClassLibrary\ClsVector.vb" />
     <Compile Include="GeneralForms\FrmTests.Designer.vb">
       <DependentUpon>FrmTests.vb</DependentUpon>
     </Compile>
@@ -138,8 +161,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="BillardClassLibrary\ClsMathhelperBillard.vb" />
-    <Compile Include="BillardClassLibrary\ClsEllipseBillardball.vb" />
+    <Compile Include="BilliardClassLibrary\ClsMathhelperBilliard.vb" />
+    <Compile Include="BilliardClassLibrary\ClsEllipseBilliardball.vb" />
+    <Compile Include="PendulumClassLibrary\INumericMethod.vb" />
+    <Compile Include="PendulumForms\FrmSpringPendulum.Designer.vb">
+      <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PendulumForms\FrmSpringPendulum.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Resources\LabelsDE.Designer.vb">
       <DependentUpon>LabelsDE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -155,10 +185,10 @@
     <Compile Include="UnimodalClassLibrary\ClsLogisticGrowth.vb" />
     <Compile Include="GeneralClassLibrary\ClsGraphicTool.vb" />
     <Compile Include="UnimodalClassLibrary\ClsMathhelperUnimodal.vb" />
-    <Compile Include="BillardForms\FrmBillardtable.Designer.vb">
-      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    <Compile Include="BilliardForms\FrmBilliardtable.Designer.vb">
+      <DependentUpon>FrmBilliardtable.vb</DependentUpon>
     </Compile>
-    <Compile Include="BillardForms\FrmBillardtable.vb">
+    <Compile Include="BilliardForms\FrmBilliardtable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GeneralForms\FrmInfo.Designer.vb">
@@ -217,24 +247,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BillardForms\FrmCDiagram.resx">
+    <EmbeddedResource Include="BilliardForms\FrmCDiagram.resx">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralForms\FrmTests.resx">
       <DependentUpon>FrmTests.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BillardForms\FrmBillardtable.resx">
-      <DependentUpon>FrmBillardtable.vb</DependentUpon>
+    <EmbeddedResource Include="BilliardForms\FrmBilliardtable.resx">
+      <DependentUpon>FrmBilliardtable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PendulumForms\FrmSpringPendulum.resx">
+      <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsDE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LabelsDE.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsEN.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LabelsEN.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UnimodalForms\FrmFeigenbaum.resx">
       <DependentUpon>FrmFeigenbaum.vb</DependentUpon>
@@ -265,6 +300,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dynamische Systeme.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Handbuch.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Manual.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -277,6 +321,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Simulator_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Zermatt.JPG" />
@@ -297,7 +342,10 @@
     <None Include="Resources\Zermatt3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dokumentation\" />
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gear.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

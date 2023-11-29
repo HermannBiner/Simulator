@@ -5,20 +5,20 @@ Public Class ClsGraphicTool
 
     'First option: this class can draw into a PictureBox
     'used when the drawings are not persistent and dynamic e.g. to show a moving ball
-    'in this case, the reference to the PictureBox is transmitted to the constructor
+    'in this case, the reference of the drawing area is set to the PictureBox in the constructor
     'by PictureBox.refresh in the upper class, the image is updated
 
     'Second option: this class draws into a Bitmap
     'used when the drawing has to be persistent, e.g. to show the track of the ball
-    'in this case, the reference of the Bitmap is transmitted to the constructor
+    'in this case, the reference of the drawing area is set to the Bitmap in the constructor
 
     'All classes using this ClsGraphicTool are working with mathematical coordinates
-    'that means, the X-coordinate is in an interval [Xmin, Xmax] =: MyMathXInterval
-    'and the Y-coordinate is in an interval [Ymin, Ymax] =: MyMathYInterval
-    'this ranges are committed to the constructor as well
+    'that means, the X-coordinate (horizontal axis) is in an interval [Xmin, Xmax] =: MyMathXInterval
+    'and the Y-coordinate (vertical axis) is in an interval [Ymin, Ymax] =: MyMathYInterval
+    'this intervals are committed to the constructor as well
 
     'the ClsGraphictool "knows" the size of the PictureBox / Bitmap
-    'and when knowing the X-range and Y-range, the matemathical coordinates are transformed
+    'and when knowing the X-range and Y-range of the matemathical coordinates, they are transformed
     'to the pixel-coordinates of the PictureBox / Bitmap by the ClsGraphicTool automatically
     'See SECTOR COORDINATE TRANSFORMATION
 
@@ -33,8 +33,12 @@ Public Class ClsGraphicTool
     'in the pixel-coordinate-system, the Y-axis shows downwards
     'but the programmer doesn't have to take care of that
 
+    'but of course, of there is drawing in pixel coordinates needed
+    'at least to draw a point is possible by overloading
+
     Private ReadOnly MyPicturebox As PictureBox
     Private ReadOnly MyBitmap As Bitmap
+    Private ReadOnly MyImage As Image
 
     'the Graphic object of the .NET library
     Private ReadOnly Graphs As Graphics
@@ -46,6 +50,7 @@ Public Class ClsGraphicTool
     Private ReadOnly MyMathYInterval As ClsInterval
 
     'the upper right corner point of the PictureBox / Bitmap
+    'it defines the size of the PictureBox / Bitmap
     Private MyDiagramCornerpoint As Point
 
     'SECTOR CONSTRUCTOR
@@ -56,7 +61,8 @@ Public Class ClsGraphicTool
         MyPicturebox = Picturebox
         Graphs = MyPicturebox.CreateGraphics
 
-        'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
+        'Because of better visibility in the User-Window,
+        'the maximal ImageRange and DiagramSize are reduced by -1
         Imagerange = New Rectangle(1, MyPicturebox.Height - 1, MyPicturebox.Width - 1, MyPicturebox.Height - 1)
         MyDiagramCornerpoint = New Point(Picturebox.Width - 1, Picturebox.Height - 1)
 
@@ -80,11 +86,27 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub New(Image As Image, MathXInterval As ClsInterval, MathYInterval As ClsInterval)
+
+        'In this case, ClsGraphics draws into a Bitmap
+        MyImage = Image
+        Graphs = Graphics.FromImage(MyImage)
+
+        'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
+        Imagerange = New Rectangle(1, MyImage.Height - 1, MyImage.Width - 1, MyImage.Height - 1)
+        MyDiagramCornerpoint = New Point(MyImage.Width - 1, MyImage.Height - 1)
+
+        MyMathXInterval = MathXInterval
+        MyMathYInterval = MathYInterval
+
+    End Sub
+
     'SECTOR GRAPHICS
 
     Public Sub Clear(color As Color)
 
         'Fills the drawing area with the color
+        'and overdraws existing images
         Graphs.Clear(color)
 
     End Sub
@@ -119,12 +141,20 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawPoint(Point As ClsMathpoint, brush As Brush, wide As Integer)
+    Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As Brush, wide As Integer)
 
-        'Draws a point filled with Brush, Wide = 1 is about one pixel
+        'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
         Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / MyDiagramCornerpoint.X
-        FillCircle(Point, size, brush)
+        FillCircle(MathPoint, size, brush)
+
+    End Sub
+
+    Public Sub DrawPoint(PixelPoint As Point, brush As Brush, wide As Integer)
+
+        'Draws a point in pixel coordinates filled with Brush, Wide = 1 is about one pixel
+
+        FillCircle(PixelPoint, wide, brush)
 
     End Sub
 
@@ -189,9 +219,20 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub FillCircle(PixelMidPoint As Point, radius As Integer, brush As Brush)
+
+        'Draws a circle with MidPoint and Radius in pixel coordinates
+        'and fills the circle with Brush
+
+        'The object Graphs expects a rectangle where the circle is drawed into
+        Dim rect As New Rectangle(PixelMidPoint.X - radius, PixelMidPoint.Y - radius, 2 * radius, 2 * radius)
+        Graphs.FillEllipse(brush, rect)
+
+    End Sub
+
     Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, color As Color, wide As Integer)
 
-        'Draws an ellipse with MidPoint, principal axis a and minor axis b
+        'Draws an ellipse with MidPoint, major axis a and minor axis b
         'in mathematical coordinates
 
         Using MyPen As New Pen(color, wide)
@@ -213,7 +254,7 @@ Public Class ClsGraphicTool
 
     Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, brush As Brush)
 
-        'Draws an ellipse with MidPoint, principal axis a and minor axis b
+        'Draws an ellipse with MidPoint, major axis a and minor axis b
         'in mathematical coordinates and fills it with Brush
 
         Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
@@ -273,6 +314,13 @@ Public Class ClsGraphicTool
             Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
         End Using
 
+
+    End Sub
+
+    Public Sub DrawImage(Image As Bitmap, XShift As Integer, YShift As Integer)
+
+        'Draws an image on position (XShift, YShift) in Pixel Coordinates
+        Graphs.DrawImage(Image, XShift, YShift)
 
     End Sub
 

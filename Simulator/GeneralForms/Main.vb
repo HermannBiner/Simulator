@@ -1,5 +1,7 @@
 ﻿'This is the start window for the program
-Imports System.Resources
+'Status checked
+
+Imports System.IO
 
 Public Class Main
 
@@ -11,6 +13,8 @@ Public Class Main
         InitializeComponent()
 
         'Initialize Language - Standard Language is English
+        'the LM Language Manager is used allover the program
+
         LM = New ClsLanguageManager With {
             .Language = ClsLanguageManager.LanguageEnum.English
         }
@@ -31,10 +35,10 @@ Public Class Main
         MnuTwoDimensions.Text = LM.GetString("MnuTwoDimensions")
         MnuFeigenbaum.Text = LM.GetString("MnuFeigenbaum")
         MnuMechanics.Text = LM.GetString("MnuMechanics")
-        MnuBillard.Text = LM.GetString("MnuBillard")
+        MnuBilliard.Text = LM.GetString("MnuBilliard")
         MnuPendulum.Text = LM.GetString("MnuPendulum")
         MnuCDiagram.Text = LM.GetString("MnuCDiagram")
-        MnuKomplexIteration.Text = LM.GetString("MnuKomplexIteration")
+        MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuFractals.Text = LM.GetString("MnuFractals")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
         MnuMandelbrotSet.Text = LM.GetString("MnuMandelbrotSet")
@@ -47,6 +51,7 @@ Public Class Main
         MnuEnglish.Text = LM.GetString("MnuEnglish")
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
+        MnuNumericMethods.Text = Main.LM.GetString("NumericMethods")
 
     End Sub
 
@@ -79,28 +84,23 @@ Public Class Main
     End Sub
 
     Private Sub MnuMathematics_Click(sender As Object, e As EventArgs) Handles MnuMathematics.Click
-        Try
-            Process.Start(LM.GetString("MathDoc"))
-        Catch ex As ArgumentException
-            MessageBox.Show(ex.Message)
-        End Try
+        OpenDocument(LM.GetString("MathDoc"))
     End Sub
 
     Private Sub MnuManual_Click(sender As Object, e As EventArgs) Handles MnuManual.Click
-        Try
-            Process.Start(LM.GetString("Manual"))
-        Catch ex As ArgumentException
-            MessageBox.Show(ex.Message)
-        End Try
+        OpenDocument(LM.GetString("Manual"))
     End Sub
 
     Private Sub MnuInfo_Click(sender As Object, e As EventArgs) Handles MnuInfo.Click
         FrmInfo.Show()
     End Sub
 
+    Private Sub MnuBilliard_Click(sender As Object, e As EventArgs) Handles MnuBilliard.Click
+        FrmBilliardtable.Show()
+    End Sub
 
-    Private Sub MnuBillard_Click(sender As Object, e As EventArgs) Handles MnuBillard.Click
-        FrmBillardTable.Show()
+    Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
+        FrmSpringPendulum.Show()
     End Sub
 
     Private Sub MnuPendulum_Click(sender As Object, e As EventArgs) Handles MnuPendulum.Click
@@ -132,4 +132,22 @@ Public Class Main
         LM.Language = ClsLanguageManager.LanguageEnum.Deutsch
         InitializeLanguage()
     End Sub
+
+    Sub OpenDocument(DocumentName As String)
+
+        'This is the path to the actual exe directory of the Simulator
+        Dim currentDirectory As String = AppDomain.CurrentDomain.BaseDirectory
+
+        'This is the path to the document that is in the folder "bin/debug" of the Simulator
+        Dim pdfPath As String = Path.Combine(currentDirectory, DocumentName)
+
+        If File.Exists(pdfPath) Then
+            'open the document
+            Process.Start(pdfPath)
+        Else
+            'else error message
+            MessageBox.Show(LM.GetString("DocumentNotFound") & DocumentName)
+        End If
+    End Sub
+
 End Class

@@ -1,6 +1,8 @@
 ﻿'Implements the interface IIteration for the tentmap
-'with the Iteration Formula: f(x) = 2*x if x in [0,0.5] and f(x) = 2*(1-x) if x in ]0.5,1]
+'with the Iteration Formula: f(x) = a*x if x in [0,0.5] and f(x) = a*(1-x) if x in ]0.5,1]
+'a in ]0,2]. Interesting is only the case a = 2
 'and "knows" everything about this kind of iteration
+
 'Status Checked
 
 Imports System.Globalization
@@ -9,7 +11,7 @@ Public Class ClsTentmap
     Implements IIteration
 
     'This is the steering parameter for the iteration
-    'in the mathematical documentation: a
+    '"a" in the mathematical documentation
     Private MyParameter As Decimal
 
     'in whitch Interval the Parameter a should be
@@ -37,7 +39,7 @@ Public Class ClsTentmap
 
         'Setting split points
         MySplitpoints = New List(Of Decimal) From {
-            CDec(1)
+            1
             }
 
     End Sub
@@ -120,11 +122,12 @@ Public Class ClsTentmap
     Public Function FN(x As Decimal) As Decimal _
         Implements IIteration.FN
 
+        'This Function is the
+        'Power-iterated function of the original function
         Dim IsIterationvaluevalid As Boolean = IterationInterval.IsNumberInInterval(x)
 
         If IsMyParametervalid And IsIterationvaluevalid Then
 
-            'Power-iterated function of the original function
             Dim i As Integer
 
             For i = 1 To MyPower
@@ -148,6 +151,7 @@ Public Class ClsTentmap
     End Function
 
     'SECTOR CALCULATION
+
     Public Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal _
         Implements IIteration.CalculateStartValueForProtocol
 

@@ -1,12 +1,18 @@
-﻿'This Class hold all information about a value-range
-'like the reflexion angle alfa of a billard or its t-parameter
-'describing the hitpoint of a billard ball
+﻿'This Class hold all information about a value-range of a dynamic system
+'like the reflexion angle alfa of a billiard or its t-parameter
+'describing the hitpoint of a billiard ball
 'other examples are the two angles of a double pendulum
 'or the dilatation and angle of an oscillating spring pendulum
+
+'Status checked
+
 Public Class ClsValueParameter
 
+    'To identify the parameter
     Private ReadOnly MyID As Integer
     Private ReadOnly MyName As String
+
+    'The definition interval of the parameter
     Private MyRange As ClsInterval
 
     Public Sub New(Tag As Integer, Name As String, Range As ClsInterval)
@@ -27,6 +33,7 @@ Public Class ClsValueParameter
         End Get
     End Property
 
+    'whitch interval is allowed for the value-parameter
     Public Property Range As ClsInterval
         Get
             Return MyRange

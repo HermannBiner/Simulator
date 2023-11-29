@@ -7,7 +7,10 @@
 
 'The form is based on an Interface IIteration 
 'that is implemented by ClsTentmap, ClsLogisticGrowth, ClsParabola
-'Therefore, more cases of unimodal functions could be easely implemented
+'Therefore, more cases of unimodal functions could be easely programmed
+'just by implementing this interface
+
+'Status Checked
 
 Imports System.Globalization
 
@@ -56,6 +59,7 @@ Public Class FrmHistogram
         CboFunction.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
+        'at the moment, no better concept of identifying the unimodal function is implemented
         CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
         CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
         CboFunction.Items.Add(Main.LM.GetString("Parabola"))
@@ -131,7 +135,7 @@ Public Class FrmHistogram
                 Iterator = New ClsParabola
         End Select
 
-        'The function is repeated 1x in each iteration step, that is the standard
+        'As standard, the function is repeated 1x in each iteration step
         Iterator.Power = 1
 
         'The parameter and startvalue are depending on the type of iteration
@@ -229,7 +233,7 @@ Public Class FrmHistogram
             'Iteration of 500 steps
             For i = 1 To 500
 
-                'calculating the umber of interval that is hit
+                'calculating the location of the interval that is hit
                 p = CInt((x - Iterator.IterationInterval.A) * PicDiagram.Width _
                     / Iterator.IterationInterval.IntervalWidth)
 
@@ -257,8 +261,7 @@ Public Class FrmHistogram
                 MyGraphics.FillRectangle(A, B, Brush)
             Next
         Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
+            'there is already a message generated
             SetDefaultValues()
         End If
     End Sub

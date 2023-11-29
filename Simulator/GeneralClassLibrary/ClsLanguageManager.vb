@@ -1,4 +1,5 @@
 ﻿'This class provides Labels, Messages and any other text in the actual language
+'Status Checked
 
 Imports System.Resources
 
@@ -13,12 +14,14 @@ Public Class ClsLanguageManager
     Private RM As ResourceManager
 
     Property Language As LanguageEnum
+
+        'The language is set in the main menu of FrmMain
         Set(value As LanguageEnum)
             MyLanguage = value
             Select Case MyLanguage
                 Case LanguageEnum.Deutsch
                     RM = New ResourceManager("Simulator.LabelsDE", GetType(LabelsDE).Assembly)
-                Case Else
+                Case Else 'English
                     RM = New ResourceManager("Simulator.LabelsEN", GetType(LabelsEN).Assembly)
             End Select
         End Set
@@ -29,6 +32,7 @@ Public Class ClsLanguageManager
 
     Public Function GetString(Identifier As String) As String
 
+        'The texts are in the resource-files LabelsDE and LabelsEN
         Dim Text As String = RM.GetString(Identifier)
 
         If Text = "" Then

@@ -122,7 +122,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="ActionStopped" xml:space="preserve">
-    <value>Aktion abgebrochen!</value>
+    <value>Aktion abgebrochen</value>
     <comment>Msg</comment>
   </data>
   <data name="Alfa" xml:space="preserve">
@@ -137,13 +137,21 @@
     <value>Kugelgeschwindigkeit</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Billard" xml:space="preserve">
+  <data name="Billiard" xml:space="preserve">
     <value>Billard</value>
     <comment>Lbl</comment>
   </data>
-  <data name="BillardTable" xml:space="preserve">
+  <data name="BilliardTable" xml:space="preserve">
     <value>Billardtisch</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>Schwarz</value>
+    <comment>Col</comment>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Blau</value>
+    <comment>Col</comment>
   </data>
   <data name="C-Diagram" xml:space="preserve">
     <value>C-Diagramm</value>
@@ -161,16 +169,24 @@
     <value>Delta</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Difference" xml:space="preserve">
+    <value>Differenz</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Difference12" xml:space="preserve">
-    <value>Differenzx2 - x1</value>
+    <value>Differenz x2 - x1</value>
     <comment>Lbl</comment>
   </data>
   <data name="DinStretching" xml:space="preserve">
     <value>d in [0,10] =</value>
     <comment>Lbl</comment>
   </data>
-  <data name="DrawBillardTable" xml:space="preserve">
-    <value>Zwischne Billardtisch</value>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Das Dokument konnte nicht gefunden werden: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="DrawBilliardTable" xml:space="preserve">
+    <value>Zeichne Billardtisch</value>
     <comment>Lbl</comment>
   </data>
   <data name="DrawFunctionGraph" xml:space="preserve">
@@ -185,8 +201,12 @@
     <value>Elliptisch</value>
     <comment>Lbl</comment>
   </data>
-  <data name="EllipticBillard" xml:space="preserve">
+  <data name="EllipticBilliard" xml:space="preserve">
     <value>Elliptisches Billard</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Euler" xml:space="preserve">
+    <value>Euler</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -195,6 +215,10 @@
   </data>
   <data name="ExaminatedValueParameter" xml:space="preserve">
     <value>Untersuchter Werteparameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExaminatedValueRange" xml:space="preserve">
+    <value>Untersuchter Wertebereich</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExperimentNo" xml:space="preserve">
@@ -217,6 +241,10 @@
     <value>Funktionsgraph</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Green" xml:space="preserve">
+    <value>Grün</value>
+    <comment>Col</comment>
+  </data>
   <data name="Histogram" xml:space="preserve">
     <value>Histogramm</value>
     <comment>Lbl</comment>
@@ -238,7 +266,7 @@
     <comment>Msg</comment>
   </data>
   <data name="InvalidUserRanges" xml:space="preserve">
-    <value>Ungültiges Wertebereich</value>
+    <value>Ungültiger Wertebereich</value>
     <comment>Msg</comment>
   </data>
   <data name="Iteration" xml:space="preserve">
@@ -265,19 +293,23 @@
     <value>Winkel des unteren Pendels</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Magenta" xml:space="preserve">
+    <value>Magenta</value>
+    <comment>Col</comment>
+  </data>
   <data name="MailTo" xml:space="preserve">
     <value>Gerne per Mail an h.biner@bluewin.ch</value>
     <comment>Lbl</comment>
   </data>
   <data name="Manual" xml:space="preserve">
-    <value>Manual Simulator.pdf</value>
+    <value>Handbuch.pdf</value>
     <comment>Doc</comment>
   </data>
   <data name="MathDoc" xml:space="preserve">
     <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
   </data>
-  <data name="MnuBillard" xml:space="preserve">
+  <data name="MnuBilliard" xml:space="preserve">
     <value>&amp;Billard</value>
     <comment>Mnu</comment>
   </data>
@@ -398,11 +430,11 @@
     <comment>Lbl</comment>
   </data>
   <data name="NoBallsOnTable" xml:space="preserve">
-    <value>Es gibt keine Kugeln auf dem Billardtisch!</value>
+    <value>Es gibt keine Kugeln auf dem Billardtisch</value>
     <comment>Msg</comment>
   </data>
   <data name="NoIntersectionPoint" xml:space="preserve">
-    <value>Kein Schnittpunkt gefunden!</value>
+    <value>Kein Schnittpunkt gefunden</value>
     <comment>Msg</comment>
   </data>
   <data name="NonChaoticBehaviour" xml:space="preserve">
@@ -410,11 +442,11 @@
     <comment>Msg</comment>
   </data>
   <data name="NoStartPointSet" xml:space="preserve">
-    <value>Kein Startpunkt gesetzt!</value>
+    <value>Kein Startpunkt gesetzt</value>
     <comment>Msg</comment>
   </data>
   <data name="NotAlllowedValue" xml:space="preserve">
-    <value>nicht erlaubt. Er muss im Intervall sein:</value>
+    <value> ist nicht erlaubt. Er muss im Intervall sein: </value>
     <comment>Msg</comment>
   </data>
   <data name="NotImplemented" xml:space="preserve">
@@ -423,6 +455,14 @@
   </data>
   <data name="NumberOfSteps" xml:space="preserve">
     <value>Anzahl Schritte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericMethod" xml:space="preserve">
+    <value>Numerisches Verfahren</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericMethods" xml:space="preserve">
+    <value>Numerische Methoden</value>
     <comment>Lbl</comment>
   </data>
   <data name="NumericValue" xml:space="preserve">
@@ -437,7 +477,7 @@
     <value>Oval</value>
     <comment>Lbl</comment>
   </data>
-  <data name="OvalBillard" xml:space="preserve">
+  <data name="OvalBilliard" xml:space="preserve">
     <value>Ovales Billard</value>
     <comment>Lbl</comment>
   </data>
@@ -450,7 +490,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="ParameterRangeNotAllowed" xml:space="preserve">
-    <value>Dieser PArameterbereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <value>Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
   </data>
   <data name="PhasePortrait" xml:space="preserve">
@@ -458,7 +498,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="PositionStartValue2" xml:space="preserve">
-    <value>Position Startwert 2:</value>
+    <value>Position Startwert 2: </value>
     <comment>Lbl</comment>
   </data>
   <data name="PositiveNumber" xml:space="preserve">
@@ -473,16 +513,28 @@
     <value>Präsentation</value>
     <comment>Lbl</comment>
   </data>
-  <data name="ProgramVersion" xml:space="preserve">
-    <value>Program Version 0.6 - 30.09.2023</value>
-    <comment>Lbl</comment>
+  <data name="Red" xml:space="preserve">
+    <value>Rot</value>
+    <comment>Col</comment>
   </data>
   <data name="ReflexionAngle" xml:space="preserve">
     <value>Reflexionswinkel</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ResetIteration" xml:space="preserve">
     <value>Iteration zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RungeKutta3" xml:space="preserve">
+    <value>Runge Kutta 3</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RungeKutta4" xml:space="preserve">
+    <value>Runge Kutta 4</value>
     <comment>Lbl</comment>
   </data>
   <data name="Sensitivity" xml:space="preserve">
@@ -490,7 +542,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="SetStartPosition" xml:space="preserve">
-    <value>Setze die Startposition mit der Maus!</value>
+    <value>Setze die Startposition mit der Maus</value>
     <comment>Msg</comment>
   </data>
   <data name="ShowSplitPoints" xml:space="preserve">
@@ -505,12 +557,20 @@
     <value>Einzelne Orbits</value>
     <comment>Lbl</comment>
   </data>
+  <data name="SpringPendulum" xml:space="preserve">
+    <value>Federpendel</value>
+    <comment>lbl</comment>
+  </data>
   <data name="Stadium" xml:space="preserve">
     <value>Stadion</value>
     <comment>Lbl</comment>
   </data>
-  <data name="StadiumBillard" xml:space="preserve">
+  <data name="StadiumBilliard" xml:space="preserve">
     <value>Billard im Stadion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
     <comment>Lbl</comment>
   </data>
   <data name="StartIteration" xml:space="preserve">
@@ -522,7 +582,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="StartPositionNotSet" xml:space="preserve">
-    <value>Die Startposition ist nicht für alle Kugeln gesetzt!</value>
+    <value>Die Startposition ist nicht für alle Kugeln gesetzt</value>
     <comment>Msg</comment>
   </data>
   <data name="StartValue" xml:space="preserve">
@@ -545,12 +605,21 @@
     <value>Vorschlag Startwert für diesen Zielwert</value>
     <comment>Lbl</comment>
   </data>
+  <data name="StepWidth" xml:space="preserve">
+    <value>Schrittweite</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StretchedMode" xml:space="preserve">
+    <value>Gestreckte Anzeige</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="StretchingParameterInterval" xml:space="preserve">
     <value>Der Dehnparameter muss im Intervall sein:</value>
     <comment>Msg</comment>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="TakeOver" xml:space="preserve">
     <value>Übernehme Startparameter</value>
@@ -573,7 +642,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="TheValue" xml:space="preserve">
-    <value>Der Wert</value>
+    <value>Der Wert </value>
     <comment>Msg</comment>
   </data>
   <data name="TimeAxis" xml:space="preserve">
@@ -603,6 +672,10 @@
   <data name="ValueList2" xml:space="preserve">
     <value>Wertliste 2</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="ValueRangeNotAllowed" xml:space="preserve">
+    <value>Dieser Wertebereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <comment>Msg</comment>
   </data>
   <data name="xStretching" xml:space="preserve">
     <value>x-Dehnung der Zeitachse</value>

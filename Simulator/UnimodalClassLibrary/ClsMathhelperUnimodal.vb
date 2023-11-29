@@ -1,5 +1,6 @@
 ﻿'Contains mathematical help functions for all kind of unimodal functions
 'see mathematical documentation
+
 'Status Checked
 
 Public Class ClsMathhelperUnimodal
@@ -39,7 +40,7 @@ Public Class ClsMathhelperUnimodal
 
     End Function
 
-    'Overloading if midofingerval is not given
+    'Overloading if MidofInterval is not given
     Public Function DualStringToDecimalNumber(dualstring As String) As Decimal
 
         Return DualStringToDecimalNumber(dualstring, False)
@@ -110,7 +111,7 @@ Public Class ClsMathhelperUnimodal
         'Adds "0" to a string representing a dual number until the number of digits is achieved
         'This method is used if in some cases a additional dual number is added to the original one
         'but so far behind, that the new number is still very near to the original one
-        'if the number of igits is already big enough, then nothing is done
+        'if the number of digits is already big enough, then nothing is done
 
         Dim i As Integer 'Position of the added "0"
 
@@ -156,10 +157,13 @@ Public Class ClsMathhelperUnimodal
         For position = 1 To dualnumber.Length
             digit = Mid(dualnumber, position, 1)
             If Not (digit = "0" Or digit = "1") Then
-                MessageBox.Show(Main.LM.GetString("InvalidDualNumberDigits"))
                 IsFormatValid = False
             End If
         Next
+
+        If Not IsFormatValid Then
+            MessageBox.Show(Main.LM.GetString("InvalidDualNumberDigits"))
+        End If
 
         Return IsFormatValid
 
@@ -167,7 +171,7 @@ Public Class ClsMathhelperUnimodal
 
     Public Function ProcotolToTentmapStartValueAsString(protocol As String) As String
 
-        'Calculates a strart value for the tentmap (see mathematical documentation)
+        'Calculates a start value for the tentmap (see mathematical documentation)
         'that generates the given protocol during the iteration
         'this function is also used by conjugates of the tentmap
         'see mathematical documentation
@@ -195,7 +199,7 @@ Public Class ClsMathhelperUnimodal
 
     Public Function ComplementDualString(dualnumber As String) As String
 
-        'Transforms a string of "0" and "1" in its complement
+        'Transforms a string of "0" and "1" into its complement
 
         'Contains the actual part of the string
         Dim Tempstring As String = ""

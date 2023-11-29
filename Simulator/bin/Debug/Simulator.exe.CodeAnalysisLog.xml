@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="17.0">
+ <Targets>
+  <Target Name="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Simulator.exe">
+   <Modules>
+    <Module Name="simulator.exe">
+     <Namespaces>
+      <Namespace Name="Simulator">
+       <Types>
+        <Type Name="ClsEllipseBilliardball" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetNextPoint(Simulator.ClsValuePair)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Argumente von öffentlichen Methoden validieren" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\BilliardClassLibrary" File="ClsEllipseBilliardball.vb" Line="421">Überprüfen Sie in der extern sichtbaren Methode "'ClsEllipseBilliardball.GetNextPoint(ClsValuePair)'" den Parameter "ActualPoint" vor der Verwendung.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ClsGraphicTool" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(System.Drawing.Image,Simulator.ClsInterval,Simulator.ClsInterval)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Image" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Image" im Parameternamen 'Image' in image.</Issue>
+            </Message>
+            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Math" im Parameternamen 'MathXInterval' in math.</Issue>
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="89">Korrigieren Sie im Member 'ClsGraphicTool.New(Image, ClsInterval, ClsInterval)' die Schreibweise von "Math" im Parameternamen 'MathYInterval' in math.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DrawImage(System.Drawing.Bitmap,System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="320">Ändern Sie den Typ des 'Image'-Parameters in 'ClsGraphicTool.DrawImage(Bitmap, Integer, Integer)' von 'Bitmap' in den Basistyp 'Image'. Für diese Methode sind scheinbar nur Basisklassenmember in der Implementierung erforderlich. Unterdrücken Sie diese Verletzung, wenn es Gründe gibt, den stärker abgeleiteten Typ in der Methodensignatur erforderlich zu machen.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DrawPoint(Simulator.ClsMathpoint,System.Drawing.Brush,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Math" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="144">Korrigieren Sie im Member 'ClsGraphicTool.DrawPoint(ClsMathpoint, Brush, Integer)' die Schreibweise von "Math" im Parameternamen 'MathPoint' in math.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DrawPoint(System.Drawing.Point,System.Drawing.Brush,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="153">Korrigieren Sie im Member 'ClsGraphicTool.DrawPoint(Point, Brush, Integer)' die Schreibweise von "Pixel" im Parameternamen 'PixelPoint' in pixel.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FillCircle(System.Drawing.Point,System.Int32,System.Drawing.Brush)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Pixel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsGraphicTool.vb" Line="222">Korrigieren Sie im Member 'ClsGraphicTool.FillCircle(Point, Integer, Brush)' die Schreibweise von "Pixel" im Parameternamen 'PixelMidPoint' in pixel.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ClsOvalBilliardball" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetNextPoint(Simulator.ClsValuePair)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Argumente von öffentlichen Methoden validieren" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\BilliardClassLibrary" File="ClsOvalBilliardball.vb" Line="415">Überprüfen Sie in der extern sichtbaren Methode "'ClsOvalBilliardball.GetNextPoint(ClsValuePair)'" den Parameter "ActualPoint" vor der Verwendung.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ClsStadiumBilliardball" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetNextPoint(Simulator.ClsValuePair)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Argumente von öffentlichen Methoden validieren" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\BilliardClassLibrary" File="ClsStadiumBilliardball.vb" Line="433">Überprüfen Sie in der extern sichtbaren Methode "'ClsStadiumBilliardball.GetNextPoint(ClsValuePair)'" den Parameter "ActualPoint" vor der Verwendung.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ClsValuePair" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(System.Decimal,System.Decimal)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="X" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="11">Korrigieren Sie im Member 'ClsValuePair.New(Decimal, Decimal)' die Schreibweise von "X" im Parameternamen 'X' in x.</Issue>
+            </Message>
+            <Message Id="Y" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="11">Korrigieren Sie im Member 'ClsValuePair.New(Decimal, Decimal)' die Schreibweise von "Y" im Parameternamen 'Y' in y.</Issue>
+            </Message>
+            <Message Id="X" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameterMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="11">Geben Sie in der 'ClsValuePair.New(Decimal, Decimal)'-Methode ggf. einen aussagekräftigeren Namen als den Parameternamen "'X'" an.</Issue>
+            </Message>
+            <Message Id="Y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameterMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="11">Geben Sie in der 'ClsValuePair.New(Decimal, Decimal)'-Methode ggf. einen aussagekräftigeren Namen als den Parameternamen "'Y'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#X" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="X" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="19">Geben Sie ggf. einen aussagekräftigeren Namen als den Membernamen "'ClsValuePair.X()'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Y" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsValuePair.vb" Line="28">Geben Sie ggf. einen aussagekräftigeren Namen als den Membernamen "'ClsValuePair.Y()'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ClsVector" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="N" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsVector.vb" Line="7">Korrigieren Sie im Member 'ClsVector.New(Integer)' die Schreibweise von "N" im Parameternamen 'N' in n.</Issue>
+            </Message>
+            <Message Id="N" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameterMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\GeneralClassLibrary" File="ClsVector.vb" Line="7">Geben Sie in der 'ClsVector.New(Integer)'-Methode ggf. einen aussagekräftigeren Namen als den Parameternamen "'N'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FrmSpringPendulum" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="MyBitmap" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="7">'FrmSpringPendulum' enthält das Feld "'FrmSpringPendulum.MyBitmap'", das vom Typ IDisposable ist: 'Bitmap'. Ändern Sie die Dispose-Methode für 'FrmSpringPendulum', sodass für dieses Feld Dispose oder Close aufgerufen wird.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#InitializeComponent()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message Id="System.Windows.Forms.ButtonBase.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="108">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'ButtonBase.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "Reset".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="127">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'ButtonBase.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "Start".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="117">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'ButtonBase.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "Stop".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="157">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'ButtonBase.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "StretchedMode".</Issue>
+            </Message>
+            <Message Id="System.Windows.Forms.Form.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="190">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Form.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "SpringPendulum".</Issue>
+            </Message>
+            <Message Id="System.Windows.Forms.Label.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="148">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "0".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="167">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "Difference".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="138">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "Number of Steps:".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="79">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "NumericMethod".</Issue>
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.Designer.vb" Line="89">Die Methode "'FrmSpringPendulum.InitializeComponent()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: "StepWidth".</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#InitializeLanguage()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message Id="System.Windows.Forms.Label.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.vb" Line="83">Die Methode "'FrmSpringPendulum.InitializeLanguage()'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: " ".</Issue>
+            </Message>
+            <Message Id="System.Decimal.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.vb" Line="83">Da das Verhalten von 'Decimal.ToString()' basierend auf den aktuellen Gebietsschemaeinstellungen des Benutzers variieren könnte, ersetzen Sie diesen Aufruf in 'FrmSpringPendulum.InitializeLanguage()' durch einen Aufruf von 'Decimal.ToString(IFormatProvider)'. Wenn das Ergebnis von 'Decimal.ToString(IFormatProvider)' dem Benutzer angezeigt wird, geben Sie "'CultureInfo.CurrentCulture()'" als IFormatProvider-Parameter an. Wenn das Ergebnis gespeichert wird und die Software darauf zugreift, z.B. wenn es auf einem Datenträger oder in einer Datenbank gespeichert wird, geben Sie "'CultureInfo.InvariantCulture()'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#TrbStepWidth_ValueChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message Id="System.Windows.Forms.Label.set_Text(System.String)" TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="KnownValue" Certainty="75" Level="Warning" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.vb" Line="161">Die Methode "'FrmSpringPendulum.TrbStepWidth_ValueChanged(Object, EventArgs)'" übergibt eine Literalzeichenfolge als Parameter "value" eines Aufrufs von 'Label.Text.Set(String)'. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: " ".</Issue>
+            </Message>
+            <Message Id="System.Decimal.ToString(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\PendulumForms" File="FrmSpringPendulum.vb" Line="161">Da das Verhalten von 'Decimal.ToString(String)' basierend auf den aktuellen Gebietsschemaeinstellungen des Benutzers variieren könnte, ersetzen Sie diesen Aufruf in 'FrmSpringPendulum.TrbStepWidth_ValueChanged(Object, EventArgs)' durch einen Aufruf von 'Decimal.ToString(String, IFormatProvider)'. Wenn das Ergebnis von 'Decimal.ToString(String, IFormatProvider)' dem Benutzer angezeigt wird, geben Sie "'CultureInfo.CurrentCulture()'" als IFormatProvider-Parameter an. Wenn das Ergebnis gespeichert wird und die Software darauf zugreift, z.B. wenn es auf einem Datenträger oder in einer Datenbank gespeichert wird, geben Sie "'CultureInfo.InvariantCulture()'" an.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ICDiagram" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetNextPoint(Simulator.ClsValuePair)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Actual" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error">Korrigieren Sie im Member 'ICDiagram.GetNextPoint(ClsValuePair)' die Schreibweise von "Actual" im Parameternamen 'ActualPoint' in actual.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="INumericMethod" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#h" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="h" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Korrigieren Sie die Schreibweise von "h" im Membernamen "'INumericMethod.h()'" in H.</Issue>
+            </Message>
+            <Message Id="h" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberMoreMeaningfulName" Certainty="75" Level="CriticalWarning">Geben Sie ggf. einen aussagekräftigeren Namen als den Membernamen "'INumericMethod.h()'" an.</Issue>
+            </Message>
+            <Message TypeName="PropertiesShouldNotBeWriteOnly" Category="Microsoft.Design" CheckId="CA1044" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="DependsOnFix">
+             <Issue Name="AddGetter" Certainty="95" Level="Error">Da die 'INumericMethod.h()'-Eigenschaft lesegeschützt ist, fügen Sie einen Getter mit einem Zugriff hinzu, der mindestens dem des zugehörigen Setters entspricht, oder konvertieren Sie diese Eigenschaft in eine Methode.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#NextApproxStep(Simulator.ClsVector)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Tupel" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2023-11-29 09:19:57Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="85" Level="Error">Korrigieren Sie im Member 'INumericMethod.NextApproxStep(ClsVector)' die Schreibweise von "Tupel" im Parameternamen 'Tupel' in tupel.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="Argumente von öffentlichen Methoden validieren" Category="Microsoft.Design" CheckId="CA1062">
+   <Name>Argumente von öffentlichen Methoden validieren</Name>
+   <Description>Alle Verweisargumente, die an extern sichtbare Methoden übergeben werden, müssen mit NULL abgeglichen werden ("Nothing" in VB). Lösen Sie ggf. eine System.ArgumentNullException aus, wenn das Argument NULL ist.</Description>
+   <Resolution Name="Default">Überprüfen Sie in der extern sichtbaren Methode "{0}" den Parameter "{1}" vor der Verwendung.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182182.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="ConsiderPassingBaseTypesAsParameters" Category="Microsoft.Design" CheckId="CA1011">
+   <Name>Basistypen als Parameter übergeben</Name>
+   <Description>Durch die Verwendung von Basistypen als Parameter für Methoden wird die Wiederverwendung dieser Methoden verbessert, wenn Sie nur die Methoden und Eigenschaften der Basisklasse des Parameters verwenden. Verwenden Sie als Parameter beispielsweise "Stream" anstelle von "FileStream", wenn Sie nur Stream.Read() aufrufen. Auf diese Weise funktioniert die Methode für alle Arten von Streams und nicht nur für Dateistreams.</Description>
+   <Resolution Name="Default">Ändern Sie den Typ des {0}-Parameters in {1} von {2} in den Basistyp {3}. Für diese Methode sind scheinbar nur Basisklassenmember in der Implementierung erforderlich. Unterdrücken Sie diese Verletzung, wenn es Gründe gibt, den stärker abgeleiteten Typ in der Methodensignatur erforderlich zu machen.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/3hk32yyz.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="50">Error</MessageLevel>
+   <File Name="designrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213">
+   <Name>Verwerfbare Felder verwerfen</Name>
+   <Description>Wenn ein Typ, der IDisposable implementiert, über Felder verfügt, die ebenfalls IDisposable implementieren, sollte die Dispose()-Implementierung des kapselnden Typs auf jedem verwerfbaren Feld Dispose() aufrufen.</Description>
+   <Resolution Name="Default">{0} enthält das Feld "{1}", das vom Typ IDisposable ist: {2}. Ändern Sie die Dispose-Methode für {0}, sodass für dieses Feld Dispose oder Close aufgerufen wird.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182328.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+   <Name>Bei Bezeichnern sollte die Groß-/Kleinschreibung beachtet werden</Name>
+   <Description>Bei Typ-, Namespace- und Memberbezeichnern wird die Pascal-Schreibweise verwendet. Bei Parameterbezeichnern wird eine Höckerschreibweise verwendet. Zweibuchstabige Akronyme in solchen Bezeichner müssen in Großbuchstaben stehen, z. B. System.IO statt System.Io. Für Akronyme mit mindestens drei Buchstaben muss die Pascal-Schreibweise verwendet werden, z. B. System.Xml statt System.XML. Bei der Pascal-Schreibweise wird der erste Buchstabe eines jeden Worts groß geschrieben, wie z. B. in BackColor. Bei der Höckerschreibweise wird der erste Buchstabe des ersten Worts klein und der erste Buchstabe aller darauf folgenden Wörter groß geschrieben, z. B. in backgroundColor. Auch wenn es möglicherweise gebräuchlich ist, Akronyme mit zwei Buchstaben nicht vollständig groß zu schreiben, sollten Verletzungen dieser Regel nicht aus diesem Grund ausgenommen werden. DbConnection beispielsweise ist gebräuchlich, aber falsch, verwenden Sie DBConnection. Eine Verletzung dieser Regel ist möglicherweise erforderlich, um die Kompatibilität mit vorhandenen, nicht verwalteten Symbolschemas zu gewährleisten. Im Allgemeinen sollten diese Symbole jedoch nicht außerhalb der Assembly, die sie verwendet, sichtbar sein.</Description>
+   <Resolution Name="Member">Korrigieren Sie die Schreibweise von "{0}" im Membernamen "{1}" in {2}.</Resolution>
+   <Resolution Name="MemberParameter">Korrigieren Sie im Member {0} die Schreibweise von "{1}" im Parameternamen {2} in {3}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182240.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="85">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+   <Name>Bezeichner sollten korrekt geschrieben werden</Name>
+   <Description>Die einzelnen Wörter, aus denen ein Bezeichner besteht, sollten nicht abgekürzt werden und sollten richtig geschrieben werden. Fügen Sie das Wort dem benutzerdefinierten FxCop-Wörterbuch hinzu, wenn diese Regel einen falschen positiven Wert für einen Begriff generiert, der erkannt werden sollte.</Description>
+   <Resolution Name="MemberMoreMeaningfulName">Geben Sie ggf. einen aussagekräftigeren Namen als den Membernamen "{0}" an.</Resolution>
+   <Resolution Name="MemberParameterMoreMeaningfulName">Geben Sie in der {0}-Methode ggf. einen aussagekräftigeren Namen als den Parameternamen "{1}" an.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb264492.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">CriticalWarning</MessageLevel>
+   <File Name="namingrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="Literale nicht als lokalisierte Parameter übergeben" Category="Microsoft.Globalization" CheckId="CA1303">
+   <Name>Literale nicht als lokalisierte Parameter übergeben</Name>
+   <Description>Literalzeichenfolgen, die in Quellcode eingebettet sind, sind schwer zu lokalisieren. Übergeben Sie keine Literalzeichenfolgen als Argumente in Fällen, in denen im Allgemeinen eine lokalisierte Zeichenfolge erwartet wird.</Description>
+   <Resolution Name="KnownValue">Die Methode "{0}" übergibt eine Literalzeichenfolge als Parameter "{1}" eines Aufrufs von {2}. Rufen Sie die folgende(n) Zeichenfolge(n) stattdessen von einer Ressourcentabelle ab: {3}.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182187.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="PropertiesShouldNotBeWriteOnly" Category="Microsoft.Design" CheckId="CA1044">
+   <Name>Eigenschaften sollten nicht lesegeschützt sein</Name>
+   <Description>Lesegeschützte Eigenschaften weisen i. d. R. auf einen Entwurfsfehler hin.</Description>
+   <Resolution Name="AddGetter">Da die {0}-Eigenschaft lesegeschützt ist, fügen Sie einen Getter mit einem Zugriff hinzu, der mindestens dem des zugehörigen Setters entspricht, oder konvertieren Sie diese Eigenschaft in eine Methode.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182165.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="17.0.0.0" />
+  </Rule>
+  <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+   <Name>IFormatProvider angeben</Name>
+   <Description>Wenn eine Überladung vorhanden ist, die IFormatProvider als Argument verwendet, sollte diese bevorzugt anstelle einer Überladung aufgerufen werden, bei der dies nicht der Fall ist. Einige Methoden in der Laufzeit konvertieren einen Wert in eine oder aus einer Zeichenfolgendarstellung und akzeptieren einen Zeichenfolgenparameter mit einem oder mehreren Zeichen, die Formatbezeichner genannt werden und die Art der Konvertierung des Werts angeben. Wenn die Bedeutung des Formatbezeichners je nach Kultur variiert, werden die tatsächlich in der Zeichenfolgendarstellung verwendeten Zeichen von einem Formatierungsobjekt bereitgestellt. In Szenarien, in denen das Sortierungs- und Vergleichsverhalten bei verschiedenen Kulturen nicht variieren darf, geben Sie CultureInfo.InvariantCulture an, und anderenfalls geben Sie CultureInfo.CurrentCulture an.</Description>
+   <Resolution Name="IFormatProviderAlternateString">Da das Verhalten von {0} basierend auf den aktuellen Gebietsschemaeinstellungen des Benutzers variieren könnte, ersetzen Sie diesen Aufruf in {1} durch einen Aufruf von {2}. Wenn das Ergebnis von {2} dem Benutzer angezeigt wird, geben Sie "{3}" als IFormatProvider-Parameter an. Wenn das Ergebnis gespeichert wird und die Software darauf zugreift, z.B. wenn es auf einem Datenträger oder in einer Datenbank gespeichert wird, geben Sie "{4}" an.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182190.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="globalizationrules.dll" Version="17.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Kategorie</String>
+  <String Key="Certainty">Sicherheit</String>
+  <String Key="CollapseAll">Alle zuklappen</String>
+  <String Key="CheckId">Prüf-ID</String>
+  <String Key="Error">Fehler</String>
+  <String Key="Errors">Fehler</String>
+  <String Key="ExpandAll">Alle aufklappen</String>
+  <String Key="Help">Hilfe</String>
+  <String Key="Line">Zeile</String>
+  <String Key="Messages">Meldung(en)</String>
+  <String Key="LocationNotStoredInPdb">[Nicht in PDB gespeicherter Speicherort]</String>
+  <String Key="Project">Projekt</String>
+  <String Key="Resolution">Auflösung</String>
+  <String Key="Rule">Regel</String>
+  <String Key="RuleFile">Regeldatei</String>
+  <String Key="RuleDescription">Regelbeschreibung</String>
+  <String Key="Source">Quelle</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Ziel</String>
+  <String Key="Warning">Warnung</String>
+  <String Key="Warnings">Warnung(en)</String>
+  <String Key="ReportTitle">Code Analysis-Bericht</String>
+ </Localized>
+</FxCopReport>

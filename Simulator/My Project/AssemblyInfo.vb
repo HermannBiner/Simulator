@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Simulator")>
-<Assembly: AssemblyDescription("Simulation chaotischer Systeme")>
+<Assembly: AssemblyDescription("Simulation dynamischer Systeme")>
 <Assembly: AssemblyCompany("Hermann Biner Zermatt")>
 <Assembly: AssemblyProduct("Simulator")>
 <Assembly: AssemblyCopyright("Copyright ©  2023")>
@@ -33,6 +33,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.5.0.0")>
-<Assembly: AssemblyFileVersion("0.5.0.0")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>
 <Assembly: NeutralResourcesLanguage("de-CH")>
