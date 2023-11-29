@@ -25,6 +25,6 @@ Public Interface ICDiagram
     ReadOnly Property ValueParameters As List(Of ClsValueParameter)
 
     'This is the main Function to get the next Iteration Point
-    Function GetNextPoint(ActualPoint As ClsValueTupel) As ClsValueTupel
+    Function GetNextPoint(ActualPoint As ClsValuePair) As ClsValuePair
 
 End Interface

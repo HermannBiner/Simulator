@@ -48,6 +48,11 @@ Simulator
   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE._Stop">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.AboutSimulator">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Info Simulator ähnelt.
@@ -113,6 +118,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Difference">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Differenz ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Difference12">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Differenz x2 - x1 ähnelt.
@@ -151,6 +161,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.EllipticBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Euler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedParameterRange">
@@ -463,6 +478,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Anzahl Schritte ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.NumericMethod">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Numerisches Verfahren ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.NumericMethods">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Numerische Methoden ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.NumericValue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Das muss ein numerischer Wert sein! ähnelt.
@@ -533,9 +558,24 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Reflexionswinkel ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Reset">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zurücksetzen ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Iteration zurücksetzen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.RungeKutta3">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.RungeKutta4">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Sensitivity">
@@ -563,6 +603,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Einzelne Orbits ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.SpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Federpendel ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Stadium">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadion ähnelt.
@@ -571,6 +616,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.StadiumBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Start">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.StartIteration">
@@ -611,6 +661,16 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.StartvalueForTargetvalue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Vorschlag Startwert für diesen Zielwert ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StepWidth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Schrittweite ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.StretchedMode">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Gestreckte Anzeige ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.StretchingParameterInterval">
@@ -714,6 +774,11 @@ Simulator
   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN._Stop">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.AboutSimulator">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die About Simulator ähnelt.
@@ -779,6 +844,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Difference">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Difference ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Difference12">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Difference x2 - x1 ähnelt.
@@ -817,6 +887,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.EllipticBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Euler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -1129,6 +1204,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Number of Steps ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.NumericMethod">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Numeric Method ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.NumericMethods">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Numeric Methods ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumericValue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die This must be a numeric value ähnelt.
@@ -1199,9 +1284,24 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Reflexion Angle ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Reset">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reset ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Reset Iteration ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.RungeKutta3">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.RungeKutta4">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Sensitivity">
@@ -1229,6 +1329,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Single Orbits ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.SpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Stadium">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadium ähnelt.
@@ -1237,6 +1342,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.StadiumBilliard">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadium Billiard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Start">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Start ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.StartIteration">
@@ -1277,6 +1387,16 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.StartvalueForTargetvalue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Propose a Startvalue for this Targetvalue ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StepWidth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Step Width ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.StretchedMode">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stretched Mode ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.StretchingParameterInterval">
