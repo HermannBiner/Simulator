@@ -161,6 +161,10 @@
     <value>Farbiges Diagramm</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Fortsetzen</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="CoordinatesStartpoint" xml:space="preserve">
     <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
@@ -205,8 +209,12 @@
     <value>Elliptisches Billard</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Euler" xml:space="preserve">
-    <value>Euler</value>
+  <data name="EulerExplicit" xml:space="preserve">
+    <value>Euler Explizit</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="EulerImplicit" xml:space="preserve">
+    <value>Euler Implizit</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -308,6 +316,10 @@
   <data name="MathDoc" xml:space="preserve">
     <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
+  </data>
+  <data name="MidpointImplicit" xml:space="preserve">
+    <value>Mittelpunkt Implizit</value>
+    <comment>Lbl</comment>
   </data>
   <data name="MnuBilliard" xml:space="preserve">
     <value>&amp;Billard</value>
@@ -493,6 +505,10 @@
     <value>Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
   </data>
+  <data name="Pendulum" xml:space="preserve">
+    <value>Pendel</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="PhasePortrait" xml:space="preserve">
     <value>Phasenportrait t, alfa</value>
     <comment>Lbl</comment>
@@ -513,6 +529,10 @@
     <value>Präsentation</value>
     <comment>Lbl</comment>
   </data>
+  <data name="RealSpringPendulum" xml:space="preserve">
+    <value>Reales Federpendel</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Red" xml:space="preserve">
     <value>Rot</value>
     <comment>Col</comment>
@@ -527,10 +547,6 @@
   </data>
   <data name="ResetIteration" xml:space="preserve">
     <value>Iteration zurücksetzen</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="RungeKutta3" xml:space="preserve">
-    <value>Runge Kutta 3</value>
     <comment>Lbl</comment>
   </data>
   <data name="RungeKutta4" xml:space="preserve">
@@ -558,7 +574,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="SpringPendulum" xml:space="preserve">
-    <value>Federpendel</value>
+    <value>Federpendel und numerische Methoden</value>
     <comment>lbl</comment>
   </data>
   <data name="Stadium" xml:space="preserve">

@@ -414,7 +414,13 @@ Public Class FrmBilliardtable
 
     Private Sub BtnNext100_Click(sender As Object, e As EventArgs) Handles BtnNext100.Click
 
+        BtnNext100.Enabled = False
+        BtnReset.Enabled = False
+
         Iteration(100)
+
+        BtnNext100.Enabled = True
+        BtnReset.Enabled = True
 
     End Sub
 

@@ -163,11 +163,17 @@
     </Compile>
     <Compile Include="BilliardClassLibrary\ClsMathhelperBilliard.vb" />
     <Compile Include="BilliardClassLibrary\ClsEllipseBilliardball.vb" />
-    <Compile Include="PendulumClassLibrary\INumericMethod.vb" />
-    <Compile Include="PendulumForms\FrmSpringPendulum.Designer.vb">
+    <Compile Include="NumericMethodsClassLibrary\ClsRungeKutta4.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsSpringPendulumAbstract.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsMidpointImplicit.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsEulerImplicit.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsEulerExplicit.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsRealSpringPendulum.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ISpringPendulum.vb" />
+    <Compile Include="NumericMethodsForms\FrmSpringPendulum.Designer.vb">
       <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
     </Compile>
-    <Compile Include="PendulumForms\FrmSpringPendulum.vb">
+    <Compile Include="NumericMethodsForms\FrmSpringPendulum.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Resources\LabelsDE.Designer.vb">
@@ -256,7 +262,7 @@
     <EmbeddedResource Include="BilliardForms\FrmBilliardtable.resx">
       <DependentUpon>FrmBilliardtable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PendulumForms\FrmSpringPendulum.resx">
+    <EmbeddedResource Include="NumericMethodsForms\FrmSpringPendulum.resx">
       <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsDE.resx">

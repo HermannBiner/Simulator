@@ -2,10 +2,10 @@
 'which dimension is defined in the constructor
 
 Public Class ClsVector
-    Private Components As Decimal()
+    Private ReadOnly Components As Decimal()
 
     Public Sub New(N As Integer)
-        ReDim Components(N - 1)
+        ReDim Components(N)
     End Sub
 
     Public Property Component(index As Integer) As Decimal

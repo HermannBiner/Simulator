@@ -228,6 +228,9 @@ Public Class FrmCDiagram
 
     Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
 
+        BtnStartIteration.Enabled = False
+        BtnReset.Enabled = False
+
         'Check and set the Ranges, defined by the user
         CheckUserRanges()
 
@@ -256,6 +259,9 @@ Public Class FrmCDiagram
         Else
             'there is already a message generated
         End If
+
+        BtnStartIteration.Enabled = True
+        BtnReset.Enabled = True
 
     End Sub
 

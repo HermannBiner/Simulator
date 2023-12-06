@@ -264,6 +264,7 @@ Public Class FrmHistogram
             'there is already a message generated
             SetDefaultValues()
         End If
+
     End Sub
 
 End Class

@@ -65,6 +65,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Continue ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property _Continue() As String
+            Get
+                Return ResourceManager.GetString("Continue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property _Stop() As String
@@ -272,11 +281,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Euler Explicit ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property Euler() As String
+        Friend Shared ReadOnly Property EulerExplicit() As String
             Get
-                Return ResourceManager.GetString("Euler", resourceCulture)
+                Return ResourceManager.GetString("EulerExplicit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Euler Implicit ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property EulerImplicit() As String
+            Get
+                Return ResourceManager.GetString("EulerImplicit", resourceCulture)
             End Get
         End Property
         
@@ -502,6 +520,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property MathDoc() As String
             Get
                 Return ResourceManager.GetString("MathDoc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Midpoint Implicit ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property MidpointImplicit() As String
+            Get
+                Return ResourceManager.GetString("MidpointImplicit", resourceCulture)
             End Get
         End Property
         
@@ -920,6 +947,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Pendulum ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Pendulum() As String
+            Get
+                Return ResourceManager.GetString("Pendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Phase Portrait t, alfa ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property PhasePortrait() As String
@@ -965,6 +1001,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Real Spring Pendulum ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property RealSpringPendulum() As String
+            Get
+                Return ResourceManager.GetString("RealSpringPendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Red ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Red() As String
@@ -997,15 +1042,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ResetIteration() As String
             Get
                 Return ResourceManager.GetString("ResetIteration", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
-        '''</summary>
-        Friend Shared ReadOnly Property RungeKutta3() As String
-            Get
-                Return ResourceManager.GetString("RungeKutta3", resourceCulture)
             End Get
         End Property
         
@@ -1064,7 +1100,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numeric Methods ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property SpringPendulum() As String
             Get

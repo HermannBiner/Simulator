@@ -317,7 +317,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawImage(Image As Bitmap, XShift As Integer, YShift As Integer)
+    Public Sub DrawImage(Image As Image, XShift As Integer, YShift As Integer)
 
         'Draws an image on position (XShift, YShift) in Pixel Coordinates
         Graphs.DrawImage(Image, XShift, YShift)

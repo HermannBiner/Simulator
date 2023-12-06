@@ -48,6 +48,11 @@ Simulator
   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE._Continue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Fortsetzen ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE._Stop">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
@@ -163,9 +168,14 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.Euler">
+<member name="P:Simulator.My.Resources.LabelsDE.EulerExplicit">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Euler Explizit ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.EulerImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler Implizit ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedParameterRange">
@@ -291,6 +301,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.MidpointImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Mittelpunkt Implizit ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuBilliard">
@@ -523,6 +538,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Pendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Pendel ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.PhasePortrait">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Phasenportrait t, alfa ähnelt.
@@ -548,6 +568,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Präsentation ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.RealSpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reales Federpendel ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Red">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Rot ähnelt.
@@ -566,11 +591,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Iteration zurücksetzen ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.RungeKutta3">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.RungeKutta4">
@@ -605,7 +625,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.SpringPendulum">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Federpendel ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Federpendel und numerische Methoden ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Stadium">
@@ -774,6 +794,11 @@ Simulator
   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN._Continue">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Continue ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN._Stop">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stop ähnelt.
@@ -889,9 +914,14 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.Euler">
+<member name="P:Simulator.My.Resources.LabelsEN.EulerExplicit">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Euler Explicit ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.EulerImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler Implicit ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -1017,6 +1047,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.MidpointImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Midpoint Implicit ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuBilliard">
@@ -1249,6 +1284,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die This Parameter Range is not allowed! It must be part of the interval ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Pendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Pendulum ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.PhasePortrait">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Phase Portrait t, alfa ähnelt.
@@ -1274,6 +1314,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Presentation ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.RealSpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Real Spring Pendulum ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Red">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Red ähnelt.
@@ -1292,11 +1337,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Reset Iteration ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.RungeKutta3">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 3 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.RungeKutta4">
@@ -1331,7 +1371,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.SpringPendulum">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numeric Methods ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Stadium">
