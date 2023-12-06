@@ -470,11 +470,11 @@
     <comment>Lbl</comment>
   </data>
   <data name="NumericMethod" xml:space="preserve">
-    <value>Numeric Method</value>
+    <value>Numerical Method</value>
     <comment>Lbl</comment>
   </data>
   <data name="NumericMethods" xml:space="preserve">
-    <value>Numeric Methods</value>
+    <value>Numerical Methods</value>
     <comment>Lbl</comment>
   </data>
   <data name="NumericValue" xml:space="preserve">
@@ -574,7 +574,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="SpringPendulum" xml:space="preserve">
-    <value>Spring Pendulum and Numeric Methods</value>
+    <value>Spring Pendulum and Numerical Methods</value>
     <comment>lbl</comment>
   </data>
   <data name="Stadium" xml:space="preserve">

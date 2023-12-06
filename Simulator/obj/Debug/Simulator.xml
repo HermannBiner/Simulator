@@ -1241,12 +1241,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumericMethod">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Numeric Method ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Numerical Method ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumericMethods">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Numeric Methods ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Numerical Methods ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NumericValue">
@@ -1371,7 +1371,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.SpringPendulum">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numeric Methods ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numerical Methods ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Stadium">

@@ -866,7 +866,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Numeric Method ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Numerical Method ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NumericMethod() As String
             Get
@@ -875,7 +875,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Numeric Methods ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Numerical Methods ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property NumericMethods() As String
             Get
@@ -1100,7 +1100,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numeric Methods ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numerical Methods ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property SpringPendulum() As String
             Get
