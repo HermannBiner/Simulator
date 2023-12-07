@@ -1,5 +1,5 @@
 ﻿'This class is the Spring Pendulum
-'together with the "Midpoint Implicit" numeric Method 
+'together with the "Midpoint Implicit" numerical Method 
 'based on the differential equation of a real spring pendulum
 
 Public Class ClsMidpointImplicit
@@ -12,7 +12,7 @@ Public Class ClsMidpointImplicit
     'And the Half-Step of it
     Private uHalf As Decimal
 
-    'and the y' substitution component(2)
+    'and the derivated y' substitution component(2)
     Private v As Decimal
 
     'And the Half-Step of it
@@ -27,7 +27,7 @@ Public Class ClsMidpointImplicit
             For i = 1 To MyNumberOfApproxSteps
                 .Component(0) += MyH
 
-                'the numeric equation is described in the mathematical documentation
+                'the numerical equation is described in the mathematical documentation
 
 
                 'Component(1) holds the y-value
@@ -37,7 +37,7 @@ Public Class ClsMidpointImplicit
                 uHalf = (u + v * MyH / 2) / locH
                 vHalf = ((v - u * MyH / 2) / locH)
 
-                'this is the numeric approximation
+                'this is the numerical approximation
                 'for Euler Explicit
                 .Component(1) = u + vHalf * MyH
                 .Component(2) = v - uHalf * MyH

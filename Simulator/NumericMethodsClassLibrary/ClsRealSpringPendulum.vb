@@ -12,7 +12,7 @@ Public Class ClsRealSpringPendulum
             MyActualParameter.Component(0) += MyH
         Next
 
-        'MyStartParameter.Component(1) ist der y-Startparameter und gleichzeitig die Amplitude
+        'MyStartParameter.Component(1) is the y-Startparameter and also the amplitude
         MyActualParameter.Component(0) = MyActualParameter.Component(0) Mod CDec(2 * Math.PI)
         MyActualParameter.Component(1) = MyStartParameter.Component(1) * CDec(Math.Cos(MyActualParameter.Component(0)))
 

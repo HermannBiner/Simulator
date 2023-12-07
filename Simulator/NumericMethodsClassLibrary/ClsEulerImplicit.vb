@@ -1,5 +1,5 @@
 ﻿'This class is the Spring Pendulum
-'together with the "Euler Implicit" numeric Method 
+'together with the "Euler Implicit" numerical Method 
 'based on the differential equation of a real spring pendulum
 
 Public Class ClsEulerImplicit
@@ -9,7 +9,7 @@ Public Class ClsEulerImplicit
     'first the y-substitution component(1)
     Private u As Decimal
 
-    'and the y' substitution component(2)
+    'and the derivated y' substitution component(2)
     Private v As Decimal
 
     Protected Overrides Sub Iteration()
@@ -21,14 +21,14 @@ Public Class ClsEulerImplicit
             For i = 1 To MyNumberOfApproxSteps
                 .Component(0) += MyH
 
-                'the numeric equation is described in the mathematical documentation
+                'the numerical equation is described in the mathematical documentation
 
 
                 'Component(1) holds the y-value
                 u = .Component(1)
                 v = .Component(2)
 
-                'this is the numeric approximation
+                'this is the numerical approximation
                 'for Euler Implicit
                 .Component(1) = (u + v * MyH) / locH
                 .Component(2) = (v - u * MyH) / locH

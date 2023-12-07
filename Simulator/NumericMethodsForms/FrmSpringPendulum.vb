@@ -1,7 +1,7 @@
 ﻿'This windows compares the movement of a 'real' spring pendulum (green)
 'oscillating like cos(t)
 'and the movement of a (red) spring pendulum which movement is approximated
-'by different numeric methods
+'by different numerical methods
 
 'Status: Under Construction!!
 
@@ -59,9 +59,11 @@ Public Class FrmSpringPendulum
 
     'Iteration parameters Pendulum A: The real spring pendulum
     Private PendulumA As ISpringPendulum
+
     'to draw the trace we need:
     Private TraceA As ClsMathpoint
     Private NextTraceA As ClsMathpoint
+
     'and the step width of the iteration is 
     Private StepWidthA As Decimal = CDec(0.1)
 
@@ -70,6 +72,7 @@ Public Class FrmSpringPendulum
     Private PendulumB As ISpringPendulum
     Private TraceB As ClsMathpoint
     Private NextTraceB As ClsMathpoint
+
     'CDec(0.1) is the Standard, but the StepWidthB is calculated
     'in SetStepWidthB based on TrbStepWidth.value
     Private StepWidthB As Decimal = CDec(0.1)
@@ -101,7 +104,7 @@ Public Class FrmSpringPendulum
 
         'the following order of adding the type of the numeric method is relevant!
         'there is at the moment no better concept implemented to identify
-        'the type of the numeric method
+        'the type of the numerical method
         CboPendulum.Items.Add(Main.LM.GetString("RealSpringPendulum"))
         CboPendulum.Items.Add(Main.LM.GetString("EulerExplicit"))
         CboPendulum.Items.Add(Main.LM.GetString("EulerImplicit"))
@@ -128,14 +131,14 @@ Public Class FrmSpringPendulum
         'Initialize Pendulums
         InitializePendulums()
 
-        'Draw the x-axis of the Coordinate System
+        'Draw the x-axis (time - axis) of the Coordinate System
         MyBitmapDrawer.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
 
         PicDiagram.Invalidate()
 
     End Sub
 
-    'Pendulum A is just a real Spring Pendulum
+    'PendulumA is just a real Spring Pendulum
     Private Sub InitializePendulums()
 
         'PendulumA is always the real spring pendulum
@@ -469,7 +472,7 @@ Public Class FrmSpringPendulum
         If IsMouseDown Then
 
             'The Position of the Mouse sets the Position of the pendulum
-            'e: Mouseposition is relative to PicBilliardTable
+            'e: Mouseposition is relative to PicDiagram
             Dim Mouseposition As Point
             Mouseposition.X = e.X + 2
             Mouseposition.Y = e.Y - 25

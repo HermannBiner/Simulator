@@ -1,5 +1,5 @@
 ﻿'This class is the Spring Pendulum
-'together with the "Runge Kutta 4" numeric Method 
+'together with the "Runge Kutta 4" numerical Method 
 'based on the differential equation of a real spring pendulum
 
 Public Class ClsRungeKutta4
@@ -9,7 +9,7 @@ Public Class ClsRungeKutta4
     'first the y-substitution component(1)
     Private u As Decimal
 
-    'and the y' substitution component(2)
+    'and the derivated y' substitution component(2)
     Private v As Decimal
 
     'The Runge Kutta Parameters for u
@@ -30,7 +30,7 @@ Public Class ClsRungeKutta4
                 u = .Component(1)
                 v = .Component(2)
 
-                'the numeric equation is described in the mathematical documentation
+                'the numerical equation is described in the mathematical documentation
                 k.Component(0) = MyH * v
                 l.Component(0) = -MyH * u
 
