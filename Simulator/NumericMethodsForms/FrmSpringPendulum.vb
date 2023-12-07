@@ -262,10 +262,10 @@ Public Class FrmSpringPendulum
                 PendulumB = New ClsRealSpringPendulum
             Case 1
                 'Spring Pendulum with Euler Explicit Approximation Method
-                PendulumB = New ClsEulerExplicit
+                PendulumB = New ClsForwardEuler
             Case 2
                 'Spring Pendulum with Euler Implicit Approximation Method
-                PendulumB = New ClsEulerImplicit
+                PendulumB = New ClsBackwardEuler
             Case 3
                 'Spring Pendulum with Midpoint Implicit Method
                 PendulumB = New ClsMidpointImplicit

@@ -1,5 +1,6 @@
 ﻿'This class is the Spring Pendulum
-'together with the "Midpoint Implicit" numerical Method 
+'together with the "Implicit Midpoint Rule" numerical Method 
+'in German "Implizite Mittelpunktsregel"
 'based on the differential equation of a real spring pendulum
 
 Public Class ClsMidpointImplicit

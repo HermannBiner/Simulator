@@ -166,8 +166,8 @@
     <Compile Include="NumericMethodsClassLibrary\ClsRungeKutta4.vb" />
     <Compile Include="NumericMethodsClassLibrary\ClsSpringPendulumAbstract.vb" />
     <Compile Include="NumericMethodsClassLibrary\ClsMidpointImplicit.vb" />
-    <Compile Include="NumericMethodsClassLibrary\ClsEulerImplicit.vb" />
-    <Compile Include="NumericMethodsClassLibrary\ClsEulerExplicit.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsBackwardEuler.vb" />
+    <Compile Include="NumericMethodsClassLibrary\ClsForwardEuler.vb" />
     <Compile Include="NumericMethodsClassLibrary\ClsRealSpringPendulum.vb" />
     <Compile Include="NumericMethodsClassLibrary\ISpringPendulum.vb" />
     <Compile Include="NumericMethodsForms\FrmSpringPendulum.Designer.vb">

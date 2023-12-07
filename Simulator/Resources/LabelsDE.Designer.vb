@@ -524,7 +524,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Mittelpunkt Implizit ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Implizite Mittelpunktsregel ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MidpointImplicit() As String
             Get
@@ -587,7 +587,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;File ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Datei ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MnuFile() As String
             Get

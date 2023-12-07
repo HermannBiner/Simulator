@@ -340,7 +340,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuFile">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;File ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Datei ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuFractals">
@@ -916,12 +916,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.EulerExplicit">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler Explicit ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Forward Euler ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.EulerImplicit">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler Implicit ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Backward Euler ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -1051,7 +1051,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MidpointImplicit">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Midpoint Implicit ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Implicit Midpoint Rule ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuBilliard">

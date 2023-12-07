@@ -281,7 +281,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Euler Explicit ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Forward Euler ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property EulerExplicit() As String
             Get
@@ -290,7 +290,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Euler Implicit ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Backward Euler ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property EulerImplicit() As String
             Get
@@ -524,7 +524,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Midpoint Implicit ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Implicit Midpoint Rule ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MidpointImplicit() As String
             Get

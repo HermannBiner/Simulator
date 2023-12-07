@@ -1,8 +1,9 @@
 ﻿'This class is the Spring Pendulum
-'together with the "Euler Explicit" numerical Method 
+'together with the "Forward Euler" numerical Method 
+'in German "Euler Explizit" Method
 'based on the differential equation of a real spring pendulum
 
-Public Class ClsEulerExplicit
+Public Class ClsForwardEuler
     Inherits ClsSpringPendulumAbstract
 
     'These are the parameters according to the mathematical documentation

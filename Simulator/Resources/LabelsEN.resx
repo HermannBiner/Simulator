@@ -210,11 +210,11 @@
     <comment>Lbl</comment>
   </data>
   <data name="EulerExplicit" xml:space="preserve">
-    <value>Euler Explicit</value>
+    <value>Forward Euler</value>
     <comment>Lbl</comment>
   </data>
   <data name="EulerImplicit" xml:space="preserve">
-    <value>Euler Implicit</value>
+    <value>Backward Euler</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>Doc</comment>
   </data>
   <data name="MidpointImplicit" xml:space="preserve">
-    <value>Midpoint Implicit</value>
+    <value>Implicit Midpoint Rule</value>
     <comment>Lbl</comment>
   </data>
   <data name="MnuBilliard" xml:space="preserve">

@@ -318,7 +318,7 @@
     <comment>Doc</comment>
   </data>
   <data name="MidpointImplicit" xml:space="preserve">
-    <value>Mittelpunkt Implizit</value>
+    <value>Implizite Mittelpunktsregel</value>
     <comment>Lbl</comment>
   </data>
   <data name="MnuBilliard" xml:space="preserve">
@@ -346,7 +346,7 @@
     <comment>Mnu</comment>
   </data>
   <data name="MnuFile" xml:space="preserve">
-    <value>&amp;File</value>
+    <value>&amp;Datei</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuFractals" xml:space="preserve">
