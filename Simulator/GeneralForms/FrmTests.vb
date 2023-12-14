@@ -33,9 +33,6 @@ Public Class FrmTests
         'This is necessary for the designer
         InitializeComponent()
 
-        'Initialize Language
-        InitializeLanguage()
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -58,6 +55,9 @@ Public Class FrmTests
         MyPictureBoxDrawer = New ClsGraphicTool(PicDiagram, MyMathRange, MyMathRange)
         MyBitmapDrawer = New ClsGraphicTool(MyBitmap, MyMathRange, MyMathRange)
         MyBitmapDrawer.Clear(Color.White)
+
+        'Initialize Language
+        InitializeLanguage()
 
     End Sub
 

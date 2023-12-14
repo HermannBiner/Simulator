@@ -106,6 +106,9 @@ Public Class ClsStadiumBilliardball
         ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
         MyValueParameters.Add(ValueRange)
 
+        'Default
+        MyC = 2
+
     End Sub
 
     WriteOnly Property Billiardtable As PictureBox Implements IBilliardball.Billiardtable
@@ -122,7 +125,10 @@ Public Class ClsStadiumBilliardball
         End Set
     End Property
 
-    WriteOnly Property C As Decimal Implements IBilliardball.C
+    Property C As Decimal Implements IBilliardball.C
+        Get
+            C = MyC
+        End Get
         Set(value As Decimal)
 
             MyC = value
@@ -144,8 +150,10 @@ Public Class ClsStadiumBilliardball
         End Set
     End Property
 
-
-    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+    Property CParameter As Decimal Implements ICDiagram.CParameter
+        Get
+            CParameter = MyC
+        End Get
         Set(value As Decimal)
 
             MyC = value
@@ -156,15 +164,6 @@ Public Class ClsStadiumBilliardball
 
             'Now, the perimeter of the Billiard Table is known and that is the Value Range of T
             MyTValuerange = New ClsInterval(0, 4 * a + 2 * b * CDec(Math.PI))
-            MyValueParameters.Clear()
-
-            'Update ValueParameters
-            Dim ValueRange As ClsValueParameter
-            ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValuerange)
-            MyValueParameters.Add(ValueRange)
-
-            ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
-            MyValueParameters.Add(ValueRange)
 
         End Set
     End Property
@@ -280,6 +279,29 @@ Public Class ClsStadiumBilliardball
 
         End Set
     End Property
+
+    Public Sub DrawBilliardTable() Implements IBilliardball.DrawBilliardtable
+
+        With MyMapBilliardtableGraphics
+            'Coordinate System
+            .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
+
+            'Draw the rectangle in the middle of the stadium
+            .DrawLine(New ClsMathpoint(-a, -b), New ClsMathpoint(a, -b), Color.Blue, 1)
+            .DrawLine(New ClsMathpoint(-a, b), New ClsMathpoint(a, b), Color.Blue, 1)
+
+            'Draw the half-circles including their midpoints
+            .DrawCircleArc(New ClsMathpoint(-a, 0), b, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawPoint(New ClsMathpoint(-a, 0), Brushes.Blue, 2)
+            .DrawCircleArc(New ClsMathpoint(a, 0), b, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawPoint(New ClsMathpoint(a, 0), Brushes.Blue, 2)
+        End With
+
+    End Sub
+
+    Public Sub ClearBilliardTable() Implements IBilliardball.ClearBilliardTable
+        MyMapBilliardtableGraphics.Clear(Color.White)
+    End Sub
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 

@@ -157,6 +157,50 @@
     <value>C-Diagramm</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ClassNameViolation" xml:space="preserve">
+    <value>Ein Klassenname muss mit derm Prefic 'Cls' starten und eine Länge &gt; 3 haben!</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="ClsBackwardEuler" xml:space="preserve">
+    <value>Euler Implizit</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsForwardEuler" xml:space="preserve">
+    <value>Euler Explizit</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsLogisticGrowth" xml:space="preserve">
+    <value>Logistisches Wachstum</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsMidpointImplicit" xml:space="preserve">
+    <value>Implizite Mittelpunktsregel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsOvalBilliardball" xml:space="preserve">
+    <value>Ovales Billard</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsParabola" xml:space="preserve">
+    <value>Parabel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsRealSpringPendulum" xml:space="preserve">
+    <value>Reales Federpendel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsRungeKutta4" xml:space="preserve">
+    <value>Runge Kutta 4</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsStadiumBilliardball" xml:space="preserve">
+    <value>Billard im Stadion</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsTentmap" xml:space="preserve">
+    <value>Zeltabbildung</value>
+    <comment>Cls</comment>
+  </data>
   <data name="ColoredDiagram" xml:space="preserve">
     <value>Farbiges Diagramm</value>
     <comment>Lbl</comment>
@@ -168,6 +212,10 @@
   <data name="CoordinatesStartpoint" xml:space="preserve">
     <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="CslEllipseBillardball" xml:space="preserve">
+    <value>Elliptisches Billard</value>
+    <comment>Cls</comment>
   </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>
@@ -203,18 +251,6 @@
   </data>
   <data name="Elliptic" xml:space="preserve">
     <value>Elliptisch</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="EllipticBilliard" xml:space="preserve">
-    <value>Elliptisches Billard</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="EulerExplicit" xml:space="preserve">
-    <value>Euler Explizit</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="EulerImplicit" xml:space="preserve">
-    <value>Euler Implizit</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -293,10 +329,6 @@
     <value>Log</value>
     <comment>Lbl</comment>
   </data>
-  <data name="LogisticGrowth" xml:space="preserve">
-    <value>Logistisches Wachstum</value>
-    <comment>Lbl</comment>
-  </data>
   <data name="LowerPendulumAngle" xml:space="preserve">
     <value>Winkel des unteren Pendels</value>
     <comment>Lbl</comment>
@@ -317,9 +349,9 @@
     <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
   </data>
-  <data name="MidpointImplicit" xml:space="preserve">
-    <value>Implizite Mittelpunktsregel</value>
-    <comment>Lbl</comment>
+  <data name="MissingImplementation" xml:space="preserve">
+    <value>Keine implementierende Klasse gefunden</value>
+    <comment>Msg</comment>
   </data>
   <data name="MnuBilliard" xml:space="preserve">
     <value>&amp;Billard</value>
@@ -489,14 +521,6 @@
     <value>Oval</value>
     <comment>Lbl</comment>
   </data>
-  <data name="OvalBilliard" xml:space="preserve">
-    <value>Ovales Billard</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="Parabola" xml:space="preserve">
-    <value>Parabel</value>
-    <comment>Lbl</comment>
-  </data>
   <data name="Parameter" xml:space="preserve">
     <value>Parameter</value>
     <comment>Lbl</comment>
@@ -529,10 +553,6 @@
     <value>Präsentation</value>
     <comment>Lbl</comment>
   </data>
-  <data name="RealSpringPendulum" xml:space="preserve">
-    <value>Reales Federpendel</value>
-    <comment>Lbl</comment>
-  </data>
   <data name="Red" xml:space="preserve">
     <value>Rot</value>
     <comment>Col</comment>
@@ -547,10 +567,6 @@
   </data>
   <data name="ResetIteration" xml:space="preserve">
     <value>Iteration zurücksetzen</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="RungeKutta4" xml:space="preserve">
-    <value>Runge Kutta 4</value>
     <comment>Lbl</comment>
   </data>
   <data name="Sensitivity" xml:space="preserve">
@@ -579,10 +595,6 @@
   </data>
   <data name="Stadium" xml:space="preserve">
     <value>Stadion</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="StadiumBilliard" xml:space="preserve">
-    <value>Billard im Stadion</value>
     <comment>Lbl</comment>
   </data>
   <data name="Start" xml:space="preserve">
@@ -647,10 +659,6 @@
   </data>
   <data name="TargetValue" xml:space="preserve">
     <value>Zielwert</value>
-    <comment>Lbl</comment>
-  </data>
-  <data name="Tentmap" xml:space="preserve">
-    <value>Zeltabbildung</value>
     <comment>Lbl</comment>
   </data>
   <data name="Test" xml:space="preserve">

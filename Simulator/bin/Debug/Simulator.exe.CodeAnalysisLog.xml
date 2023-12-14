@@ -1,6 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="17.0">
+ <Targets>
+  <Target Name="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\bin\Debug\Simulator.exe">
+   <Modules>
+    <Module Name="simulator.exe">
+     <Namespaces>
+      <Namespace Name="Simulator">
+       <Types>
+        <Type Name="FrmTwoDimensions" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#InitializeLanguage()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208" Status="Active" Created="2023-12-14 17:15:03Z" FixCategory="NonBreaking">
+             <Issue Name="IncorrectParameterName" Certainty="95" Level="CriticalError" Path="C:\Users\hbine\OneDrive\Dokumente\Chaos\GitHubRep\Simulator\UnimodalForms" File="FrmTwoDimensions.vb" Line="93">Die 'FrmTwoDimensions.InitializeLanguage()'-Methode übergibt "MissingImplementation" als 'paramName'-Argument an einen 'ArgumentNullException'-Konstruktor. Ersetzen Sie dieses Argument durch einen der Parameternamen der Methode. Der angegebene Parametername muss dieselbe Schreibweise aufweisen wie in der Deklaration für die Methode.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="InstantiateArgumentExceptionsCorrectly" Category="Microsoft.Usage" CheckId="CA2208">
+   <Name>Argumentausnahmen korrekt instanziieren</Name>
+   <Description>Zeichenfolgenargumente, die an Konstruktoren von ArgumentException und deren abgeleiteten Typen übergeben wurden, müssen korrekt sein. Von ArgumentException abgeleitete Typen haben inkonsistente Konstruktorüberladungen in Bezug auf die message- und paramName-Parameter im Vergleich zu ArgumentException.</Description>
+   <Resolution Name="IncorrectParameterName">Die {0}-Methode übergibt "{1}" als {2}-Argument an einen {3}-Konstruktor. Ersetzen Sie dieses Argument durch einen der Parameternamen der Methode. Der angegebene Parametername muss dieselbe Schreibweise aufweisen wie in der Deklaration für die Methode.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182347.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="usagerules.dll" Version="17.0.0.0" />
+  </Rule>
+ </Rules>
  <Localized>
   <String Key="Category">Kategorie</String>
   <String Key="Certainty">Sicherheit</String>

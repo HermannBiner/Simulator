@@ -43,4 +43,39 @@ Public Class ClsLanguageManager
 
     End Function
 
+    Public Function GetString(Identifier As String, IsClass As Boolean) As String
+
+        'If the user programms its own Class to implement an Interface
+        'of a dynamic system, he did maybe not fill the Resource-File
+        'with the name of its class in Germann and/or English
+        'In this case, the Name is added automatically to the resource files
+        'the user can change these entries later manually
+
+        'The texts are in the resource-files LabelsDE and LabelsEN
+        Dim Text As String = RM.GetString(Identifier)
+
+        If Text = "" Then
+            If IsClass Then
+
+                Text = Identifier
+
+                'Cut the 'CLS' part of the class name
+                'It is expected in the beginning of the ClassName
+                Dim ClsPosition = Text.IndexOf("Cls")
+                If ClsPosition = 0 And Text.Length > 3 Then
+                    Text = Text.Substring(3)
+                Else
+                    Throw New FormatException(Main.LM.GetString("ClassNamingViolation"))
+                End If
+
+            Else
+                Text = "Missing Text: " & Identifier
+
+            End If
+        End If
+
+        Return Text
+
+    End Function
+
 End Class

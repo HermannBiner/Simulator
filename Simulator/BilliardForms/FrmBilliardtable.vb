@@ -8,12 +8,17 @@
 'Status Checked
 
 Imports System.Globalization
+Imports System.Reflection
 
 Public Class FrmBilliardtable
 
     'Prepare objects
-    Private Billiardtable As IBilliardtable
     Private MapBilliardtable As Bitmap
+
+    'Default for drawing BilliardTable etc.
+    Private DefaultBilliardBall As IBilliardball
+
+    'Moving BilliardBalls
     Private Billiardball As IBilliardball
     Private MyBilliardballCollection As List(Of IBilliardball)
 
@@ -30,18 +35,12 @@ Public Class FrmBilliardtable
     'The Startposition of the Ball is set by the Mouse
     Private IsMousedown As Boolean = False
 
-    'Standard Value for Parameter C
-    Private StandardC As Decimal = CDec(0.8)
-
     'SECTOR INITIALIZATION
 
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
-
-        'Initialize Language
-        InitializeLanguage()
 
     End Sub
 
@@ -63,6 +62,7 @@ Public Class FrmBilliardtable
         BtnNextStep.Text = Main.LM.GetString("NextStep")
         LblParameterc.Text = Main.LM.GetString("FactorC")
         BtnDrawBilliardTable.Text = Main.LM.GetString("DrawBilliardTable")
+        TxtFactor.Text = ""
 
         CboBallColor.Items.Clear()
 
@@ -76,11 +76,31 @@ Public Class FrmBilliardtable
 
         CboBilliardTable.Items.Clear()
 
-        'the following order of adding the iteration type is relevant!
-        'there is at the moment no better concept implemented to identify the type of Billiard
-        CboBilliardTable.Items.Add(Main.LM.GetString("Elliptic"))
-        CboBilliardTable.Items.Add(Main.LM.GetString("Stadium"))
-        CboBilliardTable.Items.Add(Main.LM.GetString("Oval"))
+        'Add the classes implementing IBilliardBall
+        'to the Combobox CboBilliardTable by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardball)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If types.Count > 0 Then
+            Dim BilliardName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                BilliardName = Main.LM.GetString(type.Name, True)
+                CboBilliardTable.Items.Add(BilliardName)
+            Next
+
+            CboBilliardTable.SelectedIndex = CboBilliardTable.Items.Count - 1
+            CboBilliardTable.Select()
+
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+
 
     End Sub
 
@@ -99,12 +119,6 @@ Public Class FrmBilliardtable
         'The Bitmap MapBilliardTable is then shown as Image of PicBilliardTable
         PicBilliardTable.Image = MapBilliardtable
 
-        'BilliardTable
-        Billiardtable = New ClsEllipseBilliardtable With {
-            .MapBilliardtable = MapBilliardtable
-        }
-        CboBilliardTable.SelectedIndex = 0
-
         'The Phase Portrait is a square
         Squareside = Math.Min(PicPhasePortrait.Width, PicPhasePortrait.Height)
         PicPhasePortrait.Width = Squareside
@@ -114,18 +128,22 @@ Public Class FrmBilliardtable
         MyBilliardballCollection = New List(Of IBilliardball)
 
         'Setting Standard Values
-        TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
         CboBallColor.SelectedIndex = 0
+
+        'Initialize Language
+        InitializeLanguage()
 
     End Sub
 
     Private Sub BtnDrawBilliardTable_Click(sender As Object, e As EventArgs) Handles BtnDrawBilliardTable.Click
 
         Reset()
+
         If CheckFactorC() Then
-            Billiardtable.C = CDec(TxtFactor.Text)
-            Billiardtable.DrawBilliardtable()
+            DefaultBilliardBall.C = CDec(TxtFactor.Text)
+            DefaultBilliardBall.DrawBilliardtable()
             PicBilliardTable.Refresh()
+            IsBilliardtableDrawn = True
         End If
 
     End Sub
@@ -136,7 +154,7 @@ Public Class FrmBilliardtable
 
     Private Sub Reset()
 
-        Billiardtable.Clear()
+        DefaultBilliardBall.ClearBilliardTable()
         PicBilliardTable.Refresh()
         PicPhasePortrait.Refresh()
 
@@ -153,6 +171,79 @@ Public Class FrmBilliardtable
         n = 0
         LblNumberofSteps.Text = "0"
 
+    End Sub
+
+    Private Function GetBilliardBall() As IBilliardball
+
+        'This sets the type of BilliardBall by Reflection
+        'Default is EllipseBilliardball
+        Dim LocBilliardBall As IBilliardball = New ClsEllipseBilliardball
+
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardball)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If CboBilliardTable.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = CboBilliardTable.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                        LocBilliardBall = CType(Activator.CreateInstance(type), IBilliardball)
+                    End If
+                Next
+            End If
+
+        End If
+
+        With LocBilliardBall
+            .Billiardtable = PicBilliardTable
+            .MapBilliardtable = MapBilliardtable
+
+            'Setting the properties of the Ball
+            .Ballcolor = Ballcolor
+            .Ballsize = 4
+            .Ballspeed = TrbSpeed.Value
+            .ParameterProtocol = LstParameterList
+
+            'C influences the Value Range of the Parameter t
+            'Therefore C is set first
+            If TxtFactor.Text = "" Then
+                TxtFactor.Text = .C.ToString
+            Else
+                .C = CDec(TxtFactor.Text)
+            End If
+
+            'and then the Phase Portrait containing the Parameter
+            .Phaseportrait = PicPhasePortrait
+
+            'The Startpostition of the Ball is set later by the Mouse Position
+            .IsStartpositionSet = False
+            .IsStartangleSet = False
+        End With
+
+
+        Return LocBilliardBall
+
+    End Function
+
+    Private Sub CboBilliardTable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboBilliardTable.SelectedIndexChanged
+
+        TxtFactor.Text = ""
+
+        'This sets the type of Billiardball by Reflection
+        DefaultBilliardBall = GetBilliardBall()
+        TxtFactor.Text = DefaultBilliardBall.C.ToString
+
+        Reset()
+
+    End Sub
+
+    Private Sub TxtFactor_TextChanged(sender As Object, e As EventArgs) Handles TxtFactor.TextChanged
+        If IsBilliardtableDrawn Then
+            Reset()
+        End If
     End Sub
 
     'SECTOR CHECKS
@@ -219,40 +310,12 @@ Public Class FrmBilliardtable
         If CheckFactorC() Then
 
             If Not IsBilliardtableDrawn Then
-                Billiardtable.C = CDec(TxtFactor.Text)
-                Billiardtable.DrawBilliardtable()
+                DefaultBilliardBall.C = CDec(TxtFactor.Text)
+                DefaultBilliardBall.DrawBilliardtable()
                 PicBilliardTable.Refresh()
             End If
 
-            'The Type of the Billiard Ball is depending of the Type of Billiard
-            Select Case CboBilliardTable.SelectedIndex
-                Case 0
-                    Billiardball = New ClsEllipseBilliardball
-                Case 1
-                    Billiardball = New ClsStadiumBilliardball
-                Case Else
-                    Billiardball = New ClsOvalBilliardball
-            End Select
-
-            Billiardball.Billiardtable = PicBilliardTable
-            Billiardball.MapBilliardtable = MapBilliardtable
-
-            'Setting the properties of the Ball
-            Billiardball.Ballcolor = Ballcolor
-            Billiardball.Ballsize = 4
-            Billiardball.Ballspeed = TrbSpeed.Value
-            Billiardball.ParameterProtocol = LstParameterList
-
-            'C influences the Value Range of the Parameter t
-            'Therefore C is set first
-            Billiardball.C = CDec(TxtFactor.Text)
-
-            'and then the Phase Portrait containing the Parameter
-            Billiardball.Phaseportrait = PicPhasePortrait
-
-            'The Startpostition of the Ball is set later by the Mouse Position
-            Billiardball.IsStartpositionSet = False
-            Billiardball.IsStartangleSet = False
+            Billiardball = GetBilliardBall()
 
             MyBilliardballCollection.Add(Billiardball)
 
@@ -431,36 +494,6 @@ Public Class FrmBilliardtable
             Ball.Ballspeed = TrbSpeed.Value
         Next
 
-    End Sub
-
-    Private Sub CboBilliardTable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboBilliardTable.SelectedIndexChanged
-
-        'Here, the User sets the Type of Billiard
-        Select Case CboBilliardTable.SelectedIndex
-            Case 0
-                Billiardtable = New ClsEllipseBilliardtable
-                StandardC = CDec(0.8)
-                TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
-            Case 1
-                Billiardtable = New ClsStadiumBilliardtable
-                StandardC = 2
-                TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
-            Case Else
-                Billiardtable = New ClsOvalBilliardtable
-                StandardC = CDec(0.5)
-                TxtFactor.Text = StandardC.ToString(CultureInfo.CurrentCulture)
-        End Select
-
-        Billiardtable.MapBilliardtable = MapBilliardtable
-
-        Reset()
-
-    End Sub
-
-    Private Sub TxtFactor_TextChanged(sender As Object, e As EventArgs) Handles TxtFactor.TextChanged
-        If IsBilliardtableDrawn Then
-            Reset()
-        End If
     End Sub
 
     Private Sub Iteration(NumberOfSteps As Integer)

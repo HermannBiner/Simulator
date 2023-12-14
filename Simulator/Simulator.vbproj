@@ -28,8 +28,8 @@
     <TargetCulture>de-CH</TargetCulture>
     <ProductName>Chaos Simulator</ProductName>
     <PublisherName>Hermann Biner Zermatt</PublisherName>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -127,13 +127,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BilliardClassLibrary\ClsEllipseBilliardtable.vb" />
     <Compile Include="BilliardClassLibrary\ClsOvalBilliardball.vb" />
-    <Compile Include="BilliardClassLibrary\ClsOvalBilliardtable.vb" />
     <Compile Include="BilliardClassLibrary\ClsStadiumBilliardball.vb" />
-    <Compile Include="BilliardClassLibrary\ClsStadiumBilliardtable.vb" />
     <Compile Include="BilliardClassLibrary\IBilliardball.vb" />
-    <Compile Include="BilliardClassLibrary\IBilliardtable.vb" />
     <Compile Include="BilliardClassLibrary\ICDiagram.vb" />
     <Compile Include="BilliardForms\FrmCDiagram.Designer.vb">
       <DependentUpon>FrmCDiagram.vb</DependentUpon>

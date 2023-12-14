@@ -100,6 +100,9 @@ Public Class ClsEllipseBilliardball
         ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValueRange)
         MyValueParameters.Add(ValueRange)
 
+        'Default
+        MyC = CDec(0.8)
+
     End Sub
 
     WriteOnly Property Billiardtable As PictureBox Implements IBilliardball.Billiardtable
@@ -116,7 +119,10 @@ Public Class ClsEllipseBilliardball
         End Set
     End Property
 
-    WriteOnly Property C As Decimal Implements IBilliardball.C
+    Property C As Decimal Implements IBilliardball.C
+        Get
+            C = MyC
+        End Get
         Set(value As Decimal)
             MyC = value
 
@@ -144,7 +150,10 @@ Public Class ClsEllipseBilliardball
         End Set
     End Property
 
-    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+    Property CParameter As Decimal Implements ICDiagram.CParameter
+        Get
+            CParameter = MyC
+        End Get
         Set(value As Decimal)
             MyC = value
 
@@ -159,8 +168,10 @@ Public Class ClsEllipseBilliardball
                 b = CDec(0.99)
                 a = b / MyC
             End If
+
         End Set
     End Property
+
 
     WriteOnly Property Phaseportrait As PictureBox Implements IBilliardball.Phaseportrait
         Set(value As PictureBox)
@@ -272,6 +283,45 @@ Public Class ClsEllipseBilliardball
             ValueParameters = MyValueParameters
         End Get
     End Property
+
+    Public Sub DrawBilliardTable() Implements IBilliardball.DrawBilliardtable
+
+        With MyMapBilliardtableGraphics
+            'Coordinate System
+            .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
+
+            'The MidPoint of the Ellipse is always (0/0)
+            .DrawEllipse(New ClsMathpoint(0, 0), a, b, Color.Blue, 1)
+
+            'Set Focal Points F1 and F2 of the Ellipse
+            Dim F1 As New ClsMathpoint
+            Dim F2 As New ClsMathpoint
+
+            Dim f As Decimal
+            If a > b Then
+                f = CDec(Math.Sqrt(a * a - b * b))
+                F1.X = f
+                F1.Y = 0
+                F2.X = -f
+                F2.Y = 0
+            Else
+                f = CDec(Math.Sqrt(b * b - a * a))
+                F1.X = 0
+                F1.Y = f
+                F2.X = 0
+                F2.Y = -f
+            End If
+
+            'Draw Focal Points
+            .DrawPoint(F1, Brushes.DarkBlue, 3)
+            .DrawPoint(F2, Brushes.DarkBlue, 3)
+        End With
+
+    End Sub
+
+    Public Sub ClearBilliardTable() Implements IBilliardball.ClearBilliardTable
+        MyMapBilliardtableGraphics.Clear(Color.White)
+    End Sub
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 

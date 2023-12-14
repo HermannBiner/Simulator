@@ -19,6 +19,7 @@
 'Status Checked
 
 Imports System.Globalization
+Imports System.Reflection
 
 Public Class FrmIteration
 
@@ -69,9 +70,6 @@ Public Class FrmIteration
         'This is necessary for the designer
         InitializeComponent()
 
-        'Initialize Language
-        InitializeLanguage()
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -99,11 +97,30 @@ Public Class FrmIteration
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         CboFunction.Items.Clear()
 
-        'the following order of adding the iteration type is relevant!
-        'at the moment, no better concept of identifying the unimodal function is implemented
-        CboFunction.Items.Add(Main.LM.GetString("Tentmap"))
-        CboFunction.Items.Add(Main.LM.GetString("LogisticGrowth"))
-        CboFunction.Items.Add(Main.LM.GetString("Parabola"))
+        'Add the classes implementing IIteration
+        'to the Combobox CboPendulum by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If types.Count > 0 Then
+            Dim IteratorName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                IteratorName = Main.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(IteratorName)
+            Next
+
+            CboFunction.SelectedIndex = CboFunction.Items.Count - 1
+            CboFunction.Select()
+
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
 
     End Sub
 
@@ -117,6 +134,9 @@ Public Class FrmIteration
         'the diagram (Bitmap or Picturebox) should be a square as well
         Dim Squareside As Integer = Math.Min(PicDiagram.Width, PicDiagram.Height)
         DiagramSize = New Point(Squareside, Squareside)
+
+        'Initialize Language
+        InitializeLanguage()
 
         'Default settings
         CboFunction.SelectedIndex = 1
@@ -168,17 +188,25 @@ Public Class FrmIteration
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
-        'The user chooses the type of iteration
-        Dim type As Integer = CboFunction.SelectedIndex
+        'This sets the type of Iterator by Reflection
 
-        Select Case type
-            Case 0  'Tentmap
-                Iterator = New ClsTentmap
-            Case 1 'Logistic Growth
-                Iterator = New ClsLogisticGrowth
-            Case Else  'Parabola
-                Iterator = New ClsParabola
-        End Select
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If CboFunction.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = CboFunction.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                        Iterator = CType(Activator.CreateInstance(type), IIteration)
+                    End If
+                Next
+            End If
+
+        End If
 
         'As standard, the function is repeated 1x in each iteration step
         Iterator.Power = CInt(CboIterationDepth.SelectedItem)

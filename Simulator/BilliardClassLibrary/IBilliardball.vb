@@ -13,8 +13,7 @@ Public Interface IBilliardball
 
 
     'The profile of the billiard table is defined by the parameter C
-    WriteOnly Property C As Decimal
-
+    Property C As Decimal
 
     'in addtion, the ball protocols its movement in a phase portrait
     WriteOnly Property Phaseportrait As PictureBox
@@ -33,6 +32,12 @@ Public Interface IBilliardball
     WriteOnly Property Startangle As Decimal 'defines the start angle in [0, 2pi[
     Property IsStartpositionSet As Boolean
     Property IsStartangleSet As Boolean
+
+    'Drawing the Billiard Table
+    Sub DrawBilliardtable()
+
+    'Clearing Billiard Table
+    Sub ClearBilliardTable()
 
     'The following method receives a mouse position relative to the bitmap
     'It pulls the ball according to the mouse position on its start position

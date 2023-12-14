@@ -7,6 +7,7 @@
 'that is implemented by the Billiard-Classes, Pendulum-Classes and other
 
 Imports System.Globalization
+Imports System.Reflection
 
 Public Class FrmCDiagram
 
@@ -56,9 +57,6 @@ Public Class FrmCDiagram
         'This is necessary for the designer
         InitializeComponent()
 
-        'Initialize Language
-        InitializeLanguage()
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -72,13 +70,34 @@ Public Class FrmCDiagram
             TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
         LblParameterRange.Text = Main.LM.GetString("ExaminatedParameterRange")
         BtnStartIteration.Text = Main.LM.GetString("StartIteration")
+
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         CboFunction.Items.Clear()
 
-        'the following order of adding the iteration type is relevant!
-        CboFunction.Items.Add(Main.LM.GetString("EllipticBilliard"))
-        CboFunction.Items.Add(Main.LM.GetString("StadiumBilliard"))
-        CboFunction.Items.Add(Main.LM.GetString("OvalBilliard"))
+        'Add the classes implementing IBilliardBall
+        'to the Combobox CboBilliardTable by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(ICDiagram)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If types.Count > 0 Then
+            Dim BilliardName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                BilliardName = Main.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(BilliardName)
+            Next
+
+            CboFunction.SelectedIndex = CboFunction.Items.Count - 1
+            CboFunction.Select()
+
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
 
         'Note: The name of the ValueParameter into the CboValueParameters
         'is added when the ValueParameters are known
@@ -117,11 +136,12 @@ Public Class FrmCDiagram
             End If
         End If
 
-        CboFunction.SelectedIndex = 0
-        CboFunction.Select()
+        'Initialize Language
+        InitializeLanguage()
 
         'additional default settings
         SetDefaultValues()
+
 
     End Sub
 
@@ -178,18 +198,25 @@ Public Class FrmCDiagram
 
     Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
-        Dim type As Integer
+        'This sets the type of BilliardBall by Reflection
 
-        'The user chooses the type of iteration
-        type = CboFunction.SelectedIndex
-        Select Case type
-            Case 0  'Elliptic Billiard
-                Iterator = New ClsEllipseBilliardball
-            Case 1 'Stadium Billiard
-                Iterator = New ClsStadiumBilliardball
-            Case Else  'Oval Billiard
-                Iterator = New ClsOvalBilliardball
-        End Select
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(ICDiagram)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If CboFunction.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = CboFunction.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                        Iterator = CType(Activator.CreateInstance(type), ICDiagram)
+                    End If
+                Next
+            End If
+
+        End If
 
         'Reset ranges and Default Values
         SetDefaultValues()

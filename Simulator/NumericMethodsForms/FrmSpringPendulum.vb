@@ -9,6 +9,7 @@ Imports System.ComponentModel
 Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.Net.Mail
+Imports System.Reflection
 Imports System.Threading
 
 Public Class FrmSpringPendulum
@@ -84,9 +85,6 @@ Public Class FrmSpringPendulum
         'This is necessary for the designer
         InitializeComponent()
 
-        'Initialize Language
-        InitializeLanguage()
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -102,17 +100,31 @@ Public Class FrmSpringPendulum
         LblDifference.Text = Main.LM.GetString("Difference")
         CboPendulum.Items.Clear()
 
-        'the following order of adding the type of the numeric method is relevant!
-        'there is at the moment no better concept implemented to identify
-        'the type of the numerical method
-        CboPendulum.Items.Add(Main.LM.GetString("RealSpringPendulum"))
-        CboPendulum.Items.Add(Main.LM.GetString("EulerExplicit"))
-        CboPendulum.Items.Add(Main.LM.GetString("EulerImplicit"))
-        CboPendulum.Items.Add(Main.LM.GetString("MidpointImplicit"))
-        CboPendulum.Items.Add(Main.LM.GetString("RungeKutta4"))
+        'Add the classes implementing ISpringPendulum
+        'to the Combobox CboPendulum by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(ISpringPendulum)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-        CboPendulum.SelectedIndex = 0
-        CboPendulum.Select()
+        If types.Count > 0 Then
+            Dim PendulumName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                PendulumName = Main.LM.GetString(type.Name, True)
+                CboPendulum.Items.Add(PendulumName)
+            Next
+
+            CboPendulum.SelectedIndex = CboPendulum.Items.Count - 1
+            CboPendulum.Select()
+
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+
 
     End Sub
 
@@ -128,6 +140,10 @@ Public Class FrmSpringPendulum
         MyBitmapDrawer = New ClsGraphicTool(MyBitmap, MyMathRange, MyMathRange)
         MyBitmapDrawer.Clear(Color.White)
 
+
+        'Initialize Language
+        InitializeLanguage()
+
         'Initialize Pendulums
         InitializePendulums()
 
@@ -135,6 +151,7 @@ Public Class FrmSpringPendulum
         MyBitmapDrawer.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
 
         PicDiagram.Invalidate()
+
 
     End Sub
 
@@ -255,27 +272,26 @@ Public Class FrmSpringPendulum
 
     Private Sub CboPendulum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPendulum.SelectedIndexChanged
 
-        'This sets the type of PendulumB
-        Select Case CboPendulum.SelectedIndex
-            Case 0
-                'Real Spring Pendulum
-                PendulumB = New ClsRealSpringPendulum
-            Case 1
-                'Spring Pendulum with Euler Explicit Approximation Method
-                PendulumB = New ClsForwardEuler
-            Case 2
-                'Spring Pendulum with Euler Implicit Approximation Method
-                PendulumB = New ClsBackwardEuler
-            Case 3
-                'Spring Pendulum with Midpoint Implicit Method
-                PendulumB = New ClsMidpointImplicit
-            Case 4
-                'Spring Pendulum with Runge Kutta 4 Method
-                PendulumB = New ClsRungeKutta4
-        End Select
+        'This sets the type of PendulumB by Reflection
 
-        'and the standard parameters for the pendulums are set:
-        SetDefaultParameters()
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(ISpringPendulum)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If CboPendulum.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = CboPendulum.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                        PendulumB = CType(Activator.CreateInstance(type), ISpringPendulum)
+                    End If
+                Next
+            End If
+
+        End If
+
         SetStepWidthAB(TrbStepWidth.Value)
 
         Reset()
@@ -310,6 +326,7 @@ Public Class FrmSpringPendulum
     End Sub
 
     Private Sub ChkStretched_CheckedChanged(sender As Object, e As EventArgs) Handles ChkStretched.CheckedChanged
+        SetStepWidthAB(TrbStepWidth.Value)
         Reset()
     End Sub
 

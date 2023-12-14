@@ -108,6 +108,61 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die C-Diagramm ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClassNameViolation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Ein Klassenname muss mit derm Prefic &apos;Cls&apos; starten und eine Länge &gt; 3 haben! ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsBackwardEuler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler Implizit ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsForwardEuler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Euler Explizit ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsLogisticGrowth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Logistisches Wachstum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsMidpointImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Implizite Mittelpunktsregel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsOvalBilliardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Ovales Billard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsParabola">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parabel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsRealSpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Reales Federpendel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsRungeKutta4">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsStadiumBilliardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsTentmap">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zeltabbildung ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ColoredDiagram">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Farbiges Diagramm ähnelt.
@@ -116,6 +171,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.CoordinatesStartpoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Startpunkt Koordinaten ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.CslEllipseBillardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Delta">
@@ -161,21 +221,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.Elliptic">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptisch ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.EllipticBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.EulerExplicit">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler Explizit ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.EulerImplicit">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Euler Implizit ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedParameterRange">
@@ -273,11 +318,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Log ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.LogisticGrowth">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Logistisches Wachstum ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsDE.LowerPendulumAngle">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Winkel des unteren Pendels ähnelt.
@@ -303,9 +343,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.MidpointImplicit">
+<member name="P:Simulator.My.Resources.LabelsDE.MissingImplementation">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Mittelpunkt Implizit ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Keine implementierende Klasse gefunden ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuBilliard">
@@ -518,16 +558,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.OvalBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Ovales Billard ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.Parabola">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Parabel ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Parameter">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
@@ -568,11 +598,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Präsentation ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.RealSpringPendulum">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Reales Federpendel ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Red">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Rot ähnelt.
@@ -591,11 +616,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Iteration zurücksetzen ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.RungeKutta4">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Sensitivity">
@@ -631,11 +651,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.Stadium">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadion ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.StadiumBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Billard im Stadion ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Start">
@@ -711,11 +726,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.TargetValue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Zielwert ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsDE.Tentmap">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Zeltabbildung ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.Test">
@@ -854,6 +864,61 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die C-Diagram ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClassNameViolation">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die A class name must start with the prefix &apos;Cls&apos; and have a length &gt; 3 at minimum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsBackwardEuler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Backward Euler ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsForwardEuler">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Forward Euler ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsLogisticGrowth">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Logistic Growth ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsMidpointImplicit">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Implicit Midpoint Rule ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsOvalBilliardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Oval Billiard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsParabola">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parabola ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsRealSpringPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Real Spring Pendulum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsRungeKutta4">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsStadiumBilliardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Stadium Billiard ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsTentmap">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Tentmap ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.ColoredDiagram">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Colored Diagram ähnelt.
@@ -862,6 +927,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.CoordinatesStartpoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Coordinates of the Startpoint ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.CslEllipticBilliardball">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Delta">
@@ -907,21 +977,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.Elliptic">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptic ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.EllipticBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.EulerExplicit">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Forward Euler ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.EulerImplicit">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Backward Euler ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -1019,11 +1074,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Log ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.LogisticGrowth">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Logistic Growth ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsEN.LowerPendulumAngle">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Angle of lower Pendulum ähnelt.
@@ -1046,12 +1096,12 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Dynamic Systems.pdf ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.MidpointImplicit">
+<member name="P:Simulator.My.Resources.LabelsEN.MissingImplementation">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Implicit Midpoint Rule ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Missing implementation class ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuBilliard">
@@ -1264,16 +1314,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Oval ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.OvalBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Oval Billiard ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.Parabola">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Parabola ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Parameter">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
@@ -1314,11 +1354,6 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Presentation ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.RealSpringPendulum">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Real Spring Pendulum ähnelt.
-</summary>
-</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Red">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Red ähnelt.
@@ -1337,11 +1372,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.ResetIteration">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Reset Iteration ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.RungeKutta4">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Runge Kutta 4 ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Sensitivity">
@@ -1377,11 +1407,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.Stadium">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadium ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.StadiumBilliard">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Stadium Billiard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Start">
@@ -1457,11 +1482,6 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.TargetValue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Targetvalue ähnelt.
-</summary>
-</member>
-<member name="P:Simulator.My.Resources.LabelsEN.Tentmap">
-<summary>
-  Sucht eine lokalisierte Zeichenfolge, die Tentmap ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Test">

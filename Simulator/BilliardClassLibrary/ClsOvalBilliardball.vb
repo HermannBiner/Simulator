@@ -102,6 +102,9 @@ Public Class ClsOvalBilliardball
         ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
         MyValueParameters.Add(ValueRange)
 
+        'Default
+        MyC = CDec(0.5)
+
     End Sub
 
     WriteOnly Property Billiardtable As PictureBox Implements IBilliardball.Billiardtable
@@ -118,7 +121,10 @@ Public Class ClsOvalBilliardball
         End Set
     End Property
 
-    WriteOnly Property C As Decimal Implements IBilliardball.C
+    Property C As Decimal Implements IBilliardball.C
+        Get
+            C = MyC
+        End Get
         Set(value As Decimal)
             MyC = value
 
@@ -139,12 +145,15 @@ Public Class ClsOvalBilliardball
         End Set
     End Property
 
-    WriteOnly Property CParameter As Decimal Implements ICDiagram.CParameter
+    Property CParameter As Decimal Implements ICDiagram.CParameter
+        Get
+            CParameter = MyC
+        End Get
         Set(value As Decimal)
             MyC = value
 
             'for better visibility, a + b is set = 1.9 (instead of 2)
-            a = CDec(1.9) * Math.Min(1 / (1 + MyC), 1 / (2 * MyC))
+            a = CDec(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
             b = MyC * a
             m = (a - b) / 2
 
@@ -266,6 +275,48 @@ Public Class ClsOvalBilliardball
             ValueParameters = MyValueParameters
         End Get
     End Property
+
+    Public Sub DrawBilliardTable() Implements IBilliardball.DrawBilliardtable
+
+        With MyMapBilliardtableGraphics
+            'Coordinate System
+            .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
+
+            'Special Points
+            'MidPoint of the Circle and the Ellipse
+            Dim Midpoint As New ClsMathpoint((a - b) / 2, 0)
+
+            'Focal Point of the Ellipse
+            Dim Focalpoint As ClsMathpoint
+            If a >= b Then
+                Focalpoint = New ClsMathpoint(Midpoint.X - CDec(Math.Sqrt(a * a - b * b)), 0) ''linker Brennpunkt
+            Else
+                Focalpoint = New ClsMathpoint(Midpoint.X, CDec(Math.Sqrt(b * b - a * a)))
+            End If
+
+            'Draw these points
+            .DrawPoint(Midpoint, Brushes.Blue, 2)
+            .DrawPoint(Focalpoint, Brushes.Blue, 2)
+
+            'Draw half-Circle
+            .DrawCircleArc(Midpoint, b, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+
+            'Draw half-Ellipse
+            'Rectangle for the Ellipse bottom-left
+            Dim BottomLeft As New ClsMathpoint(Midpoint.X - a, -b)
+
+            'Rectangle for the Ellipse top-right
+            Dim TopRight As New ClsMathpoint(Midpoint.X + a, b)
+
+            .DrawEllipticArc(BottomLeft, TopRight, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+        End With
+
+
+    End Sub
+
+    Public Sub ClearBilliardTable() Implements IBilliardball.ClearBilliardTable
+        MyMapBilliardtableGraphics.Clear(Color.White)
+    End Sub
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 
