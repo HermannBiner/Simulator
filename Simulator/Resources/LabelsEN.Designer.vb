@@ -821,7 +821,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Unimodal Functions ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;Growth Models ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MnuUnimodal() As String
             Get

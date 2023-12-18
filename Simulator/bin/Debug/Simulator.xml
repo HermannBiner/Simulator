@@ -470,7 +470,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuUnimodal">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;Unimodale Funktionen ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Wachstumsmodelle ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.NewBall">
@@ -1226,7 +1226,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuUnimodal">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;Unimodal Functions ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;Growth Models ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.NewBall">

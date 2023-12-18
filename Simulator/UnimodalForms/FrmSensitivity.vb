@@ -116,8 +116,6 @@ Public Class FrmSensitivity
         InitializeLanguage()
 
         'Default settings
-        CboFunction.SelectedIndex = 1
-        CboFunction.Select()
         CboIterationDepth.SelectedIndex = 0
         Iterator.Power = 1
 

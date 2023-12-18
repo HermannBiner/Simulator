@@ -111,8 +111,6 @@ Public Class FrmTwoDimensions
 
         'Default settings
         Diagramsize = Math.Min(PicDiagram.Width, PicDiagram.Height)
-        CboFunction.SelectedIndex = 1
-        CboFunction.Select()
 
         'additional Defaults
         SetDefaultValues()

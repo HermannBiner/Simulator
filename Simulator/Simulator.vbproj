@@ -302,6 +302,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dynamic Systems.pdf" />
     <None Include="Dynamische Systeme.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
