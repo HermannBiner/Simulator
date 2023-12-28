@@ -118,6 +118,8 @@ Public Class FrmIteration
             CboFunction.SelectedIndex = CboFunction.Items.Count - 1
             CboFunction.Select()
 
+            SetIterator()
+
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -125,10 +127,6 @@ Public Class FrmIteration
     End Sub
 
     Private Sub FrmIteration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'Set objects
-        Iterator = New ClsLogisticGrowth
-        MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
 
         'Because all iterations are in an interval that leads to a square coordinatesystem
         'the diagram (Bitmap or Picturebox) should be a square as well
@@ -140,7 +138,6 @@ Public Class FrmIteration
 
         'Default settings
         CboIterationDepth.SelectedIndex = 0
-        Iterator.Power = 1
 
         Presentation = PresentationEnum.Functionsgraph
         TxtXStretching.Visible = False
@@ -149,9 +146,6 @@ Public Class FrmIteration
 
         LblNumberOfSteps.Text = "0"
         n = 0
-
-        'additional default values
-        SetDefaultValues()
 
     End Sub
 
@@ -186,6 +180,11 @@ Public Class FrmIteration
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
+        SetIterator()
+
+    End Sub
+
+    Private Sub SetIterator()
         'This sets the type of Iterator by Reflection
 
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().

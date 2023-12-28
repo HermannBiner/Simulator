@@ -234,6 +234,7 @@ Public Class FrmBilliardtable
 
         'This sets the type of Billiardball by Reflection
         DefaultBilliardBall = GetBilliardBall()
+
         TxtFactor.Text = DefaultBilliardBall.C.ToString
 
         Reset()

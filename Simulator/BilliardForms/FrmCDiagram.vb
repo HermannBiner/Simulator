@@ -72,6 +72,7 @@ Public Class FrmCDiagram
         BtnStartIteration.Text = Main.LM.GetString("StartIteration")
 
         BtnReset.Text = Main.LM.GetString("ResetIteration")
+
         CboFunction.Items.Clear()
 
         'Add the classes implementing IBilliardBall
@@ -95,6 +96,8 @@ Public Class FrmCDiagram
             CboFunction.SelectedIndex = CboFunction.Items.Count - 1
             CboFunction.Select()
 
+            SetBilliardBall()
+
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -111,55 +114,49 @@ Public Class FrmCDiagram
         CDiagram = New Bitmap(PicDiagram.Width, PicDiagram.Height)
         PicDiagram.Image = CDiagram
 
-        'set the standard
-        Iterator = New ClsEllipseBilliardball
-
-        'Setting not by reference that the original CParameterRange of the Iterator is not changed
-        MyParameterRange = New ClsInterval(Iterator.CParameterRange.A, Iterator.CParameterRange.B)
-        MyValueParameters = Iterator.ValueParameters
-
-        CboValueParameter.Items.Clear()
-
-        For Each VP As ClsValueParameter In MyValueParameters
-            CboValueParameter.Items.Add(VP.Name)
-        Next
-
-        If CboValueParameter.SelectedIndex < 0 Then
-            If MyUserValueParameter Is Nothing Then
-                CboValueParameter.SelectedIndex = 1
-            Else
-                If MyUserValueParameter.Tag = 1 Then
-                    CboValueParameter.SelectedIndex = 0
-                Else
-                    CboValueParameter.SelectedIndex = 1
-                End If
-            End If
-        End If
-
         'Initialize Language
         InitializeLanguage()
-
-        'additional default settings
-        SetDefaultValues()
-
 
     End Sub
 
     Private Sub SetDefaultValues()
 
-        'Setting not by reference that the original ValueParameter of the Iterator is not changed
-        SetMyValueParameterByValue(MyValueParameters.Item(CboValueParameter.SelectedIndex))
+        If Iterator IsNot Nothing Then
 
-        MyParameterRange = New ClsInterval(Iterator.CParameterRange.A, Iterator.CParameterRange.B)
-        MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyUserValueParameter.Range)
+            'Setting not by reference that the original CParameterRange of the Iterator is not changed
+            MyParameterRange = New ClsInterval(Iterator.CParameterRange.A, Iterator.CParameterRange.B)
+            MyValueParameters = Iterator.ValueParameters
 
-        TxtCMin.Text = MyParameterRange.A.ToString(CultureInfo.CurrentCulture)
-        TxtCMax.Text = MyParameterRange.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            CboValueParameter.Items.Clear()
 
-        TxtVMin.Text = MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
-        TxtVMax.Text = MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            For Each VP As ClsValueParameter In MyValueParameters
+                CboValueParameter.Items.Add(VP.Name)
+            Next
+
+            If CboValueParameter.SelectedIndex < 0 Then
+                If MyUserValueParameter Is Nothing Then
+                    CboValueParameter.SelectedIndex = 1
+                Else
+                    If MyUserValueParameter.Tag = 1 Then
+                        CboValueParameter.SelectedIndex = 0
+                    Else
+                        CboValueParameter.SelectedIndex = 1
+                    End If
+                End If
+            End If
+
+            MyParameterRange = New ClsInterval(Iterator.CParameterRange.A, Iterator.CParameterRange.B)
+            MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyUserValueParameter.Range)
+
+            TxtCMin.Text = MyParameterRange.A.ToString(CultureInfo.CurrentCulture)
+            TxtCMax.Text = MyParameterRange.B.ToString(CultureInfo.CurrentCulture)
+            LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+
+            TxtVMin.Text = MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
+            TxtVMax.Text = MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
+            LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+
+        End If
 
         ResetIteration()
 
@@ -188,16 +185,19 @@ Public Class FrmCDiagram
 
         'The display is cleared
         'When loading the form, MyBitmapGraphics is maybe not inizialized
-        If Not IsNothing(MyBitmapGraphics) Then
-            MyBitmapGraphics.Clear(Color.White)
-        End If
+        MyBitmapGraphics?.Clear(Color.White)
 
         PicDiagram.Refresh()
 
     End Sub
 
-    Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
+    Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
+        SetBilliardBall()
+
+    End Sub
+
+    Private Sub SetBilliardBall()
         'This sets the type of BilliardBall by Reflection
 
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
@@ -220,18 +220,19 @@ Public Class FrmCDiagram
 
         'Reset ranges and Default Values
         SetDefaultValues()
-
     End Sub
 
-    Private Sub CboValueRange_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboValueParameter.SelectedIndexChanged
+    Private Sub CboValueParameter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboValueParameter.SelectedIndexChanged
 
         'The ValueParameter to be investigated
         'Setting not by reference that the original ValueParameter of the Iterator is not changed
-        SetMyValueParameterByValue(MyValueParameters.Item(CboValueParameter.SelectedIndex))
+        If MyValueParameters?.Count > 0 Then
+            SetMyValueParameterByValue(MyValueParameters.Item(CboValueParameter.SelectedIndex))
+        End If
 
-        TxtVMin.Text = MyUserValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
-        TxtVMax.Text = MyUserValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        TxtVMin.Text = MyUserValueParameter?.Range.A.ToString(CultureInfo.CurrentCulture)
+        TxtVMax.Text = MyUserValueParameter?.Range.B.ToString(CultureInfo.CurrentCulture)
+        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter?.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
     End Sub
 

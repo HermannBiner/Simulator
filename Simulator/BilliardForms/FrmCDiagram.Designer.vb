@@ -260,7 +260,7 @@ Partial Class FrmCDiagram
         Me.TrbPositionStartValues.Name = "TrbPositionStartValues"
         Me.TrbPositionStartValues.Size = New System.Drawing.Size(198, 45)
         Me.TrbPositionStartValues.TabIndex = 63
-        Me.TrbPositionStartValues.Value = 4
+        Me.TrbPositionStartValues.Value = 60
         '
         'FrmCDiagram
         '

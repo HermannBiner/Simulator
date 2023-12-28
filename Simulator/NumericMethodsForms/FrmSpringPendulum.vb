@@ -87,6 +87,48 @@ Public Class FrmSpringPendulum
 
     End Sub
 
+    Private Sub FrmSpringPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        'Initialize Bitmap
+        MyBitmap = New Bitmap(PicDiagram.Width, PicDiagram.Height)
+        PicDiagram.Image = MyBitmap
+
+        'Initialize GraphicTools
+        MyMathRange = New ClsInterval(CDec(-1), CDec(1))
+        MyPictureBoxDrawer = New ClsGraphicTool(PicDiagram, MyMathRange, MyMathRange)
+        MyBitmapDrawer = New ClsGraphicTool(MyBitmap, MyMathRange, MyMathRange)
+        MyBitmapDrawer.Clear(Color.White)
+
+        ''Draw the x-axis (time - axis) of the Coordinate System
+        'MyBitmapDrawer.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
+        'PicDiagram.Invalidate()
+
+        'Initialize Pendulums
+        InitializePendulums()
+
+        'Initialize Language
+        InitializeLanguage()
+
+    End Sub
+
+    'PendulumA is just a real Spring Pendulum
+    Private Sub InitializePendulums()
+
+        'PendulumA is always the real spring pendulum
+        PendulumA = New ClsRealSpringPendulum With {
+            .h = StepWidthA,
+            .NumberOfApproxSteps = 1
+        }
+
+        'pendulumB can be the real spring pendulum
+        'or any other pendulum definied by the numerical approximation method
+        PendulumB = New ClsRealSpringPendulum With {
+            .h = StepWidthB,
+            .NumberOfApproxSteps = 1
+        }
+
+    End Sub
+
     Private Sub InitializeLanguage()
 
         Text = Main.LM.GetString("SpringPendulum")
@@ -121,6 +163,8 @@ Public Class FrmSpringPendulum
             CboPendulum.SelectedIndex = CboPendulum.Items.Count - 1
             CboPendulum.Select()
 
+            SetPendulumB()
+
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -128,72 +172,21 @@ Public Class FrmSpringPendulum
 
     End Sub
 
-    Private Sub FrmSpringPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Sub SetStartParameters()
 
-        'Initialize Bitmap
-        MyBitmap = New Bitmap(PicDiagram.Width, PicDiagram.Height)
-        PicDiagram.Image = MyBitmap
-
-        'Initialize GraphicTools
-        MyMathRange = New ClsInterval(CDec(-1), CDec(1))
-        MyPictureBoxDrawer = New ClsGraphicTool(PicDiagram, MyMathRange, MyMathRange)
-        MyBitmapDrawer = New ClsGraphicTool(MyBitmap, MyMathRange, MyMathRange)
-        MyBitmapDrawer.Clear(Color.White)
-
-
-        'Initialize Language
-        InitializeLanguage()
-
-        'Initialize Pendulums
-        InitializePendulums()
-
-        'Draw the x-axis (time - axis) of the Coordinate System
-        MyBitmapDrawer.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
-
-        PicDiagram.Invalidate()
-
-
-    End Sub
-
-    'PendulumA is just a real Spring Pendulum
-    Private Sub InitializePendulums()
-
-        'PendulumA is always the real spring pendulum
-        PendulumA = New ClsRealSpringPendulum With {
-            .h = StepWidthA,
-            .NumberOfApproxSteps = 1
-        }
-
-        'pendulumB can be the real spring pendulum
-        'or any other pendulum definied by the numerical approximation method
-        PendulumB = New ClsRealSpringPendulum With {
-            .h = StepWidthB,
-            .NumberOfApproxSteps = 1
-        }
-
-        'The default values for the Start- and Actualparameters
-        'are set here:
-        SetDefaultParameters()
-
-        'and the pendulums are drawn in the default startposition
-        Drawpendulums(MyBitmapDrawer)
-
-    End Sub
-
-    Sub SetDefaultParameters()
-
-        'all default start parameters are zero
+        'Startparameter(0) is the velocity and this is = 0
+        'STartparameter(1) is the y-coordinate and this is set = 0.5 in the beginning
         If PendulumA IsNot Nothing Then
             With PendulumA
                 .StartParameter(0) = 0
-                .StartParameter(1) = 0
+                .StartParameter(1) = CDec(0.5)
             End With
         End If
 
         If PendulumB IsNot Nothing Then
             With PendulumB
                 .StartParameter(0) = 0
-                .StartParameter(1) = 0
+                .StartParameter(1) = CDec(0.5)
             End With
             If TypeOf PendulumB IsNot ClsRealSpringPendulum Then
                 PendulumB.StartParameter(2) = 0
@@ -272,6 +265,11 @@ Public Class FrmSpringPendulum
 
     Private Sub CboPendulum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPendulum.SelectedIndexChanged
 
+        SetPendulumB()
+
+    End Sub
+
+    Private Sub SetPendulumB()
         'This sets the type of PendulumB by Reflection
 
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
@@ -306,7 +304,7 @@ Public Class FrmSpringPendulum
 
         StopIteration = True
         InitializeIteration = True
-        PicDiagram.Refresh()
+        'PicDiagram.Refresh()
         LstValueList.Items.Clear()
         InitializeIteration = True
         BtnStart.Enabled = True
@@ -316,12 +314,13 @@ Public Class FrmSpringPendulum
         'before MyBitmapDrawer is initialized
         MyBitmapDrawer?.Clear(Color.White)
 
-        SetDefaultParameters()
-
-        Drawpendulums(MyPictureBoxDrawer)
+        SetStartParameters()
 
         'Coordinate System x-axis
-        MyPictureBoxDrawer?.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
+        MyBitmapDrawer?.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
+        PicDiagram.Refresh()
+
+        Drawpendulums(MyPictureBoxDrawer)
 
     End Sub
 
@@ -539,5 +538,9 @@ Public Class FrmSpringPendulum
 
         Return y
     End Function
+
+    Private Sub FrmSpringPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Reset()
+    End Sub
 
 End Class
