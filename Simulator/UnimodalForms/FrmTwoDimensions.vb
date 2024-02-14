@@ -89,8 +89,6 @@ Public Class FrmTwoDimensions
             CboFunction.SelectedIndex = CboFunction.Items.Count - 1
             CboFunction.Select()
 
-            SetIterator()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -100,21 +98,26 @@ Public Class FrmTwoDimensions
 
     Private Sub FrmZweidimensional_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        'set objects
+        'the same Iterator iterates the x- and y-values
+        Iterator = New ClsLogisticGrowth
+        MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
+
+        'Iteration Depth
+        Iterator.Power = Standardpower
+
         'Initialize Language
         InitializeLanguage()
 
         'Default settings
         Diagramsize = Math.Min(PicDiagram.Width, PicDiagram.Height)
 
+        'additional Defaults
+        SetDefaultValues()
+
     End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
-
-        SetIterator()
-
-    End Sub
-
-    Private Sub SetIterator()
 
         'This sets the type of Iterator by Reflection
 
@@ -141,8 +144,6 @@ Public Class FrmTwoDimensions
         MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
 
         TxtParameter.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
-
-        SetDefaultValues()
 
         ResetIteration()
 

@@ -37,9 +37,9 @@ Partial Class Main
         Me.MnuFeigenbaum = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuMechanics = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBilliard = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuCDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuNumericMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuPendulum = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuCDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuComplexIteration = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuFractals = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuJuliaSet = New System.Windows.Forms.ToolStripMenuItem()
@@ -134,7 +134,7 @@ Partial Class Main
         '
         'MnuMechanics
         '
-        Me.MnuMechanics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBilliard, Me.MnuNumericMethods, Me.MnuPendulum, Me.MnuCDiagram})
+        Me.MnuMechanics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBilliard, Me.MnuCDiagram, Me.MnuNumericMethods, Me.MnuPendulum})
         Me.MnuMechanics.Name = "MnuMechanics"
         Me.MnuMechanics.Size = New System.Drawing.Size(76, 22)
         Me.MnuMechanics.Text = "Mechanics"
@@ -142,27 +142,26 @@ Partial Class Main
         'MnuBilliard
         '
         Me.MnuBilliard.Name = "MnuBilliard"
-        Me.MnuBilliard.Size = New System.Drawing.Size(167, 22)
+        Me.MnuBilliard.Size = New System.Drawing.Size(180, 22)
         Me.MnuBilliard.Text = "Billiard"
+        '
+        'MnuCDiagram
+        '
+        Me.MnuCDiagram.Name = "MnuCDiagram"
+        Me.MnuCDiagram.Size = New System.Drawing.Size(180, 22)
+        Me.MnuCDiagram.Text = "CDiagramBilliard"
         '
         'MnuNumericMethods
         '
         Me.MnuNumericMethods.Name = "MnuNumericMethods"
-        Me.MnuNumericMethods.Size = New System.Drawing.Size(167, 22)
+        Me.MnuNumericMethods.Size = New System.Drawing.Size(180, 22)
         Me.MnuNumericMethods.Text = "NumericMethods"
         '
         'MnuPendulum
         '
         Me.MnuPendulum.Name = "MnuPendulum"
-        Me.MnuPendulum.Size = New System.Drawing.Size(167, 22)
+        Me.MnuPendulum.Size = New System.Drawing.Size(180, 22)
         Me.MnuPendulum.Text = "Pendulum"
-        Me.MnuPendulum.Visible = False
-        '
-        'MnuCDiagram
-        '
-        Me.MnuCDiagram.Name = "MnuCDiagram"
-        Me.MnuCDiagram.Size = New System.Drawing.Size(167, 22)
-        Me.MnuCDiagram.Text = "CDiagram"
         '
         'MnuComplexIteration
         '
@@ -230,7 +229,7 @@ Partial Class Main
         Me.Controls.Add(Me.MnuMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MnuMain
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Main"
         Me.Text = "Simulator"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

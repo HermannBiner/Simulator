@@ -1,9 +1,9 @@
 ﻿'This Form is the User Interface for all Investigations of different Billiards
 'like elliptic, stadium or oval
-'it is based on the interfaces IBilliardTable and IBilliardBall
+'it is based on the interfaces IBilliardBall
 'that are implemented by the according classes ClsEllipticBilliardTable, ClsEllipticBilliardBall, etc.
 'see mathematical documentation
-'if other Billiards are programmed, the according classes have just to implement these interfaces
+'if other Billiards are programmed, the according classes have just to implement this interface
 
 'Status Checked
 
@@ -53,7 +53,7 @@ Public Class FrmBilliardtable
         LblAlfa.Text = Main.LM.GetString("Alfa")
         BtnTakeOverStartParameter.Text = Main.LM.GetString("TakeOver")
         GrpStartParameter.Text = Main.LM.GetString("StartParameter")
-        LblPhasePortrait.Text = Main.LM.GetString("PhasePortrait")
+        LblPhasePortrait.Text = Main.LM.GetString("PhasePortrait") & ": t, alfa"
         LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
         LblBallColor.Text = Main.LM.GetString("BallColor")
         BtnNewBall.Text = Main.LM.GetString("NewBall")
@@ -110,7 +110,7 @@ Public Class FrmBilliardtable
         'and shows the Trace of each Ball
         'the movement of the Ball is shown in the PicBilliardTable and 
         'actualized by refreshing PicBilliardTable
-        'the Bitmap and PixDiagram are Squares
+        'the Bitmap and PicDiagram are Squares
         Dim Squareside As Integer = Math.Min(PicBilliardTable.Width, PicBilliardTable.Height)
         PicBilliardTable.Width = Squareside
         PicBilliardTable.Height = Squareside
@@ -234,7 +234,6 @@ Public Class FrmBilliardtable
 
         'This sets the type of Billiardball by Reflection
         DefaultBilliardBall = GetBilliardBall()
-
         TxtFactor.Text = DefaultBilliardBall.C.ToString
 
         Reset()
@@ -405,11 +404,13 @@ Public Class FrmBilliardtable
                 Billiardball.Startangle = alfa
                 Billiardball.IsStartangleSet = True
             End If
+
+            'The Mouse gets its normal behaviour again
+            Cursor = Cursors.Arrow
+            IsMousedown = False
+
         End If
 
-        'The Mouse gets its normal behaviour again
-        Cursor = Cursors.Arrow
-        IsMousedown = False
 
     End Sub
 

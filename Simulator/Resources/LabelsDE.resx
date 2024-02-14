@@ -165,6 +165,14 @@
     <value>Euler Implizit</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsCombinedPendulum" xml:space="preserve">
+    <value>Kombipendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsDoublePendulum" xml:space="preserve">
+    <value>Doppelpendel</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsForwardEuler" xml:space="preserve">
     <value>Euler Explizit</value>
     <comment>Cls</comment>
@@ -237,6 +245,10 @@
     <value>Das Dokument konnte nicht gefunden werden: </value>
     <comment>Msg</comment>
   </data>
+  <data name="DoublePendulumC" xml:space="preserve">
+    <value>Frequenzverhältnis</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="DrawBilliardTable" xml:space="preserve">
     <value>Zeichne Billardtisch</value>
     <comment>Lbl</comment>
@@ -251,6 +263,10 @@
   </data>
   <data name="Elliptic" xml:space="preserve">
     <value>Elliptisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Energy" xml:space="preserve">
+    <value>Gesamtenergie</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -305,6 +321,10 @@
     <value>Ungültiger Parameterwert oder Startwert</value>
     <comment>Msg</comment>
   </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Einige PArameterwerte sind ungültig</value>
+    <comment>Msg</comment>
+  </data>
   <data name="InvalidProtocolDigits" xml:space="preserve">
     <value>Das Protokoll kann nur die Zeichen 0 und 1 enthalten</value>
     <comment>Msg</comment>
@@ -345,6 +365,10 @@
     <value>Handbuch.pdf</value>
     <comment>Doc</comment>
   </data>
+  <data name="MassRatioM" xml:space="preserve">
+    <value>Massenverhältnis M</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="MathDoc" xml:space="preserve">
     <value>Dynamische Systeme.pdf</value>
     <comment>Doc</comment>
@@ -357,8 +381,8 @@
     <value>&amp;Billard</value>
     <comment>Mnu</comment>
   </data>
-  <data name="MnuCDiagram" xml:space="preserve">
-    <value>&amp;C-Diagramm</value>
+  <data name="MnuCDiagramBilliard" xml:space="preserve">
+    <value>&amp;C-DiagrammBillard</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuClose" xml:space="preserve">
@@ -534,7 +558,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="PhasePortrait" xml:space="preserve">
-    <value>Phasenportrait t, alfa</value>
+    <value>Phasenportrait</value>
     <comment>Lbl</comment>
   </data>
   <data name="PositionStartValue2" xml:space="preserve">
@@ -663,6 +687,10 @@
   </data>
   <data name="Test" xml:space="preserve">
     <value>Test</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TestMode" xml:space="preserve">
+    <value>Test Modus</value>
     <comment>Lbl</comment>
   </data>
   <data name="TheValue" xml:space="preserve">

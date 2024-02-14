@@ -37,7 +37,7 @@ Public Class Main
         MnuMechanics.Text = LM.GetString("MnuMechanics")
         MnuBilliard.Text = LM.GetString("MnuBilliard")
         MnuPendulum.Text = LM.GetString("MnuPendulum")
-        MnuCDiagram.Text = LM.GetString("MnuCDiagram")
+        MnuCDiagram.Text = LM.GetString("MnuCDiagramBilliard")
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuFractals.Text = LM.GetString("MnuFractals")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
@@ -99,12 +99,8 @@ Public Class Main
         FrmBilliardtable.Show()
     End Sub
 
-    Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
-        FrmSpringPendulum.Show()
-    End Sub
-
     Private Sub MnuPendulum_Click(sender As Object, e As EventArgs) Handles MnuPendulum.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
+        FrmPendulum.Show()
     End Sub
 
     Private Sub MnuJuliaSet_Click(sender As Object, e As EventArgs) Handles MnuJuliaSet.Click
@@ -120,7 +116,7 @@ Public Class Main
     End Sub
 
     Private Sub MnuCDiagram_Click(sender As Object, e As EventArgs) Handles MnuCDiagram.Click
-        FrmCDiagram.Show()
+        FrmCDiagramBilliard.Show()
     End Sub
 
     Private Sub MnuEnglish_Click(sender As Object, e As EventArgs) Handles MnuEnglish.Click
@@ -150,4 +146,7 @@ Public Class Main
         End If
     End Sub
 
+    Private Sub MnuNumericMethods_Click_1(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
+        FrmSpringPendulum.Show()
+    End Sub
 End Class

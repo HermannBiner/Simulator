@@ -191,6 +191,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Kombipendel ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ClsCombinedPendulum() As String
+            Get
+                Return ResourceManager.GetString("ClsCombinedPendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Doppelpendel ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ClsDoublePendulum() As String
+            Get
+                Return ResourceManager.GetString("ClsDoublePendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Euler Explizit ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ClsForwardEuler() As String
@@ -344,6 +362,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Frequenzverhältnis ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property DoublePendulumC() As String
+            Get
+                Return ResourceManager.GetString("DoublePendulumC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Zeichne Billardtisch ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property DrawBilliardTable() As String
@@ -376,6 +403,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Elliptic() As String
             Get
                 Return ResourceManager.GetString("Elliptic", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Energy() As String
+            Get
+                Return ResourceManager.GetString("Energy", resourceCulture)
             End Get
         End Property
         
@@ -497,6 +533,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Einige PArameterwerte sind ungültig ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property InvalidParameters() As String
+            Get
+                Return ResourceManager.GetString("InvalidParameters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Das Protokoll kann nur die Zeichen 0 und 1 enthalten ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property InvalidProtocolDigits() As String
@@ -587,6 +632,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Massenverhältnis M ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property MassRatioM() As String
+            Get
+                Return ResourceManager.GetString("MassRatioM", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property MathDoc() As String
@@ -614,11 +668,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;C-Diagramm ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die &amp;C-DiagrammBillard ähnelt.
         '''</summary>
-        Friend Shared ReadOnly Property MnuCDiagram() As String
+        Friend Shared ReadOnly Property MnuCDiagramBilliard() As String
             Get
-                Return ResourceManager.GetString("MnuCDiagram", resourceCulture)
+                Return ResourceManager.GetString("MnuCDiagramBilliard", resourceCulture)
             End Get
         End Property
         
@@ -1010,7 +1064,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Phasenportrait t, alfa ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Phasenportrait ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property PhasePortrait() As String
             Get
@@ -1294,6 +1348,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Test() As String
             Get
                 Return ResourceManager.GetString("Test", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Test Modus ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property TestMode() As String
+            Get
+                Return ResourceManager.GetString("TestMode", resourceCulture)
             End Get
         End Property
         

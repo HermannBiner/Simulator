@@ -98,8 +98,6 @@ Public Class FrmSensitivity
             CboFunction.SelectedIndex = CboFunction.Items.Count - 1
             CboFunction.Select()
 
-            SetIterator()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -110,19 +108,25 @@ Public Class FrmSensitivity
     Private Sub FrmSensitivity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set objects
+        Iterator = New ClsLogisticGrowth
         MathXIntervall = New ClsInterval(1, PicDiagram.Width)
+        MyGraphics = New ClsGraphicTool(PicDiagram, MathXIntervall, Iterator.IterationInterval)
 
         'Initialize Language
         InitializeLanguage()
 
         'Default settings
         CboIterationDepth.SelectedIndex = 0
+        Iterator.Power = 1
 
         Presentation = PresentationEnum.Difference
 
         'Number of Iteration Steps
         LblNumberOfSteps.Text = "0"
         n = 0
+
+        'additional Defaults
+        SetDefaultValues()
 
     End Sub
 
@@ -157,12 +161,6 @@ Public Class FrmSensitivity
     End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
-
-        SetIterator()
-
-    End Sub
-
-    Private Sub SetIterator()
 
         'This sets the type of Iterator by Reflection
 

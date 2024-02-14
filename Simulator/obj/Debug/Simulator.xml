@@ -118,6 +118,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Euler Implizit ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsCombinedPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Kombipendel ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ClsDoublePendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Doppelpendel ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ClsForwardEuler">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Euler Explizit ähnelt.
@@ -203,6 +213,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Das Dokument konnte nicht gefunden werden:  ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.DoublePendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Frequenzverhältnis ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.DrawBilliardTable">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Zeichne Billardtisch ähnelt.
@@ -221,6 +236,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.Elliptic">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptisch ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Energy">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ExaminatedParameterRange">
@@ -288,6 +308,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Ungültiger Parameterwert oder Startwert ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.InvalidParameters">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Einige PArameterwerte sind ungültig ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.InvalidProtocolDigits">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Das Protokoll kann nur die Zeichen 0 und 1 enthalten ähnelt.
@@ -338,6 +363,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Handbuch.pdf ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.MassRatioM">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Massenverhältnis M ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.MathDoc">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Dynamische Systeme.pdf ähnelt.
@@ -353,9 +383,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die &amp;Billard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsDE.MnuCDiagram">
+<member name="P:Simulator.My.Resources.LabelsDE.MnuCDiagramBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;C-Diagramm ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;C-DiagrammBillard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.MnuClose">
@@ -575,7 +605,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PhasePortrait">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Phasenportrait t, alfa ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Phasenportrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PositionStartValue2">
@@ -733,6 +763,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Test ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.TestMode">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Test Modus ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.TheValue">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Der Wert  ähnelt.
@@ -874,6 +909,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Backward Euler ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsCombinedPendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Combined Pendulum ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ClsDoublePendulum">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Double Pendulum ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.ClsForwardEuler">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Forward Euler ähnelt.
@@ -959,6 +1004,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die The document was not found:  ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.DoublePendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Frequency ratio ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.DrawBilliardTable">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Draw Billiard Table ähnelt.
@@ -977,6 +1027,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.Elliptic">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Elliptic ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Energy">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Total Energy ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ExaminatedParameterRange">
@@ -1044,6 +1099,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Invalid Parameter Value or Iteration Value! ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.InvalidParameters">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Some Parameters are invalid ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.InvalidProtocolDigits">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die The Protocol can only contain the Digits 0 and 1! ähnelt.
@@ -1094,6 +1154,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Manual.pdf ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.MassRatioM">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Mass ratio M ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.MathDoc">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Dynamic Systems.pdf ähnelt.
@@ -1109,9 +1174,9 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die &amp;Billiard ähnelt.
 </summary>
 </member>
-<member name="P:Simulator.My.Resources.LabelsEN.MnuCDiagram">
+<member name="P:Simulator.My.Resources.LabelsEN.MnuCDiagramBilliard">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die &amp;C-Diagram ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die &amp;C-DiagramBilliard ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.MnuClose">
@@ -1331,7 +1396,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PhasePortrait">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Phase Portrait t, alfa ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Phase Portrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PositionStartValue2">
@@ -1487,6 +1552,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.Test">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Test ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TestMode">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Test Mode ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.TheValue">

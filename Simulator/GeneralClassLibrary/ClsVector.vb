@@ -3,8 +3,10 @@
 
 Public Class ClsVector
     Private ReadOnly Components As Decimal()
+    Private MyDimension As Integer
 
     Public Sub New(N As Integer)
+        MyDimension = N
         ReDim Components(N)
     End Sub
 
@@ -15,6 +17,12 @@ Public Class ClsVector
         Set(value As Decimal)
             Components(index) = value
         End Set
+    End Property
+
+    Public ReadOnly Property Dimension As Integer
+        Get
+            Dimension = MyDimension
+        End Get
     End Property
 
 End Class

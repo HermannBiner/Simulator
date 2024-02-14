@@ -88,8 +88,6 @@ Public Class FrmFeigenbaum
             CboFunction.SelectedIndex = CboFunction.Items.Count - 1
             CboFunction.Select()
 
-            SetIterator()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
@@ -101,12 +99,16 @@ Public Class FrmFeigenbaum
         'Generate objects
         FeigenbaumDiagram = New Bitmap(PicDiagram.Width, PicDiagram.Height)
         PicDiagram.Image = FeigenbaumDiagram
+        Iterator = New ClsLogisticGrowth With {
+            .Power = 1
+        }
 
         'Initialize Language
         InitializeLanguage()
 
         'additional default settings
         SetDefaultValues()
+
 
     End Sub
 
@@ -143,20 +145,15 @@ Public Class FrmFeigenbaum
 
         'The display is cleared
         'When loading the form, MyBitmapGraphics is maybe not inizialized
-
-        MyBitmapGraphics?.Clear(Color.White)
+        If Not IsNothing(MyBitmapGraphics) Then
+            MyBitmapGraphics.Clear(Color.White)
+        End If
 
         PicDiagram.Refresh()
 
     End Sub
 
     Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
-
-        SetIterator()
-
-    End Sub
-
-    Private Sub SetIterator()
 
         'This sets the type of Iterator by Reflection
 

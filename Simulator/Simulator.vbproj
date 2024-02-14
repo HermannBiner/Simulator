@@ -130,11 +130,11 @@
     <Compile Include="BilliardClassLibrary\ClsOvalBilliardball.vb" />
     <Compile Include="BilliardClassLibrary\ClsStadiumBilliardball.vb" />
     <Compile Include="BilliardClassLibrary\IBilliardball.vb" />
-    <Compile Include="BilliardClassLibrary\ICDiagram.vb" />
-    <Compile Include="BilliardForms\FrmCDiagram.Designer.vb">
-      <DependentUpon>FrmCDiagram.vb</DependentUpon>
+    <Compile Include="BilliardClassLibrary\ICDiagramBilliard.vb" />
+    <Compile Include="BilliardForms\FrmCDiagramBilliard.Designer.vb">
+      <DependentUpon>FrmCDiagramBilliard.vb</DependentUpon>
     </Compile>
-    <Compile Include="BilliardForms\FrmCDiagram.vb">
+    <Compile Include="BilliardForms\FrmCDiagramBilliard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GeneralClassLibrary\ClsInterval.vb" />
@@ -170,6 +170,15 @@
       <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
     </Compile>
     <Compile Include="NumericMethodsForms\FrmSpringPendulum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PendulumClassLibrary\ClsDoublePendulum.vb" />
+    <Compile Include="PendulumClassLibrary\ClsMathHelperPendulum.vb" />
+    <Compile Include="PendulumClassLibrary\IPendulum.vb" />
+    <Compile Include="PendulumForms\FrmPendulum.Designer.vb">
+      <DependentUpon>FrmPendulum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PendulumForms\FrmPendulum.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Resources\LabelsDE.Designer.vb">
@@ -249,8 +258,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BilliardForms\FrmCDiagram.resx">
-      <DependentUpon>FrmCDiagram.vb</DependentUpon>
+    <EmbeddedResource Include="BilliardForms\FrmCDiagramBilliard.resx">
+      <DependentUpon>FrmCDiagramBilliard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralForms\FrmTests.resx">
       <DependentUpon>FrmTests.vb</DependentUpon>
@@ -260,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NumericMethodsForms\FrmSpringPendulum.resx">
       <DependentUpon>FrmSpringPendulum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PendulumForms\FrmPendulum.resx">
+      <DependentUpon>FrmPendulum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LabelsDE.resx">
       <Generator>ResXFileCodeGenerator</Generator>

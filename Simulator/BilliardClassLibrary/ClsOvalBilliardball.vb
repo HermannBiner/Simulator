@@ -13,7 +13,7 @@
 Imports System.Globalization
 
 Public Class ClsOvalBilliardball
-    Implements IBilliardball, ICDiagram
+    Implements IBilliardball, ICDiagramBilliard
 
     'The actual position of the Ball is drawn into this PictureBox
     'and shown by the Refresh-Method
@@ -145,7 +145,7 @@ Public Class ClsOvalBilliardball
         End Set
     End Property
 
-    Property CParameter As Decimal Implements ICDiagram.CParameter
+    Property CParameter As Decimal Implements ICDiagramBilliard.CParameter
         Get
             CParameter = MyC
         End Get
@@ -264,13 +264,13 @@ Public Class ClsOvalBilliardball
         End Set
     End Property
 
-    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagram.CParameterRange
+    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagramBilliard.CParameterRange
         Get
             CParameterRange = New ClsInterval(CDec(0.5), CDec(2))
         End Get
     End Property
 
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagram.ValueParameters
+    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagramBilliard.ValueParameters
         Get
             ValueParameters = MyValueParameters
         End Get
@@ -461,7 +461,7 @@ Public Class ClsOvalBilliardball
 
     End Sub
 
-    Public Function GetNextPoint(ActualPoint As ClsValuePair) As ClsValuePair Implements ICDiagram.GetNextPoint
+    Public Function GetNextPoint(ActualPoint As ClsValuePair) As ClsValuePair Implements ICDiagramBilliard.GetNextPoint
 
         MyT = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y

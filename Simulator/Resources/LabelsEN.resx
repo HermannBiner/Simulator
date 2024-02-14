@@ -165,6 +165,14 @@
     <value>Backward Euler</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsCombinedPendulum" xml:space="preserve">
+    <value>Combined Pendulum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsDoublePendulum" xml:space="preserve">
+    <value>Double Pendulum</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsForwardEuler" xml:space="preserve">
     <value>Forward Euler</value>
     <comment>Cls</comment>
@@ -237,6 +245,10 @@
     <value>The document was not found: </value>
     <comment>Msg</comment>
   </data>
+  <data name="DoublePendulumC" xml:space="preserve">
+    <value>Frequency ratio</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="DrawBilliardTable" xml:space="preserve">
     <value>Draw Billiard Table</value>
     <comment>Lbl</comment>
@@ -251,6 +263,10 @@
   </data>
   <data name="Elliptic" xml:space="preserve">
     <value>Elliptic</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Energy" xml:space="preserve">
+    <value>Total Energy</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
@@ -305,6 +321,10 @@
     <value>Invalid Parameter Value or Iteration Value!</value>
     <comment>Msg</comment>
   </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Some Parameters are invalid</value>
+    <comment>Msg</comment>
+  </data>
   <data name="InvalidProtocolDigits" xml:space="preserve">
     <value>The Protocol can only contain the Digits 0 and 1!</value>
     <comment>Msg</comment>
@@ -345,6 +365,10 @@
     <value>Manual.pdf</value>
     <comment>Doc</comment>
   </data>
+  <data name="MassRatioM" xml:space="preserve">
+    <value>Mass ratio M</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="MathDoc" xml:space="preserve">
     <value>Dynamic Systems.pdf</value>
     <comment>Doc</comment>
@@ -357,8 +381,8 @@
     <value>&amp;Billiard</value>
     <comment>Mnu</comment>
   </data>
-  <data name="MnuCDiagram" xml:space="preserve">
-    <value>&amp;C-Diagram</value>
+  <data name="MnuCDiagramBilliard" xml:space="preserve">
+    <value>&amp;C-DiagramBilliard</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuClose" xml:space="preserve">
@@ -534,7 +558,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="PhasePortrait" xml:space="preserve">
-    <value>Phase Portrait t, alfa</value>
+    <value>Phase Portrait</value>
     <comment>Lbl</comment>
   </data>
   <data name="PositionStartValue2" xml:space="preserve">
@@ -663,6 +687,10 @@
   </data>
   <data name="Test" xml:space="preserve">
     <value>Test</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TestMode" xml:space="preserve">
+    <value>Test Mode</value>
     <comment>Lbl</comment>
   </data>
   <data name="TheValue" xml:space="preserve">
