@@ -176,7 +176,7 @@ Public Class FrmSpringPendulum
         SetDefaultParameters()
 
         'and the pendulums are drawn in the default startposition
-        Drawpendulums(MyBitmapDrawer)
+        Drawpendulums(MyPictureBoxDrawer)
 
     End Sub
 
@@ -538,4 +538,7 @@ Public Class FrmSpringPendulum
         Return y
     End Function
 
+    Private Sub FrmSpringPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Reset()
+    End Sub
 End Class

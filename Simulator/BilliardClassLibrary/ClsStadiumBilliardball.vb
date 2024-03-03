@@ -77,6 +77,9 @@ Public Class ClsStadiumBilliardball
     Private MySize As Integer
     Private MySpeed As Integer = 5
 
+    'Size of the point in the phase portrait
+    Const p As Integer = 1
+
     'Start Position of the Ball, set by the User
     Private UserStartposition As ClsMathpoint
     Private UserEndposition As ClsMathpoint
@@ -696,7 +699,7 @@ Public Class ClsStadiumBilliardball
         'of the next part of the Orbit into the Phase Portrait
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
-            MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, 2)
+            MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
             MyParameterListbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
                                          MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterListbox.Refresh()

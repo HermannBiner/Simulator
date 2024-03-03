@@ -299,6 +299,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property CombinedPendulumC() As String
+            Get
+                Return ResourceManager.GetString("CombinedPendulumC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Startpunkt Koordinaten ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property CoordinatesStartpoint() As String
@@ -362,7 +371,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Frequenzverhältnis ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property DoublePendulumC() As String
             Get
@@ -475,6 +484,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FeigenbaumDiagram() As String
             Get
                 Return ResourceManager.GetString("FeigenbaumDiagram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Fülle Phasenportrait ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property FillPhasePortrait() As String
+            Get
+                Return ResourceManager.GetString("FillPhasePortrait", resourceCulture)
             End Get
         End Property
         
@@ -1195,6 +1213,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SpringPendulum() As String
             Get
                 Return ResourceManager.GetString("SpringPendulum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Frequenz Federpendel ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property SpringPendulumFrequency() As String
+            Get
+                Return ResourceManager.GetString("SpringPendulumFrequency", resourceCulture)
             End Get
         End Property
         

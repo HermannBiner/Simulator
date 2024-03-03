@@ -9,6 +9,7 @@
 
 Imports System.Globalization
 Imports System.Reflection
+Imports System.Threading
 
 Public Class FrmBilliardtable
 
@@ -29,6 +30,10 @@ Public Class FrmBilliardtable
     'Number of Steps
     Private n As Integer
 
+    'Iteration Control
+    Private StopIteration As Boolean
+    Private StopFillingPhasePortrait As Boolean
+
     'Properties of the Ball
     Private Ballcolor As Brush
 
@@ -47,8 +52,8 @@ Public Class FrmBilliardtable
     Private Sub InitializeLanguage()
 
         Text = Main.LM.GetString("Billiard")
-        BtnNext100.Text = Main.LM.GetString("Next100Steps")
-        LblNumber.Text = Main.LM.GetString("NumberOfSteps")
+        BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
+        LblNumberOfSteps.Text = Main.LM.GetString("NumberOfSteps")
         LblBilliardTable.Text = Main.LM.GetString("BilliardTable")
         LblAlfa.Text = Main.LM.GetString("Alfa")
         BtnTakeOverStartParameter.Text = Main.LM.GetString("TakeOver")
@@ -57,7 +62,7 @@ Public Class FrmBilliardtable
         LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
         LblBallColor.Text = Main.LM.GetString("BallColor")
         BtnNewBall.Text = Main.LM.GetString("NewBall")
-        BtnNext10.Text = Main.LM.GetString("Next10Steps")
+        BtnStart.Text = Main.LM.GetString("Start")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         BtnNextStep.Text = Main.LM.GetString("NextStep")
         LblParameterc.Text = Main.LM.GetString("FactorC")
@@ -169,7 +174,15 @@ Public Class FrmBilliardtable
         LstParameterList.Items.Clear()
 
         n = 0
-        LblNumberofSteps.Text = "0"
+        LblIterationSteps.Text = "0"
+        StopIteration = True
+        BtnStart.Text = Main.LM.GetString("Start")
+        StopFillingPhasePortrait = True
+        BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
+
+        BtnDrawBilliardTable.Enabled = True
+        BtnNewBall.Enabled = True
+        BtnNextStep.Enabled = True
 
     End Sub
 
@@ -469,23 +482,58 @@ Public Class FrmBilliardtable
 
     'SECTOR ITERATION
 
-    Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
-        Iteration(1)
+    Private Async Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
+
+        If IsIterationReady() Then
+            Await Iteration(1)
+        Else
+            'Message already generated
+        End If
+
     End Sub
 
-    Private Sub BtnNext10_Click(sender As Object, e As EventArgs) Handles BtnNext10.Click
-        Iteration(10)
+    Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+
+        If IsIterationReady() Then
+
+            If StopIteration Then
+
+                'the iteration was stopped or reseted
+                'and should start from the beginning
+                BtnStart.Text = Main.LM.GetString("Stop")
+                BtnReset.Enabled = False
+                BtnTakeOverStartParameter.Enabled = False
+                StopIteration = False
+                BtnDrawBilliardTable.Enabled = False
+                BtnNewBall.Enabled = False
+                BtnNextStep.Enabled = False
+
+                Await Iteration(0)
+
+            Else
+
+                'the iteration is running and should be stopped
+                BtnStart.Text = Main.LM.GetString("Continue")
+                BtnReset.Enabled = True
+                BtnTakeOverStartParameter.Enabled = True
+                StopIteration = True
+
+            End If
+
+        Else
+
+            'Message already generated
+
+        End If
+
     End Sub
 
-    Private Sub BtnNext100_Click(sender As Object, e As EventArgs) Handles BtnNext100.Click
+    Private Async Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
 
-        BtnNext100.Enabled = False
-        BtnReset.Enabled = False
 
-        Iteration(100)
+        'manage buttons ToDo
 
-        BtnNext100.Enabled = True
-        BtnReset.Enabled = True
+        Await FillPhasePortrait()
 
     End Sub
 
@@ -498,36 +546,70 @@ Public Class FrmBilliardtable
 
     End Sub
 
-    Private Sub Iteration(NumberOfSteps As Integer)
+    Private Function IsIterationReady() As Boolean
+
+        Dim LocIsReady As Boolean = True
 
         If MyBilliardballCollection.Count > 0 Then
-            PicBilliardTable.Refresh()
-
-            Dim IsIteration As Boolean = False
-
             For Each Ball As IBilliardball In MyBilliardballCollection
                 If Ball.IsStartpositionSet And Ball.IsStartangleSet Then
-                    Ball.Iteration(NumberOfSteps)
-                    LblNumber.Text = Main.LM.GetString("NumberOfSteps")
-                    IsIteration = True
+                    'nothing
                 Else
-                    If IsFirstIterationstep Then
-                        MessageBox.Show(Main.LM.GetString("StartPositionNotSet"))
-                        MessageBox.Show(Main.LM.GetString("SetStartPosition"))
-                        IsFirstIterationstep = False
-                    End If
+                    MessageBox.Show(Main.LM.GetString("StartPositionNotSet"))
+                    LocIsReady = False
                 End If
             Next
-
-            If IsIteration Then
-                n += NumberOfSteps
-                LblNumberofSteps.Text = n.ToString(CultureInfo.CurrentCulture)
-            End If
         Else
             MessageBox.Show(Main.LM.GetString("NoBallsOnTable"))
+            LocIsReady = False
         End If
 
-    End Sub
+        If LocIsReady Then
+            PicBilliardTable.Refresh()
+        End If
+
+        Return LocIsReady
+
+    End Function
+
+    Private Async Function FillPhasePortrait() As Task
+        Do
+
+            n += 1
+            LblIterationSteps.Text = n.ToString(CultureInfo.CurrentCulture)
+
+            'Here, the filling must be implemented
+
+            If n Mod 5 = 0 Then
+                Await Task.Delay(2)
+            End If
+
+        Loop Until StopFillingPhasePortrait
+
+
+    End Function
+
+    Private Async Function Iteration(NumberOfSteps As Integer) As Task
+
+        Do
+            n += 1
+            LblIterationSteps.Text = n.ToString(CultureInfo.CurrentCulture)
+
+            'If NumberOfSteps is > 0, then the iteration stops after NumberOfSteps
+            If n = NumberOfSteps Then StopIteration = True
+
+            'Each Ball is now iterated 1x
+            For Each Ball As IBilliardball In MyBilliardballCollection
+                Ball.Iteration(1)
+            Next
+
+            If n Mod 5 = 0 Then
+                Await Task.Delay(2)
+            End If
+
+        Loop Until StopIteration
+
+    End Function
 
     Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
         LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString

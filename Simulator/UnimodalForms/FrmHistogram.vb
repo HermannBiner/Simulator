@@ -27,6 +27,9 @@ Public Class FrmHistogram
     'Number of Iteration Steps
     Private n As Integer
 
+    'Iteration Control
+    Private StopIteration As Boolean
+
     'Actual value of the iteration
     Private x As Decimal
 
@@ -51,7 +54,7 @@ Public Class FrmHistogram
         Text = Main.LM.GetString("Histogram")
         LblSteps.Text = Main.LM.GetString("NumberOfSteps")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
-        BtnNextSteps.Text = Main.LM.GetString("Next100Steps")
+        BtnStart.Text = Main.LM.GetString("Start")
         LblStartValue.Text = Main.LM.GetString("StartValue") & " ="
         LblParameter.Text = Main.LM.GetString("Parameter") & " = "
         CboFunction.Items.Clear()
@@ -101,6 +104,7 @@ Public Class FrmHistogram
         'Number of Iteration Steps
         LblNumberOfSteps.Text = "0"
         n = 0
+        StopIteration = True
 
         'additional default values
         SetDefaultValues()
@@ -130,6 +134,9 @@ Public Class FrmHistogram
         'Reset Number of Steps
         n = 0
         LblNumberOfSteps.Text = "0"
+        StopIteration = True
+
+        BtnStart.Text = Main.LM.GetString("Start")
 
         'and Number of Hits
         ReDim NumberOfHits(PicDiagram.Width)
@@ -221,16 +228,9 @@ Public Class FrmHistogram
 
     'SECTOR HISTOGRAM
 
-    Private Sub BtnNextSteps_Click(sender As Object, e As EventArgs) Handles BtnNextSteps.Click
+    Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
         'Generates and draws the histogram
-
-        'Counter for the number of the iteration steps of each process (500 steps)
-        Dim i As Integer
-
-        'p is the pixel coordinate of the x-axis and the number of the interval that is hit
-        Dim p As Integer
-
 
         If n = 0 Then
 
@@ -253,41 +253,76 @@ Public Class FrmHistogram
 
         If IsInitialized Then
 
-            'Iteration of 500 steps
-            For i = 1 To 500
+            If StopIteration Then
 
-                'calculating the location of the interval that is hit
-                p = CInt((x - Iterator.IterationInterval.A) * PicDiagram.Width _
-                    / Iterator.IterationInterval.IntervalWidth)
+                'the iteration was stopped or reseted
+                BtnStart.Text = Main.LM.GetString("Stop")
+                BtnReset.Enabled = False
+                StopIteration = False
 
-                'and increasing the number of hits for this interval
-                NumberOfHits(p) += 1
+                'Iteration loop
 
-                'increasing the number of iteration steps
-                n += 1
-                LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
+                Await IterationLoop()
 
-                'Next step of the iteration
-                x = Iterator.FN(x)
+            Else
+                'the iteration is running and should be stopped
 
-            Next
+                BtnStart.Text = Main.LM.GetString("Continue")
+                BtnReset.Enabled = True
+                StopIteration = True
 
-            'Clear the display
-            MyGraphics.Clear(Color.White)
+            End If
 
-            'and redraw the actualized histogram
-            Dim Brush = Brushes.CadetBlue
-            For i = 1 To PicDiagram.Width
-
-                Dim A As New ClsMathpoint(i - 1, 0)
-                Dim B As New ClsMathpoint(i, NumberOfHits(i))
-                MyGraphics.FillRectangle(A, B, Brush)
-            Next
         Else
             'there is already a message generated
             SetDefaultValues()
+
         End If
 
+
+
     End Sub
+
+    Private Async Function IterationLoop() As Task
+
+        'p is the pixel coordinate of the x-axis and the number of the interval that is hit
+        Dim p As Integer
+
+        Do
+
+            'calculating the location of the interval that is hit
+            p = CInt((x - Iterator.IterationInterval.A) * PicDiagram.Width _
+                / Iterator.IterationInterval.IntervalWidth)
+
+            'and increasing the number of hits for this interval
+            NumberOfHits(p) += 1
+
+            'increasing the number of iteration steps
+            n += 1
+            LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
+
+            'Next step of the iteration
+            x = Iterator.FN(x)
+
+            If n Mod 100 = 0 Then
+                'Clear the display
+                MyGraphics.Clear(Color.White)
+
+                'and redraw the actualized histogram
+                Dim Brush = Brushes.CadetBlue
+                For i = 1 To PicDiagram.Width
+
+                    Dim A As New ClsMathpoint(i - 1, 0)
+                    Dim B As New ClsMathpoint(i, NumberOfHits(i))
+                    MyGraphics.FillRectangle(A, B, Brush)
+                Next
+
+                Await Task.Delay(2)
+
+            End If
+
+        Loop Until StopIteration
+
+    End Function
 
 End Class

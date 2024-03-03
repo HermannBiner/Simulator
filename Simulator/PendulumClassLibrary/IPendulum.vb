@@ -26,13 +26,19 @@ Public Interface IPendulum
     ReadOnly Property LabelParameterC As String
 
     'To set the parameters of the TrbAdditionalParameter
-    ReadOnly Property SetAdditionalParameter As ClsValueParameter
+    ReadOnly Property AdditionalParameter As ClsValueParameter
+
+    'The total Energy of the Pendulum
+    ReadOnly Property Energy As Decimal
+
+    'The Interval of the StartEnergy
+    ReadOnly Property StartEnergyRange As ClsInterval
 
     'contains the value of the trackbar TrbAdditionalParameter
-    WriteOnly Property AdditionalParameter As Integer
+    WriteOnly Property AdditionalParameterValue As Integer
 
     'The parameter C for the C-DiagraM
-    Property C As Decimal
+    ReadOnly Property C As Decimal
 
     'The constant parameters
     Property Constants As ClsVector
@@ -41,7 +47,7 @@ Public Interface IPendulum
     Property Variables As ClsVector
 
     'To Calculate the Mass Ratio out of the Trackbar Value
-    Function CalcMfromTrbAddParameter(TbrValue As Integer) As Decimal
+    Function CalcValuefromTrbAddParameter(TbrValue As Integer) As Decimal
 
     Sub DrawPendulum()
 

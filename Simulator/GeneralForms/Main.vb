@@ -146,7 +146,7 @@ Public Class Main
         End If
     End Sub
 
-    Private Sub MnuNumericMethods_Click_1(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
+    Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
         FrmSpringPendulum.Show()
     End Sub
 End Class

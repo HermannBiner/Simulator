@@ -28,7 +28,7 @@ Partial Class FrmHistogram
         Me.LblParameter = New System.Windows.Forms.Label()
         Me.TxtStartValue = New System.Windows.Forms.TextBox()
         Me.LblStartValue = New System.Windows.Forms.Label()
-        Me.BtnNextSteps = New System.Windows.Forms.Button()
+        Me.BtnStart = New System.Windows.Forms.Button()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.LblNumberOfSteps = New System.Windows.Forms.Label()
         Me.LblSteps = New System.Windows.Forms.Label()
@@ -64,7 +64,7 @@ Partial Class FrmHistogram
         Me.LblParameter.Name = "LblParameter"
         Me.LblParameter.Size = New System.Drawing.Size(139, 26)
         Me.LblParameter.TabIndex = 11
-        Me.LblParameter.Text = "Parameter" & " = "
+        Me.LblParameter.Text = "Parameter = "
         '
         'TxtStartValue
         '
@@ -81,20 +81,20 @@ Partial Class FrmHistogram
         Me.LblStartValue.Location = New System.Drawing.Point(1281, 155)
         Me.LblStartValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblStartValue.Name = "LblStartValue"
-        Me.LblStartValue.Size = New System.Drawing.Size(129, 26)
+        Me.LblStartValue.Size = New System.Drawing.Size(133, 26)
         Me.LblStartValue.TabIndex = 13
-        Me.LblStartValue.Text = "StartValue" & " ="
+        Me.LblStartValue.Text = "StartValue ="
         '
-        'BtnNextSteps
+        'BtnStart
         '
-        Me.BtnNextSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnNextSteps.Location = New System.Drawing.Point(1287, 272)
-        Me.BtnNextSteps.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnNextSteps.Name = "BtnNextSteps"
-        Me.BtnNextSteps.Size = New System.Drawing.Size(341, 61)
-        Me.BtnNextSteps.TabIndex = 18
-        Me.BtnNextSteps.Text = "Next100Steps"
-        Me.BtnNextSteps.UseVisualStyleBackColor = True
+        Me.BtnStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnStart.Location = New System.Drawing.Point(1287, 272)
+        Me.BtnStart.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnStart.Name = "BtnStart"
+        Me.BtnStart.Size = New System.Drawing.Size(341, 61)
+        Me.BtnStart.TabIndex = 18
+        Me.BtnStart.Text = "Start"
+        Me.BtnStart.UseVisualStyleBackColor = True
         '
         'BtnReset
         '
@@ -124,7 +124,7 @@ Partial Class FrmHistogram
         Me.LblSteps.Location = New System.Drawing.Point(1281, 219)
         Me.LblSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblSteps.Name = "LblSteps"
-        Me.LblSteps.Size = New System.Drawing.Size(176, 26)
+        Me.LblSteps.Size = New System.Drawing.Size(169, 26)
         Me.LblSteps.TabIndex = 27
         Me.LblSteps.Text = "NumberOfSteps"
         '
@@ -146,7 +146,7 @@ Partial Class FrmHistogram
         Me.Controls.Add(Me.CboFunction)
         Me.Controls.Add(Me.LblNumberOfSteps)
         Me.Controls.Add(Me.LblSteps)
-        Me.Controls.Add(Me.BtnNextSteps)
+        Me.Controls.Add(Me.BtnStart)
         Me.Controls.Add(Me.BtnReset)
         Me.Controls.Add(Me.TxtStartValue)
         Me.Controls.Add(Me.LblStartValue)
@@ -170,7 +170,7 @@ Partial Class FrmHistogram
     Friend WithEvents LblParameter As Label
     Friend WithEvents TxtStartValue As TextBox
     Friend WithEvents LblStartValue As Label
-    Friend WithEvents BtnNextSteps As Button
+    Friend WithEvents BtnStart As Button
     Friend WithEvents BtnReset As Button
     Friend WithEvents LblNumberOfSteps As Label
     Friend WithEvents LblSteps As Label

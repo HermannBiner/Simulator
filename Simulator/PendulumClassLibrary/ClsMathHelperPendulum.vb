@@ -6,16 +6,25 @@ Public Class ClsMathHelperPendulum
         'Calculation of the Angle between the negative Y-axis and the Pendulum-Axis
         Dim Phi As Decimal
 
-        Select Case True
-            Case X >= 0 And Y < 0
-                Phi = CDec(Math.Atan(Math.Abs(X / Y)))
-            Case X <= 0 And Y > 0
-                Phi = CDec(Math.Atan(Math.Abs(X / Y)) - Math.PI)
-            Case X > 0 And Y >= 0
-                Phi = CDec(Math.Atan(Math.Abs(Y / X)) + Math.PI / 2)
-            Case Else
-                Phi = CDec(Math.Atan(Math.Abs(Y / X)) - Math.PI / 2)
-        End Select
+        If Y = 0 Then
+            If X > 0 Then
+                Phi = CDec(Math.PI / 2)
+            Else
+                Phi = -CDec(Math.PI / 2)
+            End If
+        Else
+            Dim alfa As Decimal = -CDec(Math.Atan(X / Y))
+
+            Select Case True
+                Case Y < 0
+                    Phi = alfa
+                Case X < 0 And Y > 0
+                    Phi = alfa - CDec(Math.PI)
+                Case Else 'x > 0, y > 0
+                    Phi = alfa + CDec(Math.PI)
+            End Select
+
+        End If
 
         Return Phi
 
@@ -28,13 +37,15 @@ Public Class ClsMathHelperPendulum
 
         Dim Tempangle As Decimal = angle
 
-        'Make sure that angle is >= -Pi
+        'Make sure that angle is > -Pi
         Do Until Tempangle > -CDec(Math.PI)
             Tempangle = CDec(Tempangle + Math.PI * 2)
         Loop
 
-        'If Angle was > pi from the beginning
-        Tempangle = CDec(Tempangle Mod (Math.PI))
+        'Make sure that angle is <= pi
+        Do Until Tempangle <= CDec(Math.PI)
+            Tempangle = CDec(Tempangle - Math.PI * 2)
+        Loop
 
         Return Tempangle
 

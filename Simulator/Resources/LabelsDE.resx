@@ -213,6 +213,10 @@
     <value>Farbiges Diagramm</value>
     <comment>Lbl</comment>
   </data>
+  <data name="CombinedPendulumC" xml:space="preserve">
+    <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Fortsetzen</value>
     <comment>Lbl</comment>
@@ -246,7 +250,7 @@
     <comment>Msg</comment>
   </data>
   <data name="DoublePendulumC" xml:space="preserve">
-    <value>Frequenzverhältnis</value>
+    <value>Gesamtenergie</value>
     <comment>Lbl</comment>
   </data>
   <data name="DrawBilliardTable" xml:space="preserve">
@@ -295,6 +299,10 @@
   </data>
   <data name="FeigenbaumDiagram" xml:space="preserve">
     <value>Feigenbaum Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="FillPhasePortrait" xml:space="preserve">
+    <value>Fülle Phasenportrait</value>
     <comment>Lbl</comment>
   </data>
   <data name="FunctionGraph" xml:space="preserve">
@@ -616,6 +624,10 @@
   <data name="SpringPendulum" xml:space="preserve">
     <value>Federpendel und numerische Methoden</value>
     <comment>lbl</comment>
+  </data>
+  <data name="SpringPendulumFrequency" xml:space="preserve">
+    <value>Frequenz Federpendel</value>
+    <comment>Lbl</comment>
   </data>
   <data name="Stadium" xml:space="preserve">
     <value>Stadion</value>

@@ -178,6 +178,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Farbiges Diagramm ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.CombinedPendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.CoordinatesStartpoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Startpunkt Koordinaten ähnelt.
@@ -215,7 +220,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.DoublePendulumC">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Frequenzverhältnis ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Gesamtenergie ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.DrawBilliardTable">
@@ -276,6 +281,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.FeigenbaumDiagram">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Feigenbaum Diagramm ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.FillPhasePortrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Fülle Phasenportrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.FunctionGraph">
@@ -678,6 +688,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Federpendel und numerische Methoden ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.SpringPendulumFrequency">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Frequenz Federpendel ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Stadium">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stadion ähnelt.
@@ -969,6 +984,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Colored Diagram ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.CombinedPendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Total Energy ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.CoordinatesStartpoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Coordinates of the Startpoint ähnelt.
@@ -1006,7 +1026,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.DoublePendulumC">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Frequency ratio ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Energy total ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.DrawBilliardTable">
@@ -1067,6 +1087,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.FeigenbaumDiagram">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Feigenbaum Diagram ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.FillPhasePortrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Fill Phase Portrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.FunctionGraph">
@@ -1467,6 +1492,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.SpringPendulum">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Spring Pendulum and Numerical Methods ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.SpringPendulumFrequency">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Frequency Spring Pendulum ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.Stadium">
