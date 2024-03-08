@@ -500,10 +500,10 @@ Public Class FrmBilliardtable
 
                 'the iteration was stopped or reseted
                 'and should start from the beginning
+                StopIteration = False
                 BtnStart.Text = Main.LM.GetString("Stop")
                 BtnReset.Enabled = False
                 BtnTakeOverStartParameter.Enabled = False
-                StopIteration = False
                 BtnDrawBilliardTable.Enabled = False
                 BtnNewBall.Enabled = False
                 BtnNextStep.Enabled = False
@@ -513,10 +513,10 @@ Public Class FrmBilliardtable
             Else
 
                 'the iteration is running and should be stopped
+                StopIteration = True
                 BtnStart.Text = Main.LM.GetString("Continue")
                 BtnReset.Enabled = True
                 BtnTakeOverStartParameter.Enabled = True
-                StopIteration = True
 
             End If
 

@@ -18,6 +18,7 @@ Public Class ClsDoublePendulum
     'and shown by the Refresh-Method
     Private MyPictureBox As PictureBox
     Private MyPictureboxGraphics As ClsGraphicTool
+
     'The permanent Track of the Pendulum is drawn into the BitMap
     Private MyBitmap As Bitmap
     Private MyBitmapGraphics As ClsGraphicTool
@@ -100,7 +101,10 @@ Public Class ClsDoublePendulum
     Private IsTestMode As Boolean
 
     'Gravitation acceleration
-    Const g As Decimal = CDec(10)
+    Const g As Decimal = CDec(9.81)
+
+    'Level of the x-Axis in the Diagram as math. y-Coordinate
+    Const MyY0 As Decimal = 0
 
     'SECTOR INITIALIZATION
 
@@ -144,6 +148,7 @@ Public Class ClsDoublePendulum
 
         'Calculates mass ratio M = m2/m1
         MyM = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
+        Mu = MyM / (1 + MyM)
 
         'Vectors
         'We have two constant parameters: L1 = .Component(0), L2 = Component(1)
@@ -167,6 +172,8 @@ Public Class ClsDoublePendulum
             u2 = .Component(1)
             v2 = 0
         End With
+
+        SetStartenergyRange()
 
         'For the Double Pendulum is the Factor C 
         'the Energy
@@ -203,6 +210,12 @@ Public Class ClsDoublePendulum
         End Set
     End Property
 
+    ReadOnly Property Y0 As Decimal Implements IPendulum.Y0
+        Get
+            Y0 = MyY0
+        End Get
+    End Property
+
     WriteOnly Property MapPendulum As Bitmap Implements IPendulum.MapPendulum
         Set(value As Bitmap)
             MyBitmap = value
@@ -214,7 +227,7 @@ Public Class ClsDoublePendulum
         Set(value As PictureBox)
             MyPhaseportrait = value
             Dim UInterval = New ClsInterval(-CDec(Math.PI), CDec(Math.PI))
-            Dim VInterval = New ClsInterval(-8, 8)
+            Dim VInterval = New ClsInterval(-10, 10)
             MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, UInterval, VInterval)
         End Set
     End Property
@@ -264,6 +277,7 @@ Public Class ClsDoublePendulum
             'Factor Mu in Differential Equations
             Mu = MyM / (1 + MyM)
             SetPendulumSize()
+            SetStartenergyRange()
         End Set
     End Property
 
@@ -357,6 +371,18 @@ Public Class ClsDoublePendulum
         Return Temp
 
     End Function
+
+    Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
+
+        If MyBitmapGraphics IsNot Nothing Then
+            ClearBitmap()
+            'x-Axis
+            MyBitmapGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Aquamarine, 1)
+            'y-Axis
+            MyBitmapGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
+        End If
+
+    End Sub
 
     Public Sub DrawPendulum() Implements IPendulum.DrawPendulum
 
@@ -683,8 +709,6 @@ Public Class ClsDoublePendulum
         Dim EKin As Decimal
         Dim EPot As Decimal
         Dim Etotal As Decimal
-
-        SetStartenergyRange()
 
         With Constants
             'we set as norm m1 = 1, m2 = M

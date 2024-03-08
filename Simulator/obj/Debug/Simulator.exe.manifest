@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5681088">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Simulator.exe" size="5683136">
       <assemblyIdentity name="Simulator" version="3.0.0.2" publicKeyToken="0C1F5579C1838C03" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iCAaH5eCcA8Bys4HCiCzog45WXMCtU0qhGONEkVS9Ns=</dsig:DigestValue>
+        <dsig:DigestValue>fOm5DhfRlvcTUZvYYNojj2e9jvWiWIYYsDGNzbuwT4Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

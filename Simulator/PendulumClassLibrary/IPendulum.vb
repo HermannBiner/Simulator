@@ -11,6 +11,8 @@ Public Interface IPendulum
 
     WriteOnly Property MapPendulum As Bitmap
 
+    ReadOnly Property Y0 As Decimal
+
     'in addtion, the ball protocols its movement in a phase portrait
     WriteOnly Property Phaseportrait As PictureBox
 
@@ -48,6 +50,8 @@ Public Interface IPendulum
 
     'To Calculate the Mass Ratio out of the Trackbar Value
     Function CalcValuefromTrbAddParameter(TbrValue As Integer) As Decimal
+
+    Sub DrawCoordinateSystem()
 
     Sub DrawPendulum()
 

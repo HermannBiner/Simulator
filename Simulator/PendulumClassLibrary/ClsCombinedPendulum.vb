@@ -9,6 +9,7 @@
 
 Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Linq.Expressions
 
 Public Class ClsCombinedPendulum
     Implements IPendulum
@@ -17,6 +18,7 @@ Public Class ClsCombinedPendulum
     'and shown by the Refresh-Method
     Private MyPictureBox As PictureBox
     Private MyPictureboxGraphics As ClsGraphicTool
+
     'The permanent Track of the Pendulum is drawn into the BitMap
     Private MyBitmap As Bitmap
     Private MyBitmapGraphics As ClsGraphicTool
@@ -92,7 +94,14 @@ Public Class ClsCombinedPendulum
     Const g As Decimal = CDec(9.81)
 
     'Length of unstressed Spring
-    Const StartL As Decimal = CDec(0.1)
+    Const StartL As Decimal = CDec(0.5)
+
+    'Minimal length of the spring pendulum
+    Const Lmin As Decimal = CDec(0.05)
+
+    'Level of the x-Axis in the Diagram as math. y-Coordinate
+    'y0 in math. dok.
+    Private MyY0 As Decimal
 
     'SECTOR INITIALIZATION
 
@@ -102,45 +111,56 @@ Public Class ClsCombinedPendulum
 
         MyMathValuerange = New ClsInterval(-1, 1)
 
+        'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
+        'and the Tag its Value of the Additional Parameter as Standard
+
+        'Omega has to be bigger than ... see math. doc.
+        Dim LowerLimitOmega As Integer = CInt(Math.Ceiling(Math.Max(Math.Sqrt(g / (1 - StartL)), Math.Sqrt(g / StartL))))
+
+        MyAdditionalParameterValue = LowerLimitOmega + 5
+        MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
+                                                      Main.LM.GetString("SpringPendulumFrequency"),
+                                                      New ClsInterval(LowerLimitOmega, LowerLimitOmega + 10))
+
+        MyOmega = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
+
+        'This is an optimal value that the movement of the pendulum has place in the diagram
+        MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - StartL))
+
         MyValueParameters = New List(Of ClsValueParameter)
 
-        Dim ValueParameter(3) As ClsValueParameter
+        Dim ValueParameter(1) As ClsValueParameter
 
         'Inizialize all parameters
         'Tag is the Number of the Label in the Pendulum Form
         'L
-        ValueParameter(0) = New ClsValueParameter(1, "L", New ClsInterval(CDec(0.1), CDec(0.95)))
+        ValueParameter(0) = New ClsValueParameter(1, "L", New ClsInterval(Lmin, CDec(0.95)))
         MyValueParameters.Add(ValueParameter(0))
 
         'Phi
-        ValueParameter(1) = New ClsValueParameter(3, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
+        ValueParameter(1) = New ClsValueParameter(2, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
         MyValueParameters.Add(ValueParameter(1))
 
         'Labels
-        MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": u1, v1, u2, v2 -- Etot"
+        MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": red: u1, v1, green: u2, v2 -- Etot"
         MyLabelParameterC = Main.LM.GetString("CombinedPendulumC")
 
-        'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
-        'and the Tag its Value of the Additional Parameter as Standard
-        MyAdditionalParameterValue = 5  'that means 1 oszillation per second
-        MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
-                                                      Main.LM.GetString("SpringPendulumFrequency"),
-                                                      New ClsInterval(1, 10))
-
-        'Vectors
+        DrawCoordinateSystem()
 
         'We have two variable parameters: L = MyVariables.Components(0), Phi = MyVariables.components(1)
         MyVariables = New ClsVector(1)
 
         'Standardvalues
         With MyVariables
-            .Component(0) = StartL
+            .Component(0) = StartL + MyY0
             u1 = .Component(0)
             v1 = 0
             .Component(1) = CDec(Math.PI / 6) 'Phi
             u2 = .Component(1)
             v2 = 0
         End With
+
+        SetStartenergyRange()
 
         'For the Combined Pendulum is the Factor C 
         'the Energy
@@ -171,6 +191,12 @@ Public Class ClsCombinedPendulum
         End Set
     End Property
 
+    ReadOnly Property Y0 As Decimal Implements IPendulum.Y0
+        Get
+            Y0 = MyY0
+        End Get
+    End Property
+
     WriteOnly Property MapPendulum As Bitmap Implements IPendulum.MapPendulum
         Set(value As Bitmap)
             MyBitmap = value
@@ -195,6 +221,9 @@ Public Class ClsCombinedPendulum
 
     ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements IPendulum.ValueParameters
         Get
+            'Lmax must be adapted depending on Phi
+            MyValueParameters.Item(0) = New ClsValueParameter(1, "L", New ClsInterval(CDec(0.2), CDec(0.95 + MyY0 * Math.Cos(MyVariables.Component(1)))))
+
             ValueParameters = MyValueParameters
         End Get
     End Property
@@ -228,6 +257,12 @@ Public Class ClsCombinedPendulum
         Set(value As Integer)
             MyAdditionalParameterValue = value
             MyOmega = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
+            MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - StartL))
+            'Variables.Component(0) = 0
+            SetPosition()
+            DrawCoordinateSystem()
+            DrawPendulum()
+            SetStartenergyRange()
         End Set
     End Property
 
@@ -299,7 +334,7 @@ Public Class ClsCombinedPendulum
 
     ReadOnly Property StartEnergyRange As ClsInterval Implements IPendulum.StartEnergyRange
         Get
-            StartEnergyRange = MyStartenergyRange
+            StartEnergyRange = MyStartEnergyRange
         End Get
     End Property
 
@@ -313,6 +348,35 @@ Public Class ClsCombinedPendulum
 
     End Function
 
+    Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
+
+        If MyBitmapGraphics IsNot Nothing Then
+            ClearBitmap()
+            'x-Axis
+            MyBitmapGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
+            'y0-Line
+            MyBitmapGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Red, 1)
+            'y-Axis
+            MyBitmapGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
+
+            'Show the equilibrium line where the spring compensates the gravitation
+            Dim i As Integer
+
+            'Parameters of the polar coordinates
+            Dim r As Decimal
+            Dim t As Decimal
+            Dim NumberOfSteps As Integer = 500
+
+            For i = 0 To NumberOfSteps
+                t = MyMathhelper.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
+                r = StartL + CDec(g * Math.Cos(t) / Math.Pow(MyOmega, 2))
+                MyBitmapGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), MyY0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
+            Next
+
+        End If
+
+    End Sub
+
     Public Sub DrawPendulum() Implements IPendulum.DrawPendulum
 
         With MyPictureboxGraphics
@@ -321,7 +385,7 @@ Public Class ClsCombinedPendulum
             MyPictureBox.Refresh()
 
             'Pendulum
-            .DrawLine(New ClsMathpoint(0, 0), Position, Color.Green, 2)
+            .DrawLine(New ClsMathpoint(0, MyY0), Position, Color.Green, 2)
             .FillCircle(Position, CDec(0.02), Brushes.Green)
 
         End With
@@ -340,15 +404,18 @@ Public Class ClsCombinedPendulum
         'See math. doc.
         With Position
             .X = MyVariables.Component(0) * CDec(Math.Sin(MyVariables.Component(1)))
-            .Y = -MyVariables.Component(0) * CDec(Math.Cos(MyVariables.Component(1)))
+            .Y = -MyVariables.Component(0) * CDec(Math.Cos(MyVariables.Component(1))) + MyY0
         End With
 
     End Sub
 
     Private Sub SetStartenergyRange()
 
-        Dim Emin As Decimal = 0
-        Dim Emax As Decimal = 1
+        Dim Emin As Decimal
+        Dim Emax As Decimal
+
+        Emin = -CDec(Math.Pow(g / MyOmega, 2)) / 2
+        Emax = CDec(Math.Pow(MyOmega * (1 - MyY0 - StartL), 2)) / 2 + g * (StartL + 1 - MyY0)
 
         MyStartEnergyRange = New ClsInterval(Emin, Emax)
 
@@ -360,18 +427,23 @@ Public Class ClsCombinedPendulum
         Dim ActualPosition As ClsMathpoint = MyPictureboxGraphics.PixelToMathpoint(Mouseposition)
 
         With ActualPosition
-            'L should be maximal 0.95 
-            Dim LocRange As ClsInterval
-            'L
-            LocRange = New ClsInterval(MyValueParameters.Item(0).Range.A, MyValueParameters.Item(0).Range.B)
-            Dim LocL As Decimal = CDec(Math.Max(LocRange.A, Math.Min(Math.Sqrt(.X * .X + .Y * .Y), LocRange.B)))
+
+            .Y = .Y - MyY0
 
             'Phi
             Dim Phi As Decimal = MyMathhelper.GetAngle(.X, .Y)
+            Phi = MyMathhelper.AngleInMinusPiAndPi(Phi)
+
+            'L should be in [MyValueParameters.Item(0).Range.A, MyValueParameters.Item(0).Range.B]
+            Dim LocL As Decimal
+            LocL = CDec(Math.Sqrt(.X * .X + .Y * .Y))
+            LocL = Math.Max(MyValueParameters.Item(0).Range.A, LocL)
+            LocL = Math.Min(LocL, CDec(0.95) + MyY0 * CDec(Math.Cos(Phi)))
+
 
             'Set parameters
             MyVariables.Component(0) = LocL
-            MyVariables.Component(1) = MyMathhelper.AngleInMinusPiAndPi(Phi)
+            MyVariables.Component(1) = Phi
             MyC = GetEnergy()
 
             SetPosition()
@@ -505,8 +577,15 @@ Public Class ClsCombinedPendulum
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
 
-        u1 = MyMathhelper.AngleInMinusPiAndPi(u1)
+        If u1 < Lmin Then
+            u1 = Lmin
+            v1 = -v1
+        End If
+
         u2 = MyMathhelper.AngleInMinusPiAndPi(u2)
+
+        'For debug issues
+        'If Math.Abs(u1) > 500 Or Math.Abs(u2) > 500 Then Stop
 
         'New Values to MyVariables
         With MyVariables
@@ -560,15 +639,15 @@ Public Class ClsCombinedPendulum
         Dim ESpring As Decimal
 
         'we set as norm m = 1
-        'kinetic energy of m: v1^2 + l^2*v2^2
-        EKin = CDec(Math.Pow(v1, 2) + Math.Pow(u1 * v2, 2))
+        'kinetic energy of m: (v1^2 + l^2*v2^2)/2
+        EKin = CDec(Math.Pow(v1, 2) + Math.Pow(u1 * v2, 2)) / 2
 
         'Potential Energy of m
-        EPot = -g * (CDec(u1 * Math.Cos(u2) - StartL))
+        EPot = g * (StartL - CDec(u1 * Math.Cos(u2)))
 
         'potential energy of Spring Pendulum: see math.doc.
         'Spring constant id D, MyOmega = SQRT(D/m) => D = MyOmega^2
-        ESpring = CDec(Math.Pow(MyOmega * (StartL - u1), 2)) / 2
+        ESpring = CDec(Math.Pow(MyOmega * (u1 - StartL), 2)) / 2
 
         Return EKin + EPot + ESpring
 
@@ -585,10 +664,15 @@ Public Class ClsCombinedPendulum
 
         Dim Temp As Decimal
 
-        With x
 
-            Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
-            Temp += CDec(Math.Pow(MyOmega, 2) * (StartL - .Component(0)) + g * Math.Cos(.Component(2)))
+        With x
+            Try
+                Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
+                Temp += CDec(-Math.Pow(MyOmega, 2) * (.Component(0) - StartL) + g * Math.Cos(.Component(2)))
+            Catch ex As Exception
+                MessageBox.Show("Overflow 0: " & .Component(0).ToString & ", 2: " & .Component(2).ToString & ", 3: " & .Component(3).ToString)
+            End Try
+
 
         End With
 
@@ -609,7 +693,12 @@ Public Class ClsCombinedPendulum
         With x
             'see math.doc: (-2*v2*v1-g*sinu2)/u1
             'and: u1 = l > 0
-            Temp = (-2 * .Component(3) * .Component(1) - g * CDec(Math.Sin(.Component(2)))) / .Component(0)
+            Try
+                Temp = (-2 * .Component(3) * .Component(1) - g * CDec(Math.Sin(.Component(2)))) / .Component(0)
+            Catch ex As Exception
+                MessageBox.Show("Overflow 0: " & .Component(0).ToString & ", 1: " & .Component(1).ToString & ", 2: " & .Component(2).ToString & ", 3: " & .Component(3).ToString)
+            End Try
+
         End With
 
         Return Temp

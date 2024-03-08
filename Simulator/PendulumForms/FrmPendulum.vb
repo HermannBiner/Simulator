@@ -144,7 +144,7 @@ Public Class FrmPendulum
         ActivePendulum.IsStartparameter1Set = False
         ActivePendulum.IsStartparameter2Set = False
 
-        DrawCoordinateSystem()
+        ActivePendulum.DrawCoordinateSystem()
         PicPendulum.Invalidate()
 
         'Draw active pendulum
@@ -160,13 +160,9 @@ Public Class FrmPendulum
 
     End Sub
 
-
-
     Private Sub CboPendulum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPendulum.SelectedIndexChanged
 
-        'This sets the active Pendulum by Reflection
         ActivePendulum = InitializePendulum()
-
         Reset()
 
     End Sub
@@ -267,7 +263,12 @@ Public Class FrmPendulum
     Private Sub DrawCoordinateSystem()
 
         'Draw Coordinate System
-        MyBitmapGraphics?.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
+        Dim LevelXaxis As Decimal = 0
+        If ActivePendulum IsNot Nothing Then
+            LevelXaxis = ActivePendulum.Y0
+        End If
+        'x-Axis
+        MyBitmapGraphics?.DrawLine(New ClsMathpoint(-1, LevelXaxis), New ClsMathpoint(1, LevelXaxis), Color.Aquamarine, 1)
         MyBitmapGraphics?.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
 
     End Sub
@@ -343,7 +344,7 @@ Public Class FrmPendulum
         'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
         Dim Mouseposition As New Point With {
             .X = e.X + 2,
-            .Y = e.Y - 25
+            .Y = e.Y
         }
 
         If ActivePendulum IsNot Nothing Then
@@ -390,11 +391,12 @@ Public Class FrmPendulum
             With ActivePendulum
 
                 Dim i As Integer
-                Dim LocVector As New ClsVector(.Constants.Dimension)
-
                 Dim ConstantsDimension As Integer
+                Dim LocVector As ClsVector
 
                 If .Constants IsNot Nothing Then
+                    LocVector = New ClsVector(.Constants.Dimension)
+
                     ConstantsDimension = .Constants.Dimension
                     'Constants
                     For i = 0 To .Constants.Dimension
@@ -467,11 +469,11 @@ Public Class FrmPendulum
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-
         If StopIteration Then
 
             'the iteration was stopped or reseted
             'and should start from the beginning
+            StopIteration = False
             BtnStart.Text = Main.LM.GetString("Stop")
             With ActivePendulum
                 .IsStartparameter1Set = True
@@ -483,20 +485,19 @@ Public Class FrmPendulum
             BtnTakeOverStartParameter.Enabled = False
             TrbAdditionalParameter.Enabled = False
             ChkTestMode.Enabled = False
-            StopIteration = False
 
             Await IterationLoop()
 
         Else
 
             'the iteration is running and should be stopped
-
+            StopIteration = True
             BtnStart.Text = Main.LM.GetString("Continue")
             BtnReset.Enabled = True
             BtnTakeOverStartParameter.Enabled = True
             TrbAdditionalParameter.Enabled = True
             ChkTestMode.Enabled = True
-            StopIteration = True
+
 
         End If
 
