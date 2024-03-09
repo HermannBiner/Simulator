@@ -229,6 +229,10 @@
     <value>Elliptisches Billard</value>
     <comment>Cls</comment>
   </data>
+  <data name="Cylinder" xml:space="preserve">
+    <value>Zylinder</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>
     <comment>Lbl</comment>
@@ -319,6 +323,10 @@
   </data>
   <data name="HitPoint" xml:space="preserve">
     <value>Stosspunkt Parameter t</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Independent" xml:space="preserve">
+    <value>Unabhängige Pendel</value>
     <comment>Lbl</comment>
   </data>
   <data name="InvalidDualNumberDigits" xml:space="preserve">
@@ -557,6 +565,10 @@
     <value>Parameter</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ParameterList" xml:space="preserve">
+    <value>Parameterliste:</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ParameterRangeNotAllowed" xml:space="preserve">
     <value>Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
@@ -567,6 +579,10 @@
   </data>
   <data name="PhasePortrait" xml:space="preserve">
     <value>Phasenportrait</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PoincareSection" xml:space="preserve">
+    <value>Poincaré Schnitt</value>
     <comment>Lbl</comment>
   </data>
   <data name="PositionStartValue2" xml:space="preserve">
@@ -713,12 +729,20 @@
     <value>Zeitachse</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Torus" xml:space="preserve">
+    <value>Torus</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Transitivity" xml:space="preserve">
     <value>Transitivität</value>
     <comment>Lbl</comment>
   </data>
   <data name="TwoDimensions" xml:space="preserve">
     <value>Iteration in zwei Dimensionen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TypeofPhaseportrait" xml:space="preserve">
+    <value>Type Phasenportrait</value>
     <comment>Lbl</comment>
   </data>
   <data name="UnimodalFunctions" xml:space="preserve">

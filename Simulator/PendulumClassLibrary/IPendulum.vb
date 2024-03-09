@@ -9,12 +9,16 @@ Public Interface IPendulum
     'the pendulum needs the following references to draw its movement
     WriteOnly Property PicPendulum As PictureBox
 
+    'the permanent track of the orbit is drawn into a Bitmap
     WriteOnly Property MapPendulum As Bitmap
 
     ReadOnly Property Y0 As Decimal
 
     'in addtion, the ball protocols its movement in a phase portrait
-    WriteOnly Property Phaseportrait As PictureBox
+    WriteOnly Property PicPhaseportrait As PictureBox
+
+    'the permanent track of the orbit is drawn into a Bitmap
+    WriteOnly Property MapPhaseportrait As Bitmap
 
     WriteOnly Property ParameterListbox As ListBox
 
@@ -23,6 +27,9 @@ Public Interface IPendulum
 
     'label the Phaseportrait
     ReadOnly Property LabelPhasePortrait As String
+
+    'Label of the Parameterlist
+    ReadOnly Property LabelParameterList As String
 
     'Label Parameter C
     ReadOnly Property LabelParameterC As String
@@ -55,7 +62,7 @@ Public Interface IPendulum
 
     Sub DrawPendulum()
 
-    Sub ClearBitmap()
+    Sub ClearBitmaps()
 
     Property IsStartparameter1Set As Boolean
 
@@ -64,6 +71,10 @@ Public Interface IPendulum
     WriteOnly Property TestMode As Boolean
 
     WriteOnly Property StepWidth As Decimal
+
+    Function GetTypesofPhaseportrait() As List(Of String)
+
+    WriteOnly Property PhaseportraitIndex As Integer
 
     Sub SetAndDrawStartparameter1(Mouseposition As Point)
 

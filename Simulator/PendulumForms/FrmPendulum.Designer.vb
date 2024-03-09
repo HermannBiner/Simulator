@@ -27,10 +27,6 @@ Partial Class FrmPendulum
         Me.LblPendulum = New System.Windows.Forms.Label()
         Me.LstParameterList = New System.Windows.Forms.ListBox()
         Me.GrpStartParameter = New System.Windows.Forms.GroupBox()
-        Me.TxtP8 = New System.Windows.Forms.TextBox()
-        Me.LblP8 = New System.Windows.Forms.Label()
-        Me.TxtP7 = New System.Windows.Forms.TextBox()
-        Me.LblP7 = New System.Windows.Forms.Label()
         Me.TxtP6 = New System.Windows.Forms.TextBox()
         Me.LblP6 = New System.Windows.Forms.Label()
         Me.TxtP5 = New System.Windows.Forms.TextBox()
@@ -58,8 +54,10 @@ Partial Class FrmPendulum
         Me.BtnStart = New System.Windows.Forms.Button()
         Me.LblStepWidth = New System.Windows.Forms.Label()
         Me.TrbStepWidth = New System.Windows.Forms.TrackBar()
-        Me.ChkTestMode = New System.Windows.Forms.CheckBox()
         Me.PicStatus = New System.Windows.Forms.PictureBox()
+        Me.CboTypeofPhaseportrait = New System.Windows.Forms.ComboBox()
+        Me.LblTypeofPhaseportrait = New System.Windows.Forms.Label()
+        Me.LblParameterlist = New System.Windows.Forms.Label()
         Me.GrpStartParameter.SuspendLayout()
         CType(Me.TrbAdditionalParameter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicPhasePortrait, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,7 +71,7 @@ Partial Class FrmPendulum
         Me.CboPendulum.FormattingEnabled = True
         Me.CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
         Me.CboPendulum.Location = New System.Drawing.Point(642, 19)
-        Me.CboPendulum.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CboPendulum.Margin = New System.Windows.Forms.Padding(2)
         Me.CboPendulum.Name = "CboPendulum"
         Me.CboPendulum.Size = New System.Drawing.Size(184, 21)
         Me.CboPendulum.TabIndex = 38
@@ -91,18 +89,14 @@ Partial Class FrmPendulum
         'LstParameterList
         '
         Me.LstParameterList.FormattingEnabled = True
-        Me.LstParameterList.Location = New System.Drawing.Point(831, 445)
-        Me.LstParameterList.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.LstParameterList.Location = New System.Drawing.Point(831, 458)
+        Me.LstParameterList.Margin = New System.Windows.Forms.Padding(2)
         Me.LstParameterList.Name = "LstParameterList"
-        Me.LstParameterList.Size = New System.Drawing.Size(422, 173)
+        Me.LstParameterList.Size = New System.Drawing.Size(422, 160)
         Me.LstParameterList.TabIndex = 36
         '
         'GrpStartParameter
         '
-        Me.GrpStartParameter.Controls.Add(Me.TxtP8)
-        Me.GrpStartParameter.Controls.Add(Me.LblP8)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP7)
-        Me.GrpStartParameter.Controls.Add(Me.LblP7)
         Me.GrpStartParameter.Controls.Add(Me.TxtP6)
         Me.GrpStartParameter.Controls.Add(Me.LblP6)
         Me.GrpStartParameter.Controls.Add(Me.TxtP5)
@@ -117,58 +111,18 @@ Partial Class FrmPendulum
         Me.GrpStartParameter.Controls.Add(Me.LblP2)
         Me.GrpStartParameter.Controls.Add(Me.LblP1)
         Me.GrpStartParameter.Location = New System.Drawing.Point(644, 139)
-        Me.GrpStartParameter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GrpStartParameter.Margin = New System.Windows.Forms.Padding(2)
         Me.GrpStartParameter.Name = "GrpStartParameter"
-        Me.GrpStartParameter.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.GrpStartParameter.Size = New System.Drawing.Size(182, 250)
+        Me.GrpStartParameter.Padding = New System.Windows.Forms.Padding(2)
+        Me.GrpStartParameter.Size = New System.Drawing.Size(182, 201)
         Me.GrpStartParameter.TabIndex = 35
         Me.GrpStartParameter.TabStop = False
         Me.GrpStartParameter.Text = "StartParameter"
         '
-        'TxtP8
-        '
-        Me.TxtP8.Location = New System.Drawing.Point(42, 192)
-        Me.TxtP8.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TxtP8.Name = "TxtP8"
-        Me.TxtP8.Size = New System.Drawing.Size(106, 20)
-        Me.TxtP8.TabIndex = 16
-        Me.TxtP8.Visible = False
-        '
-        'LblP8
-        '
-        Me.LblP8.AutoSize = True
-        Me.LblP8.Location = New System.Drawing.Point(6, 195)
-        Me.LblP8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblP8.Name = "LblP8"
-        Me.LblP8.Size = New System.Drawing.Size(20, 13)
-        Me.LblP8.TabIndex = 15
-        Me.LblP8.Text = "P8"
-        Me.LblP8.Visible = False
-        '
-        'TxtP7
-        '
-        Me.TxtP7.Location = New System.Drawing.Point(42, 168)
-        Me.TxtP7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TxtP7.Name = "TxtP7"
-        Me.TxtP7.Size = New System.Drawing.Size(106, 20)
-        Me.TxtP7.TabIndex = 14
-        Me.TxtP7.Visible = False
-        '
-        'LblP7
-        '
-        Me.LblP7.AutoSize = True
-        Me.LblP7.Location = New System.Drawing.Point(6, 171)
-        Me.LblP7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblP7.Name = "LblP7"
-        Me.LblP7.Size = New System.Drawing.Size(20, 13)
-        Me.LblP7.TabIndex = 13
-        Me.LblP7.Text = "P7"
-        Me.LblP7.Visible = False
-        '
         'TxtP6
         '
         Me.TxtP6.Location = New System.Drawing.Point(42, 144)
-        Me.TxtP6.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP6.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP6.Name = "TxtP6"
         Me.TxtP6.Size = New System.Drawing.Size(106, 20)
         Me.TxtP6.TabIndex = 12
@@ -188,7 +142,7 @@ Partial Class FrmPendulum
         'TxtP5
         '
         Me.TxtP5.Location = New System.Drawing.Point(42, 120)
-        Me.TxtP5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP5.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP5.Name = "TxtP5"
         Me.TxtP5.Size = New System.Drawing.Size(106, 20)
         Me.TxtP5.TabIndex = 10
@@ -208,7 +162,7 @@ Partial Class FrmPendulum
         'TxtP4
         '
         Me.TxtP4.Location = New System.Drawing.Point(42, 95)
-        Me.TxtP4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP4.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP4.Name = "TxtP4"
         Me.TxtP4.Size = New System.Drawing.Size(106, 20)
         Me.TxtP4.TabIndex = 8
@@ -217,7 +171,7 @@ Partial Class FrmPendulum
         'TxtP3
         '
         Me.TxtP3.Location = New System.Drawing.Point(42, 70)
-        Me.TxtP3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP3.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP3.Name = "TxtP3"
         Me.TxtP3.Size = New System.Drawing.Size(106, 20)
         Me.TxtP3.TabIndex = 7
@@ -247,8 +201,8 @@ Partial Class FrmPendulum
         '
         'BtnTakeOverStartParameter
         '
-        Me.BtnTakeOverStartParameter.Location = New System.Drawing.Point(4, 218)
-        Me.BtnTakeOverStartParameter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BtnTakeOverStartParameter.Location = New System.Drawing.Point(4, 168)
+        Me.BtnTakeOverStartParameter.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
         Me.BtnTakeOverStartParameter.Size = New System.Drawing.Size(170, 25)
         Me.BtnTakeOverStartParameter.TabIndex = 4
@@ -258,7 +212,7 @@ Partial Class FrmPendulum
         'TxtP2
         '
         Me.TxtP2.Location = New System.Drawing.Point(42, 46)
-        Me.TxtP2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP2.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP2.Name = "TxtP2"
         Me.TxtP2.Size = New System.Drawing.Size(106, 20)
         Me.TxtP2.TabIndex = 3
@@ -267,7 +221,7 @@ Partial Class FrmPendulum
         'TxtP1
         '
         Me.TxtP1.Location = New System.Drawing.Point(42, 21)
-        Me.TxtP1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtP1.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtP1.Name = "TxtP1"
         Me.TxtP1.Size = New System.Drawing.Size(106, 20)
         Me.TxtP1.TabIndex = 2
@@ -298,7 +252,7 @@ Partial Class FrmPendulum
         'LblPhasePortrait
         '
         Me.LblPhasePortrait.AutoSize = True
-        Me.LblPhasePortrait.Location = New System.Drawing.Point(939, 426)
+        Me.LblPhasePortrait.Location = New System.Drawing.Point(828, 426)
         Me.LblPhasePortrait.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblPhasePortrait.Name = "LblPhasePortrait"
         Me.LblPhasePortrait.Size = New System.Drawing.Size(70, 13)
@@ -319,7 +273,7 @@ Partial Class FrmPendulum
         'TrbAdditionalParameter
         '
         Me.TrbAdditionalParameter.Location = New System.Drawing.Point(644, 90)
-        Me.TrbAdditionalParameter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TrbAdditionalParameter.Margin = New System.Windows.Forms.Padding(2)
         Me.TrbAdditionalParameter.Maximum = 100
         Me.TrbAdditionalParameter.Minimum = 1
         Me.TrbAdditionalParameter.Name = "TrbAdditionalParameter"
@@ -331,7 +285,7 @@ Partial Class FrmPendulum
         '
         Me.PicPhasePortrait.BackColor = System.Drawing.Color.White
         Me.PicPhasePortrait.Location = New System.Drawing.Point(831, 1)
-        Me.PicPhasePortrait.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PicPhasePortrait.Margin = New System.Windows.Forms.Padding(2)
         Me.PicPhasePortrait.Name = "PicPhasePortrait"
         Me.PicPhasePortrait.Size = New System.Drawing.Size(420, 420)
         Me.PicPhasePortrait.TabIndex = 31
@@ -342,7 +296,7 @@ Partial Class FrmPendulum
         Me.TxtFactor.BackColor = System.Drawing.Color.White
         Me.TxtFactor.Enabled = False
         Me.TxtFactor.Location = New System.Drawing.Point(704, 47)
-        Me.TxtFactor.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtFactor.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtFactor.Name = "TxtFactor"
         Me.TxtFactor.Size = New System.Drawing.Size(122, 20)
         Me.TxtFactor.TabIndex = 30
@@ -361,7 +315,7 @@ Partial Class FrmPendulum
         '
         Me.PicPendulum.BackColor = System.Drawing.Color.White
         Me.PicPendulum.Location = New System.Drawing.Point(0, 1)
-        Me.PicPendulum.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PicPendulum.Margin = New System.Windows.Forms.Padding(2)
         Me.PicPendulum.Name = "PicPendulum"
         Me.PicPendulum.Size = New System.Drawing.Size(630, 630)
         Me.PicPendulum.TabIndex = 28
@@ -370,7 +324,7 @@ Partial Class FrmPendulum
         'LblSteps
         '
         Me.LblSteps.AutoSize = True
-        Me.LblSteps.Location = New System.Drawing.Point(732, 492)
+        Me.LblSteps.Location = New System.Drawing.Point(733, 496)
         Me.LblSteps.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblSteps.Name = "LblSteps"
         Me.LblSteps.Size = New System.Drawing.Size(13, 13)
@@ -380,7 +334,7 @@ Partial Class FrmPendulum
         'LblNumberOfSteps
         '
         Me.LblNumberOfSteps.AutoSize = True
-        Me.LblNumberOfSteps.Location = New System.Drawing.Point(641, 492)
+        Me.LblNumberOfSteps.Location = New System.Drawing.Point(642, 496)
         Me.LblNumberOfSteps.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblNumberOfSteps.Name = "LblNumberOfSteps"
         Me.LblNumberOfSteps.Size = New System.Drawing.Size(89, 13)
@@ -409,7 +363,7 @@ Partial Class FrmPendulum
         'BtnStart
         '
         Me.BtnStart.Location = New System.Drawing.Point(642, 518)
-        Me.BtnStart.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BtnStart.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnStart.Name = "BtnStart"
         Me.BtnStart.Size = New System.Drawing.Size(182, 34)
         Me.BtnStart.TabIndex = 39
@@ -419,7 +373,7 @@ Partial Class FrmPendulum
         'LblStepWidth
         '
         Me.LblStepWidth.AutoSize = True
-        Me.LblStepWidth.Location = New System.Drawing.Point(641, 398)
+        Me.LblStepWidth.Location = New System.Drawing.Point(642, 347)
         Me.LblStepWidth.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblStepWidth.Name = "LblStepWidth"
         Me.LblStepWidth.Size = New System.Drawing.Size(57, 13)
@@ -428,42 +382,64 @@ Partial Class FrmPendulum
         '
         'TrbStepWidth
         '
-        Me.TrbStepWidth.Location = New System.Drawing.Point(643, 413)
-        Me.TrbStepWidth.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TrbStepWidth.Location = New System.Drawing.Point(644, 362)
+        Me.TrbStepWidth.Margin = New System.Windows.Forms.Padding(2)
         Me.TrbStepWidth.Maximum = 25
         Me.TrbStepWidth.Minimum = 1
         Me.TrbStepWidth.Name = "TrbStepWidth"
         Me.TrbStepWidth.Size = New System.Drawing.Size(182, 45)
         Me.TrbStepWidth.TabIndex = 44
-        Me.TrbStepWidth.Value = 10
-        '
-        'ChkTestMode
-        '
-        Me.ChkTestMode.AutoSize = True
-        Me.ChkTestMode.Location = New System.Drawing.Point(644, 463)
-        Me.ChkTestMode.Name = "ChkTestMode"
-        Me.ChkTestMode.Size = New System.Drawing.Size(74, 17)
-        Me.ChkTestMode.TabIndex = 46
-        Me.ChkTestMode.Text = "TestMode"
-        Me.ChkTestMode.UseVisualStyleBackColor = True
+        Me.TrbStepWidth.Value = 12
         '
         'PicStatus
         '
         Me.PicStatus.BackColor = System.Drawing.Color.White
         Me.PicStatus.Location = New System.Drawing.Point(831, 617)
-        Me.PicStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PicStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.PicStatus.Name = "PicStatus"
         Me.PicStatus.Size = New System.Drawing.Size(420, 14)
         Me.PicStatus.TabIndex = 47
         Me.PicStatus.TabStop = False
+        '
+        'CboTypeofPhaseportrait
+        '
+        Me.CboTypeofPhaseportrait.FormattingEnabled = True
+        Me.CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
+        Me.CboTypeofPhaseportrait.Location = New System.Drawing.Point(643, 426)
+        Me.CboTypeofPhaseportrait.Name = "CboTypeofPhaseportrait"
+        Me.CboTypeofPhaseportrait.Size = New System.Drawing.Size(174, 21)
+        Me.CboTypeofPhaseportrait.TabIndex = 48
+        '
+        'LblTypeofPhaseportrait
+        '
+        Me.LblTypeofPhaseportrait.AutoSize = True
+        Me.LblTypeofPhaseportrait.Location = New System.Drawing.Point(642, 408)
+        Me.LblTypeofPhaseportrait.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
+        Me.LblTypeofPhaseportrait.Size = New System.Drawing.Size(102, 13)
+        Me.LblTypeofPhaseportrait.TabIndex = 49
+        Me.LblTypeofPhaseportrait.Text = "TypeofPhaseportrait"
+        '
+        'LblParameterlist
+        '
+        Me.LblParameterlist.AutoSize = True
+        Me.LblParameterlist.Location = New System.Drawing.Point(828, 442)
+        Me.LblParameterlist.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LblParameterlist.Name = "LblParameterlist"
+        Me.LblParameterlist.Size = New System.Drawing.Size(71, 13)
+        Me.LblParameterlist.TabIndex = 50
+        Me.LblParameterlist.Text = "ParameterList"
+        Me.LblParameterlist.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FrmPendulum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1262, 634)
+        Me.Controls.Add(Me.LblParameterlist)
+        Me.Controls.Add(Me.LblTypeofPhaseportrait)
+        Me.Controls.Add(Me.CboTypeofPhaseportrait)
         Me.Controls.Add(Me.PicStatus)
-        Me.Controls.Add(Me.ChkTestMode)
         Me.Controls.Add(Me.LblStepWidth)
         Me.Controls.Add(Me.TrbStepWidth)
         Me.Controls.Add(Me.LblSteps)
@@ -525,14 +501,12 @@ Partial Class FrmPendulum
     Friend WithEvents BtnReset As Button
     Friend WithEvents BtnPhasePortrait As Button
     Friend WithEvents BtnStart As Button
-    Friend WithEvents TxtP8 As TextBox
-    Friend WithEvents LblP8 As Label
-    Friend WithEvents TxtP7 As TextBox
-    Friend WithEvents LblP7 As Label
     Friend WithEvents TxtP6 As TextBox
     Friend WithEvents LblP6 As Label
     Friend WithEvents LblStepWidth As Label
     Friend WithEvents TrbStepWidth As TrackBar
-    Friend WithEvents ChkTestMode As CheckBox
     Friend WithEvents PicStatus As PictureBox
+    Friend WithEvents CboTypeofPhaseportrait As ComboBox
+    Friend WithEvents LblTypeofPhaseportrait As Label
+    Friend WithEvents LblParameterlist As Label
 End Class

@@ -16,21 +16,36 @@ Public Class ClsCombinedPendulum
 
     'The actual position of the Pendulum is drawn into this PictureBox
     'and shown by the Refresh-Method
-    Private MyPictureBox As PictureBox
-    Private MyPictureboxGraphics As ClsGraphicTool
+    Private MyPicPendulum As PictureBox
+    Private MyPicPendulumGraphics As ClsGraphicTool
 
     'The permanent Track of the Pendulum is drawn into the BitMap
-    Private MyBitmap As Bitmap
-    Private MyBitmapGraphics As ClsGraphicTool
-
+    Private MyMapPendulum As Bitmap
+    Private MyMapPendulumGraphics As ClsGraphicTool
 
     'The Pendulum draws as well into the Phase Portrait
-    Private MyPhaseportrait As PictureBox
-    Private MyPhaseportraitGraphics As ClsGraphicTool
+    Private MyPicPhaseportrait As PictureBox
+    Private MyPicPhaseportraitGraphics As ClsGraphicTool
+
+    'Permanent Track in the Phaseportrait
+    Private MyMapPhaseportrait As Bitmap
+    Private MyMapPhaseportraitGraphics As ClsGraphicTool
+
+    'TypesofPhaseportrait
+    Private Enum TypeofPhaseportraitEnum
+        Independent 'Both movements are shown independently
+        Cylinder 'Phi, l are shown on a cylinder
+        PoincareSection 'see math. doc.
+    End Enum
+
+    Private MyTypesofPhaseportrait As List(Of String)
+
+    Private MyPhaseportraitType As TypeofPhaseportraitEnum
 
     'Labeling
-    Private ReadOnly MyPhaseportraitLabel As String
+    Private MyPhaseportraitLabel As String
     Private ReadOnly MyLabelParameterC As String
+
     Private ReadOnly MyAdditionalParameter As ClsValueParameter
     Private MyAdditionalParameterValue As Integer
 
@@ -77,6 +92,13 @@ Public Class ClsCombinedPendulum
     Private v1 As Decimal
     Private u2 As Decimal
     Private v2 As Decimal
+
+    'For Poincaré Sections
+    Private SignumChanged As Boolean
+
+    'And their definition range
+    Private UInterval As ClsInterval
+    Private VInterval As ClsInterval
 
     'And additional Parameters for Runge Kutta
     Private ReadOnly x As ClsVector
@@ -142,7 +164,6 @@ Public Class ClsCombinedPendulum
         MyValueParameters.Add(ValueParameter(1))
 
         'Labels
-        MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": red: u1, v1, green: u2, v2 -- Etot"
         MyLabelParameterC = Main.LM.GetString("CombinedPendulumC")
 
         DrawCoordinateSystem()
@@ -152,10 +173,12 @@ Public Class ClsCombinedPendulum
 
         'Standardvalues
         With MyVariables
+            'Length of Pendulum l
             .Component(0) = StartL + MyY0
             u1 = .Component(0)
             v1 = 0
-            .Component(1) = CDec(Math.PI / 6) 'Phi
+            'Angle of Pendulum Phi
+            .Component(1) = CDec(Math.PI / 6)
             u2 = .Component(1)
             v2 = 0
         End With
@@ -186,8 +209,8 @@ Public Class ClsCombinedPendulum
 
     WriteOnly Property PicPendulum As PictureBox Implements IPendulum.PicPendulum
         Set(value As PictureBox)
-            MyPictureBox = value
-            MyPictureboxGraphics = New ClsGraphicTool(MyPictureBox, MyMathValuerange, MyMathValuerange)
+            MyPicPendulum = value
+            MyPicPendulumGraphics = New ClsGraphicTool(MyPicPendulum, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
@@ -199,17 +222,20 @@ Public Class ClsCombinedPendulum
 
     WriteOnly Property MapPendulum As Bitmap Implements IPendulum.MapPendulum
         Set(value As Bitmap)
-            MyBitmap = value
-            MyBitmapGraphics = New ClsGraphicTool(MyBitmap, MyMathValuerange, MyMathValuerange)
+            MyMapPendulum = value
+            MyMapPendulumGraphics = New ClsGraphicTool(MyMapPendulum, MyMathValuerange, MyMathValuerange)
         End Set
     End Property
 
-    WriteOnly Property Phaseportrait As PictureBox Implements IPendulum.Phaseportrait
+    WriteOnly Property PicPhaseportrait As PictureBox Implements IPendulum.PicPhaseportrait
         Set(value As PictureBox)
-            MyPhaseportrait = value
-            Dim UInterval = New ClsInterval(-CDec(Math.PI), CDec(Math.PI))
-            Dim VInterval = New ClsInterval(-8, 8)
-            MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, UInterval, VInterval)
+            MyPicPhaseportrait = value
+        End Set
+    End Property
+
+    WriteOnly Property MapPhaseportrait As Bitmap Implements IPendulum.MapPhaseportrait
+        Set(value As Bitmap)
+            MyMapPhaseportrait = value
         End Set
     End Property
 
@@ -217,6 +243,12 @@ Public Class ClsCombinedPendulum
         Set(value As ListBox)
             MyParameterlistbox = value
         End Set
+    End Property
+
+    ReadOnly Property LabelParameterlist As String Implements IPendulum.LabelParameterList
+        Get
+            LabelParameterlist = Main.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
+        End Get
     End Property
 
     ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements IPendulum.ValueParameters
@@ -296,6 +328,35 @@ Public Class ClsCombinedPendulum
         End Get
     End Property
 
+    Public Function GetTypesofPhaseportrait() As List(Of String) Implements IPendulum.GetTypesofPhaseportrait
+
+        Return [Enum].GetNames(GetType(TypeofPhaseportraitEnum)).ToList
+    End Function
+
+    WriteOnly Property PhaseportraitIndex As Integer Implements IPendulum.PhaseportraitIndex
+        Set(value As Integer)
+            Dim PhaPorTypes As Array = [Enum].GetValues(GetType(TypeofPhaseportraitEnum))
+            MyPhaseportraitType = CType(PhaPorTypes.GetValue(value), TypeofPhaseportraitEnum)
+            'Labeling and preparing UInterval, VInterval and MapPhaseportraitGraphics
+            Select Case MyPhaseportraitType
+                Case TypeofPhaseportraitEnum.Cylinder
+                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": l, Phi. Tangent: l', Phi'"
+                    UInterval = New ClsInterval(Lmin, 1)
+                    VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                Case TypeofPhaseportraitEnum.PoincareSection
+                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": Phi = 0, l, l'"
+                    UInterval = New ClsInterval(Lmin, 1)
+                    VInterval = New ClsInterval(-10, 10)
+                Case Else
+                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": Red: l, l'. Green: Phi, Phi'"
+                    UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                    VInterval = New ClsInterval(-10, 10)
+            End Select
+            MyPicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, UInterval, VInterval)
+            MyMapPhaseportraitGraphics = New ClsGraphicTool(MyMapPhaseportrait, UInterval, VInterval)
+        End Set
+    End Property
+
     Property IsStartparameter1Set As Boolean Implements IPendulum.IsStartparameter1Set
         Set(value As Boolean)
             MyIsStartparameter1Set = value
@@ -350,14 +411,14 @@ Public Class ClsCombinedPendulum
 
     Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
 
-        If MyBitmapGraphics IsNot Nothing Then
-            ClearBitmap()
+        If MyMapPendulumGraphics IsNot Nothing Then
+            ClearBitmaps()
             'x-Axis
-            MyBitmapGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
+            MyMapPendulumGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
             'y0-Line
-            MyBitmapGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Red, 1)
+            MyMapPendulumGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Red, 1)
             'y-Axis
-            MyBitmapGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
+            MyMapPendulumGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
 
             'Show the equilibrium line where the spring compensates the gravitation
             Dim i As Integer
@@ -370,7 +431,7 @@ Public Class ClsCombinedPendulum
             For i = 0 To NumberOfSteps
                 t = MyMathhelper.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
                 r = StartL + CDec(g * Math.Cos(t) / Math.Pow(MyOmega, 2))
-                MyBitmapGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), MyY0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
+                MyMapPendulumGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), MyY0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
             Next
 
         End If
@@ -379,10 +440,10 @@ Public Class ClsCombinedPendulum
 
     Public Sub DrawPendulum() Implements IPendulum.DrawPendulum
 
-        With MyPictureboxGraphics
+        With MyPicPendulumGraphics
 
             'Clear Graphic
-            MyPictureBox.Refresh()
+            MyPicPendulum.Refresh()
 
             'Pendulum
             .DrawLine(New ClsMathpoint(0, MyY0), Position, Color.Green, 2)
@@ -392,9 +453,10 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Sub ClearBitmap() Implements IPendulum.ClearBitmap
+    Sub ClearBitmaps() Implements IPendulum.ClearBitmaps
 
-        MyBitmapGraphics.Clear(Color.White)
+        MyMapPendulumGraphics.Clear(Color.White)
+        MyMapPhaseportraitGraphics?.Clear(Color.White)
 
     End Sub
 
@@ -424,7 +486,7 @@ Public Class ClsCombinedPendulum
     'SECTOR SETSTARTPARAMETER
     Sub SetAndDrawStartparameter1(Mouseposition As Point) Implements IPendulum.SetAndDrawStartparameter1
 
-        Dim ActualPosition As ClsMathpoint = MyPictureboxGraphics.PixelToMathpoint(Mouseposition)
+        Dim ActualPosition As ClsMathpoint = MyPicPendulumGraphics.PixelToMathpoint(Mouseposition)
 
         With ActualPosition
 
@@ -487,9 +549,6 @@ Public Class ClsCombinedPendulum
             .X = Position.X
             .Y = Position.Y
         End With
-
-        'Draw Phase Diagram
-        DrawPhaseDiagram()
 
         'Protocol Values to List
         ProtocolValues()
@@ -589,9 +648,17 @@ Public Class ClsCombinedPendulum
 
         'New Values to MyVariables
         With MyVariables
+            If .Component(1) * u2 <= 0 Then
+                SignumChanged = True
+            Else
+                SignumChanged = False
+            End If
             .Component(0) = u1
             .Component(1) = u2
         End With
+
+        'Draw Phase Diagram
+        DrawPhaseportrait()
 
         'Transfer new Values to Position
         SetPosition()
@@ -608,15 +675,26 @@ Public Class ClsCombinedPendulum
 
         'The track of Pendulum1 is always on a circle and not interesting
         'MyBitmapGraphics.DrawLine(OldPosition1, Position1, Color.Red, 1)
-        MyBitmapGraphics.DrawLine(OldPosition, Position, Color.Green, 1)
-        MyPictureBox.Invalidate()
+        MyMapPendulumGraphics.DrawLine(OldPosition, Position, Color.Green, 1)
+        MyPicPendulum.Invalidate()
 
     End Sub
 
-    Private Sub DrawPhaseDiagram()
-
-        MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
-        MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
+    Private Sub DrawPhaseportrait()
+        Select Case MyPhaseportraitType
+            Case TypeofPhaseportraitEnum.Cylinder
+                MyPicPhaseportrait.Refresh()
+                MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
+                MyMapPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
+            Case TypeofPhaseportraitEnum.PoincareSection
+                If SignumChanged Then
+                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Green, 2)
+                End If
+            Case Else
+                'Draw only into PicPhaseportrait
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
+        End Select
 
     End Sub
 

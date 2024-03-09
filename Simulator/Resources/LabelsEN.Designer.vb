@@ -326,6 +326,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Cylinder ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Cylinder() As String
+            Get
+                Return ResourceManager.GetString("Cylinder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Delta() As String
@@ -529,6 +538,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property HitPoint() As String
             Get
                 Return ResourceManager.GetString("HitPoint", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Independent Pendulums ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Independent() As String
+            Get
+                Return ResourceManager.GetString("Independent", resourceCulture)
             End Get
         End Property
         
@@ -1064,6 +1082,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Parameterlist: ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ParameterList() As String
+            Get
+                Return ResourceManager.GetString("ParameterList", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die This Parameter Range is not allowed! It must be part of the interval ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ParameterRangeNotAllowed() As String
@@ -1087,6 +1114,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PhasePortrait() As String
             Get
                 Return ResourceManager.GetString("PhasePortrait", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Poincaré Section ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property PoincareSection() As String
+            Get
+                Return ResourceManager.GetString("PoincareSection", resourceCulture)
             End Get
         End Property
         
@@ -1406,6 +1442,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Torus ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Torus() As String
+            Get
+                Return ResourceManager.GetString("Torus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Transitivity ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Transitivity() As String
@@ -1420,6 +1465,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property TwoDimensions() As String
             Get
                 Return ResourceManager.GetString("TwoDimensions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Type of Phaseportrait ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property TypeofPhaseportrait() As String
+            Get
+                Return ResourceManager.GetString("TypeofPhaseportrait", resourceCulture)
             End Get
         End Property
         

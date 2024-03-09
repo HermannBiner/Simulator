@@ -36,7 +36,7 @@ Public Class ClsLanguageManager
         Dim Text As String = RM.GetString(Identifier)
 
         If Text = "" Then
-            Text = "Missing Text: " & Identifier
+            Text = Identifier
         End If
 
         Return Text
@@ -69,7 +69,7 @@ Public Class ClsLanguageManager
                 End If
 
             Else
-                Text = "Missing Text: " & Identifier
+                Text = Identifier
 
             End If
         End If

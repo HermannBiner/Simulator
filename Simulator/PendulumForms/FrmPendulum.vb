@@ -14,8 +14,10 @@ Imports System.Reflection
 Public Class FrmPendulum
 
     'Graphic object for local drawings
-    Private MyBitmapGraphics As ClsGraphicTool
     Private MapPendulum As Bitmap
+    Private MapPhaseportrait As Bitmap
+
+    'To show the total energy
     Private StatusGraphics As Graphics
 
     'Active Pendulum
@@ -38,6 +40,9 @@ Public Class FrmPendulum
 
     Private Const EnergyTolerance As Decimal = CDec(0.1)
     Private Const StepWidthUnit As Decimal = CDec(0.0001)
+
+    'For debugging issues
+    Private Const IsTestMode As Boolean = False
 
 
     'SECTOR INITIALIZATION
@@ -65,8 +70,8 @@ Public Class FrmPendulum
         TxtFactor.Text = ""
         BtnStart.Text = Main.LM.GetString("Start")
         BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
-        ChkTestMode.Text = Main.LM.GetString("TestMode")
         LblStepWidth.Text = Main.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
+        LblTypeofPhaseportrait.Text = Main.LM.GetString("TypeofPhaseportrait")
 
         CboPendulum.Items.Clear()
 
@@ -103,15 +108,14 @@ Public Class FrmPendulum
         'the actual position of the Pendulum is shown in the PicPendulum and 
         'actualized by refreshing PicPendulum
         'the Bitmap and PicDiagram are Squares
+
+        MathInterval = New ClsInterval(-1, 1)
+
         Dim Squareside As Integer = Math.Min(PicPendulum.Width, PicPendulum.Height)
         PicPendulum.Width = Squareside
         PicPendulum.Height = Squareside
 
-        MathInterval = New ClsInterval(-1, 1)
-
         MapPendulum = New Bitmap(Squareside, Squareside)
-        MyBitmapGraphics = New ClsGraphicTool(MapPendulum, MathInterval, MathInterval)
-        StatusGraphics = PicStatus.CreateGraphics
 
         'The Bitmap MapPendulum is then shown as Image of PicPendulum
         PicPendulum.Image = MapPendulum
@@ -120,6 +124,12 @@ Public Class FrmPendulum
         Squareside = Math.Min(PicPhasePortrait.Width, PicPhasePortrait.Height)
         PicPhasePortrait.Width = Squareside
         PicPhasePortrait.Height = Squareside
+
+        MapPhaseportrait = New Bitmap(Squareside, Squareside)
+        PicPhasePortrait.Image = MapPhaseportrait
+
+        'to show the total energy
+        StatusGraphics = PicStatus.CreateGraphics
 
         'Initialize Language
         InitializeLanguage()
@@ -135,7 +145,7 @@ Public Class FrmPendulum
     Sub Reset()
 
         'Clear Diagram and Bitmap
-        ActivePendulum.ClearBitmap()
+        ActivePendulum.ClearBitmaps()
         PicPhasePortrait.Refresh()
         LstParameterList.Items.Clear()
         n = 0
@@ -156,7 +166,6 @@ Public Class FrmPendulum
         BtnStart.Text = Main.LM.GetString("Start")
         BtnTakeOverStartParameter.Enabled = True
         TrbAdditionalParameter.Enabled = True
-        ChkTestMode.Enabled = True
 
     End Sub
 
@@ -194,7 +203,8 @@ Public Class FrmPendulum
         With LocPendulum
             .PicPendulum = PicPendulum
             .MapPendulum = MapPendulum
-            .Phaseportrait = PicPhasePortrait
+            .PicPhaseportrait = PicPhasePortrait
+            .MapPhaseportrait = MapPhaseportrait
             .ParameterListbox = LstParameterList
 
             TxtFactor.Text = .C.ToString("N10")
@@ -207,7 +217,7 @@ Public Class FrmPendulum
             LblPhasePortrait.Text = .LabelPhasePortrait
 
             Dim i As Integer
-            For i = 1 To 8
+            For i = 1 To 6
                 GrpStartParameter.Controls.Item("LblP" & i.ToString).Visible = (i <= .ValueParameters.Count)
                 GrpStartParameter.Controls.Item("TxtP" & i.ToString).Visible = (i <= .ValueParameters.Count)
             Next
@@ -233,8 +243,20 @@ Public Class FrmPendulum
 
             .AdditionalParameterValue = TrbAdditionalParameter.Value
             .StepWidth = TrbStepWidth.Value * StepWidthUnit
-            .TestMode = ChkTestMode.Checked
+            .TestMode = IsTestMode
             StartEnergy = .Energy
+
+            CboTypeofPhaseportrait.Items.Clear()
+
+            Dim TypesofPhaseportrait As List(Of String) = .GetTypesofPhaseportrait
+            For Each PhaPorType As String In TypesofPhaseportrait
+                CboTypeofPhaseportrait.Items.Add(Main.LM.GetString(PhaPorType))
+            Next
+
+            CboTypeofPhaseportrait.SelectedIndex = 0
+            .PhaseportraitIndex = 0
+            LblPhasePortrait.Text = .LabelPhasePortrait
+            LblParameterlist.Text = .LabelParameterList
         End With
 
         Return LocPendulum
@@ -253,23 +275,20 @@ Public Class FrmPendulum
 
     End Sub
 
+    Private Sub CboTypeofPhaseportrait_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboTypeofPhaseportrait.SelectedIndexChanged
+
+        If ActivePendulum IsNot Nothing Then
+            ActivePendulum.PhaseportraitIndex = CboTypeofPhaseportrait.SelectedIndex
+            LblPhasePortrait.Text = ActivePendulum.LabelPhasePortrait
+            Reset()
+        End If
+
+    End Sub
+
     Private Sub TrbStepWide_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
 
         LblStepWidth.Text = Main.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
         ActivePendulum.StepWidth = CDec(TrbStepWidth.Value * StepWidthUnit)
-
-    End Sub
-
-    Private Sub DrawCoordinateSystem()
-
-        'Draw Coordinate System
-        Dim LevelXaxis As Decimal = 0
-        If ActivePendulum IsNot Nothing Then
-            LevelXaxis = ActivePendulum.Y0
-        End If
-        'x-Axis
-        MyBitmapGraphics?.DrawLine(New ClsMathpoint(-1, LevelXaxis), New ClsMathpoint(1, LevelXaxis), Color.Aquamarine, 1)
-        MyBitmapGraphics?.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
 
     End Sub
 
@@ -484,7 +503,6 @@ Public Class FrmPendulum
             BtnReset.Enabled = False
             BtnTakeOverStartParameter.Enabled = False
             TrbAdditionalParameter.Enabled = False
-            ChkTestMode.Enabled = False
 
             Await IterationLoop()
 
@@ -496,9 +514,6 @@ Public Class FrmPendulum
             BtnReset.Enabled = True
             BtnTakeOverStartParameter.Enabled = True
             TrbAdditionalParameter.Enabled = True
-            ChkTestMode.Enabled = True
-
-
         End If
 
     End Sub
@@ -520,7 +535,7 @@ Public Class FrmPendulum
 
         Do
             n += 1
-            ActivePendulum.Iteration(ChkTestMode.Checked)
+            ActivePendulum.Iteration(IsTestMode)
             ActualEnergy = CDec(ActivePendulum.Energy)
 
             Select Case True

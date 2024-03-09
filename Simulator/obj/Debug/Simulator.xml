@@ -193,6 +193,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptisches Billard ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Cylinder">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Zylinder ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Delta">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
@@ -306,6 +311,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.HitPoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Stosspunkt Parameter t ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.Independent">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Unabhängige Pendel ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.InvalidDualNumberDigits">
@@ -603,6 +613,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ParameterList">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parameterliste: ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ParameterRangeNotAllowed">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von: ähnelt.
@@ -616,6 +631,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.PhasePortrait">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Phasenportrait ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.PoincareSection">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Poincaré Schnitt ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.PositionStartValue2">
@@ -793,6 +813,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Zeitachse ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.Torus">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Torus ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.Transitivity">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Transitivität ähnelt.
@@ -801,6 +826,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.TwoDimensions">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Iteration in zwei Dimensionen ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.TypeofPhaseportrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Type Phasenportrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.UnimodalFunctions">
@@ -999,6 +1029,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Elliptic Billiard ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Cylinder">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Cylinder ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Delta">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Delta ähnelt.
@@ -1112,6 +1147,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.HitPoint">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Hitpont Parameter t ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.Independent">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Independent Pendulums ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.InvalidDualNumberDigits">
@@ -1409,6 +1449,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Parameter ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.ParameterList">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Parameterlist: ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.ParameterRangeNotAllowed">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die This Parameter Range is not allowed! It must be part of the interval ähnelt.
@@ -1422,6 +1467,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.PhasePortrait">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Phase Portrait ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.PoincareSection">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Poincaré Section ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.PositionStartValue2">
@@ -1599,6 +1649,11 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Time Axis ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.Torus">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Torus ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.Transitivity">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Transitivity ähnelt.
@@ -1607,6 +1662,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.TwoDimensions">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Iteration in two Dimensions ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.TypeofPhaseportrait">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Type of Phaseportrait ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.UnimodalFunctions">
