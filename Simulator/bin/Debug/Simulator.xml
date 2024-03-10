@@ -120,7 +120,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ClsCombinedPendulum">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Kombipendel ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Schwingendes Federpendel ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.ClsDoublePendulum">
@@ -956,7 +956,7 @@ Simulator
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ClsCombinedPendulum">
 <summary>
-  Sucht eine lokalisierte Zeichenfolge, die Combined Pendulum ähnelt.
+  Sucht eine lokalisierte Zeichenfolge, die Osz. Spring Pendulum ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.ClsDoublePendulum">

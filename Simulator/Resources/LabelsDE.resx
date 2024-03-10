@@ -166,7 +166,7 @@
     <comment>Cls</comment>
   </data>
   <data name="ClsCombinedPendulum" xml:space="preserve">
-    <value>Kombipendel</value>
+    <value>Schwingendes Federpendel</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsDoublePendulum" xml:space="preserve">

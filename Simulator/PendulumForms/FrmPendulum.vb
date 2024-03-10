@@ -492,8 +492,8 @@ Public Class FrmPendulum
 
             'the iteration was stopped or reseted
             'and should start from the beginning
-            StopIteration = False
             BtnStart.Text = Main.LM.GetString("Stop")
+            StopIteration = False
             With ActivePendulum
                 .IsStartparameter1Set = True
                 .IsStartparameter2Set = True
@@ -509,8 +509,8 @@ Public Class FrmPendulum
         Else
 
             'the iteration is running and should be stopped
-            StopIteration = True
             BtnStart.Text = Main.LM.GetString("Continue")
+            StopIteration = True
             BtnReset.Enabled = True
             BtnTakeOverStartParameter.Enabled = True
             TrbAdditionalParameter.Enabled = True

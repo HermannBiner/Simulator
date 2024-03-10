@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|c:\\users\\hbine\\onedrive\\dokumente\\chaos\\githubrep\\simulator\\pendulumclasslibrary\\clscombinedpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\pendulumclasslibrary\\clscombinedpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|c:\\users\\hbine\\onedrive\\dokumente\\chaos\\githubrep\\simulator\\billiardforms\\frmbilliardtable.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\billiardforms\\frmbilliardtable.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,22 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClsCombinedPendulum.vb",
-              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsCombinedPendulum.vb",
-              "RelativeDocumentMoniker": "Simulator\\PendulumClassLibrary\\ClsCombinedPendulum.vb",
-              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsCombinedPendulum.vb*",
-              "RelativeToolTip": "Simulator\\PendulumClassLibrary\\ClsCombinedPendulum.vb*",
-              "ViewState": "AQIAAJICAAAAAAAAAAAswKkCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-03-09T10:15:53.035Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -61,6 +47,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmBilliardtable.vb",
+              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\BilliardForms\\FrmBilliardtable.vb",
+              "RelativeDocumentMoniker": "Simulator\\BilliardForms\\FrmBilliardtable.vb",
+              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\BilliardForms\\FrmBilliardtable.vb*",
+              "RelativeToolTip": "Simulator\\BilliardForms\\FrmBilliardtable.vb*",
+              "ViewState": "AQIAACkCAAAAAAAAAAAuwDECAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2024-03-10T10:39:44.518Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -77,7 +77,7 @@ Public Class ClsOvalBilliardball
     Private m As Decimal
 
     'Size of the point in the phase portrait
-    Const p As Integer = 1
+    Const p As Integer = 2
 
     'Start Position of the Ball, set by the User
     Private UserStartposition As ClsMathpoint

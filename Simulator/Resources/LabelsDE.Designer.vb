@@ -191,7 +191,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Kombipendel ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Schwingendes Federpendel ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ClsCombinedPendulum() As String
             Get

@@ -32,7 +32,6 @@ Public Class FrmBilliardtable
 
     'Iteration Control
     Private StopIteration As Boolean
-    Private StopFillingPhasePortrait As Boolean
 
     'Properties of the Ball
     Private Ballcolor As Brush
@@ -177,7 +176,6 @@ Public Class FrmBilliardtable
         LblIterationSteps.Text = "0"
         StopIteration = True
         BtnStart.Text = Main.LM.GetString("Start")
-        StopFillingPhasePortrait = True
         BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
 
         BtnDrawBilliardTable.Enabled = True
@@ -500,8 +498,8 @@ Public Class FrmBilliardtable
 
                 'the iteration was stopped or reseted
                 'and should start from the beginning
-                StopIteration = False
                 BtnStart.Text = Main.LM.GetString("Stop")
+                StopIteration = False
                 BtnReset.Enabled = False
                 BtnTakeOverStartParameter.Enabled = False
                 BtnDrawBilliardTable.Enabled = False
@@ -513,8 +511,8 @@ Public Class FrmBilliardtable
             Else
 
                 'the iteration is running and should be stopped
-                StopIteration = True
                 BtnStart.Text = Main.LM.GetString("Continue")
+                StopIteration = True
                 BtnReset.Enabled = True
                 BtnTakeOverStartParameter.Enabled = True
 
@@ -528,12 +526,9 @@ Public Class FrmBilliardtable
 
     End Sub
 
-    Private Async Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
+    Private Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
 
-
-        'manage buttons ToDo
-
-        Await FillPhasePortrait()
+        PreparePhaseportraitBalls()
 
     End Sub
 
@@ -544,6 +539,75 @@ Public Class FrmBilliardtable
             Ball.Ballspeed = TrbSpeed.Value
         Next
 
+    End Sub
+
+    Private Sub PreparePhaseportraitBalls()
+
+        'Generate Balls with startposition (0,b)
+        'that is the zenith of the billardtable
+        'and different startangles
+
+        Dim NumberOfBalls As Integer = 20
+        Dim i As Integer
+
+        'Startparameter
+        Dim t As Decimal
+        Dim Alfa As Decimal
+
+        Dim LocBilliardBall As IBilliardball
+        'First Billardball to prepare general parameters
+        LocBilliardBall = GetBilliardBall()
+
+        Reset()
+        If CheckFactorC() Then
+            LocBilliardBall.C = CDec(TxtFactor.Text)
+            LocBilliardBall.DrawBilliardtable()
+            PicBilliardTable.Refresh()
+            IsBilliardtableDrawn = True
+
+            'the next start parameters are chosen that the phaseportrait gets a nice image
+            Select Case True
+                Case TypeOf LocBilliardBall Is ClsEllipseBilliardball
+                    t = CDec(Math.PI / 2)
+                    Alfa = CDec(0.001)
+                Case TypeOf LocBilliardBall Is ClsOvalBilliardball
+                    t = CDec(Math.PI / 2)
+                    Alfa = CDec(Math.PI / NumberOfBalls)
+                Case Else
+                    t = CDec(0.95) / (1 + LocBilliardBall.C)
+                    Alfa = CDec(Math.PI / NumberOfBalls)
+            End Select
+
+            With LocBilliardBall
+                .Ballcolor = Brushes.Green
+                .Startparameter = t
+                .IsStartpositionSet = True
+                .Startangle = Alfa
+                .IsStartangleSet = True
+                .Iteration(1)
+            End With
+
+            MyBilliardballCollection.Add(LocBilliardBall)
+
+            For i = 1 To NumberOfBalls - 2
+                LocBilliardBall = GetBilliardBall()
+                Alfa += CDec(Math.PI / NumberOfBalls)
+                With LocBilliardBall
+                    If i < 6 Or i > 14 Then
+                        .Ballcolor = Brushes.Green
+                    Else
+                        .Ballcolor = Brushes.Red
+                    End If
+                    .Startparameter = t
+                    .IsStartpositionSet = True
+                    .Startangle = Alfa
+                    .IsStartangleSet = True
+                    .Iteration(1)
+                End With
+                MyBilliardballCollection.Add(LocBilliardBall)
+            Next
+
+        End If
     End Sub
 
     Private Function IsIterationReady() As Boolean
@@ -569,23 +633,6 @@ Public Class FrmBilliardtable
         End If
 
         Return LocIsReady
-
-    End Function
-
-    Private Async Function FillPhasePortrait() As Task
-        Do
-
-            n += 1
-            LblIterationSteps.Text = n.ToString(CultureInfo.CurrentCulture)
-
-            'Here, the filling must be implemented
-
-            If n Mod 5 = 0 Then
-                Await Task.Delay(2)
-            End If
-
-        Loop Until StopFillingPhasePortrait
-
 
     End Function
 

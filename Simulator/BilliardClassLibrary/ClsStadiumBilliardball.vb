@@ -78,7 +78,7 @@ Public Class ClsStadiumBilliardball
     Private MySpeed As Integer = 5
 
     'Size of the point in the phase portrait
-    Const p As Integer = 1
+    Const p As Integer = 2
 
     'Start Position of the Ball, set by the User
     Private UserStartposition As ClsMathpoint

@@ -257,8 +257,8 @@ Public Class FrmHistogram
 
                 'the iteration was stopped or reseted
                 BtnStart.Text = Main.LM.GetString("Stop")
-                BtnReset.Enabled = False
                 StopIteration = False
+                BtnReset.Enabled = False
 
                 'Iteration loop
 
@@ -268,8 +268,8 @@ Public Class FrmHistogram
                 'the iteration is running and should be stopped
 
                 BtnStart.Text = Main.LM.GetString("Continue")
-                BtnReset.Enabled = True
                 StopIteration = True
+                BtnReset.Enabled = True
 
             End If
 

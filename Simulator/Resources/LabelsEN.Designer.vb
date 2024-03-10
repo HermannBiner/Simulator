@@ -191,7 +191,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Combined Pendulum ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Osz. Spring Pendulum ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ClsCombinedPendulum() As String
             Get
