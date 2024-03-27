@@ -3,6 +3,8 @@
 'in German "Implizite Mittelpunktsregel"
 'based on the differential equation of a real spring pendulum
 
+'Status Checked
+
 Public Class ClsMidpointImplicit
     Inherits ClsSpringPendulumAbstract
 

@@ -1217,6 +1217,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Shaking Energy ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ShakedPendulumC() As String
+            Get
+                Return ResourceManager.GetString("ShakedPendulumC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Shaking Frequency ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property ShakingFrequency() As String
+            Get
+                Return ResourceManager.GetString("ShakingFrequency", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Show first Splitpoints ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property ShowSplitPoints() As String
@@ -1240,6 +1258,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SingleOrbits() As String
             Get
                 Return ResourceManager.GetString("SingleOrbits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Spring Constant ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property SpringConstant() As String
+            Get
+                Return ResourceManager.GetString("SpringConstant", resourceCulture)
             End Get
         End Property
         

@@ -688,6 +688,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Setze die Startposition mit der Maus ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsDE.ShakedPendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Rüttelenergie ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.ShakingFrequency">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Rüttelfrequenz ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsDE.ShowSplitPoints">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Zeige die ersten Splitpunkte ähnelt.
@@ -701,6 +711,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsDE.SingleOrbits">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Einzelne Orbits ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsDE.SpringConstant">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Federkonstante ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsDE.SpringPendulum">
@@ -1524,6 +1539,16 @@ Simulator
   Sucht eine lokalisierte Zeichenfolge, die Set the Startposition with the Mouse ähnelt.
 </summary>
 </member>
+<member name="P:Simulator.My.Resources.LabelsEN.ShakedPendulumC">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Shaking Energy ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.ShakingFrequency">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Shaking Frequency ähnelt.
+</summary>
+</member>
 <member name="P:Simulator.My.Resources.LabelsEN.ShowSplitPoints">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Show first Splitpoints ähnelt.
@@ -1537,6 +1562,11 @@ Simulator
 <member name="P:Simulator.My.Resources.LabelsEN.SingleOrbits">
 <summary>
   Sucht eine lokalisierte Zeichenfolge, die Single Orbits ähnelt.
+</summary>
+</member>
+<member name="P:Simulator.My.Resources.LabelsEN.SpringConstant">
+<summary>
+  Sucht eine lokalisierte Zeichenfolge, die Spring Constant ähnelt.
 </summary>
 </member>
 <member name="P:Simulator.My.Resources.LabelsEN.SpringPendulum">

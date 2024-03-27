@@ -3,6 +3,8 @@
 'in German "Euler Implizit" method
 'based on the differential equation of a real spring pendulum
 
+'Status Checked
+
 Public Class ClsBackwardEuler
     Inherits ClsSpringPendulumAbstract
 

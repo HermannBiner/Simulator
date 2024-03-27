@@ -2,6 +2,8 @@
 'together with the "Runge Kutta 4" numerical Method 
 'based on the differential equation of a real spring pendulum
 
+'Status Checked
+
 Public Class ClsRungeKutta4
     Inherits ClsSpringPendulumAbstract
 

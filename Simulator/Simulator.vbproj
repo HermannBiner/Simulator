@@ -175,8 +175,8 @@
     <Compile Include="PendulumClassLibrary\ClsCombinedPendulum.vb" />
     <Compile Include="PendulumClassLibrary\ClsDoublePendulum.vb" />
     <Compile Include="PendulumClassLibrary\ClsMathHelperPendulum.vb" />
-    <Compile Include="PendulumClassLibrary\ClsSpring.vb" />
     <Compile Include="PendulumClassLibrary\IPendulum.vb" />
+    <Compile Include="PendulumClassLibrary\ClsShakedPendulum.vb" />
     <Compile Include="PendulumForms\FrmPendulum.Designer.vb">
       <DependentUpon>FrmPendulum.vb</DependentUpon>
     </Compile>

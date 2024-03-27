@@ -5,6 +5,8 @@
 'with maybe some more local parameters
 'to apply the numeric method for the iteration
 
+'Status Checked
+
 Public MustInherit Class ClsSpringPendulumAbstract
 
     Implements ISpringPendulum

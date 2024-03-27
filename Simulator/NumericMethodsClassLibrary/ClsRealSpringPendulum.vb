@@ -1,6 +1,8 @@
 ﻿'This class is the "real" Spring Pendulum
 'that oscillates like cos(t)
 
+'Status Checked
+
 Public Class ClsRealSpringPendulum
     Inherits ClsSpringPendulumAbstract
 

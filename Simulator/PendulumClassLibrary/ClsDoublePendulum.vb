@@ -8,9 +8,6 @@
 
 'Status Checked
 
-Imports System.ComponentModel
-Imports System.Globalization
-
 Public Class ClsDoublePendulum
     Implements IPendulum
 
@@ -431,7 +428,7 @@ Public Class ClsDoublePendulum
     Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
 
         If MyMapPendulumGraphics IsNot Nothing Then
-            ClearBitmaps()
+
             'x-Axis
             MyMapPendulumGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Aquamarine, 1)
             'y-Axis
@@ -440,7 +437,7 @@ Public Class ClsDoublePendulum
 
     End Sub
 
-    Public Sub DrawPendulum() Implements IPendulum.DrawPendulum
+    Public Sub DrawPendulums() Implements IPendulum.DrawPendulums
 
         With MyPicPendulumGraphics
 
@@ -459,7 +456,7 @@ Public Class ClsDoublePendulum
 
     End Sub
 
-    Sub ClearBitmaps() Implements IPendulum.ClearBitmaps
+    Sub Reset() Implements IPendulum.Reset
 
         MyMapPendulumGraphics.Clear(Color.White)
         MyMapPhaseportraitGraphics?.Clear(Color.White)
@@ -546,7 +543,7 @@ Public Class ClsDoublePendulum
             SetStartenergyRange()
 
             'Draw pendulum
-            DrawPendulum()
+            DrawPendulums()
 
             'Runge Kutta
             u1 = Phi1
@@ -584,7 +581,7 @@ Public Class ClsDoublePendulum
             SetStartenergyRange()
 
             'Draw pendulum
-            DrawPendulum()
+            DrawPendulums()
 
             'Runge Kutta Parameters
             u2 = Phi2
@@ -734,7 +731,7 @@ Public Class ClsDoublePendulum
         DrawTrack()
 
         'Draw actual Pendulumposition
-        DrawPendulum()
+        DrawPendulums()
 
     End Sub
 

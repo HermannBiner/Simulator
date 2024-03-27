@@ -5,11 +5,7 @@
 'important: this class works with mathematical coordinates
 'the Instance of the GraphicTool transforms these in Pixel-Coordinates
 
-'Status UnChecked
-
-Imports System.ComponentModel
-Imports System.Globalization
-Imports System.Linq.Expressions
+'Status Checked
 
 Public Class ClsCombinedPendulum
     Implements IPendulum
@@ -93,12 +89,12 @@ Public Class ClsCombinedPendulum
     Private u2 As Decimal
     Private v2 As Decimal
 
-    'For Poincaré Sections
-    Private SignumChanged As Boolean
-
-    'And their definition range
+    'And their definition range for the Phaseportrait
     Private UInterval As ClsInterval
     Private VInterval As ClsInterval
+
+    'For Poincaré Sections
+    Private SignumChanged As Boolean
 
     'And additional Parameters for Runge Kutta
     Private ReadOnly x As ClsVector
@@ -115,8 +111,8 @@ Public Class ClsCombinedPendulum
     'Gravitation acceleration
     Const g As Decimal = CDec(9.81)
 
-    'Length of unstressed Spring
-    Const StartL As Decimal = CDec(0.5)
+    'Length of unstressed Spring - l0 in math.doc.
+    Const l0 As Decimal = CDec(0.5)
 
     'Minimal length of the spring pendulum
     Const Lmin As Decimal = CDec(0.05)
@@ -137,7 +133,7 @@ Public Class ClsCombinedPendulum
         'and the Tag its Value of the Additional Parameter as Standard
 
         'Omega has to be bigger than ... see math. doc.
-        Dim LowerLimitOmega As Integer = CInt(Math.Ceiling(Math.Max(Math.Sqrt(g / (1 - StartL)), Math.Sqrt(g / StartL))))
+        Dim LowerLimitOmega As Integer = CInt(Math.Ceiling(Math.Max(Math.Sqrt(g / (1 - l0)), Math.Sqrt(g / l0))))
 
         MyAdditionalParameterValue = LowerLimitOmega + 5
         MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
@@ -147,7 +143,7 @@ Public Class ClsCombinedPendulum
         MyOmega = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
 
         'This is an optimal value that the movement of the pendulum has place in the diagram
-        MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - StartL))
+        MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - l0))
 
         MyValueParameters = New List(Of ClsValueParameter)
 
@@ -166,15 +162,13 @@ Public Class ClsCombinedPendulum
         'Labels
         MyLabelParameterC = Main.LM.GetString("CombinedPendulumC")
 
-        DrawCoordinateSystem()
-
         'We have two variable parameters: L = MyVariables.Components(0), Phi = MyVariables.components(1)
         MyVariables = New ClsVector(1)
 
         'Standardvalues
         With MyVariables
             'Length of Pendulum l
-            .Component(0) = StartL + MyY0
+            .Component(0) = l0 + MyY0
             u1 = .Component(0)
             v1 = 0
             'Angle of Pendulum Phi
@@ -289,11 +283,10 @@ Public Class ClsCombinedPendulum
         Set(value As Integer)
             MyAdditionalParameterValue = value
             MyOmega = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
-            MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - StartL))
+            MyY0 = CDec(g / Math.Pow(MyOmega, 2) / (1 - l0))
             'Variables.Component(0) = 0
             SetPosition()
-            DrawCoordinateSystem()
-            DrawPendulum()
+            Reset()
             SetStartenergyRange()
         End Set
     End Property
@@ -412,7 +405,7 @@ Public Class ClsCombinedPendulum
     Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
 
         If MyMapPendulumGraphics IsNot Nothing Then
-            ClearBitmaps()
+
             'x-Axis
             MyMapPendulumGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
             'y0-Line
@@ -430,7 +423,7 @@ Public Class ClsCombinedPendulum
 
             For i = 0 To NumberOfSteps
                 t = MyMathhelper.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
-                r = StartL + CDec(g * Math.Cos(t) / Math.Pow(MyOmega, 2))
+                r = l0 + CDec(g * Math.Cos(t) / Math.Pow(MyOmega, 2))
                 MyMapPendulumGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), MyY0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
             Next
 
@@ -438,7 +431,7 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Public Sub DrawPendulum() Implements IPendulum.DrawPendulum
+    Public Sub DrawPendulums() Implements IPendulum.DrawPendulums
 
         With MyPicPendulumGraphics
 
@@ -453,7 +446,7 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Sub ClearBitmaps() Implements IPendulum.ClearBitmaps
+    Sub Reset() Implements IPendulum.Reset
 
         MyMapPendulumGraphics.Clear(Color.White)
         MyMapPhaseportraitGraphics?.Clear(Color.White)
@@ -477,7 +470,7 @@ Public Class ClsCombinedPendulum
         Dim Emax As Decimal
 
         Emin = -CDec(Math.Pow(g / MyOmega, 2)) / 2
-        Emax = CDec(Math.Pow(MyOmega * (1 - MyY0 - StartL), 2)) / 2 + g * (StartL + 1 - MyY0)
+        Emax = CDec(Math.Pow(MyOmega * (1 - MyY0 - l0), 2)) / 2 + g * (l0 + 1 - MyY0)
 
         MyStartEnergyRange = New ClsInterval(Emin, Emax)
 
@@ -513,7 +506,7 @@ Public Class ClsCombinedPendulum
             SetStartenergyRange()
 
             'Draw pendulum
-            DrawPendulum()
+            DrawPendulums()
 
             'Runge Kutta
             u1 = LocL
@@ -667,7 +660,7 @@ Public Class ClsCombinedPendulum
         DrawTrack()
 
         'Draw actual Pendulumposition
-        DrawPendulum()
+        DrawPendulums()
 
     End Sub
 
@@ -721,11 +714,11 @@ Public Class ClsCombinedPendulum
         EKin = CDec(Math.Pow(v1, 2) + Math.Pow(u1 * v2, 2)) / 2
 
         'Potential Energy of m
-        EPot = g * (StartL - CDec(u1 * Math.Cos(u2)))
+        EPot = g * (l0 - CDec(u1 * Math.Cos(u2)))
 
         'potential energy of Spring Pendulum: see math.doc.
         'Spring constant id D, MyOmega = SQRT(D/m) => D = MyOmega^2
-        ESpring = CDec(Math.Pow(MyOmega * (u1 - StartL), 2)) / 2
+        ESpring = CDec(Math.Pow(MyOmega * (u1 - l0), 2)) / 2
 
         Return EKin + EPot + ESpring
 
@@ -746,7 +739,7 @@ Public Class ClsCombinedPendulum
         With x
             Try
                 Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
-                Temp += CDec(-Math.Pow(MyOmega, 2) * (.Component(0) - StartL) + g * Math.Cos(.Component(2)))
+                Temp += CDec(-Math.Pow(MyOmega, 2) * (.Component(0) - l0) + g * Math.Cos(.Component(2)))
             Catch ex As Exception
                 MessageBox.Show("Overflow 0: " & .Component(0).ToString & ", 2: " & .Component(2).ToString & ", 3: " & .Component(3).ToString)
             End Try
@@ -790,7 +783,7 @@ Public Class ClsCombinedPendulum
 
         With x
 
-            Temp = -g * CDec(Math.Sin(.Component(0))) / StartL
+            Temp = -g * CDec(Math.Sin(.Component(0))) / l0
 
         End With
 

@@ -625,6 +625,14 @@
     <value>Set the Startposition with the Mouse</value>
     <comment>Msg</comment>
   </data>
+  <data name="ShakedPendulumC" xml:space="preserve">
+    <value>Shaking Energy</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ShakingFrequency" xml:space="preserve">
+    <value>Shaking Frequency</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ShowSplitPoints" xml:space="preserve">
     <value>Show first Splitpoints</value>
     <comment>Lbl</comment>
@@ -635,6 +643,10 @@
   </data>
   <data name="SingleOrbits" xml:space="preserve">
     <value>Single Orbits</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SpringConstant" xml:space="preserve">
+    <value>Spring Constant</value>
     <comment>Lbl</comment>
   </data>
   <data name="SpringPendulum" xml:space="preserve">

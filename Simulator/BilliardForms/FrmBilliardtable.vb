@@ -9,7 +9,6 @@
 
 Imports System.Globalization
 Imports System.Reflection
-Imports System.Threading
 
 Public Class FrmBilliardtable
 

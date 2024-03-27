@@ -5,10 +5,8 @@
 'see mathematical documentation
 'if other Pendulums are programmed, the according classes have just to implement this interfaces
 
-'Status UnChecked
+'Status Checked
 
-Imports System.Globalization
-Imports System.Linq.Expressions
 Imports System.Reflection
 
 Public Class FrmPendulum
@@ -145,7 +143,7 @@ Public Class FrmPendulum
     Sub Reset()
 
         'Clear Diagram and Bitmap
-        ActivePendulum.ClearBitmaps()
+        ActivePendulum.Reset()
         PicPhasePortrait.Refresh()
         LstParameterList.Items.Clear()
         n = 0
@@ -158,7 +156,7 @@ Public Class FrmPendulum
         PicPendulum.Invalidate()
 
         'Draw active pendulum
-        ActivePendulum.DrawPendulum()
+        ActivePendulum.DrawPendulums()
 
         'Iteration Control
         StopIteration = True
@@ -268,7 +266,8 @@ Public Class FrmPendulum
         With ActivePendulum
             LblAdditionalParameter.Text = .AdditionalParameter.Name & ": " & .CalcValuefromTrbAddParameter(TrbAdditionalParameter.Value).ToString
             .AdditionalParameterValue = TrbAdditionalParameter.Value
-            .DrawPendulum()
+            .DrawCoordinateSystem()
+            .DrawPendulums()
             TxtFactor.Text = .C.ToString("N10")
             StartEnergy = .Energy
         End With
@@ -334,12 +333,6 @@ Public Class FrmPendulum
 
                     'The setting of Parameter1 i now blocked
                     .IsStartparameter1Set = True
-
-                    If .Variables.Dimension = 0 Then
-
-                        'Only one variable parameter
-                        .IsStartparameter2Set = True
-                    End If
 
                 ElseIf Not .IsStartparameter2Set Then
 
@@ -439,7 +432,7 @@ Public Class FrmPendulum
                 .IsStartparameter1Set = True
                 .IsStartparameter2Set = True
 
-                .DrawPendulum()
+                .DrawPendulums()
 
             End With
         Else

@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|c:\\users\\hbine\\onedrive\\dokumente\\chaos\\githubrep\\simulator\\billiardforms\\frmbilliardtable.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\billiardforms\\frmbilliardtable.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|c:\\users\\hbine\\onedrive\\dokumente\\chaos\\githubrep\\simulator\\pendulumclasslibrary\\clsshakedpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\pendulumclasslibrary\\clsshakedpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\simulator\\pendulumforms\\frmpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\pendulumforms\\frmpendulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\simulator\\pendulumclasslibrary\\clsdoublependulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{1FC33857-9191-4D26-8121-4CFA2407A1A5}|Simulator\\Simulator.vbproj|solutionrelative:simulator\\pendulumclasslibrary\\clsdoublependulum.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,15 +58,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FrmBilliardtable.vb",
-              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\BilliardForms\\FrmBilliardtable.vb",
-              "RelativeDocumentMoniker": "Simulator\\BilliardForms\\FrmBilliardtable.vb",
-              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\BilliardForms\\FrmBilliardtable.vb*",
-              "RelativeToolTip": "Simulator\\BilliardForms\\FrmBilliardtable.vb*",
-              "ViewState": "AQIAACkCAAAAAAAAAAAuwDECAAAeAAAA",
+              "DocumentIndex": 1,
+              "Title": "FrmPendulum.vb",
+              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumForms\\FrmPendulum.vb",
+              "RelativeDocumentMoniker": "Simulator\\PendulumForms\\FrmPendulum.vb",
+              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumForms\\FrmPendulum.vb",
+              "RelativeToolTip": "Simulator\\PendulumForms\\FrmPendulum.vb",
+              "ViewState": "AQIAANAAAAAAAAAAAAAMwK0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2024-03-10T10:39:44.518Z",
+              "WhenOpened": "2024-03-26T15:36:26.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClsDoublePendulum.vb",
+              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsDoublePendulum.vb",
+              "RelativeDocumentMoniker": "Simulator\\PendulumClassLibrary\\ClsDoublePendulum.vb",
+              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsDoublePendulum.vb",
+              "RelativeToolTip": "Simulator\\PendulumClassLibrary\\ClsDoublePendulum.vb",
+              "ViewState": "AQIAAOACAAAAAAAAAAAQwPgCAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2024-03-26T15:18:53.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClsShakedPendulum.vb",
+              "DocumentMoniker": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsShakedPendulum.vb",
+              "RelativeDocumentMoniker": "Simulator\\PendulumClassLibrary\\ClsShakedPendulum.vb",
+              "ToolTip": "C:\\Users\\hbine\\OneDrive\\Dokumente\\Chaos\\GitHubRep\\Simulator\\PendulumClassLibrary\\ClsShakedPendulum.vb*",
+              "RelativeToolTip": "Simulator\\PendulumClassLibrary\\ClsShakedPendulum.vb*",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAiwHEAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2024-03-26T12:48:28.254Z",
               "EditorCaption": ""
             }
           ]

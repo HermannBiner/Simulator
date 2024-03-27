@@ -2,8 +2,6 @@
 'a pendulum knows all rules for its movement
 'and can move itself on the screen
 
-'Status UnChecked
-
 Public Interface IPendulum
 
     'the pendulum needs the following references to draw its movement
@@ -60,9 +58,9 @@ Public Interface IPendulum
 
     Sub DrawCoordinateSystem()
 
-    Sub DrawPendulum()
+    Sub DrawPendulums()
 
-    Sub ClearBitmaps()
+    Sub Reset()
 
     Property IsStartparameter1Set As Boolean
 

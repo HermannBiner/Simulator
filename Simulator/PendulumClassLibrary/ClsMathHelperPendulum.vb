@@ -1,4 +1,7 @@
 ﻿'This class contains some mathematical calculations that are used by different pendulums
+
+'Status Checked
+
 Public Class ClsMathHelperPendulum
 
     Public Function GetAngle(X As Decimal, Y As Decimal) As Decimal

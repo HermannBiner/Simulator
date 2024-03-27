@@ -2,9 +2,6 @@
 'normally, the menu to open this form in FrmMain is not visible
 'Status checked
 
-Imports System.ComponentModel
-Imports System.Threading
-
 Public Class FrmTests
 
     Private MyMathRange As ClsInterval

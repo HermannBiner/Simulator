@@ -3,14 +3,9 @@
 'and the movement of a (red) spring pendulum which movement is approximated
 'by different numerical methods
 
-'Status: Under Construction!!
+'Status Checked
 
-Imports System.ComponentModel
-Imports System.Drawing.Text
-Imports System.Globalization
-Imports System.Net.Mail
 Imports System.Reflection
-Imports System.Threading
 
 Public Class FrmSpringPendulum
 
