@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutSimulator" xml:space="preserve">
+    <value>Info Simulator</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ActionStopped" xml:space="preserve">
+    <value>Aktion abgebrochen</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Alfa" xml:space="preserve">
+    <value>Alfa</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BallColor" xml:space="preserve">
+    <value>Farbe der nächsten Kugel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BallSpeed" xml:space="preserve">
+    <value>Kugelgeschwindigkeit</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Billiard" xml:space="preserve">
+    <value>Billard</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BilliardTable" xml:space="preserve">
+    <value>Billardtisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>Schwarz</value>
+    <comment>Col</comment>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Blau</value>
+    <comment>Col</comment>
+  </data>
+  <data name="C-Diagram" xml:space="preserve">
+    <value>C-Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClassNameViolation" xml:space="preserve">
+    <value>Ein Klassenname muss mit derm Prefic 'Cls' starten und eine Länge &gt; 3 haben!</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="ClsBackwardEuler" xml:space="preserve">
+    <value>Euler Implizit</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsCombinedPendulum" xml:space="preserve">
+    <value>Schwingendes Federpendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsDoublePendulum" xml:space="preserve">
+    <value>Doppelpendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsEllipseBilliardball" xml:space="preserve">
+    <value>Elliptisches Billard</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsForwardEuler" xml:space="preserve">
+    <value>Euler Explizit</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsLogisticGrowth" xml:space="preserve">
+    <value>Logistisches Wachstum</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsMidpointImplicit" xml:space="preserve">
+    <value>Implizite Mittelpunktsregel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsOvalBilliardball" xml:space="preserve">
+    <value>Ovales Billard</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsParabola" xml:space="preserve">
+    <value>Parabel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsRealSpringPendulum" xml:space="preserve">
+    <value>Reales Federpendel</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsRungeKutta4" xml:space="preserve">
+    <value>Runge Kutta 4</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsShakedPendulum" xml:space="preserve">
+    <value>Rüttelpendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsStadiumBilliardball" xml:space="preserve">
+    <value>Billard im Stadion</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsTentmap" xml:space="preserve">
+    <value>Zeltabbildung</value>
+    <comment>Cls</comment>
+  </data>
+  <data name="ClsUnitRoots3" xml:space="preserve">
+    <value>f(z)=z^3-1</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ColoredDiagram" xml:space="preserve">
+    <value>Farbiges Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="CombinedPendulumC" xml:space="preserve">
+    <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Fortsetzen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="CoordinatesStartpoint" xml:space="preserve">
+    <value>Startpunkt Koordinaten</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Cylinder" xml:space="preserve">
+    <value>Zylinder</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Delta" xml:space="preserve">
+    <value>Delta</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Difference" xml:space="preserve">
+    <value>Differenz</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Difference12" xml:space="preserve">
+    <value>Differenz x2 - x1</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DinStretching" xml:space="preserve">
+    <value>d in [0,10] =</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Das Dokument konnte nicht gefunden werden: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="DoublePendulumC" xml:space="preserve">
+    <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DrawBilliardTable" xml:space="preserve">
+    <value>Zeichne Billardtisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DrawFunctionGraph" xml:space="preserve">
+    <value>Zeichne Funktionsgraph</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DrMathETH" xml:space="preserve">
+    <value>Dr. math. ETHZ Hermann Biner, Zermatt</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Elliptic" xml:space="preserve">
+    <value>Elliptisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Energy" xml:space="preserve">
+    <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExaminatedParameterRange" xml:space="preserve">
+    <value>Untersuchter Parameterbereich</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExaminatedValueParameter" xml:space="preserve">
+    <value>Untersuchter Werteparameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExaminatedValueRange" xml:space="preserve">
+    <value>Untersuchter Wertebereich</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExperimentNo" xml:space="preserve">
+    <value>Experiment No</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="FactorC" xml:space="preserve">
+    <value>Faktor C</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback ist willkommen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="FeigenbaumDiagram" xml:space="preserve">
+    <value>Feigenbaum Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="FillPhasePortrait" xml:space="preserve">
+    <value>Fülle Phasenportrait</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="FunctionGraph" xml:space="preserve">
+    <value>Funktionsgraph</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Grün</value>
+    <comment>Col</comment>
+  </data>
+  <data name="Histogram" xml:space="preserve">
+    <value>Histogramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="HitPoint" xml:space="preserve">
+    <value>Stosspunkt Parameter t</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Independent" xml:space="preserve">
+    <value>Unabhängige Pendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="InvalidDualNumberDigits" xml:space="preserve">
+    <value>Eine Dualzahl kann nur die Ziffern 0 und 1 enthalten</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="InvalidParameterOrIterationValue" xml:space="preserve">
+    <value>Ungültiger Parameterwert oder Startwert</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Einige PArameterwerte sind ungültig</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="InvalidProtocolDigits" xml:space="preserve">
+    <value>Das Protokoll kann nur die Zeichen 0 und 1 enthalten</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="InvalidUserRanges" xml:space="preserve">
+    <value>Ungültiger Wertebereich</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Iteration</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="IterationDepth" xml:space="preserve">
+    <value>Iterationstiefe</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="LeftSmallerRight" xml:space="preserve">
+    <value>Die linke Intervallgrenze muss kleiner sein als die rechte</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="LowerPendulumAngle" xml:space="preserve">
+    <value>Winkel des unteren Pendels</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Magenta" xml:space="preserve">
+    <value>Magenta</value>
+    <comment>Col</comment>
+  </data>
+  <data name="MailTo" xml:space="preserve">
+    <value>Gerne per Mail an h.biner@bluewin.ch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Handbuch.pdf</value>
+    <comment>Doc</comment>
+  </data>
+  <data name="MassRatioM" xml:space="preserve">
+    <value>Massenverhältnis M</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MathDoc" xml:space="preserve">
+    <value>Dynamische Systeme.pdf</value>
+    <comment>Doc</comment>
+  </data>
+  <data name="MissingImplementation" xml:space="preserve">
+    <value>Keine implementierende Klasse gefunden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="MnuBilliard" xml:space="preserve">
+    <value>&amp;Billard</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuCDiagramBilliard" xml:space="preserve">
+    <value>&amp;C-DiagrammBillard</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuClose" xml:space="preserve">
+    <value>&amp;Schliessen</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuDocumentation" xml:space="preserve">
+    <value>&amp;Dokumentation</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuEnglish" xml:space="preserve">
+    <value>Englisch</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuFeigenbaum" xml:space="preserve">
+    <value>&amp;Feigenbaum</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuFile" xml:space="preserve">
+    <value>&amp;Datei</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuFractals" xml:space="preserve">
+    <value>&amp;Fraktale</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuGerman" xml:space="preserve">
+    <value>Deutsch</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuHistogram" xml:space="preserve">
+    <value>&amp;Histogramm</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuInfo" xml:space="preserve">
+    <value>&amp;Info</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuIteration" xml:space="preserve">
+    <value>&amp;Iteration</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuKomplexIteration" xml:space="preserve">
+    <value>&amp;Komplexe Iteration</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuLanguage" xml:space="preserve">
+    <value>Sprache</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuMain" xml:space="preserve">
+    <value>Hauptmenu</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuMandelbrot" xml:space="preserve">
+    <value>&amp;Mandelbrot Menge</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuManual" xml:space="preserve">
+    <value>&amp;Handbuch</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuMathematics" xml:space="preserve">
+    <value>M&amp;athematik</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuMechanics" xml:space="preserve">
+    <value>&amp;Mechanik</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuNewton" xml:space="preserve">
+    <value>&amp;Newton Iteration</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuPendulum" xml:space="preserve">
+    <value>&amp;Pendel</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuSensitivity" xml:space="preserve">
+    <value>&amp;Sensitivität</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuTest" xml:space="preserve">
+    <value>&amp;Test</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuTwoDimensions" xml:space="preserve">
+    <value>&amp;Zweidimensional</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuUnimodal" xml:space="preserve">
+    <value>&amp;Wachstumsmodelle</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="NewBall" xml:space="preserve">
+    <value>Neue Kugel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NewtonIteration" xml:space="preserve">
+    <value>Newton Iteration</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Next100Steps" xml:space="preserve">
+    <value>Nächste 100 Schritte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Next10Steps" xml:space="preserve">
+    <value>Nächste 10 Schritte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NextDiagram" xml:space="preserve">
+    <value>Nächstes Diagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>Nächster Schritt</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NoBallsOnTable" xml:space="preserve">
+    <value>Es gibt keine Kugeln auf dem Billardtisch</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NoIntersectionPoint" xml:space="preserve">
+    <value>Kein Schnittpunkt gefunden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NonChaoticBehaviour" xml:space="preserve">
+    <value>Wenn das Verhalten nicht chaotisch ist, wird das erwartete Resultat nicht auftreten.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NoStartPointSet" xml:space="preserve">
+    <value>Kein Startpunkt gesetzt</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NotAlllowedValue" xml:space="preserve">
+    <value> ist nicht erlaubt. Er muss im Intervall sein: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NotImplemented" xml:space="preserve">
+    <value>Diese Funktion ist momentan nicht implementiert!</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NumberOfSteps" xml:space="preserve">
+    <value>Anzahl Schritte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericMethod" xml:space="preserve">
+    <value>Numerisches Verfahren</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericMethods" xml:space="preserve">
+    <value>Numerische Methoden</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NumericValue" xml:space="preserve">
+    <value>Das muss ein numerischer Wert sein!</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="OnlyDecAndInt" xml:space="preserve">
+    <value>In diesem Projekt sind nur Zahlen vom Typ Integer oder Decimal erlaubt.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Oval" xml:space="preserve">
+    <value>Oval</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ParameterList" xml:space="preserve">
+    <value>Parameterliste:</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ParameterRangeNotAllowed" xml:space="preserve">
+    <value>Dieser Parameterbereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Pendulum" xml:space="preserve">
+    <value>Pendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PhasePortrait" xml:space="preserve">
+    <value>Phasenportrait</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PoincareSection" xml:space="preserve">
+    <value>Poincaré Schnitt</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PositionStartValue2" xml:space="preserve">
+    <value>Position Startwert 2: </value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PositiveNumber" xml:space="preserve">
+    <value>muss eine positive Zahl sein!</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Precision" xml:space="preserve">
+    <value>Präzision</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Presentation" xml:space="preserve">
+    <value>Präsentation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>Prokotoll p,q,x,y</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Rot</value>
+    <comment>Col</comment>
+  </data>
+  <data name="ReflexionAngle" xml:space="preserve">
+    <value>Reflexionswinkel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ResetIteration" xml:space="preserve">
+    <value>Iteration zurücksetzen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Sensitivity" xml:space="preserve">
+    <value>Sensitivität</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SetStartPosition" xml:space="preserve">
+    <value>Setze die Startposition mit der Maus</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="ShakedPendulumC" xml:space="preserve">
+    <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ShakingFrequency" xml:space="preserve">
+    <value>Rüttelfrequenz</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ShowOrbit" xml:space="preserve">
+    <value>Orbit anzeigen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ShowSplitPoints" xml:space="preserve">
+    <value>Zeige die ersten Splitpunkte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Simulator" xml:space="preserve">
+    <value>Simulator</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SingleOrbits" xml:space="preserve">
+    <value>Einzelne Orbits</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SpringConstant" xml:space="preserve">
+    <value>Federkonstante</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SpringPendulum" xml:space="preserve">
+    <value>Federpendel und numerische Methoden</value>
+    <comment>lbl</comment>
+  </data>
+  <data name="SpringPendulumFrequency" xml:space="preserve">
+    <value>Frequenz Federpendel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Stadium" xml:space="preserve">
+    <value>Stadion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartIteration" xml:space="preserve">
+    <value>Start Iteration</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartParameter" xml:space="preserve">
+    <value>Start Parameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartPositionNotSet" xml:space="preserve">
+    <value>Die Startposition ist nicht für alle Kugeln gesetzt</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="StartValue" xml:space="preserve">
+    <value>Startwert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartValue1" xml:space="preserve">
+    <value>Startwert 1 =</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartValue2" xml:space="preserve">
+    <value>Startwert 2 =</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartvalueForProtocol" xml:space="preserve">
+    <value>Vorschlag Startwert für dieses Protokoll</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartvalueForTargetvalue" xml:space="preserve">
+    <value>Vorschlag Startwert für diesen Zielwert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StepWidth" xml:space="preserve">
+    <value>Schrittweite</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StretchedMode" xml:space="preserve">
+    <value>Gestreckte Anzeige</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StretchingParameterInterval" xml:space="preserve">
+    <value>Der Dehnparameter muss im Intervall sein:</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="TakeOver" xml:space="preserve">
+    <value>Übernehme Startparameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TargetProtocol" xml:space="preserve">
+    <value>Zielprotokoll</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TargetValue" xml:space="preserve">
+    <value>Zielwert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Test</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TestMode" xml:space="preserve">
+    <value>Test Modus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TheValue" xml:space="preserve">
+    <value>Der Wert </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="TimeAxis" xml:space="preserve">
+    <value>Zeitachse</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Torus" xml:space="preserve">
+    <value>Torus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Transitivity" xml:space="preserve">
+    <value>Transitivität</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TwoDimensions" xml:space="preserve">
+    <value>Iteration in zwei Dimensionen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TypeofPhaseportrait" xml:space="preserve">
+    <value>Type Phasenportrait</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UnimodalFunctions" xml:space="preserve">
+    <value>Unimodale Funktionen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperPendulumAngle" xml:space="preserve">
+    <value>Winkel des oberen Pendels</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ValueList1" xml:space="preserve">
+    <value>Wertliste 1</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ValueList2" xml:space="preserve">
+    <value>Wertliste 2</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ValueRangeNotAllowed" xml:space="preserve">
+    <value>Dieser Wertebereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="X-RangeNotAllowed" xml:space="preserve">
+    <value>Dieser X-Bereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="xStretching" xml:space="preserve">
+    <value>x-Dehnung der Zeitachse</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="XValues" xml:space="preserve">
+    <value>x-Werte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Y-RangeNotAllowed1" xml:space="preserve">
+    <value>Dieser Y-Bereich ist nicht erlaubt. Er muss Teil sein von:</value>
+    <comment>Msg</comment>
+  </data>
+</root>
