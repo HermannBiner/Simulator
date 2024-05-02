@@ -130,8 +130,16 @@ Public Class Main
         Dim pdfPath As String = Path.Combine(currentDirectory, DocumentName)
 
         If File.Exists(pdfPath) Then
-            'open the document
-            Process.Start(pdfPath)
+            Dim p As New ProcessStartInfo With {
+                .FileName = pdfPath,
+                .UseShellExecute = True
+            }
+            Try
+                'open the document
+                System.Diagnostics.Process.Start(p)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
         Else
             'else error message
             MessageBox.Show(LM.GetString("DocumentNotFound") & DocumentName)
