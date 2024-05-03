@@ -613,6 +613,10 @@
     <value>Presentation</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ProcotolActivated" xml:space="preserve">
+    <value>Protocol activated</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Protocol" xml:space="preserve">
     <value>Protocol p,q,x,y</value>
     <comment>Lbl</comment>
@@ -717,6 +721,10 @@
     <value>Propose a Startvalue for this Targetvalue</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Steps" xml:space="preserve">
+    <value>Steps</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="StepWidth" xml:space="preserve">
     <value>Step Width</value>
     <comment>Lbl</comment>
@@ -756,6 +764,10 @@
   <data name="TheValue" xml:space="preserve">
     <value>The Value </value>
     <comment>Msg</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+    <comment>Lbl</comment>
   </data>
   <data name="TimeAxis" xml:space="preserve">
     <value>Time Axis</value>

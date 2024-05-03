@@ -124,7 +124,7 @@ Public Class Main
     Sub OpenDocument(DocumentName As String)
 
         'This is the path to the actual exe directory of the Simulator
-        Dim currentDirectory As String = AppDomain.CurrentDomain.BaseDirectory
+        Dim currentDirectory As String = Environment.CurrentDirectory
 
         'This is the path to the document that is in the folder "bin/debug" of the Simulator
         Dim pdfPath As String = Path.Combine(currentDirectory, DocumentName)

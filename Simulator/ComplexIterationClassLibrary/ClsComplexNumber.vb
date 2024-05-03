@@ -110,6 +110,18 @@ Public Class ClsComplexNumber
         End Get
     End Property
 
+    ReadOnly Property Power2 As ClsComplexNumber
+        Get
+            Power2 = GetPower2(MyX, MyY)
+        End Get
+    End Property
+
+    ReadOnly Property Power(n As Integer) As ClsComplexNumber
+        Get
+            Power = GetPower(New ClsComplexNumber(MyX, MyY), n)
+        End Get
+    End Property
+
     Private Function Multiply(u As ClsComplexNumber) As ClsComplexNumber
 
         Dim Result = New ClsComplexNumber(MyX * u.X - MyY * u.Y, MyX * u.Y + MyY * u.X)
@@ -125,122 +137,39 @@ Public Class ClsComplexNumber
 
     End Function
 
-    'We prepare some powers of the Complex Number
-    ReadOnly Property Power2 As ClsComplexNumber
-        Get
-            Power2 = GetPower2(MyX, MyY)
-        End Get
-    End Property
 
-    ReadOnly Property Power3 As ClsComplexNumber
-        Get
-            Power3 = GetPower3(MyX, MyY)
-        End Get
-    End Property
+    Private Function GetPower(u As ClsComplexNumber, n As Integer) As ClsComplexNumber
 
-    ReadOnly Property Power4 As ClsComplexNumber
-        Get
-            Power4 = GetPower4(MyX, MyY)
-        End Get
-    End Property
+        Dim k As Integer
+        Dim Result As New ClsComplexNumber
 
-    ReadOnly Property Power5 As ClsComplexNumber
-        Get
-            Power5 = GetPower5(MyX, MyY)
-        End Get
-    End Property
+        Select Case n
+            Case < 0
+                Result = u.Invers
+                n = -n
+            Case 0
+                Result.X = 0
+                Result.Y = 0
+            Case Else
+                Result = u
+        End Select
 
-    ReadOnly Property Power6 As ClsComplexNumber
-        Get
-            Power6 = GetPower6(MyX, MyY)
-        End Get
-    End Property
+        If n > 0 Then
+            Do While k < n - 1
+                k += 1
+                Result = Result.Multiply(u)
+            Loop
+        End If
 
-    ReadOnly Property Power7 As ClsComplexNumber
-        Get
-            Power7 = GetPower7(MyX, MyY)
-        End Get
-    End Property
+        Return Result
 
-    ReadOnly Property Power8 As ClsComplexNumber
-        Get
-            Power8 = GetPower8(MyX, MyY)
-        End Get
-    End Property
+    End Function
 
-    ReadOnly Property Power9 As ClsComplexNumber
-        Get
-            Power9 = GetPower9(MyX, MyY)
-        End Get
-    End Property
-
-    ReadOnly Property Power10 As ClsComplexNumber
-        Get
-            Power10 = GetPower10(MyX, MyY)
-        End Get
-    End Property
     Private Function GetPower2(X As Double, Y As Double) As ClsComplexNumber
 
         Dim Result = New ClsComplexNumber(X * X - Y * Y, 2 * X * Y)
         Return Result
 
     End Function
-
-    Private Function GetPower3(X As Double, Y As Double) As ClsComplexNumber
-
-        Dim Result = New ClsComplexNumber(X * X * X - 3 * X * Y * Y, 3 * X * X * Y - Y * Y * Y)
-        Return Result
-
-    End Function
-
-    Private Function GetPower4(x As Double, y As Double) As ClsComplexNumber
-
-        Return GetPower2(GetPower2(x, y).X, GetPower2(x, y).Y)
-
-    End Function
-
-    Private Function GetPower5(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower2(x, y).X, GetPower2(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower3(x, y).X, GetPower3(x, y).Y))
-
-    End Function
-
-    Private Function GetPower6(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower3(x, y).X, GetPower3(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower3(x, y).X, GetPower3(x, y).Y))
-
-    End Function
-
-    Private Function GetPower7(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower4(x, y).X, GetPower4(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower3(x, y).X, GetPower3(x, y).Y))
-
-    End Function
-
-    Private Function GetPower8(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower4(x, y).X, GetPower4(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower4(x, y).X, GetPower4(x, y).Y))
-
-    End Function
-
-    Private Function GetPower9(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower4(x, y).X, GetPower4(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower5(x, y).X, GetPower5(x, y).Y))
-
-    End Function
-
-    Private Function GetPower10(x As Double, y As Double) As ClsComplexNumber
-
-        Dim W = New ClsComplexNumber(GetPower5(x, y).X, GetPower5(x, y).Y)
-        Return W.Mult(New ClsComplexNumber(GetPower4(x, y).X, GetPower4(x, y).Y))
-
-    End Function
-
-    'if needed, it is easy to continue with this list
 
 End Class

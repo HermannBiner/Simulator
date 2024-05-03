@@ -13,6 +13,8 @@
 
 Imports System.Globalization
 Imports System.Reflection
+Imports System.Diagnostics
+
 
 Public Class FrmNewtonIteration
 
@@ -50,6 +52,8 @@ Public Class FrmNewtonIteration
     'Length of a branche of the spiral
     'see Sub IterationLoop
     Dim L As Integer = 0
+    Dim Steps As Integer
+    Dim Watch As Stopwatch
 
     'SECTOR INITIALIZATION
 
@@ -68,6 +72,8 @@ Public Class FrmNewtonIteration
         BtnStart.Text = Main.LM.GetString("Start")
         BtnStop.Text = Main.LM.GetString("Stop")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
+        LblTime.Text = Main.LM.GetString("Time")
+        LblSteps.Text = Main.LM.GetString("Steps")
 
         CboFunction.Items.Clear()
 
@@ -110,9 +116,13 @@ Public Class FrmNewtonIteration
         MapCPlane = New Bitmap(Square, Square)
         PicCPlane.Image = MapCPlane
 
-        Polynom = New ClsUnitRoots3 With {
+        Polynom = New ClsUnitRoots With {
             .MapCPlane = MapCPlane
         }
+
+        CboN.SelectedIndex = 0
+
+        Watch = New Stopwatch
 
         'Initialize Language
         InitializeLanguage()
@@ -132,9 +142,10 @@ Public Class FrmNewtonIteration
             TxtYMin.Text = .ActualYRange.A.ToString(CultureInfo.CurrentCulture)
             TxtYMax.Text = .ActualYRange.B.ToString(CultureInfo.CurrentCulture)
             TxtDeltaY.Text = .ActualYRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            .N = CInt(CboN.SelectedItem)
         End With
 
-        Polynom.Deepness = TrbPrecision.Value * 10
+        Polynom.Deepness = TrbPrecision.Value
         Polynom.Procotol = LstProtocol
 
         ResetIteration()
@@ -143,6 +154,12 @@ Public Class FrmNewtonIteration
 
         n = 0
         L = 0
+        TxtSteps.Text = 1.ToString
+        Steps = 1
+        If Watch IsNot Nothing Then
+            Watch.Reset()
+            TxtTime.Text = Watch.ToString
+        End If
 
     End Sub
 
@@ -162,7 +179,7 @@ Public Class FrmNewtonIteration
             .ActualXRange = .AllowedXRange
             .ActualYRange = .AllowedYRange
             .MapCPlane = MapCPlane
-            .Deepness = TrbPrecision.Value * 10
+            .Deepness = TrbPrecision.Value
         End With
 
         SetDefaultValues()
@@ -195,6 +212,14 @@ Public Class FrmNewtonIteration
         'Reset ranges and default Values
         SetDefaultValues()
 
+    End Sub
+
+    Private Sub CboN_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboN.SelectedIndexChanged
+        If CboN.SelectedIndex >= 0 Then
+            Polynom.N = CInt(CboN.SelectedItem)
+        End If
+
+        SetDefaultValues()
     End Sub
 
     Private Sub TrbPrecision_ValueChanged(sender As Object, e As EventArgs) Handles TrbPrecision.ValueChanged
@@ -259,13 +284,18 @@ Public Class FrmNewtonIteration
             End With
 
             Polynom.Iteration(PixelPoint)
-            PicCPlane.Refresh()
+
+            If Steps Mod 500 = 0 Then
+                PicCPlane.Refresh()
+            End If
+
+            Steps = 1
+            Watch.Start()
 
         End If
 
 
         Do
-
             n += 1
 
             If n Mod 2 = 0 Then
@@ -284,12 +314,15 @@ Public Class FrmNewtonIteration
                 End With
 
                 Polynom.Iteration(PixelPoint)
-                PicCPlane.Refresh()
 
-                If p Mod 10 = 0 Then
-                    Await Task.Delay(2)
+                If Steps Mod 5000 = 0 Then
+                    PicCPlane.Refresh()
                 End If
 
+                If p Mod 100 = 0 Then
+                    Await Task.Delay(2)
+                End If
+                Steps += 1
             Next
 
             For k = 1 To L
@@ -300,15 +333,18 @@ Public Class FrmNewtonIteration
                 End With
 
                 Polynom.Iteration(PixelPoint)
-                PicCPlane.Refresh()
-
-                If q Mod 10 = 0 Then
-                    Await Task.Delay(2)
+                If Steps Mod 5000 = 0 Then
+                    PicCPlane.Refresh()
                 End If
 
+                If q Mod 100 = 0 Then
+                    Await Task.Delay(2)
+                End If
+                Steps += 1
             Next
 
-
+            TxtSteps.Text = Steps.ToString
+            TxtTime.Text = Watch.Elapsed.ToString
 
             If p >= PicCPlane.Width Or q >= PicCPlane.Height Then
 
@@ -316,6 +352,8 @@ Public Class FrmNewtonIteration
                 BtnStart.Text = Main.LM.GetString("Start")
                 BtnStart.Enabled = True
                 BtnReset.Enabled = True
+
+                Watch.Stop()
 
             End If
 

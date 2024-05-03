@@ -23,219 +23,219 @@ Partial Class Main
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-        Me.MnuMain = New System.Windows.Forms.MenuStrip()
-        Me.MnuFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuLanguage = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuEnglish = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuGerman = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuClose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuUnimodal = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuIteration = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuSensitivity = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuHistogram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuTwoDimensions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuFeigenbaum = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuMechanics = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuBilliard = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuCDiagram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuNumericMethods = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuPendulum = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuComplexIteration = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuFractals = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuNewton = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuMandelbrot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuTest = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuDocumentation = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuManual = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuMathematics = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuInfo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuMain.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'MnuMain
-        '
-        Me.MnuMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
-        Me.MnuMain.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuFile, Me.MnuUnimodal, Me.MnuMechanics, Me.MnuComplexIteration, Me.MnuTest, Me.MnuDocumentation})
-        Me.MnuMain.Location = New System.Drawing.Point(0, 0)
-        Me.MnuMain.Name = "MnuMain"
-        Me.MnuMain.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-        Me.MnuMain.Size = New System.Drawing.Size(2028, 42)
-        Me.MnuMain.TabIndex = 0
-        Me.MnuMain.Text = "Main"
-        '
-        'MnuFile
-        '
-        Me.MnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuLanguage, Me.MnuClose})
-        Me.MnuFile.Name = "MnuFile"
-        Me.MnuFile.Size = New System.Drawing.Size(71, 38)
-        Me.MnuFile.Text = "File"
-        '
-        'MnuLanguage
-        '
-        Me.MnuLanguage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuEnglish, Me.MnuGerman})
-        Me.MnuLanguage.Name = "MnuLanguage"
-        Me.MnuLanguage.Size = New System.Drawing.Size(251, 44)
-        Me.MnuLanguage.Text = "Language"
-        '
-        'MnuEnglish
-        '
-        Me.MnuEnglish.Name = "MnuEnglish"
-        Me.MnuEnglish.Size = New System.Drawing.Size(231, 44)
-        Me.MnuEnglish.Text = "English"
-        '
-        'MnuGerman
-        '
-        Me.MnuGerman.Name = "MnuGerman"
-        Me.MnuGerman.Size = New System.Drawing.Size(231, 44)
-        Me.MnuGerman.Text = "German"
-        '
-        'MnuClose
-        '
-        Me.MnuClose.Name = "MnuClose"
-        Me.MnuClose.Size = New System.Drawing.Size(251, 44)
-        Me.MnuClose.Text = "Close"
-        '
-        'MnuUnimodal
-        '
-        Me.MnuUnimodal.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuIteration, Me.MnuSensitivity, Me.MnuHistogram, Me.MnuTwoDimensions, Me.MnuFeigenbaum})
-        Me.MnuUnimodal.Name = "MnuUnimodal"
-        Me.MnuUnimodal.Size = New System.Drawing.Size(137, 38)
-        Me.MnuUnimodal.Text = "Unimodal"
-        '
-        'MnuIteration
-        '
-        Me.MnuIteration.Name = "MnuIteration"
-        Me.MnuIteration.Size = New System.Drawing.Size(315, 44)
-        Me.MnuIteration.Text = "Iteration"
-        '
-        'MnuSensitivity
-        '
-        Me.MnuSensitivity.Name = "MnuSensitivity"
-        Me.MnuSensitivity.Size = New System.Drawing.Size(315, 44)
-        Me.MnuSensitivity.Text = "Sensitivity"
-        '
-        'MnuHistogram
-        '
-        Me.MnuHistogram.Name = "MnuHistogram"
-        Me.MnuHistogram.Size = New System.Drawing.Size(315, 44)
-        Me.MnuHistogram.Text = "Histogram"
-        '
-        'MnuTwoDimensions
-        '
-        Me.MnuTwoDimensions.Name = "MnuTwoDimensions"
-        Me.MnuTwoDimensions.Size = New System.Drawing.Size(315, 44)
-        Me.MnuTwoDimensions.Text = "TwoDimensions"
-        '
-        'MnuFeigenbaum
-        '
-        Me.MnuFeigenbaum.Name = "MnuFeigenbaum"
-        Me.MnuFeigenbaum.Size = New System.Drawing.Size(315, 44)
-        Me.MnuFeigenbaum.Text = "Feigenbaum"
-        '
-        'MnuMechanics
-        '
-        Me.MnuMechanics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBilliard, Me.MnuCDiagram, Me.MnuNumericMethods, Me.MnuPendulum})
-        Me.MnuMechanics.Name = "MnuMechanics"
-        Me.MnuMechanics.Size = New System.Drawing.Size(147, 38)
-        Me.MnuMechanics.Text = "Mechanics"
-        '
-        'MnuBilliard
-        '
-        Me.MnuBilliard.Name = "MnuBilliard"
-        Me.MnuBilliard.Size = New System.Drawing.Size(333, 44)
-        Me.MnuBilliard.Text = "Billiard"
-        '
-        'MnuCDiagram
-        '
-        Me.MnuCDiagram.Name = "MnuCDiagram"
-        Me.MnuCDiagram.Size = New System.Drawing.Size(333, 44)
-        Me.MnuCDiagram.Text = "CDiagramBilliard"
-        '
-        'MnuNumericMethods
-        '
-        Me.MnuNumericMethods.Name = "MnuNumericMethods"
-        Me.MnuNumericMethods.Size = New System.Drawing.Size(333, 44)
-        Me.MnuNumericMethods.Text = "NumericMethods"
-        '
-        'MnuPendulum
-        '
-        Me.MnuPendulum.Name = "MnuPendulum"
-        Me.MnuPendulum.Size = New System.Drawing.Size(333, 44)
-        Me.MnuPendulum.Text = "Pendulum"
-        '
-        'MnuComplexIteration
-        '
-        Me.MnuComplexIteration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuFractals, Me.MnuNewton, Me.MnuMandelbrot})
-        Me.MnuComplexIteration.Name = "MnuComplexIteration"
-        Me.MnuComplexIteration.Size = New System.Drawing.Size(217, 38)
-        Me.MnuComplexIteration.Text = "ComplexIteration"
-        '
-        'MnuFractals
-        '
-        Me.MnuFractals.Name = "MnuFractals"
-        Me.MnuFractals.Size = New System.Drawing.Size(272, 44)
-        Me.MnuFractals.Text = "Fractals"
-        '
-        'MnuNewton
-        '
-        Me.MnuNewton.Name = "MnuNewton"
-        Me.MnuNewton.Size = New System.Drawing.Size(272, 44)
-        Me.MnuNewton.Text = "Newton"
-        '
-        'MnuMandelbrot
-        '
-        Me.MnuMandelbrot.Name = "MnuMandelbrot"
-        Me.MnuMandelbrot.Size = New System.Drawing.Size(272, 44)
-        Me.MnuMandelbrot.Text = "Mandelbrot"
-        '
-        'MnuTest
-        '
-        Me.MnuTest.Name = "MnuTest"
-        Me.MnuTest.Size = New System.Drawing.Size(76, 38)
-        Me.MnuTest.Text = "Test"
-        '
-        'MnuDocumentation
-        '
-        Me.MnuDocumentation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuManual, Me.MnuMathematics, Me.MnuInfo})
-        Me.MnuDocumentation.Name = "MnuDocumentation"
-        Me.MnuDocumentation.Size = New System.Drawing.Size(200, 38)
-        Me.MnuDocumentation.Text = "Documentation"
-        '
-        'MnuManual
-        '
-        Me.MnuManual.Name = "MnuManual"
-        Me.MnuManual.Size = New System.Drawing.Size(359, 44)
-        Me.MnuManual.Text = "Manual"
-        '
-        'MnuMathematics
-        '
-        Me.MnuMathematics.Name = "MnuMathematics"
-        Me.MnuMathematics.Size = New System.Drawing.Size(359, 44)
-        Me.MnuMathematics.Text = "Mathematics"
-        '
-        'MnuInfo
-        '
-        Me.MnuInfo.Name = "MnuInfo"
-        Me.MnuInfo.Size = New System.Drawing.Size(359, 44)
-        Me.MnuInfo.Text = "Info"
-        '
-        'Main
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2028, 1127)
-        Me.Controls.Add(Me.MnuMain)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MainMenuStrip = Me.MnuMain
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.Name = "Main"
-        Me.Text = "Simulator"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.MnuMain.ResumeLayout(False)
-        Me.MnuMain.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        MnuMain = New MenuStrip()
+        MnuFile = New ToolStripMenuItem()
+        MnuLanguage = New ToolStripMenuItem()
+        MnuEnglish = New ToolStripMenuItem()
+        MnuGerman = New ToolStripMenuItem()
+        MnuClose = New ToolStripMenuItem()
+        MnuUnimodal = New ToolStripMenuItem()
+        MnuIteration = New ToolStripMenuItem()
+        MnuSensitivity = New ToolStripMenuItem()
+        MnuHistogram = New ToolStripMenuItem()
+        MnuTwoDimensions = New ToolStripMenuItem()
+        MnuFeigenbaum = New ToolStripMenuItem()
+        MnuMechanics = New ToolStripMenuItem()
+        MnuBilliard = New ToolStripMenuItem()
+        MnuCDiagram = New ToolStripMenuItem()
+        MnuNumericMethods = New ToolStripMenuItem()
+        MnuPendulum = New ToolStripMenuItem()
+        MnuComplexIteration = New ToolStripMenuItem()
+        MnuFractals = New ToolStripMenuItem()
+        MnuNewton = New ToolStripMenuItem()
+        MnuMandelbrot = New ToolStripMenuItem()
+        MnuTest = New ToolStripMenuItem()
+        MnuDocumentation = New ToolStripMenuItem()
+        MnuManual = New ToolStripMenuItem()
+        MnuMathematics = New ToolStripMenuItem()
+        MnuInfo = New ToolStripMenuItem()
+        MnuMain.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' MnuMain
+        ' 
+        MnuMain.ImageScalingSize = New Size(24, 24)
+        MnuMain.Items.AddRange(New ToolStripItem() {MnuFile, MnuUnimodal, MnuMechanics, MnuComplexIteration, MnuTest, MnuDocumentation})
+        MnuMain.Location = New Point(0, 0)
+        MnuMain.Name = "MnuMain"
+        MnuMain.Padding = New Padding(9, 3, 0, 3)
+        MnuMain.Size = New Size(2197, 42)
+        MnuMain.TabIndex = 0
+        MnuMain.Text = "Main"
+        ' 
+        ' MnuFile
+        ' 
+        MnuFile.DropDownItems.AddRange(New ToolStripItem() {MnuLanguage, MnuClose})
+        MnuFile.Name = "MnuFile"
+        MnuFile.Size = New Size(71, 36)
+        MnuFile.Text = "File"
+        ' 
+        ' MnuLanguage
+        ' 
+        MnuLanguage.DropDownItems.AddRange(New ToolStripItem() {MnuEnglish, MnuGerman})
+        MnuLanguage.Name = "MnuLanguage"
+        MnuLanguage.Size = New Size(251, 44)
+        MnuLanguage.Text = "Language"
+        ' 
+        ' MnuEnglish
+        ' 
+        MnuEnglish.Name = "MnuEnglish"
+        MnuEnglish.Size = New Size(231, 44)
+        MnuEnglish.Text = "English"
+        ' 
+        ' MnuGerman
+        ' 
+        MnuGerman.Name = "MnuGerman"
+        MnuGerman.Size = New Size(231, 44)
+        MnuGerman.Text = "German"
+        ' 
+        ' MnuClose
+        ' 
+        MnuClose.Name = "MnuClose"
+        MnuClose.Size = New Size(251, 44)
+        MnuClose.Text = "Close"
+        ' 
+        ' MnuUnimodal
+        ' 
+        MnuUnimodal.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum})
+        MnuUnimodal.Name = "MnuUnimodal"
+        MnuUnimodal.Size = New Size(137, 36)
+        MnuUnimodal.Text = "Unimodal"
+        ' 
+        ' MnuIteration
+        ' 
+        MnuIteration.Name = "MnuIteration"
+        MnuIteration.Size = New Size(315, 44)
+        MnuIteration.Text = "Iteration"
+        ' 
+        ' MnuSensitivity
+        ' 
+        MnuSensitivity.Name = "MnuSensitivity"
+        MnuSensitivity.Size = New Size(315, 44)
+        MnuSensitivity.Text = "Sensitivity"
+        ' 
+        ' MnuHistogram
+        ' 
+        MnuHistogram.Name = "MnuHistogram"
+        MnuHistogram.Size = New Size(315, 44)
+        MnuHistogram.Text = "Histogram"
+        ' 
+        ' MnuTwoDimensions
+        ' 
+        MnuTwoDimensions.Name = "MnuTwoDimensions"
+        MnuTwoDimensions.Size = New Size(315, 44)
+        MnuTwoDimensions.Text = "TwoDimensions"
+        ' 
+        ' MnuFeigenbaum
+        ' 
+        MnuFeigenbaum.Name = "MnuFeigenbaum"
+        MnuFeigenbaum.Size = New Size(315, 44)
+        MnuFeigenbaum.Text = "Feigenbaum"
+        ' 
+        ' MnuMechanics
+        ' 
+        MnuMechanics.DropDownItems.AddRange(New ToolStripItem() {MnuBilliard, MnuCDiagram, MnuNumericMethods, MnuPendulum})
+        MnuMechanics.Name = "MnuMechanics"
+        MnuMechanics.Size = New Size(147, 36)
+        MnuMechanics.Text = "Mechanics"
+        ' 
+        ' MnuBilliard
+        ' 
+        MnuBilliard.Name = "MnuBilliard"
+        MnuBilliard.Size = New Size(333, 44)
+        MnuBilliard.Text = "Billiard"
+        ' 
+        ' MnuCDiagram
+        ' 
+        MnuCDiagram.Name = "MnuCDiagram"
+        MnuCDiagram.Size = New Size(333, 44)
+        MnuCDiagram.Text = "CDiagramBilliard"
+        ' 
+        ' MnuNumericMethods
+        ' 
+        MnuNumericMethods.Name = "MnuNumericMethods"
+        MnuNumericMethods.Size = New Size(333, 44)
+        MnuNumericMethods.Text = "NumericMethods"
+        ' 
+        ' MnuPendulum
+        ' 
+        MnuPendulum.Name = "MnuPendulum"
+        MnuPendulum.Size = New Size(333, 44)
+        MnuPendulum.Text = "Pendulum"
+        ' 
+        ' MnuComplexIteration
+        ' 
+        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuFractals, MnuNewton, MnuMandelbrot})
+        MnuComplexIteration.Name = "MnuComplexIteration"
+        MnuComplexIteration.Size = New Size(217, 36)
+        MnuComplexIteration.Text = "ComplexIteration"
+        ' 
+        ' MnuFractals
+        ' 
+        MnuFractals.Name = "MnuFractals"
+        MnuFractals.Size = New Size(272, 44)
+        MnuFractals.Text = "Fractals"
+        ' 
+        ' MnuNewton
+        ' 
+        MnuNewton.Name = "MnuNewton"
+        MnuNewton.Size = New Size(272, 44)
+        MnuNewton.Text = "Newton"
+        ' 
+        ' MnuMandelbrot
+        ' 
+        MnuMandelbrot.Name = "MnuMandelbrot"
+        MnuMandelbrot.Size = New Size(272, 44)
+        MnuMandelbrot.Text = "Mandelbrot"
+        ' 
+        ' MnuTest
+        ' 
+        MnuTest.Name = "MnuTest"
+        MnuTest.Size = New Size(76, 36)
+        MnuTest.Text = "Test"
+        MnuTest.Visible = False
+        ' 
+        ' MnuDocumentation
+        ' 
+        MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuMathematics, MnuInfo})
+        MnuDocumentation.Name = "MnuDocumentation"
+        MnuDocumentation.Size = New Size(200, 36)
+        MnuDocumentation.Text = "Documentation"
+        ' 
+        ' MnuManual
+        ' 
+        MnuManual.Name = "MnuManual"
+        MnuManual.Size = New Size(284, 44)
+        MnuManual.Text = "Manual"
+        ' 
+        ' MnuMathematics
+        ' 
+        MnuMathematics.Name = "MnuMathematics"
+        MnuMathematics.Size = New Size(284, 44)
+        MnuMathematics.Text = "Mathematics"
+        ' 
+        ' MnuInfo
+        ' 
+        MnuInfo.Name = "MnuInfo"
+        MnuInfo.Size = New Size(284, 44)
+        MnuInfo.Text = "Info"
+        ' 
+        ' Main
+        ' 
+        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(2197, 1443)
+        Controls.Add(MnuMain)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MainMenuStrip = MnuMain
+        Margin = New Padding(4, 5, 4, 5)
+        Name = "Main"
+        Text = "Simulator"
+        WindowState = FormWindowState.Maximized
+        MnuMain.ResumeLayout(False)
+        MnuMain.PerformLayout()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
 

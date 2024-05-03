@@ -42,9 +42,15 @@ Public Class FrmTests
 
         LstValues.Items.Add("Z = " & Z.X.ToString("N8") & "/" & Z.Y.ToString("N8"))
 
-        Dim W As ClsComplexNumber = Z.Invers
+        Dim W As ClsComplexNumber
+        Dim k As Integer
 
-        LstValues.Items.Add("Invers = " & W.X.ToString("N8") & "/" & W.Y.ToString("N8"))
+        For k = -2 To 5
+
+            W = Z.Power(k)
+
+            LstValues.Items.Add("k = " & k.ToString & ", " & W.X.ToString("N8") & "/" & W.Y.ToString("N8"))
+        Next
 
 
     End Sub

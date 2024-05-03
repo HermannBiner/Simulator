@@ -28,6 +28,9 @@ Public Interface IPolynom
     'Protocol
     WriteOnly Property Procotol As ListBox
 
+    'N (number of roots)
+    WriteOnly Property N As Integer
+
     'Draws the coordinatesystem and the roots of the Polynom
     Sub DrawCoordinateSystem()
 
