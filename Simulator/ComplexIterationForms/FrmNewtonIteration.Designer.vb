@@ -259,7 +259,7 @@ Partial Class FrmNewtonIteration
         ' CboN
         ' 
         CboN.FormattingEnabled = True
-        CboN.Items.AddRange(New Object() {"3", "4", "5", "6", "7", "8", "9", "10", "11"})
+        CboN.Items.AddRange(New Object() {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         CboN.Location = New Point(1985, 12)
         CboN.Name = "CboN"
         CboN.Size = New Size(69, 40)

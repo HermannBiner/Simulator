@@ -34,10 +34,16 @@ Public Interface IPolynom
     'Draws the coordinatesystem and the roots of the Polynom
     Sub DrawCoordinateSystem()
 
+    'Draws the roots
+    Sub DrawRoots(Finished As Boolean)
+
     'Iteration
     Sub Iteration(Startpoint As Point)
 
     'Reset
     Sub Reset()
+
+    Sub PrepareIteration()
+
 
 End Interface

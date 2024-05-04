@@ -148,9 +148,11 @@ Public Class FrmNewtonIteration
         Polynom.Deepness = TrbPrecision.Value
         Polynom.Procotol = LstProtocol
 
-        ResetIteration()
-
+        Polynom.PrepareIteration()
         Polynom.DrawCoordinateSystem()
+        Polynom.DrawRoots(False)
+
+        ResetIteration()
 
         n = 0
         L = 0
@@ -215,6 +217,7 @@ Public Class FrmNewtonIteration
     End Sub
 
     Private Sub CboN_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboN.SelectedIndexChanged
+
         If CboN.SelectedIndex >= 0 Then
             Polynom.N = CInt(CboN.SelectedItem)
         End If
@@ -285,10 +288,6 @@ Public Class FrmNewtonIteration
 
             Polynom.Iteration(PixelPoint)
 
-            If Steps Mod 500 = 0 Then
-                PicCPlane.Refresh()
-            End If
-
             Steps = 1
             Watch.Start()
 
@@ -354,6 +353,8 @@ Public Class FrmNewtonIteration
                 BtnReset.Enabled = True
 
                 Watch.Stop()
+                Polynom.DrawRoots(True)
+                PicCPlane.Refresh()
 
             End If
 

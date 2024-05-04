@@ -26,25 +26,26 @@ Public Class ClsUnitRoots
 
     End Sub
 
-    Private Sub PrepareIteration()
+    Protected Overrides Sub PrepareIteration()
 
         ReDim Root(MyN)
 
         Dim k As Integer
 
         'Prepare Brushlist
-        Dim BrushList(11) As Brush
+        Dim BrushList(12) As Brush
         BrushList(1) = Brushes.Red
         BrushList(2) = Brushes.Blue
         BrushList(3) = Brushes.Green
         BrushList(4) = Brushes.Yellow
-        BrushList(5) = Brushes.Aqua
-        BrushList(6) = Brushes.Orange
-        BrushList(7) = Brushes.Magenta
-        BrushList(8) = Brushes.Violet
-        BrushList(9) = Brushes.LightBlue
-        BrushList(10) = Brushes.LawnGreen
-        BrushList(11) = Brushes.Gray
+        BrushList(5) = Brushes.Salmon
+        BrushList(6) = Brushes.SkyBlue
+        BrushList(7) = Brushes.Gold
+        BrushList(8) = Brushes.Lime
+        BrushList(9) = Brushes.DarkOrange
+        BrushList(10) = Brushes.Aqua
+        BrushList(11) = Brushes.Magenta
+        BrushList(12) = Brushes.SpringGreen
 
         'Generate Roots
         Dim W = New ClsComplexNumber(1, 0)
@@ -57,19 +58,28 @@ Public Class ClsUnitRoots
     End Sub
 
     'Draws roots of the polynom
-    Protected Overrides Sub DrawRoots()
-
-        PrepareIteration()
+    Protected Overrides Sub DrawRoots(Finished As Boolean)
 
         'Roots
         Dim i As Integer
+        Dim Col As Brush
+
         For i = 1 To MyN
-            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(Root(i).X), CDec(Root(i).Y)), Root(i).Color, 3)
+            If Finished Then
+                Col = Brushes.Black
+            Else
+                Col = Root(i).Color
+            End If
+            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(Root(i).X), CDec(Root(i).Y)), Col, 3)
         Next
 
     End Sub
 
     Protected Overrides Function StopCondition(Z As ClsComplexNumber) As Boolean
+
+        'The stop condition is
+        'Abs(1-z^n) < abs(z^n)  -- see math. doc.
+        'if this condition is fullfilled then the startpoint converges to a root
 
         Dim W = Z.Power(MyN)
 
@@ -79,12 +89,14 @@ Public Class ClsUnitRoots
 
     Protected Overrides Function GetBasin(Z As ClsComplexNumber) As Brush
 
+
+        'If sht stop condition is fullfilled, then the startpoint onverges to a root
+        'and we have to find out, which root that is
+
         Dim Difference As Double
         Dim Temp As Double = Z.Add(Root(1).Stretch(-1)).AbsoluteValue
         Dim Color As Brush = Root(1).Color
         Dim i As Integer
-
-
 
         For i = 2 To MyN
 
@@ -101,6 +113,8 @@ Public Class ClsUnitRoots
 
     Protected Overrides Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 
+        'This is the formula for the Newton Iteration
+        'see math. doc.
         Dim W As ClsComplexNumber = Z.Power(MyN - 1).Invers.Stretch(1 / MyN)
         W = Z.Stretch((MyN - 1) / MyN).Add(W)
 

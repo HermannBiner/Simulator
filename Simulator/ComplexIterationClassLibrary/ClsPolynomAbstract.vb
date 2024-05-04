@@ -92,19 +92,18 @@ Public MustInherit Class ClsPolynomAbstract
 
         If ActualXRange.IsNumberInInterval(0) Then
 
-            'Draw y-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
-                                         New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
-        End If
+                'Draw y-axis
+                MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
+                                             New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
+            End If
 
-        If ActualYRange.IsNumberInInterval(0) Then
+            If ActualYRange.IsNumberInInterval(0) Then
 
-            'Draw x-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
+                'Draw x-axis
+                MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
                                          New ClsMathpoint(ActualXRange.B, 0), Color.Black, 1)
-        End If
+            End If
 
-        DrawRoots()
     End Sub
 
     Public Sub Iteration(Startpoint As Point) Implements IPolynom.Iteration
@@ -162,6 +161,7 @@ Public MustInherit Class ClsPolynomAbstract
         If MyMapCPlaneGraphics IsNot Nothing Then
             MyMapCPlaneGraphics.Clear(Color.White)
             DrawCoordinateSystem()
+            DrawRoots(False)
         End If
 
         'Clear Protocol
@@ -170,13 +170,15 @@ Public MustInherit Class ClsPolynomAbstract
         End If
     End Sub
 
-    Protected MustOverride Sub DrawRoots()
+    Protected MustOverride Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
 
     Protected MustOverride Function StopCondition(Z As ClsComplexNumber) As Boolean
 
     Protected MustOverride Function GetBasin(Z As ClsComplexNumber) As Brush
 
     Protected MustOverride Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
+
+    Protected MustOverride Sub PrepareIteration() Implements IPolynom.PrepareIteration
 
 End Class
 
