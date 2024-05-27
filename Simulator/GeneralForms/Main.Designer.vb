@@ -43,7 +43,7 @@ Partial Class Main
         MnuComplexIteration = New ToolStripMenuItem()
         MnuFractals = New ToolStripMenuItem()
         MnuNewton = New ToolStripMenuItem()
-        MnuMandelbrot = New ToolStripMenuItem()
+        MnuJuliaSet = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
         MnuDocumentation = New ToolStripMenuItem()
         MnuManual = New ToolStripMenuItem()
@@ -59,7 +59,7 @@ Partial Class Main
         MnuMain.Location = New Point(0, 0)
         MnuMain.Name = "MnuMain"
         MnuMain.Padding = New Padding(9, 3, 0, 3)
-        MnuMain.Size = New Size(2197, 42)
+        MnuMain.Size = New Size(2197, 44)
         MnuMain.TabIndex = 0
         MnuMain.Text = "Main"
         ' 
@@ -67,7 +67,7 @@ Partial Class Main
         ' 
         MnuFile.DropDownItems.AddRange(New ToolStripItem() {MnuLanguage, MnuClose})
         MnuFile.Name = "MnuFile"
-        MnuFile.Size = New Size(71, 36)
+        MnuFile.Size = New Size(71, 38)
         MnuFile.Text = "File"
         ' 
         ' MnuLanguage
@@ -99,7 +99,7 @@ Partial Class Main
         ' 
         MnuUnimodal.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum})
         MnuUnimodal.Name = "MnuUnimodal"
-        MnuUnimodal.Size = New Size(137, 36)
+        MnuUnimodal.Size = New Size(137, 38)
         MnuUnimodal.Text = "Unimodal"
         ' 
         ' MnuIteration
@@ -136,7 +136,7 @@ Partial Class Main
         ' 
         MnuMechanics.DropDownItems.AddRange(New ToolStripItem() {MnuBilliard, MnuCDiagram, MnuNumericMethods, MnuPendulum})
         MnuMechanics.Name = "MnuMechanics"
-        MnuMechanics.Size = New Size(147, 36)
+        MnuMechanics.Size = New Size(147, 38)
         MnuMechanics.Text = "Mechanics"
         ' 
         ' MnuBilliard
@@ -165,41 +165,40 @@ Partial Class Main
         ' 
         ' MnuComplexIteration
         ' 
-        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuFractals, MnuNewton, MnuMandelbrot})
+        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuFractals, MnuNewton, MnuJuliaSet})
         MnuComplexIteration.Name = "MnuComplexIteration"
-        MnuComplexIteration.Size = New Size(217, 36)
+        MnuComplexIteration.Size = New Size(217, 38)
         MnuComplexIteration.Text = "ComplexIteration"
         ' 
         ' MnuFractals
         ' 
         MnuFractals.Name = "MnuFractals"
-        MnuFractals.Size = New Size(272, 44)
+        MnuFractals.Size = New Size(359, 44)
         MnuFractals.Text = "Fractals"
         ' 
         ' MnuNewton
         ' 
         MnuNewton.Name = "MnuNewton"
-        MnuNewton.Size = New Size(272, 44)
+        MnuNewton.Size = New Size(359, 44)
         MnuNewton.Text = "Newton"
         ' 
-        ' MnuMandelbrot
+        ' MnuJuliaSet
         ' 
-        MnuMandelbrot.Name = "MnuMandelbrot"
-        MnuMandelbrot.Size = New Size(272, 44)
-        MnuMandelbrot.Text = "Mandelbrot"
+        MnuJuliaSet.Name = "MnuJuliaSet"
+        MnuJuliaSet.Size = New Size(359, 44)
+        MnuJuliaSet.Text = "JuliaSet"
         ' 
         ' MnuTest
         ' 
         MnuTest.Name = "MnuTest"
-        MnuTest.Size = New Size(76, 36)
+        MnuTest.Size = New Size(76, 38)
         MnuTest.Text = "Test"
-        MnuTest.Visible = False
         ' 
         ' MnuDocumentation
         ' 
         MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuMathematics, MnuInfo})
         MnuDocumentation.Name = "MnuDocumentation"
-        MnuDocumentation.Size = New Size(200, 36)
+        MnuDocumentation.Size = New Size(200, 38)
         MnuDocumentation.Text = "Documentation"
         ' 
         ' MnuManual
@@ -257,7 +256,7 @@ Partial Class Main
     Friend WithEvents MnuPendulum As ToolStripMenuItem
     Friend WithEvents MnuComplexIteration As ToolStripMenuItem
     Friend WithEvents MnuNewton As ToolStripMenuItem
-    Friend WithEvents MnuMandelbrot As ToolStripMenuItem
+    Friend WithEvents MnuJuliaSet As ToolStripMenuItem
     Friend WithEvents MnuBilliard As ToolStripMenuItem
     Friend WithEvents MnuFractals As ToolStripMenuItem
     Friend WithEvents MnuCDiagram As ToolStripMenuItem

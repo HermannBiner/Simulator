@@ -26,12 +26,28 @@ Public Interface IPolynom
     WriteOnly Property Deepness As Integer
 
     'Protocol
-    WriteOnly Property Procotol As ListBox
+    WriteOnly Property ProcotolList As ListBox
+    WriteOnly Property IsProtocol As Boolean
+
+    'Using N as parameter
+    ReadOnly Property UseN As Boolean
 
     'N (number of roots)
     WriteOnly Property N As Integer
 
-    'Draws the coordinatesystem and the roots of the Polynom
+    'Using C as parameter
+    ReadOnly Property UseC As Boolean
+
+    'Parameter C
+    WriteOnly Property C As ClsComplexNumber
+
+    'Conjugate Z
+    'the Newton Iteration is replaced
+    'and Z is conjugated in each step
+    WriteOnly Property ConjugateZ As Boolean
+
+
+    'Draws the coordinatesystem
     Sub DrawCoordinateSystem()
 
     'Draws the roots

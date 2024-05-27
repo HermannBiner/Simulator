@@ -9,8 +9,6 @@ Public Class FrmTests
 
     Public Sub New()
 
-        Z = New ClsComplexNumber(100, 100)
-
         'This is necessary for the designer
         InitializeComponent()
 
@@ -33,26 +31,34 @@ Public Class FrmTests
 
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
-        If Z.X = 100 Then
-            Z.X = CDec(InputBox("X="))
-        End If
-        If Z.Y = 100 Then
-            Z.Y = CDec(InputBox("Y="))
-        End If
-
-        LstValues.Items.Add("Z = " & Z.X.ToString("N8") & "/" & Z.Y.ToString("N8"))
-
-        Dim W As ClsComplexNumber
+        Dim Z = New ClsComplexNumber(-0.9, 0)
+        Dim W = New ClsComplexNumber(0, 0)
+        Dim i As Integer
         Dim k As Integer
 
-        For k = -2 To 5
+        For k = 1 To 18
 
-            W = Z.Power(k)
+            LstValues.Items.Add(Z.X.ToString("N5") & ", " & Z.Y.ToString("N5"))
+            W.X = Z.X
+            W.Y = Z.Y
 
-            LstValues.Items.Add("k = " & k.ToString & ", " & W.X.ToString("N8") & "/" & W.Y.ToString("N8"))
-        Next
+            If W.AbsoluteValue > 0 Then
+                For i = 1 To 50
 
+                    If W.AbsoluteValue > 0 Then
+                        W = W.Power2.Add(New ClsComplexNumber(1, 0)).Div(W.Stretch(2))
+                    Else
+                        i = 51
+                    End If
 
+                Next i
+            End If
+
+            LstValues.Items.Add(W.X.ToString("N5") & ", " & W.Y.ToString("N5"))
+
+            Z.X += 0.1 * k
+
+        Next k
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
@@ -62,8 +68,6 @@ Public Class FrmTests
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        Z.X = 100
-        Z.Y = 100
         LstValues.Items.Clear()
 
     End Sub

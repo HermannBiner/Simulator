@@ -41,7 +41,7 @@ Public Class Main
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuFractals.Text = LM.GetString("MnuFractals")
         MnuNewton.Text = LM.GetString("MnuNewton")
-        MnuMandelbrot.Text = LM.GetString("MnuMandelbrot")
+        MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
         MnuTest.Text = LM.GetString("MnuTest")
         MnuDocumentation.Text = LM.GetString("MnuDocumentation")
         MnuManual.Text = LM.GetString("MnuManual")
@@ -154,7 +154,7 @@ Public Class Main
         FrmNewtonIteration.Show()
     End Sub
 
-    Private Sub MnuMandelbrot_Click(sender As Object, e As EventArgs) Handles MnuMandelbrot.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
+    Private Sub MnuJuliaSet_Click(sender As Object, e As EventArgs) Handles MnuJuliaSet.Click
+        FrmJuliaSet.Show()
     End Sub
 End Class

@@ -181,6 +181,14 @@
     <value>Euler Explizit</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsInversUnitRoots" xml:space="preserve">
+    <value>Inverse komplexe Einheitswurzeln</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsJuliaN" xml:space="preserve">
+    <value>Julia Menge mit Exponent z^n</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsLogisticGrowth" xml:space="preserve">
     <value>Logistisches Wachstum</value>
     <comment>Cls</comment>
@@ -196,6 +204,10 @@
   <data name="ClsParabola" xml:space="preserve">
     <value>Parabel</value>
     <comment>Cls</comment>
+  </data>
+  <data name="ClsPolynom3C" xml:space="preserve">
+    <value>Polynom mit drei Nullstellen</value>
+    <comment>Lbl</comment>
   </data>
   <data name="ClsRealSpringPendulum" xml:space="preserve">
     <value>Reales Federpendel</value>
@@ -217,8 +229,8 @@
     <value>Zeltabbildung</value>
     <comment>Cls</comment>
   </data>
-  <data name="ClsUnitRoots3" xml:space="preserve">
-    <value>f(z)=z^3-1</value>
+  <data name="ClsUnitRoots" xml:space="preserve">
+    <value>Komplexe Einheitswurzeln</value>
     <comment>Lbl</comment>
   </data>
   <data name="ColoredDiagram" xml:space="preserve">
@@ -229,6 +241,10 @@
     <value>Gesamtenergie</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ConjugateZ" xml:space="preserve">
+    <value>Konjugiere Schritt</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Fortsetzen</value>
     <comment>Lbl</comment>
@@ -237,9 +253,17 @@
     <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
   </data>
+  <data name="CXNotAllowed" xml:space="preserve">
+    <value>Der a-Teil von c ist nicht erlaubt. Er muss im Intervall sein</value>
+    <comment>Msg</comment>
+  </data>
   <data name="Cylinder" xml:space="preserve">
     <value>Zylinder</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="CYNotAllowed" xml:space="preserve">
+    <value>Der b-Teil von c ist nicht erlaubt. Er muss im Intervall sein</value>
+    <comment>Msg</comment>
   </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>
@@ -365,6 +389,14 @@
     <value>Iterationstiefe</value>
     <comment>Lbl</comment>
   </data>
+  <data name="JuliaMandelbrot" xml:space="preserve">
+    <value>Julia und Mandelbrot Menge</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="JuliaSet" xml:space="preserve">
+    <value>Julia Menge</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="LeftSmallerRight" xml:space="preserve">
     <value>Die linke Intervallgrenze muss kleiner sein als die rechte</value>
     <comment>Msg</comment>
@@ -449,6 +481,10 @@
     <value>&amp;Iteration</value>
     <comment>Mnu</comment>
   </data>
+  <data name="MnuJuliaSet" xml:space="preserve">
+    <value>&amp;Julia Menge</value>
+    <comment>Mnu</comment>
+  </data>
   <data name="MnuKomplexIteration" xml:space="preserve">
     <value>&amp;Komplexe Iteration</value>
     <comment>Mnu</comment>
@@ -459,10 +495,6 @@
   </data>
   <data name="MnuMain" xml:space="preserve">
     <value>Hauptmenu</value>
-    <comment>Mnu</comment>
-  </data>
-  <data name="MnuMandelbrot" xml:space="preserve">
-    <value>&amp;Mandelbrot Menge</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuManual" xml:space="preserve">
@@ -618,7 +650,15 @@
     <comment>Lbl</comment>
   </data>
   <data name="Protocol" xml:space="preserve">
-    <value>Prokotoll p,q,x,y</value>
+    <value>Protokoll</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ProtocolJulia" xml:space="preserve">
+    <value>Protokoll: Min und Max #Schritte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ProtocolNewton" xml:space="preserve">
+    <value>Prokotoll Startpunkt, Endpunkt</value>
     <comment>Lbl</comment>
   </data>
   <data name="Red" xml:space="preserve">
@@ -821,7 +861,7 @@
     <value>x-Werte</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Y-RangeNotAllowed1" xml:space="preserve">
+  <data name="Y-RangeNotAllowed" xml:space="preserve">
     <value>Dieser Y-Bereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
   </data>

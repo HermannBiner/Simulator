@@ -666,7 +666,7 @@ Public Class ClsOvalBilliardball
         End If
 
         If Not IsIntersectionFound Then
-            Throw New ArgumentException(Main.LM.GetString("NoIntersectionPoint"))
+            Throw New ArgumentException(Main.LM.GetString("NoIntersectionPoint") & ", t: " & t.ToString & ", phi: " & Phi.ToString)
 
             Return 0
 

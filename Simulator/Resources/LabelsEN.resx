@@ -181,6 +181,14 @@
     <value>Forward Euler</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsInversUnitRoots" xml:space="preserve">
+    <value>Invers complex Unit Roots</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsJuliaN" xml:space="preserve">
+    <value>Julia Set with Power z^n</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsLogisticGrowth" xml:space="preserve">
     <value>Logistic Growth</value>
     <comment>Cls</comment>
@@ -196,6 +204,10 @@
   <data name="ClsParabola" xml:space="preserve">
     <value>Parabola</value>
     <comment>Cls</comment>
+  </data>
+  <data name="ClsPolynom3C" xml:space="preserve">
+    <value>Polynom with three roots</value>
+    <comment>Lbl</comment>
   </data>
   <data name="ClsRealSpringPendulum" xml:space="preserve">
     <value>Real Spring Pendulum</value>
@@ -217,8 +229,8 @@
     <value>Tentmap</value>
     <comment>Cls</comment>
   </data>
-  <data name="ClsUnitRoots3" xml:space="preserve">
-    <value>f(z)=z^3-1</value>
+  <data name="ClsUnitRoots" xml:space="preserve">
+    <value>Complex Unit Roots</value>
     <comment>Lbl</comment>
   </data>
   <data name="ColoredDiagram" xml:space="preserve">
@@ -229,6 +241,10 @@
     <value>Total Energy</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ConjugateZ" xml:space="preserve">
+    <value>Conjugate Step</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
     <comment>Lbl</comment>
@@ -237,9 +253,17 @@
     <value>Coordinates of the Startpoint</value>
     <comment>Lbl</comment>
   </data>
+  <data name="CXNotAllowed" xml:space="preserve">
+    <value>The a-part of c is not allowed. It must be in the interval</value>
+    <comment>Msg</comment>
+  </data>
   <data name="Cylinder" xml:space="preserve">
     <value>Cylinder</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="CYNotAllowed" xml:space="preserve">
+    <value>The b-part of c is not allowed. It must be in the interval</value>
+    <comment>Msg</comment>
   </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>
@@ -365,6 +389,14 @@
     <value>Iteration Depth</value>
     <comment>Lbl</comment>
   </data>
+  <data name="JuliaMandelbrot" xml:space="preserve">
+    <value>Julia and Mandelbrot Set</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="JuliaSet" xml:space="preserve">
+    <value>Julia Set</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="LeftSmallerRight" xml:space="preserve">
     <value>The left interval border must be smaller than the right interval border!</value>
     <comment>Msg</comment>
@@ -449,6 +481,10 @@
     <value>&amp;Iteration</value>
     <comment>Mnu</comment>
   </data>
+  <data name="MnuJuliaSet" xml:space="preserve">
+    <value>&amp;Julia Set</value>
+    <comment>Mnu</comment>
+  </data>
   <data name="MnuKomplexIteration" xml:space="preserve">
     <value>&amp;Complex Iteration</value>
     <comment>Mnu</comment>
@@ -459,10 +495,6 @@
   </data>
   <data name="MnuMain" xml:space="preserve">
     <value>Main</value>
-    <comment>Mnu</comment>
-  </data>
-  <data name="MnuMandelbrot" xml:space="preserve">
-    <value>&amp;Mandelbrot Set</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuManual" xml:space="preserve">
@@ -618,7 +650,15 @@
     <comment>Lbl</comment>
   </data>
   <data name="Protocol" xml:space="preserve">
-    <value>Protocol p,q,x,y</value>
+    <value>Protocol</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ProtocolJulia" xml:space="preserve">
+    <value>Protocol: Min and Max #Steps</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ProtocolNewton" xml:space="preserve">
+    <value>Protocol Startpoint, Endpoint</value>
     <comment>Lbl</comment>
   </data>
   <data name="Red" xml:space="preserve">

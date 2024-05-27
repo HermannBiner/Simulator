@@ -595,15 +595,17 @@ Public Class FrmBilliardtable
             For i = 1 To NumberOfBalls
                 LocBilliardBall = GetBilliardBall()
                 Alfa += CDec(Math.PI / NumberOfBalls)
-                With LocBilliardBall
-                    .Ballcolor = Brushes.Blue
-                    .Startparameter = t
-                    .IsStartpositionSet = True
-                    .Startangle = Alfa
-                    .IsStartangleSet = True
-                    .Iteration(1)
-                End With
-                MyBilliardballCollection.Add(LocBilliardBall)
+                If Alfa < Math.PI Then
+                    With LocBilliardBall
+                        .Ballcolor = Brushes.Blue
+                        .Startparameter = t
+                        .IsStartpositionSet = True
+                        .Startangle = Alfa
+                        .IsStartangleSet = True
+                        .Iteration(1)
+                    End With
+                    MyBilliardballCollection.Add(LocBilliardBall)
+                End If
             Next
 
         End If

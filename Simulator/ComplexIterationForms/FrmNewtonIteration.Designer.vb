@@ -53,8 +53,9 @@ Partial Class FrmNewtonIteration
         LblTime = New Label()
         TxtSteps = New TextBox()
         TxtTime = New TextBox()
-        CheckBox1 = New CheckBox()
+        ChkProtocol = New CheckBox()
         LblPower = New Label()
+        ChkConjugateZ = New CheckBox()
         CType(PicCPlane, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbPrecision, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -240,6 +241,7 @@ Partial Class FrmNewtonIteration
         ' LstProtocol
         ' 
         LstProtocol.FormattingEnabled = True
+        LstProtocol.HorizontalScrollbar = True
         LstProtocol.Location = New Point(1460, 1000)
         LstProtocol.Margin = New Padding(4, 5, 4, 5)
         LstProtocol.Name = "LstProtocol"
@@ -259,7 +261,7 @@ Partial Class FrmNewtonIteration
         ' CboN
         ' 
         CboN.FormattingEnabled = True
-        CboN.Items.AddRange(New Object() {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+        CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         CboN.Location = New Point(1985, 12)
         CboN.Name = "CboN"
         CboN.Size = New Size(69, 40)
@@ -267,17 +269,19 @@ Partial Class FrmNewtonIteration
         ' 
         ' TxtB
         ' 
-        TxtB.Location = New Point(1841, 81)
+        TxtB.Location = New Point(1746, 82)
         TxtB.Name = "TxtB"
-        TxtB.Size = New Size(213, 39)
+        TxtB.Size = New Size(130, 39)
         TxtB.TabIndex = 28
+        TxtB.Text = "1"
         ' 
         ' TxtA
         ' 
         TxtA.Location = New Point(1560, 81)
         TxtA.Name = "TxtA"
-        TxtA.Size = New Size(213, 39)
+        TxtA.Size = New Size(130, 39)
         TxtA.TabIndex = 30
+        TxtA.Text = "0"
         ' 
         ' LblC
         ' 
@@ -291,7 +295,7 @@ Partial Class FrmNewtonIteration
         ' LblI
         ' 
         LblI.AutoSize = True
-        LblI.Location = New Point(1783, 81)
+        LblI.Location = New Point(1697, 84)
         LblI.Name = "LblI"
         LblI.Size = New Size(43, 32)
         LblI.TabIndex = 33
@@ -329,15 +333,15 @@ Partial Class FrmNewtonIteration
         TxtTime.Size = New Size(238, 39)
         TxtTime.TabIndex = 37
         ' 
-        ' CheckBox1
+        ' ChkProtocol
         ' 
-        CheckBox1.AutoSize = True
-        CheckBox1.Location = New Point(1879, 956)
-        CheckBox1.Name = "CheckBox1"
-        CheckBox1.Size = New Size(175, 36)
-        CheckBox1.TabIndex = 38
-        CheckBox1.Text = "ChkProtocol"
-        CheckBox1.UseVisualStyleBackColor = True
+        ChkProtocol.AutoSize = True
+        ChkProtocol.Location = New Point(1879, 961)
+        ChkProtocol.Name = "ChkProtocol"
+        ChkProtocol.Size = New Size(134, 36)
+        ChkProtocol.TabIndex = 38
+        ChkProtocol.Text = "Protocol"
+        ChkProtocol.UseVisualStyleBackColor = True
         ' 
         ' LblPower
         ' 
@@ -348,13 +352,24 @@ Partial Class FrmNewtonIteration
         LblPower.TabIndex = 39
         LblPower.Text = "n ="
         ' 
+        ' ChkConjugateZ
+        ' 
+        ChkConjugateZ.AutoSize = True
+        ChkConjugateZ.Location = New Point(1885, 80)
+        ChkConjugateZ.Name = "ChkConjugateZ"
+        ChkConjugateZ.Size = New Size(170, 36)
+        ChkConjugateZ.TabIndex = 40
+        ChkConjugateZ.Text = "ConjugateZ"
+        ChkConjugateZ.UseVisualStyleBackColor = True
+        ' 
         ' FrmNewtonIteration
         ' 
         AutoScaleDimensions = New SizeF(13F, 32F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(2091, 1612)
+        Controls.Add(ChkConjugateZ)
         Controls.Add(LblPower)
-        Controls.Add(CheckBox1)
+        Controls.Add(ChkProtocol)
         Controls.Add(TxtTime)
         Controls.Add(TxtSteps)
         Controls.Add(LblTime)
@@ -427,6 +442,7 @@ Partial Class FrmNewtonIteration
     Friend WithEvents LblTime As Label
     Friend WithEvents TxtSteps As TextBox
     Friend WithEvents TxtTime As TextBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ChkProtocol As CheckBox
     Friend WithEvents LblPower As Label
+    Friend WithEvents ChkConjugateZ As CheckBox
 End Class

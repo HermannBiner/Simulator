@@ -1,10 +1,10 @@
 ﻿'Implements the Interface IPolynom
 'and inherits ClsUnitRootAbstract
-'for the unit-roots f(z)=z^n-1
+'for the invers unit-roots g(w)=nw/(n-1+w^n) - see math. doc.
 
 'Status Checked
 
-Public Class ClsUnitRoots
+Public Class ClsInversUnitRoots
     Inherits ClsPolynomAbstract
 
     Private MyRadius As Double
@@ -107,13 +107,13 @@ Public Class ClsUnitRoots
 
     Public Overrides Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 
-        'This is the formula for the Newton Iteration
-        'see math. doc.
         If MyConjugateZ Then
             Z = Z.Conjugate
         End If
 
-        Dim W As ClsComplexNumber = Z.Stretch((MyN - 1) / MyN).Add(Denominator(Z))
+        'This is the formula for the Newton Iteration
+        'see math. doc.
+        Dim W As ClsComplexNumber = Z.Stretch(MyN).Mult(Denominator(Z))
 
         Return W
 
@@ -121,7 +121,7 @@ Public Class ClsUnitRoots
 
     Public Overrides Function Denominator(Z As ClsComplexNumber) As ClsComplexNumber
 
-        Return Z.Power(MyN - 1).Invers.Stretch(1 / MyN)
+        Return Z.Power(MyN).Add(New ClsComplexNumber(MyN - 1, 0)).Invers
 
     End Function
 
