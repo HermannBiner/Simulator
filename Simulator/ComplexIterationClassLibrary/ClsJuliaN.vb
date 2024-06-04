@@ -8,23 +8,34 @@
 Public Class ClsJuliaN
     Inherits ClsJuliaAbstract
 
-
+    'the precision of the border of the Julia set
     Const MaxSteps As Integer = 250
+
+    Private MyN As Integer
+
+    Private ReadOnly StandardColors As ClsSystemBrushes
 
     Private UpperBoundSteps As Integer = 0
     Private LowerBoundSteps As Integer = MaxSteps
 
-
     Public Sub New()
 
-        'The Julia set is contained in a circle of raduis 2
-        MyAllowedXRange = New ClsInterval(CDec(-1.2), CDec(1.2))
-        MyAllowedYRange = New ClsInterval(CDec(-1.2), CDec(1.2))
+        'The Julia set is contained in a circle of radius 2
+        MyAllowedXRange = New ClsInterval(CDec(-1.5), CDec(1.5))
+        MyAllowedYRange = New ClsInterval(CDec(-1.5), CDec(1.5))
 
         MyActualXRange = MyAllowedXRange
         MyActualYRange = MyAllowedYRange
 
+        StandardColors = New ClsSystemBrushes(MaxSteps)
+
     End Sub
+
+    Protected Overrides WriteOnly Property N As Integer
+        Set(value As Integer)
+            MyN = value
+        End Set
+    End Property
 
     Public Overrides Function IterationFormula(Zi As ClsComplexNumber) As Brush
 
@@ -43,28 +54,38 @@ Public Class ClsJuliaN
         'there are 25 colors available and the steps are between 0 and MaxSteps
         'The lowest color-index is for the highest # steps, therefore:
         Dim MyBrush As Brush
+        Dim ColorIndex As Double
 
         If Steps > MaxSteps Then
             MyBrush = New SolidBrush(Color.Black)
         Else
-            Steps = Math.Max(1, Steps) 'if steps = 0, then the color is black as well otherwise
-            'we increase the bright part of the Julia set
-            'that means, we replace the linear increasing step-number
-            'by a parabola going through the points (0,0), (MaxSteps, MaxSteps)
-            Dim ColorIndex As Double = Steps / MaxSteps
-            ColorIndex = Math.Exp(Math.Log(ColorIndex) / 5)
+            'if steps = 0, the color would be black as well, therefore we set
+            Steps = Math.Max(1, Steps)
 
-            MyBrush = New SolidBrush(Color.FromArgb(255, CInt(255 * ColorIndex * MyRedPercent),
+
+            If MyUseSystemColors Then
+                MyBrush = StandardColors.GetSystemBrush(Steps)
+                ColorIndex = 1
+            Else
+
+                ColorIndex = Steps / MaxSteps
+
+                'to keep the brightness higher
+                ColorIndex = Math.Min(1, ColorIndex * 2)
+                ColorIndex = Math.Exp(Math.Log(ColorIndex) / 5)
+
+                MyBrush = New SolidBrush(Color.FromArgb(255, CInt(255 * ColorIndex * MyRedPercent),
                        CInt(255 * ColorIndex * MyGreenPercent), CInt(255 * ColorIndex * MyBluePercent)))
-        End If
+            End If
 
-        If MyIsProtocol Then
-            If Steps > UpperBoundSteps Then
-                UpperBoundSteps = Steps
-                MyProtocolList.Items.Add(UpperBoundSteps)
-            ElseIf Steps < LowerBoundSteps Then
-                LowerBoundSteps = Steps
-                MyProtocolList.Items.Add(LowerBoundSteps)
+            If MyIsProtocol Then
+                If Steps > UpperBoundSteps Then
+                    UpperBoundSteps = Steps
+                    MyProtocolList.Items.Add(UpperBoundSteps.ToString)
+                ElseIf Steps < LowerBoundSteps Then
+                    LowerBoundSteps = Steps
+                    MyProtocolList.Items.Add(LowerBoundSteps.ToString)
+                End If
             End If
         End If
 
@@ -72,4 +93,5 @@ Public Class ClsJuliaN
         Return MyBrush
 
     End Function
+
 End Class

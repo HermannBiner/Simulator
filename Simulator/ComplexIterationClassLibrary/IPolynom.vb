@@ -7,6 +7,17 @@
 
 Public Interface IPolynom
 
+    Enum EnColor
+        Bright
+        Shadowed
+    End Enum
+
+    Enum EnMixing
+        None
+        Conjugate
+        Rotate
+    End Enum
+
     'The Polynom plots the Orbit into MapCPlane
     WriteOnly Property MapCPlane As Bitmap
 
@@ -21,9 +32,6 @@ Public Interface IPolynom
 
     'Actual interval for the y-Values
     Property ActualYRange As ClsInterval
-
-    'How deep should the iteration go
-    WriteOnly Property Deepness As Integer
 
     'Protocol
     WriteOnly Property ProcotolList As ListBox
@@ -41,11 +49,11 @@ Public Interface IPolynom
     'Parameter C
     WriteOnly Property C As ClsComplexNumber
 
-    'Conjugate Z
-    'the Newton Iteration is replaced
-    'and Z is conjugated in each step
-    WriteOnly Property ConjugateZ As Boolean
+    'Mixing
+    WriteOnly Property UseMixing As EnMixing
 
+    'Color
+    WriteOnly Property UseColor As EnColor
 
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()

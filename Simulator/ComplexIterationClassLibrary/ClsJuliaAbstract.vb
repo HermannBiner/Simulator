@@ -26,12 +26,15 @@ Public MustInherit Class ClsJuliaAbstract
     Protected Property MyC As ClsComplexNumber
 
     'Power of z
-    Protected Property MyN As Integer
+    Protected MustOverride WriteOnly Property N As Integer Implements IJulia.N
 
     'Color Intensity
     Protected Property MyRedPercent As Double
     Protected Property MyGreenPercent As Double
     Protected Property MyBluePercent As Double
+
+    'Use SystemColors
+    Protected Property MyUseSystemColors As Boolean
 
     'Protocol
     Protected MyProtocolList As ListBox
@@ -82,12 +85,6 @@ Public MustInherit Class ClsJuliaAbstract
         End Set
     End Property
 
-    WriteOnly Property N As Integer Implements IJulia.N
-        Set(value As Integer)
-            MyN = value
-        End Set
-    End Property
-
     WriteOnly Property RedPercent As Double Implements IJulia.RedPercent
         Set(value As Double)
             MyRedPercent = value
@@ -103,6 +100,12 @@ Public MustInherit Class ClsJuliaAbstract
     WriteOnly Property BluePercent As Double Implements IJulia.BluePercent
         Set(value As Double)
             MyBluePercent = value
+        End Set
+    End Property
+
+    WriteOnly Property UseSystemColors As Boolean Implements IJulia.UseSystemColors
+        Set(value As Boolean)
+            MyUseSystemColors = value
         End Set
     End Property
 
@@ -152,6 +155,7 @@ Public MustInherit Class ClsJuliaAbstract
         Dim MyBrush As Brush = IterationFormula(Zi)
 
         MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBrush.Dispose()
 
     End Sub
 

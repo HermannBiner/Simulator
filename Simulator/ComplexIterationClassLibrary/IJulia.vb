@@ -36,6 +36,8 @@ Public Interface IJulia
     WriteOnly Property GreenPercent As Double
     WriteOnly Property BluePercent As Double
 
+    'Use the System Colors
+    WriteOnly Property UseSystemColors As Boolean
 
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()

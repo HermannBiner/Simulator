@@ -66,15 +66,20 @@ Public Class FrmNewtonIteration
     Private Sub InitializeLanguage()
 
         Text = Main.LM.GetString("NewtonIteration")
-        LblPrecision.Text = Main.LM.GetString("Precision") & ": " & TrbPrecision.Value
         LblProtocol.Text = Main.LM.GetString("ProtocolNewton")
         ChkProtocol.Text = Main.LM.GetString("Protocol")
-        ChkConjugateZ.Text = Main.LM.GetString("ConjugateZ")
         BtnStart.Text = Main.LM.GetString("Start")
         BtnStop.Text = Main.LM.GetString("Stop")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         LblTime.Text = Main.LM.GetString("Time")
         LblSteps.Text = Main.LM.GetString("Steps")
+        GrpMixing.Text = Main.LM.GetString("Mixing")
+        OptNone.Text = Main.LM.GetString("None")
+        OptConjugate.Text = Main.LM.GetString("Conjugate")
+        OptRotate.Text = Main.LM.GetString("Rotate")
+        GrpColor.Text = Main.LM.GetString("Color")
+        OptBright.Text = Main.LM.GetString("Bright")
+        OptShadowed.Text = Main.LM.GetString("Shadowed")
 
         CboFunction.Items.Clear()
 
@@ -121,7 +126,7 @@ Public Class FrmNewtonIteration
             .MapCPlane = MapCPlane
         }
 
-        CboN.SelectedIndex = 0
+        CboN.SelectedIndex = 1
 
         Watch = New Stopwatch
 
@@ -158,7 +163,10 @@ Public Class FrmNewtonIteration
 
                 If .UseN Then
                     .N = CInt(CboN.SelectedItem)
+                Else
+                    .N = 3
                 End If
+
                 If .UseC Then
                     'Check if c=a+ib is a complex number and part if the square ActualXRange X ActualYRange
                     'if not, the standard value is set: c=i
@@ -166,14 +174,26 @@ Public Class FrmNewtonIteration
                     .C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
                 End If
 
-
-                .Deepness = TrbPrecision.Value
                 .ProcotolList = LstProtocol
                 .IsProtocol = ChkProtocol.Checked
 
                 .PrepareIteration()
                 .DrawCoordinateSystem()
                 .DrawRoots(False)
+
+                If OptConjugate.Checked Then
+                    Polynom.UseMixing = IPolynom.EnMixing.Conjugate
+                ElseIf OptRotate.Checked Then
+                    Polynom.UseMixing = IPolynom.EnMixing.Rotate
+                Else
+                    Polynom.UseMixing = IPolynom.EnMixing.None
+                End If
+
+                If OptBright.Checked Then
+                    Polynom.UseColor = IPolynom.EnColor.Bright
+                Else
+                    Polynom.UseColor = IPolynom.EnColor.Shadowed
+                End If
             End With
 
             ResetIteration()
@@ -208,7 +228,6 @@ Public Class FrmNewtonIteration
             .ActualXRange = .AllowedXRange
             .ActualYRange = .AllowedYRange
             .MapCPlane = MapCPlane
-            .Deepness = TrbPrecision.Value
         End With
 
         SetDefaultValues()
@@ -252,13 +271,6 @@ Public Class FrmNewtonIteration
         SetDefaultValues()
     End Sub
 
-    Private Sub TrbPrecision_ValueChanged(sender As Object, e As EventArgs) Handles TrbPrecision.ValueChanged
-        LblPrecision.Text = Main.LM.GetString("Precision") & ": " & TrbPrecision.Value
-        If Polynom IsNot Nothing Then
-            Polynom.Deepness = TrbPrecision.Value * 10
-        End If
-    End Sub
-
     'SECTOR ITERATION
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
@@ -279,8 +291,6 @@ Public Class FrmNewtonIteration
         ChkProtocol.Enabled = False
 
         Application.DoEvents()
-
-        Polynom.ConjugateZ = ChkConjugateZ.Checked
 
         Await IterationLoop()
 
@@ -620,11 +630,31 @@ Public Class FrmNewtonIteration
         SetDefaultValues()
     End Sub
 
-    Private Sub ChkConjugateZ_CheckedChanged(sender As Object, e As EventArgs) Handles ChkConjugateZ.CheckedChanged
-        SetDefaultValues()
+    Private Sub ChkConjugateZ_CheckedChanged(sender As Object, e As EventArgs)
+        SetDefaultValues
     End Sub
 
     Private Sub ChkProtocol_CheckedChanged(sender As Object, e As EventArgs) Handles ChkProtocol.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptBright_CheckedChanged(sender As Object, e As EventArgs) Handles OptBright.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptShadowed_CheckedChanged(sender As Object, e As EventArgs) Handles OptShadowed.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptNone_CheckedChanged(sender As Object, e As EventArgs) Handles OptNone.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptConjugate_CheckedChanged(sender As Object, e As EventArgs) Handles OptConjugate.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptRotate_CheckedChanged(sender As Object, e As EventArgs) Handles OptRotate.CheckedChanged
         SetDefaultValues()
     End Sub
 End Class

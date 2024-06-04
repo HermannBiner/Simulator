@@ -8,6 +8,12 @@
 Public MustInherit Class ClsPolynomAbstract
     Implements IPolynom
 
+    'the radius where Zi is regarded as belonging to a root
+    Protected Const MyRadius As Double = 0.1
+
+    'How many steps should be iterated?
+    Protected MyIterationDeepness As Integer
+
     'Drawing MapCPlane
     Protected MyMapCPlane As Bitmap
     Protected MyMapCPlaneGraphics As ClsGraphicTool
@@ -24,8 +30,6 @@ Public MustInherit Class ClsPolynomAbstract
     'the actual range for the y-coordinate
     Protected MyActualYRange As ClsInterval
 
-    Protected MyDeepness As Integer
-
     'Protocol
     Protected MyProtocolList As ListBox
     Protected MyIsProtocol As Boolean
@@ -38,15 +42,23 @@ Public MustInherit Class ClsPolynomAbstract
     Protected Property MyUseC As Boolean
     Protected Property MyC As ClsComplexNumber
 
-    'Conjugate Z
-    Protected Property MyConjugateZ As Boolean
+    'Mixing
+    Protected Property MyMixing As IPolynom.EnMixing
+
+    'Color
+    Protected Property MyColor As IPolynom.EnColor
 
     'List of roots of the polynom
-    Protected Root() As ClsRoot
+    Protected Roots As Collection
+
+    'How many levels of colors
+    Private MyColorDeepness As Integer
+
+    Public Sub New()
+        Roots = New Collection
+    End Sub
 
     'SECTOR INTERFACE
-
-    MustOverride WriteOnly Property Deepness As Integer Implements IPolynom.Deepness
 
     WriteOnly Property MapCPlane As Bitmap Implements IPolynom.MapCPlane
         Set(value As Bitmap)
@@ -121,9 +133,15 @@ Public MustInherit Class ClsPolynomAbstract
         End Set
     End Property
 
-    WriteOnly Property ConjugateZ As Boolean Implements IPolynom.ConjugateZ
-        Set(value As Boolean)
-            MyConjugateZ = value
+    WriteOnly Property UseMixing As IPolynom.EnMixing Implements IPolynom.UseMixing
+        Set(value As IPolynom.EnMixing)
+            MyMixing = value
+        End Set
+    End Property
+
+    WriteOnly Property UseColor As IPolynom.EnColor Implements IPolynom.UseColor
+        Set(value As IPolynom.EnColor)
+            MyColor = value
         End Set
     End Property
 
@@ -168,7 +186,7 @@ Public MustInherit Class ClsPolynomAbstract
             Dim i As Integer = 1
 
 
-            Do While i <= MyDeepness And Not StopCondition(Zi)
+            Do While i <= MyIterationDeepness And Not StopCondition(Zi)
 
                 i += 1
 
@@ -177,13 +195,14 @@ Public MustInherit Class ClsPolynomAbstract
 
             Loop
 
-            If (i > MyDeepness) Or (Denominator(Zi).AbsoluteValue = 0) Then
+            If (i > MyIterationDeepness) Or (Denominator(Zi).AbsoluteValue = 0) Then
 
                 'the point doesn't converge to a root
                 MyBrush = Brushes.Black
             Else
-
-                MyBrush = GetBasin(Zi)
+                'the basin defines the type of color
+                'and i influences its brightness
+                MyBrush = GetBasin(Zi, i)
             End If
         Else
 
@@ -215,11 +234,69 @@ Public MustInherit Class ClsPolynomAbstract
         End If
     End Sub
 
-    Protected MustOverride Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
+
+    'Draws roots of the polynom
+    Public Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
+
+        'The next value is set after experiments
+        If MyN = 2 Then
+            MyColorDeepness = 30
+        Else
+            MyColorDeepness = MyN * 100 - 270
+        End If
+
+        'Roots
+        Dim Col As Brush
+
+        'Finished = PicCPlane is generated
+        If Finished Then
+            Col = Brushes.Black
+
+        Else
+            For Each MyRoot As ClsRoot In Roots
+                Col = MyRoot.GetColor(0)
+                MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+            Next
+        End If
+
+    End Sub
+
+    Private Function GetBasin(Z As ClsComplexNumber, Steps As Integer) As Brush
+
+        'If the stop condition is fullfilled, then the startpoint converges to a root
+        'and we have to find out, which root that is
+        'and get the appropriate color
+
+        Dim Temp As Double = 1000
+        Dim Difference As Double
+        Dim RootBrush As Brush = Brushes.Black
+
+        Dim FinalBrightness As Double
+
+        If MyColor = IPolynom.EnColor.Bright Then
+            FinalBrightness = 1
+        Else
+
+            FinalBrightness = (1 - Steps / MyColorDeepness) * 1.1
+
+            'but the maximum is 1
+            FinalBrightness = Math.Min(FinalBrightness, 1)
+        End If
+
+
+        For Each Root As ClsRoot In Roots
+            Difference = Z.Add(Root.Stretch(-1)).AbsoluteValue
+            If Difference < Temp Then
+                Temp = Difference
+                RootBrush = Root.GetColor(FinalBrightness)
+            End If
+        Next
+
+        Return RootBrush
+
+    End Function
 
     Public MustOverride Function StopCondition(Z As ClsComplexNumber) As Boolean
-
-    Protected MustOverride Function GetBasin(Z As ClsComplexNumber) As Brush
 
     Public MustOverride Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 

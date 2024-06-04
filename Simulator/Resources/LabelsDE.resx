@@ -153,6 +153,10 @@
     <value>Blau</value>
     <comment>Col</comment>
   </data>
+  <data name="Bright" xml:space="preserve">
+    <value>Hell</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="C-Diagram" xml:space="preserve">
     <value>C-Diagramm</value>
     <comment>Lbl</comment>
@@ -182,7 +186,7 @@
     <comment>Cls</comment>
   </data>
   <data name="ClsInversUnitRoots" xml:space="preserve">
-    <value>Inverse komplexe Einheitswurzeln</value>
+    <value>Komplexe Einheitswurzeln invertiert</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsJuliaN" xml:space="preserve">
@@ -233,12 +237,24 @@
     <value>Komplexe Einheitswurzeln</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Farbe</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ColoredDiagram" xml:space="preserve">
     <value>Farbiges Diagramm</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Colors" xml:space="preserve">
+    <value>Farben</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="CombinedPendulumC" xml:space="preserve">
     <value>Gesamtenergie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Conjugate" xml:space="preserve">
+    <value>Konjugation</value>
     <comment>Lbl</comment>
   </data>
   <data name="ConjugateZ" xml:space="preserve">
@@ -433,6 +449,10 @@
     <value>Keine implementierende Klasse gefunden</value>
     <comment>Msg</comment>
   </data>
+  <data name="Mixing" xml:space="preserve">
+    <value>Mischung</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="MnuBilliard" xml:space="preserve">
     <value>&amp;Billard</value>
     <comment>Mnu</comment>
@@ -569,6 +589,10 @@
     <value>Wenn das Verhalten nicht chaotisch ist, wird das erwartete Resultat nicht auftreten.</value>
     <comment>Msg</comment>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>Keine</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="NoStartPointSet" xml:space="preserve">
     <value>Kein Startpunkt gesetzt</value>
     <comment>Msg</comment>
@@ -677,6 +701,10 @@
     <value>Iteration zurücksetzen</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Rotation</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Sensitivity" xml:space="preserve">
     <value>Sensitivität</value>
     <comment>Lbl</comment>
@@ -684,6 +712,10 @@
   <data name="SetStartPosition" xml:space="preserve">
     <value>Setze die Startposition mit der Maus</value>
     <comment>Msg</comment>
+  </data>
+  <data name="Shadowed" xml:space="preserve">
+    <value>Schattiert</value>
+    <comment>Lbl</comment>
   </data>
   <data name="ShakedPendulumC" xml:space="preserve">
     <value>Gesamtenergie</value>
@@ -781,6 +813,10 @@
     <value>Der Dehnparameter muss im Intervall sein:</value>
     <comment>Msg</comment>
   </data>
+  <data name="System" xml:space="preserve">
+    <value>Systemvorgabe</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="TakeOver" xml:space="preserve">
     <value>Übernehme Startparameter</value>
     <comment>Lbl</comment>
@@ -835,6 +871,10 @@
   </data>
   <data name="UpperPendulumAngle" xml:space="preserve">
     <value>Winkel des oberen Pendels</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UserDefined" xml:space="preserve">
+    <value>Benutzerdefiniert</value>
     <comment>Lbl</comment>
   </data>
   <data name="ValueList1" xml:space="preserve">

@@ -22,7 +22,7 @@ Public Class FrmJuliaSet
     'The Julia Set is drawn into the bitmap by the Polynom
     Private MapCPlane As Bitmap
 
-    'The FrmNewtonIteration fraws into PicCPlane when moving the mouse
+    'The FrmNewtonIteration draws into PicCPlane when moving the mouse
     Private PicCPlaneGraphics As ClsGraphicTool
 
     'Variables for the definition of the Ranges by a selection-rectangle
@@ -70,6 +70,9 @@ Public Class FrmJuliaSet
         LblSteps.Text = Main.LM.GetString("Steps")
         LblProtocol.Text = Main.LM.GetString("ProtocolJulia")
         ChkProtocol.Text = Main.LM.GetString("Protocol")
+        GrpColors.Text = Main.LM.GetString("Colors")
+        OptSystem.Text = Main.LM.GetString("System")
+        OptUser.Text = Main.LM.GetString("UserDefined")
 
         CboFunction.Items.Clear()
 
@@ -91,7 +94,7 @@ Public Class FrmJuliaSet
                 CboFunction.Items.Add(JuliaName)
             Next
 
-            CboFunction.SelectedIndex = CboFunction.Items.Count - 1
+            CboFunction.SelectedIndex = 0
             CboFunction.Select()
 
         Else
@@ -112,11 +115,15 @@ Public Class FrmJuliaSet
         MapCPlane = New Bitmap(Square, Square)
         PicCPlane.Image = MapCPlane
 
+
         Julia = New ClsJuliaN With {
             .MapCPlane = MapCPlane
         }
 
         CboN.SelectedIndex = 0
+
+        TxtA.Text = "-0.2"
+        TxtB.Text = "0.7"
 
         Watch = New Stopwatch
 
@@ -133,6 +140,9 @@ Public Class FrmJuliaSet
         If Julia IsNot Nothing Then
 
             With Julia
+
+                .N = CInt(CboN.SelectedItem)
+
                 TxtXMin.Text = .ActualXRange.A.ToString(CultureInfo.CurrentCulture)
                 TxtXMax.Text = .ActualXRange.B.ToString(CultureInfo.CurrentCulture)
                 TxtDeltaX.Text = .ActualXRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
@@ -144,8 +154,8 @@ Public Class FrmJuliaSet
                 'Check if c=a+ib is a complex number and part if the square ActualXRange X ActualYRange
                 'if not, the standard value is set: c=i
                 CheckParameterC()
+
                 .C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
-                .N = CInt(CboN.SelectedItem)
 
                 .ProcotolList = LstProtocol
                 .IsProtocol = ChkProtocol.Checked
@@ -155,6 +165,24 @@ Public Class FrmJuliaSet
                 .RedPercent = TrbRed.Value / 10
                 .GreenPercent = TrbGreen.Value / 10
                 .BluePercent = TrbBlue.Value / 10
+
+                .UseSystemColors = OptSystem.Checked
+
+                If OptSystem.Checked Then
+                    TrbBlue.Visible = False
+                    TrbGreen.Visible = False
+                    TrbRed.Visible = False
+                    PicBright.Visible = False
+                    PicDark.Visible = False
+                Else
+                    TrbBlue.Visible = True
+                    TrbGreen.Visible = True
+                    TrbRed.Visible = True
+                    PicBright.Visible = True
+                    PicDark.Visible = True
+                    SetColors()
+                End If
+
             End With
 
             ResetIteration()
@@ -167,8 +195,6 @@ Public Class FrmJuliaSet
                 Watch.Reset()
                 TxtTime.Text = Watch.ToString
             End If
-
-            SetColors()
 
         End If
 
@@ -215,6 +241,7 @@ Public Class FrmJuliaSet
                     If Main.LM.GetString(type.Name, True) = SelectedName Then
                         Julia = CType(Activator.CreateInstance(type), IJulia)
                         Julia.MapCPlane = MapCPlane
+
                     End If
                 Next
             End If
@@ -457,7 +484,6 @@ Public Class FrmJuliaSet
 
                 'Prepare new Iteration
                 SetDefaultValues()
-                Reset()
 
             End If
         End If
@@ -591,6 +617,12 @@ Public Class FrmJuliaSet
             Julia.N = CInt(CboN.SelectedItem)
         End If
 
+        With Julia
+            .ActualXRange = .AllowedXRange
+            .ActualYRange = .AllowedYRange
+            .MapCPlane = MapCPlane
+        End With
+
         SetDefaultValues()
     End Sub
 
@@ -636,5 +668,13 @@ Public Class FrmJuliaSet
                                              CInt(255 * TrbBlue.Value / 10))
         PicDark.BackColor = Color.FromArgb(255, CInt(150 * TrbRed.Value / 10), CInt(150 * TrbGreen.Value / 10),
                                              CInt(150 * TrbBlue.Value / 10))
+    End Sub
+
+    Private Sub OptSystem_CheckedChanged(sender As Object, e As EventArgs) Handles OptSystem.CheckedChanged
+        SetDefaultValues()
+    End Sub
+
+    Private Sub OptUser_CheckedChanged(sender As Object, e As EventArgs) Handles OptUser.CheckedChanged
+        SetDefaultValues()
     End Sub
 End Class

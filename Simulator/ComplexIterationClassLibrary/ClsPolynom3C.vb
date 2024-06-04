@@ -8,8 +8,6 @@
 Public Class ClsPolynom3C
     Inherits ClsPolynomAbstract
 
-    Private MyRadius As Double
-
     'SECTOR INITIALIZATION
 
     Public Sub New()
@@ -23,50 +21,26 @@ Public Class ClsPolynom3C
         MyUseN = False
         MyUseC = True
 
-        MyN = 3
-
     End Sub
-
-    Public Overrides WriteOnly Property Deepness As Integer
-        Set(value As Integer)
-            MyDeepness = value * 20
-            MyRadius = 0.2 / value
-        End Set
-    End Property
 
     Protected Overrides Sub PrepareIteration()
 
-        ReDim Root(MyN)
-
         'Generate Roots
-        Root(1) = New ClsRoot(New ClsComplexNumber(-1, 0), Brushes.Red)
-        Root(2) = New ClsRoot(New ClsComplexNumber(1, 0), Brushes.Blue)
-        Root(3) = New ClsRoot(New ClsComplexNumber(MyC.X, MyC.Y), Brushes.Green)
+        Roots.Clear()
 
-    End Sub
+        Roots.Add(New ClsRoot(New ClsComplexNumber(-1, 0), 1))
+        Roots.Add(New ClsRoot(New ClsComplexNumber(1, 0), 2))
+        Roots.Add(New ClsRoot(New ClsComplexNumber(MyC.X, MyC.Y), 3))
 
-    'Draws roots of the polynom
-    Protected Overrides Sub DrawRoots(Finished As Boolean)
 
-        'Roots
-        Dim i As Integer
-        Dim Col As Brush
-
-        For i = 1 To MyN
-            If Finished Then
-                Col = Brushes.Black
-            Else
-                Col = Root(i).Color
-            End If
-            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(Root(i).X), CDec(Root(i).Y)), Col, 3)
-        Next
+        MyN = 3
+        MyIterationDeepness = 100
 
     End Sub
 
     Public Overrides Function StopCondition(Z As ClsComplexNumber) As Boolean
 
         'left side of the stop condition
-        Dim W As ClsComplexNumber
         Dim Stopped As Boolean = False
 
         'in all cases, we need the denominator
@@ -113,32 +87,18 @@ Public Class ClsPolynom3C
 
     End Function
 
-    Protected Overrides Function GetBasin(Z As ClsComplexNumber) As Brush
-
-        'If the stop condition is fullfilled, then the startpoint onverges to a root
-        'and we have to find out, which root that is
-
-        Dim Difference As Double
-        Dim Temp As Double = Z.Add(Root(1).Stretch(-1)).AbsoluteValue
-        Dim Color As Brush = Root(1).Color
-        Dim i As Integer
-
-        For i = 2 To 3
-            Difference = Z.Add(Root(i).Stretch(-1)).AbsoluteValue
-            If Difference < Temp Then
-                Temp = Difference
-                Color = Root(i).Color
-            End If
-        Next
-
-        Return Color
-    End Function
-
     Public Overrides Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 
-        If MyConjugateZ Then
-            Z = Z.Conjugate
-        End If
+
+        Select Case MyMixing
+            Case IPolynom.EnMixing.Conjugate
+                Z = Z.Conjugate
+            Case IPolynom.EnMixing.Rotate
+                Dim Phi As Double = 2 * Math.PI / 3
+                Z = Z.Mult(New ClsComplexNumber(Math.Cos(Phi), Math.Sin(Phi)))
+            Case Else
+                'nothing
+        End Select
 
         'Nominator of the iterated function g(z)
         Dim W As ClsComplexNumber
