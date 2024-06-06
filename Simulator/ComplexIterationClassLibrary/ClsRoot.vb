@@ -26,9 +26,9 @@ Public Class ClsRoot
 
         'RedPart
         Select Case Index
-            Case 1, 4, 5, 7, 9, 12
+            Case 1, 4, 6, 9, 10, 11, 12
                 MyRedPart = 1
-            Case 8, 11
+            Case 5, 7
                 MyRedPart = 0.5
             Case Else
                 MyRedPart = 0
@@ -36,9 +36,9 @@ Public Class ClsRoot
 
         'GreenPart
         Select Case Index
-            Case 2, 4, 6, 8, 12
+            Case 2, 4, 7, 8, 11
                 MyGreenPart = 1
-            Case 7, 10
+            Case 10, 12
                 MyGreenPart = 0.5
             Case Else
                 MyGreenPart = 0
@@ -46,9 +46,9 @@ Public Class ClsRoot
 
         'BluePart
         Select Case Index
-            Case 3, 5, 6, 10, 11, 12
+            Case 3, 5, 8, 9, 12
                 MyBluePart = 1
-            Case 9
+            Case 6, 11
                 MyBluePart = 0.5
             Case Else
                 MyBluePart = 0

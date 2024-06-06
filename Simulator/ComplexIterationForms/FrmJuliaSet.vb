@@ -185,8 +185,6 @@ Public Class FrmJuliaSet
 
             End With
 
-            ResetIteration()
-
             n = 0
             L = 0
             TxtSteps.Text = 1.ToString
@@ -206,7 +204,9 @@ Public Class FrmJuliaSet
         StopIteration = True
 
         'The display is cleared
-        Julia.Reset()
+        If Julia IsNot Nothing Then
+            Julia.Reset()
+        End If
         PicCPlane.Refresh()
         LstProtocol.Items.Clear()
 
@@ -221,6 +221,7 @@ Public Class FrmJuliaSet
         End With
 
         SetDefaultValues()
+        ResetIteration()
 
     End Sub
 
@@ -263,6 +264,8 @@ Public Class FrmJuliaSet
             'the iteration was stopped or reset
             'and should start from the beginning
             CheckUserRanges()
+            SetDefaultValues()
+            ResetIteration()
 
             BtnStart.Text = Main.LM.GetString("Continue")
 
@@ -426,10 +429,15 @@ Public Class FrmJuliaSet
         If IsMousedown Then
 
             'the selection-rectangle is dranw in its actual position
-            Dim rect As New Rectangle(Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X), Math.Min(UserSelectionStartpoint.Y, UserSelectionEndpoint.Y),
-                                      Math.Abs(UserSelectionStartpoint.X - UserSelectionEndpoint.X), Math.Abs(UserSelectionStartpoint.Y - UserSelectionEndpoint.Y))
+            Dim rect As New Rectangle(Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X),
+                                      Math.Min(UserSelectionStartpoint.Y, UserSelectionEndpoint.Y),
+                                  Math.Abs(UserSelectionStartpoint.X - UserSelectionEndpoint.X),
+                                  Math.Abs(UserSelectionStartpoint.Y - UserSelectionEndpoint.Y))
+            Dim midpoint As New Rectangle(CInt((UserSelectionEndpoint.X + UserSelectionStartpoint.X) / 2),
+                                          CInt((UserSelectionStartpoint.Y + UserSelectionEndpoint.Y) / 2), 1, 1)
             Using MyPen As New Pen(Color.Red, 2)
-                e.Graphics.DrawRectangle(MyPen, rect)
+                    e.Graphics.DrawRectangle(MyPen, rect)
+                e.Graphics.DrawEllipse(MyPen, midpoint)
             End Using
 
         End If
@@ -484,6 +492,7 @@ Public Class FrmJuliaSet
 
                 'Prepare new Iteration
                 SetDefaultValues()
+                BtnStart.Text = Main.LM.GetString("Start")
 
             End If
         End If
@@ -624,22 +633,27 @@ Public Class FrmJuliaSet
         End With
 
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub FrmJuliaSet_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub TxtA_LostFocus(sender As Object, e As EventArgs) Handles TxtA.LostFocus
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub TxtB_LostFocus(sender As Object, e As EventArgs) Handles TxtB.LostFocus
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub ChkProtocol_CheckedChanged(sender As Object, e As EventArgs) Handles ChkProtocol.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub TrbBlue_ValueChanged(sender As Object, e As EventArgs) Handles TrbBlue.ValueChanged
@@ -672,9 +686,11 @@ Public Class FrmJuliaSet
 
     Private Sub OptSystem_CheckedChanged(sender As Object, e As EventArgs) Handles OptSystem.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptUser_CheckedChanged(sender As Object, e As EventArgs) Handles OptUser.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 End Class

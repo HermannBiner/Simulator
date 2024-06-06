@@ -196,7 +196,7 @@ Public Class FrmNewtonIteration
                 End If
             End With
 
-            ResetIteration()
+            'ResetIteration()
 
             n = 0
             L = 0
@@ -217,7 +217,9 @@ Public Class FrmNewtonIteration
         StopIteration = True
 
         'The display is cleared
-        Polynom.Reset()
+        If Polynom IsNot Nothing Then
+            Polynom.Reset()
+        End If
         PicCPlane.Refresh()
 
     End Sub
@@ -231,6 +233,7 @@ Public Class FrmNewtonIteration
         End With
 
         SetDefaultValues()
+        ResetIteration()
 
     End Sub
 
@@ -259,6 +262,7 @@ Public Class FrmNewtonIteration
 
         'Reset ranges and default Values
         SetDefaultValues()
+        ResetIteration()
 
     End Sub
 
@@ -269,6 +273,7 @@ Public Class FrmNewtonIteration
         End If
 
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     'SECTOR ITERATION
@@ -280,6 +285,8 @@ Public Class FrmNewtonIteration
             'the iteration was stopped or reset
             'and should start from the beginning
             CheckUserRanges()
+            SetDefaultValues()
+            ResetIteration()
 
             BtnStart.Text = Main.LM.GetString("Continue")
 
@@ -392,6 +399,7 @@ Public Class FrmNewtonIteration
                 BtnStart.Text = Main.LM.GetString("Start")
                 BtnStart.Enabled = True
                 BtnReset.Enabled = True
+                ChkProtocol.Enabled = True
 
                 Watch.Stop()
                 Polynom.DrawRoots(True)
@@ -490,7 +498,8 @@ Public Class FrmNewtonIteration
 
                 'Prepare new Iteration
                 SetDefaultValues()
-                Reset()
+
+                BtnStart.Text = Main.LM.GetString("Start")
 
             End If
         End If
@@ -620,41 +629,51 @@ Public Class FrmNewtonIteration
 
     Private Sub FrmNewtonIteration_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub TxtA_LostFocus(sender As Object, e As EventArgs) Handles TxtA.LostFocus
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub TxtB_LostFocus(sender As Object, e As EventArgs) Handles TxtB.LostFocus
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub ChkConjugateZ_CheckedChanged(sender As Object, e As EventArgs)
-        SetDefaultValues
+        SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub ChkProtocol_CheckedChanged(sender As Object, e As EventArgs) Handles ChkProtocol.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptBright_CheckedChanged(sender As Object, e As EventArgs) Handles OptBright.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptShadowed_CheckedChanged(sender As Object, e As EventArgs) Handles OptShadowed.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptNone_CheckedChanged(sender As Object, e As EventArgs) Handles OptNone.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptConjugate_CheckedChanged(sender As Object, e As EventArgs) Handles OptConjugate.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 
     Private Sub OptRotate_CheckedChanged(sender As Object, e As EventArgs) Handles OptRotate.CheckedChanged
         SetDefaultValues()
+        ResetIteration()
     End Sub
 End Class

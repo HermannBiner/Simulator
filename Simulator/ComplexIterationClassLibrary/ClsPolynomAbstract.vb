@@ -51,9 +51,6 @@ Public MustInherit Class ClsPolynomAbstract
     'List of roots of the polynom
     Protected Roots As Collection
 
-    'How many levels of colors
-    Private MyColorDeepness As Integer
-
     Public Sub New()
         Roots = New Collection
     End Sub
@@ -214,8 +211,7 @@ Public MustInherit Class ClsPolynomAbstract
         'Protocol of the PixelStartpoint and the Endpoint as Mathpoint
         If MyIsProtocol Then
             MyProtocolList.Items.Add(MathStartpoint.X.ToString("N5") & ", " & MathStartpoint.Y.ToString("N5") &
-                ", " & Zi.X.ToString("N5") & ", " & Zi.Y.ToString("N5") & ", " &
-                CType(MyBrush, SolidBrush).Color.ToString)
+                ", " & Zi.X.ToString("N5") & ", " & Zi.Y.ToString("N5"))
         End If
     End Sub
 
@@ -238,26 +234,19 @@ Public MustInherit Class ClsPolynomAbstract
     'Draws roots of the polynom
     Public Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
 
-        'The next value is set after experiments
-        If MyN = 2 Then
-            MyColorDeepness = 30
-        Else
-            MyColorDeepness = MyN * 100 - 270
-        End If
-
         'Roots
         Dim Col As Brush
 
         'Finished = PicCPlane is generated
-        If Finished Then
-            Col = Brushes.Black
 
-        Else
-            For Each MyRoot As ClsRoot In Roots
+        For Each MyRoot As ClsRoot In Roots
+            If Finished Then
+                Col = Brushes.Black
+            Else
                 Col = MyRoot.GetColor(0)
-                MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
-            Next
-        End If
+            End If
+            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+        Next
 
     End Sub
 
@@ -276,6 +265,22 @@ Public MustInherit Class ClsPolynomAbstract
         If MyColor = IPolynom.EnColor.Bright Then
             FinalBrightness = 1
         Else
+
+            Dim MyColorDeepness As Integer
+            'The next value is set after experiments:
+            'MyN = 3 and MyColorDeepness = 30
+            'MyN = 4 and ColorDeepness = 50
+            'MyN = 5 and ColorDeepness = 80
+            'MyN = 6 and ColorDeepness = 120
+            '...
+            'The Formula that delivers these values is
+            'y = 5*x^2 - 15 x + 30
+
+            If MyN = 2 Then
+                MyColorDeepness = 30
+            Else
+                MyColorDeepness = 5 * MyN * MyN - 15 * MyN + 30
+            End If
 
             FinalBrightness = (1 - Steps / MyColorDeepness) * 1.1
 

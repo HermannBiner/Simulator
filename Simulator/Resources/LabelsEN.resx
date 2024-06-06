@@ -190,12 +190,16 @@
     <comment>Lbl</comment>
   </data>
   <data name="ClsJuliaN" xml:space="preserve">
-    <value>Julia Set with Power z^n</value>
+    <value>Julia Set with Exponent n</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsLogisticGrowth" xml:space="preserve">
     <value>Logistic Growth</value>
     <comment>Cls</comment>
+  </data>
+  <data name="ClsMandelbrot" xml:space="preserve">
+    <value>Mandelbrot set with exponent n</value>
+    <comment>Lbl</comment>
   </data>
   <data name="ClsMidpointImplicit" xml:space="preserve">
     <value>Implicit Midpoint Rule</value>

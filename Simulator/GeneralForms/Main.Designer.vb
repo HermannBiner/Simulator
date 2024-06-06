@@ -173,19 +173,20 @@ Partial Class Main
         ' MnuFractals
         ' 
         MnuFractals.Name = "MnuFractals"
-        MnuFractals.Size = New Size(359, 44)
+        MnuFractals.Size = New Size(231, 44)
         MnuFractals.Text = "Fractals"
+        MnuFractals.Visible = False
         ' 
         ' MnuNewton
         ' 
         MnuNewton.Name = "MnuNewton"
-        MnuNewton.Size = New Size(359, 44)
+        MnuNewton.Size = New Size(231, 44)
         MnuNewton.Text = "Newton"
         ' 
         ' MnuJuliaSet
         ' 
         MnuJuliaSet.Name = "MnuJuliaSet"
-        MnuJuliaSet.Size = New Size(359, 44)
+        MnuJuliaSet.Size = New Size(231, 44)
         MnuJuliaSet.Text = "JuliaSet"
         ' 
         ' MnuTest
@@ -193,6 +194,7 @@ Partial Class Main
         MnuTest.Name = "MnuTest"
         MnuTest.Size = New Size(76, 38)
         MnuTest.Text = "Test"
+        MnuTest.Visible = False
         ' 
         ' MnuDocumentation
         ' 

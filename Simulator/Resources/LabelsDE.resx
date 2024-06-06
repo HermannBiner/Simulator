@@ -190,12 +190,16 @@
     <comment>Lbl</comment>
   </data>
   <data name="ClsJuliaN" xml:space="preserve">
-    <value>Julia Menge mit Exponent z^n</value>
+    <value>Julia Menge mit Exponent n</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsLogisticGrowth" xml:space="preserve">
     <value>Logistisches Wachstum</value>
     <comment>Cls</comment>
+  </data>
+  <data name="ClsMandelbrot" xml:space="preserve">
+    <value>Mandelbrot Menge mit Exponent n</value>
+    <comment>Lbl</comment>
   </data>
   <data name="ClsMidpointImplicit" xml:space="preserve">
     <value>Implizite Mittelpunktsregel</value>
