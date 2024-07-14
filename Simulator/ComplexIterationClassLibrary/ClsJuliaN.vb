@@ -40,8 +40,9 @@ Public Class ClsJuliaN
     Public Overrides Function IterationFormula(Zi As ClsComplexNumber) As Brush
 
         Dim Steps As Integer = 0
+        Dim R As Decimal = CDec(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
 
-        Do Until (Zi.AbsoluteValue > Math.Exp(Math.Log(2) / (MyN - 1))) Or (Steps > MaxSteps)
+        Do Until (Zi.AbsoluteValue > R) Or (Steps > MaxSteps)
 
             Steps += 1
 
@@ -72,7 +73,7 @@ Public Class ClsJuliaN
 
                 'to keep the brightness higher
                 ColorIndex = Math.Min(1, ColorIndex * 2)
-                ColorIndex = Math.Exp(Math.Log(ColorIndex) / 5)
+                ColorIndex = Math.Pow(ColorIndex, 1 / 5)
 
                 MyBrush = New SolidBrush(Color.FromArgb(255, CInt(255 * ColorIndex * MyRedPercent),
                        CInt(255 * ColorIndex * MyGreenPercent), CInt(255 * ColorIndex * MyBluePercent)))
@@ -93,5 +94,10 @@ Public Class ClsJuliaN
         Return MyBrush
 
     End Function
+
+    Public Overrides Sub ShowCTrack()
+        'is not relevant for a Julia Set Generation
+        Throw New NotImplementedException()
+    End Sub
 
 End Class

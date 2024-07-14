@@ -9,6 +9,9 @@ Public Interface IJulia
     'The Iteration plots the Orbit into MapCPlane
     WriteOnly Property MapCPlane As Bitmap
 
+    'The Mandelbrot Class draws into the Picturebox as well
+    WriteOnly Property PicCPlane As PictureBox
+
     'Allowed Interval for the x-Values
     ReadOnly Property AllowedXRange As ClsInterval
 
@@ -44,6 +47,7 @@ Public Interface IJulia
 
     'Iteration
     Sub Iteration(Startpoint As Point)
+    Sub ShowCTrack()
 
     'Reset
     Sub Reset()

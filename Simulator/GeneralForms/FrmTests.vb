@@ -5,7 +5,12 @@
 
 Public Class FrmTests
 
-    Private Z As ClsComplexNumber
+    Const N As Integer = 3
+    Const StepWide As Double = 0.001
+
+    Private MyGraphics As ClsGraphicTool
+    Private XInterval As ClsInterval
+    Private YInterval As ClsInterval
 
     Public Sub New()
 
@@ -26,39 +31,47 @@ Public Class FrmTests
         'Initialize Language
         InitializeLanguage()
 
+        SetDefaulValues()
+
     End Sub
 
+    Private Sub SetDefaulValues()
+
+        XInterval = New ClsInterval(CDec(-0.1), CDec(3))
+        YInterval = New ClsInterval(CDec(-2), CDec(8))
+        MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
+
+    End Sub
+
+    Private Sub DrawDefault()
+        MyGraphics.DrawLine(New ClsMathpoint(XInterval.A, 0), New ClsMathpoint(XInterval.B, 0),
+                    Color.Black, 1)
+        MyGraphics.DrawLine(New ClsMathpoint(0, YInterval.A), New ClsMathpoint(0, YInterval.B),
+                    Color.Black, 1)
+
+    End Sub
+
+    Private Sub Clear()
+        LstValues.Items.Clear()
+        MyGraphics.Clear(Color.White)
+    End Sub
 
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
-        Dim Z = New ClsComplexNumber(-0.9, 0)
-        Dim W = New ClsComplexNumber(0, 0)
-        Dim i As Integer
-        Dim k As Integer
+        Clear()
+        DrawDefault()
 
-        For k = 1 To 18
 
-            LstValues.Items.Add(Z.X.ToString("N5") & ", " & Z.Y.ToString("N5"))
-            W.X = Z.X
-            W.Y = Z.Y
+        Dim x As Decimal = 0
 
-            If W.AbsoluteValue > 0 Then
-                For i = 1 To 50
+        Do
+            MyGraphics.DrawPoint(New ClsMathpoint(x, CDec(Math.Pow(x, 3)) - 1), Brushes.Blue, 1)
+            x += CDec(0.001)
 
-                    If W.AbsoluteValue > 0 Then
-                        W = W.Power2.Add(New ClsComplexNumber(1, 0)).Div(W.Stretch(2))
-                    Else
-                        i = 51
-                    End If
 
-                Next i
-            End If
+        Loop Until x > 2
 
-            LstValues.Items.Add(W.X.ToString("N5") & ", " & W.Y.ToString("N5"))
 
-            Z.X += 0.1 * k
-
-        Next k
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
@@ -68,7 +81,8 @@ Public Class FrmTests
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
-        LstValues.Items.Clear()
+        Clear()
+        DrawDefault()
 
     End Sub
 End Class

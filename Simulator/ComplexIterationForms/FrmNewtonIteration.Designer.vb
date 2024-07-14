@@ -60,6 +60,7 @@ Partial Class FrmNewtonIteration
         LblTime = New Label()
         TxtSteps = New TextBox()
         TxtTime = New TextBox()
+        BtnShowBasin = New Button()
         CType(PicCPlane, ComponentModel.ISupportInitialize).BeginInit()
         GrpMixing.SuspendLayout()
         GrpColor.SuspendLayout()
@@ -204,7 +205,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1460, 917)
+        BtnStop.Location = New Point(1460, 912)
         BtnStop.Margin = New Padding(4, 5, 4, 5)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(594, 74)
@@ -216,16 +217,16 @@ Partial Class FrmNewtonIteration
         ' 
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
-        LstProtocol.Location = New Point(1460, 1064)
+        LstProtocol.Location = New Point(1460, 1160)
         LstProtocol.Margin = New Padding(4, 5, 4, 5)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(594, 452)
+        LstProtocol.Size = New Size(594, 356)
         LstProtocol.TabIndex = 25
         ' 
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1460, 1015)
+        LblProtocol.Location = New Point(1460, 1114)
         LblProtocol.Margin = New Padding(4, 0, 4, 0)
         LblProtocol.Name = "LblProtocol"
         LblProtocol.Size = New Size(102, 32)
@@ -278,7 +279,7 @@ Partial Class FrmNewtonIteration
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Location = New Point(1879, 1013)
+        ChkProtocol.Location = New Point(1879, 1110)
         ChkProtocol.Name = "ChkProtocol"
         ChkProtocol.Size = New Size(134, 36)
         ChkProtocol.TabIndex = 38
@@ -413,11 +414,22 @@ Partial Class FrmNewtonIteration
         TxtTime.Size = New Size(233, 39)
         TxtTime.TabIndex = 37
         ' 
+        ' BtnShowBasin
+        ' 
+        BtnShowBasin.Location = New Point(1460, 1009)
+        BtnShowBasin.Margin = New Padding(4, 5, 4, 5)
+        BtnShowBasin.Name = "BtnShowBasin"
+        BtnShowBasin.Size = New Size(594, 74)
+        BtnShowBasin.TabIndex = 42
+        BtnShowBasin.Text = "ShowBasin"
+        BtnShowBasin.UseVisualStyleBackColor = True
+        ' 
         ' FrmNewtonIteration
         ' 
         AutoScaleDimensions = New SizeF(13F, 32F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(2091, 1612)
+        Controls.Add(BtnShowBasin)
         Controls.Add(GrpColor)
         Controls.Add(GrpMixing)
         Controls.Add(LblPower)
@@ -502,4 +514,5 @@ Partial Class FrmNewtonIteration
     Friend WithEvents GrpColor As GroupBox
     Friend WithEvents OptShadowed As RadioButton
     Friend WithEvents OptBright As RadioButton
+    Friend WithEvents BtnShowBasin As Button
 End Class

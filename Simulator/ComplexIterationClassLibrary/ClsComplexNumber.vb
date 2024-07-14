@@ -137,7 +137,6 @@ Public Class ClsComplexNumber
 
     End Function
 
-
     Private Function GetPower(u As ClsComplexNumber, n As Integer) As ClsComplexNumber
 
         Dim k As Integer

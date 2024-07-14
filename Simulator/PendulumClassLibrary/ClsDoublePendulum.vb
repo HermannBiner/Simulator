@@ -419,7 +419,7 @@ Public Class ClsDoublePendulum
     Public Function CalcValuefromTrbAddParameter(AddParameter As Integer) As Decimal _
         Implements IPendulum.CalcValuefromTrbAddParameter
 
-        Dim Temp As Decimal = CDec(Math.Exp(Math.Log(2) * (AddParameter - 2)))
+        Dim Temp As Decimal = CDec(Math.Pow(2, AddParameter - 2))
 
         Return Temp
 

@@ -10,6 +10,10 @@ Public MustInherit Class ClsJuliaAbstract
     Protected MyMapCPlane As Bitmap
     Protected MyMapCPlaneGraphics As ClsGraphicTool
 
+    'Drawing PicCPlane
+    Protected MyPicCPlane As PictureBox
+    Protected MyPicCPlaneGraphics As ClsGraphicTool
+
     'Allowed Interval for the x-Values
     Protected MyAllowedXRange As ClsInterval
 
@@ -46,6 +50,13 @@ Public MustInherit Class ClsJuliaAbstract
         Set(value As Bitmap)
             MyMapCPlane = value
             MyMapCPlaneGraphics = New ClsGraphicTool(MyMapCPlane, MyActualXRange, MyActualYRange)
+        End Set
+    End Property
+
+    WriteOnly Property PicCPlane As PictureBox Implements IJulia.PicCPlane
+        Set(value As PictureBox)
+            MyPicCPlane = value
+            MyPicCPlaneGraphics = New ClsGraphicTool(MyPicCPlane, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
@@ -159,7 +170,6 @@ Public MustInherit Class ClsJuliaAbstract
 
     End Sub
 
-
     Public Sub Reset() Implements IJulia.Reset
 
         'Clear MapCPlane
@@ -171,5 +181,7 @@ Public MustInherit Class ClsJuliaAbstract
     End Sub
 
     Public MustOverride Function IterationFormula(Z As ClsComplexNumber) As Brush
+
+    Public MustOverride Sub ShowCTrack() Implements IJulia.ShowCTrack
 
 End Class

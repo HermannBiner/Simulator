@@ -61,7 +61,7 @@ Public Class ClsInterval
             Dim DecNumber As Double = DirectCast(number, Double)
             Return DecNumber >= MyA And DecNumber <= MyB
         Else
-            MessageBox.Show(Main.LM.GetString("OnlyDecAndInt"))
+            MessageBox.Show(Main.LM.GetString("OnlyDecAndIntAndDbl"))
             Return False
         End If
 

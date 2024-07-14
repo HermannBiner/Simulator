@@ -13,6 +13,7 @@
 
 Imports System.Globalization
 Imports System.Reflection
+Imports Windows.Win32
 
 
 Public Class FrmNewtonIteration
@@ -70,6 +71,7 @@ Public Class FrmNewtonIteration
         ChkProtocol.Text = Main.LM.GetString("Protocol")
         BtnStart.Text = Main.LM.GetString("Start")
         BtnStop.Text = Main.LM.GetString("Stop")
+        BtnShowBasin.Text = Main.LM.GetString("ShowBasin")
         BtnReset.Text = Main.LM.GetString("ResetIteration")
         LblTime.Text = Main.LM.GetString("Time")
         LblSteps.Text = Main.LM.GetString("Steps")
@@ -194,9 +196,15 @@ Public Class FrmNewtonIteration
                 Else
                     Polynom.UseColor = IPolynom.EnColor.Shadowed
                 End If
+
             End With
 
-            'ResetIteration()
+            If TypeOf (Polynom) Is ClsUnitRoots Then
+                BtnShowBasin.Visible = True
+            Else
+                BtnShowBasin.Visible = False
+            End If
+
 
             n = 0
             L = 0
@@ -303,6 +311,95 @@ Public Class FrmNewtonIteration
 
     End Sub
 
+    Private Sub ShowBasin()
+        'Shows the approximated basin(1)
+        'that is an area where |Np'(z)|<1
+        If Polynom IsNot Nothing Then
+
+            Dim XInterval = New ClsInterval(CDec(0), CDec(2))
+            Dim YInterval = New ClsInterval(CDec(-1), CDec(1))
+            Dim MyGraphics = New ClsGraphicTool(PicCPlane, XInterval, YInterval)
+            Dim locN As Integer = CInt(CboN.SelectedItem)
+
+            Const StepWide As Double = 0.001
+
+            MyGraphics.Clear(Color.White)
+            LstProtocol.Items.Clear()
+
+            'Draws the coordinate system and the circles
+            MyGraphics.DrawLine(New ClsMathpoint(XInterval.A, 0), New ClsMathpoint(XInterval.B, 0),
+            Color.Black, 1)
+            MyGraphics.DrawLine(New ClsMathpoint(0, YInterval.A), New ClsMathpoint(0, YInterval.B),
+                        Color.Black, 1)
+            MyGraphics.DrawCircle(New ClsMathpoint(1, 0), 1, Color.Blue, 1)
+            MyGraphics.DrawCircle(New ClsMathpoint(1, 0), CDec(1 - 1 / Math.Pow(2, 1 / locN)),
+                                  Color.Green, 1)
+            MyGraphics.DrawPoint(New ClsMathpoint(1, 0), Brushes.Black, 2)
+
+            Dim Asymptote As New ClsMathpoint(CDec(2 * Math.Cos(Math.PI / (2 * locN))), CDec(2 * Math.Sin(Math.PI / (2 * locN))))
+            MyGraphics.DrawLine(New ClsMathpoint(0, 0), Asymptote, Color.Green, 1)
+            Asymptote.Y = -Asymptote.Y
+            MyGraphics.DrawLine(New ClsMathpoint(0, 0), Asymptote, Color.Green, 1)
+
+
+            Dim Phi As Double = 0
+            Dim R As Double
+            Dim Limit As Double = Math.Sqrt(Math.Pow(XInterval.B, 2) + Math.Pow(YInterval.B, 2))
+
+            'Draws the real and approximated curve of |Np'(z)|<1
+
+            Do
+                R = GetR(Phi, locN)
+
+                If R < Limit Then
+                    MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(R * Math.Sin(Phi))), Brushes.Red, 1)
+                    MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(-R * Math.Sin(Phi))), Brushes.Red, 1)
+                End If
+
+                R = GetRApprox(Phi, locN)
+
+                If R < Limit Then
+                    MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(R * Math.Sin(Phi))), Brushes.Red, 1)
+                    MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(-R * Math.Sin(Phi))), Brushes.Red, 1)
+                End If
+
+                'This is the result of experiments:
+                Phi += StepWide / (2 * R)
+
+            Loop Until (R > Limit) Or (Phi > Math.PI / (2 * locN))
+
+        End If
+
+    End Sub
+
+    Private Function GetR(phi As Double, lN As Integer) As Double
+
+        Dim rTemp As Double
+
+        'Prepare Root
+        rTemp = Math.Pow(Math.Cos(lN * phi) * (lN - 1) / (2 * lN - 1), 2) + 1 / (2 * lN - 1)
+
+        'Root
+        rTemp = (lN - 1) * Math.Sqrt(rTemp)
+
+        'Add
+        rTemp += -Math.Cos(lN * phi) * (lN - 1) * (lN - 1) / (2 * lN - 1)
+
+        'n-th root
+        rTemp = Math.Pow(rTemp, 1 / lN)
+
+        Return rTemp
+
+    End Function
+
+    Private Function GetRApprox(phi As Double, lN As Integer) As Double
+
+        Dim rTemp As Double
+
+        rTemp = 1 / Math.Pow(2 * Math.Cos(lN * phi), 1 / lN)
+
+        Return rTemp
+    End Function
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
@@ -362,7 +459,7 @@ Public Class FrmNewtonIteration
 
                 Polynom.Iteration(PixelPoint)
 
-                If Steps Mod 5000 = 0 Then
+                If Steps Mod 10000 = 0 Then
                     PicCPlane.Refresh()
                 End If
 
@@ -380,7 +477,7 @@ Public Class FrmNewtonIteration
                 End With
 
                 Polynom.Iteration(PixelPoint)
-                If Steps Mod 5000 = 0 Then
+                If Steps Mod 10000 = 0 Then
                     PicCPlane.Refresh()
                 End If
 
@@ -675,5 +772,9 @@ Public Class FrmNewtonIteration
     Private Sub OptRotate_CheckedChanged(sender As Object, e As EventArgs) Handles OptRotate.CheckedChanged
         SetDefaultValues()
         ResetIteration()
+    End Sub
+
+    Private Sub BtnShowBasin_Click(sender As Object, e As EventArgs) Handles BtnShowBasin.Click
+        ShowBasin()
     End Sub
 End Class

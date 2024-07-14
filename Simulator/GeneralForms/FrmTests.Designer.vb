@@ -23,83 +23,83 @@ Partial Class FrmTests
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTests))
-        Me.BtnTest = New System.Windows.Forms.Button()
-        Me.PicDiagram = New System.Windows.Forms.PictureBox()
-        Me.BtnStop = New System.Windows.Forms.Button()
-        Me.LstValues = New System.Windows.Forms.ListBox()
-        Me.BtnReset = New System.Windows.Forms.Button()
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'BtnTest
-        '
-        Me.BtnTest.Location = New System.Drawing.Point(1240, 4)
-        Me.BtnTest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.BtnTest.Name = "BtnTest"
-        Me.BtnTest.Size = New System.Drawing.Size(308, 65)
-        Me.BtnTest.TabIndex = 2
-        Me.BtnTest.Text = "Start"
-        Me.BtnTest.UseVisualStyleBackColor = True
-        '
-        'PicDiagram
-        '
-        Me.PicDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PicDiagram.Location = New System.Drawing.Point(16, 4)
-        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.PicDiagram.Name = "PicDiagram"
-        Me.PicDiagram.Size = New System.Drawing.Size(1198, 1152)
-        Me.PicDiagram.TabIndex = 4
-        Me.PicDiagram.TabStop = False
-        '
-        'BtnStop
-        '
-        Me.BtnStop.Location = New System.Drawing.Point(1240, 100)
-        Me.BtnStop.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.BtnStop.Name = "BtnStop"
-        Me.BtnStop.Size = New System.Drawing.Size(308, 65)
-        Me.BtnStop.TabIndex = 5
-        Me.BtnStop.Text = "Stop"
-        Me.BtnStop.UseVisualStyleBackColor = True
-        '
-        'LstValues
-        '
-        Me.LstValues.FormattingEnabled = True
-        Me.LstValues.ItemHeight = 25
-        Me.LstValues.Location = New System.Drawing.Point(1240, 302)
-        Me.LstValues.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.LstValues.Name = "LstValues"
-        Me.LstValues.Size = New System.Drawing.Size(628, 854)
-        Me.LstValues.TabIndex = 6
-        '
-        'BtnReset
-        '
-        Me.BtnReset.Location = New System.Drawing.Point(1240, 200)
-        Me.BtnReset.Margin = New System.Windows.Forms.Padding(6)
-        Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(308, 65)
-        Me.BtnReset.TabIndex = 7
-        Me.BtnReset.Text = "Reset"
-        Me.BtnReset.UseVisualStyleBackColor = True
-        '
-        'FrmTests
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.Control
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(1908, 1212)
-        Me.Controls.Add(Me.BtnReset)
-        Me.Controls.Add(Me.LstValues)
-        Me.Controls.Add(Me.BtnStop)
-        Me.Controls.Add(Me.PicDiagram)
-        Me.Controls.Add(Me.BtnTest)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Name = "FrmTests"
-        Me.Text = "Test"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        BtnTest = New Button()
+        PicDiagram = New PictureBox()
+        BtnStop = New Button()
+        LstValues = New ListBox()
+        BtnReset = New Button()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' BtnTest
+        ' 
+        BtnTest.Location = New Point(1343, 5)
+        BtnTest.Margin = New Padding(4, 5, 4, 5)
+        BtnTest.Name = "BtnTest"
+        BtnTest.Size = New Size(334, 83)
+        BtnTest.TabIndex = 2
+        BtnTest.Text = "Start"
+        BtnTest.UseVisualStyleBackColor = True
+        ' 
+        ' PicDiagram
+        ' 
+        PicDiagram.BackColor = Color.White
+        PicDiagram.BorderStyle = BorderStyle.FixedSingle
+        PicDiagram.Location = New Point(17, 5)
+        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(1298, 1474)
+        PicDiagram.TabIndex = 4
+        PicDiagram.TabStop = False
+        ' 
+        ' BtnStop
+        ' 
+        BtnStop.Location = New Point(1343, 128)
+        BtnStop.Margin = New Padding(6, 8, 6, 8)
+        BtnStop.Name = "BtnStop"
+        BtnStop.Size = New Size(334, 83)
+        BtnStop.TabIndex = 5
+        BtnStop.Text = "Stop"
+        BtnStop.UseVisualStyleBackColor = True
+        ' 
+        ' LstValues
+        ' 
+        LstValues.FormattingEnabled = True
+        LstValues.Location = New Point(1343, 387)
+        LstValues.Margin = New Padding(6, 8, 6, 8)
+        LstValues.Name = "LstValues"
+        LstValues.Size = New Size(680, 1092)
+        LstValues.TabIndex = 6
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Location = New Point(1343, 256)
+        BtnReset.Margin = New Padding(6, 8, 6, 8)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(334, 83)
+        BtnReset.TabIndex = 7
+        BtnReset.Text = "Reset"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' FrmTests
+        ' 
+        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleMode = AutoScaleMode.Font
+        BackColor = SystemColors.Control
+        BackgroundImageLayout = ImageLayout.None
+        ClientSize = New Size(2067, 1551)
+        Controls.Add(BtnReset)
+        Controls.Add(LstValues)
+        Controls.Add(BtnStop)
+        Controls.Add(PicDiagram)
+        Controls.Add(BtnTest)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        Name = "FrmTests"
+        Text = "Test"
+        WindowState = FormWindowState.Maximized
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
 
     End Sub
     Friend WithEvents BtnTest As Button

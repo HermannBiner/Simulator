@@ -4,6 +4,8 @@
 
 'Status Checked
 
+Imports System.Net.Http.Headers
+
 Public Class ClsMandelbrot
     Inherits ClsJuliaAbstract
 
@@ -68,6 +70,8 @@ Public Class ClsMandelbrot
     Public Overrides Function IterationFormula(Zi As ClsComplexNumber) As Brush
 
         Dim Steps As Integer = 0
+        Dim R As Decimal = CDec(Math.Pow(2, 1 / (MyN - 1)))
+
 
         'For the Mandelbrot-Set, the Point Zi is replaced by C
         MyC.X = Zi.X
@@ -76,7 +80,7 @@ Public Class ClsMandelbrot
         'For the Mandelbrot set, the Iteration starts always with Zi = 0
         Zi = New ClsComplexNumber(0, 0)
 
-        Do Until (Zi.AbsoluteValue > Math.Exp(Math.Log(2) / (MyN - 1))) Or (Steps > MaxSteps)
+        Do Until (Zi.AbsoluteValue > R) Or (Steps > MaxSteps)
 
             Steps += 1
 
@@ -107,7 +111,7 @@ Public Class ClsMandelbrot
 
                 'to keep the brightness higher
                 ColorIndex = Math.Min(1, ColorIndex * 2)
-                ColorIndex = Math.Exp(Math.Log(ColorIndex) / 5)
+                ColorIndex = Math.Pow(ColorIndex, 1 / 5)
 
                 MyBrush = New SolidBrush(Color.FromArgb(255, CInt(255 * ColorIndex * MyRedPercent),
                        CInt(255 * ColorIndex * MyGreenPercent), CInt(255 * ColorIndex * MyBluePercent)))
@@ -128,5 +132,22 @@ Public Class ClsMandelbrot
         Return MyBrush
 
     End Function
+
+    Public Overrides Sub ShowCTrack()
+        Dim i As Integer = 1
+        Dim w As ClsComplexNumber = MyC
+
+        MyPicCPlane.Refresh()
+
+        MyPicCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
+
+        Do
+            w = w.Power(MyN).Add(MyC)
+            MyPicCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
+
+            i += 1
+        Loop Until i > 50 Or w.AbsoluteValue > 2
+
+    End Sub
 
 End Class

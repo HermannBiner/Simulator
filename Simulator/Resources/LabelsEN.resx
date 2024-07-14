@@ -137,6 +137,14 @@
     <value>Speed of all Balls</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Bifurcation" xml:space="preserve">
+    <value>Bifurcation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BifurcationDiagram" xml:space="preserve">
+    <value>Bifurcation Diagram for the Mandelbrot Set</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Billiard" xml:space="preserve">
     <value>Billiard</value>
     <comment>Lbl</comment>
@@ -156,6 +164,10 @@
   <data name="Bright" xml:space="preserve">
     <value>Bright</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="bValueNotAllowed" xml:space="preserve">
+    <value>The value of b is not in</value>
+    <comment>Msg</comment>
   </data>
   <data name="C-Diagram" xml:space="preserve">
     <value>C-Diagram</value>
@@ -214,7 +226,7 @@
     <comment>Cls</comment>
   </data>
   <data name="ClsPolynom3C" xml:space="preserve">
-    <value>Polynom with three roots</value>
+    <value>Polynom with three zeros</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsRealSpringPendulum" xml:space="preserve">
@@ -271,6 +283,10 @@
   </data>
   <data name="CoordinatesStartpoint" xml:space="preserve">
     <value>Coordinates of the Startpoint</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="CTrack" xml:space="preserve">
+    <value>C-Track</value>
     <comment>Lbl</comment>
   </data>
   <data name="CXNotAllowed" xml:space="preserve">
@@ -331,6 +347,10 @@
   </data>
   <data name="ExaminatedParameterRange" xml:space="preserve">
     <value>Examinated Parameter Range:</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ExaminatedRealpartRange" xml:space="preserve">
+    <value>Examinated Realpart Range</value>
     <comment>Lbl</comment>
   </data>
   <data name="ExaminatedValueParameter" xml:space="preserve">
@@ -625,8 +645,8 @@
     <value>This must be a numeric value</value>
     <comment>Msg</comment>
   </data>
-  <data name="OnlyDecAndInt" xml:space="preserve">
-    <value>In this project, only numbers of type Integer and Decimal are allowed</value>
+  <data name="OnlyDecAndIntAndDbl" xml:space="preserve">
+    <value>Only numbers of type Integer, Decimal or Double are allowed</value>
     <comment>Msg</comment>
   </data>
   <data name="Oval" xml:space="preserve">
@@ -682,11 +702,15 @@
     <comment>Lbl</comment>
   </data>
   <data name="ProtocolJulia" xml:space="preserve">
-    <value>Protocol: Min and Max #Steps</value>
+    <value>Min and Max #Steps</value>
     <comment>Lbl</comment>
   </data>
   <data name="ProtocolNewton" xml:space="preserve">
     <value>Protocol Startpoint, Endpoint</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="QuadraticFunction" xml:space="preserve">
+    <value>Quadratic Function</value>
     <comment>Lbl</comment>
   </data>
   <data name="Red" xml:space="preserve">
@@ -727,6 +751,10 @@
   </data>
   <data name="ShakingFrequency" xml:space="preserve">
     <value>Shaking Frequency</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ShowBasin" xml:space="preserve">
+    <value>Show Basin (1)</value>
     <comment>Lbl</comment>
   </data>
   <data name="ShowOrbit" xml:space="preserve">

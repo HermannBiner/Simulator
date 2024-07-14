@@ -39,9 +39,9 @@ Public Class Main
         MnuPendulum.Text = LM.GetString("MnuPendulum")
         MnuCDiagram.Text = LM.GetString("MnuCDiagramBilliard")
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
-        MnuFractals.Text = LM.GetString("MnuFractals")
         MnuNewton.Text = LM.GetString("MnuNewton")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
+        MnuBifurcation.Text = Main.LM.GetString("Bifurcation")
         MnuTest.Text = LM.GetString("MnuTest")
         MnuDocumentation.Text = LM.GetString("MnuDocumentation")
         MnuManual.Text = LM.GetString("MnuManual")
@@ -103,10 +103,6 @@ Public Class Main
         FrmPendulum.Show()
     End Sub
 
-    Private Sub MnuFractals_Click(sender As Object, e As EventArgs) Handles MnuFractals.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
-    End Sub
-
     Private Sub MnuCDiagram_Click(sender As Object, e As EventArgs) Handles MnuCDiagram.Click
         FrmCDiagramBilliard.Show()
     End Sub
@@ -155,6 +151,10 @@ Public Class Main
     End Sub
 
     Private Sub MnuJuliaSet_Click(sender As Object, e As EventArgs) Handles MnuJuliaSet.Click
-        FrmJuliaSet.Show()
+        FrmJulia.Show()
+    End Sub
+
+    Private Sub MnuBifurcation_Click(sender As Object, e As EventArgs) Handles MnuBifurcation.Click
+        FrmBifurcation.Show()
     End Sub
 End Class

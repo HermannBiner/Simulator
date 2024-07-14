@@ -9,7 +9,7 @@ Public MustInherit Class ClsPolynomAbstract
     Implements IPolynom
 
     'the radius where Zi is regarded as belonging to a root
-    Protected Const MyRadius As Double = 0.1
+    Protected MyRadius As Double
 
     'How many steps should be iterated?
     Protected MyIterationDeepness As Integer
@@ -115,6 +115,7 @@ Public MustInherit Class ClsPolynomAbstract
     WriteOnly Property N As Integer Implements IPolynom.N
         Set(value As Integer)
             MyN = value
+            MyRadius = Math.Min(0.1, 1 - Math.Pow(2, -1 / MyN))
         End Set
     End Property
 
