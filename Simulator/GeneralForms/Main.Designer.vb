@@ -43,12 +43,12 @@ Partial Class Main
         MnuComplexIteration = New ToolStripMenuItem()
         MnuNewton = New ToolStripMenuItem()
         MnuJuliaSet = New ToolStripMenuItem()
+        MnuBifurcation = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
         MnuDocumentation = New ToolStripMenuItem()
         MnuManual = New ToolStripMenuItem()
         MnuMathematics = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
-        MnuBifurcation = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
@@ -59,7 +59,7 @@ Partial Class Main
         MnuMain.Location = New Point(0, 0)
         MnuMain.Name = "MnuMain"
         MnuMain.Padding = New Padding(9, 2, 0, 2)
-        MnuMain.Size = New Size(2197, 40)
+        MnuMain.Size = New Size(2197, 42)
         MnuMain.TabIndex = 0
         MnuMain.Text = "Main"
         ' 
@@ -67,7 +67,7 @@ Partial Class Main
         ' 
         MnuFile.DropDownItems.AddRange(New ToolStripItem() {MnuLanguage, MnuClose})
         MnuFile.Name = "MnuFile"
-        MnuFile.Size = New Size(71, 36)
+        MnuFile.Size = New Size(71, 38)
         MnuFile.Text = "File"
         ' 
         ' MnuLanguage
@@ -99,7 +99,7 @@ Partial Class Main
         ' 
         MnuUnimodal.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum})
         MnuUnimodal.Name = "MnuUnimodal"
-        MnuUnimodal.Size = New Size(137, 36)
+        MnuUnimodal.Size = New Size(137, 38)
         MnuUnimodal.Text = "Unimodal"
         ' 
         ' MnuIteration
@@ -136,7 +136,7 @@ Partial Class Main
         ' 
         MnuMechanics.DropDownItems.AddRange(New ToolStripItem() {MnuBilliard, MnuCDiagram, MnuNumericMethods, MnuPendulum})
         MnuMechanics.Name = "MnuMechanics"
-        MnuMechanics.Size = New Size(147, 36)
+        MnuMechanics.Size = New Size(147, 38)
         MnuMechanics.Text = "Mechanics"
         ' 
         ' MnuBilliard
@@ -167,7 +167,7 @@ Partial Class Main
         ' 
         MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet, MnuBifurcation})
         MnuComplexIteration.Name = "MnuComplexIteration"
-        MnuComplexIteration.Size = New Size(217, 36)
+        MnuComplexIteration.Size = New Size(217, 38)
         MnuComplexIteration.Text = "ComplexIteration"
         ' 
         ' MnuNewton
@@ -182,10 +182,16 @@ Partial Class Main
         MnuJuliaSet.Size = New Size(262, 44)
         MnuJuliaSet.Text = "JuliaSet"
         ' 
+        ' MnuBifurcation
+        ' 
+        MnuBifurcation.Name = "MnuBifurcation"
+        MnuBifurcation.Size = New Size(262, 44)
+        MnuBifurcation.Text = "Bifurcation"
+        ' 
         ' MnuTest
         ' 
         MnuTest.Name = "MnuTest"
-        MnuTest.Size = New Size(76, 36)
+        MnuTest.Size = New Size(76, 38)
         MnuTest.Text = "Test"
         MnuTest.Visible = False
         ' 
@@ -193,7 +199,7 @@ Partial Class Main
         ' 
         MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuMathematics, MnuInfo})
         MnuDocumentation.Name = "MnuDocumentation"
-        MnuDocumentation.Size = New Size(200, 36)
+        MnuDocumentation.Size = New Size(200, 38)
         MnuDocumentation.Text = "Documentation"
         ' 
         ' MnuManual
@@ -213,12 +219,6 @@ Partial Class Main
         MnuInfo.Name = "MnuInfo"
         MnuInfo.Size = New Size(284, 44)
         MnuInfo.Text = "Info"
-        ' 
-        ' MnuBifurcation
-        ' 
-        MnuBifurcation.Name = "MnuBifurcation"
-        MnuBifurcation.Size = New Size(262, 44)
-        MnuBifurcation.Text = "Bifurcation"
         ' 
         ' Main
         ' 

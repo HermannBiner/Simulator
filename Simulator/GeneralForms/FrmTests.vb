@@ -5,7 +5,6 @@
 
 Public Class FrmTests
 
-    Const N As Integer = 3
     Const StepWide As Double = 0.001
 
     Private MyGraphics As ClsGraphicTool
@@ -37,13 +36,13 @@ Public Class FrmTests
 
     Private Sub SetDefaulValues()
 
-        XInterval = New ClsInterval(CDec(-0.1), CDec(3))
-        YInterval = New ClsInterval(CDec(-2), CDec(8))
+        XInterval = New ClsInterval(CDec(-1.3), CDec(0.7))
+        YInterval = New ClsInterval(CDec(-1), CDec(1))
         MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
 
     End Sub
 
-    Private Sub DrawDefault()
+    Private Sub DrawCoordinateSystem()
         MyGraphics.DrawLine(New ClsMathpoint(XInterval.A, 0), New ClsMathpoint(XInterval.B, 0),
                     Color.Black, 1)
         MyGraphics.DrawLine(New ClsMathpoint(0, YInterval.A), New ClsMathpoint(0, YInterval.B),
@@ -59,17 +58,30 @@ Public Class FrmTests
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
 
         Clear()
-        DrawDefault()
+        DrawCoordinateSystem()
 
 
-        Dim x As Decimal = 0
+        Dim phi As Decimal = 0
+        Dim Cardioide As New ClsMathpoint
+        Dim Circle As New ClsMathpoint
 
         Do
-            MyGraphics.DrawPoint(New ClsMathpoint(x, CDec(Math.Pow(x, 3)) - 1), Brushes.Blue, 1)
-            x += CDec(0.001)
+            With Cardioide
+                .X = CDec(Math.Cos(phi) / 2 - Math.Cos(2 * phi) / 4)
+                .Y = CDec(Math.Sin(phi) / 2 - Math.Sin(2 * phi) / 4)
+            End With
+            MyGraphics.DrawPoint(Cardioide, Brushes.Blue, 1)
+
+            With Circle
+                .X = CDec(-1 + Math.Cos(phi) / 4)
+                .Y = CDec(Math.Sin(phi) / 4)
+            End With
+            MyGraphics.DrawPoint(Circle, Brushes.Green, 1)
+
+            phi += CDec(0.001)
 
 
-        Loop Until x > 2
+        Loop Until phi > CDec(Math.pi * 2)
 
 
     End Sub
@@ -82,7 +94,7 @@ Public Class FrmTests
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
 
         Clear()
-        DrawDefault()
+        DrawCoordinateSystem()
 
     End Sub
 End Class

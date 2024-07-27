@@ -386,7 +386,7 @@ Public Class FrmIteration
         Dim m As Integer
 
         'X and XPlus are increased stepwise and the line betweens these points is drawn
-        For m = 0 To DiagramSize.X - 1
+        For m = 0 To DiagramSize.X - 2
 
             X.X = Iterator.IterationInterval.A + (m * deltaX)
             X.Y = Iterator.FN(X.X)
