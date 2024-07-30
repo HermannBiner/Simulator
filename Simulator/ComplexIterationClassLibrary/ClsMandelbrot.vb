@@ -4,12 +4,11 @@
 
 'Status Checked
 
-Imports System.Net.Http.Headers
 
 Public Class ClsMandelbrot
     Inherits ClsJuliaAbstract
 
-    'the precision of the border of the Mandelbrot set
+    'the precision of the boundary of the Mandelbrot set
     Const MaxSteps As Integer = 250
 
     Private MyN As Integer
@@ -36,6 +35,8 @@ Public Class ClsMandelbrot
         MyActualYRange = MyAllowedYRange
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
+
+        MyIsTrackImplemented = True
 
     End Sub
 
@@ -67,7 +68,15 @@ Public Class ClsMandelbrot
 
     End Sub
 
-    Public Overrides Function IterationFormula(Zi As ClsComplexNumber) As Brush
+    Public Overrides Sub IterationStep(Startpoint As Point)
+
+        'Transform the PixelPoint to a Complex Number
+        Dim Zi As ClsComplexNumber
+
+        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
+            'Saved for debugging
+            Zi = New ClsComplexNumber(.X, .Y)
+        End With
 
         Dim Steps As Integer = 0
         Dim R As Decimal = CDec(Math.Pow(2, 1 / (MyN - 1)))
@@ -128,10 +137,10 @@ Public Class ClsMandelbrot
             End If
         End If
 
-        'the lower the colorindex the brighter the color
-        Return MyBrush
+        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBrush.Dispose()
 
-    End Function
+    End Sub
 
     Public Overrides Sub ShowCTrack()
         Dim i As Integer = 1
@@ -149,5 +158,6 @@ Public Class ClsMandelbrot
         Loop Until i > 50 Or w.AbsoluteValue > 2
 
     End Sub
+
 
 End Class

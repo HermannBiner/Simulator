@@ -34,23 +34,6 @@ Public Class FrmJulia
     'Point where the left mouse button was released
     Private UserSelectionEndpoint As Point
 
-    'Controlling the Iteration Loop
-    Private StopIteration As Boolean
-
-    'Number of Steps
-    Private n As Integer
-
-    'Coordinates of the pixel with the startvalue
-    Dim p As Integer
-    Dim q As Integer
-    Dim PixelPoint As Point
-
-    'Length of a branche of the spiral
-    'see Sub IterationLoop
-    Dim L As Integer = 0
-    Dim Steps As Integer
-    Dim Watch As Stopwatch
-
     'SECTOR INITIALIZATION
 
     Public Sub New()
@@ -116,18 +99,18 @@ Public Class FrmJulia
         MapCPlane = New Bitmap(Square, Square)
         PicCPlane.Image = MapCPlane
 
-
         Julia = New ClsJuliaN
         With Julia
             .MapCPlane = MapCPlane
+            .PicCPlane = PicCPlane
+            .TxtNumberOfSteps = TxtSteps
+            .TxtElapsedTime = TxtTime
         End With
 
         CboN.SelectedIndex = 0
 
         TxtA.Text = "-0.2"
         TxtB.Text = "0.7"
-
-        Watch = New Stopwatch
 
         'Initialize Language
         InitializeLanguage()
@@ -158,6 +141,9 @@ Public Class FrmJulia
 
                 .C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
                 .PicCPlane = PicCPlane
+                .MapCPlane = MapCPlane
+                .TxtElapsedTime = TxtTime
+                .TxtNumberOfSteps = TxtSteps
 
                 .ProcotolList = LstProtocol
                 .IsProtocol = ChkProtocol.Checked
@@ -185,17 +171,11 @@ Public Class FrmJulia
                     SetColors()
                 End If
 
+                .IterationStatus = ClsGeneral.EnIterationStatus.Stopped
+
             End With
-
-            n = 0
-            L = 0
-            TxtSteps.Text = 1.ToString
-            Steps = 1
-            If Watch IsNot Nothing Then
-                Watch.Reset()
-                TxtTime.Text = Watch.ToString
-            End If
-
+            TxtSteps.Text = 0.ToString
+            TxtTime.Text = 0.ToString
         End If
 
     End Sub
@@ -203,11 +183,11 @@ Public Class FrmJulia
     Private Sub ResetIteration()
 
         BtnStart.Text = Main.LM.GetString("Start")
-        StopIteration = True
 
         'The display is cleared
         If Julia IsNot Nothing Then
             Julia.Reset()
+            Julia.IterationStatus = ClsGeneral.EnIterationStatus.Stopped
         End If
         PicCPlane.Refresh()
         LstProtocol.Items.Clear()
@@ -222,7 +202,6 @@ Public Class FrmJulia
         With Julia
             .ActualXRange = .AllowedXRange
             .ActualYRange = .AllowedYRange
-            .MapCPlane = MapCPlane
         End With
 
         SetDefaultValues()
@@ -247,7 +226,7 @@ Public Class FrmJulia
                     If Main.LM.GetString(type.Name, True) = SelectedName Then
                         Julia = CType(Activator.CreateInstance(type), IJulia)
                         Julia.MapCPlane = MapCPlane
-
+                        Julia.PicCPlane = PicCPlane
                     End If
                 Next
             End If
@@ -264,151 +243,60 @@ Public Class FrmJulia
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-        If ChkTrack.Checked Then
+        If Julia IsNot Nothing Then
+            If ChkTrack.Checked Then
 
-            If Julia IsNot Nothing Then
                 Julia.C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
                 ShowCTrack()
+
+            Else
+                If Julia.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+
+                    'the iteration was stopped or reset
+                    'and should start from the beginning
+                    CheckUserRanges()
+                    SetDefaultValues()
+                    ResetIteration()
+
+                    BtnStart.Text = Main.LM.GetString("Continue")
+                End If
+
+                Julia.IterationStatus = ClsGeneral.EnIterationStatus.Started
+
+                BtnStart.Enabled = False
+                BtnReset.Enabled = False
+                ChkProtocol.Enabled = False
+
+                Application.DoEvents()
+
+                Await Julia.GenerateImage
+
+                If Julia.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                    BtnStart.Text = Main.LM.GetString("Start")
+                    BtnStart.Enabled = True
+                    BtnReset.Enabled = True
+
+                    If Julia.IsTrackImplemented Then
+                        ChkTrack.Visible = True
+                    End If
+                End If
+
             End If
-        Else
-            If n = 0 Then
-
-                'the iteration was stopped or reset
-                'and should start from the beginning
-                CheckUserRanges()
-                SetDefaultValues()
-                ResetIteration()
-
-                BtnStart.Text = Main.LM.GetString("Continue")
-
-            End If
-
-            StopIteration = False
-            BtnStart.Enabled = False
-            BtnReset.Enabled = False
-            ChkProtocol.Enabled = False
-
-            Application.DoEvents()
-
-            Await IterationLoop()
         End If
-
     End Sub
 
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        'the iteration is running and should be stopped
-        StopIteration = True
+        'the iteration was running and is interrupted
+        Julia.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+        'the iteration is stopoped by reset the iteration
 
         BtnStart.Enabled = True
         BtnReset.Enabled = True
         ChkProtocol.Enabled = True
 
     End Sub
-
-    Private Async Function IterationLoop() As Task
-
-        'Sig = 1 if n odd, = -1 else
-        Dim Sig As Integer
-
-        'Parameter k = 1...L
-        Dim k As Integer
-
-        'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        If n = 0 Then
-            p = CInt(PicCPlane.Width / 2)
-            q = CInt(PicCPlane.Height / 2)
-            PixelPoint = New Point
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            Julia.Iteration(PixelPoint)
-
-            Steps = 1
-            Watch.Start()
-
-        End If
-
-
-        Do
-            n += 1
-
-            If n Mod 2 = 0 Then
-                Sig = -1
-            Else
-                Sig = 1
-            End If
-
-            L += 1
-
-            For k = 1 To L
-                p += Sig
-                With PixelPoint
-                    .X = p
-                    .Y = q
-                End With
-
-                'Calculates the color of the PixelPoint
-                'and draws it to MapCPlane
-                Julia.Iteration(PixelPoint)
-
-                If Steps Mod 10000 = 0 Then
-                    PicCPlane.Refresh()
-                End If
-
-                If p Mod 100 = 0 Then
-                    Await Task.Delay(2)
-                End If
-                Steps += 1
-            Next
-
-            For k = 1 To L
-                q += Sig
-                With PixelPoint
-                    .X = p
-                    .Y = q
-                End With
-
-                'Calculates the color of the PixelPoint
-                'and draws it to MapCPlane
-                Julia.Iteration(PixelPoint)
-
-                If Steps Mod 10000 = 0 Then
-                    PicCPlane.Refresh()
-                End If
-
-                If q Mod 100 = 0 Then
-                    Await Task.Delay(2)
-                End If
-                Steps += 1
-            Next
-
-            TxtSteps.Text = Steps.ToString
-            TxtTime.Text = Watch.Elapsed.ToString
-
-            If p >= PicCPlane.Width Or q >= PicCPlane.Height Then
-
-                StopIteration = True
-                BtnStart.Text = Main.LM.GetString("Start")
-                BtnStart.Enabled = True
-                BtnReset.Enabled = True
-
-                Watch.Stop()
-                PicCPlane.Refresh()
-
-                If TypeOf (Julia) Is ClsMandelbrot Then
-                    ChkTrack.Visible = True
-                End If
-
-            End If
-
-        Loop Until StopIteration
-
-    End Function
 
     Private Sub ShowCTrack()
         Julia.ShowCTrack
@@ -418,7 +306,7 @@ Public Class FrmJulia
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicCPlane.MouseDown
 
-        If StopIteration Then
+        If Julia.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
             'The user can choose a range by a flexible rectangle
             IsMousedown = True
 
@@ -501,8 +389,7 @@ Public Class FrmJulia
                     TxtDeltaY.Text = (PixelToY(yMax) - PixelToY(yMin)).ToString(CultureInfo.CurrentCulture)
                 End With
 
-                If TypeOf Julia Is ClsMandelbrot Then
-
+                If Julia.IsTrackImplemented Then
                     'The parameter C is set as midpoint of the selection
                     TxtA.Text = ((CDbl(TxtXMax.Text) + CDbl(TxtXMin.Text)) / 2).ToString
                     TxtB.Text = ((CDbl(TxtYMax.Text) + CDbl(TxtYMin.Text)) / 2).ToString
@@ -653,6 +540,7 @@ Public Class FrmJulia
             .ActualXRange = .AllowedXRange
             .ActualYRange = .AllowedYRange
             .MapCPlane = MapCPlane
+            .PicCPlane = PicCPlane
         End With
 
         SetDefaultValues()

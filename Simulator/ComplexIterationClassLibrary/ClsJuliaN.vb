@@ -29,6 +29,8 @@ Public Class ClsJuliaN
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
+        MyIsTrackImplemented = False
+
     End Sub
 
     Protected Overrides WriteOnly Property N As Integer
@@ -37,7 +39,15 @@ Public Class ClsJuliaN
         End Set
     End Property
 
-    Public Overrides Function IterationFormula(Zi As ClsComplexNumber) As Brush
+    Public Overrides Sub IterationStep(Startpoint As Point)
+
+        'Transform the PixelPoint to a Complex Number
+        Dim Zi As ClsComplexNumber
+
+        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
+            'Saved for debugging
+            Zi = New ClsComplexNumber(.X, .Y)
+        End With
 
         Dim Steps As Integer = 0
         Dim R As Decimal = CDec(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
@@ -88,16 +98,18 @@ Public Class ClsJuliaN
                     MyProtocolList.Items.Add(LowerBoundSteps.ToString)
                 End If
             End If
+
         End If
 
-        'the lower the colorindex the brighter the color
-        Return MyBrush
+        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBrush.Dispose()
 
-    End Function
+    End Sub
 
     Public Overrides Sub ShowCTrack()
         'is not relevant for a Julia Set Generation
         Throw New NotImplementedException()
     End Sub
+
 
 End Class

@@ -18,6 +18,10 @@ Public MustInherit Class ClsPolynomAbstract
     Protected MyMapCPlane As Bitmap
     Protected MyMapCPlaneGraphics As ClsGraphicTool
 
+    'Drawing PicCPlane
+    Protected MyPicCPlane As PictureBox
+    Protected MyPicCPlaneGraphics As ClsGraphicTool
+
     'Allowed Interval for the x-Values
     Protected MyAllowedXRange As ClsInterval
 
@@ -29,6 +33,37 @@ Public MustInherit Class ClsPolynomAbstract
 
     'the actual range for the y-coordinate
     Protected MyActualYRange As ClsInterval
+
+    'Controlling the Iteration Loop
+    Protected Property MyStopIteration As Boolean
+    Protected Property MyTxtNumberofSteps As TextBox
+    Protected Property MyTxtElapsedTime As TextBox
+
+    'Parameters for the Iteration
+
+    Protected Property MyIterationStatus As ClsGeneral.EnIterationStatus
+
+    'Number of examinated points in the complex plane
+    Protected ExaminatedPoints As Integer
+
+    'Coordinates of the pixel with the startvalue
+    Protected p As Integer
+    Protected q As Integer
+    Protected PixelPoint As Point
+
+    'Length of a branche of the spiral
+    'see Sub IterationLoop
+    Protected L As Integer = 0
+
+    'Sig = 1 if n odd, = -1 else
+    Protected Sig As Integer
+
+    'Parameter k = 1...L
+    Protected k As Integer
+
+    'Number of iteration steps per pixelpoint
+    Protected Steps As Integer
+    Protected Watch As Stopwatch
 
     'Protocol
     Protected MyProtocolList As ListBox
@@ -53,6 +88,7 @@ Public MustInherit Class ClsPolynomAbstract
 
     Public Sub New()
         Roots = New Collection
+        Watch = New Stopwatch
     End Sub
 
     'SECTOR INTERFACE
@@ -61,6 +97,13 @@ Public MustInherit Class ClsPolynomAbstract
         Set(value As Bitmap)
             MyMapCPlane = value
             MyMapCPlaneGraphics = New ClsGraphicTool(MyMapCPlane, MyActualXRange, MyActualYRange)
+        End Set
+    End Property
+
+    WriteOnly Property PicCPlane As PictureBox Implements IPolynom.PicCPlane
+        Set(value As PictureBox)
+            MyPicCPlane = value
+            MyPicCPlaneGraphics = New ClsGraphicTool(MyPicCPlane, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
@@ -91,6 +134,27 @@ Public MustInherit Class ClsPolynomAbstract
         End Get
         Set(value As ClsInterval)
             MyActualYRange = value
+        End Set
+    End Property
+
+    Property IterationStatus As ClsGeneral.EnIterationStatus Implements IPolynom.IterationStatus
+        Get
+            IterationStatus = MyIterationStatus
+        End Get
+        Set(value As ClsGeneral.EnIterationStatus)
+            MyIterationStatus = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtNumberofSteps As TextBox Implements IPolynom.TxtNumberOfSteps
+        Set(value As TextBox)
+            MyTxtNumberofSteps = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtElapsedTime As TextBox Implements IPolynom.TxtElapsedTime
+        Set(value As TextBox)
+            MyTxtElapsedTime = value
         End Set
     End Property
 
@@ -161,7 +225,203 @@ Public MustInherit Class ClsPolynomAbstract
 
     End Sub
 
-    Public Sub Iteration(Startpoint As Point) Implements IPolynom.Iteration
+    Public Sub Reset() Implements IPolynom.Reset
+
+        'Clear MapCPlane
+        If MyMapCPlaneGraphics IsNot Nothing Then
+            MyMapCPlaneGraphics.Clear(Color.White)
+            DrawCoordinateSystem()
+            DrawRoots(False)
+            L = 0
+            Watch.Reset()
+            ExaminatedPoints = 0
+        End If
+
+        'Clear Protocol
+        If MyProtocolList IsNot Nothing Then
+            MyProtocolList.Items.Clear()
+        End If
+    End Sub
+
+
+    'Draws roots of the polynom
+    Public Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
+
+        'Roots
+        Dim Col As Brush
+
+        'Finished = PicCPlane is generated
+
+        For Each MyRoot As ClsRoot In Roots
+            If Finished Then
+                Col = Brushes.Black
+            Else
+                Col = MyRoot.GetColor(0)
+            End If
+            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+        Next
+
+    End Sub
+
+    Protected Function GetBasin(Z As ClsComplexNumber, Steps As Integer) As Brush
+
+        'If the stop condition is fullfilled, then the startpoint converges to a root
+        'and we have to find out, which root that is
+        'and get the appropriate color
+
+        Dim Temp As Double = 1000
+        Dim Difference As Double
+        Dim RootBrush As Brush = Brushes.Black
+
+        Dim FinalBrightness As Double
+
+        If MyColor = IPolynom.EnColor.Bright Then
+            FinalBrightness = 1
+        Else
+
+            Dim MyColorDeepness As Integer
+            'The next value is set after experiments:
+            'MyN = 3 and MyColorDeepness = 30
+            'MyN = 4 and ColorDeepness = 50
+            'MyN = 5 and ColorDeepness = 80
+            'MyN = 6 and ColorDeepness = 120
+            '...
+            'The Formula that delivers these values is
+            'y = 5*x^2 - 15 x + 30
+
+            If MyN = 2 Then
+                MyColorDeepness = 30
+            Else
+                MyColorDeepness = 5 * MyN * MyN - 15 * MyN + 30
+            End If
+
+            FinalBrightness = (1 - Steps / MyColorDeepness) * 1.1
+
+            'but the maximum is 1
+            FinalBrightness = Math.Min(FinalBrightness, 1)
+        End If
+
+
+        For Each Root As ClsRoot In Roots
+            Difference = Z.Add(Root.Stretch(-1)).AbsoluteValue
+            If Difference < Temp Then
+                Temp = Difference
+                RootBrush = Root.GetColor(FinalBrightness)
+            End If
+        Next
+
+        Return RootBrush
+
+    End Function
+
+    Public Function GenerateImage() As Task Implements IPolynom.GenerateImage
+
+        'This algorithm goes through the CPlane in a spiral starting in the midpoint
+        'In case of Symmetry, only the lower halfplane is examinated
+        If ExaminatedPoints = 0 Then
+            p = CInt(MyPicCPlane.Width / 2)
+            q = CInt(MyPicCPlane.Height / 2)
+
+            PixelPoint = New Point
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            IterationStep(PixelPoint)
+
+            Steps = 1
+            Watch.Start()
+
+        End If
+
+
+        Do
+            ExaminatedPoints += 1
+
+            IterationLoop()
+
+
+            If p >= MyPicCPlane.Width Or q >= MyPicCPlane.Height Then
+
+                MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+                Watch.Stop()
+                MyPicCPlane.Refresh()
+
+            End If
+
+            If ExaminatedPoints Mod 100 = 0 Then
+                MyTxtNumberofSteps.Text = Steps.ToString
+                MyTxtElapsedTime.Text = Watch.Elapsed.ToString
+                Application.DoEvents()
+                Task.Delay(2)
+            End If
+
+        Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted _
+            Or MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+
+        Return Task.CompletedTask
+
+    End Function
+
+
+    Private Sub IterationLoop()
+
+        If ExaminatedPoints Mod 2 = 0 Then
+            Sig = -1
+        Else
+            Sig = 1
+        End If
+
+        L += 1
+
+        k = 1
+        Do While k < L
+            p += Sig
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyPicCPlane.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+        k = 1
+
+        Do While k < L
+            q += Sig
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyPicCPlane.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+    End Sub
+
+
+    Public Sub IterationStep(Startpoint As Point)
 
         'Transform the PixelPoint to a Complex Number
         Dim MathStartpoint As ClsComplexNumber
@@ -215,92 +475,6 @@ Public MustInherit Class ClsPolynomAbstract
                 ", " & Zi.X.ToString("N5") & ", " & Zi.Y.ToString("N5"))
         End If
     End Sub
-
-    Public Sub Reset() Implements IPolynom.Reset
-
-        'Clear MapCPlane
-        If MyMapCPlaneGraphics IsNot Nothing Then
-            MyMapCPlaneGraphics.Clear(Color.White)
-            DrawCoordinateSystem()
-            DrawRoots(False)
-        End If
-
-        'Clear Protocol
-        If MyProtocolList IsNot Nothing Then
-            MyProtocolList.Items.Clear()
-        End If
-    End Sub
-
-
-    'Draws roots of the polynom
-    Public Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
-
-        'Roots
-        Dim Col As Brush
-
-        'Finished = PicCPlane is generated
-
-        For Each MyRoot As ClsRoot In Roots
-            If Finished Then
-                Col = Brushes.Black
-            Else
-                Col = MyRoot.GetColor(0)
-            End If
-            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
-        Next
-
-    End Sub
-
-    Private Function GetBasin(Z As ClsComplexNumber, Steps As Integer) As Brush
-
-        'If the stop condition is fullfilled, then the startpoint converges to a root
-        'and we have to find out, which root that is
-        'and get the appropriate color
-
-        Dim Temp As Double = 1000
-        Dim Difference As Double
-        Dim RootBrush As Brush = Brushes.Black
-
-        Dim FinalBrightness As Double
-
-        If MyColor = IPolynom.EnColor.Bright Then
-            FinalBrightness = 1
-        Else
-
-            Dim MyColorDeepness As Integer
-            'The next value is set after experiments:
-            'MyN = 3 and MyColorDeepness = 30
-            'MyN = 4 and ColorDeepness = 50
-            'MyN = 5 and ColorDeepness = 80
-            'MyN = 6 and ColorDeepness = 120
-            '...
-            'The Formula that delivers these values is
-            'y = 5*x^2 - 15 x + 30
-
-            If MyN = 2 Then
-                MyColorDeepness = 30
-            Else
-                MyColorDeepness = 5 * MyN * MyN - 15 * MyN + 30
-            End If
-
-            FinalBrightness = (1 - Steps / MyColorDeepness) * 1.1
-
-            'but the maximum is 1
-            FinalBrightness = Math.Min(FinalBrightness, 1)
-        End If
-
-
-        For Each Root As ClsRoot In Roots
-            Difference = Z.Add(Root.Stretch(-1)).AbsoluteValue
-            If Difference < Temp Then
-                Temp = Difference
-                RootBrush = Root.GetColor(FinalBrightness)
-            End If
-        Next
-
-        Return RootBrush
-
-    End Function
 
     Public MustOverride Function StopCondition(Z As ClsComplexNumber) As Boolean
 

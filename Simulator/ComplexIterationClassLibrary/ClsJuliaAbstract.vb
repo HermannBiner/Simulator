@@ -26,6 +26,37 @@ Public MustInherit Class ClsJuliaAbstract
     'the actual range for the y-coordinate
     Protected MyActualYRange As ClsInterval
 
+    'Controlling the Iteration Loop
+    Protected Property MyStopIteration As Boolean
+    Protected Property MyTxtNumberofSteps As TextBox
+    Protected Property MyTxtElapsedTime As TextBox
+
+    'Parameters for the Iteration
+
+    Protected Property MyIterationStatus As ClsGeneral.EnIterationStatus
+
+    'Number of examinated points in the complex plane
+    Protected ExaminatedPoints As Integer
+
+    'Coordinates of the pixel with the startvalue
+    Protected p As Integer
+    Protected q As Integer
+    Protected PixelPoint As Point
+
+    'Length of a branche of the spiral
+    'see Sub IterationLoop
+    Protected L As Integer = 0
+
+    'Sig = 1 if n odd, = -1 else
+    Protected Sig As Integer
+
+    'Parameter k = 1...L
+    Protected k As Integer
+
+    'Number of iteration steps per pixelpoint
+    Protected Steps As Integer
+    Protected Watch As Stopwatch
+
     'Parameter C
     Protected Property MyC As ClsComplexNumber
 
@@ -40,9 +71,17 @@ Public MustInherit Class ClsJuliaAbstract
     'Use SystemColors
     Protected Property MyUseSystemColors As Boolean
 
+    'Track
+    Protected Property MyIsTrackImplemented As Boolean
+
     'Protocol
     Protected MyProtocolList As ListBox
     Protected MyIsProtocol As Boolean
+
+    Public Sub New()
+
+        Watch = New Stopwatch
+    End Sub
 
     'SECTOR INTERFACE
 
@@ -96,6 +135,27 @@ Public MustInherit Class ClsJuliaAbstract
         End Set
     End Property
 
+    Property IterationStatus As ClsGeneral.EnIterationStatus Implements IJulia.IterationStatus
+        Get
+            IterationStatus = MyIterationStatus
+        End Get
+        Set(value As ClsGeneral.EnIterationStatus)
+            MyIterationStatus = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtNumberofSteps As TextBox Implements IJulia.TxtNumberOfSteps
+        Set(value As TextBox)
+            MyTxtNumberofSteps = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtElapsedTime As TextBox Implements IJulia.TxtElapsedTime
+        Set(value As TextBox)
+            MyTxtElapsedTime = value
+        End Set
+    End Property
+
     WriteOnly Property RedPercent As Double Implements IJulia.RedPercent
         Set(value As Double)
             MyRedPercent = value
@@ -118,6 +178,12 @@ Public MustInherit Class ClsJuliaAbstract
         Set(value As Boolean)
             MyUseSystemColors = value
         End Set
+    End Property
+
+    ReadOnly Property IsTrackImplemented As Boolean Implements IJulia.IsTrackImplemented
+        Get
+            IsTrackImplemented = MyIsTrackImplemented
+        End Get
     End Property
 
     WriteOnly Property ProcotolList As ListBox Implements IJulia.ProcotolList
@@ -150,38 +216,131 @@ Public MustInherit Class ClsJuliaAbstract
 
     End Sub
 
-
-    Public Sub Iteration(Startpoint As Point) Implements IJulia.Iteration
-
-        'Transform the PixelPoint to a Complex Number
-        Dim MathStartpoint As ClsComplexNumber
-
-        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
-            'Saved for debugging
-            MathStartpoint = New ClsComplexNumber(.X, .Y)
-        End With
-
-        Dim Zi As New ClsComplexNumber(MathStartpoint.X, MathStartpoint.Y)
-
-        Dim MyBrush As Brush = IterationFormula(Zi)
-
-        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
-        MyBrush.Dispose()
-
-    End Sub
-
     Public Sub Reset() Implements IJulia.Reset
 
         'Clear MapCPlane
         If MyMapCPlaneGraphics IsNot Nothing Then
             MyMapCPlaneGraphics.Clear(Color.White)
             DrawCoordinateSystem()
+            L = 0
+            Watch.Reset()
+            ExaminatedPoints = 0
+        End If
+
+        'Clear Protocol
+        If MyProtocolList IsNot Nothing Then
+            MyProtocolList.Items.Clear()
         End If
 
     End Sub
 
-    Public MustOverride Function IterationFormula(Z As ClsComplexNumber) As Brush
+    Public Function GenerateImage() As Task Implements IJulia.GenerateImage
+
+        'This algorithm goes through the CPlane in a spiral starting in the midpoint
+        'In case of Symmetry, only the lower halfplane is examinated
+        If ExaminatedPoints = 0 Then
+            p = CInt(MyPicCPlane.Width / 2)
+            q = CInt(MyPicCPlane.Height / 2)
+
+            PixelPoint = New Point
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            IterationStep(PixelPoint)
+
+            Steps = 1
+            Watch.Start()
+
+        End If
+
+
+        Do
+            ExaminatedPoints += 1
+
+            IterationLoop()
+
+
+            If p >= MyPicCPlane.Width Or q >= MyPicCPlane.Height Then
+
+                MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+                Watch.Stop()
+                MyPicCPlane.Refresh()
+
+            End If
+
+            If ExaminatedPoints Mod 100 = 0 Then
+                MyTxtNumberofSteps.Text = Steps.ToString
+                MyTxtElapsedTime.Text = Watch.Elapsed.ToString
+                Application.DoEvents()
+                Task.Delay(2)
+            End If
+
+        Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted _
+            Or MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+
+        Return Task.CompletedTask
+
+    End Function
+
+    Private Sub IterationLoop()
+
+        If ExaminatedPoints Mod 2 = 0 Then
+            Sig = -1
+        Else
+            Sig = 1
+        End If
+
+        L += 1
+
+        k = 1
+        Do While k < L
+            p += Sig
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyPicCPlane.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+        k = 1
+
+        Do While k < L
+            q += Sig
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyPicCPlane.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+    End Sub
 
     Public MustOverride Sub ShowCTrack() Implements IJulia.ShowCTrack
+
+    Public MustOverride Sub IterationStep(PicelPoint As Point)
 
 End Class

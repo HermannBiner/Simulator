@@ -42,11 +42,22 @@ Public Interface IJulia
     'Use the System Colors
     WriteOnly Property UseSystemColors As Boolean
 
+    'Draw Track
+    ReadOnly Property IsTrackImplemented As Boolean
+
+    'Iteration Control
+    Property IterationStatus As ClsGeneral.EnIterationStatus
+
+    WriteOnly Property TxtNumberOfSteps As TextBox
+    WriteOnly Property TxtElapsedTime As TextBox
+
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()
 
     'Iteration
-    Sub Iteration(Startpoint As Point)
+    Function GenerateImage() As Task
+
+    'C-Track - Orbit with STartpoint c
     Sub ShowCTrack()
 
     'Reset

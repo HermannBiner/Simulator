@@ -21,6 +21,9 @@ Public Interface IPolynom
     'The Polynom plots the Orbit into MapCPlane
     WriteOnly Property MapCPlane As Bitmap
 
+    'The Iteration needs the Picturebox as well
+    WriteOnly Property PicCPlane As PictureBox
+
     'Allowed Interval for the x-Values
     ReadOnly Property AllowedXRange As ClsInterval
 
@@ -55,6 +58,12 @@ Public Interface IPolynom
     'Color
     WriteOnly Property UseColor As EnColor
 
+    'Iteration Control
+    Property IterationStatus As ClsGeneral.EnIterationStatus
+
+    WriteOnly Property TxtNumberOfSteps As TextBox
+    WriteOnly Property TxtElapsedTime As TextBox
+
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()
 
@@ -62,12 +71,12 @@ Public Interface IPolynom
     Sub DrawRoots(Finished As Boolean)
 
     'Iteration
-    Sub Iteration(Startpoint As Point)
+    'Prepare the Root-Colors
+    Sub PrepareIteration()
+
+    Function GenerateImage() As Task
 
     'Reset
     Sub Reset()
-
-    Sub PrepareIteration()
-
 
 End Interface

@@ -51,7 +51,7 @@ Public Class ClsPolynom3C
             Stopped = True
         ElseIf Z.Add(New ClsComplexNumber(-1, 0)).AbsoluteValue < MyRadius Then
             Stopped = True
-        ElseIf Z.Add(New ClsComplexNumber(-MyC.x, -MyC.y)).AbsoluteValue < MyRadius Then
+        ElseIf Z.Add(New ClsComplexNumber(-MyC.X, -MyC.Y)).AbsoluteValue < MyRadius Then
             Stopped = True
         End If
 

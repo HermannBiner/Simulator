@@ -13,7 +13,6 @@
 
 Imports System.Globalization
 Imports System.Reflection
-Imports Windows.Win32
 
 
 Public Class FrmNewtonIteration
@@ -37,23 +36,6 @@ Public Class FrmNewtonIteration
 
     'Point where the left mouse button was released
     Private UserSelectionEndpoint As Point
-
-    'Controlling the Iteration Loop
-    Private StopIteration As Boolean
-
-    'Number of Steps
-    Private n As Integer
-
-    'Coordinates of the pixel with the startvalue
-    Dim p As Integer
-    Dim q As Integer
-    Dim PixelPoint As Point
-
-    'Length of a branche of the spiral
-    'see Sub IterationLoop
-    Dim L As Integer = 0
-    Dim Steps As Integer
-    Dim Watch As Stopwatch
 
     'SECTOR INITIALIZATION
 
@@ -124,13 +106,16 @@ Public Class FrmNewtonIteration
         MapCPlane = New Bitmap(Square, Square)
         PicCPlane.Image = MapCPlane
 
-        Polynom = New ClsUnitRoots With {
+        Polynom = New ClsUnitRoots
+        With Polynom
             .MapCPlane = MapCPlane
-        }
+            .PicCPlane = PicCPlane
+            .TxtNumberOfSteps = TxtSteps
+            .TxtElapsedTime = TxtTime
+        End With
+
 
         CboN.SelectedIndex = 1
-
-        Watch = New Stopwatch
 
         'Initialize Language
         InitializeLanguage()
@@ -176,6 +161,11 @@ Public Class FrmNewtonIteration
                     .C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
                 End If
 
+                .PicCPlane = PicCPlane
+                .MapCPlane = MapCPlane
+                .TxtElapsedTime = TxtTime
+                .TxtNumberOfSteps = TxtSteps
+
                 .ProcotolList = LstProtocol
                 .IsProtocol = ChkProtocol.Checked
 
@@ -205,15 +195,8 @@ Public Class FrmNewtonIteration
                 BtnShowBasin.Visible = False
             End If
 
-
-            n = 0
-            L = 0
-            TxtSteps.Text = 1.ToString
-            Steps = 1
-            If Watch IsNot Nothing Then
-                Watch.Reset()
-                TxtTime.Text = Watch.ToString
-            End If
+            TxtSteps.Text = 0.ToString
+            TxtTime.Text = 0.ToString
 
         End If
 
@@ -222,12 +205,13 @@ Public Class FrmNewtonIteration
     Private Sub ResetIteration()
 
         BtnStart.Text = Main.LM.GetString("Start")
-        StopIteration = True
 
         'The display is cleared
         If Polynom IsNot Nothing Then
             Polynom.Reset()
+            Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Stopped
         End If
+        LstProtocol.Items.Clear()
         PicCPlane.Refresh()
 
     End Sub
@@ -262,6 +246,7 @@ Public Class FrmNewtonIteration
                     If Main.LM.GetString(type.Name, True) = SelectedName Then
                         Polynom = CType(Activator.CreateInstance(type), IPolynom)
                         Polynom.MapCPlane = MapCPlane
+                        Polynom.PicCPlane = PicCPlane
                     End If
                 Next
             End If
@@ -288,7 +273,7 @@ Public Class FrmNewtonIteration
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-        If n = 0 Then
+        If Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
 
             'the iteration was stopped or reset
             'and should start from the beginning
@@ -300,14 +285,22 @@ Public Class FrmNewtonIteration
 
         End If
 
-        StopIteration = False
+        Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Started
+
         BtnStart.Enabled = False
         BtnReset.Enabled = False
         ChkProtocol.Enabled = False
 
         Application.DoEvents()
 
-        Await IterationLoop()
+        Await Polynom.GenerateImage
+
+        If Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+            BtnStart.Text = Main.LM.GetString("Start")
+            BtnStart.Enabled = True
+            BtnReset.Enabled = True
+
+        End If
 
     End Sub
 
@@ -403,8 +396,9 @@ Public Class FrmNewtonIteration
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        'the iteration is running and should be stopped
-        StopIteration = True
+        'the iteration was running and is interrupted
+        Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+        'the iteration is stopoped by reset the iteration
 
         BtnStart.Enabled = True
         BtnReset.Enabled = True
@@ -412,107 +406,12 @@ Public Class FrmNewtonIteration
 
     End Sub
 
-    Private Async Function IterationLoop() As Task
-
-        'Sig = 1 if n odd, = -1 else
-        Dim Sig As Integer
-
-        'Parameter k = 1...L
-        Dim k As Integer
-
-        'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        If n = 0 Then
-            p = CInt(PicCPlane.Width / 2)
-            q = CInt(PicCPlane.Height / 2)
-            PixelPoint = New Point
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            Polynom.Iteration(PixelPoint)
-
-            Steps = 1
-            Watch.Start()
-
-        End If
-
-
-        Do
-            n += 1
-
-            If n Mod 2 = 0 Then
-                Sig = -1
-            Else
-                Sig = 1
-            End If
-
-            L += 1
-
-            For k = 1 To L
-                p += Sig
-                With PixelPoint
-                    .X = p
-                    .Y = q
-                End With
-
-                Polynom.Iteration(PixelPoint)
-
-                If Steps Mod 10000 = 0 Then
-                    PicCPlane.Refresh()
-                End If
-
-                If p Mod 100 = 0 Then
-                    Await Task.Delay(2)
-                End If
-                Steps += 1
-            Next
-
-            For k = 1 To L
-                q += Sig
-                With PixelPoint
-                    .X = p
-                    .Y = q
-                End With
-
-                Polynom.Iteration(PixelPoint)
-                If Steps Mod 10000 = 0 Then
-                    PicCPlane.Refresh()
-                End If
-
-                If q Mod 100 = 0 Then
-                    Await Task.Delay(2)
-                End If
-                Steps += 1
-            Next
-
-            TxtSteps.Text = Steps.ToString
-            TxtTime.Text = Watch.Elapsed.ToString
-
-            If p >= PicCPlane.Width Or q >= PicCPlane.Height Then
-
-                StopIteration = True
-                BtnStart.Text = Main.LM.GetString("Start")
-                BtnStart.Enabled = True
-                BtnReset.Enabled = True
-                ChkProtocol.Enabled = True
-
-                Watch.Stop()
-                Polynom.DrawRoots(True)
-                PicCPlane.Refresh()
-
-            End If
-
-        Loop Until StopIteration
-
-    End Function
 
     'SECTOR MANAGE USER RANGES
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicCPlane.MouseDown
 
-        If StopIteration Then
+        If Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
             'The user can choose a range by a flexible rectangle
             IsMousedown = True
 
