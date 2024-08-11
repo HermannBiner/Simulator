@@ -389,6 +389,10 @@
     <value>Grün</value>
     <comment>Col</comment>
   </data>
+  <data name="GrowthModels" xml:space="preserve">
+    <value>Wachstumsmodelle</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Histogram" xml:space="preserve">
     <value>Histogramm</value>
     <comment>Lbl</comment>

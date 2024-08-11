@@ -58,8 +58,8 @@ Partial Class Main
         MnuMain.Items.AddRange(New ToolStripItem() {MnuFile, MnuUnimodal, MnuMechanics, MnuComplexIteration, MnuTest, MnuDocumentation})
         MnuMain.Location = New Point(0, 0)
         MnuMain.Name = "MnuMain"
-        MnuMain.Padding = New Padding(9, 2, 0, 2)
-        MnuMain.Size = New Size(2197, 42)
+        MnuMain.Padding = New Padding(5, 1, 0, 1)
+        MnuMain.Size = New Size(1183, 24)
         MnuMain.TabIndex = 0
         MnuMain.Text = "Main"
         ' 
@@ -67,131 +67,131 @@ Partial Class Main
         ' 
         MnuFile.DropDownItems.AddRange(New ToolStripItem() {MnuLanguage, MnuClose})
         MnuFile.Name = "MnuFile"
-        MnuFile.Size = New Size(71, 38)
+        MnuFile.Size = New Size(37, 22)
         MnuFile.Text = "File"
         ' 
         ' MnuLanguage
         ' 
         MnuLanguage.DropDownItems.AddRange(New ToolStripItem() {MnuEnglish, MnuGerman})
         MnuLanguage.Name = "MnuLanguage"
-        MnuLanguage.Size = New Size(251, 44)
+        MnuLanguage.Size = New Size(126, 22)
         MnuLanguage.Text = "Language"
         ' 
         ' MnuEnglish
         ' 
         MnuEnglish.Name = "MnuEnglish"
-        MnuEnglish.Size = New Size(231, 44)
+        MnuEnglish.Size = New Size(116, 22)
         MnuEnglish.Text = "English"
         ' 
         ' MnuGerman
         ' 
         MnuGerman.Name = "MnuGerman"
-        MnuGerman.Size = New Size(231, 44)
+        MnuGerman.Size = New Size(116, 22)
         MnuGerman.Text = "German"
         ' 
         ' MnuClose
         ' 
         MnuClose.Name = "MnuClose"
-        MnuClose.Size = New Size(251, 44)
+        MnuClose.Size = New Size(126, 22)
         MnuClose.Text = "Close"
         ' 
         ' MnuUnimodal
         ' 
         MnuUnimodal.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum})
         MnuUnimodal.Name = "MnuUnimodal"
-        MnuUnimodal.Size = New Size(137, 38)
+        MnuUnimodal.Size = New Size(71, 22)
         MnuUnimodal.Text = "Unimodal"
         ' 
         ' MnuIteration
         ' 
         MnuIteration.Name = "MnuIteration"
-        MnuIteration.Size = New Size(315, 44)
+        MnuIteration.Size = New Size(180, 22)
         MnuIteration.Text = "Iteration"
         ' 
         ' MnuSensitivity
         ' 
         MnuSensitivity.Name = "MnuSensitivity"
-        MnuSensitivity.Size = New Size(315, 44)
+        MnuSensitivity.Size = New Size(180, 22)
         MnuSensitivity.Text = "Sensitivity"
         ' 
         ' MnuHistogram
         ' 
         MnuHistogram.Name = "MnuHistogram"
-        MnuHistogram.Size = New Size(315, 44)
+        MnuHistogram.Size = New Size(180, 22)
         MnuHistogram.Text = "Histogram"
         ' 
         ' MnuTwoDimensions
         ' 
         MnuTwoDimensions.Name = "MnuTwoDimensions"
-        MnuTwoDimensions.Size = New Size(315, 44)
+        MnuTwoDimensions.Size = New Size(180, 22)
         MnuTwoDimensions.Text = "TwoDimensions"
         ' 
         ' MnuFeigenbaum
         ' 
         MnuFeigenbaum.Name = "MnuFeigenbaum"
-        MnuFeigenbaum.Size = New Size(315, 44)
+        MnuFeigenbaum.Size = New Size(180, 22)
         MnuFeigenbaum.Text = "Feigenbaum"
         ' 
         ' MnuMechanics
         ' 
         MnuMechanics.DropDownItems.AddRange(New ToolStripItem() {MnuBilliard, MnuCDiagram, MnuNumericMethods, MnuPendulum})
         MnuMechanics.Name = "MnuMechanics"
-        MnuMechanics.Size = New Size(147, 38)
+        MnuMechanics.Size = New Size(76, 22)
         MnuMechanics.Text = "Mechanics"
         ' 
         ' MnuBilliard
         ' 
         MnuBilliard.Name = "MnuBilliard"
-        MnuBilliard.Size = New Size(333, 44)
+        MnuBilliard.Size = New Size(167, 22)
         MnuBilliard.Text = "Billiard"
         ' 
         ' MnuCDiagram
         ' 
         MnuCDiagram.Name = "MnuCDiagram"
-        MnuCDiagram.Size = New Size(333, 44)
+        MnuCDiagram.Size = New Size(167, 22)
         MnuCDiagram.Text = "CDiagramBilliard"
         ' 
         ' MnuNumericMethods
         ' 
         MnuNumericMethods.Name = "MnuNumericMethods"
-        MnuNumericMethods.Size = New Size(333, 44)
+        MnuNumericMethods.Size = New Size(167, 22)
         MnuNumericMethods.Text = "NumericMethods"
         ' 
         ' MnuPendulum
         ' 
         MnuPendulum.Name = "MnuPendulum"
-        MnuPendulum.Size = New Size(333, 44)
+        MnuPendulum.Size = New Size(167, 22)
         MnuPendulum.Text = "Pendulum"
         ' 
         ' MnuComplexIteration
         ' 
         MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet, MnuBifurcation})
         MnuComplexIteration.Name = "MnuComplexIteration"
-        MnuComplexIteration.Size = New Size(217, 38)
+        MnuComplexIteration.Size = New Size(111, 22)
         MnuComplexIteration.Text = "ComplexIteration"
         ' 
         ' MnuNewton
         ' 
         MnuNewton.Name = "MnuNewton"
-        MnuNewton.Size = New Size(262, 44)
+        MnuNewton.Size = New Size(132, 22)
         MnuNewton.Text = "Newton"
         ' 
         ' MnuJuliaSet
         ' 
         MnuJuliaSet.Name = "MnuJuliaSet"
-        MnuJuliaSet.Size = New Size(262, 44)
+        MnuJuliaSet.Size = New Size(132, 22)
         MnuJuliaSet.Text = "JuliaSet"
         ' 
         ' MnuBifurcation
         ' 
         MnuBifurcation.Name = "MnuBifurcation"
-        MnuBifurcation.Size = New Size(262, 44)
+        MnuBifurcation.Size = New Size(132, 22)
         MnuBifurcation.Text = "Bifurcation"
         ' 
         ' MnuTest
         ' 
         MnuTest.Name = "MnuTest"
-        MnuTest.Size = New Size(76, 38)
+        MnuTest.Size = New Size(39, 22)
         MnuTest.Text = "Test"
         MnuTest.Visible = False
         ' 
@@ -199,36 +199,36 @@ Partial Class Main
         ' 
         MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuMathematics, MnuInfo})
         MnuDocumentation.Name = "MnuDocumentation"
-        MnuDocumentation.Size = New Size(200, 38)
+        MnuDocumentation.Size = New Size(102, 22)
         MnuDocumentation.Text = "Documentation"
         ' 
         ' MnuManual
         ' 
         MnuManual.Name = "MnuManual"
-        MnuManual.Size = New Size(284, 44)
+        MnuManual.Size = New Size(143, 22)
         MnuManual.Text = "Manual"
         ' 
         ' MnuMathematics
         ' 
         MnuMathematics.Name = "MnuMathematics"
-        MnuMathematics.Size = New Size(284, 44)
+        MnuMathematics.Size = New Size(143, 22)
         MnuMathematics.Text = "Mathematics"
         ' 
         ' MnuInfo
         ' 
         MnuInfo.Name = "MnuInfo"
-        MnuInfo.Size = New Size(284, 44)
+        MnuInfo.Size = New Size(143, 22)
         MnuInfo.Text = "Info"
         ' 
         ' Main
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2197, 1421)
+        ClientSize = New Size(1183, 666)
         Controls.Add(MnuMain)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MnuMain
-        Margin = New Padding(4)
+        Margin = New Padding(2, 2, 2, 2)
         Name = "Main"
         Text = "Simulator"
         WindowState = FormWindowState.Maximized
