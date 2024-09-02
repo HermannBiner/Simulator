@@ -45,18 +45,18 @@ Public Class FrmJulia
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("JuliaMandelbrot")
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnStop.Text = Main.LM.GetString("Stop")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
-        LblTime.Text = Main.LM.GetString("Time")
-        LblSteps.Text = Main.LM.GetString("Steps")
-        LblProtocol.Text = Main.LM.GetString("ProtocolJulia")
-        ChkProtocol.Text = Main.LM.GetString("Protocol")
-        GrpColors.Text = Main.LM.GetString("Colors")
-        OptSystem.Text = Main.LM.GetString("System")
-        OptUser.Text = Main.LM.GetString("UserDefined")
-        ChkTrack.Text = Main.LM.GetString("CTrack")
+        Text = FrmMain.LM.GetString("JuliaMandelbrot")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnStop.Text = FrmMain.LM.GetString("Stop")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        LblTime.Text = FrmMain.LM.GetString("Time")
+        LblSteps.Text = FrmMain.LM.GetString("Steps")
+        LblProtocol.Text = FrmMain.LM.GetString("ProtocolJulia")
+        ChkProtocol.Text = FrmMain.LM.GetString("Protocol")
+        GrpColors.Text = FrmMain.LM.GetString("Colors")
+        OptSystem.Text = FrmMain.LM.GetString("System")
+        OptUser.Text = FrmMain.LM.GetString("UserDefined")
+        ChkTrack.Text = FrmMain.LM.GetString("CTrack")
 
         CboFunction.Items.Clear()
 
@@ -74,7 +74,7 @@ Public Class FrmJulia
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                JuliaName = Main.LM.GetString(type.Name, True)
+                JuliaName = FrmMain.LM.GetString(type.Name, True)
                 CboFunction.Items.Add(JuliaName)
             Next
 
@@ -182,7 +182,7 @@ Public Class FrmJulia
 
     Private Sub ResetIteration()
 
-        BtnStart.Text = Main.LM.GetString("Start")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
 
         'The display is cleared
         If Julia IsNot Nothing Then
@@ -223,7 +223,7 @@ Public Class FrmJulia
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         Julia = CType(Activator.CreateInstance(type), IJulia)
                         Julia.MapCPlane = MapCPlane
                         Julia.PicCPlane = PicCPlane
@@ -258,10 +258,10 @@ Public Class FrmJulia
                     SetDefaultValues()
                     ResetIteration()
 
-                    BtnStart.Text = Main.LM.GetString("Continue")
+                    BtnStart.Text = FrmMain.LM.GetString("Continue")
                 End If
 
-                Julia.IterationStatus = ClsGeneral.EnIterationStatus.Started
+                Julia.IterationStatus = ClsGeneral.EnIterationStatus.Running
 
                 BtnStart.Enabled = False
                 BtnReset.Enabled = False
@@ -272,7 +272,7 @@ Public Class FrmJulia
                 Await Julia.GenerateImage
 
                 If Julia.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
-                    BtnStart.Text = Main.LM.GetString("Start")
+                    BtnStart.Text = FrmMain.LM.GetString("Start")
                     BtnStart.Enabled = True
                     BtnReset.Enabled = True
 
@@ -402,7 +402,7 @@ Public Class FrmJulia
 
                     'Prepare new Iteration
                     SetDefaultValues()
-                    BtnStart.Text = Main.LM.GetString("Start")
+                    BtnStart.Text = FrmMain.LM.GetString("Start")
                 End If
             End If
         End If
@@ -453,7 +453,7 @@ Public Class FrmJulia
                 'take over
                 Julia.ActualXRange = TempXRange
             Else
-                MessageBox.Show(Main.LM.GetString("X-RangeNotAllowed") & " [" &
+                MessageBox.Show(FrmMain.LM.GetString("X-RangeNotAllowed") & " [" &
                    Julia.AllowedXRange.A.ToString(CultureInfo.CurrentCulture) &
                    ", " & Julia.AllowedXRange.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
@@ -479,7 +479,7 @@ Public Class FrmJulia
                     'take over
                     Julia.ActualYRange = TempYRange
                 Else
-                    MessageBox.Show(Main.LM.GetString("Y-RangeNotAllowed") & " [" &
+                    MessageBox.Show(FrmMain.LM.GetString("Y-RangeNotAllowed") & " [" &
                        Julia.AllowedYRange.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & Julia.AllowedYRange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
@@ -505,7 +505,7 @@ Public Class FrmJulia
             If Julia.AllowedXRange.IsNumberInInterval(ParameterA.NumericValue) Then
                 'OK, nothing to do
             Else
-                MessageBox.Show(Main.LM.GetString("CXNotAllowed") & ": [" & Julia.AllowedXRange.A.ToString &
+                MessageBox.Show(FrmMain.LM.GetString("CXNotAllowed") & ": [" & Julia.AllowedXRange.A.ToString &
                                                   ", " & Julia.AllowedXRange.B.ToString & "]")
                 TxtA.Text = "0" 'Standard
             End If
@@ -520,7 +520,7 @@ Public Class FrmJulia
             If Julia.AllowedYRange.IsNumberInInterval(ParameterB.NumericValue) Then
                 'OK, nothing to do
             Else
-                MessageBox.Show(Main.LM.GetString("CYNotAllowed") & ": [" & Julia.AllowedYRange.A.ToString &
+                MessageBox.Show(FrmMain.LM.GetString("CYNotAllowed") & ": [" & Julia.AllowedYRange.A.ToString &
                                                   ", " & Julia.AllowedYRange.B.ToString & "]")
                 TxtB.Text = "1" 'Standard
             End If

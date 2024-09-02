@@ -48,13 +48,13 @@ Public Class FrmBifurcation
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("BifurcationDiagram")
-        LblDeltaX.Text = Main.LM.GetString("Delta") & " = "
-        LblDeltaA.Text = Main.LM.GetString("Delta") & " = "
-        LblValueRange.Text = Main.LM.GetString("ExaminatedValueRange")
-        LblParameterRange.Text = Main.LM.GetString("ExaminatedParameterRange")
-        BtnStartIteration.Text = Main.LM.GetString("StartIteration")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
+        Text = FrmMain.LM.GetString("BifurcationDiagram")
+        LblDeltaX.Text = FrmMain.LM.GetString("Delta") & " = "
+        LblDeltaA.Text = FrmMain.LM.GetString("Delta") & " = "
+        LblValueRange.Text = FrmMain.LM.GetString("ExaminatedValueRange")
+        LblParameterRange.Text = FrmMain.LM.GetString("ExaminatedParameterRange")
+        BtnStartIteration.Text = FrmMain.LM.GetString("StartIteration")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
 
     End Sub
 
@@ -83,11 +83,11 @@ Public Class FrmBifurcation
 
         TxtAMin.Text = Parameterrange.A.ToString(CultureInfo.CurrentCulture)
         TxtAMax.Text = Parameterrange.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaA.Text = Main.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaA.Text = FrmMain.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
         TxtXMin.Text = Valuerange.A.ToString(CultureInfo.CurrentCulture)
         TxtXMax.Text = Valuerange.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaX.Text = FrmMain.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
         Resetiteration()
 
@@ -311,7 +311,7 @@ Public Class FrmBifurcation
                 'take over
                 Parameterrange = TempParameterrange
             Else
-                MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
+                MessageBox.Show(FrmMain.LM.GetString("ParameterRangeNotAllowed") & " [" &
                    Parameterrange.A.ToString(CultureInfo.CurrentCulture) &
                    ", " & Parameterrange.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
@@ -340,7 +340,7 @@ Public Class FrmBifurcation
                     'take over
                     Valuerange = TempValuerange
                 Else
-                    MessageBox.Show(Main.LM.GetString("ValueRangeNotAllowed") & " [" &
+                    MessageBox.Show(FrmMain.LM.GetString("ValueRangeNotAllowed") & " [" &
                        Valuerange.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & Valuerange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
@@ -354,8 +354,8 @@ Public Class FrmBifurcation
         IsUserSelectionValid = IsParameterrangeValid And IsValuerangeValid
 
         If IsUserSelectionValid Then
-            LblDeltaA.Text = Main.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
-            LblDeltaX.Text = Main.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            LblDeltaA.Text = FrmMain.LM.GetString("Delta") & " = " & Parameterrange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            LblDeltaX.Text = FrmMain.LM.GetString("Delta") & " = " & Valuerange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(BifurcationDiagram, Parameterrange, Valuerange)
         Else
             'nothing

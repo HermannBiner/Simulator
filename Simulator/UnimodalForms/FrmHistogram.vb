@@ -10,35 +10,22 @@
 'Therefore, more cases of unimodal functions could be easely programmed
 'just by implementing this interface
 
-'Status Checked
+'Status Redesign Tested
 
 Imports System.Globalization
 Imports System.Reflection
 
 Public Class FrmHistogram
 
+    'Loading Control
+    Private IsFormLoaded As Boolean
+    Private LM As ClsLanguageManager
+
     'Prepare basic objects
-    Private MyGraphics As ClsGraphicTool
-    Private Iterator As IIteration
-    Private DiagramSize As ClsInterval
+    Private DS As IIteration
 
-    'Private global variables
-
-    'Number of Iteration Steps
-    Private n As Integer
-
-    'Iteration Control
-    Private StopIteration As Boolean
-
-    'Actual value of the iteration
-    Private x As Decimal
-
-    'Success if the initialization of the iteration
-    Private IsInitialized As Boolean
-
-    'How many times does the iterated value hit a small interval?
-    'NumberOfHits is an array if those intervals
-    Private NumberOfHits() As Integer ''Für Histogramm
+    'Histogram Controller
+    Private HistogramController As ClsHistogramController
 
     'SECTOR INITIALIZATION
 
@@ -49,15 +36,44 @@ Public Class FrmHistogram
 
     End Sub
 
+    Private Sub FrmHistogramm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        IsFormLoaded = False
+
+        'Form Controller
+        HistogramController = New ClsHistogramController
+
+        'Initialize Language
+        InitializeLanguage()
+
+        'Fill DS-List into CboFunction
+        FillDynamicSystem()
+
+    End Sub
+
+    Private Sub FrmHistogram_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        CboFunction.SelectedIndex = 0
+
+        IsFormLoaded = True
+        SetDS()
+
+    End Sub
+
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("Histogram")
-        LblSteps.Text = Main.LM.GetString("NumberOfSteps")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnStop.Text = Main.LM.GetString("Stop")
-        LblStartValue.Text = Main.LM.GetString("StartValue") & " ="
-        LblParameter.Text = Main.LM.GetString("Parameter") & " = "
+        Text = FrmMain.LM.GetString("Histogram")
+        LblSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnStop.Text = FrmMain.LM.GetString("Stop")
+        LblStartValue.Text = FrmMain.LM.GetString("StartValue") & " ="
+        LblParameter.Text = FrmMain.LM.GetString("Parameter") & " = "
+
+    End Sub
+
+    Private Sub FillDynamicSystem()
+
         CboFunction.Items.Clear()
 
         'Add the classes implementing IIteration
@@ -67,90 +83,27 @@ Public Class FrmHistogram
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim IteratorName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = Main.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(IteratorName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(DSName)
             Next
-
-            CboFunction.SelectedIndex = CboFunction.Items.Count - 1
-            CboFunction.Select()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
-
     End Sub
 
-    Private Sub FrmHistogramm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'Generate objects
-        Iterator = New ClsLogisticGrowth
-        DiagramSize = New ClsInterval(1, PicDiagram.Width)
-        MyGraphics = New ClsGraphicTool(PicDiagram, DiagramSize, DiagramSize)
-
-        'Now, the array of small intervals is defined (pixel-size)
-        ReDim NumberOfHits(PicDiagram.Width)
-
-        'Initialize Language
-        InitializeLanguage()
-
-        Iterator.Power = 1
-
-        'Number of Iteration Steps
-        LblNumberOfSteps.Text = "0"
-        n = 0
-        StopIteration = True
-
-        'additional default values
-        SetDefaultValues()
-
-    End Sub
-
-    Private Sub SetDefaultValues()
-
-        TxtParameter.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
-        TxtStartValue.Text = (Iterator.IterationInterval.A +
-            (Iterator.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
-
-    End Sub
-
-    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
-
-        ResetIteration()
-
-    End Sub
-
-    Private Sub ResetIteration()
-
-        'Clear dispblay
-        MyGraphics.Clear(Color.White)
-        IsInitialized = False
-
-        'Reset Number of Steps
-        n = 0
-        LblNumberOfSteps.Text = "0"
-        StopIteration = True
-
-        BtnStart.Text = Main.LM.GetString("Start")
-
-        'and Number of Hits
-        ReDim NumberOfHits(PicDiagram.Width)
-
-    End Sub
-
-    Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
-
+    Private Sub SetDS()
         'This sets the type of Iterator by Reflection
 
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
-                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+                             Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                             t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If CboFunction.SelectedIndex >= 0 Then
 
@@ -158,8 +111,8 @@ Public Class FrmHistogram
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
-                        Iterator = CType(Activator.CreateInstance(type), IIteration)
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DS = CType(Activator.CreateInstance(type), IIteration)
                     End If
                 Next
             End If
@@ -167,164 +120,150 @@ Public Class FrmHistogram
         End If
 
         'As standard, the function is repeated 1x in each iteration step
-        Iterator.Power = 1
+        InitializeDS()
 
         'The parameter and startvalue are depending on the type of iteration
-        SetDefaultValues()
+        SetDefaultUserData()
 
-        'If the type of iteration changes, everything has tp be reset
+        'If the type of iteration changes, everything has to be reset
+        'especially the status parameters
         ResetIteration()
+    End Sub
 
+    'This routine sets the DS parameters to a default
+    'the trigger is, that the DS has changed
+    Private Sub InitializeDS()
+
+        DS.Power = 1
+
+        With HistogramController
+            .DS = DS
+            .LblN = LblNumberOfSteps
+            .PicDiagram = PicDiagram
+            .IterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        End With
+    End Sub
+
+
+    'This routine sets the user data to the default
+    'the trigger is, that the DS has changed
+    Private Sub SetDefaultUserData()
+
+        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
+        TxtStartValue.Text = (DS.IterationInterval.A +
+            (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
+
+    End Sub
+
+    'This routine reset all iteration parameters
+    'except user data and DS parameter
+    'the meaning is, that DS has not changed
+    'and the iteration is newly started
+    Private Sub ResetIteration()
+
+        'Clear display
+        HistogramController.ResetIteration()
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+
+    End Sub
+
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        If IsFormLoaded Then
+            ResetIteration()
+        End If
+    End Sub
+
+    Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
+
+        If IsFormLoaded Then
+            SetDS()
+        End If
     End Sub
 
     Private Sub TxtParameter_TextChanged(sender As Object, e As EventArgs) Handles TxtParameter.TextChanged
-
-        'If this value changes, the Iteration has to be reset
-        ResetIteration()
+        If IsFormLoaded Then
+            'If this value changes, the Iteration has to be reset
+            ResetIteration()
+        End If
     End Sub
 
     Private Sub TxtStartWert_TextChanged(sender As Object, e As EventArgs) Handles TxtStartValue.TextChanged
-
-        'If this value changes, the Iteration has to be reset
-        ResetIteration()
-    End Sub
-
-    Private Sub InitializeIteration()
-
-        'Checks all manual inputs of the user
-
-        'Checks and sets the value of the parameter
-        Dim CheckParameter As New ClsCheckIsNumeric(TxtParameter)
-
-        If CheckParameter.IsInputValid Then
-            If Iterator.IsParameterAllowed(CheckParameter.NumericValue) Then
-                Iterator.Parameter = CheckParameter.NumericValue
-                IsInitialized = True
-            Else
-                TxtParameter.Text = ""
-                TxtParameter.Select()
-                IsInitialized = False
-            End If
-        Else
-            IsInitialized = False
+        If IsFormLoaded Then
+            'If this value changes, the Iteration has to be reset
+            ResetIteration()
         End If
-
-        'Checks and sets the startvalue
-        If IsInitialized Then
-            Dim CheckStartValue As New ClsCheckIsNumeric(TxtStartValue)
-            If CheckStartValue.IsInputValid Then
-                If Iterator.IsIterationvalueAllowed(CheckStartValue.NumericValue) Then
-                    x = CheckStartValue.NumericValue
-                Else
-                    TxtStartValue.Text = ""
-                    TxtStartValue.Select()
-                    IsInitialized = False
-                End If
-            Else
-                IsInitialized = False
-            End If
-        End If
-
     End Sub
 
     'SECTOR HISTOGRAM
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-        'Generates and draws the histogram
+        If IsFormLoaded Then
 
-        If n = 0 Then
+            With HistogramController
 
-            'In this case the iteration has just started
-            'and must be initialized
-            ResetIteration()
-            InitializeIteration()
+                If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                    'Check User Data
+                    If IsUserDataOK() Then
 
-            If IsInitialized Then
+                        'Set Ds Parameters
+                        DS.Parameter = CDec(TxtParameter.Text)
+                        .StartValue = CDec(TxtStartValue.Text)
+                        .IterationStatus = ClsGeneral.EnIterationStatus.Ready
 
-                'The initialization was succesful
-                If Iterator.IsBehaviourChaotic() Then
-                    'OK
-                Else
-                    'nothing to do, a message is already generated
+                        If DS.IsBehaviourChaotic() Then
+                            'OK
+                        Else
+                            'nothing to do, a message is already generated
+                        End If
+
+                    Else
+                        'nothing - Iterationstatus stays stopped
+                    End If
                 End If
-            End If
-        End If
 
+                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready _
+                Or .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
 
-        If IsInitialized Then
+                    .IterationStatus = ClsGeneral.EnIterationStatus.Running
 
-            'the iteration was stopped or reset
-            'and should start from the beginning
-            StopIteration = False
+                    BtnStart.Text = FrmMain.LM.GetString("Continue")
+                    BtnStart.Enabled = False
+                    BtnReset.Enabled = False
 
-            BtnStart.Text = Main.LM.GetString("Continue")
-            BtnStart.Enabled = False
-            BtnReset.Enabled = False
+                    Application.DoEvents()
 
-            Application.DoEvents()
+                    'Iteration loop
+                    Await .IterationLoop()
 
-            'Iteration loop
-
-            Await IterationLoop()
-
-        Else
-            'there is already a message generated
-            SetDefaultValues()
-
+                Else
+                    SetDefaultUserData()
+                End If
+            End With
         End If
 
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        'the iteration is running and should be stopped
-        StopIteration = True
+        If IsFormLoaded Then
 
-        BtnStart.Enabled = True
-        BtnReset.Enabled = True
+            'the iteration is running and should be stopped
+            HistogramController.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+
+            BtnStart.Enabled = True
+            BtnReset.Enabled = True
+        End If
 
     End Sub
 
-    Private Async Function IterationLoop() As Task
+    Private Function IsUserDataOK() As Boolean
 
-        'p is the pixel coordinate of the x-axis and the number of the interval that is hit
-        Dim p As Integer
+        'Is the value of TxtParameter in the Iteration Interval?
+        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim MyCheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
 
-        Do
-
-            'calculating the location of the interval that is hit
-            p = CInt((x - Iterator.IterationInterval.A) * PicDiagram.Width _
-                / Iterator.IterationInterval.IntervalWidth)
-
-            'and increasing the number of hits for this interval
-            NumberOfHits(p) += 1
-
-            'increasing the number of iteration steps
-            n += 1
-            LblNumberOfSteps.Text = n.ToString(CultureInfo.CurrentCulture)
-
-            'Next step of the iteration
-            x = Iterator.FN(x)
-
-            If n Mod 100 = 0 Then
-                'Clear the display
-                MyGraphics.Clear(Color.White)
-
-                'and redraw the actualized histogram
-                Dim Brush = Brushes.CadetBlue
-                For i = 1 To PicDiagram.Width
-
-                    Dim A As New ClsMathpoint(i - 1, 0)
-                    Dim B As New ClsMathpoint(i, NumberOfHits(i))
-                    MyGraphics.FillRectangle(A, B, Brush)
-                Next
-
-                Await Task.Delay(2)
-
-            End If
-
-        Loop Until StopIteration
+        Return MyCheckParameter.IsTxtValueAllowed And MyCheckStartValue.IsTxtValueAllowed
 
     End Function
 

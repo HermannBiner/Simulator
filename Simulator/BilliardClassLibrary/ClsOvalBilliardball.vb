@@ -666,7 +666,7 @@ Public Class ClsOvalBilliardball
         End If
 
         If Not IsIntersectionFound Then
-            Throw New ArgumentException(Main.LM.GetString("NoIntersectionPoint") & ", t: " & t.ToString & ", phi: " & Phi.ToString)
+            Throw New ArgumentException(FrmMain.LM.GetString("NoIntersectionPoint") & ", t: " & t.ToString & ", phi: " & Phi.ToString)
 
             Return 0
 
@@ -716,7 +716,7 @@ Public Class ClsOvalBilliardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
-            MyParameterlistbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+            MyParameterlistbox.Items.Add(FrmMain.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
                                          MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterlistbox.Refresh()
         End If

@@ -46,8 +46,8 @@ Public Class ClsGraphicTool
     'The rectangle representing the Bitmap or PictureBox
     Private Imagerange As Rectangle
 
-    Private ReadOnly MyMathXInterval As ClsInterval
-    Private ReadOnly MyMathYInterval As ClsInterval
+    Private MyMathXInterval As ClsInterval
+    Private MyMathYInterval As ClsInterval
 
     'the upper right corner point of the PictureBox / Bitmap
     'it defines the size of the PictureBox / Bitmap
@@ -100,6 +100,24 @@ Public Class ClsGraphicTool
         MyMathYInterval = MathYInterval
 
     End Sub
+
+    Property MathXInterval As ClsInterval
+        Get
+            MathXInterval = MyMathXInterval
+        End Get
+        Set(value As ClsInterval)
+            MyMathXInterval = value
+        End Set
+    End Property
+
+    Property MathYInterval As ClsInterval
+        Get
+            MathYInterval = MyMathYInterval
+        End Get
+        Set(value As ClsInterval)
+            MyMathYInterval = value
+        End Set
+    End Property
 
     'SECTOR GRAPHICS
 

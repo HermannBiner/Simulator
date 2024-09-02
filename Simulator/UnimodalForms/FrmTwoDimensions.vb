@@ -13,40 +13,24 @@
 'Therefore, more cases of unimodal functions could be easely programmed
 'just by implementing hits interface
 
-'Status Checked
+'Status Redesign Tested
 
 Imports System.Globalization
 Imports System.Reflection
 
 Public Class FrmTwoDimensions
 
+    Private IsFormLoaded As Boolean
+    Private TwoDimensionsController As ClsTwoDimensionsController
+
     'Prepare basic objects
-    Private MyGraphics As ClsGraphicTool
-    Private Iterator As IIteration
-
-    'Private global variables
-
-    'Number of Iteration Steps
-    Private n As Integer
-
-    'Actual values of the iteration
-    Private x As Decimal
-    Private y As Decimal
-
-    'Representing the raster for the measure exactness of the experimentator in Pixels
-    Private Const Rastersize As Integer = 5
-
-    'Corresponding x-Value
-    Private deltaX As Decimal
-
-    'additional
-    Private Diagramsize As Integer
-    Private MyBrush As Brush
-    Private MyColor As Color
-    Private IsNewExperiment As Boolean
+    Private DS As IIteration
 
     'IterationDepth: 5 is optimal, due to experiments
     Private Const Standardpower As Integer = 5
+
+    'Color of the actual Experiment
+    Private Brush As SolidBrush
 
     'SECTOR INITIALIZATION
 
@@ -57,15 +41,43 @@ Public Class FrmTwoDimensions
 
     End Sub
 
+    Private Sub FrmTwoDimensions_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        IsFormLoaded = False
+        TwoDimensionsController = New ClsTwoDimensionsController
+
+        'Initialize Language
+        InitializeLanguage()
+
+        'Fill DS-List into CboFunction
+        FillDynamicSystem()
+
+    End Sub
+
+    Private Sub FrmTwoDimensions_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        CboFunction.SelectedIndex = 0
+        CboExperiment.SelectedIndex = 0
+        IsFormLoaded = True
+
+        SetBrush()
+        SetDS()
+
+    End Sub
+
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("TwoDimensions")
-        GrpParameter.Text = Main.LM.GetString("Parameter")
-        GrpExperiment.Text = Main.LM.GetString("ExperimentNo")
-        BtnNextStep.Text = Main.LM.GetString("NextStep")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
-        BtnNext10.Text = Main.LM.GetString("Next10Steps")
-        GrpStartpoint.Text = Main.LM.GetString("CoordinatesStartpoint")
+        Text = FrmMain.LM.GetString("TwoDimensions")
+        GrpParameter.Text = FrmMain.LM.GetString("Parameter")
+        GrpExperiment.Text = FrmMain.LM.GetString("ExperimentNo")
+        BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        BtnNext10.Text = FrmMain.LM.GetString("Next10Steps")
+        GrpStartpoint.Text = FrmMain.LM.GetString("CoordinatesStartpoint")
+    End Sub
+
+    Private Sub FillDynamicSystem()
+
         CboFunction.Items.Clear()
 
         'Add the classes implementing IIteration
@@ -82,42 +94,15 @@ Public Class FrmTwoDimensions
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = Main.LM.GetString(type.Name, True)
+                IteratorName = FrmMain.LM.GetString(type.Name, True)
                 CboFunction.Items.Add(IteratorName)
             Next
-
-            CboFunction.SelectedIndex = CboFunction.Items.Count - 1
-            CboFunction.Select()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
-
-
     End Sub
 
-    Private Sub FrmZweidimensional_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        'set objects
-        'the same Iterator iterates the x- and y-values
-        Iterator = New ClsLogisticGrowth
-        MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
-
-        'Iteration Depth
-        Iterator.Power = Standardpower
-
-        'Initialize Language
-        InitializeLanguage()
-
-        'Default settings
-        Diagramsize = Math.Min(PicDiagram.Width, PicDiagram.Height)
-
-        'additional Defaults
-        SetDefaultValues()
-
-    End Sub
-
-    Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
+    Private Sub SetDS()
 
         'This sets the type of Iterator by Reflection
 
@@ -131,248 +116,169 @@ Public Class FrmTwoDimensions
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
-                        Iterator = CType(Activator.CreateInstance(type), IIteration)
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DS = CType(Activator.CreateInstance(type), IIteration)
                     End If
                 Next
             End If
 
         End If
 
-        Iterator.Power = Standardpower
+        InitializeDS()
 
-        MyGraphics = New ClsGraphicTool(PicDiagram, Iterator.IterationInterval, Iterator.IterationInterval)
+        'The parameter and startvalue are depending on the type of iteration
+        SetDefaultUserData()
 
-        TxtParameter.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
-
+        'If the type of iteration changes, everything has to be reset
         ResetIteration()
 
     End Sub
 
-    Private Sub SetDefaultValues()
+    Private Sub InitializeDS()
 
-        TxtX.Text = (Iterator.IterationInterval.A +
-            (Iterator.IterationInterval.IntervalWidth * 0.414)).ToString(CultureInfo.CurrentCulture)
-        TxtY.Text = (Iterator.IterationInterval.A +
-            (Iterator.IterationInterval.IntervalWidth * 0.407)).ToString(CultureInfo.CurrentCulture)
-        TxtParameter.Text = Iterator.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
+        'Iteration Depth
+        DS.Power = Standardpower
+
+        With TwoDimensionsController
+            .DS = DS
+            .PicDiagram = PicDiagram
+        End With
+
+    End Sub
+
+    Private Sub SetDefaultUserData()
+
+        TxtX.Text = (DS.IterationInterval.A +
+            (DS.IterationInterval.IntervalWidth * 0.414)).ToString(CultureInfo.CurrentCulture)
+        TxtY.Text = (DS.IterationInterval.A +
+            (DS.IterationInterval.IntervalWidth * 0.407)).ToString(CultureInfo.CurrentCulture)
+        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
         CboExperiment.SelectedIndex = 0
-        MyBrush = Brushes.Black
-        MyColor = Color.Black
-        IsNewExperiment = True
         TxtX.Select()
 
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
-        ResetIteration()
+        If IsFormLoaded Then
+            ResetIteration()
+        End If
     End Sub
 
     Private Sub ResetIteration()
+        TwoDimensionsController.ResetIteration()
+    End Sub
 
-        'Clear Display
-        MyGraphics.Clear(Color.White)
+    Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
-        'Reset Number of Steps
-        n = 0
+        If IsFormLoaded Then
+            SetDS()
+        End If
 
-        IsNewExperiment = True
+    End Sub
+
+    Private Sub SetBrush()
+
+        'To show the effect of different experiments,
+        'there are 5 possible startpoints in different colors
+        Select Case CboExperiment.SelectedIndex
+            Case 0
+                Brush = CType(Brushes.Black, SolidBrush)
+            Case 1
+                Brush = CType(Brushes.Green, SolidBrush)
+            Case 2
+                Brush = CType(Brushes.Blue, SolidBrush)
+            Case 3
+                Brush = CType(Brushes.Magenta, SolidBrush)
+            Case Else
+                Brush = CType(Brushes.Red, SolidBrush)
+        End Select
+
+        TwoDimensionsController.Brush = Brush
 
     End Sub
 
     Private Sub CboExperiment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboExperiment.SelectedIndexChanged
 
-        'To show the effect of different experiments,
-        'there are 5 possible startpoints in different colors
+        If IsFormLoaded Then
+            SetBrush()
 
-        IsNewExperiment = True
-        Select Case CboExperiment.SelectedIndex
-            Case 0
-                MyBrush = Brushes.Black
-                MyColor = Color.Black
-                n = 0
-            Case 1
-                MyBrush = Brushes.Green
-                MyColor = Color.Green
-            Case 2
-                MyBrush = Brushes.Blue
-                MyColor = Color.Blue
-            Case 3
-                MyBrush = Brushes.Magenta
-                MyColor = Color.Magenta
-            Case Else
-                MyBrush = Brushes.Red
-                MyColor = Color.Red
-        End Select
-    End Sub
+            With TwoDimensionsController
+                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+                    .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+                End If
+            End With
 
-    Private Sub DrawRaster()
-
-        'The raster shows the measure exactness of the experimentator
-        'one square in the raster has 5x5 pixel points
-        'that corresponds to a measure exactness of about 0.00825 for the x- and y-values
-
-        'Counter
-        Dim i As Integer
-
-        'Corresponding x- and y-coordinates
-        Dim u As Decimal
-
-        'Adapting DeltaX to the Iteration.Interval.Width
-        'that all type of Iteration Functions have the same Raster
-        deltaX = CDec(Rastersize / Diagramsize) * Iterator.IterationInterval.IntervalWidth
-
-        Do
-
-            'lines parallel to the y-axis
-            u = Iterator.IterationInterval.A + (i * deltaX)
-            Dim X1 As New ClsMathpoint(u, Iterator.IterationInterval.A)
-            Dim X2 As New ClsMathpoint(u, Iterator.IterationInterval.B)
-            MyGraphics.DrawLine(X1, X2, Color.Aqua, 1)
-
-            'lines parallel to the x-axis
-            Dim Y1 As New ClsMathpoint(Iterator.IterationInterval.A, u)
-            Dim Y2 As New ClsMathpoint(Iterator.IterationInterval.B, u)
-            MyGraphics.DrawLine(Y1, Y2, Color.Aqua, 1)
-
-            i += 1
-
-        Loop Until i * deltaX >= Iterator.IterationInterval.IntervalWidth
+        End If
 
     End Sub
 
-    Private Sub TxtX_TextChanged(sender As Object, e As EventArgs) Handles TxtX.TextChanged
-
-        'If this value changes, the Iteration has to be reset
-        IsNewExperiment = True
-    End Sub
-
-    Private Sub TxtY_TextChanged(sender As Object, e As EventArgs) Handles TxtY.TextChanged
-
-        'If this value changes, the Iteration has to be reset
-        IsNewExperiment = True
-    End Sub
-
-    Private Function InitializeIteration() As Boolean
+    Private Function IsUserDataOK() As Boolean
 
         'Checks all manual inputs of the user
 
-        Dim IsAllvalid As Boolean
+        'Is the value of TxtParameter in the Iteration Interval?
+        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim MyCheckXStartvalue = New ClsCheckUserData(TxtX, DS.IterationInterval)
+        Dim MyCheckYStartvalue = New ClsCheckUserData(TxtY, DS.IterationInterval)
 
-        'Checks and sets the value of the parameter
-        Dim CheckParameter As New ClsCheckIsNumeric(TxtParameter)
-
-        If CheckParameter.IsInputValid Then
-            If Iterator.IsParameterAllowed(CheckParameter.NumericValue) Then
-                Iterator.Parameter = CheckParameter.NumericValue
-                IsAllvalid = True
-            Else
-                TxtParameter.Text = ""
-                TxtParameter.Select()
-                IsAllvalid = False
-            End If
-        Else
-            IsAllvalid = False
-        End If
-
-        'Checks and sets the x-startvalue
-        If IsAllvalid Then
-            Dim CheckXStartvalue As New ClsCheckIsNumeric(TxtX)
-            If CheckXStartvalue.IsInputValid Then
-                If Iterator.IsIterationvalueAllowed(CheckXStartvalue.NumericValue) Then
-                    x = CheckXStartvalue.NumericValue
-                Else
-                    TxtX.Text = ""
-                    TxtX.Select()
-                    IsAllvalid = False
-                End If
-            Else
-                IsAllvalid = False
-            End If
-        End If
-
-        'Checks and sets the y-startvalue
-        If IsAllvalid Then
-            Dim CheckYStartvalue As New ClsCheckIsNumeric(TxtY)
-            If CheckYStartvalue.IsInputValid Then
-                If Iterator.IsIterationvalueAllowed(CheckYStartvalue.NumericValue) Then
-                    y = CheckYStartvalue.NumericValue
-                Else
-                    TxtY.Text = ""
-                    TxtY.Select()
-                    IsAllvalid = False
-                End If
-            Else
-                IsAllvalid = False
-            End If
-        End If
-
-        'Prepare the iteration
-        If IsAllvalid Then
-            If n = 0 Then
-                DrawRaster()
-            End If
-
-            'Mark the startpoint
-            Dim Startpoint As New ClsMathpoint(x, y)
-            MyGraphics.DrawPoint(Startpoint, MyBrush, 2)
-            MyGraphics.DrawCircle(Startpoint, 5, MyColor, 1)
-            n += 1
-        Else
-            MessageBox.Show(Main.LM.GetString("ActionStopped"))
-
-            SetDefaultValues()
-        End If
-
-        Return IsAllvalid
+        Return MyCheckParameter.IsTxtValueAllowed And MyCheckXStartvalue.IsTxtValueAllowed _
+            And MyCheckYStartvalue.IsTxtValueAllowed
 
     End Function
 
     'SECTOR ITERATION
 
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
-
-        'Perform one iteration step
-        DoIteration(1)
+        If IsFormLoaded Then
+            'Perform one iteration step
+            DoIteration(1)
+        End If
     End Sub
 
     Private Sub BtnNext10_Click(sender As Object, e As EventArgs) Handles BtnNext10.Click
-
-        'Perform 10 iteration steps
-        DoIteration(10)
+        If IsFormLoaded Then
+            'Perform 10 iteration steps
+            DoIteration(10)
+        End If
     End Sub
 
     Private Sub DoIteration(EndOfLoop As Integer)
 
-        'steering the iteration
-        If IsNewExperiment Then
-            If InitializeIteration() Then
-                IsNewExperiment = False
-                IterationLoop(EndOfLoop)
+        With TwoDimensionsController
+
+            'New Iteration
+            If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If IsUserDataOK() Then
+                    .PrepareDiagram()
+                    DS.Parameter = CDec(TxtParameter.Text)
+                    .StartValueX = CDec(TxtX.Text)
+                    .StartValueY = CDec(TxtY.Text)
+                    .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                Else
+                    SetDefaultUserData()
+                End If
             End If
-        Else
-            IterationLoop(EndOfLoop)
-        End If
+
+            'New Experiment with new UserData
+            If .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
+                If IsUserDataOK() Then
+                    .StartValueX = CDec(TxtX.Text)
+                    .StartValueY = CDec(TxtY.Text)
+                    .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                Else
+                    SetDefaultUserData()
+                End If
+            End If
+
+            'Next steps of a running Iteration
+            If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+                .IterationStatus = ClsGeneral.EnIterationStatus.Running
+                .IterationLoop(EndOfLoop)
+                .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+            End If
+        End With
 
     End Sub
 
-    Private Sub IterationLoop(EndOfLoop As Integer)
 
-        'the next steps of the iteration are performed
-        Dim i As Integer
-        For i = 1 To EndOfLoop
-
-            Dim P As New ClsMathpoint(x, y)
-            Dim nextP As New ClsMathpoint(Iterator.FN(x), Iterator.FN(y))
-
-            'draw result
-            MyGraphics.DrawPoint(nextP, MyBrush, 1)
-            MyGraphics.DrawLine(P, nextP, MyColor, 1)
-            x = Iterator.FN(x)
-            y = Iterator.FN(y)
-
-        Next
-        n += EndOfLoop
-
-    End Sub
 End Class

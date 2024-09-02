@@ -84,15 +84,15 @@ Public Class FrmSpringPendulum
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("SpringPendulum")
-        BtnReset.Text = Main.LM.GetString("Reset")
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnStop.Text = Main.LM.GetString("Stop")
-        LblPendulum.Text = Main.LM.GetString("Pendulum")
-        LblStepWidth.Text = Main.LM.GetString("StepWidth") & " 0.02"
-        LblNumberOfSteps.Text = Main.LM.GetString("NumberOfSteps")
-        ChkStretched.Text = Main.LM.GetString("StretchedMode")
-        LblDifference.Text = Main.LM.GetString("Difference")
+        Text = FrmMain.LM.GetString("SpringPendulum")
+        BtnReset.Text = FrmMain.LM.GetString("Reset")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnStop.Text = FrmMain.LM.GetString("Stop")
+        LblPendulum.Text = FrmMain.LM.GetString("Pendulum")
+        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " 0.02"
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        ChkStretched.Text = FrmMain.LM.GetString("StretchedMode")
+        LblDifference.Text = FrmMain.LM.GetString("Difference")
         CboPendulum.Items.Clear()
 
         'Add the classes implementing ISpringPendulum
@@ -109,7 +109,7 @@ Public Class FrmSpringPendulum
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                PendulumName = Main.LM.GetString(type.Name, True)
+                PendulumName = FrmMain.LM.GetString(type.Name, True)
                 CboPendulum.Items.Add(PendulumName)
             Next
 
@@ -241,7 +241,7 @@ Public Class FrmSpringPendulum
             StepWidthB = StepWidthA / NumberOfApproxStepsB
         End If
 
-        LblStepWidth.Text = Main.LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
+        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
 
         If PendulumA IsNot Nothing Then
             PendulumA.h = StepWidthA
@@ -277,7 +277,7 @@ Public Class FrmSpringPendulum
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         PendulumB = CType(Activator.CreateInstance(type), ISpringPendulum)
                     End If
                 Next
@@ -303,7 +303,7 @@ Public Class FrmSpringPendulum
         LstValueList.Items.Clear()
         InitializeIteration = True
         BtnStart.Enabled = True
-        BtnStart.Text = Main.LM.GetString("Start")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
 
         'when loading the form, click events are launched
         'before MyBitmapDrawer is initialized
@@ -329,7 +329,7 @@ Public Class FrmSpringPendulum
 
         StopIteration = False
         BtnStart.Enabled = False
-        BtnStart.Text = Main.LM.GetString("Continue")
+        BtnStart.Text = FrmMain.LM.GetString("Continue")
         BtnReset.Enabled = False
 
         Await IterationLoop()

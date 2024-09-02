@@ -3,7 +3,7 @@
 'To program a new unimodal function
 'just this interface has to be implemented
 
-'Status Checked
+'Status Redesign Tested
 
 Public Interface IIteration
 
@@ -22,12 +22,6 @@ Public Interface IIteration
 
     'the interval in which the iteration values are
     ReadOnly Property IterationInterval As ClsInterval
-
-    'Check if the steering parameter is in the allowed parameter interval
-    Function IsParameterAllowed(Parameter As Decimal) As Boolean
-
-    'Check if the start value if the iteration is in the allowed iteration interval
-    Function IsIterationvalueAllowed(x As Decimal) As Boolean
 
     'If there is a given protocol by the user
     'the program should calculate an appropriate start value (in case of chaos)

@@ -3,12 +3,18 @@
 
 Public Class ClsCheckIsNumeric
 
-    Private ReadOnly MyTextbox As TextBox
+    Private MyTextbox As TextBox
     Private MyNumericValue As Decimal
 
     Public Sub New(Textbox As TextBox)
         MyTextbox = Textbox
     End Sub
+
+    Public WriteOnly Property TxtBox As TextBox
+        Set(value As TextBox)
+            MyTextbox = value
+        End Set
+    End Property
 
     Public ReadOnly Property NumericValue As Decimal
         Get
@@ -21,7 +27,7 @@ Public Class ClsCheckIsNumeric
         Dim Valid As Boolean
 
         If Not IsNumeric(MyTextbox.Text) Then
-            MessageBox.Show(Main.LM.GetString("NumericValue"))
+            MessageBox.Show(FrmMain.LM.GetString("NumericValue"))
             MyTextbox.Text = ""
             MyTextbox.Select()
             Valid = False

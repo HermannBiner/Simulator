@@ -20,8 +20,8 @@ Public Class FrmTests
 
     Private Sub InitializeLanguage()
 
-        BtnTest.Text = Main.LM.GetString("Test")
-        Text = Main.LM.GetString("Test")
+        BtnTest.Text = FrmMain.LM.GetString("Test")
+        Text = FrmMain.LM.GetString("Test")
 
     End Sub
 

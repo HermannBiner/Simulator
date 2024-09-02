@@ -23,429 +23,429 @@ Partial Class FrmIteration
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIteration))
-        Me.PicDiagram = New System.Windows.Forms.PictureBox()
-        Me.BtnReset = New System.Windows.Forms.Button()
-        Me.LblParameter = New System.Windows.Forms.Label()
-        Me.LblStartValue = New System.Windows.Forms.Label()
-        Me.BtnNextStep = New System.Windows.Forms.Button()
-        Me.BtnNext10Steps = New System.Windows.Forms.Button()
-        Me.LstValueList = New System.Windows.Forms.ListBox()
-        Me.LstProtocol = New System.Windows.Forms.ListBox()
-        Me.GrpStep = New System.Windows.Forms.GroupBox()
-        Me.LblSteps = New System.Windows.Forms.Label()
-        Me.GrpTargetValue = New System.Windows.Forms.GroupBox()
-        Me.BtnStartTransitive = New System.Windows.Forms.Button()
-        Me.TxtTargetValue = New System.Windows.Forms.TextBox()
-        Me.LblTargetValue = New System.Windows.Forms.Label()
-        Me.GrpProtocol = New System.Windows.Forms.GroupBox()
-        Me.BtnProtocolStartvalue = New System.Windows.Forms.Button()
-        Me.TxtTargetProtocol = New System.Windows.Forms.TextBox()
-        Me.TxtParameter = New System.Windows.Forms.TextBox()
-        Me.TxtStartValue = New System.Windows.Forms.TextBox()
-        Me.CboFunction = New System.Windows.Forms.ComboBox()
-        Me.BtnDrawDiagram = New System.Windows.Forms.Button()
-        Me.LblIterationDepth = New System.Windows.Forms.Label()
-        Me.CboIterationDepth = New System.Windows.Forms.ComboBox()
-        Me.LblNumberOfSteps = New System.Windows.Forms.Label()
-        Me.LblXValues = New System.Windows.Forms.Label()
-        Me.LblLog = New System.Windows.Forms.Label()
-        Me.GrpPresentation = New System.Windows.Forms.GroupBox()
-        Me.LblStretching = New System.Windows.Forms.Label()
-        Me.TxtXStretching = New System.Windows.Forms.TextBox()
-        Me.LblxStretching = New System.Windows.Forms.Label()
-        Me.OptTimeAxis = New System.Windows.Forms.RadioButton()
-        Me.OptFunctionGraph = New System.Windows.Forms.RadioButton()
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GrpStep.SuspendLayout()
-        Me.GrpTargetValue.SuspendLayout()
-        Me.GrpProtocol.SuspendLayout()
-        Me.GrpPresentation.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'PicDiagram
-        '
-        Me.PicDiagram.BackColor = System.Drawing.Color.White
-        Me.PicDiagram.Location = New System.Drawing.Point(16, 65)
-        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(4)
-        Me.PicDiagram.Name = "PicDiagram"
-        Me.PicDiagram.Size = New System.Drawing.Size(1179, 1105)
-        Me.PicDiagram.TabIndex = 0
-        Me.PicDiagram.TabStop = False
-        '
-        'BtnReset
-        '
-        Me.BtnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnReset.Location = New System.Drawing.Point(1553, 1104)
-        Me.BtnReset.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(520, 61)
-        Me.BtnReset.TabIndex = 17
-        Me.BtnReset.Text = "ResetIteration"
-        Me.BtnReset.UseVisualStyleBackColor = True
-        '
-        'LblParameter
-        '
-        Me.LblParameter.AutoSize = True
-        Me.LblParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblParameter.Location = New System.Drawing.Point(289, 20)
-        Me.LblParameter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblParameter.Name = "LblParameter"
-        Me.LblParameter.Size = New System.Drawing.Size(43, 26)
-        Me.LblParameter.TabIndex = 5
-        Me.LblParameter.Text = "a ="
-        '
-        'LblStartValue
-        '
-        Me.LblStartValue.AutoSize = True
-        Me.LblStartValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStartValue.Location = New System.Drawing.Point(1533, 28)
-        Me.LblStartValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblStartValue.Name = "LblStartValue"
-        Me.LblStartValue.Size = New System.Drawing.Size(129, 26)
-        Me.LblStartValue.TabIndex = 7
-        Me.LblStartValue.Text = "StartValue" & " = "
-        '
-        'BtnNextStep
-        '
-        Me.BtnNextStep.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnNextStep.Location = New System.Drawing.Point(12, 42)
-        Me.BtnNextStep.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnNextStep.Name = "BtnNextStep"
-        Me.BtnNextStep.Size = New System.Drawing.Size(245, 61)
-        Me.BtnNextStep.TabIndex = 3
-        Me.BtnNextStep.Text = "NextStep"
-        Me.BtnNextStep.UseVisualStyleBackColor = True
-        '
-        'BtnNext10Steps
-        '
-        Me.BtnNext10Steps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnNext10Steps.Location = New System.Drawing.Point(285, 42)
-        Me.BtnNext10Steps.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnNext10Steps.Name = "BtnNext10Steps"
-        Me.BtnNext10Steps.Size = New System.Drawing.Size(245, 61)
-        Me.BtnNext10Steps.TabIndex = 4
-        Me.BtnNext10Steps.Text = "Next10Steps"
-        Me.BtnNext10Steps.UseVisualStyleBackColor = True
-        '
-        'LstValueList
-        '
-        Me.LstValueList.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstValueList.FormattingEnabled = True
-        Me.LstValueList.ItemHeight = 25
-        Me.LstValueList.Location = New System.Drawing.Point(1197, 65)
-        Me.LstValueList.Margin = New System.Windows.Forms.Padding(4)
-        Me.LstValueList.Name = "LstValueList"
-        Me.LstValueList.ScrollAlwaysVisible = True
-        Me.LstValueList.Size = New System.Drawing.Size(225, 1104)
-        Me.LstValueList.TabIndex = 14
-        '
-        'LstProtocol
-        '
-        Me.LstProtocol.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstProtocol.FormattingEnabled = True
-        Me.LstProtocol.ItemHeight = 25
-        Me.LstProtocol.Location = New System.Drawing.Point(1432, 65)
-        Me.LstProtocol.Margin = New System.Windows.Forms.Padding(4)
-        Me.LstProtocol.Name = "LstProtocol"
-        Me.LstProtocol.ScrollAlwaysVisible = True
-        Me.LstProtocol.Size = New System.Drawing.Size(69, 1104)
-        Me.LstProtocol.TabIndex = 15
-        '
-        'GrpStep
-        '
-        Me.GrpStep.Controls.Add(Me.BtnNextStep)
-        Me.GrpStep.Controls.Add(Me.BtnNext10Steps)
-        Me.GrpStep.Location = New System.Drawing.Point(1539, 311)
-        Me.GrpStep.Margin = New System.Windows.Forms.Padding(4)
-        Me.GrpStep.Name = "GrpStep"
-        Me.GrpStep.Padding = New System.Windows.Forms.Padding(4)
-        Me.GrpStep.Size = New System.Drawing.Size(563, 122)
-        Me.GrpStep.TabIndex = 17
-        Me.GrpStep.TabStop = False
-        Me.GrpStep.Text = "Iteration"
-        '
-        'LblSteps
-        '
-        Me.LblSteps.AutoSize = True
-        Me.LblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblSteps.Location = New System.Drawing.Point(1533, 80)
-        Me.LblSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblSteps.Name = "LblSteps"
-        Me.LblSteps.Size = New System.Drawing.Size(176, 26)
-        Me.LblSteps.TabIndex = 7
-        Me.LblSteps.Text = "NumberOfSteps"
-        '
-        'GrpTargetValue
-        '
-        Me.GrpTargetValue.Controls.Add(Me.BtnStartTransitive)
-        Me.GrpTargetValue.Controls.Add(Me.TxtTargetValue)
-        Me.GrpTargetValue.Controls.Add(Me.LblTargetValue)
-        Me.GrpTargetValue.Location = New System.Drawing.Point(1539, 689)
-        Me.GrpTargetValue.Margin = New System.Windows.Forms.Padding(4)
-        Me.GrpTargetValue.Name = "GrpTargetValue"
-        Me.GrpTargetValue.Padding = New System.Windows.Forms.Padding(4)
-        Me.GrpTargetValue.Size = New System.Drawing.Size(563, 180)
-        Me.GrpTargetValue.TabIndex = 11
-        Me.GrpTargetValue.TabStop = False
-        Me.GrpTargetValue.Text = "Transitivity"
-        '
-        'BtnStartTransitive
-        '
-        Me.BtnStartTransitive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStartTransitive.Location = New System.Drawing.Point(15, 92)
-        Me.BtnStartTransitive.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnStartTransitive.Name = "BtnStartTransitive"
-        Me.BtnStartTransitive.Size = New System.Drawing.Size(520, 61)
-        Me.BtnStartTransitive.TabIndex = 13
-        Me.BtnStartTransitive.Text = "StartvalueForTargetvalue"
-        Me.BtnStartTransitive.UseVisualStyleBackColor = True
-        '
-        'TxtTargetValue
-        '
-        Me.TxtTargetValue.Location = New System.Drawing.Point(155, 39)
-        Me.TxtTargetValue.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtTargetValue.Name = "TxtTargetValue"
-        Me.TxtTargetValue.Size = New System.Drawing.Size(379, 31)
-        Me.TxtTargetValue.TabIndex = 12
-        '
-        'LblTargetValue
-        '
-        Me.LblTargetValue.AutoSize = True
-        Me.LblTargetValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblTargetValue.Location = New System.Drawing.Point(9, 46)
-        Me.LblTargetValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblTargetValue.Name = "LblTargetValue"
-        Me.LblTargetValue.Size = New System.Drawing.Size(144, 26)
-        Me.LblTargetValue.TabIndex = 17
-        Me.LblTargetValue.Text = "TargetValue" & " = "
-        '
-        'GrpProtocol
-        '
-        Me.GrpProtocol.Controls.Add(Me.BtnProtocolStartvalue)
-        Me.GrpProtocol.Controls.Add(Me.TxtTargetProtocol)
-        Me.GrpProtocol.Location = New System.Drawing.Point(1539, 462)
-        Me.GrpProtocol.Margin = New System.Windows.Forms.Padding(4)
-        Me.GrpProtocol.Name = "GrpProtocol"
-        Me.GrpProtocol.Padding = New System.Windows.Forms.Padding(4)
-        Me.GrpProtocol.Size = New System.Drawing.Size(563, 199)
-        Me.GrpProtocol.TabIndex = 9
-        Me.GrpProtocol.TabStop = False
-        Me.GrpProtocol.Text = "TargetProtocol"
-        '
-        'BtnProtocolStartvalue
-        '
-        Me.BtnProtocolStartvalue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnProtocolStartvalue.Location = New System.Drawing.Point(12, 104)
-        Me.BtnProtocolStartvalue.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
-        Me.BtnProtocolStartvalue.Size = New System.Drawing.Size(523, 61)
-        Me.BtnProtocolStartvalue.TabIndex = 8
-        Me.BtnProtocolStartvalue.Text = "StartvalueForProtocol"
-        Me.BtnProtocolStartvalue.UseVisualStyleBackColor = True
-        '
-        'TxtTargetProtocol
-        '
-        Me.TxtTargetProtocol.Location = New System.Drawing.Point(15, 42)
-        Me.TxtTargetProtocol.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtTargetProtocol.Name = "TxtTargetProtocol"
-        Me.TxtTargetProtocol.Size = New System.Drawing.Size(519, 31)
-        Me.TxtTargetProtocol.TabIndex = 10
-        '
-        'TxtParameter
-        '
-        Me.TxtParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtParameter.Location = New System.Drawing.Point(339, 15)
-        Me.TxtParameter.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtParameter.Name = "TxtParameter"
-        Me.TxtParameter.Size = New System.Drawing.Size(171, 32)
-        Me.TxtParameter.TabIndex = 2
-        '
-        'TxtStartValue
-        '
-        Me.TxtStartValue.Location = New System.Drawing.Point(1657, 24)
-        Me.TxtStartValue.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtStartValue.Name = "TxtStartValue"
-        Me.TxtStartValue.Size = New System.Drawing.Size(411, 31)
-        Me.TxtStartValue.TabIndex = 4
-        '
-        'CboFunction
-        '
-        Me.CboFunction.FormattingEnabled = True
-        Me.CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        Me.CboFunction.Location = New System.Drawing.Point(16, 15)
-        Me.CboFunction.Margin = New System.Windows.Forms.Padding(4)
-        Me.CboFunction.Name = "CboFunction"
-        Me.CboFunction.Size = New System.Drawing.Size(264, 33)
-        Me.CboFunction.TabIndex = 1
-        '
-        'BtnDrawDiagram
-        '
-        Me.BtnDrawDiagram.Location = New System.Drawing.Point(783, 11)
-        Me.BtnDrawDiagram.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnDrawDiagram.Name = "BtnDrawDiagram"
-        Me.BtnDrawDiagram.Size = New System.Drawing.Size(412, 41)
-        Me.BtnDrawDiagram.TabIndex = 22
-        Me.BtnDrawDiagram.Text = "DrawFunctionGraph"
-        Me.BtnDrawDiagram.UseVisualStyleBackColor = True
-        '
-        'LblIterationDepth
-        '
-        Me.LblIterationDepth.AutoSize = True
-        Me.LblIterationDepth.Location = New System.Drawing.Point(519, 20)
-        Me.LblIterationDepth.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblIterationDepth.Name = "LblIterationDepth"
-        Me.LblIterationDepth.Size = New System.Drawing.Size(146, 25)
-        Me.LblIterationDepth.TabIndex = 23
-        Me.LblIterationDepth.Text = "IterationDepth"
-        '
-        'CboIterationDepth
-        '
-        Me.CboIterationDepth.FormattingEnabled = True
-        Me.CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.CboIterationDepth.Location = New System.Drawing.Point(669, 15)
-        Me.CboIterationDepth.Margin = New System.Windows.Forms.Padding(4)
-        Me.CboIterationDepth.Name = "CboIterationDepth"
-        Me.CboIterationDepth.Size = New System.Drawing.Size(84, 33)
-        Me.CboIterationDepth.TabIndex = 3
-        '
-        'LblNumberOfSteps
-        '
-        Me.LblNumberOfSteps.AutoSize = True
-        Me.LblNumberOfSteps.Location = New System.Drawing.Point(1708, 80)
-        Me.LblNumberOfSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblNumberOfSteps.Name = "LblNumberOfSteps"
-        Me.LblNumberOfSteps.Size = New System.Drawing.Size(24, 25)
-        Me.LblNumberOfSteps.TabIndex = 26
-        Me.LblNumberOfSteps.Text = "0"
-        '
-        'LblXValues
-        '
-        Me.LblXValues.AutoSize = True
-        Me.LblXValues.Location = New System.Drawing.Point(1216, 25)
-        Me.LblXValues.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblXValues.Name = "LblXValues"
-        Me.LblXValues.Size = New System.Drawing.Size(99, 25)
-        Me.LblXValues.TabIndex = 27
-        Me.LblXValues.Text = "XValues"
-        '
-        'LblLog
-        '
-        Me.LblLog.AutoSize = True
-        Me.LblLog.Location = New System.Drawing.Point(1409, 28)
-        Me.LblLog.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblLog.Name = "LblLog"
-        Me.LblLog.Size = New System.Drawing.Size(48, 25)
-        Me.LblLog.TabIndex = 28
-        Me.LblLog.Text = "Log"
-        '
-        'GrpPresentation
-        '
-        Me.GrpPresentation.Controls.Add(Me.LblStretching)
-        Me.GrpPresentation.Controls.Add(Me.TxtXStretching)
-        Me.GrpPresentation.Controls.Add(Me.LblxStretching)
-        Me.GrpPresentation.Controls.Add(Me.OptTimeAxis)
-        Me.GrpPresentation.Controls.Add(Me.OptFunctionGraph)
-        Me.GrpPresentation.Location = New System.Drawing.Point(1539, 125)
-        Me.GrpPresentation.Margin = New System.Windows.Forms.Padding(4)
-        Me.GrpPresentation.Name = "GrpPresentation"
-        Me.GrpPresentation.Padding = New System.Windows.Forms.Padding(4)
-        Me.GrpPresentation.Size = New System.Drawing.Size(556, 160)
-        Me.GrpPresentation.TabIndex = 34
-        Me.GrpPresentation.TabStop = False
-        Me.GrpPresentation.Text = "Presentation"
-        '
-        'LblStretching
-        '
-        Me.LblStretching.AutoSize = True
-        Me.LblStretching.Location = New System.Drawing.Point(280, 108)
-        Me.LblStretching.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblStretching.Name = "LblStretching"
-        Me.LblStretching.Size = New System.Drawing.Size(107, 25)
-        Me.LblStretching.TabIndex = 4
-        Me.LblStretching.Text = "DinStretching"
-        '
-        'TxtXStretching
-        '
-        Me.TxtXStretching.Location = New System.Drawing.Point(407, 100)
-        Me.TxtXStretching.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtXStretching.Name = "TxtXStretching"
-        Me.TxtXStretching.Size = New System.Drawing.Size(120, 31)
-        Me.TxtXStretching.TabIndex = 3
-        '
-        'LblxStretching
-        '
-        Me.LblxStretching.AutoSize = True
-        Me.LblxStretching.Location = New System.Drawing.Point(280, 45)
-        Me.LblxStretching.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblxStretching.Name = "LblxStretching"
-        Me.LblxStretching.Size = New System.Drawing.Size(243, 25)
-        Me.LblxStretching.TabIndex = 2
-        Me.LblxStretching.Text = "xStretching"
-        '
-        'OptTimeAxis
-        '
-        Me.OptTimeAxis.AutoSize = True
-        Me.OptTimeAxis.Location = New System.Drawing.Point(24, 102)
-        Me.OptTimeAxis.Margin = New System.Windows.Forms.Padding(4)
-        Me.OptTimeAxis.Name = "OptTimeAxis"
-        Me.OptTimeAxis.Size = New System.Drawing.Size(137, 29)
-        Me.OptTimeAxis.TabIndex = 1
-        Me.OptTimeAxis.Text = "TimeAxis"
-        Me.OptTimeAxis.UseVisualStyleBackColor = True
-        '
-        'OptFunctionGraph
-        '
-        Me.OptFunctionGraph.AutoSize = True
-        Me.OptFunctionGraph.Checked = True
-        Me.OptFunctionGraph.Location = New System.Drawing.Point(24, 42)
-        Me.OptFunctionGraph.Margin = New System.Windows.Forms.Padding(4)
-        Me.OptFunctionGraph.Name = "OptFunctionGraph"
-        Me.OptFunctionGraph.Size = New System.Drawing.Size(191, 29)
-        Me.OptFunctionGraph.TabIndex = 0
-        Me.OptFunctionGraph.TabStop = True
-        Me.OptFunctionGraph.Text = "FunctionGraph"
-        Me.OptFunctionGraph.UseVisualStyleBackColor = True
-        '
-        'FrmIteration
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2141, 1180)
-        Me.Controls.Add(Me.GrpPresentation)
-        Me.Controls.Add(Me.LblLog)
-        Me.Controls.Add(Me.LblXValues)
-        Me.Controls.Add(Me.LblNumberOfSteps)
-        Me.Controls.Add(Me.LblSteps)
-        Me.Controls.Add(Me.CboIterationDepth)
-        Me.Controls.Add(Me.LblIterationDepth)
-        Me.Controls.Add(Me.BtnDrawDiagram)
-        Me.Controls.Add(Me.CboFunction)
-        Me.Controls.Add(Me.TxtParameter)
-        Me.Controls.Add(Me.GrpProtocol)
-        Me.Controls.Add(Me.GrpTargetValue)
-        Me.Controls.Add(Me.GrpStep)
-        Me.Controls.Add(Me.TxtStartValue)
-        Me.Controls.Add(Me.LstProtocol)
-        Me.Controls.Add(Me.LstValueList)
-        Me.Controls.Add(Me.LblStartValue)
-        Me.Controls.Add(Me.LblParameter)
-        Me.Controls.Add(Me.BtnReset)
-        Me.Controls.Add(Me.PicDiagram)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.Name = "FrmIteration"
-        Me.Text = "UnimodalFunctions"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GrpStep.ResumeLayout(False)
-        Me.GrpTargetValue.ResumeLayout(False)
-        Me.GrpTargetValue.PerformLayout()
-        Me.GrpProtocol.ResumeLayout(False)
-        Me.GrpProtocol.PerformLayout()
-        Me.GrpPresentation.ResumeLayout(False)
-        Me.GrpPresentation.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        PicDiagram = New PictureBox()
+        BtnReset = New Button()
+        LblParameter = New Label()
+        LblStartValue = New Label()
+        BtnNextStep = New Button()
+        BtnNext10Steps = New Button()
+        LstValueList = New ListBox()
+        LstProtocol = New ListBox()
+        GrpStep = New GroupBox()
+        LblSteps = New Label()
+        GrpTargetValue = New GroupBox()
+        BtnTransitiveStartValue = New Button()
+        TxtTargetValue = New TextBox()
+        LblTargetValue = New Label()
+        GrpProtocol = New GroupBox()
+        BtnProtocolStartvalue = New Button()
+        TxtTargetProtocol = New TextBox()
+        TxtParameter = New TextBox()
+        TxtStartValue = New TextBox()
+        CboFunction = New ComboBox()
+        BtnDrawDiagram = New Button()
+        LblIterationDepth = New Label()
+        CboIterationDepth = New ComboBox()
+        LblNumberOfSteps = New Label()
+        LblXValues = New Label()
+        LblLog = New Label()
+        GrpPresentation = New GroupBox()
+        LblStretching = New Label()
+        TxtXStretching = New TextBox()
+        LblxStretching = New Label()
+        OptTimeAxis = New RadioButton()
+        OptFunctionGraph = New RadioButton()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
+        GrpStep.SuspendLayout()
+        GrpTargetValue.SuspendLayout()
+        GrpProtocol.SuspendLayout()
+        GrpPresentation.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' PicDiagram
+        ' 
+        PicDiagram.BackColor = Color.White
+        PicDiagram.Location = New Point(9, 39)
+        PicDiagram.Margin = New Padding(2)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(688, 667)
+        PicDiagram.TabIndex = 0
+        PicDiagram.TabStop = False
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnReset.Location = New Point(904, 669)
+        BtnReset.Margin = New Padding(2)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(303, 37)
+        BtnReset.TabIndex = 17
+        BtnReset.Text = "ResetIteration"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' LblParameter
+        ' 
+        LblParameter.AutoSize = True
+        LblParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblParameter.Location = New Point(169, 12)
+        LblParameter.Margin = New Padding(2, 0, 2, 0)
+        LblParameter.Name = "LblParameter"
+        LblParameter.Size = New Size(22, 13)
+        LblParameter.TabIndex = 5
+        LblParameter.Text = "a ="
+        ' 
+        ' LblStartValue
+        ' 
+        LblStartValue.AutoSize = True
+        LblStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblStartValue.Location = New Point(894, 17)
+        LblStartValue.Margin = New Padding(2, 0, 2, 0)
+        LblStartValue.Name = "LblStartValue"
+        LblStartValue.Size = New Size(68, 13)
+        LblStartValue.TabIndex = 7
+        LblStartValue.Text = "StartValue = "
+        ' 
+        ' BtnNextStep
+        ' 
+        BtnNextStep.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnNextStep.Location = New Point(7, 25)
+        BtnNextStep.Margin = New Padding(2)
+        BtnNextStep.Name = "BtnNextStep"
+        BtnNextStep.Size = New Size(143, 37)
+        BtnNextStep.TabIndex = 3
+        BtnNextStep.Text = "NextStep"
+        BtnNextStep.UseVisualStyleBackColor = True
+        ' 
+        ' BtnNext10Steps
+        ' 
+        BtnNext10Steps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnNext10Steps.Location = New Point(166, 25)
+        BtnNext10Steps.Margin = New Padding(2)
+        BtnNext10Steps.Name = "BtnNext10Steps"
+        BtnNext10Steps.Size = New Size(143, 37)
+        BtnNext10Steps.TabIndex = 4
+        BtnNext10Steps.Text = "Next10Steps"
+        BtnNext10Steps.UseVisualStyleBackColor = True
+        ' 
+        ' LstValueList
+        ' 
+        LstValueList.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LstValueList.FormattingEnabled = True
+        LstValueList.ItemHeight = 13
+        LstValueList.Location = New Point(698, 39)
+        LstValueList.Margin = New Padding(2)
+        LstValueList.Name = "LstValueList"
+        LstValueList.ScrollAlwaysVisible = True
+        LstValueList.Size = New Size(133, 667)
+        LstValueList.TabIndex = 14
+        ' 
+        ' LstProtocol
+        ' 
+        LstProtocol.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LstProtocol.FormattingEnabled = True
+        LstProtocol.ItemHeight = 13
+        LstProtocol.Location = New Point(835, 39)
+        LstProtocol.Margin = New Padding(2)
+        LstProtocol.Name = "LstProtocol"
+        LstProtocol.ScrollAlwaysVisible = True
+        LstProtocol.Size = New Size(42, 667)
+        LstProtocol.TabIndex = 15
+        ' 
+        ' GrpStep
+        ' 
+        GrpStep.Controls.Add(BtnNextStep)
+        GrpStep.Controls.Add(BtnNext10Steps)
+        GrpStep.Location = New Point(898, 187)
+        GrpStep.Margin = New Padding(2)
+        GrpStep.Name = "GrpStep"
+        GrpStep.Padding = New Padding(2)
+        GrpStep.Size = New Size(328, 73)
+        GrpStep.TabIndex = 17
+        GrpStep.TabStop = False
+        GrpStep.Text = "Iteration"
+        ' 
+        ' LblSteps
+        ' 
+        LblSteps.AutoSize = True
+        LblSteps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblSteps.Location = New Point(894, 48)
+        LblSteps.Margin = New Padding(2, 0, 2, 0)
+        LblSteps.Name = "LblSteps"
+        LblSteps.Size = New Size(82, 13)
+        LblSteps.TabIndex = 7
+        LblSteps.Text = "NumberOfSteps"
+        ' 
+        ' GrpTargetValue
+        ' 
+        GrpTargetValue.Controls.Add(BtnTransitiveStartValue)
+        GrpTargetValue.Controls.Add(TxtTargetValue)
+        GrpTargetValue.Controls.Add(LblTargetValue)
+        GrpTargetValue.Location = New Point(898, 413)
+        GrpTargetValue.Margin = New Padding(2)
+        GrpTargetValue.Name = "GrpTargetValue"
+        GrpTargetValue.Padding = New Padding(2)
+        GrpTargetValue.Size = New Size(328, 108)
+        GrpTargetValue.TabIndex = 11
+        GrpTargetValue.TabStop = False
+        GrpTargetValue.Text = "Transitivity"
+        ' 
+        ' BtnTransitiveStartValue
+        ' 
+        BtnTransitiveStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnTransitiveStartValue.Location = New Point(9, 55)
+        BtnTransitiveStartValue.Margin = New Padding(2)
+        BtnTransitiveStartValue.Name = "BtnTransitiveStartValue"
+        BtnTransitiveStartValue.Size = New Size(303, 37)
+        BtnTransitiveStartValue.TabIndex = 13
+        BtnTransitiveStartValue.Text = "StartvalueForTargetvalue"
+        BtnTransitiveStartValue.UseVisualStyleBackColor = True
+        ' 
+        ' TxtTargetValue
+        ' 
+        TxtTargetValue.Location = New Point(90, 23)
+        TxtTargetValue.Margin = New Padding(2)
+        TxtTargetValue.Name = "TxtTargetValue"
+        TxtTargetValue.Size = New Size(223, 23)
+        TxtTargetValue.TabIndex = 12
+        ' 
+        ' LblTargetValue
+        ' 
+        LblTargetValue.AutoSize = True
+        LblTargetValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblTargetValue.Location = New Point(5, 28)
+        LblTargetValue.Margin = New Padding(2, 0, 2, 0)
+        LblTargetValue.Name = "LblTargetValue"
+        LblTargetValue.Size = New Size(77, 13)
+        LblTargetValue.TabIndex = 17
+        LblTargetValue.Text = "TargetValue = "
+        ' 
+        ' GrpProtocol
+        ' 
+        GrpProtocol.Controls.Add(BtnProtocolStartvalue)
+        GrpProtocol.Controls.Add(TxtTargetProtocol)
+        GrpProtocol.Location = New Point(898, 277)
+        GrpProtocol.Margin = New Padding(2)
+        GrpProtocol.Name = "GrpProtocol"
+        GrpProtocol.Padding = New Padding(2)
+        GrpProtocol.Size = New Size(328, 119)
+        GrpProtocol.TabIndex = 9
+        GrpProtocol.TabStop = False
+        GrpProtocol.Text = "TargetProtocol"
+        ' 
+        ' BtnProtocolStartvalue
+        ' 
+        BtnProtocolStartvalue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnProtocolStartvalue.Location = New Point(7, 62)
+        BtnProtocolStartvalue.Margin = New Padding(2)
+        BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
+        BtnProtocolStartvalue.Size = New Size(305, 37)
+        BtnProtocolStartvalue.TabIndex = 8
+        BtnProtocolStartvalue.Text = "StartvalueForProtocol"
+        BtnProtocolStartvalue.UseVisualStyleBackColor = True
+        ' 
+        ' TxtTargetProtocol
+        ' 
+        TxtTargetProtocol.Location = New Point(9, 25)
+        TxtTargetProtocol.Margin = New Padding(2)
+        TxtTargetProtocol.Name = "TxtTargetProtocol"
+        TxtTargetProtocol.Size = New Size(304, 23)
+        TxtTargetProtocol.TabIndex = 10
+        ' 
+        ' TxtParameter
+        ' 
+        TxtParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameter.Location = New Point(198, 9)
+        TxtParameter.Margin = New Padding(2)
+        TxtParameter.Name = "TxtParameter"
+        TxtParameter.Size = New Size(101, 20)
+        TxtParameter.TabIndex = 2
+        ' 
+        ' TxtStartValue
+        ' 
+        TxtStartValue.Location = New Point(967, 14)
+        TxtStartValue.Margin = New Padding(2)
+        TxtStartValue.Name = "TxtStartValue"
+        TxtStartValue.Size = New Size(241, 23)
+        TxtStartValue.TabIndex = 4
+        ' 
+        ' CboFunction
+        ' 
+        CboFunction.FormattingEnabled = True
+        CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
+        CboFunction.Location = New Point(9, 9)
+        CboFunction.Margin = New Padding(2)
+        CboFunction.Name = "CboFunction"
+        CboFunction.Size = New Size(156, 23)
+        CboFunction.TabIndex = 1
+        ' 
+        ' BtnDrawDiagram
+        ' 
+        BtnDrawDiagram.Location = New Point(457, 7)
+        BtnDrawDiagram.Margin = New Padding(2)
+        BtnDrawDiagram.Name = "BtnDrawDiagram"
+        BtnDrawDiagram.Size = New Size(240, 25)
+        BtnDrawDiagram.TabIndex = 22
+        BtnDrawDiagram.Text = "DrawFunctionGraph"
+        BtnDrawDiagram.UseVisualStyleBackColor = True
+        ' 
+        ' LblIterationDepth
+        ' 
+        LblIterationDepth.AutoSize = True
+        LblIterationDepth.Location = New Point(303, 12)
+        LblIterationDepth.Margin = New Padding(2, 0, 2, 0)
+        LblIterationDepth.Name = "LblIterationDepth"
+        LblIterationDepth.Size = New Size(83, 15)
+        LblIterationDepth.TabIndex = 23
+        LblIterationDepth.Text = "IterationDepth"
+        ' 
+        ' CboIterationDepth
+        ' 
+        CboIterationDepth.FormattingEnabled = True
+        CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+        CboIterationDepth.Location = New Point(390, 9)
+        CboIterationDepth.Margin = New Padding(2)
+        CboIterationDepth.Name = "CboIterationDepth"
+        CboIterationDepth.Size = New Size(51, 23)
+        CboIterationDepth.TabIndex = 3
+        ' 
+        ' LblNumberOfSteps
+        ' 
+        LblNumberOfSteps.AutoSize = True
+        LblNumberOfSteps.Location = New Point(996, 48)
+        LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
+        LblNumberOfSteps.Name = "LblNumberOfSteps"
+        LblNumberOfSteps.Size = New Size(13, 15)
+        LblNumberOfSteps.TabIndex = 26
+        LblNumberOfSteps.Text = "0"
+        ' 
+        ' LblXValues
+        ' 
+        LblXValues.AutoSize = True
+        LblXValues.Location = New Point(709, 15)
+        LblXValues.Margin = New Padding(2, 0, 2, 0)
+        LblXValues.Name = "LblXValues"
+        LblXValues.Size = New Size(47, 15)
+        LblXValues.TabIndex = 27
+        LblXValues.Text = "XValues"
+        ' 
+        ' LblLog
+        ' 
+        LblLog.AutoSize = True
+        LblLog.Location = New Point(822, 17)
+        LblLog.Margin = New Padding(2, 0, 2, 0)
+        LblLog.Name = "LblLog"
+        LblLog.Size = New Size(27, 15)
+        LblLog.TabIndex = 28
+        LblLog.Text = "Log"
+        ' 
+        ' GrpPresentation
+        ' 
+        GrpPresentation.Controls.Add(LblStretching)
+        GrpPresentation.Controls.Add(TxtXStretching)
+        GrpPresentation.Controls.Add(LblxStretching)
+        GrpPresentation.Controls.Add(OptTimeAxis)
+        GrpPresentation.Controls.Add(OptFunctionGraph)
+        GrpPresentation.Location = New Point(898, 75)
+        GrpPresentation.Margin = New Padding(2)
+        GrpPresentation.Name = "GrpPresentation"
+        GrpPresentation.Padding = New Padding(2)
+        GrpPresentation.Size = New Size(324, 96)
+        GrpPresentation.TabIndex = 34
+        GrpPresentation.TabStop = False
+        GrpPresentation.Text = "Presentation"
+        ' 
+        ' LblStretching
+        ' 
+        LblStretching.AutoSize = True
+        LblStretching.Location = New Point(163, 65)
+        LblStretching.Margin = New Padding(2, 0, 2, 0)
+        LblStretching.Name = "LblStretching"
+        LblStretching.Size = New Size(79, 15)
+        LblStretching.TabIndex = 4
+        LblStretching.Text = "DinStretching"
+        ' 
+        ' TxtXStretching
+        ' 
+        TxtXStretching.Location = New Point(237, 60)
+        TxtXStretching.Margin = New Padding(2)
+        TxtXStretching.Name = "TxtXStretching"
+        TxtXStretching.Size = New Size(72, 23)
+        TxtXStretching.TabIndex = 3
+        ' 
+        ' LblxStretching
+        ' 
+        LblxStretching.AutoSize = True
+        LblxStretching.Location = New Point(163, 27)
+        LblxStretching.Margin = New Padding(2, 0, 2, 0)
+        LblxStretching.Name = "LblxStretching"
+        LblxStretching.Size = New Size(67, 15)
+        LblxStretching.TabIndex = 2
+        LblxStretching.Text = "xStretching"
+        ' 
+        ' OptTimeAxis
+        ' 
+        OptTimeAxis.AutoSize = True
+        OptTimeAxis.Location = New Point(14, 61)
+        OptTimeAxis.Margin = New Padding(2)
+        OptTimeAxis.Name = "OptTimeAxis"
+        OptTimeAxis.Size = New Size(73, 19)
+        OptTimeAxis.TabIndex = 1
+        OptTimeAxis.Text = "TimeAxis"
+        OptTimeAxis.UseVisualStyleBackColor = True
+        ' 
+        ' OptFunctionGraph
+        ' 
+        OptFunctionGraph.AutoSize = True
+        OptFunctionGraph.Checked = True
+        OptFunctionGraph.Location = New Point(14, 25)
+        OptFunctionGraph.Margin = New Padding(2)
+        OptFunctionGraph.Name = "OptFunctionGraph"
+        OptFunctionGraph.Size = New Size(104, 19)
+        OptFunctionGraph.TabIndex = 0
+        OptFunctionGraph.TabStop = True
+        OptFunctionGraph.Text = "FunctionGraph"
+        OptFunctionGraph.UseVisualStyleBackColor = True
+        ' 
+        ' FrmIteration
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1249, 708)
+        Controls.Add(GrpPresentation)
+        Controls.Add(LblLog)
+        Controls.Add(LblXValues)
+        Controls.Add(LblNumberOfSteps)
+        Controls.Add(LblSteps)
+        Controls.Add(CboIterationDepth)
+        Controls.Add(LblIterationDepth)
+        Controls.Add(BtnDrawDiagram)
+        Controls.Add(CboFunction)
+        Controls.Add(TxtParameter)
+        Controls.Add(GrpProtocol)
+        Controls.Add(GrpTargetValue)
+        Controls.Add(GrpStep)
+        Controls.Add(TxtStartValue)
+        Controls.Add(LstProtocol)
+        Controls.Add(LstValueList)
+        Controls.Add(LblStartValue)
+        Controls.Add(LblParameter)
+        Controls.Add(BtnReset)
+        Controls.Add(PicDiagram)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(2)
+        Name = "FrmIteration"
+        Text = "UnimodalFunctions"
+        WindowState = FormWindowState.Maximized
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
+        GrpStep.ResumeLayout(False)
+        GrpTargetValue.ResumeLayout(False)
+        GrpTargetValue.PerformLayout()
+        GrpProtocol.ResumeLayout(False)
+        GrpProtocol.PerformLayout()
+        GrpPresentation.ResumeLayout(False)
+        GrpPresentation.PerformLayout()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
 
@@ -459,7 +459,7 @@ Partial Class FrmIteration
     Friend WithEvents LstProtocol As ListBox
     Friend WithEvents GrpStep As GroupBox
     Friend WithEvents GrpTargetValue As GroupBox
-    Friend WithEvents BtnStartTransitive As Button
+    Friend WithEvents BtnTransitiveStartValue As Button
     Friend WithEvents TxtTargetValue As TextBox
     Friend WithEvents LblTargetValue As Label
     Friend WithEvents GrpProtocol As GroupBox

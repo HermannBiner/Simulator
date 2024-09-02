@@ -12,7 +12,7 @@ Public Class ClsInterval
         'The interval borders A and B are committed
 
         If a >= b Then
-            Throw New ArgumentException(Main.LM.GetString("LeftSmallerRight"))
+            Throw New ArgumentException(FrmMain.LM.GetString("LeftSmallerRight"))
         Else
             MyA = a
             MyB = b
@@ -61,7 +61,7 @@ Public Class ClsInterval
             Dim DecNumber As Double = DirectCast(number, Double)
             Return DecNumber >= MyA And DecNumber <= MyB
         Else
-            MessageBox.Show(Main.LM.GetString("OnlyDecAndIntAndDbl"))
+            MessageBox.Show(FrmMain.LM.GetString("OnlyDecAndIntAndDbl"))
             Return False
         End If
 

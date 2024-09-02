@@ -3,7 +3,7 @@
 
 Imports System.IO
 
-Public Class Main
+Public Class FrmMain
 
     Public Shared LM As ClsLanguageManager
 
@@ -13,8 +13,6 @@ Public Class Main
         InitializeComponent()
 
         'Initialize Language - Standard Language is English
-        'the LM Language Manager is used allover the program
-
         LM = New ClsLanguageManager With {
             .Language = ClsLanguageManager.LanguageEnum.English
         }
@@ -41,7 +39,7 @@ Public Class Main
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuNewton.Text = LM.GetString("MnuNewton")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
-        MnuBifurcation.Text = Main.LM.GetString("Bifurcation")
+        MnuBifurcation.Text = FrmMain.LM.GetString("Bifurcation")
         MnuTest.Text = LM.GetString("MnuTest")
         MnuDocumentation.Text = LM.GetString("MnuDocumentation")
         MnuManual.Text = LM.GetString("MnuManual")
@@ -51,7 +49,7 @@ Public Class Main
         MnuEnglish.Text = LM.GetString("MnuEnglish")
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
-        MnuNumericMethods.Text = Main.LM.GetString("NumericMethods")
+        MnuNumericMethods.Text = FrmMain.LM.GetString("NumericMethods")
 
     End Sub
 

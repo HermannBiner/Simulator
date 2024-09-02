@@ -2,37 +2,15 @@
 'with the iteration formula: f(x) = a*x*(1-x), x in [0,1], a in ]0,4]
 'and "knows" everything about this kind of iteration
 
-'Status Checked
-
-Imports System.Globalization
+'Status Redesign Tested
 
 Public Class ClsLogisticGrowth
-    Implements IIteration
-
-    'This is the steering parameter for the iteration
-    '"a" in the mathematical documentation 
-    Private MyParameter As Decimal
-
-    'in whitch Interval the Parameter a should be
-    Private ReadOnly MyParameterInterval As ClsInterval
-
-    'in whitch Interval the iterated Value x should be
-    Private ReadOnly MyIterationInterval As ClsInterval
-
-    'Power of the iteration function f:
-    'How many times the iteration function f is performed in one iteration step
-    Private MyPower As Integer
-
-    'Checking if the steering parameter is OK
-    Private IsMyParameterValid As Boolean
-
-    'SplitPoints
-    Private ReadOnly MySplitpoints As List(Of Decimal)
+    Inherits ClsIterationAbstract
 
 
     'SECTOR INITIALISATION
 
-    Public Sub New()
+    Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
         MyParameterInterval = New ClsInterval(0, 4)
@@ -49,107 +27,9 @@ Public Class ClsLogisticGrowth
 
     End Sub
 
-    Public WriteOnly Property Parameter As Decimal Implements IIteration.Parameter
-        Set(Value As Decimal)
-            MyParameter = Value
-            IsMyParameterValid = IsParameterAllowed(MyParameter)
-        End Set
-    End Property
-
-    Public WriteOnly Property Power As Integer Implements IIteration.Power
-        Set(value As Integer)
-            MyPower = value
-        End Set
-    End Property
-
-    Public ReadOnly Property ParameterInterval As ClsInterval Implements IIteration.ParameterInterval
-        Get
-            ParameterInterval = MyParameterInterval
-        End Get
-    End Property
-
-    Public ReadOnly Property IterationInterval As ClsInterval Implements IIteration.IterationInterval
-        Get
-            IterationInterval = MyIterationInterval
-        End Get
-    End Property
-
-    Public ReadOnly Property Splitpoints As List(Of Decimal) Implements IIteration.Splitpoints
-        Get
-            Splitpoints = MySplitpoints
-        End Get
-    End Property
-
-    Public Function IsParameterAllowed(Parameter As Decimal) As Boolean _
-        Implements IIteration.IsParameterAllowed
-
-        If Not ParameterInterval.IsNumberInInterval(Parameter) Then
-            MessageBox.Show(Main.LM.GetString("TheValue") & Parameter.ToString(CultureInfo.CurrentCulture) &
-                            Main.LM.GetString("NotAlllowedValue") & "[" &
-                            ParameterInterval.A.ToString(CultureInfo.CurrentCulture) &
-                            ", " & ParameterInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
-    Public Function IsIterationvalueAllowed(x As Decimal) As Boolean _
-        Implements IIteration.IsIterationvalueAllowed
-
-        If Not IterationInterval.IsNumberInInterval(x) Then
-            MessageBox.Show(Main.LM.GetString("TheValue") & x.ToString(CultureInfo.CurrentCulture) &
-                            Main.LM.GetString("NotAlllowedValue") & "[" &
-                            IterationInterval.A.ToString(CultureInfo.CurrentCulture) &
-                            ", " & IterationInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
-    Public Function IsBehaviourChaotic() As Boolean _
-        Implements IIteration.IsBehaviourChaotic
-
-        'Chaotic behaviour is only guaranteed for the right border of the parameter interval
-        'see mathematical documentation
-        If MyParameter < ParameterInterval.B Then
-            MessageBox.Show(Main.LM.GetString("NonChaoticBehaviour"))
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
     'SECTOR ITERATION
 
-    Public Function FN(x As Decimal) As Decimal _
-        Implements IIteration.FN
-
-        'This Function is the
-        'Power-iterated function of the original function
-
-        Dim IsIterationswertValid As Boolean = IterationInterval.IsNumberInInterval(x)
-
-        If IsMyParameterValid And IsIterationswertValid Then
-
-            Dim i As Integer
-
-            For i = 1 To MyPower
-                x = F(x)
-            Next
-        Else
-            MessageBox.Show(Main.LM.GetString("InvalidParameterOrIterationValue"))
-        End If
-
-        Return x
-
-    End Function
-
-    Private Function F(x As Decimal) As Decimal
+    Protected Overrides Function F(x As Decimal) As Decimal
 
         'This is the original iteration function
         Return MyParameter * x * (1 - x)
@@ -158,44 +38,37 @@ Public Class ClsLogisticGrowth
 
     'SECTOR CALCULATION
 
-    Public Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal _
-        Implements IIteration.CalculateStartValueForProtocol
+    Public Overrides Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal
 
         Dim Mathhelper As New ClsMathhelperUnimodal
 
-        If IsMyParameterValid Then
 
-            'First, a dual startvalue for the tentmap is calculated that generates the given protocol
-            'See mathematical documentation
-            Dim BinaryTentmapStartvalue As String =
+        'First, a dual startvalue for the tentmap is calculated that generates the given protocol
+        'See mathematical documentation
+        Dim BinaryTentmapStartvalue As String =
                 Mathhelper.ProcotolToTentmapStartValueAsString(TargetProtocol)
 
-            'The next step converts the dual startvalue of the tentmap in its according decimal startvalue
-            'for the tent map
-            Dim DecimalTentmapStartvalue As Decimal =
+        'The next step converts the dual startvalue of the tentmap in its according decimal startvalue
+        'for the tent map
+        Dim DecimalTentmapStartvalue As Decimal =
                 Mathhelper.DualStringToDecimalNumber(BinaryTentmapStartvalue, True)
 
-            'Finally, we use the conjugation between the tentmap and the logistic growth
-            Return TentmapToLogisticGrowth(DecimalTentmapStartvalue)
+        'Finally, we use the conjugation between the tentmap and the logistic growth
+        Return TentmapToIteration(DecimalTentmapStartvalue)
 
-        Else
-            MessageBox.Show(Main.LM.GetString("InvalidParameterOrIterationValue"))
-            Return 0
-        End If
 
     End Function
 
-    Public Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal _
-        Implements IIteration.CalculateStartValueForTargetValue
+    Public Overrides Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal
 
         Dim Mathhelper As New ClsMathhelperUnimodal
 
         'Startvalue is the original start value 
         'We need the conjugated startvalue of the tentmap
-        Dim TentmapDecimalStartvalue As Decimal = LogisticGrowthToTentmap(StartValue)
+        Dim TentmapDecimalStartvalue As Decimal = IterationToTentmap(StartValue)
 
         'As well, we need the conjugated targetvalue of the tentmap
-        Dim TentmapDecimalTargetvalue As Decimal = LogisticGrowthToTentmap(TargetValue)
+        Dim TentmapDecimalTargetvalue As Decimal = IterationToTentmap(TargetValue)
 
         'Next, we consider the tentmap startvalue in dual string format
         'The conjugates of the iteration chain of the tentmap is identical 
@@ -231,14 +104,14 @@ Public Class ClsLogisticGrowth
             Mathhelper.DualStringToDecimalNumber(TentmapDualStartvalue, True)
 
         'Finally, we conjugate this value back to the logistic growth
-        Dim AdjustedLogisticStartvalue As Decimal = TentmapToLogisticGrowth(AdjustedTentmapStartvalue)
+        Dim AdjustedLogisticStartvalue As Decimal = TentmapToIteration(AdjustedTentmapStartvalue)
 
         Return AdjustedLogisticStartvalue
 
     End Function
 
     'SECTOR CONJUGATION
-    Private Function LogisticGrowthToTentmap(x As Decimal) As Decimal
+    Protected Overrides Function IterationToTentmap(x As Decimal) As Decimal
 
         'This is the conjugation that transforms the logistic growth to the tentmap
         'see mathematical documentation
@@ -246,7 +119,7 @@ Public Class ClsLogisticGrowth
 
     End Function
 
-    Private Function TentmapToLogisticGrowth(u As Decimal) As Decimal
+    Protected Overrides Function TentmapToIteration(u As Decimal) As Decimal
 
         'This is the conjugation that transforms the tentmap to the logistic growth
         'see mathematical documentation

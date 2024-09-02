@@ -3,10 +3,14 @@
 'Status Checked
 
 Public Class ClsGeneral
+
+    'Status of the Iteration
     Public Enum EnIterationStatus
-        Started
+        Running
         Interrupted
         Stopped
+        Ready
     End Enum
+
 
 End Class

@@ -717,6 +717,10 @@
     <value>Quadratische Funktion</value>
     <comment>Lbl</comment>
   </data>
+  <data name="RangeNotAllowed" xml:space="preserve">
+    <value>Dieses Intervall ist nicht erlaubt. Es muss Teil sein von:</value>
+    <comment>Msg</comment>
+  </data>
   <data name="Red" xml:space="preserve">
     <value>Rot</value>
     <comment>Col</comment>
@@ -920,6 +924,10 @@
   <data name="ValueList2" xml:space="preserve">
     <value>Wertliste 2</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="ValueNotAllowed" xml:space="preserve">
+    <value>Dieser Wert ist nicht erlaubt. Er muss enthalten sein in:</value>
+    <comment>Msg</comment>
   </data>
   <data name="ValueRangeNotAllowed" xml:space="preserve">
     <value>Dieser Wertebereich ist nicht erlaubt. Er muss Teil sein von:</value>

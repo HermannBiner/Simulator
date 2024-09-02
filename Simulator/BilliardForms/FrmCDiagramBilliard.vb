@@ -61,17 +61,17 @@ Public Class FrmCDiagramBilliard
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("C-Diagram")
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = "
-        LblDeltaC.Text = Main.LM.GetString("Delta") & " = "
-        LblValueParameter.Text = Main.LM.GetString("ExaminatedValueParameter")
-        LblPrecision.Text = Main.LM.GetString("Precision") & ": " & (TrbPrecision.Value * 1000).ToString(CultureInfo.CurrentCulture)
-        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
+        Text = FrmMain.LM.GetString("C-Diagram")
+        LblDeltaV.Text = FrmMain.LM.GetString("Delta") & " = "
+        LblDeltaC.Text = FrmMain.LM.GetString("Delta") & " = "
+        LblValueParameter.Text = FrmMain.LM.GetString("ExaminatedValueParameter")
+        LblPrecision.Text = FrmMain.LM.GetString("Precision") & ": " & (TrbPrecision.Value * 1000).ToString(CultureInfo.CurrentCulture)
+        LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
             TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
-        LblParameterRange.Text = Main.LM.GetString("ExaminatedParameterRange")
-        BtnStartIteration.Text = Main.LM.GetString("StartIteration")
+        LblParameterRange.Text = FrmMain.LM.GetString("ExaminatedParameterRange")
+        BtnStartIteration.Text = FrmMain.LM.GetString("StartIteration")
 
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         CboFunction.Items.Clear()
 
         'Add the classes implementing IBilliardBall
@@ -88,7 +88,7 @@ Public Class FrmCDiagramBilliard
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                BilliardName = Main.LM.GetString(type.Name, True)
+                BilliardName = FrmMain.LM.GetString(type.Name, True)
                 CboFunction.Items.Add(BilliardName)
             Next
 
@@ -155,11 +155,11 @@ Public Class FrmCDiagramBilliard
 
         TxtCMin.Text = MyParameterRange.A.ToString(CultureInfo.CurrentCulture)
         TxtCMax.Text = MyParameterRange.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaC.Text = FrmMain.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
         TxtVMin.Text = MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
         TxtVMax.Text = MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaV.Text = FrmMain.LM.GetString("Delta") & " = " & MyValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
         ResetIteration()
 
@@ -210,7 +210,7 @@ Public Class FrmCDiagramBilliard
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         Iterator = CType(Activator.CreateInstance(type), ICDiagramBilliard)
                     End If
                 Next
@@ -231,14 +231,14 @@ Public Class FrmCDiagramBilliard
 
         TxtVMin.Text = MyUserValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
         TxtVMax.Text = MyUserValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
-        LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+        LblDeltaV.Text = FrmMain.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
 
     End Sub
 
     Private Sub TrbPrecision_ValueChanged(sender As Object, e As EventArgs) Handles TrbPrecision.ValueChanged
 
         'The precision defines how precise the diagram is generated
-        LblPrecision.Text = Main.LM.GetString("Precision") & ": " & (1000 * TrbPrecision.Value).ToString(CultureInfo.CurrentCulture)
+        LblPrecision.Text = FrmMain.LM.GetString("Precision") & ": " & (1000 * TrbPrecision.Value).ToString(CultureInfo.CurrentCulture)
 
     End Sub
 
@@ -246,7 +246,7 @@ Public Class FrmCDiagramBilliard
 
         'The position of the start values is a number "pos" between 1 and 11
         'each startvalue is then set = ValueRange.A + pos * ValueRange.IntervalWidth / 120
-        LblStartValues.Text = Main.LM.GetString("PositionStartValue2") &
+        LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
             TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
 
     End Sub
@@ -461,7 +461,7 @@ Public Class FrmCDiagramBilliard
                 'take over
                 MyParameterRange = TempParameterrange
             Else
-                MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
+                MessageBox.Show(FrmMain.LM.GetString("ParameterRangeNotAllowed") & " [" &
                    Iterator.CParameterRange.A.ToString(CultureInfo.CurrentCulture) &
                    ", " & Iterator.CParameterRange.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
@@ -489,7 +489,7 @@ Public Class FrmCDiagramBilliard
                     'take over
                     MyUserValueParameter.Range = TempValuerange
                 Else
-                    MessageBox.Show(Main.LM.GetString("ParameterRangeNotAllowed") & " [" &
+                    MessageBox.Show(FrmMain.LM.GetString("ParameterRangeNotAllowed") & " [" &
                    MyValueParameter.Range.A.ToString(CultureInfo.CurrentCulture) &
                    ", " & MyValueParameter.Range.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
@@ -503,8 +503,8 @@ Public Class FrmCDiagramBilliard
         IsUserSelectionValid = IsParameterrangeValid And IsValuerangeValid
 
         If IsUserSelectionValid Then
-            LblDeltaC.Text = Main.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
-            LblDeltaV.Text = Main.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            LblDeltaC.Text = FrmMain.LM.GetString("Delta") & " = " & MyParameterRange.IntervalWidth.ToString(CultureInfo.CurrentCulture)
+            LblDeltaV.Text = FrmMain.LM.GetString("Delta") & " = " & MyUserValueParameter.Range.IntervalWidth.ToString(CultureInfo.CurrentCulture)
             MyBitmapGraphics = New ClsGraphicTool(CDiagram, MyParameterRange, MyUserValueParameter.Range)
         Else
             'nothing

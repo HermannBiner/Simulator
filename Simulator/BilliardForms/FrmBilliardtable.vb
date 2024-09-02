@@ -50,33 +50,33 @@ Public Class FrmBilliardtable
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("Billiard")
-        BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
-        LblNumberOfSteps.Text = Main.LM.GetString("NumberOfSteps")
-        LblBilliardTable.Text = Main.LM.GetString("BilliardTable")
-        LblAlfa.Text = Main.LM.GetString("Alfa")
-        BtnTakeOverStartParameter.Text = Main.LM.GetString("TakeOver")
-        GrpStartParameter.Text = Main.LM.GetString("StartParameter")
-        LblPhasePortrait.Text = Main.LM.GetString("PhasePortrait") & ": t, alfa"
-        LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
-        LblBallColor.Text = Main.LM.GetString("BallColor")
-        BtnNewBall.Text = Main.LM.GetString("NewBall")
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
-        BtnNextStep.Text = Main.LM.GetString("NextStep")
-        LblParameterc.Text = Main.LM.GetString("FactorC")
-        BtnDrawBilliardTable.Text = Main.LM.GetString("DrawBilliardTable")
+        Text = FrmMain.LM.GetString("Billiard")
+        BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        LblBilliardTable.Text = FrmMain.LM.GetString("BilliardTable")
+        LblAlfa.Text = FrmMain.LM.GetString("Alfa")
+        BtnTakeOverStartParameter.Text = FrmMain.LM.GetString("TakeOver")
+        GrpStartParameter.Text = FrmMain.LM.GetString("StartParameter")
+        LblPhasePortrait.Text = FrmMain.LM.GetString("PhasePortrait") & ": t, alfa"
+        LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+        LblBallColor.Text = FrmMain.LM.GetString("BallColor")
+        BtnNewBall.Text = FrmMain.LM.GetString("NewBall")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
+        LblParameterc.Text = FrmMain.LM.GetString("FactorC")
+        BtnDrawBilliardTable.Text = FrmMain.LM.GetString("DrawBilliardTable")
         TxtFactor.Text = ""
 
         CboBallColor.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
         'there is at the moment no better concept implemented to identify the type of Billiard
-        CboBallColor.Items.Add(Main.LM.GetString("Red"))
-        CboBallColor.Items.Add(Main.LM.GetString("Green"))
-        CboBallColor.Items.Add(Main.LM.GetString("Blue"))
-        CboBallColor.Items.Add(Main.LM.GetString("Black"))
-        CboBallColor.Items.Add(Main.LM.GetString("Magenta"))
+        CboBallColor.Items.Add(FrmMain.LM.GetString("Red"))
+        CboBallColor.Items.Add(FrmMain.LM.GetString("Green"))
+        CboBallColor.Items.Add(FrmMain.LM.GetString("Blue"))
+        CboBallColor.Items.Add(FrmMain.LM.GetString("Black"))
+        CboBallColor.Items.Add(FrmMain.LM.GetString("Magenta"))
 
         CboBilliardTable.Items.Clear()
 
@@ -94,7 +94,7 @@ Public Class FrmBilliardtable
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                BilliardName = Main.LM.GetString(type.Name, True)
+                BilliardName = FrmMain.LM.GetString(type.Name, True)
                 CboBilliardTable.Items.Add(BilliardName)
             Next
 
@@ -175,8 +175,8 @@ Public Class FrmBilliardtable
         n = 0
         LblIterationSteps.Text = "0"
         StopIteration = True
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnPhasePortrait.Text = Main.LM.GetString("FillPhasePortrait")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
 
         BtnDrawBilliardTable.Enabled = True
         BtnNewBall.Enabled = True
@@ -200,7 +200,7 @@ Public Class FrmBilliardtable
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         LocBilliardBall = CType(Activator.CreateInstance(type), IBilliardball)
                     End If
                 Next
@@ -274,7 +274,7 @@ Public Class FrmBilliardtable
             If C <= 0 Then
                 TxtFactor.Text = ""
                 TxtFactor.Select()
-                MessageBox.Show("C " & Main.LM.GetString("PositiveNumber"))
+                MessageBox.Show("C " & FrmMain.LM.GetString("PositiveNumber"))
                 OK = False
             Else
                 OK = True
@@ -498,7 +498,7 @@ Public Class FrmBilliardtable
             'and should start from the beginning
             StopIteration = False
 
-            BtnStart.Text = Main.LM.GetString("Continue")
+            BtnStart.Text = FrmMain.LM.GetString("Continue")
             BtnStart.Enabled = False
             BtnReset.Enabled = False
             BtnTakeOverStartParameter.Enabled = False
@@ -620,12 +620,12 @@ Public Class FrmBilliardtable
                 If Ball.IsStartpositionSet And Ball.IsStartangleSet Then
                     'nothing
                 Else
-                    MessageBox.Show(Main.LM.GetString("StartPositionNotSet"))
+                    MessageBox.Show(FrmMain.LM.GetString("StartPositionNotSet"))
                     LocIsReady = False
                 End If
             Next
         Else
-            MessageBox.Show(Main.LM.GetString("NoBallsOnTable"))
+            MessageBox.Show(FrmMain.LM.GetString("NoBallsOnTable"))
             LocIsReady = False
         End If
 
@@ -660,7 +660,7 @@ Public Class FrmBilliardtable
     End Function
 
     Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
-        LblSpeed.Text = Main.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+        LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
     End Sub
 
 End Class

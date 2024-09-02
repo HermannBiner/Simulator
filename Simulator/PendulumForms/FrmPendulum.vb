@@ -54,21 +54,21 @@ Public Class FrmPendulum
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("Pendulum")
-        LblPendulum.Text = Main.LM.GetString("Pendulum")
-        LblParameterc.Text = Main.LM.GetString("Energy")
+        Text = FrmMain.LM.GetString("Pendulum")
+        LblPendulum.Text = FrmMain.LM.GetString("Pendulum")
+        LblParameterc.Text = FrmMain.LM.GetString("Energy")
 
         'LblSteps contains the  #Steps
-        LblNumberOfSteps.Text = Main.LM.GetString("NumberOfSteps")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
 
         'LblAdditionParameter, LblP1 ... LblP5 is set by the Active Pendulum
-        BtnTakeOverStartParameter.Text = Main.LM.GetString("TakeOver")
-        GrpStartParameter.Text = Main.LM.GetString("StartParameter")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
+        BtnTakeOverStartParameter.Text = FrmMain.LM.GetString("TakeOver")
+        GrpStartParameter.Text = FrmMain.LM.GetString("StartParameter")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         TxtFactor.Text = ""
-        BtnStart.Text = Main.LM.GetString("Start")
-        LblStepWidth.Text = Main.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
-        LblTypeofPhaseportrait.Text = Main.LM.GetString("TypeofPhaseportrait")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
+        LblTypeofPhaseportrait.Text = FrmMain.LM.GetString("TypeofPhaseportrait")
 
         CboPendulum.Items.Clear()
 
@@ -86,7 +86,7 @@ Public Class FrmPendulum
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                PendulumName = Main.LM.GetString(type.Name, True)
+                PendulumName = FrmMain.LM.GetString(type.Name, True)
                 CboPendulum.Items.Add(PendulumName)
             Next
 
@@ -160,7 +160,7 @@ Public Class FrmPendulum
         'Iteration Control
         StopIteration = True
 
-        BtnStart.Text = Main.LM.GetString("Start")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
         BtnTakeOverStartParameter.Enabled = True
         TrbAdditionalParameter.Enabled = True
 
@@ -189,7 +189,7 @@ Public Class FrmPendulum
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         LocPendulum = CType(Activator.CreateInstance(type), IPendulum)
                     End If
                 Next
@@ -247,7 +247,7 @@ Public Class FrmPendulum
 
             Dim TypesofPhaseportrait As List(Of String) = .GetTypesofPhaseportrait
             For Each PhaPorType As String In TypesofPhaseportrait
-                CboTypeofPhaseportrait.Items.Add(Main.LM.GetString(PhaPorType))
+                CboTypeofPhaseportrait.Items.Add(FrmMain.LM.GetString(PhaPorType))
             Next
 
             CboTypeofPhaseportrait.SelectedIndex = 0
@@ -285,7 +285,7 @@ Public Class FrmPendulum
 
     Private Sub TrbStepWide_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
 
-        LblStepWidth.Text = Main.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
+        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
         ActivePendulum.StepWidth = CDec(TrbStepWidth.Value * StepWidthUnit)
 
     End Sub
@@ -435,7 +435,7 @@ Public Class FrmPendulum
 
             End With
         Else
-            MessageBox.Show(Main.LM.GetString("InvalidParameters"))
+            MessageBox.Show(FrmMain.LM.GetString("InvalidParameters"))
         End If
 
     End Sub
@@ -484,7 +484,7 @@ Public Class FrmPendulum
         'and should start from the beginning
         StopIteration = False
 
-        BtnStart.Text = Main.LM.GetString("Continue")
+        BtnStart.Text = FrmMain.LM.GetString("Continue")
         BtnStart.Enabled = False
 
         With ActivePendulum

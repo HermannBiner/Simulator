@@ -2,8 +2,6 @@
 
 'Status Checked
 
-Imports System.ComponentModel.Design.Serialization
-
 Public Class ClsSystemBrushes
 
     Private MyMaxSteps As Integer

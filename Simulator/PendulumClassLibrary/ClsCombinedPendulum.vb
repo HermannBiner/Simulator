@@ -137,7 +137,7 @@ Public Class ClsCombinedPendulum
 
         MyAdditionalParameterValue = LowerLimitOmega + 5
         MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
-                                                      Main.LM.GetString("SpringPendulumFrequency"),
+                                                      FrmMain.LM.GetString("SpringPendulumFrequency"),
                                                       New ClsInterval(LowerLimitOmega, LowerLimitOmega + 10))
 
         MyOmega = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
@@ -160,7 +160,7 @@ Public Class ClsCombinedPendulum
         MyValueParameters.Add(ValueParameter(1))
 
         'Labels
-        MyLabelParameterC = Main.LM.GetString("CombinedPendulumC")
+        MyLabelParameterC = FrmMain.LM.GetString("CombinedPendulumC")
 
         'We have two variable parameters: L = MyVariables.Components(0), Phi = MyVariables.components(1)
         MyVariables = New ClsVector(1)
@@ -241,7 +241,7 @@ Public Class ClsCombinedPendulum
 
     ReadOnly Property LabelParameterlist As String Implements IPendulum.LabelParameterList
         Get
-            LabelParameterlist = Main.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
+            LabelParameterlist = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
         End Get
     End Property
 
@@ -333,15 +333,15 @@ Public Class ClsCombinedPendulum
             'Labeling and preparing UInterval, VInterval and MapPhaseportraitGraphics
             Select Case MyPhaseportraitType
                 Case TypeofPhaseportraitEnum.Cylinder
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": l, Phi. Tangent: l', Phi'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": l, Phi. Tangent: l', Phi'"
                     UInterval = New ClsInterval(Lmin, 1)
                     VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 Case TypeofPhaseportraitEnum.PoincareSection
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": Phi = 0, l, l'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Phi = 0, l, l'"
                     UInterval = New ClsInterval(Lmin, 1)
                     VInterval = New ClsInterval(-10, 10)
                 Case Else
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": Red: l, l'. Green: Phi, Phi'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Red: l, l'. Green: Phi, Phi'"
                     UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                     VInterval = New ClsInterval(-10, 10)
             End Select

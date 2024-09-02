@@ -38,7 +38,7 @@ Public Class ClsCheckIsInterval
         Dim IsBValid As Boolean
 
         If Not IsNumeric(MyTextboxA.Text) Then
-            MessageBox.Show(Main.LM.GetString("NumericValue"))
+            MessageBox.Show(FrmMain.LM.GetString("NumericValue"))
             MyTextboxA.Text = ""
             MyTextboxA.Select()
             IsAValid = False
@@ -56,7 +56,7 @@ Public Class ClsCheckIsInterval
 
         If IsAValid Then
             If Not IsNumeric(MyTextboxB.Text) Then
-                MessageBox.Show(Main.LM.GetString("NumericValue"))
+                MessageBox.Show(FrmMain.LM.GetString("NumericValue"))
                 MyTextboxB.Text = ""
                 MyTextboxB.Select()
                 IsBValid = False
@@ -73,7 +73,7 @@ Public Class ClsCheckIsInterval
             End If
 
             If IsBValid And MyA >= MyB Then
-                MessageBox.Show(Main.LM.GetString("LeftSmallerRight"))
+                MessageBox.Show(FrmMain.LM.GetString("LeftSmallerRight"))
                 MyTextboxA.Text = ""
                 MyTextboxA.Select()
                 IsAValid = False

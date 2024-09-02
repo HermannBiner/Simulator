@@ -600,7 +600,7 @@ Public Class ClsEllipseBilliardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
-            MyParameterListbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+            MyParameterListbox.Items.Add(FrmMain.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
                                          MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterListbox.Refresh()
         End If

@@ -48,22 +48,22 @@ Public Class FrmNewtonIteration
 
     Private Sub InitializeLanguage()
 
-        Text = Main.LM.GetString("NewtonIteration")
-        LblProtocol.Text = Main.LM.GetString("ProtocolNewton")
-        ChkProtocol.Text = Main.LM.GetString("Protocol")
-        BtnStart.Text = Main.LM.GetString("Start")
-        BtnStop.Text = Main.LM.GetString("Stop")
-        BtnShowBasin.Text = Main.LM.GetString("ShowBasin")
-        BtnReset.Text = Main.LM.GetString("ResetIteration")
-        LblTime.Text = Main.LM.GetString("Time")
-        LblSteps.Text = Main.LM.GetString("Steps")
-        GrpMixing.Text = Main.LM.GetString("Mixing")
-        OptNone.Text = Main.LM.GetString("None")
-        OptConjugate.Text = Main.LM.GetString("Conjugate")
-        OptRotate.Text = Main.LM.GetString("Rotate")
-        GrpColor.Text = Main.LM.GetString("Color")
-        OptBright.Text = Main.LM.GetString("Bright")
-        OptShadowed.Text = Main.LM.GetString("Shadowed")
+        Text = FrmMain.LM.GetString("NewtonIteration")
+        LblProtocol.Text = FrmMain.LM.GetString("ProtocolNewton")
+        ChkProtocol.Text = FrmMain.LM.GetString("Protocol")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnStop.Text = FrmMain.LM.GetString("Stop")
+        BtnShowBasin.Text = FrmMain.LM.GetString("ShowBasin")
+        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        LblTime.Text = FrmMain.LM.GetString("Time")
+        LblSteps.Text = FrmMain.LM.GetString("Steps")
+        GrpMixing.Text = FrmMain.LM.GetString("Mixing")
+        OptNone.Text = FrmMain.LM.GetString("None")
+        OptConjugate.Text = FrmMain.LM.GetString("Conjugate")
+        OptRotate.Text = FrmMain.LM.GetString("Rotate")
+        GrpColor.Text = FrmMain.LM.GetString("Color")
+        OptBright.Text = FrmMain.LM.GetString("Bright")
+        OptShadowed.Text = FrmMain.LM.GetString("Shadowed")
 
         CboFunction.Items.Clear()
 
@@ -81,7 +81,7 @@ Public Class FrmNewtonIteration
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                PolynomName = Main.LM.GetString(type.Name, True)
+                PolynomName = FrmMain.LM.GetString(type.Name, True)
                 CboFunction.Items.Add(PolynomName)
             Next
 
@@ -204,7 +204,7 @@ Public Class FrmNewtonIteration
 
     Private Sub ResetIteration()
 
-        BtnStart.Text = Main.LM.GetString("Start")
+        BtnStart.Text = FrmMain.LM.GetString("Start")
 
         'The display is cleared
         If Polynom IsNot Nothing Then
@@ -243,7 +243,7 @@ Public Class FrmNewtonIteration
 
             If types.Count > 0 Then
                 For Each type In types
-                    If Main.LM.GetString(type.Name, True) = SelectedName Then
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
                         Polynom = CType(Activator.CreateInstance(type), IPolynom)
                         Polynom.MapCPlane = MapCPlane
                         Polynom.PicCPlane = PicCPlane
@@ -281,11 +281,11 @@ Public Class FrmNewtonIteration
             SetDefaultValues()
             ResetIteration()
 
-            BtnStart.Text = Main.LM.GetString("Continue")
+            BtnStart.Text = FrmMain.LM.GetString("Continue")
 
         End If
 
-        Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Started
+        Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Running
 
         BtnStart.Enabled = False
         BtnReset.Enabled = False
@@ -296,7 +296,7 @@ Public Class FrmNewtonIteration
         Await Polynom.GenerateImage
 
         If Polynom.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
-            BtnStart.Text = Main.LM.GetString("Start")
+            BtnStart.Text = FrmMain.LM.GetString("Start")
             BtnStart.Enabled = True
             BtnReset.Enabled = True
 
@@ -495,7 +495,7 @@ Public Class FrmNewtonIteration
                 'Prepare new Iteration
                 SetDefaultValues()
 
-                BtnStart.Text = Main.LM.GetString("Start")
+                BtnStart.Text = FrmMain.LM.GetString("Start")
 
             End If
         End If
@@ -546,7 +546,7 @@ Public Class FrmNewtonIteration
                 'take over
                 Polynom.ActualXRange = TempXRange
             Else
-                MessageBox.Show(Main.LM.GetString("X-RangeNotAllowed") & " [" &
+                MessageBox.Show(FrmMain.LM.GetString("X-RangeNotAllowed") & " [" &
                    Polynom.AllowedXRange.A.ToString(CultureInfo.CurrentCulture) &
                    ", " & Polynom.AllowedXRange.B.ToString(CultureInfo.CurrentCulture) &
                    "] ")
@@ -572,7 +572,7 @@ Public Class FrmNewtonIteration
                     'take over
                     Polynom.ActualYRange = TempYRange
                 Else
-                    MessageBox.Show(Main.LM.GetString("Y-RangeNotAllowed") & " [" &
+                    MessageBox.Show(FrmMain.LM.GetString("Y-RangeNotAllowed") & " [" &
                        Polynom.AllowedYRange.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & Polynom.AllowedYRange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
@@ -598,7 +598,7 @@ Public Class FrmNewtonIteration
             If Polynom.AllowedXRange.IsNumberInInterval(ParameterA.NumericValue) Then
                 'OK, nothing to do
             Else
-                MessageBox.Show(Main.LM.GetString("CXNotAllowed") & ": [" & Polynom.AllowedXRange.A.ToString &
+                MessageBox.Show(FrmMain.LM.GetString("CXNotAllowed") & ": [" & Polynom.AllowedXRange.A.ToString &
                                                   ", " & Polynom.AllowedXRange.B.ToString & "]")
                 TxtA.Text = "0" 'Standard
             End If
@@ -613,7 +613,7 @@ Public Class FrmNewtonIteration
             If Polynom.AllowedYRange.IsNumberInInterval(ParameterB.NumericValue) Then
                 'OK, nothing to do
             Else
-                MessageBox.Show(Main.LM.GetString("CYNotAllowed") & ": [" & Polynom.AllowedYRange.A.ToString &
+                MessageBox.Show(FrmMain.LM.GetString("CYNotAllowed") & ": [" & Polynom.AllowedYRange.A.ToString &
                                                   ", " & Polynom.AllowedYRange.B.ToString & "]")
                 TxtB.Text = "1" 'Standard
             End If

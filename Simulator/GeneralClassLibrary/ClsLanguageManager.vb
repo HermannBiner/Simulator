@@ -66,7 +66,7 @@ Public Class ClsLanguageManager
                 If ClsPosition = 0 And Text.Length > 3 Then
                     Text = Text.Substring(3)
                 Else
-                    Throw New FormatException(Main.LM.GetString("ClassNamingViolation"))
+                    Throw New FormatException(FrmMain.LM.GetString("ClassNamingViolation"))
                 End If
 
             Else

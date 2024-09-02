@@ -137,7 +137,7 @@ Public Class ClsComplexNumber
 
     End Function
 
-    Private Function GetPower(u As ClsComplexNumber, n As Integer) As ClsComplexNumber
+    Private Shared Function GetPower(u As ClsComplexNumber, n As Integer) As ClsComplexNumber
 
         Dim k As Integer
         Dim Result As New ClsComplexNumber
@@ -164,7 +164,7 @@ Public Class ClsComplexNumber
 
     End Function
 
-    Private Function GetPower2(X As Double, Y As Double) As ClsComplexNumber
+    Private Shared Function GetPower2(X As Double, Y As Double) As ClsComplexNumber
 
         Dim Result = New ClsComplexNumber(X * X - Y * Y, 2 * X * Y)
         Return Result

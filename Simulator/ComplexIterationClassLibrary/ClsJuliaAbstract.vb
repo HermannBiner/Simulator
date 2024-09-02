@@ -237,7 +237,6 @@ Public MustInherit Class ClsJuliaAbstract
     Public Function GenerateImage() As Task Implements IJulia.GenerateImage
 
         'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        'In case of Symmetry, only the lower halfplane is examinated
         If ExaminatedPoints = 0 Then
             p = CInt(MyPicCPlane.Width / 2)
             q = CInt(MyPicCPlane.Height / 2)

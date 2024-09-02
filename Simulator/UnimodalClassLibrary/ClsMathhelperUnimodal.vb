@@ -1,7 +1,7 @@
 ﻿'Contains mathematical help functions for all kind of unimodal functions
 'see mathematical documentation
 
-'Status Checked
+'Status Redesign Tested
 
 Public Class ClsMathhelperUnimodal
 
@@ -27,7 +27,7 @@ Public Class ClsMathhelperUnimodal
                 Case "0"
                     'nothing to do
                 Case Else
-                    Throw New ArgumentException(Main.LM.GetString("InvalidDualNumberDigits"))
+                    Throw New ArgumentException(FrmMain.LM.GetString("InvalidDualNumberDigits"))
                     Return 0
             End Select
         Next
@@ -139,7 +139,7 @@ Public Class ClsMathhelperUnimodal
                 Case "1"
                     counter += 1
                 Case Else
-                    Throw New ArgumentException(Main.LM.GetString("InvalidDualNumberDigits"))
+                    Throw New ArgumentException(FrmMain.LM.GetString("InvalidDualNumberDigits"))
             End Select
         Next
 
@@ -162,7 +162,7 @@ Public Class ClsMathhelperUnimodal
         Next
 
         If Not IsFormatValid Then
-            MessageBox.Show(Main.LM.GetString("InvalidDualNumberDigits"))
+            MessageBox.Show(FrmMain.LM.GetString("InvalidDualNumberDigits"))
         End If
 
         Return IsFormatValid
@@ -189,7 +189,7 @@ Public Class ClsMathhelperUnimodal
                 Case "1"
                     TempDualstring = "1" & ComplementDualString(TempDualstring)
                 Case Else
-                    Throw New ArgumentException(Main.LM.GetString("InvalidProtocolDigits"))
+                    Throw New ArgumentException(FrmMain.LM.GetString("InvalidProtocolDigits"))
             End Select
         Next
 
@@ -214,7 +214,7 @@ Public Class ClsMathhelperUnimodal
                 Case "1"
                     Tempstring &= "0"
                 Case Else
-                    Throw New ArgumentException(Main.LM.GetString("InvalidDualNumberDigits"))
+                    Throw New ArgumentException(FrmMain.LM.GetString("InvalidDualNumberDigits"))
             End Select
         Next
 

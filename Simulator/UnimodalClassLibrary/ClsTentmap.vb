@@ -3,35 +3,13 @@
 'a in ]0,2]. Interesting is only the case a = 2
 'and "knows" everything about this kind of iteration
 
-'Status Checked
-
-Imports System.Globalization
+'Status Redesign Tested
 
 Public Class ClsTentmap
-    Implements IIteration
-
-    'This is the steering parameter for the iteration
-    '"a" in the mathematical documentation
-    Private MyParameter As Decimal
-
-    'in whitch Interval the Parameter a should be
-    Private ReadOnly MyParameterInterval As ClsInterval
-
-    'in whitch Interval the iterated Value x should be
-    Private ReadOnly MyIterationInterval As ClsInterval
-
-    'Power of the iteration function F:
-    'How many times the iteration function F is performed in one iteration step
-    Private MyPower As Integer
-
-    'Checking if the steering parameter is OK
-    Private IsMyParametervalid As Boolean
-
-    'SplitPoints
-    Private ReadOnly MySplitpoints As List(Of Decimal)
+    Inherits ClsIterationAbstract
 
     'SECTOR INITIALISATION
-    Public Sub New()
+    Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
         MyParameterInterval = New ClsInterval(0, 2)
@@ -44,104 +22,9 @@ Public Class ClsTentmap
 
     End Sub
 
-    Public WriteOnly Property Parameter As Decimal Implements IIteration.Parameter
-        Set(Value As Decimal)
-            MyParameter = Value
-            IsMyParametervalid = IsParameterAllowed(MyParameter)
-        End Set
-    End Property
-
-    Public WriteOnly Property Power As Integer Implements IIteration.Power
-        Set(value As Integer)
-            MyPower = value
-        End Set
-    End Property
-
-    Public ReadOnly Property ParameterInterval As ClsInterval Implements IIteration.ParameterInterval
-        Get
-            ParameterInterval = MyParameterInterval
-        End Get
-    End Property
-
-    Public ReadOnly Property IterationInterval As ClsInterval Implements IIteration.IterationInterval
-        Get
-            IterationInterval = MyIterationInterval
-        End Get
-    End Property
-
-    Public ReadOnly Property Splitpoints As List(Of Decimal) Implements IIteration.Splitpoints
-        Get
-            Splitpoints = MySplitpoints
-        End Get
-    End Property
-
-    Public Function IsParameterAllowed(Parameter As Decimal) As Boolean Implements IIteration.IsParameterAllowed
-
-        If Not ParameterInterval.IsNumberInInterval(Parameter) Then
-            MessageBox.Show(Main.LM.GetString("TheValue") & Parameter.ToString(CultureInfo.CurrentCulture) &
-                            Main.LM.GetString("NotAlllowedValue") & "[" &
-                            ParameterInterval.A.ToString(CultureInfo.CurrentCulture) &
-                            ", " & ParameterInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
-    Public Function IsIterationvalueAllowed(x As Decimal) As Boolean _
-        Implements IIteration.IsIterationValueAllowed
-
-        If Not IterationInterval.IsNumberInInterval(x) Then
-            MessageBox.Show(Main.LM.GetString("TheValue") & x.ToString(CultureInfo.CurrentCulture) &
-                            Main.LM.GetString("NotAlllowedValue") & "[" &
-                            IterationInterval.A.ToString(CultureInfo.CurrentCulture) &
-                            ", " & IterationInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
-    Public Function IsBehaviourChaotic() As Boolean Implements IIteration.IsBehaviourChaotic
-
-        'Chaotic behaviour is only guaranteed for the right border of the parameter interval
-        'see mathematical documentation
-        If MyParameter < ParameterInterval.B Then
-            MessageBox.Show(Main.LM.GetString("NonChaoticBehaviour"))
-            Return False
-        Else
-            Return True
-        End If
-
-    End Function
-
     'SECTOR ITERATION
 
-    Public Function FN(x As Decimal) As Decimal _
-        Implements IIteration.FN
-
-        'This Function is the
-        'Power-iterated function of the original function
-        Dim IsIterationvaluevalid As Boolean = IterationInterval.IsNumberInInterval(x)
-
-        If IsMyParametervalid And IsIterationvaluevalid Then
-
-            Dim i As Integer
-
-            For i = 1 To MyPower
-                x = F(x)
-            Next
-        Else
-            MessageBox.Show(Main.LM.GetString("InvalidParameterOrIterationValue"))
-        End If
-
-        Return x
-
-    End Function
-
-    Private Function F(u As Decimal) As Decimal
+    Protected Overrides Function F(u As Decimal) As Decimal
 
         'This is the original iteration function
         u = If(u < 0.5, MyParameter * u, MyParameter * (1 - u))
@@ -152,8 +35,7 @@ Public Class ClsTentmap
 
     'SECTOR CALCULATION
 
-    Public Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal _
-        Implements IIteration.CalculateStartValueForProtocol
+    Public Overrides Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal
 
         Dim Mathhelper As New ClsMathhelperUnimodal
 
@@ -166,8 +48,7 @@ Public Class ClsTentmap
         Return DecimalStartvalue
     End Function
 
-    Public Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal _
-        Implements IIteration.CalculateStartValueForTargetValue
+    Public Overrides Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal
 
         Dim Mathhelper As New ClsMathhelperUnimodal
 
@@ -200,6 +81,20 @@ Public Class ClsTentmap
         Dim AdjustedTentmapStartvalue As Decimal = Mathhelper.DualStringToDecimalNumber(StartDualstring, True)
 
         Return AdjustedTentmapStartvalue
+
+    End Function
+
+    'SECTOR CONJUGATION
+
+    Protected Overrides Function IterationToTentmap(x As Decimal) As Decimal
+
+        Return x
+
+    End Function
+
+    Protected Overrides Function TentmapToIteration(u As Decimal) As Decimal
+
+        Return u
 
     End Function
 End Class

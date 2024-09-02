@@ -263,7 +263,7 @@ Public MustInherit Class ClsPolynomAbstract
 
     End Sub
 
-    Protected Function GetBasin(Z As ClsComplexNumber, Steps As Integer) As Brush
+    Private Function GetBasin(Z As ClsComplexNumber, Steps As Integer) As Brush
 
         'If the stop condition is fullfilled, then the startpoint converges to a root
         'and we have to find out, which root that is

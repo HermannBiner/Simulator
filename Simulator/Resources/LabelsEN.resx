@@ -390,7 +390,7 @@
     <comment>Col</comment>
   </data>
   <data name="GrowthModels" xml:space="preserve">
-    <value>GrowthModels</value>
+    <value>Growth Models</value>
     <comment>Lbl</comment>
   </data>
   <data name="Histogram" xml:space="preserve">
@@ -717,6 +717,10 @@
     <value>Quadratic Function</value>
     <comment>Lbl</comment>
   </data>
+  <data name="RangeNotAllowed" xml:space="preserve">
+    <value>This Range is not allowed! It must be part of the interval</value>
+    <comment>Msg</comment>
+  </data>
   <data name="Red" xml:space="preserve">
     <value>Red</value>
     <comment>Col</comment>
@@ -920,6 +924,10 @@
   <data name="ValueList2" xml:space="preserve">
     <value>Value List 2</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="ValueNotAllowed" xml:space="preserve">
+    <value>This Value is not alluwed. It must be part of:</value>
+    <comment>Msg</comment>
   </data>
   <data name="ValueRangeNotAllowed" xml:space="preserve">
     <value>This Valuerange is not allowed! It must be part of the interval</value>

@@ -155,14 +155,14 @@ Public Class ClsShakedPendulum
         MyValueParameters.Add(ValueParameter(2))
 
         'Labels
-        MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": -- "
-        MyLabelParameterC = Main.LM.GetString("ShakedPendulumC")
+        MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": -- "
+        MyLabelParameterC = FrmMain.LM.GetString("ShakedPendulumC")
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 60  'that means MyM in the middle
         MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
-                                                      Main.LM.GetString("SpringConstant"), New ClsInterval(20, 100))
+                                                      FrmMain.LM.GetString("SpringConstant"), New ClsInterval(20, 100))
         MyD = MyAdditionalParameterValue
 
         'Vectors
@@ -246,7 +246,7 @@ Public Class ClsShakedPendulum
 
     ReadOnly Property LabelParameterlist As String Implements IPendulum.LabelParameterList
         Get
-            LabelParameterlist = Main.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
+            LabelParameterlist = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
         End Get
     End Property
     WriteOnly Property ParameterListbox As ListBox Implements IPendulum.ParameterListbox
@@ -342,15 +342,15 @@ Public Class ClsShakedPendulum
             'Labeling and preparing UInterval, VInterval and MapPhaseportraitGraphics
             Select Case MyPhaseportraitType
                 Case TypeofPhaseportraitEnum.Cylinder
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": x, Phi. Tangent: x', Phi'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": x, Phi. Tangent: x', Phi'"
                     UInterval = New ClsInterval(-1, 1)
                     VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 Case TypeofPhaseportraitEnum.PoincareSection
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": x = 0, Phi, Phi'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": x = 0, Phi, Phi'"
                     UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                     VInterval = New ClsInterval(-10, 10)
                 Case Else
-                    MyPhaseportraitLabel = Main.LM.GetString("PhasePortrait") & ": Red: x, x'. Green: Phi, Phi'"
+                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Red: x, x'. Green: Phi, Phi'"
                     UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                     VInterval = New ClsInterval(-10, 10)
             End Select

@@ -671,7 +671,7 @@ Public Class ClsStadiumBilliardball
         'but smaller than the pixel-unit
 
         If Not IsIntersectionFound Then
-            Throw New ArgumentException(Main.LM.GetString("NoIntersectionPoint"))
+            Throw New ArgumentException(FrmMain.LM.GetString("NoIntersectionPoint"))
         Else
             nextT = CalculateTFromMathPoint(Intersection)
         End If
@@ -700,7 +700,7 @@ Public Class ClsStadiumBilliardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
-            MyParameterListbox.Items.Add(Main.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
+            MyParameterListbox.Items.Add(FrmMain.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
                                          MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             MyParameterListbox.Refresh()
         End If
