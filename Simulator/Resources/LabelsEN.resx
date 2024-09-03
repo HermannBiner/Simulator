@@ -930,7 +930,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="ValueNotAllowed" xml:space="preserve">
-    <value>This Value is not alluwed. It must be part of:</value>
+    <value> is not allowed. It must be part of:</value>
     <comment>Msg</comment>
   </data>
   <data name="ValueRangeNotAllowed" xml:space="preserve">

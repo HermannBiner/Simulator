@@ -3,7 +3,7 @@
 'in German "Euler Explizit" Method
 'based on the differential equation of a real spring pendulum
 
-'Status Checked
+'Status Redesign Checked
 
 Public Class ClsForwardEuler
     Inherits ClsSpringPendulumAbstract

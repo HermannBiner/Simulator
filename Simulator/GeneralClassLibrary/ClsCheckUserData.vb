@@ -84,6 +84,7 @@ Public Class ClsCheckUserData
                             FrmMain.LM.GetString("ValueNotAllowed") & "[" &
                             MyTargetInterval.A.ToString(CultureInfo.CurrentCulture) &
                             ", " & MyTargetInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
+                MyTxtX.Select()
                 Return False
             End If
         Else
@@ -119,6 +120,7 @@ Public Class ClsCheckUserData
                        MyTargetInterval.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & MyTargetInterval.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
+                MyTxtA.Select()
                 Return False
             End If
 

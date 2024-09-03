@@ -23,176 +23,182 @@ Partial Class FrmSpringPendulum
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSpringPendulum))
-        Me.LstValueList = New System.Windows.Forms.ListBox()
-        Me.PicDiagram = New System.Windows.Forms.PictureBox()
-        Me.CboPendulum = New System.Windows.Forms.ComboBox()
-        Me.LblPendulum = New System.Windows.Forms.Label()
-        Me.LblStepWidth = New System.Windows.Forms.Label()
-        Me.TrbStepWidth = New System.Windows.Forms.TrackBar()
-        Me.BtnReset = New System.Windows.Forms.Button()
-        Me.BtnStop = New System.Windows.Forms.Button()
-        Me.BtnStart = New System.Windows.Forms.Button()
-        Me.LblNumberOfSteps = New System.Windows.Forms.Label()
-        Me.LblSteps = New System.Windows.Forms.Label()
-        Me.ChkStretched = New System.Windows.Forms.CheckBox()
-        Me.LblDifference = New System.Windows.Forms.Label()
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TrbStepWidth, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'LstValueList
-        '
-        Me.LstValueList.FormattingEnabled = True
-        Me.LstValueList.Location = New System.Drawing.Point(962, 33)
-        Me.LstValueList.Name = "LstValueList"
-        Me.LstValueList.Size = New System.Drawing.Size(150, 446)
-        Me.LstValueList.TabIndex = 8
-        '
-        'PicDiagram
-        '
-        Me.PicDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PicDiagram.Location = New System.Drawing.Point(6, 7)
-        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(2)
-        Me.PicDiagram.Name = "PicDiagram"
-        Me.PicDiagram.Size = New System.Drawing.Size(739, 471)
-        Me.PicDiagram.TabIndex = 7
-        Me.PicDiagram.TabStop = False
-        '
-        'CboPendulum
-        '
-        Me.CboPendulum.FormattingEnabled = True
-        Me.CboPendulum.Items.AddRange(New Object() {"RealSpringPendulum", "EulerExplicit", "EulerImplicit", "MidpointImplicit", "RungeKutta4"})
-        Me.CboPendulum.Location = New System.Drawing.Point(762, 33)
-        Me.CboPendulum.Margin = New System.Windows.Forms.Padding(2)
-        Me.CboPendulum.Name = "CboPendulum"
-        Me.CboPendulum.Size = New System.Drawing.Size(184, 21)
-        Me.CboPendulum.TabIndex = 29
-        '
-        'LblPendulum
-        '
-        Me.LblPendulum.AutoSize = True
-        Me.LblPendulum.Location = New System.Drawing.Point(760, 8)
-        Me.LblPendulum.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblPendulum.Name = "LblPendulum"
-        Me.LblPendulum.Size = New System.Drawing.Size(54, 13)
-        Me.LblPendulum.TabIndex = 28
-        Me.LblPendulum.Text = "Pendulum"
-        '
-        'LblStepWidth
-        '
-        Me.LblStepWidth.AutoSize = True
-        Me.LblStepWidth.Location = New System.Drawing.Point(768, 66)
-        Me.LblStepWidth.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblStepWidth.Name = "LblStepWidth"
-        Me.LblStepWidth.Size = New System.Drawing.Size(57, 13)
-        Me.LblStepWidth.TabIndex = 31
-        Me.LblStepWidth.Text = "StepWidth"
-        '
-        'TrbStepWidth
-        '
-        Me.TrbStepWidth.Location = New System.Drawing.Point(762, 87)
-        Me.TrbStepWidth.Margin = New System.Windows.Forms.Padding(2)
-        Me.TrbStepWidth.Maximum = 15
-        Me.TrbStepWidth.Minimum = 1
-        Me.TrbStepWidth.Name = "TrbStepWidth"
-        Me.TrbStepWidth.Size = New System.Drawing.Size(182, 45)
-        Me.TrbStepWidth.TabIndex = 30
-        Me.TrbStepWidth.Value = 5
-        '
-        'BtnReset
-        '
-        Me.BtnReset.Location = New System.Drawing.Point(762, 323)
-        Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(182, 34)
-        Me.BtnReset.TabIndex = 34
-        Me.BtnReset.Text = "Reset"
-        Me.BtnReset.UseVisualStyleBackColor = True
-        '
-        'BtnStop
-        '
-        Me.BtnStop.Location = New System.Drawing.Point(762, 264)
-        Me.BtnStop.Name = "BtnStop"
-        Me.BtnStop.Size = New System.Drawing.Size(182, 34)
-        Me.BtnStop.TabIndex = 33
-        Me.BtnStop.Text = "Stop"
-        Me.BtnStop.UseVisualStyleBackColor = True
-        '
-        'BtnStart
-        '
-        Me.BtnStart.Location = New System.Drawing.Point(763, 184)
-        Me.BtnStart.Margin = New System.Windows.Forms.Padding(2)
-        Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(182, 34)
-        Me.BtnStart.TabIndex = 32
-        Me.BtnStart.Text = "Start"
-        Me.BtnStart.UseVisualStyleBackColor = True
-        '
-        'LblNumberOfSteps
-        '
-        Me.LblNumberOfSteps.AutoSize = True
-        Me.LblNumberOfSteps.Location = New System.Drawing.Point(760, 234)
-        Me.LblNumberOfSteps.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblNumberOfSteps.Name = "LblNumberOfSteps"
-        Me.LblNumberOfSteps.Size = New System.Drawing.Size(89, 13)
-        Me.LblNumberOfSteps.TabIndex = 35
-        Me.LblNumberOfSteps.Text = "Number of Steps:"
-        '
-        'LblSteps
-        '
-        Me.LblSteps.AutoSize = True
-        Me.LblSteps.Location = New System.Drawing.Point(857, 234)
-        Me.LblSteps.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblSteps.Name = "LblSteps"
-        Me.LblSteps.Size = New System.Drawing.Size(13, 13)
-        Me.LblSteps.TabIndex = 36
-        Me.LblSteps.Text = "0"
-        '
-        'ChkStretched
-        '
-        Me.ChkStretched.AutoSize = True
-        Me.ChkStretched.Location = New System.Drawing.Point(763, 137)
-        Me.ChkStretched.Name = "ChkStretched"
-        Me.ChkStretched.Size = New System.Drawing.Size(99, 17)
-        Me.ChkStretched.TabIndex = 37
-        Me.ChkStretched.Text = "StretchedMode"
-        Me.ChkStretched.UseVisualStyleBackColor = True
-        '
-        'LblDifference
-        '
-        Me.LblDifference.AutoSize = True
-        Me.LblDifference.Location = New System.Drawing.Point(962, 9)
-        Me.LblDifference.Name = "LblDifference"
-        Me.LblDifference.Size = New System.Drawing.Size(56, 13)
-        Me.LblDifference.TabIndex = 38
-        Me.LblDifference.Text = "Difference"
-        '
-        'FrmSpringPendulum
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1131, 488)
-        Me.Controls.Add(Me.LblDifference)
-        Me.Controls.Add(Me.ChkStretched)
-        Me.Controls.Add(Me.LblSteps)
-        Me.Controls.Add(Me.LblNumberOfSteps)
-        Me.Controls.Add(Me.BtnReset)
-        Me.Controls.Add(Me.BtnStop)
-        Me.Controls.Add(Me.BtnStart)
-        Me.Controls.Add(Me.LblStepWidth)
-        Me.Controls.Add(Me.TrbStepWidth)
-        Me.Controls.Add(Me.CboPendulum)
-        Me.Controls.Add(Me.LblPendulum)
-        Me.Controls.Add(Me.LstValueList)
-        Me.Controls.Add(Me.PicDiagram)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.Name = "FrmSpringPendulum"
-        Me.Text = "SpringPendulum"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TrbStepWidth, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        LstValueList = New ListBox()
+        PicDiagram = New PictureBox()
+        CboPendulum = New ComboBox()
+        LblPendulum = New Label()
+        LblStepWidth = New Label()
+        TrbStepWidth = New TrackBar()
+        BtnReset = New Button()
+        BtnStop = New Button()
+        BtnStart = New Button()
+        LblNumberOfSteps = New Label()
+        LblSteps = New Label()
+        ChkStretched = New CheckBox()
+        LblDifference = New Label()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
+        CType(TrbStepWidth, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' LstValueList
+        ' 
+        LstValueList.FormattingEnabled = True
+        LstValueList.ItemHeight = 15
+        LstValueList.Location = New Point(1122, 38)
+        LstValueList.Margin = New Padding(4, 3, 4, 3)
+        LstValueList.Name = "LstValueList"
+        LstValueList.Size = New Size(174, 514)
+        LstValueList.TabIndex = 8
+        ' 
+        ' PicDiagram
+        ' 
+        PicDiagram.BorderStyle = BorderStyle.FixedSingle
+        PicDiagram.Location = New Point(7, 8)
+        PicDiagram.Margin = New Padding(2)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(862, 543)
+        PicDiagram.TabIndex = 7
+        PicDiagram.TabStop = False
+        ' 
+        ' CboPendulum
+        ' 
+        CboPendulum.FormattingEnabled = True
+        CboPendulum.Items.AddRange(New Object() {"RealSpringPendulum", "EulerExplicit", "EulerImplicit", "MidpointImplicit", "RungeKutta4"})
+        CboPendulum.Location = New Point(889, 38)
+        CboPendulum.Margin = New Padding(2)
+        CboPendulum.Name = "CboPendulum"
+        CboPendulum.Size = New Size(214, 23)
+        CboPendulum.TabIndex = 29
+        ' 
+        ' LblPendulum
+        ' 
+        LblPendulum.AutoSize = True
+        LblPendulum.Location = New Point(887, 9)
+        LblPendulum.Margin = New Padding(2, 0, 2, 0)
+        LblPendulum.Name = "LblPendulum"
+        LblPendulum.Size = New Size(62, 15)
+        LblPendulum.TabIndex = 28
+        LblPendulum.Text = "Pendulum"
+        ' 
+        ' LblStepWidth
+        ' 
+        LblStepWidth.AutoSize = True
+        LblStepWidth.Location = New Point(896, 76)
+        LblStepWidth.Margin = New Padding(2, 0, 2, 0)
+        LblStepWidth.Name = "LblStepWidth"
+        LblStepWidth.Size = New Size(62, 15)
+        LblStepWidth.TabIndex = 31
+        LblStepWidth.Text = "StepWidth"
+        ' 
+        ' TrbStepWidth
+        ' 
+        TrbStepWidth.Location = New Point(889, 100)
+        TrbStepWidth.Margin = New Padding(2)
+        TrbStepWidth.Maximum = 15
+        TrbStepWidth.Minimum = 1
+        TrbStepWidth.Name = "TrbStepWidth"
+        TrbStepWidth.Size = New Size(212, 45)
+        TrbStepWidth.TabIndex = 30
+        TrbStepWidth.Value = 5
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Location = New Point(889, 373)
+        BtnReset.Margin = New Padding(4, 3, 4, 3)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(212, 39)
+        BtnReset.TabIndex = 34
+        BtnReset.Text = "Reset"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' BtnStop
+        ' 
+        BtnStop.Location = New Point(889, 305)
+        BtnStop.Margin = New Padding(4, 3, 4, 3)
+        BtnStop.Name = "BtnStop"
+        BtnStop.Size = New Size(212, 39)
+        BtnStop.TabIndex = 33
+        BtnStop.Text = "Stop"
+        BtnStop.UseVisualStyleBackColor = True
+        ' 
+        ' BtnStart
+        ' 
+        BtnStart.Location = New Point(890, 212)
+        BtnStart.Margin = New Padding(2)
+        BtnStart.Name = "BtnStart"
+        BtnStart.Size = New Size(212, 39)
+        BtnStart.TabIndex = 32
+        BtnStart.Text = "Start"
+        BtnStart.UseVisualStyleBackColor = True
+        ' 
+        ' LblNumberOfSteps
+        ' 
+        LblNumberOfSteps.AutoSize = True
+        LblNumberOfSteps.Location = New Point(887, 270)
+        LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
+        LblNumberOfSteps.Name = "LblNumberOfSteps"
+        LblNumberOfSteps.Size = New Size(99, 15)
+        LblNumberOfSteps.TabIndex = 35
+        LblNumberOfSteps.Text = "Number of Steps:"
+        ' 
+        ' LblSteps
+        ' 
+        LblSteps.AutoSize = True
+        LblSteps.Location = New Point(1000, 270)
+        LblSteps.Margin = New Padding(2, 0, 2, 0)
+        LblSteps.Name = "LblSteps"
+        LblSteps.Size = New Size(13, 15)
+        LblSteps.TabIndex = 36
+        LblSteps.Text = "0"
+        ' 
+        ' ChkStretched
+        ' 
+        ChkStretched.AutoSize = True
+        ChkStretched.Location = New Point(890, 158)
+        ChkStretched.Margin = New Padding(4, 3, 4, 3)
+        ChkStretched.Name = "ChkStretched"
+        ChkStretched.Size = New Size(107, 19)
+        ChkStretched.TabIndex = 37
+        ChkStretched.Text = "StretchedMode"
+        ChkStretched.UseVisualStyleBackColor = True
+        ' 
+        ' LblDifference
+        ' 
+        LblDifference.AutoSize = True
+        LblDifference.Location = New Point(1122, 10)
+        LblDifference.Margin = New Padding(4, 0, 4, 0)
+        LblDifference.Name = "LblDifference"
+        LblDifference.Size = New Size(61, 15)
+        LblDifference.TabIndex = 38
+        LblDifference.Text = "Difference"
+        ' 
+        ' FrmSpringPendulum
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1320, 563)
+        Controls.Add(LblDifference)
+        Controls.Add(ChkStretched)
+        Controls.Add(LblSteps)
+        Controls.Add(LblNumberOfSteps)
+        Controls.Add(BtnReset)
+        Controls.Add(BtnStop)
+        Controls.Add(BtnStart)
+        Controls.Add(LblStepWidth)
+        Controls.Add(TrbStepWidth)
+        Controls.Add(CboPendulum)
+        Controls.Add(LblPendulum)
+        Controls.Add(LstValueList)
+        Controls.Add(PicDiagram)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(2)
+        Name = "FrmSpringPendulum"
+        Text = "SpringPendulum"
+        WindowState = FormWindowState.Maximized
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
+        CType(TrbStepWidth, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
 

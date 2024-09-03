@@ -12,7 +12,7 @@ Public Class ClsFeigenbaumController
     Private MyBmpDiagram As Bitmap
 
     'The Graphic Helper for the Graphics
-    Private MyBmpDiagramGraphics As ClsGraphicTool
+    Private MyBmpGraphics As ClsGraphicTool
     Private MyIsColored As Boolean
 
     'User Ranges for Parameter and Iteration
@@ -33,7 +33,7 @@ Public Class ClsFeigenbaumController
             MyPicDiagram = value
             MyBmpDiagram = New Bitmap(MyPicDiagram.Width, MyPicDiagram.Height)
             MyPicDiagram.Image = MyBmpDiagram
-            MyBmpDiagramGraphics = New ClsGraphicTool(MyBmpDiagram, MyParameterRange, MyIterationRange)
+            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyParameterRange, MyIterationRange)
         End Set
     End Property
 
@@ -43,7 +43,7 @@ Public Class ClsFeigenbaumController
         End Get
         Set(value As ClsInterval)
             MyParameterRange = value
-            MyBmpDiagramGraphics.MathXInterval = MyParameterRange
+            MyBmpGraphics.MathXInterval = MyParameterRange
         End Set
     End Property
 
@@ -53,7 +53,7 @@ Public Class ClsFeigenbaumController
         End Get
         Set(value As ClsInterval)
             MyIterationRange = value
-            MyBmpDiagramGraphics.MathYInterval = MyIterationRange
+            MyBmpGraphics.MathYInterval = MyIterationRange
         End Set
     End Property
 
@@ -85,7 +85,7 @@ Public Class ClsFeigenbaumController
         Do
             x = MyDS.FN(x)
             i += 1
-        Loop Until (i > RuntimeUntilCycle - 1) Or Not MyDS.IterationInterval.IsNumberInInterval(x)
+        Loop Until (i > RuntimeUntilCycle - 1)
         'The second stop condition is due to the DS Julia Real
 
         i = RuntimeUntilCycle
@@ -101,11 +101,11 @@ Public Class ClsFeigenbaumController
         Dim CyclePoint As New ClsMathpoint(a, x)
 
         Do
-            MyBmpDiagramGraphics.DrawPoint(CyclePoint, SetColor(i), 1)
+            MyBmpGraphics.DrawPoint(CyclePoint, SetColor(i), 1)
             x = MyDS.FN(x)
             CyclePoint.Y = Math.Max(MyDS.IterationInterval.A, Math.Min(x, MyDS.IterationInterval.B))
             i += 1
-        Loop Until (i > RuntimeUntilCycle + LengthOfCycle) Or Not MyDS.IterationInterval.IsNumberInInterval(x)
+        Loop Until (i > RuntimeUntilCycle + LengthOfCycle)
         'The second stop condition is due to the DS Julia Real
 
         MyPicDiagram.Refresh()
@@ -149,9 +149,9 @@ Public Class ClsFeigenbaumController
                 B.X = Splitpoints(i)
                 B.Y = MyDS.IterationInterval.B
                 If i < Splitpoints.Count - 1 Then
-                    MyBmpDiagramGraphics.DrawLine(A, B, Color.Green, 1)
+                    MyBmpGraphics.DrawLine(A, B, Color.Green, 1)
                 Else
-                    MyBmpDiagramGraphics.DrawLine(A, B, Color.Red, 1)
+                    MyBmpGraphics.DrawLine(A, B, Color.Red, 1)
                 End If
             End If
         Next
@@ -161,7 +161,7 @@ Public Class ClsFeigenbaumController
 
     Public Sub ResetIteration()
 
-        MyBmpDiagramGraphics.Clear(Color.White)
+        MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
 
     End Sub

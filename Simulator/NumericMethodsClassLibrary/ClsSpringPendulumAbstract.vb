@@ -5,7 +5,7 @@
 'with maybe some more local parameters
 'to apply the numeric method for the iteration
 
-'Status Checked
+'Status Redesign Checked
 
 Public MustInherit Class ClsSpringPendulumAbstract
     Implements ISpringPendulum
@@ -16,30 +16,14 @@ Public MustInherit Class ClsSpringPendulumAbstract
     'Number of approximation steps before result is returned
     Protected MyNumberOfApproxSteps As Integer
 
-    'Data transfer is here based on a vector
-    'StartParameter(0) is the "time"-Parameter t
-    'and StartParameter(1) is the Y-Position of the Pendulum
+    'Amplitude is the Y-Position of the Pendulum
     'at the Start Position
-    Protected MyStartParameter As New ClsVector(2)
+    Protected MyAmplitude As Decimal
 
     'Data transfer is here based on a vector
     'ActualParameter(0) is the "time"-Parameter t
     'and ActualParameter(1) is the Y-Position of the Pendulum
     Protected MyActualParameter As New ClsVector(2)
-
-    Protected Sub New()
-
-        'Standard Values
-        MyStartParameter.Component(0) = 0
-        MyStartParameter.Component(1) = 0
-        MyStartParameter.Component(2) = 0
-
-        'Standard Values
-        MyActualParameter.Component(0) = MyStartParameter.Component(0)
-        MyActualParameter.Component(1) = MyStartParameter.Component(1)
-        MyActualParameter.Component(2) = MyStartParameter.Component(2)
-
-    End Sub
 
     Property h As Decimal Implements ISpringPendulum.h
         Get
@@ -56,17 +40,20 @@ Public MustInherit Class ClsSpringPendulumAbstract
         End Set
     End Property
 
-    WriteOnly Property StartParameter(index As Integer) As Decimal Implements ISpringPendulum.StartParameter
+    WriteOnly Property Amplitude As Decimal Implements ISpringPendulum.Amplitude
         Set(value As Decimal)
-            MyStartParameter.Component(index) = value
-            MyActualParameter.Component(index) = value
+            MyAmplitude = value
+            MyActualParameter.Component(1) = value
         End Set
     End Property
 
-    ReadOnly Property ActualParameter(index As Integer) As Decimal Implements ISpringPendulum.ActualParameter
+    Property ActualParameter(index As Integer) As Decimal Implements ISpringPendulum.ActualParameter
         Get
             ActualParameter = MyActualParameter.Component(index)
         End Get
+        Set(value As Decimal)
+            MyActualParameter.Component(index) = value
+        End Set
     End Property
 
     Protected MustOverride Sub Iteration() Implements ISpringPendulum.Iteration

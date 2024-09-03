@@ -365,7 +365,6 @@ Public MustInherit Class ClsPolynomAbstract
 
     End Function
 
-
     Private Sub IterationLoop()
 
         If ExaminatedPoints Mod 2 = 0 Then
@@ -419,7 +418,6 @@ Public MustInherit Class ClsPolynomAbstract
         Loop
 
     End Sub
-
 
     Public Sub IterationStep(Startpoint As Point)
 
