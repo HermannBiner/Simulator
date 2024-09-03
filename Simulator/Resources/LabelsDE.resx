@@ -213,6 +213,10 @@
     <value>Mandelbrot Menge mit Exponent n</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ClsMandelbrotReal" xml:space="preserve">
+    <value>Mandelbrot Iteration für reelle Zahlen</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsMidpointImplicit" xml:space="preserve">
     <value>Implizite Mittelpunktsregel</value>
     <comment>Cls</comment>

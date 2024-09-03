@@ -8,7 +8,6 @@
 'Status Checked
 
 Public MustInherit Class ClsSpringPendulumAbstract
-
     Implements ISpringPendulum
 
     'Step Width for the approximation

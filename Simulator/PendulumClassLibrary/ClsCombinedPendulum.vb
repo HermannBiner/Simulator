@@ -27,7 +27,7 @@ Public Class ClsCombinedPendulum
     Private MyMapPhaseportrait As Bitmap
     Private MyMapPhaseportraitGraphics As ClsGraphicTool
 
-    'TypesofPhaseportrait
+    'TypeofPhaseportrait
     Private Enum TypeofPhaseportraitEnum
         Independent 'Both movements are shown independently
         Cylinder 'Phi, l are shown on a cylinder

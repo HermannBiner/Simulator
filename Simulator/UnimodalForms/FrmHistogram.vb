@@ -144,12 +144,11 @@ Public Class FrmHistogram
         End With
     End Sub
 
-
     'This routine sets the user data to the default
     'the trigger is, that the DS has changed
     Private Sub SetDefaultUserData()
-
-        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
+        'default settings
+        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
         TxtStartValue.Text = (DS.IterationInterval.A +
             (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
 

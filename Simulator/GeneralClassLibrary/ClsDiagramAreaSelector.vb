@@ -145,9 +145,6 @@ Public Class ClsDiagramAreaSelector
                 Dim qMin As Integer = Math.Min(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
                 Dim qMax As Integer = Math.Max(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
 
-                'This rectangle surrounds the selected range
-                'Dim rect As New Rectangle(pMin, qMin, pMax - pMin, qMax - qMin)
-
                 'transmit the selection to the parameter range
                 MyTxtAMin.Text = Math.Max(PixelToA(pMin), MyDS.ParameterInterval.A).ToString(CultureInfo.CurrentCulture)
                 MyTxtAMax.Text = Math.Min(PixelToA(pMax), MyDS.ParameterInterval.B).ToString(CultureInfo.CurrentCulture)

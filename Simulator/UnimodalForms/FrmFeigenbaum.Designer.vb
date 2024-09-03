@@ -9,7 +9,6 @@ Partial Class FrmFeigenbaum
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
             End If
-            FeigenbaumDiagram.Dispose()
         Finally
             MyBase.Dispose(disposing)
         End Try

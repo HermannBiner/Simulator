@@ -4,7 +4,6 @@
 
 Public Class ClsFeigenbaumController
 
-
     'The dynamic System
     Private MyDS As IIteration
 
@@ -73,7 +72,7 @@ Public Class ClsFeigenbaumController
     Public Sub IterationLoop(p As Integer)
 
         'The startvalue x for the iteration should be the same for all values of a
-        Dim x As Decimal = CDec(MyDS.IterationInterval.A + (MyIterationRange.IntervalWidth * 0.31415926535))
+        Dim x As Decimal = MyDS.CriticalPoint
 
         'Calculate the parameter a for the iteration depending on p
         Dim a As Decimal = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
@@ -81,9 +80,15 @@ Public Class ClsFeigenbaumController
 
         'First, the iteration runs a while until it gets periodic (if the behaviour is not chaotic)
         Dim RuntimeUntilCycle As Integer = 1000 * MyPrecision
-        For n = 1 To RuntimeUntilCycle - 1
+        Dim i As Integer = 1
+
+        Do
             x = MyDS.FN(x)
-        Next
+            i += 1
+        Loop Until (i > RuntimeUntilCycle - 1) Or Not MyDS.IterationInterval.IsNumberInInterval(x)
+        'The second stop condition is due to the DS Julia Real
+
+        i = RuntimeUntilCycle
 
         'After that, the number of iterations must be big enough to draw the cycle
         Dim LengthOfCycle As Integer = CInt(MyPicDiagram.Height * MyIterationRange.IntervalWidth _
@@ -93,13 +98,15 @@ Public Class ClsFeigenbaumController
         LengthOfCycle = Math.Min(LengthOfCycle, 5 * MyPicDiagram.Height)
 
         'Finally , the cycle is drawn
-        Dim Z As New ClsMathpoint(a, x)
+        Dim CyclePoint As New ClsMathpoint(a, x)
 
-        For n = RuntimeUntilCycle To RuntimeUntilCycle + LengthOfCycle
-            MyBmpDiagramGraphics.DrawPoint(Z, SetColor(n), 1)
+        Do
+            MyBmpDiagramGraphics.DrawPoint(CyclePoint, SetColor(i), 1)
             x = MyDS.FN(x)
-            Z.Y = x
-        Next
+            CyclePoint.Y = Math.Max(MyDS.IterationInterval.A, Math.Min(x, MyDS.IterationInterval.B))
+            i += 1
+        Loop Until (i > RuntimeUntilCycle + LengthOfCycle) Or Not MyDS.IterationInterval.IsNumberInInterval(x)
+        'The second stop condition is due to the DS Julia Real
 
         MyPicDiagram.Refresh()
 

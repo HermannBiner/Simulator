@@ -156,7 +156,8 @@ Public Class FrmSensitivity
 
     Private Sub SetDefaultUserData()
 
-        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
+        'default settings
+        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
         TxtStartValue1.Text = (DS.IterationInterval.A +
             (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
         TxtStartValue2.Text = (DS.IterationInterval.A +

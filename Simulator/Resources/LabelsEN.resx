@@ -213,6 +213,10 @@
     <value>Mandelbrot set with exponent n</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ClsMandelbrotReal" xml:space="preserve">
+    <value>Mandelbrot Iteration for Real Numbers</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsMidpointImplicit" xml:space="preserve">
     <value>Implicit Midpoint Rule</value>
     <comment>Cls</comment>

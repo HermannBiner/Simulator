@@ -39,7 +39,6 @@ Public Class FrmMain
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuNewton.Text = LM.GetString("MnuNewton")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
-        MnuBifurcation.Text = FrmMain.LM.GetString("Bifurcation")
         MnuTest.Text = LM.GetString("MnuTest")
         MnuDocumentation.Text = LM.GetString("MnuDocumentation")
         MnuManual.Text = LM.GetString("MnuManual")
@@ -152,7 +151,4 @@ Public Class FrmMain
         FrmJulia.Show()
     End Sub
 
-    Private Sub MnuBifurcation_Click(sender As Object, e As EventArgs) Handles MnuBifurcation.Click
-        FrmBifurcation.Show()
-    End Sub
 End Class

@@ -148,11 +148,12 @@ Public Class FrmTwoDimensions
 
     Private Sub SetDefaultUserData()
 
+        'default settings
+        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
         TxtX.Text = (DS.IterationInterval.A +
             (DS.IterationInterval.IntervalWidth * 0.414)).ToString(CultureInfo.CurrentCulture)
         TxtY.Text = (DS.IterationInterval.A +
             (DS.IterationInterval.IntervalWidth * 0.407)).ToString(CultureInfo.CurrentCulture)
-        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture)
         CboExperiment.SelectedIndex = 0
         TxtX.Select()
 

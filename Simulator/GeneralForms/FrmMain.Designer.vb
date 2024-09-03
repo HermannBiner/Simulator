@@ -43,7 +43,6 @@ Partial Class FrmMain
         MnuComplexIteration = New ToolStripMenuItem()
         MnuNewton = New ToolStripMenuItem()
         MnuJuliaSet = New ToolStripMenuItem()
-        MnuBifurcation = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
         MnuDocumentation = New ToolStripMenuItem()
         MnuManual = New ToolStripMenuItem()
@@ -105,31 +104,31 @@ Partial Class FrmMain
         ' MnuIteration
         ' 
         MnuIteration.Name = "MnuIteration"
-        MnuIteration.Size = New Size(180, 22)
+        MnuIteration.Size = New Size(157, 22)
         MnuIteration.Text = "Iteration"
         ' 
         ' MnuSensitivity
         ' 
         MnuSensitivity.Name = "MnuSensitivity"
-        MnuSensitivity.Size = New Size(180, 22)
+        MnuSensitivity.Size = New Size(157, 22)
         MnuSensitivity.Text = "Sensitivity"
         ' 
         ' MnuHistogram
         ' 
         MnuHistogram.Name = "MnuHistogram"
-        MnuHistogram.Size = New Size(180, 22)
+        MnuHistogram.Size = New Size(157, 22)
         MnuHistogram.Text = "Histogram"
         ' 
         ' MnuTwoDimensions
         ' 
         MnuTwoDimensions.Name = "MnuTwoDimensions"
-        MnuTwoDimensions.Size = New Size(180, 22)
+        MnuTwoDimensions.Size = New Size(157, 22)
         MnuTwoDimensions.Text = "TwoDimensions"
         ' 
         ' MnuFeigenbaum
         ' 
         MnuFeigenbaum.Name = "MnuFeigenbaum"
-        MnuFeigenbaum.Size = New Size(180, 22)
+        MnuFeigenbaum.Size = New Size(157, 22)
         MnuFeigenbaum.Text = "Feigenbaum"
         ' 
         ' MnuMechanics
@@ -165,7 +164,7 @@ Partial Class FrmMain
         ' 
         ' MnuComplexIteration
         ' 
-        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet, MnuBifurcation})
+        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet})
         MnuComplexIteration.Name = "MnuComplexIteration"
         MnuComplexIteration.Size = New Size(111, 22)
         MnuComplexIteration.Text = "ComplexIteration"
@@ -173,20 +172,14 @@ Partial Class FrmMain
         ' MnuNewton
         ' 
         MnuNewton.Name = "MnuNewton"
-        MnuNewton.Size = New Size(132, 22)
+        MnuNewton.Size = New Size(180, 22)
         MnuNewton.Text = "Newton"
         ' 
         ' MnuJuliaSet
         ' 
         MnuJuliaSet.Name = "MnuJuliaSet"
-        MnuJuliaSet.Size = New Size(132, 22)
+        MnuJuliaSet.Size = New Size(180, 22)
         MnuJuliaSet.Text = "JuliaSet"
-        ' 
-        ' MnuBifurcation
-        ' 
-        MnuBifurcation.Name = "MnuBifurcation"
-        MnuBifurcation.Size = New Size(132, 22)
-        MnuBifurcation.Text = "Bifurcation"
         ' 
         ' MnuTest
         ' 
@@ -220,7 +213,7 @@ Partial Class FrmMain
         MnuInfo.Size = New Size(143, 22)
         MnuInfo.Text = "Info"
         ' 
-        ' Main
+        ' FrmMain
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -228,8 +221,8 @@ Partial Class FrmMain
         Controls.Add(MnuMain)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MnuMain
-        Margin = New Padding(2, 2, 2, 2)
-        Name = "Main"
+        Margin = New Padding(2)
+        Name = "FrmMain"
         Text = "Simulator"
         WindowState = FormWindowState.Maximized
         MnuMain.ResumeLayout(False)
@@ -264,5 +257,4 @@ Partial Class FrmMain
     Friend WithEvents MnuEnglish As ToolStripMenuItem
     Friend WithEvents MnuGerman As ToolStripMenuItem
     Friend WithEvents MnuNumericMethods As ToolStripMenuItem
-    Friend WithEvents MnuBifurcation As ToolStripMenuItem
 End Class

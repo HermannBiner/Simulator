@@ -175,7 +175,7 @@ Public Class FrmIteration
     Private Sub SetDefaultUserData()
 
         'default settings
-        TxtParameter.Text = DS.ParameterInterval.B.ToString(CultureInfo.CurrentCulture) 'this is the chaotic case
+        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
         TxtStartValue.Text = (DS.IterationInterval.A +
             (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
         TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)

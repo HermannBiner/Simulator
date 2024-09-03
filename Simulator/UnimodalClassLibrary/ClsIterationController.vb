@@ -31,6 +31,8 @@ Public Class ClsIterationController
     Private MyTargetValue As Decimal
     Private MyTargetProtocol As String
     Private MyTxtStartValue As TextBox
+    'How is the protocol defined
+    Private SignProtocol As Decimal
 
     'Status Parameters
     'Number of Iteration Steps
@@ -125,6 +127,7 @@ Public Class ClsIterationController
     WriteOnly Property TargetProtocol As String
         Set(value As String)
             MyTargetProtocol = value
+            SignProtocol = Math.Sign(MyDS.ChaoticParameter)
         End Set
     End Property
 
@@ -283,11 +286,13 @@ Public Class ClsIterationController
         MyValueList.SelectedIndex = MyValueList.Items.Count - 1
 
         'LstProtocol is filled with the according protocol-value
-        If u < MyDS.IterationInterval.A + ((MyDS.IterationInterval.B - MyDS.IterationInterval.A) / 2) Then
+
+        If SignProtocol * u < SignProtocol * (MyDS.IterationInterval.A + ((MyDS.IterationInterval.B - MyDS.IterationInterval.A) / 2)) Then
             MyProtocol.Items.Add("0")
         Else
             MyProtocol.Items.Add("1")
         End If
+
         MyProtocol.SelectedIndex = MyProtocol.Items.Count - 1
 
     End Sub

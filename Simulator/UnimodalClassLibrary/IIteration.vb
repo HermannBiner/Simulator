@@ -20,6 +20,12 @@ Public Interface IIteration
     'Splitpoints of the Feigenbaum diagram
     ReadOnly Property Splitpoints As List(Of Decimal)
 
+    'Critical Point for attractive basins
+    ReadOnly Property CriticalPoint As Decimal
+
+    'The Chaotic Parameter
+    ReadOnly Property ChaoticParameter As Decimal
+
     'the interval in which the iteration values are
     ReadOnly Property IterationInterval As ClsInterval
 
