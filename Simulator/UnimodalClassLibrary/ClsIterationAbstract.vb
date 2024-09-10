@@ -40,7 +40,10 @@ Public MustInherit Class ClsIterationAbstract
         End Set
     End Property
 
-    WriteOnly Property Parameter As Decimal Implements IIteration.Parameter
+    Overridable Property Parameter As Decimal Implements IIteration.Parameter
+        Get
+            Parameter = MyParameter
+        End Get
         Set(Value As Decimal)
             MyParameter = Value
         End Set

@@ -50,7 +50,7 @@ Public Class FrmJulia
         BtnStop.Text = FrmMain.LM.GetString("Stop")
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         LblTime.Text = FrmMain.LM.GetString("Time")
-        LblSteps.Text = FrmMain.LM.GetString("Steps")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("Steps")
         LblProtocol.Text = FrmMain.LM.GetString("ProtocolJulia")
         ChkProtocol.Text = FrmMain.LM.GetString("Protocol")
         GrpColors.Text = FrmMain.LM.GetString("Colors")

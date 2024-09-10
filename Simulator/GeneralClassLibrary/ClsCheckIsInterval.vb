@@ -1,4 +1,5 @@
 ﻿'Checks if the manual input in two textboxes represents an interval
+
 'Status Checked
 
 Public Class ClsCheckIsInterval

@@ -52,19 +52,17 @@ Public Class FrmSensitivity
         CboFunction.SelectedIndex = 0
         CboIterationDepth.SelectedIndex = 0
 
-        IsFormLoaded = True
-
         'Default Presentation
         SetPresentation()
-
         SetDS()
+        IsFormLoaded = True
 
     End Sub
 
     Private Sub InitializeLanguage()
 
         Text = FrmMain.LM.GetString("Sensitivity")
-        LblSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         BtnStartIteration.Text = FrmMain.LM.GetString("StartIteration")
         OptDifference.Text = FrmMain.LM.GetString("Difference12")
@@ -91,15 +89,15 @@ Public Class FrmSensitivity
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim IteratorName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(IteratorName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(DSName)
             Next
         Else
             Throw New ArgumentNullException("MissingImplementation")
@@ -144,7 +142,7 @@ Public Class FrmSensitivity
 
         With SensitivityController
             .DS = DS
-            .LblN = LblNumberOfSteps
+            .LblN = LblSteps
             .PicDiagram = PicDiagram
             .Presentation = Presentation
             .ValueList1 = LstValueList1
@@ -246,15 +244,15 @@ Public Class FrmSensitivity
     Private Function IsUserDataOK() As Boolean
 
         'Is the value of TxtParameter in the Iteration Interval?
-        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim MyCheckStartValue1 = New ClsCheckUserData(TxtStartValue1, DS.IterationInterval)
-        Dim MyCheckStartValue2 = New ClsCheckUserData(TxtStartValue2, DS.IterationInterval)
+        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim CheckStartValue1 = New ClsCheckUserData(TxtStartValue1, DS.IterationInterval)
+        Dim CheckStartValue2 = New ClsCheckUserData(TxtStartValue2, DS.IterationInterval)
 
         Dim StretchInterval = New ClsInterval(1, 10)
-        Dim MyCheckStretchInterval = New ClsCheckUserData(TxtxStretching, StretchInterval)
+        Dim CheckStretchInterval = New ClsCheckUserData(TxtxStretching, StretchInterval)
 
-        Return MyCheckParameter.IsTxtValueAllowed And MyCheckStartValue1.IsTxtValueAllowed _
-            And MyCheckStartValue2.IsTxtValueAllowed And MyCheckStretchInterval.IsTxtValueAllowed
+        Return CheckParameter.IsTxtValueAllowed And CheckStartValue1.IsTxtValueAllowed _
+            And CheckStartValue2.IsTxtValueAllowed And CheckStretchInterval.IsTxtValueAllowed
 
     End Function
 

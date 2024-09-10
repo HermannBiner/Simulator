@@ -14,7 +14,6 @@ Public Class ClsIterationController
     Private MyPicDiagram As PictureBox
     Private MyPicDiagramSize As Integer
 
-
     'The Graphic Helper for PicDiagram
     Private MyPicGraphics As ClsGraphicTool
 

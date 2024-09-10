@@ -54,16 +54,14 @@ Public Class FrmHistogram
     Private Sub FrmHistogram_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         CboFunction.SelectedIndex = 0
-
-        IsFormLoaded = True
         SetDS()
-
+        IsFormLoaded = True
     End Sub
 
     Private Sub InitializeLanguage()
 
         Text = FrmMain.LM.GetString("Histogram")
-        LblSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         BtnStart.Text = FrmMain.LM.GetString("Start")
         BtnStop.Text = FrmMain.LM.GetString("Stop")
@@ -138,7 +136,7 @@ Public Class FrmHistogram
 
         With HistogramController
             .DS = DS
-            .LblN = LblNumberOfSteps
+            .LblN = LblSteps
             .PicDiagram = PicDiagram
             .IterationStatus = ClsGeneral.EnIterationStatus.Stopped
         End With
@@ -259,10 +257,10 @@ Public Class FrmHistogram
     Private Function IsUserDataOK() As Boolean
 
         'Is the value of TxtParameter in the Iteration Interval?
-        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim MyCheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
+        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim CheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
 
-        Return MyCheckParameter.IsTxtValueAllowed And MyCheckStartValue.IsTxtValueAllowed
+        Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
 
     End Function
 

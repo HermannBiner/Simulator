@@ -13,223 +13,23 @@
 Imports System.Globalization
 
 Public Class ClsStadiumBilliardball
-    Implements IBilliardball, ICDiagramBilliard
+    Inherits ClsBilliardBallAbstract
 
-    'The actual position of the Ball is drawn into this PictureBox
-    'and shown by the Refresh-Method
-    Private MyBilliardtable As PictureBox
-    Private MyBilliardtableGraphics As ClsGraphicTool
-
-    'The permanent Orbit of the Ball is drawn into the BitMap
-    Private MyMapBilliardtable As Bitmap
-    Private MyMapBilliardtableGraphics As ClsGraphicTool
-
-    'The ball draws as well into the Phase Portrait
-    Private MyPhaseportrait As PictureBox
-    Private MyPhaseportraitGraphics As ClsGraphicTool
-
-    'and protocols its Position (Parameter t and reflexion-angle Alfa) into a ListBox
-    Private MyParameterListbox As ListBox
-
-    'The class for general mathematical Calculations
-    Private ReadOnly MyMathhelper As ClsMathhelperBilliard
-
-    'The Value Ranges of the relevant Parameters
-    'Reflexion Angle between the Ball-Movement-Vector and the Tangent in the Hit Point
-    'the angle is in ]0, pi[
-    Private ReadOnly MyAlfaValuerange As ClsInterval
-
-    'Value Range of the Parameter t that defines the Hit Point
-    'here it is the distance between the Hit Point and a Zero Point on the Border of the Table
-    Private MyTValuerange As ClsInterval
-
-    'Collection of the two ValueRanges for the C-Diagram
-    Private ReadOnly MyValueParameters As List(Of ClsValueParameter)
-
-    'The Value Range of the Mathematical Coordinates - Standard is the Interval [-1,1]
-    'and the Coordinate System as Square [-1,1] x [-1,1]
-    Private ReadOnly MyMathValuerange As ClsInterval
-
-    'Parameter that defines the actual hit point
-    'see mathematical documentation
-    Private MyT As Decimal
-
-    'This is the angle between the actual moving-direction and the positive x-axis
-    Private MyPhi As Decimal
-
-    'Profile of the Stadium
-    'a and b are the half sides of the rectangle in the middle of the stadium
-    'the corner points of this rectangle have the coordinates (+-a, +-b)
-    'and the half circles on the border of the stadium the radius b
-    Private a As Decimal
-    Private b As Decimal
-
-    'The parameter C defines the profile of the stadium: b = C*a
-    Private MyC As Decimal
-
-    'Properties of the Ball
-    Private MyColor As Brush
-
-    'Color of the Orbit
-    Private MyTrackcolor As Color
-
-    'Size in pixel units
-    Private MySize As Integer
-    Private MySpeed As Integer = 5
-
-    'Size of the point in the phase portrait
-    Const p As Integer = 2
-
-    'Start Position of the Ball, set by the User
-    Private UserStartposition As ClsMathpoint
-    Private UserEndposition As ClsMathpoint
-
-    'Control ot Setting these Start Parameters
-    Private MyStartpositionSet As Boolean
-    Private MyStartangleSet As Boolean
 
     'SECTOR INITIALIZATION
 
-    Public Sub New()
-
-        MyMathhelper = New ClsMathhelperBilliard
-        MyMathValuerange = New ClsInterval(-1, 1)
-        MyAlfaValuerange = New ClsInterval(0, CDec(Math.PI))
-
-        'The ValueRange of MyT is only known, after a, b and C are set
-        'here is set as default C = 1 (a = b)
-        MyTValuerange = New ClsInterval(0, CDec(0.95 * (4 + 2 * Math.PI)))
-
-        MyValueParameters = New List(Of ClsValueParameter)
-
-        Dim ValueRange As ClsValueParameter
-        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValuerange)
-        MyValueParameters.Add(ValueRange)
-
-        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValuerange)
-        MyValueParameters.Add(ValueRange)
-
-        'Default
-        MyC = 2
-
-    End Sub
-
-    WriteOnly Property Billiardtable As PictureBox Implements IBilliardball.Billiardtable
-        Set(value As PictureBox)
-            MyBilliardtable = value
-            MyBilliardtableGraphics = New ClsGraphicTool(MyBilliardtable, MyMathValuerange, MyMathValuerange)
-        End Set
-    End Property
-
-    WriteOnly Property MapBilliardtable As Bitmap Implements IBilliardball.MapBilliardtable
-        Set(value As Bitmap)
-            MyMapBilliardtable = value
-            MyMapBilliardtableGraphics = New ClsGraphicTool(MyMapBilliardtable, MyMathValuerange, MyMathValuerange)
-        End Set
-    End Property
-
-    Property C As Decimal Implements IBilliardball.C
-        Get
-            C = MyC
-        End Get
-        Set(value As Decimal)
-
-            MyC = value
-
-            'Because of better visibility we set a = 0.95 (instead of 1)
-            a = CDec(0.95) / (1 + MyC)
-            b = MyC * a
-
-            'Now, the perimeter of the Billiard Table is known and that is the Value Range of T
-            MyTValuerange = New ClsInterval(0, 4 * a + 2 * b * CDec(Math.PI))
-
-            'Standard Start Point is (0/b)
-            UserStartposition = New ClsMathpoint(a, b)
-            DrawUserStartposition(False)
-
-            'the final EndPosition is set later
-            UserEndposition = New ClsMathpoint(-a, -b)
-
-        End Set
-    End Property
-
-    Property CParameter As Decimal Implements ICDiagramBilliard.CParameter
-        Get
-            CParameter = MyC
-        End Get
-        Set(value As Decimal)
-
-            MyC = value
-
-            'Because of better visibility we set a = 0.95 (instead of 1)
-            a = CDec(0.95) / (1 + MyC)
-            b = MyC * a
-
-            'Now, the perimeter of the Billiard Table is known and that is the Value Range of T
-            MyTValuerange = New ClsInterval(0, 4 * a + 2 * b * CDec(Math.PI))
-
-        End Set
-    End Property
-
-    WriteOnly Property Phaseportrait As PictureBox Implements IBilliardball.Phaseportrait
-        Set(value As PictureBox)
-            MyPhaseportrait = value
-            MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, MyTValuerange, MyAlfaValuerange)
-        End Set
-    End Property
-
-    WriteOnly Property ParameterProtocol As ListBox Implements IBilliardball.ParameterProtocol
-        Set(value As ListBox)
-            MyParameterListbox = value
-        End Set
-    End Property
-
-    WriteOnly Property Ballcolor As Brush Implements IBilliardball.Ballcolor
-        Set(value As Brush)
-            MyColor = value
-            MyTrackcolor = DirectCast(MyColor, SolidBrush).Color
-        End Set
-    End Property
-
-    WriteOnly Property Ballsize As Integer Implements IBilliardball.Ballsize
-        Set(value As Integer)
-            MySize = value
-        End Set
-    End Property
-
-    WriteOnly Property Ballspeed As Integer Implements IBilliardball.Ballspeed
-        Set(value As Integer)
-            MySpeed = value
-        End Set
-    End Property
-
-    Property IsStartpositionSet As Boolean Implements IBilliardball.IsStartpositionSet
-        Get
-            IsStartpositionSet = MyStartpositionSet
-        End Get
-        Set(value As Boolean)
-            MyStartpositionSet = value
-        End Set
-    End Property
-
-    Property IsStartangleSet As Boolean Implements IBilliardball.IsStartangleSet
-        Get
-            IsStartangleSet = MyStartangleSet
-        End Get
-        Set(value As Boolean)
-            MyStartangleSet = value
-        End Set
-    End Property
-
-    Property Startparameter As Decimal Implements IBilliardball.Startparameter
+    Overrides Property Startparameter As Decimal
         Get
             Startparameter = MyT
         End Get
-
         'The user can set the Startparameter t also manually (when not setting it by the mouse)
         'and transmit this value to the Ball
         Set(value As Decimal)
             MyT = value
+
+            If IsNothing(UserStartposition) Then
+                UserStartposition = New ClsMathpoint(0, 0)
+            End If
 
             'and then, the Startposition according to the mathematical documentation is
             Dim StartPointBall As ClsMathpoint = CalculateMathPointFromT(MyT)
@@ -237,23 +37,11 @@ Public Class ClsStadiumBilliardball
             UserStartposition.Y = StartPointBall.Y
 
             DrawUserStartposition(True)
-            MyStartpositionSet = True
+            MyStartPositionSet = True
         End Set
     End Property
 
-    ReadOnly Property CParameterRange As ClsInterval Implements ICDiagramBilliard.CParameterRange
-        Get
-            CParameterRange = New ClsInterval(CDec(0.5), CDec(2))
-        End Get
-    End Property
-
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements ICDiagramBilliard.ValueParameters
-        Get
-            ValueParameters = MyValueParameters
-        End Get
-    End Property
-
-    WriteOnly Property Startangle As Decimal Implements IBilliardball.Startangle
+    Overrides WriteOnly Property Startangle As Decimal
 
         Set(value As Decimal)
 
@@ -270,6 +58,10 @@ Public Class ClsStadiumBilliardball
             'Now the angle between the next moving-direction and the positive x-axis is:
             MyPhi = psi + alfa
 
+            If IsNothing(UserEndposition) Then
+                UserEndposition = New ClsMathpoint(0, 0)
+            End If
+
             'With these parameters, we can calculate the next Hit Point
             'and its Parameter NextT
             Dim nextT As Decimal = ParameterOfNextHitpoint(MyT, MyPhi)
@@ -278,38 +70,14 @@ Public Class ClsStadiumBilliardball
             UserEndposition.X = Userposition.X
             UserEndposition.Y = Userposition.Y
             DrawUserEndposition(True)
-            MyStartangleSet = True
+            MyStartAngleSet = True
 
         End Set
     End Property
 
-    Public Sub DrawBilliardTable() Implements IBilliardball.DrawBilliardtable
-
-        With MyMapBilliardtableGraphics
-            'Coordinate System
-            .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
-
-            'Draw the rectangle in the middle of the stadium
-            .DrawLine(New ClsMathpoint(-a, -b), New ClsMathpoint(a, -b), Color.Blue, 1)
-            .DrawLine(New ClsMathpoint(-a, b), New ClsMathpoint(a, b), Color.Blue, 1)
-
-            'Draw the half-circles including their midpoints
-            .DrawCircleArc(New ClsMathpoint(-a, 0), b, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
-            .DrawPoint(New ClsMathpoint(-a, 0), Brushes.Blue, 2)
-            .DrawCircleArc(New ClsMathpoint(a, 0), b, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
-            .DrawPoint(New ClsMathpoint(a, 0), Brushes.Blue, 2)
-        End With
-
-    End Sub
-
-    Public Sub ClearBilliardTable() Implements IBilliardball.ClearBilliardTable
-        MyMapBilliardtableGraphics.Clear(Color.White)
-    End Sub
-
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 
-    Public Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal _
-        Implements IBilliardball.SetAndDrawUserStartposition
+    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal
 
         Dim t As Decimal = SetUserStartposition(Mouseposition)
         DrawUserStartposition(definitive)
@@ -323,37 +91,49 @@ Public Class ClsStadiumBilliardball
 
         'Position of the Ball in math. coordinates, set by the Mouseposition in Pixel Coordinates
         'this startposition is still at the mouseposition (and not on the border of the Stadium)
-        UserStartposition = MyMapBilliardtableGraphics.PixelToMathpoint(Mouseposition)
+        UserStartposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
         'Parameter of this Startpoint
-        Dim t As Decimal = CalculateTFromMathPoint(UserStartposition)
-        MyT = t
+        MyT = CalculateTFromMathPoint(UserStartposition)
 
         'Now, the Startposition is set on the border of the Ellipse
-        Dim StartpointBall As ClsMathpoint = CalculateMathPointFromT(t)
+        Dim StartpointBall As ClsMathpoint = CalculateMathPointFromT(MyT)
         UserStartposition.X = StartpointBall.X
         UserStartposition.Y = StartpointBall.Y
 
-        Return t
+        Return MyT
 
     End Function
+
+    Public Overrides Sub DrawFirstUserStartposition()
+
+        'Standard Start Point is (0/b)
+        UserStartposition = New ClsMathpoint(MyA, MyB)
+
+        'the final EndPosition is set later
+        UserEndposition = New ClsMathpoint(-MyA, -MyB)
+
+        'these Parameters are set later by moving the Mouse
+        DrawUserStartposition(False)
+
+    End Sub
 
     Private Sub DrawUserStartposition(definitive As Boolean)
         If definitive Then
 
             'The Ball is drawn permanentely into the BitMap
-            MyMapBilliardtableGraphics.DrawPoint(UserStartposition, MyColor, MySize)
-            MyBilliardtable.Refresh()
+            MyBmpGraphics.DrawPoint(UserStartposition, MyColor, Size)
+            MyPicDiagram.Refresh()
         Else
 
             'The actual and still moving Ball is drawn into PicDiagram
-            MyBilliardtable.Refresh()
-            MyBilliardtableGraphics.DrawPoint(UserStartposition, MyColor, MySize)
+            MyPicDiagram.Refresh()
+            MyPicGraphics.DrawPoint(UserStartposition, MyColor, Size)
         End If
     End Sub
 
-    Public Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal _
-        Implements IBilliardball.SetAndDrawUserEndposition
+    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal _
+
 
         'The Endposition is definied by the angle phi of the next moving direction
         Dim phi As Decimal = SetUserEndposition(Mouseposition)
@@ -369,7 +149,7 @@ Public Class ClsStadiumBilliardball
 
         'The Endposition of the Ball in math. coordinates
         'is just equal to the Mouseposition in Pixels
-        UserEndposition = MyMapBilliardtableGraphics.PixelToMathpoint(Mouseposition)
+        UserEndposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
         'Now, we need the Parameter t according to this Point
         Dim t As Decimal = CalculateTFromMathPoint(UserEndposition)
@@ -394,24 +174,26 @@ Public Class ClsStadiumBilliardball
         If definitive Then
 
             'The Endposition of the Ball is drawn permanentely into the BitMap
-            MyMapBilliardtableGraphics.DrawPoint(UserEndposition, MyColor, MySize)
-            MyBilliardtable.Refresh()
+            MyBmpGraphics.DrawPoint(UserEndposition, MyColor, Size)
+            MyPicDiagram.Refresh()
 
             'The Track of the first Hit of the Ball is drawn only into the PicDiagram
-            MyBilliardtableGraphics.DrawLine(UserStartposition, UserEndposition, MyTrackcolor, 1)
+            MyPicGraphics.DrawLine(UserStartposition, UserEndposition,
+                                   DirectCast(MyColor, SolidBrush).Color, 1)
         Else
-            MyBilliardtable.Refresh()
+            MyPicDiagram.Refresh()
 
             'The actual Ballposition is drawn only into the PicDiagram
-            MyBilliardtableGraphics.DrawPoint(UserEndposition, MyColor, MySize)
-            MyBilliardtableGraphics.DrawLine(UserStartposition, UserEndposition, MyTrackcolor, 1)
+            MyPicGraphics.DrawPoint(UserEndposition, MyColor, Size)
+            MyPicGraphics.DrawLine(UserStartposition, UserEndposition,
+                                   DirectCast(MyColor, SolidBrush).Color, 1)
         End If
 
     End Sub
 
     'SECTOR ITERATION
 
-    Public Sub Iteration(NumberOfSteps As Integer) Implements IBilliardball.Iteration
+    Public Overrides Sub IterationStep()
 
         'Startpoint of the actual part of the Orbit
         Dim Startpoint As New ClsMathpoint
@@ -422,12 +204,9 @@ Public Class ClsStadiumBilliardball
         'and the according EndPoint
         Dim Endpoint As New ClsMathpoint
 
-        Dim i As Integer
 
-        For i = 1 To NumberOfSteps
-
-            'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
-            Dim TempStartpoint As ClsMathpoint = CalculateMathPointFromT(MyT)
+        'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
+        Dim TempStartpoint As ClsMathpoint = CalculateMathPointFromT(MyT)
 
             Startpoint.X = TempStartpoint.X
             Startpoint.Y = TempStartpoint.Y
@@ -449,11 +228,10 @@ Public Class ClsStadiumBilliardball
             'in addition, we calculate the angle of the following movement
             MyPhi = CalculateNextPhi(MyT, MyPhi)
 
-        Next i
 
     End Sub
 
-    Public Function GetNextPoint(ActualPoint As ClsValuePair) As ClsValuePair Implements ICDiagramBilliard.GetNextPoint
+    Public Overrides Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
 
         MyT = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y
@@ -506,13 +284,14 @@ Public Class ClsStadiumBilliardball
             End If
 
             'Draw the trace of this part of the Orbit permanentely into the BitMap
-            MyMapBilliardtableGraphics.DrawLine(ActualPosition, Nextposition, MyTrackcolor, 1)
+            MyBmpGraphics.DrawLine(ActualPosition, Nextposition,
+                                   DirectCast(MyColor, SolidBrush).Color, 1)
 
             'and show the trace by refreshing the Diagram
-            MyBilliardtable.Refresh()
+            MyPicDiagram.Refresh()
 
             'and draw the new Ball Position
-            MyBilliardtableGraphics.DrawPoint(Nextposition, MyColor, MySize)
+            MyPicGraphics.DrawPoint(Nextposition, MyColor, Size)
 
             ActualPosition.X = Nextposition.X
             ActualPosition.Y = Nextposition.Y
@@ -528,16 +307,16 @@ Public Class ClsStadiumBilliardball
         Dim OK As Boolean = False
 
         'Is the Ball in the Rectangle?
-        If -a <= Position.X And Position.X <= a Then
-            If -b <= Position.Y And Position.Y <= b Then
+        If -MyA <= Position.X And Position.X <= MyA Then
+            If -MyB <= Position.Y And Position.Y <= MyB Then
                 OK = True
             End If
         End If
 
         'Is the Ball in the left half-Circle
         If Not OK Then
-            If -a - b <= Position.Y And Position.X <= a Then
-                If Position.X * Position.X + Position.Y * Position.Y <= b * b Then
+            If -MyA - MyB <= Position.Y And Position.X <= MyA Then
+                If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
                     OK = True
                 End If
             End If
@@ -545,8 +324,8 @@ Public Class ClsStadiumBilliardball
 
         'Is the Ball in the right half-Circle?
         If Not OK Then
-            If a <= Position.X And Position.X <= a + b Then
-                If Position.X * Position.X + Position.Y * Position.Y <= b * b Then
+            If MyA <= Position.X And Position.X <= MyA + MyB Then
+                If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
                     OK = True
                 End If
             End If
@@ -582,24 +361,24 @@ Public Class ClsStadiumBilliardball
         If phi <> 0 And Math.Abs(phi - Math.PI) > 0 Then
 
             'the Orbit intersects the line y = b
-            t = CDec((b - Startpoint.Y) / Math.Sin(phi))
+            t = CDec((MyB - Startpoint.Y) / Math.Sin(phi))
 
             'if the x-coordinate is in [-a,a], then the intersection is found
             'but we have to exclude t = 0 (the StartPoint)
             Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-            If Math.Abs(Intersection.X) <= a And Math.Abs(t) > 0.0000001 Then
-                Intersection.Y = b
+            If Math.Abs(Intersection.X) <= MyA And Math.Abs(t) > 0.0000001 Then
+                Intersection.Y = MyB
                 IsIntersectionFound = True
             Else
 
                 'the Orbit intersects the line y = -b
-                t = CDec((-b - Startpoint.Y) / Math.Sin(phi))
+                t = CDec((-MyB - Startpoint.Y) / Math.Sin(phi))
 
                 'if the x-coordinate is in [-a,a], then the intersection is found
                 'but we have to exclude t = 0 (the StartPoint)
                 Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-                If Math.Abs(Intersection.X) <= a And Math.Abs(t) > 0.0000001 Then
-                    Intersection.Y = -b
+                If Math.Abs(Intersection.X) <= MyA And Math.Abs(t) > 0.0000001 Then
+                    Intersection.Y = -MyB
                     IsIntersectionFound = True
                 End If
             End If
@@ -610,8 +389,8 @@ Public Class ClsStadiumBilliardball
             Dim TempC As Decimal
 
             'The Orbit intersects the right half-Circle
-            TempB = CDec((Startpoint.X - a) * Math.Cos(phi) + Startpoint.Y * Math.Sin(phi))
-            TempC = (Startpoint.X - a) * (Startpoint.X - a) + Startpoint.Y * Startpoint.Y - b * b
+            TempB = CDec((Startpoint.X - MyA) * Math.Cos(phi) + Startpoint.Y * Math.Sin(phi))
+            TempC = (Startpoint.X - MyA) * (Startpoint.X - MyA) + Startpoint.Y * Startpoint.Y - MyB * MyB
 
             'The discriminant must be positive
             If TempB * TempB - TempC >= 0 Then
@@ -619,7 +398,7 @@ Public Class ClsStadiumBilliardball
                 'first try for a solution of the quadratic equation
                 t = -TempB + CDec(Math.Sqrt(TempB * TempB - TempC))
                 Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-                If Intersection.X > a And Math.Abs(t) > 0.0000001 Then
+                If Intersection.X > MyA And Math.Abs(t) > 0.0000001 Then
                     Intersection.Y = Startpoint.Y + t * CDec(Math.Sin(phi))
                     IsIntersectionFound = True
                 Else
@@ -627,7 +406,7 @@ Public Class ClsStadiumBilliardball
                     'second try for a solution of the quadratic equation
                     t = -TempB - CDec(Math.Sqrt(TempB * TempB - TempC))
                     Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-                    If Intersection.X > a And Math.Abs(t) > 0.0000001 Then
+                    If Intersection.X > MyA And Math.Abs(t) > 0.0000001 Then
                         Intersection.Y = Startpoint.Y + t * CDec(Math.Sin(phi))
                         IsIntersectionFound = True
                     End If
@@ -637,8 +416,8 @@ Public Class ClsStadiumBilliardball
             If Not IsIntersectionFound Then
 
                 'The Orbit intersects the left half-Circle
-                TempB = CDec((Startpoint.X + a) * Math.Cos(phi) + Startpoint.Y * Math.Sin(phi))
-                TempC = (Startpoint.X + a) * (Startpoint.X + a) + Startpoint.Y * Startpoint.Y - b * b
+                TempB = CDec((Startpoint.X + MyA) * Math.Cos(phi) + Startpoint.Y * Math.Sin(phi))
+                TempC = (Startpoint.X + MyA) * (Startpoint.X + MyA) + Startpoint.Y * Startpoint.Y - MyB * MyB
 
                 'The discriminant must be positive
                 If TempB * TempB - TempC >= 0 Then
@@ -646,7 +425,7 @@ Public Class ClsStadiumBilliardball
                     'first try for a solution of the quadratic equation
                     t = -TempB + CDec(Math.Sqrt(TempB * TempB - TempC))
                     Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-                    If Intersection.X < -a And Math.Abs(t) > 0.0000001 Then
+                    If Intersection.X < -MyA And Math.Abs(t) > 0.0000001 Then
                         Intersection.Y = Startpoint.Y + t * CDec(Math.Sin(phi))
                         IsIntersectionFound = True
                     Else
@@ -654,7 +433,7 @@ Public Class ClsStadiumBilliardball
                         'second try for a solution of the quadratic equation
                         t = -TempB - CDec(Math.Sqrt(TempB * TempB - TempC))
                         Intersection.X = Startpoint.X + t * CDec(Math.Cos(phi))
-                        If Intersection.X < -a And Math.Abs(t) > 0.0000001 Then
+                        If Intersection.X < -MyA And Math.Abs(t) > 0.0000001 Then
                             Intersection.Y = Startpoint.Y + t * CDec(Math.Sin(phi))
                             IsIntersectionFound = True
                         End If
@@ -700,16 +479,19 @@ Public Class ClsStadiumBilliardball
         If MyPhaseportraitGraphics IsNot Nothing Then
             Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
             MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
-            MyParameterListbox.Items.Add(FrmMain.LM.GetString(MyTrackcolor.Name) & " t/alfa = " &
-                                         MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
-            MyParameterListbox.Refresh()
+            If MyValueProtocol IsNot Nothing Then
+                MyValueProtocol.Items.Add(FrmMain.LM.GetString(
+                                     DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
+                                     MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+                MyValueProtocol.Refresh()
+            End If
         End If
 
         Return nextPhi
 
     End Function
 
-    Public Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal Implements IBilliardball.CalculateAlfa
+    Public Overrides Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal
 
         'This method calculates the next reflection angle Alfa
 
@@ -732,15 +514,15 @@ Public Class ClsStadiumBilliardball
         Dim psi As Decimal
 
         Select Case True
-            Case t <= 2 * a
+            Case t <= 2 * MyA
                 psi = CDec(Math.PI)
-            Case t > 2 * a And t < 2 * a + b * CDec(Math.PI)
-                Dim angle As Decimal = (t - 2 * a) / b
+            Case t > 2 * MyA And t < 2 * MyA + MyB * CDec(Math.PI)
+                Dim angle As Decimal = (t - 2 * MyA) / MyB
                 psi = CDec(Math.PI) + angle
-            Case t >= 2 * a + b * CDec(Math.PI) And t <= 4 * a + b * CDec(Math.PI)
+            Case t >= 2 * MyA + MyB * CDec(Math.PI) And t <= 4 * MyA + MyB * CDec(Math.PI)
                 psi = 0
             Case Else
-                Dim angle As Decimal = (t - 4 * a - b * CDec(Math.PI)) / b
+                Dim angle As Decimal = (t - 4 * MyA - MyB * CDec(Math.PI)) / MyB
                 psi = angle
         End Select
 
@@ -755,23 +537,23 @@ Public Class ClsStadiumBilliardball
 
         Dim Ballpoint As New ClsMathpoint(0, 0)
 
-        t = t Mod (4 * a + 2 * b * CDec(Math.PI))
+        t = t Mod (4 * MyA + 2 * MyB * CDec(Math.PI))
 
         Select Case True
-            Case t <= 2 * a
-                Ballpoint.X = a - t
-                Ballpoint.Y = b
-            Case t > 2 * a And t < 2 * a + b * CDec(Math.PI)
-                Dim Angle As Decimal = (t - 2 * a) / b
-                Ballpoint.X = -a - b * CDec(Math.Sin(Angle))
-                Ballpoint.Y = b * CDec(Math.Cos(Angle))
-            Case t >= 2 * a + b * CDec(Math.PI) And t <= 4 * a + b * CDec(Math.PI)
-                Ballpoint.X = t - 3 * a - b * CDec(Math.PI)
-                Ballpoint.Y = -b
+            Case t <= 2 * MyA
+                Ballpoint.X = MyA - t
+                Ballpoint.Y = MyB
+            Case t > 2 * MyA And t < 2 * MyA + MyB * CDec(Math.PI)
+                Dim Angle As Decimal = (t - 2 * MyA) / MyB
+                Ballpoint.X = -MyA - MyB * CDec(Math.Sin(Angle))
+                Ballpoint.Y = MyB * CDec(Math.Cos(Angle))
+            Case t >= 2 * MyA + MyB * CDec(Math.PI) And t <= 4 * MyA + MyB * CDec(Math.PI)
+                Ballpoint.X = t - 3 * MyA - MyB * CDec(Math.PI)
+                Ballpoint.Y = -MyB
             Case Else
-                Dim Angle As Decimal = (t - 4 * a - b * CDec(Math.PI)) / b
-                Ballpoint.X = a + b * CDec(Math.Sin(Angle))
-                Ballpoint.Y = -b * CDec(Math.Cos(Angle))
+                Dim Angle As Decimal = (t - 4 * MyA - MyB * CDec(Math.PI)) / MyB
+                Ballpoint.X = MyA + MyB * CDec(Math.Sin(Angle))
+                Ballpoint.Y = -MyB * CDec(Math.Cos(Angle))
         End Select
 
         Return Ballpoint
@@ -785,45 +567,45 @@ Public Class ClsStadiumBilliardball
 
         Dim TempT As Decimal
 
-        If -a <= Mathpoint.X And Mathpoint.X <= a Then
+        If -MyA <= Mathpoint.X And Mathpoint.X <= MyA Then
 
             'Set the Ball on the Border of the rectangle
             If Mathpoint.Y >= 0 Then
 
                 'Is the position above the rectangle?
-                TempT = a - Mathpoint.X
+                TempT = MyA - Mathpoint.X
             Else
 
                 'Is the position below the rectangle?
-                TempT = 3 * a + b * CDec(Math.PI) + Mathpoint.X
+                TempT = 3 * MyA + MyB * CDec(Math.PI) + Mathpoint.X
             End If
         Else
-            Dim Sinevalue As Decimal
-            If Mathpoint.X < -a Then
+            Dim SinValue As Decimal
+            If Mathpoint.X < -MyA Then
 
                 'Set the Ball on the Border of the left half-Circle
-                Sinevalue = Math.Min(1, (-Mathpoint.X - a) / b)
+                SinValue = Math.Min(1, (-Mathpoint.X - MyA) / MyB)
                 If Mathpoint.Y >= 0 Then
 
                     'Above x-axis
-                    TempT = 2 * a + b * CDec(Math.Asin(Sinevalue))
+                    TempT = 2 * MyA + MyB * CDec(Math.Asin(SinValue))
                 Else
 
                     'Below x-axis
-                    TempT = 2 * a + b * (CDec(Math.PI) - CDec(Math.Asin(Sinevalue)))
+                    TempT = 2 * MyA + MyB * (CDec(Math.PI) - CDec(Math.Asin(SinValue)))
                 End If
             Else
 
                 'Set the Ball on the Border of the right half-Circle
-                Sinevalue = Math.Min(1, (Mathpoint.X - a) / b)
+                SinValue = Math.Min(1, (Mathpoint.X - MyA) / MyB)
                 If Mathpoint.Y <= 0 Then
 
                     'below x-axis
-                    TempT = 4 * a + b * (CDec(Math.PI) + CDec(Math.Asin(Sinevalue)))
+                    TempT = 4 * MyA + MyB * (CDec(Math.PI) + CDec(Math.Asin(SinValue)))
                 Else
 
                     'above x-axis
-                    TempT = 4 * a + b * (2 * CDec(Math.PI) - CDec(Math.Asin(Sinevalue)))
+                    TempT = 4 * MyA + MyB * (2 * CDec(Math.PI) - CDec(Math.Asin(SinValue)))
                 End If
             End If
         End If

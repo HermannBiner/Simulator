@@ -15,12 +15,22 @@ Public Class ClsFeigenbaumController
     Private MyBmpGraphics As ClsGraphicTool
     Private MyIsColored As Boolean
 
-    'User Ranges for Parameter and Iteration
     Private MyParameterRange As ClsInterval
-    Private MyIterationRange As ClsInterval
+    Private MyValueRange As ClsInterval
 
     'Precision
     Private MyPrecision As Integer
+
+    'IterationStatus
+    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+
+    'Iteration Parameters
+    Private x As Decimal
+    Private RunTimeUntilCycle As Integer
+    Private LengthOfCycle As Integer
+    Private CyclePoint As ClsMathpoint
+    'Iterationsteps
+    Private i As Integer
 
     WriteOnly Property DS As IIteration
         Set(value As IIteration)
@@ -33,7 +43,7 @@ Public Class ClsFeigenbaumController
             MyPicDiagram = value
             MyBmpDiagram = New Bitmap(MyPicDiagram.Width, MyPicDiagram.Height)
             MyPicDiagram.Image = MyBmpDiagram
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyParameterRange, MyIterationRange)
+            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyParameterRange, MyValueRange)
         End Set
     End Property
 
@@ -49,11 +59,11 @@ Public Class ClsFeigenbaumController
 
     Property IterationRange As ClsInterval
         Get
-            IterationRange = MyIterationRange
+            IterationRange = MyValueRange
         End Get
         Set(value As ClsInterval)
-            MyIterationRange = value
-            MyBmpGraphics.MathYInterval = MyIterationRange
+            MyValueRange = value
+            MyBmpGraphics.MathYInterval = MyValueRange
         End Set
     End Property
 
@@ -69,46 +79,64 @@ Public Class ClsFeigenbaumController
         End Set
     End Property
 
+    Property IterationStatus As ClsGeneral.EnIterationStatus
+        Set(value As ClsGeneral.EnIterationStatus)
+            MyIterationStatus = value
+        End Set
+        Get
+            IterationStatus = MyIterationStatus
+        End Get
+    End Property
+
     Public Sub IterationLoop(p As Integer)
 
-        'The startvalue x for the iteration should be the same for all values of a
-        Dim x As Decimal = MyDS.CriticalPoint
+        If MyIterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+            'Initialize
+            'First, the iteration runs a while until it gets periodic (if the behaviour is not chaotic)
+            RunTimeUntilCycle = 1000 * MyPrecision
+
+            'After that, the number of iterations must be big enough to draw the cycle
+            LengthOfCycle = CInt(MyPicDiagram.Height * MyValueRange.IntervalWidth _
+                * MyPrecision / 25 / Math.Max(MyValueRange.IntervalWidth, 0.01))
+
+            '..but not bigger than the y-axis allows
+            LengthOfCycle = Math.Min(LengthOfCycle, 5 * MyPicDiagram.Height)
+
+            'To draw the cycle
+            CyclePoint = New ClsMathpoint(MyDS.Parameter, x)
+        End If
+
+        MyIterationStatus = ClsGeneral.EnIterationStatus.Running
 
         'Calculate the parameter a for the iteration depending on p
-        Dim a As Decimal = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
-        MyDS.Parameter = a
+        MyDS.Parameter = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
+        CyclePoint.X = MyDS.Parameter
 
-        'First, the iteration runs a while until it gets periodic (if the behaviour is not chaotic)
-        Dim RuntimeUntilCycle As Integer = 1000 * MyPrecision
-        Dim i As Integer = 1
+        'Initialize Iteration
+        'The startvalue x for the iteration should be the same for all values of a
+        x = MyDS.CriticalPoint
+
+        i = 1
 
         Do
             x = MyDS.FN(x)
             i += 1
-        Loop Until (i > RuntimeUntilCycle - 1)
-        'The second stop condition is due to the DS Julia Real
+        Loop Until (i > RunTimeUntilCycle - 1)
 
-        i = RuntimeUntilCycle
+        i = RunTimeUntilCycle
 
-        'After that, the number of iterations must be big enough to draw the cycle
-        Dim LengthOfCycle As Integer = CInt(MyPicDiagram.Height * MyIterationRange.IntervalWidth _
-            * MyPrecision / 25 / Math.Max(MyIterationRange.IntervalWidth, 0.01))
-
-        '..but not bigger than the y-axis allows
-        LengthOfCycle = Math.Min(LengthOfCycle, 5 * MyPicDiagram.Height)
-
-        'Finally , the cycle is drawn
-        Dim CyclePoint As New ClsMathpoint(a, x)
+        CyclePoint.Y = x
 
         Do
             MyBmpGraphics.DrawPoint(CyclePoint, SetColor(i), 1)
             x = MyDS.FN(x)
             CyclePoint.Y = Math.Max(MyDS.IterationInterval.A, Math.Min(x, MyDS.IterationInterval.B))
             i += 1
-        Loop Until (i > RuntimeUntilCycle + LengthOfCycle)
-        'The second stop condition is due to the DS Julia Real
+        Loop Until (i > RunTimeUntilCycle + LengthOfCycle)
 
         MyPicDiagram.Refresh()
+
+        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
 
     End Sub
 
@@ -163,6 +191,8 @@ Public Class ClsFeigenbaumController
 
         MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
+
+        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
 
     End Sub
 

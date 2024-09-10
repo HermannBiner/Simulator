@@ -54,19 +54,17 @@ Public Class FrmIteration
 
     End Sub
 
-
     Private Sub FrmIteration_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         CboIterationDepth.SelectedIndex = 0
         CboFunction.SelectedIndex = 0
         OptFunctionGraph.Checked = True
 
-        IsFormLoaded = True
-
         'Default Presentation
         SetPresentation()
-
         SetDS()
+        IsFormLoaded = True
+
 
     End Sub
 
@@ -87,7 +85,7 @@ Public Class FrmIteration
         LblTargetValue.Text = FrmMain.LM.GetString("TargetValue") & " = "
         BtnTransitiveStartValue.Text = FrmMain.LM.GetString("StartvalueForTargetvalue")
         GrpTargetValue.Text = FrmMain.LM.GetString("Transitivity")
-        LblSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
         GrpStep.Text = FrmMain.LM.GetString("Iteration")
         BtnNext10Steps.Text = FrmMain.LM.GetString("Next10Steps")
         BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
@@ -107,15 +105,15 @@ Public Class FrmIteration
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim IteratorName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(IteratorName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(DSName)
             Next
         Else
             Throw New ArgumentNullException("MissingImplementation")
@@ -161,7 +159,7 @@ Public Class FrmIteration
 
         With IterationController
             .DS = DS
-            .LblN = LblNumberOfSteps
+            .LblN = LblSteps
             .PicDiagram = PicDiagram
             .Presentation = Presentation
             .XStretching = XStretchingDefault
@@ -270,14 +268,14 @@ Public Class FrmIteration
     Private Function IsUserDataOK() As Boolean
 
         'Checks all manual inputs of the user
-        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim MyCheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
-        Dim MyCheckTargetValue = New ClsCheckUserData(TxtTargetValue, DS.IterationInterval)
+        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim CheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
+        Dim CheckTargetValue = New ClsCheckUserData(TxtTargetValue, DS.IterationInterval)
         Dim StretchInterval = New ClsInterval(1, 10)
-        Dim MyCheckStretchInterval = New ClsCheckUserData(TxtXStretching, StretchInterval)
+        Dim CheckStretchInterval = New ClsCheckUserData(TxtXStretching, StretchInterval)
 
-        Return MyCheckParameter.IsTxtValueAllowed And MyCheckStartValue.IsTxtValueAllowed _
-            And MyCheckTargetValue.IsTxtValueAllowed And MyCheckStretchInterval.IsTxtValueAllowed
+        Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed _
+            And CheckTargetValue.IsTxtValueAllowed And CheckStretchInterval.IsTxtValueAllowed
 
     End Function
 
@@ -285,16 +283,18 @@ Public Class FrmIteration
 
     Private Sub BtnDrawDiagram_Click(sender As Object, e As EventArgs) Handles BtnDrawDiagram.Click
 
-        'Checks the parametervalue and draws the graph of the function
-        If IsUserDataOK() Then
-            DS.Parameter = CDec(TxtParameter.Text)
+        If IsFormLoaded Then
+            'Checks the parametervalue and draws the graph of the function
+            If IsUserDataOK() Then
+                DS.Parameter = CDec(TxtParameter.Text)
 
-            'Initialization was successful
-            ResetIteration()
-            IterationController.PrepareDiagram()
-        Else
-            'There is already a message generated
-            SetDefaultUserData()
+                'Initialization was successful
+                ResetIteration()
+                IterationController.PrepareDiagram()
+            Else
+                'There is already a message generated
+                SetDefaultUserData()
+            End If
         End If
 
     End Sub
@@ -303,25 +303,27 @@ Public Class FrmIteration
 
     Private Sub BtnProtocolStartvalue_Click(sender As Object, e As EventArgs) Handles BtnProtocolStartvalue.Click
 
-        If IsUserDataOK() Then
+        If IsFormLoaded Then
+            If IsUserDataOK() Then
 
-            DS.Parameter = CDec(TxtParameter.Text)
+                DS.Parameter = CDec(TxtParameter.Text)
 
-            'Initialization was successful
-            If DS.IsBehaviourChaotic Then
-                'OK, nothing to do
-            Else
-                'There is already a message generated
+                'Initialization was successful
+                If DS.IsBehaviourChaotic Then
+                    'OK, nothing to do
+                Else
+                    'There is already a message generated
+                End If
+
+                'The power should be = 1 to produce the protocol
+                CboIterationDepth.SelectedIndex = 0
+                DS.Power = 1
+
+                With IterationController
+                    .TargetProtocol = TxtTargetProtocol.Text.ToString
+                    .CalculateStartvalueForProtocol()
+                End With
             End If
-
-            'The power should be = 1 to produce the protocol
-            CboIterationDepth.SelectedIndex = 0
-            DS.Power = 1
-
-            With IterationController
-                .TargetProtocol = TxtTargetProtocol.Text.ToString
-                .CalculateStartvalueForProtocol()
-            End With
         End If
 
     End Sub
@@ -330,40 +332,42 @@ Public Class FrmIteration
 
     Private Sub BtnTransitiveStartValue_Click(sender As Object, e As EventArgs) Handles BtnTransitiveStartValue.Click
 
-        'A target value for the iteration is given
-        'The original startvalue should be adapted minimally
-        'So that the target value will be reached nearly during the iteration
+        If IsFormLoaded Then
+            'A target value for the iteration is given
+            'The original startvalue should be adapted minimally
+            'So that the target value will be reached nearly during the iteration
 
-        'Reset an existing iteration
-        ResetIteration()
+            'Reset an existing iteration
+            ResetIteration()
 
 
-        Dim CheckTargetvalue As New ClsCheckIsNumeric(TxtTargetValue)
+            Dim CheckTargetvalue As New ClsCheckIsNumeric(TxtTargetValue)
 
-        If IsUserDataOK() Then
+            If IsUserDataOK() Then
 
-            DS.Parameter = CDec(TxtParameter.Text)
+                DS.Parameter = CDec(TxtParameter.Text)
 
-            'Initialization was succesful
-            If DS.IsBehaviourChaotic Then
-                'OK, nothing to do
+                'Initialization was succesful
+                If DS.IsBehaviourChaotic Then
+                    'OK, nothing to do
+                Else
+                    'There is already a message generated
+                End If
+
+                'The power should be = 1 to produce the iteration to the target value
+                CboIterationDepth.SelectedIndex = 0
+                DS.Power = 1
+
+                With IterationController
+                    .StartValue = CDec(TxtStartValue.Text)
+                    .TargetValue = CDec(TxtTargetValue.Text)
+                    .CalculateStartvalueForTargetValue()
+                End With
+
             Else
                 'There is already a message generated
+                SetDefaultUserData()
             End If
-
-            'The power should be = 1 to produce the iteration to the target value
-            CboIterationDepth.SelectedIndex = 0
-            DS.Power = 1
-
-            With IterationController
-                .StartValue = CDec(TxtStartValue.Text)
-                .TargetValue = CDec(TxtTargetValue.Text)
-                .CalculateStartvalueForTargetValue()
-            End With
-
-        Else
-            'There is already a message generated
-            SetDefaultUserData()
         End If
 
     End Sub
@@ -371,6 +375,7 @@ Public Class FrmIteration
     'SECTOR ITERATION
 
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
+
         If IsFormLoaded Then
             'Perform one iteration step
             DoIteration(1)
@@ -378,6 +383,7 @@ Public Class FrmIteration
     End Sub
 
     Private Sub BtnNext10Steps_Click(sender As Object, e As EventArgs) Handles BtnNext10Steps.Click
+
         If IsFormLoaded Then
             'Perform one iteration step
             DoIteration(10)

@@ -44,7 +44,7 @@ Public Class ClsSpringPendulumController
 
     'Status Parameters
     Private n As Integer '#Steps
-    Private MyLblSteps As Label
+    Private MyLblN As Label
     Private MyValueList As ListBox
 
     'The X-Position of both Pendulums
@@ -109,7 +109,7 @@ Public Class ClsSpringPendulumController
 
     WriteOnly Property LblSteps As Label
         Set(value As Label)
-            MyLblSteps = value
+            MyLblN = value
         End Set
     End Property
 
@@ -302,7 +302,7 @@ Public Class ClsSpringPendulumController
                 MyValueList.Items.Add(n.ToString("00000") & ": " & (TraceA.Y - TraceB.Y).ToString("0.##########"))
 
                 If n Mod 5 = 0 Then
-                    MyLblSteps.Text = n.ToString
+                    MyLblN.Text = n.ToString
 
                     Application.DoEvents()
                     Await Task.Delay(2)

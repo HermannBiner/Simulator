@@ -27,7 +27,7 @@ Partial Class FrmJulia
         TxtTime = New TextBox()
         TxtSteps = New TextBox()
         LblTime = New Label()
-        LblSteps = New Label()
+        LblNumberOfSteps = New Label()
         LblI = New Label()
         LblC = New Label()
         TxtA = New TextBox()
@@ -106,15 +106,15 @@ Partial Class FrmJulia
         LblTime.TabIndex = 60
         LblTime.Text = "Time"
         ' 
-        ' LblSteps
+        ' LblNumberOfSteps
         ' 
-        LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1450, 972)
-        LblSteps.Margin = New Padding(4, 0, 4, 0)
-        LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(71, 32)
-        LblSteps.TabIndex = 59
-        LblSteps.Text = "Steps"
+        LblNumberOfSteps.AutoSize = True
+        LblNumberOfSteps.Location = New Point(1450, 972)
+        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Name = "LblNumberOfSteps"
+        LblNumberOfSteps.Size = New Size(71, 32)
+        LblNumberOfSteps.TabIndex = 59
+        LblNumberOfSteps.Text = "Steps"
         ' 
         ' LblI
         ' 
@@ -465,7 +465,7 @@ Partial Class FrmJulia
         Controls.Add(TxtTime)
         Controls.Add(TxtSteps)
         Controls.Add(LblTime)
-        Controls.Add(LblSteps)
+        Controls.Add(LblNumberOfSteps)
         Controls.Add(LblI)
         Controls.Add(LblC)
         Controls.Add(TxtA)
@@ -507,7 +507,7 @@ Partial Class FrmJulia
     Friend WithEvents TxtTime As TextBox
     Friend WithEvents TxtSteps As TextBox
     Friend WithEvents LblTime As Label
-    Friend WithEvents LblSteps As Label
+    Friend WithEvents LblNumberOfSteps As Label
     Friend WithEvents LblI As Label
     Friend WithEvents LblC As Label
     Friend WithEvents TxtA As TextBox

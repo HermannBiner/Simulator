@@ -9,7 +9,7 @@ Public Interface IIteration
 
     'Steering parameter of the iteration
     '"a" in the mathematical documentation
-    WriteOnly Property Parameter As Decimal
+    Property Parameter As Decimal
 
     'Allowed interval for the steering parameter
     ReadOnly Property ParameterInterval As ClsInterval

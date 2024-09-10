@@ -8,7 +8,10 @@ Public Class ClsMandelbrotReal
 
         'Generate the needed objects
         MyParameterInterval = New ClsInterval(-2, 0)
+
+        'This is adapted when the Parameter is changed
         MyIterationInterval = New ClsInterval(-2, 2)
+
         MyCriticalPoint = 0
         MyChaoticParameter = -2
 
@@ -22,6 +25,17 @@ Public Class ClsMandelbrotReal
             }
     End Sub
 
+    Overrides Property Parameter As Decimal
+        Get
+            Parameter = MyParameter
+        End Get
+        Set(Value As Decimal)
+            MyParameter = Value
+            Dim b As Decimal
+            b = CDec(1 + Math.Sqrt(1 - 4 * MyParameter) / 2)
+            MyIterationInterval = New ClsInterval(-b, b)
+        End Set
+    End Property
 
     Protected Overrides Function F(x As Decimal) As Decimal
 

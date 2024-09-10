@@ -5,11 +5,14 @@ Imports System.Globalization
 
 Public Class ClsDiagramAreaSelector
 
-    'For allowed Parameterranges and Valueranges
-    Private MyDS As IIteration
-
     'PicDiagram from where the selection is done
     Private WithEvents MyPicDiagram As PictureBox
+
+    'Allowed global Ranges
+    'they are needed to check if the
+    'UserRanges are in these ranges
+    Private MyParameterRange As ClsInterval
+    Private MyValueRange As ClsInterval
 
     'Selected UserRanges
     Private MyUserParameterRange As ClsInterval
@@ -17,10 +20,10 @@ Public Class ClsDiagramAreaSelector
 
     'Result of the Selection
     'A is the Parameter, X is the Iterationvalue
-    Private MyTxtAMin As TextBox
-    Private MyTxtAMax As TextBox
-    Private MyTxtXMin As TextBox
-    Private MyTxtXMax As TextBox
+    Private MyTxtParameterMin As TextBox
+    Private MyTxtParameterMax As TextBox
+    Private MyTxtValueMin As TextBox
+    Private MyTxtValueMax As TextBox
 
     'Mouse Status
     Private IsMouseDown As Boolean
@@ -30,12 +33,6 @@ Public Class ClsDiagramAreaSelector
 
     'Point where the left mouse button was released
     Private UserSelectionEndpoint As Point
-
-    WriteOnly Property DS As IIteration
-        Set(value As IIteration)
-            MyDS = value
-        End Set
-    End Property
 
     WriteOnly Property PicDiagram As PictureBox
         Set(value As PictureBox)
@@ -59,27 +56,39 @@ Public Class ClsDiagramAreaSelector
         End Set
     End Property
 
-    WriteOnly Property TxtAMin As TextBox
-        Set(value As TextBox)
-            MyTxtAMin = value
+    WriteOnly Property ParameterRange As ClsInterval
+        Set(value As ClsInterval)
+            MyParameterRange = value
         End Set
     End Property
 
-    WriteOnly Property TxtAMax As TextBox
-        Set(value As TextBox)
-            MyTxtAMax = value
+    WriteOnly Property ValueRange As ClsInterval
+        Set(value As ClsInterval)
+            MyValueRange = value
         End Set
     End Property
 
-    WriteOnly Property TxtXMin As TextBox
+    WriteOnly Property TxtParameterMin As TextBox
         Set(value As TextBox)
-            MyTxtXMin = value
+            MyTxtParameterMin = value
         End Set
     End Property
 
-    WriteOnly Property TxtXMax As TextBox
+    WriteOnly Property TxtParameterMax As TextBox
         Set(value As TextBox)
-            MyTxtXMax = value
+            MyTxtParameterMax = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtValueMin As TextBox
+        Set(value As TextBox)
+            MyTxtValueMin = value
+        End Set
+    End Property
+
+    WriteOnly Property TxtValueMax As TextBox
+        Set(value As TextBox)
+            MyTxtValueMax = value
         End Set
     End Property
 
@@ -146,12 +155,12 @@ Public Class ClsDiagramAreaSelector
                 Dim qMax As Integer = Math.Max(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
 
                 'transmit the selection to the parameter range
-                MyTxtAMin.Text = Math.Max(PixelToA(pMin), MyDS.ParameterInterval.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtAMax.Text = Math.Min(PixelToA(pMax), MyDS.ParameterInterval.B).ToString(CultureInfo.CurrentCulture)
+                MyTxtParameterMin.Text = Math.Max(PixelToA(pMin), MyParameterRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtParameterMax.Text = Math.Min(PixelToA(pMax), MyParameterRange.B).ToString(CultureInfo.CurrentCulture)
 
                 'transmit the selection to the value range of x
-                MyTxtXMin.Text = Math.Max(PixelToX(qMin), MyDS.IterationInterval.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtXMax.Text = Math.Min(PixelToX(qMax), MyDS.IterationInterval.B).ToString(CultureInfo.CurrentCulture)
+                MyTxtValueMin.Text = Math.Max(PixelToX(qMin), MyValueRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtValueMax.Text = Math.Min(PixelToX(qMax), MyValueRange.B).ToString(CultureInfo.CurrentCulture)
 
             End If
         End If

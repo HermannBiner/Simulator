@@ -8,30 +8,18 @@
 'Status Checked
 
 Imports System.Globalization
-Imports System.IO.Ports
 Imports System.Reflection
 
 Public Class FrmBilliardtable
 
-    'Prepare objects
-    Private MapBilliardtable As Bitmap
+    'Controlling Form Load
+    Private IsFormLoaded As Boolean
 
     'Default for drawing BilliardTable etc.
-    Private DefaultBilliardBall As IBilliardball
+    Private DS As IBilliardTable
 
-    'Moving BilliardBalls
-    Private Billiardball As IBilliardball
-    Private MyBilliardballCollection As List(Of IBilliardball)
-
-    'BilliardTable
-    Private IsBilliardtableDrawn As Boolean = False
-    Private IsFirstIterationstep As Boolean = True
-
-    'Number of Steps
-    Private n As Integer
-
-    'Iteration Control
-    Private StopIteration As Boolean
+    'Tha active BilliardBall
+    Private ActiveBilliardball As IBilliardball
 
     'Properties of the Ball
     Private Ballcolor As Brush
@@ -65,8 +53,6 @@ Public Class FrmBilliardtable
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
         LblParameterc.Text = FrmMain.LM.GetString("FactorC")
-        BtnDrawBilliardTable.Text = FrmMain.LM.GetString("DrawBilliardTable")
-        TxtFactor.Text = ""
 
         CboBallColor.Items.Clear()
 
@@ -78,120 +64,65 @@ Public Class FrmBilliardtable
         CboBallColor.Items.Add(FrmMain.LM.GetString("Black"))
         CboBallColor.Items.Add(FrmMain.LM.GetString("Magenta"))
 
+    End Sub
+
+    Private Sub FrmBilliardTable_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        IsFormLoaded = False
+
+        'No Controller needed
+
+        'Initialize Language
+        InitializeLanguage()
+
+        FillDynamicSystem()
+
+    End Sub
+
+    Private Sub FrmBilliardtable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        'Setting Standard Values
+        CboBallColor.SelectedIndex = 0
+        Ballcolor = Brushes.Red
+        CboBilliardTable.SelectedIndex = 0
+
+        SetDS()
+        IsFormLoaded = True
+
+    End Sub
+
+    Private Sub FillDynamicSystem()
+
         CboBilliardTable.Items.Clear()
 
         'Add the classes implementing IBilliardBall
         'to the Combobox CboBilliardTable by Reflection
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardball)) AndAlso
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardTable)) AndAlso
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim BilliardName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                BilliardName = FrmMain.LM.GetString(type.Name, True)
-                CboBilliardTable.Items.Add(BilliardName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboBilliardTable.Items.Add(DSName)
             Next
-
-            CboBilliardTable.SelectedIndex = CboBilliardTable.Items.Count - 1
-            CboBilliardTable.Select()
 
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
-
-
     End Sub
 
-    Private Sub FrmBilliardTable_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub SetDS()
 
-        'The Bitmap "MapBilliardTable" contains the profile of the BilliardTable
-        'and shows the Trace of each Ball
-        'the movement of the Ball is shown in the PicBilliardTable and 
-        'actualized by refreshing PicBilliardTable
-        'the Bitmap and PicDiagram are Squares
-        Dim Squareside As Integer = Math.Min(PicBilliardTable.Width, PicBilliardTable.Height)
-        PicBilliardTable.Width = Squareside
-        PicBilliardTable.Height = Squareside
-        MapBilliardtable = New Bitmap(Squareside, Squareside)
-
-        'The Bitmap MapBilliardTable is then shown as Image of PicBilliardTable
-        PicBilliardTable.Image = MapBilliardtable
-
-        'The Phase Portrait is a square
-        Squareside = Math.Min(PicPhasePortrait.Width, PicPhasePortrait.Height)
-        PicPhasePortrait.Width = Squareside
-        PicPhasePortrait.Height = Squareside
-
-        'The collection of all Billiard Balls on the Table
-        MyBilliardballCollection = New List(Of IBilliardball)
-
-        'Setting Standard Values
-        CboBallColor.SelectedIndex = 0
-
-        'Initialize Language
-        InitializeLanguage()
-
-    End Sub
-
-    Private Sub BtnDrawBilliardTable_Click(sender As Object, e As EventArgs) Handles BtnDrawBilliardTable.Click
-
-        Reset()
-
-        If CheckFactorC() Then
-            DefaultBilliardBall.C = CDec(TxtFactor.Text)
-            DefaultBilliardBall.DrawBilliardtable()
-            PicBilliardTable.Refresh()
-            IsBilliardtableDrawn = True
-        End If
-
-    End Sub
-
-    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
-        Reset()
-    End Sub
-
-    Private Sub Reset()
-
-        DefaultBilliardBall.ClearBilliardTable()
-        PicBilliardTable.Refresh()
-        PicPhasePortrait.Refresh()
-
-        If MyBilliardballCollection IsNot Nothing Then
-            For Each Billiardball In MyBilliardballCollection
-                Billiardball = Nothing
-            Next
-            MyBilliardballCollection.Clear()
-        End If
-
-        IsBilliardtableDrawn = False
-        LstParameterList.Items.Clear()
-
-        n = 0
-        LblIterationSteps.Text = "0"
-        StopIteration = True
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
-
-        BtnDrawBilliardTable.Enabled = True
-        BtnNewBall.Enabled = True
-        BtnNextStep.Enabled = True
-
-    End Sub
-
-    Private Function GetBilliardBall() As IBilliardball
-
-        'This sets the type of BilliardBall by Reflection
-        'Default is EllipseBilliardball
-        Dim LocBilliardBall As IBilliardball = New ClsEllipseBilliardball
-
+        'This sets the type of BilliardTable by Reflection
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardball)) AndAlso
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardTable)) AndAlso
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If CboBilliardTable.SelectedIndex >= 0 Then
@@ -201,171 +132,138 @@ Public Class FrmBilliardtable
             If types.Count > 0 Then
                 For Each type In types
                     If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
-                        LocBilliardBall = CType(Activator.CreateInstance(type), IBilliardball)
+                        DS = CType(Activator.CreateInstance(type), IBilliardTable)
                     End If
                 Next
             End If
 
         End If
 
-        With LocBilliardBall
-            .Billiardtable = PicBilliardTable
-            .MapBilliardtable = MapBilliardtable
+        InitializeDS()
 
-            'Setting the properties of the Ball
-            .Ballcolor = Ballcolor
-            .Ballsize = 4
-            .Ballspeed = TrbSpeed.Value
-            .ParameterProtocol = LstParameterList
 
-            'C influences the Value Range of the Parameter t
-            'Therefore C is set first
-            If TxtFactor.Text = "" Then
-                TxtFactor.Text = .C.ToString
-            Else
-                .C = CDec(TxtFactor.Text)
-            End If
+        SetDefaultUserData()
 
-            'and then the Phase Portrait containing the Parameter
-            .Phaseportrait = PicPhasePortrait
+        'If the type of iteration changes, everything has to be reset
+        ResetIteration()
 
-            'The Startpostition of the Ball is set later by the Mouse Position
-            .IsStartpositionSet = False
-            .IsStartangleSet = False
+    End Sub
+
+    Private Sub InitializeDS()
+        With DS
+            .PicDiagram = PicDiagram
+            .LblN = LblSteps
+            .PhasePortrait = PicPhasePortrait
+            .ValueProtocol = LstValueList
         End With
+    End Sub
 
+    Private Sub SetDefaultUserData()
+        TxtT.Text = "0"
+        TxtAlfa.Text = "1"
+    End Sub
 
-        Return LocBilliardBall
+    Private Sub ResetIteration()
 
-    End Function
+        DS.ResetIteration()
+        PicPhasePortrait.Refresh()
+        LstValueList.Items.Clear()
+
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
+
+        BtnNewBall.Enabled = True
+        BtnNextStep.Enabled = True
+
+        'preparediagram
+        DS.DrawBilliardtable()
+
+    End Sub
+
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        If IsFormLoaded Then
+            ResetIteration()
+        End If
+    End Sub
 
     Private Sub CboBilliardTable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboBilliardTable.SelectedIndexChanged
-
-        TxtFactor.Text = ""
-
-        'This sets the type of Billiardball by Reflection
-        DefaultBilliardBall = GetBilliardBall()
-        TxtFactor.Text = DefaultBilliardBall.C.ToString
-
-        Reset()
-
-    End Sub
-
-    Private Sub TxtFactor_TextChanged(sender As Object, e As EventArgs) Handles TxtFactor.TextChanged
-        If IsBilliardtableDrawn Then
-            Reset()
+        If IsFormLoaded Then
+            SetDS()
         End If
     End Sub
 
-    'SECTOR CHECKS
-
-    Private Function CheckFactorC() As Boolean
-
-        Dim OK As Boolean
-
-        'Depending of the Type of the Billiard Table, C defines the Profile of the Table
-        'See the Code of the classes for the Billiard Table / -Ball
-        Dim C As Decimal
-
-        Dim FactorC = New ClsCheckIsNumeric(TxtFactor)
-
-        If FactorC.IsInputValid Then
-            C = FactorC.NumericValue
-            If C <= 0 Then
-                TxtFactor.Text = ""
-                TxtFactor.Select()
-                MessageBox.Show("C " & FrmMain.LM.GetString("PositiveNumber"))
-                OK = False
-            Else
-                OK = True
-            End If
-        Else
-            OK = False
+    Private Sub CboBallColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboBallColor.SelectedIndexChanged
+        If IsFormLoaded Then
+            'Is this needed??
+            'The generated Balls can have different colors to be distinguished
+            Select Case CboBallColor.SelectedIndex
+                Case 0
+                    LblColor.BackColor = Color.Red
+                    Ballcolor = Brushes.Red
+                Case 1
+                    LblColor.BackColor = Color.Green
+                    Ballcolor = Brushes.Green
+                Case 2
+                    LblColor.BackColor = Color.Blue
+                    Ballcolor = Brushes.Blue
+                Case 3
+                    LblColor.BackColor = Color.Black
+                    Ballcolor = Brushes.Black
+                Case Else
+                    LblColor.BackColor = Color.Magenta
+                    Ballcolor = Brushes.Magenta
+            End Select
         End If
+    End Sub
 
-        Return OK
+    Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
+        If IsFormLoaded Then
+            LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
 
-    End Function
-
-    Private Function CheckStartparameter() As Boolean
-
-        Dim OK As Boolean
-        Dim ParameterT = New ClsCheckIsNumeric(TxtT)
-
-        If ParameterT.IsInputValid Then
-            Dim ParameterAlfa = New ClsCheckIsNumeric(TxtAlfa)
-            If ParameterAlfa.IsInputValid Then
-                OK = True
-            Else
-                OK = False
-            End If
-        Else
-            OK = False
+            'All Billiard Balls have the same speed
+            For Each Ball As IBilliardball In DS.BilliardBallCollection
+                Ball.BallSpeed = TrbSpeed.Value
+            Next
         End If
+    End Sub
 
-        Return OK
-
-    End Function
+    Private Sub TrbC_Scroll(sender As Object, e As EventArgs) Handles TrbC.Scroll
+        If IsFormLoaded Then
+            DS.C = CDec(TrbC.Value * 0.01)
+            ResetIteration()
+        End If
+    End Sub
 
     'SECTOR GENERATE A NEW BALL
 
     Private Sub BtnNewBall_Click(sender As Object, e As EventArgs) Handles BtnNewBall.Click
-
-        GenerateNewball()
-
-    End Sub
-
-    Private Sub GenerateNewball()
-
-        'The Factor C must be OK
-        If CheckFactorC() Then
-
-            If Not IsBilliardtableDrawn Then
-                DefaultBilliardBall.C = CDec(TxtFactor.Text)
-                DefaultBilliardBall.DrawBilliardtable()
-                PicBilliardTable.Refresh()
+        If IsFormLoaded Then
+            If IsUserDataOK() Then
+                CreateNewBall()
             End If
-
-            Billiardball = GetBilliardBall()
-
-            MyBilliardballCollection.Add(Billiardball)
-
-        Else
-            'There is already a message generated
         End If
-
     End Sub
 
-    Private Sub CboBallColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboBallColor.SelectedIndexChanged
+    Public Sub CreateNewBall()
+        ActiveBilliardball = DS.GetBilliardBall
+        'Set GUI Parameters
+        With ActiveBilliardball
+            .BallColor = Ballcolor
+            .BallSpeed = TrbSpeed.Value
+            .DrawFirstUserStartposition()
+        End With
 
-        'The generated Balls can have different colors to be distinguished
-        Select Case CboBallColor.SelectedIndex
-            Case 0
-                LblColor.BackColor = Color.Red
-                Ballcolor = Brushes.Red
-            Case 1
-                LblColor.BackColor = Color.Green
-                Ballcolor = Brushes.Green
-            Case 2
-                LblColor.BackColor = Color.Blue
-                Ballcolor = Brushes.Blue
-            Case 3
-                LblColor.BackColor = Color.Black
-                Ballcolor = Brushes.Black
-            Case Else
-                LblColor.BackColor = Color.Magenta
-                Ballcolor = Brushes.Magenta
-        End Select
+        'All the other parameters are set by DS
 
     End Sub
 
     'SECTOR SET STARTPOSITION AND POSITION OF THE FIRST HIT
 
-    Private Sub PicBilliardTable_MouseDown(sender As Object, e As MouseEventArgs) Handles PicBilliardTable.MouseDown
+    Private Sub PicBilliardTable_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
-        If Billiardball IsNot Nothing Then
+        If ActiveBilliardball IsNot Nothing Then
 
-            If Not (Billiardball.IsStartpositionSet And Billiardball.IsStartangleSet) Then
+            If Not (ActiveBilliardball.IsStartpositionSet And ActiveBilliardball.IsStartangleSet) Then
 
                 Cursor = Cursors.Hand
                 IsMousedown = True
@@ -378,7 +276,7 @@ Public Class FrmBilliardtable
 
     End Sub
 
-    Private Sub PicBilliardTable_MouseUp(sender As Object, e As MouseEventArgs) Handles PicBilliardTable.MouseUp
+    Private Sub PicBilliardTable_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         'Has only an effect, if the Mouse was down
         If IsMousedown Then
@@ -389,31 +287,32 @@ Public Class FrmBilliardtable
             Mouseposition.X = e.X + 2
             Mouseposition.Y = e.Y - 25
 
-            If Not Billiardball.IsStartpositionSet Then
+            If Not ActiveBilliardball.IsStartpositionSet Then
 
                 'This is the first Time that the MouseUp event happens
                 'and the Position of the Mouse sets the Start Position of the Ball
                 'This Start Position is defined by the according Parameter t
-                Dim t As Decimal = Billiardball.SetAndDrawUserStartposition(Mouseposition, True)
+                Dim t As Decimal = ActiveBilliardball.SetAndDrawUserStartposition(Mouseposition, True)
                 TxtT.Text = t.ToString(CultureInfo.CurrentCulture)
 
                 't is as well transmitted to the Ball
-                Billiardball.Startparameter = t
-                Billiardball.IsStartpositionSet = True
+                ActiveBilliardball.Startparameter = t
+                ActiveBilliardball.IsStartpositionSet = True
 
-            ElseIf Not Billiardball.IsStartangleSet Then
+            ElseIf Not ActiveBilliardball.IsStartangleSet Then
 
                 'This is the second time that the MouseUp event happens
                 'and the Position of the first Hit is set
                 'This is defined by the Angle Phi,
                 'that is the Angle between the Direction of the first Ball Movement and the x-Axis
-                Dim phi As Decimal = Billiardball.SetAndDrawUserEndposition(Mouseposition, True)
+                Dim phi As Decimal = ActiveBilliardball.SetAndDrawUserEndposition(Mouseposition, True)
 
                 'For the PhasePortrait, we need the Hit-Angle Alfa as well
-                Dim alfa = Billiardball.CalculateAlfa(Billiardball.Startparameter, phi)
+                Dim alfa = ActiveBilliardball.CalculateAlfa(ActiveBilliardball.Startparameter, phi)
                 TxtAlfa.Text = alfa.ToString(CultureInfo.CurrentCulture)
-                Billiardball.Startangle = alfa
-                Billiardball.IsStartangleSet = True
+                ActiveBilliardball.Startangle = alfa
+                ActiveBilliardball.IsStartangleSet = True
+                DS.BilliardBallCollection.Add(ActiveBilliardball)
             End If
 
             'The Mouse gets its normal behaviour again
@@ -425,7 +324,7 @@ Public Class FrmBilliardtable
 
     End Sub
 
-    Private Sub PicBilliardTable_MouseMove(sender As Object, e As MouseEventArgs) Handles PicBilliardTable.MouseMove
+    Private Sub PicBilliardTable_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
             MouseMoving(e)
@@ -441,226 +340,143 @@ Public Class FrmBilliardtable
             .Y = e.Y - 25
         }
 
-        If Billiardball IsNot Nothing Then
+        If ActiveBilliardball IsNot Nothing Then
 
-            If Not Billiardball.IsStartpositionSet Then
+            If Not ActiveBilliardball.IsStartpositionSet Then
 
                 'The actual Position of the Mouse is hold by the Parameter t
-                Billiardball.SetAndDrawUserStartposition(Mouseposition, False)
+                ActiveBilliardball.SetAndDrawUserStartposition(Mouseposition, False)
 
-            ElseIf Not Billiardball.IsStartangleSet Then
+            ElseIf Not ActiveBilliardball.IsStartangleSet Then
 
                 'The actual Start Angle is hold by Phi, the Angle between the first Ball Movement and the x-Axis
-                Billiardball.SetAndDrawUserEndposition(Mouseposition, False)
+                ActiveBilliardball.SetAndDrawUserEndposition(Mouseposition, False)
 
             End If
         End If
     End Sub
 
-    Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
+    'SECTOR CHECKS
 
-        'The Start Parameters are transmitted to the Ball and then, the Ball uses them as Start Parameters
-        If Billiardball Is Nothing Then
-            GenerateNewball()
+    Private Function IsUserDataOK() As Boolean
+
+        Dim CheckStartposition = New ClsCheckUserData(TxtT, DS.TValueRange)
+        Dim CheckStartangle = New ClsCheckUserData(TxtAlfa, DS.AlfaValueRange)
+
+        Return CheckStartposition.IsTxtValueAllowed And CheckStartangle.IsTxtValueAllowed
+    End Function
+
+    Private Function IsBilliardballExisting() As Boolean
+
+        If DS.BilliardBallCollection.Count > 0 Then
+            Return True
+        Else
+            MessageBox.Show(FrmMain.LM.GetString("NoBallsOnTable"))
+            Return False
         End If
 
-        If CheckStartparameter() Then
+    End Function
 
-            'Parameter of the Start Point
-            Dim t As Decimal = CDec(TxtT.Text)
-            Billiardball.Startparameter = t
+    Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
 
-            'Start Angle
-            Dim alfa As Decimal = CDec(TxtAlfa.Text)
-            Billiardball.Startangle = alfa
+        If IsFormLoaded Then
+            If ActiveBilliardball IsNot Nothing Then
+                If IsUserDataOK() Then
 
+                    'Parameter of the Start Point
+                    Dim t As Decimal = CDec(TxtT.Text)
+                    ActiveBilliardball.Startparameter = t
+
+                    'Start Angle
+                    Dim alfa As Decimal = CDec(TxtAlfa.Text)
+                    ActiveBilliardball.Startangle = alfa
+
+                    DS.BilliardBallCollection.Add(ActiveBilliardball)
+                Else
+                    'There are already Error messages generated
+                End If
+            Else
+                MessageBox.Show(FrmMain.LM.GetString("NoBallsOnTable"))
+            End If
         End If
 
     End Sub
 
     'SECTOR ITERATION
 
-    Private Async Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
+    Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
 
-        If IsIterationReady() Then
-            Await Iteration(1)
-        Else
-            'Message already generated
+        If IsFormLoaded Then
+            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If IsBilliardballExisting() Then
+                    If IsUserDataOK() Then
+                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                    Else
+                        'Message already generated
+                    End If
+                End If
+            End If
+
+            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+
+                DS.IterationStep()
+
+            End If
+
+            'The iterationstatus is set to stopped by ResetIteration
+
         End If
-
     End Sub
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-        If IsIterationReady() Then
+        If IsFormLoaded Then
+            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If IsBilliardballExisting() Then
+                    If IsUserDataOK() Then
+                        BtnStart.Text = FrmMain.LM.GetString("Continue")
+                        BtnStart.Enabled = False
+                        BtnReset.Enabled = False
+                        BtnTakeOverStartParameter.Enabled = False
+                        BtnNewBall.Enabled = False
+                        BtnNextStep.Enabled = False
+                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                    Else
+                        'Message already generated
+                    End If
+                End If
+            End If
 
-            'the iteration was stopped or reset
-            'and should start from the beginning
-            StopIteration = False
+            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready Or
+                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
+                DS.IterationStatus = ClsGeneral.EnIterationStatus.Running
+                Application.DoEvents()
 
-            BtnStart.Text = FrmMain.LM.GetString("Continue")
-            BtnStart.Enabled = False
-            BtnReset.Enabled = False
-            BtnTakeOverStartParameter.Enabled = False
-            BtnDrawBilliardTable.Enabled = False
-            BtnNewBall.Enabled = False
-            BtnNextStep.Enabled = False
+                Await DS.IterationLoop()
 
-            Application.DoEvents()
-
-            Await Iteration(0)
-
-        Else
-
-            'Message already generated
-
+            End If
         End If
 
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        'the iteration is running and should be stopped
-        StopIteration = True
-
-        BtnStart.Enabled = True
-        BtnReset.Enabled = True
-        BtnTakeOverStartParameter.Enabled = True
-
+        If IsFormLoaded Then
+            DS.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+            BtnStart.Enabled = True
+            BtnReset.Enabled = True
+            BtnTakeOverStartParameter.Enabled = True
+        End If
     End Sub
 
     Private Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
 
-        PreparePhaseportraitBalls()
-
-    End Sub
-
-    Private Sub TrbSpeed_Scroll(sender As Object, e As EventArgs) Handles TrbSpeed.Scroll
-
-        'All Billiard Balls have the same speed
-        For Each Ball As IBilliardball In MyBilliardballCollection
-            Ball.Ballspeed = TrbSpeed.Value
-        Next
-
-    End Sub
-
-    Private Sub PreparePhaseportraitBalls()
-
-        'Generate Balls with startposition (0,b)
-        'that is the zenith of the billardtable
-        'and different startangles
-
-        Dim NumberOfBalls As Integer = 31
-        Dim i As Integer
-
-        'Startparameter
-        Dim t As Decimal
-        Dim Alfa As Decimal
-
-        Dim LocBilliardBall As IBilliardball
-        'First Billardball to prepare general parameters
-        LocBilliardBall = GetBilliardBall()
-
-        Reset()
-        If CheckFactorC() Then
-            LocBilliardBall.C = CDec(TxtFactor.Text)
-            LocBilliardBall.DrawBilliardtable()
-            PicBilliardTable.Refresh()
-            IsBilliardtableDrawn = True
-
-            'the next start parameters are chosen that the phaseportrait gets a nice image
-            Select Case True
-                Case TypeOf LocBilliardBall Is ClsEllipseBilliardball
-                    t = CDec(Math.PI / 2)
-                    Alfa = CDec(0.001)
-                Case TypeOf LocBilliardBall Is ClsOvalBilliardball
-                    t = CDec(Math.PI / 2)
-                    Alfa = CDec(Math.PI / NumberOfBalls)
-                Case Else
-                    t = CDec(0.95) / (1 + LocBilliardBall.C)
-                    Alfa = CDec(Math.PI / NumberOfBalls)
-            End Select
-
-            With LocBilliardBall
-                .Ballcolor = Brushes.Blue
-                .Startparameter = t
-                .IsStartpositionSet = True
-                .Startangle = Alfa
-                .IsStartangleSet = True
-                .Iteration(1)
-            End With
-
-            MyBilliardballCollection.Add(LocBilliardBall)
-
-            For i = 1 To NumberOfBalls
-                LocBilliardBall = GetBilliardBall()
-                Alfa += CDec(Math.PI / NumberOfBalls)
-                If Alfa < Math.PI Then
-                    With LocBilliardBall
-                        .Ballcolor = Brushes.Blue
-                        .Startparameter = t
-                        .IsStartpositionSet = True
-                        .Startangle = Alfa
-                        .IsStartangleSet = True
-                        .Iteration(1)
-                    End With
-                    MyBilliardballCollection.Add(LocBilliardBall)
-                End If
-            Next
-
-        End If
-    End Sub
-
-    Private Function IsIterationReady() As Boolean
-
-        Dim LocIsReady As Boolean = True
-
-        If MyBilliardballCollection.Count > 0 Then
-            For Each Ball As IBilliardball In MyBilliardballCollection
-                If Ball.IsStartpositionSet And Ball.IsStartangleSet Then
-                    'nothing
-                Else
-                    MessageBox.Show(FrmMain.LM.GetString("StartPositionNotSet"))
-                    LocIsReady = False
-                End If
-            Next
-        Else
-            MessageBox.Show(FrmMain.LM.GetString("NoBallsOnTable"))
-            LocIsReady = False
-        End If
-
-        If LocIsReady Then
-            PicBilliardTable.Refresh()
-        End If
-
-        Return LocIsReady
-
-    End Function
-
-    Private Async Function Iteration(NumberOfSteps As Integer) As Task
-
-        Do
-            n += 1
-            LblIterationSteps.Text = n.ToString(CultureInfo.CurrentCulture)
-
-            'If NumberOfSteps is > 0, then the iteration stops after NumberOfSteps
-            If n = NumberOfSteps Then StopIteration = True
-
-            'Each Ball is now iterated 1x
-            For Each Ball As IBilliardball In MyBilliardballCollection
-                Ball.Iteration(1)
-            Next
-
-            If n Mod 2 = 0 Then
-                Await Task.Delay(2)
+        If IsFormLoaded Then
+            If IsUserDataOK() Then
+                ResetIteration()
+                DS.PrepareBallsForPhaseportrait()
             End If
-
-        Loop Until StopIteration
-
-    End Function
-
-    Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
-        LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+        End If
     End Sub
 
 End Class

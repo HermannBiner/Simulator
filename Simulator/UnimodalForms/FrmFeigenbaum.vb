@@ -26,7 +26,6 @@ Public Class FrmFeigenbaum
 
     Private DS As IIteration
 
-
     'SECTOR INITIALIZATION
 
     Public Sub New()
@@ -51,15 +50,13 @@ Public Class FrmFeigenbaum
 
     End Sub
 
-
     Private Sub FrmFeigenbaum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         CboFunction.SelectedIndex = 0
         LblPrecision.Text = FrmMain.LM.GetString("Precision") & ": " & (1000 * TrbPrecision.Value).ToString(CultureInfo.CurrentCulture)
 
-        IsFormLoaded = True
-
         SetDS()
+        IsFormLoaded = True
 
     End Sub
 
@@ -89,15 +86,15 @@ Public Class FrmFeigenbaum
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim IteratorName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(IteratorName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(DSName)
             Next
         Else
             Throw New ArgumentNullException("MissingImplementation")
@@ -149,12 +146,13 @@ Public Class FrmFeigenbaum
         End With
 
         With DiagramAreaSelector
-            .DS = DS
+            .ParameterRange = DS.ParameterInterval
+            .ValueRange = DS.IterationInterval
             .PicDiagram = PicDiagram
-            .TxtAMin = TxtAMin
-            .TxtAMax = TxtAMax
-            .TxtXMin = TxtXMin
-            .TxtXMax = TxtXMax
+            .TxtParameterMin = TxtAMin
+            .TxtParameterMax = TxtAMax
+            .TxtValueMin = TxtXMin
+            .TxtValueMax = TxtXMax
         End With
 
     End Sub
@@ -248,25 +246,35 @@ Public Class FrmFeigenbaum
 
     Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
 
-        If IsUserDataOK() Then
-            FeigenbaumController.ParameterRange = New ClsInterval(CDec(TxtAMin.Text), CDec(TxtAMax.Text))
-            FeigenbaumController.IterationRange = New ClsInterval(CDec(TxtXMin.Text), CDec(TxtXMax.Text))
-            DiagramAreaSelector.UserParameterRange = FeigenbaumController.ParameterRange
-            DiagramAreaSelector.UserValueRange = FeigenbaumController.IterationRange
-            BtnStartIteration.Enabled = False
-            BtnReset.Enabled = False
-            DoIteration()
-            BtnStartIteration.Enabled = True
-            BtnReset.Enabled = True
-        Else
-            SetDefaultUserData()
+        If IsFormLoaded Then
+            With FeigenbaumController
+                .ResetIteration()
+                If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                    If IsUserDataOK() Then
+                        .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                        .ParameterRange = New ClsInterval(CDec(TxtAMin.Text), CDec(TxtAMax.Text))
+                        .IterationRange = New ClsInterval(CDec(TxtXMin.Text), CDec(TxtXMax.Text))
+                        DiagramAreaSelector.UserParameterRange = .ParameterRange
+                        DiagramAreaSelector.UserValueRange = .IterationRange
+                        BtnStartIteration.Enabled = False
+                        BtnReset.Enabled = False
+                        BtnStartIteration.Enabled = True
+                        BtnReset.Enabled = True
+                    Else
+                        SetDefaultUserData()
+                    End If
+                End If
+
+                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+                    DoIteration()
+                End If
+
+            End With
         End If
 
     End Sub
 
     Private Sub DoIteration()
-
-        FeigenbaumController.ResetIteration()
 
         'In the direction of the x-axis, we work with pixel coordinates
         Dim p As Integer
@@ -280,7 +288,7 @@ Public Class FrmFeigenbaum
 
         Next
 
-        'Draw the Splitpoints
+        'Draw Splitpoints
         If ChkSplitPoints.Checked Then
             FeigenbaumController.DrawSplitPoints()
         End If

@@ -50,8 +50,8 @@ Public Class FrmSpringPendulum
         CboPendulum.SelectedIndex = 0
         ChkStretched.Checked = False
 
-        IsFormLoaded = True
         SetDS()
+        IsFormLoaded = True
 
     End Sub
 
@@ -79,15 +79,15 @@ Public Class FrmSpringPendulum
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim PendulumName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                PendulumName = FrmMain.LM.GetString(type.Name, True)
-                CboPendulum.Items.Add(PendulumName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboPendulum.Items.Add(DSName)
             Next
         Else
             Throw New ArgumentNullException("MissingImplementation")
@@ -280,23 +280,23 @@ Public Class FrmSpringPendulum
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
-        BtnStart.Enabled = False
-        BtnStart.Text = FrmMain.LM.GetString("Continue")
-        BtnReset.Enabled = False
+        If IsFormLoaded Then
+            BtnStart.Enabled = False
+            BtnStart.Text = FrmMain.LM.GetString("Continue")
+            BtnReset.Enabled = False
 
-        'The loop controls as well the Iterationstatus
-        Await SpringPendulumController.IterationLoop()
-
+            'The loop controls as well the Iterationstatus
+            Await SpringPendulumController.IterationLoop()
+        End If
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        BtnStart.Enabled = True
-        BtnReset.Enabled = True
-        SpringPendulumController.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
-
+        If IsFormLoaded Then
+            BtnStart.Enabled = True
+            BtnReset.Enabled = True
+            SpringPendulumController.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+        End If
     End Sub
-
-
 
 End Class

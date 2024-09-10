@@ -23,158 +23,158 @@ Partial Class FrmHistogram
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmHistogram))
-        Me.PicDiagram = New System.Windows.Forms.PictureBox()
-        Me.TxtParameter = New System.Windows.Forms.TextBox()
-        Me.LblParameter = New System.Windows.Forms.Label()
-        Me.TxtStartValue = New System.Windows.Forms.TextBox()
-        Me.LblStartValue = New System.Windows.Forms.Label()
-        Me.BtnStart = New System.Windows.Forms.Button()
-        Me.BtnReset = New System.Windows.Forms.Button()
-        Me.LblNumberOfSteps = New System.Windows.Forms.Label()
-        Me.LblSteps = New System.Windows.Forms.Label()
-        Me.CboFunction = New System.Windows.Forms.ComboBox()
-        Me.BtnStop = New System.Windows.Forms.Button()
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'PicDiagram
-        '
-        Me.PicDiagram.BackColor = System.Drawing.Color.White
-        Me.PicDiagram.Location = New System.Drawing.Point(3, 4)
-        Me.PicDiagram.Margin = New System.Windows.Forms.Padding(4)
-        Me.PicDiagram.Name = "PicDiagram"
-        Me.PicDiagram.Size = New System.Drawing.Size(1227, 1174)
-        Me.PicDiagram.TabIndex = 1
-        Me.PicDiagram.TabStop = False
-        '
-        'TxtParameter
-        '
-        Me.TxtParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtParameter.Location = New System.Drawing.Point(1423, 96)
-        Me.TxtParameter.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtParameter.Name = "TxtParameter"
-        Me.TxtParameter.Size = New System.Drawing.Size(204, 32)
-        Me.TxtParameter.TabIndex = 10
-        '
-        'LblParameter
-        '
-        Me.LblParameter.AutoSize = True
-        Me.LblParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblParameter.Location = New System.Drawing.Point(1281, 100)
-        Me.LblParameter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblParameter.Name = "LblParameter"
-        Me.LblParameter.Size = New System.Drawing.Size(139, 26)
-        Me.LblParameter.TabIndex = 11
-        Me.LblParameter.Text = "Parameter = "
-        '
-        'TxtStartValue
-        '
-        Me.TxtStartValue.Location = New System.Drawing.Point(1423, 148)
-        Me.TxtStartValue.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtStartValue.Name = "TxtStartValue"
-        Me.TxtStartValue.Size = New System.Drawing.Size(204, 31)
-        Me.TxtStartValue.TabIndex = 12
-        '
-        'LblStartValue
-        '
-        Me.LblStartValue.AutoSize = True
-        Me.LblStartValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblStartValue.Location = New System.Drawing.Point(1281, 155)
-        Me.LblStartValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblStartValue.Name = "LblStartValue"
-        Me.LblStartValue.Size = New System.Drawing.Size(133, 26)
-        Me.LblStartValue.TabIndex = 13
-        Me.LblStartValue.Text = "StartValue ="
-        '
-        'BtnStart
-        '
-        Me.BtnStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStart.Location = New System.Drawing.Point(1287, 272)
-        Me.BtnStart.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(341, 61)
-        Me.BtnStart.TabIndex = 18
-        Me.BtnStart.Text = "Start"
-        Me.BtnStart.UseVisualStyleBackColor = True
-        '
-        'BtnReset
-        '
-        Me.BtnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnReset.Location = New System.Drawing.Point(1286, 1117)
-        Me.BtnReset.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(341, 61)
-        Me.BtnReset.TabIndex = 19
-        Me.BtnReset.Text = "ResetIteration"
-        Me.BtnReset.UseVisualStyleBackColor = True
-        '
-        'LblNumberOfSteps
-        '
-        Me.LblNumberOfSteps.AutoSize = True
-        Me.LblNumberOfSteps.Location = New System.Drawing.Point(1456, 219)
-        Me.LblNumberOfSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblNumberOfSteps.Name = "LblNumberOfSteps"
-        Me.LblNumberOfSteps.Size = New System.Drawing.Size(24, 25)
-        Me.LblNumberOfSteps.TabIndex = 28
-        Me.LblNumberOfSteps.Text = "0"
-        '
-        'LblSteps
-        '
-        Me.LblSteps.AutoSize = True
-        Me.LblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblSteps.Location = New System.Drawing.Point(1281, 219)
-        Me.LblSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblSteps.Name = "LblSteps"
-        Me.LblSteps.Size = New System.Drawing.Size(169, 26)
-        Me.LblSteps.TabIndex = 27
-        Me.LblSteps.Text = "NumberOfSteps"
-        '
-        'CboFunction
-        '
-        Me.CboFunction.FormattingEnabled = True
-        Me.CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        Me.CboFunction.Location = New System.Drawing.Point(1287, 30)
-        Me.CboFunction.Margin = New System.Windows.Forms.Padding(4)
-        Me.CboFunction.Name = "CboFunction"
-        Me.CboFunction.Size = New System.Drawing.Size(340, 33)
-        Me.CboFunction.TabIndex = 29
-        '
-        'BtnStop
-        '
-        Me.BtnStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnStop.Location = New System.Drawing.Point(1286, 359)
-        Me.BtnStop.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnStop.Name = "BtnStop"
-        Me.BtnStop.Size = New System.Drawing.Size(341, 61)
-        Me.BtnStop.TabIndex = 30
-        Me.BtnStop.Text = "Stop"
-        Me.BtnStop.UseVisualStyleBackColor = True
-        '
-        'FrmHistogram
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2349, 1193)
-        Me.Controls.Add(Me.BtnStop)
-        Me.Controls.Add(Me.CboFunction)
-        Me.Controls.Add(Me.LblNumberOfSteps)
-        Me.Controls.Add(Me.LblSteps)
-        Me.Controls.Add(Me.BtnStart)
-        Me.Controls.Add(Me.BtnReset)
-        Me.Controls.Add(Me.TxtStartValue)
-        Me.Controls.Add(Me.LblStartValue)
-        Me.Controls.Add(Me.TxtParameter)
-        Me.Controls.Add(Me.LblParameter)
-        Me.Controls.Add(Me.PicDiagram)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.Name = "FrmHistogram"
-        Me.RightToLeftLayout = True
-        Me.Text = "Histogram"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PicDiagram, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        PicDiagram = New PictureBox()
+        TxtParameter = New TextBox()
+        LblParameter = New Label()
+        TxtStartValue = New TextBox()
+        LblStartValue = New Label()
+        BtnStart = New Button()
+        BtnReset = New Button()
+        LblSteps = New Label()
+        LblNumberOfSteps = New Label()
+        CboFunction = New ComboBox()
+        BtnStop = New Button()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' PicDiagram
+        ' 
+        PicDiagram.BackColor = Color.White
+        PicDiagram.Location = New Point(3, 5)
+        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(1329, 1503)
+        PicDiagram.TabIndex = 1
+        PicDiagram.TabStop = False
+        ' 
+        ' TxtParameter
+        ' 
+        TxtParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameter.Location = New Point(1542, 123)
+        TxtParameter.Margin = New Padding(4, 5, 4, 5)
+        TxtParameter.Name = "TxtParameter"
+        TxtParameter.Size = New Size(221, 32)
+        TxtParameter.TabIndex = 10
+        ' 
+        ' LblParameter
+        ' 
+        LblParameter.AutoSize = True
+        LblParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblParameter.Location = New Point(1388, 128)
+        LblParameter.Margin = New Padding(4, 0, 4, 0)
+        LblParameter.Name = "LblParameter"
+        LblParameter.Size = New Size(139, 26)
+        LblParameter.TabIndex = 11
+        LblParameter.Text = "Parameter = "
+        ' 
+        ' TxtStartValue
+        ' 
+        TxtStartValue.Location = New Point(1542, 189)
+        TxtStartValue.Margin = New Padding(4, 5, 4, 5)
+        TxtStartValue.Name = "TxtStartValue"
+        TxtStartValue.Size = New Size(221, 39)
+        TxtStartValue.TabIndex = 12
+        ' 
+        ' LblStartValue
+        ' 
+        LblStartValue.AutoSize = True
+        LblStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblStartValue.Location = New Point(1388, 198)
+        LblStartValue.Margin = New Padding(4, 0, 4, 0)
+        LblStartValue.Name = "LblStartValue"
+        LblStartValue.Size = New Size(133, 26)
+        LblStartValue.TabIndex = 13
+        LblStartValue.Text = "StartValue ="
+        ' 
+        ' BtnStart
+        ' 
+        BtnStart.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnStart.Location = New Point(1394, 348)
+        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Name = "BtnStart"
+        BtnStart.Size = New Size(369, 78)
+        BtnStart.TabIndex = 18
+        BtnStart.Text = "Start"
+        BtnStart.UseVisualStyleBackColor = True
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnReset.Location = New Point(1393, 1430)
+        BtnReset.Margin = New Padding(4, 5, 4, 5)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(369, 78)
+        BtnReset.TabIndex = 19
+        BtnReset.Text = "ResetIteration"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' LblSteps
+        ' 
+        LblSteps.AutoSize = True
+        LblSteps.Location = New Point(1577, 280)
+        LblSteps.Margin = New Padding(4, 0, 4, 0)
+        LblSteps.Name = "LblSteps"
+        LblSteps.Size = New Size(27, 32)
+        LblSteps.TabIndex = 28
+        LblSteps.Text = "0"
+        ' 
+        ' LblNumberOfSteps
+        ' 
+        LblNumberOfSteps.AutoSize = True
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblNumberOfSteps.Location = New Point(1388, 280)
+        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Name = "LblNumberOfSteps"
+        LblNumberOfSteps.Size = New Size(169, 26)
+        LblNumberOfSteps.TabIndex = 27
+        LblNumberOfSteps.Text = "NumberOfSteps"
+        ' 
+        ' CboFunction
+        ' 
+        CboFunction.FormattingEnabled = True
+        CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
+        CboFunction.Location = New Point(1394, 38)
+        CboFunction.Margin = New Padding(4, 5, 4, 5)
+        CboFunction.Name = "CboFunction"
+        CboFunction.Size = New Size(368, 40)
+        CboFunction.TabIndex = 29
+        ' 
+        ' BtnStop
+        ' 
+        BtnStop.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnStop.Location = New Point(1393, 460)
+        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Name = "BtnStop"
+        BtnStop.Size = New Size(369, 78)
+        BtnStop.TabIndex = 30
+        BtnStop.Text = "Stop"
+        BtnStop.UseVisualStyleBackColor = True
+        ' 
+        ' FrmHistogram
+        ' 
+        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(2545, 1527)
+        Controls.Add(BtnStop)
+        Controls.Add(CboFunction)
+        Controls.Add(LblSteps)
+        Controls.Add(LblNumberOfSteps)
+        Controls.Add(BtnStart)
+        Controls.Add(BtnReset)
+        Controls.Add(TxtStartValue)
+        Controls.Add(LblStartValue)
+        Controls.Add(TxtParameter)
+        Controls.Add(LblParameter)
+        Controls.Add(PicDiagram)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        Name = "FrmHistogram"
+        RightToLeftLayout = True
+        Text = "Histogram"
+        WindowState = FormWindowState.Maximized
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
 
@@ -185,8 +185,8 @@ Partial Class FrmHistogram
     Friend WithEvents LblStartValue As Label
     Friend WithEvents BtnStart As Button
     Friend WithEvents BtnReset As Button
-    Friend WithEvents LblNumberOfSteps As Label
     Friend WithEvents LblSteps As Label
+    Friend WithEvents LblNumberOfSteps As Label
     Friend WithEvents CboFunction As ComboBox
     Friend WithEvents BtnStop As Button
 End Class

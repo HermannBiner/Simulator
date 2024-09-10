@@ -58,10 +58,10 @@ Public Class FrmTwoDimensions
 
         CboFunction.SelectedIndex = 0
         CboExperiment.SelectedIndex = 0
-        IsFormLoaded = True
 
         SetBrush()
         SetDS()
+        IsFormLoaded = True
 
     End Sub
 
@@ -87,15 +87,15 @@ Public Class FrmTwoDimensions
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
 
         If types.Count > 0 Then
-            Dim IteratorName As String
+            Dim DSName As String
             For Each type In types
 
                 'GetString is calle dwith the option IsClass = true
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                IteratorName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(IteratorName)
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                CboFunction.Items.Add(DSName)
             Next
         Else
             Throw New ArgumentNullException("MissingImplementation")
@@ -218,18 +218,19 @@ Public Class FrmTwoDimensions
         'Checks all manual inputs of the user
 
         'Is the value of TxtParameter in the Iteration Interval?
-        Dim MyCheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim MyCheckXStartvalue = New ClsCheckUserData(TxtX, DS.IterationInterval)
-        Dim MyCheckYStartvalue = New ClsCheckUserData(TxtY, DS.IterationInterval)
+        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
+        Dim CheckXStartvalue = New ClsCheckUserData(TxtX, DS.IterationInterval)
+        Dim CheckYStartvalue = New ClsCheckUserData(TxtY, DS.IterationInterval)
 
-        Return MyCheckParameter.IsTxtValueAllowed And MyCheckXStartvalue.IsTxtValueAllowed _
-            And MyCheckYStartvalue.IsTxtValueAllowed
+        Return CheckParameter.IsTxtValueAllowed And CheckXStartvalue.IsTxtValueAllowed _
+            And CheckYStartvalue.IsTxtValueAllowed
 
     End Function
 
     'SECTOR ITERATION
 
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
+
         If IsFormLoaded Then
             'Perform one iteration step
             DoIteration(1)
@@ -237,6 +238,7 @@ Public Class FrmTwoDimensions
     End Sub
 
     Private Sub BtnNext10_Click(sender As Object, e As EventArgs) Handles BtnNext10.Click
+
         If IsFormLoaded Then
             'Perform 10 iteration steps
             DoIteration(10)

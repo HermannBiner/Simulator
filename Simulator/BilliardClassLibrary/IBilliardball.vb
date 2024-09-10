@@ -6,38 +6,35 @@
 
 Public Interface IBilliardball
 
-    WriteOnly Property Billiardtable As PictureBox
+    WriteOnly Property PicDiagram As PictureBox
+    WriteOnly Property PicGraphics As ClsGraphicTool
 
+    WriteOnly Property BmpDiagram As Bitmap
+    WriteOnly Property BmpGraphics As ClsGraphicTool
 
-    WriteOnly Property MapBilliardtable As Bitmap
+    'MathValue for graphic calculation
+    WriteOnly Property MathValueRange As ClsInterval
+    WriteOnly Property TValueRange As ClsInterval
+    WriteOnly Property AlfaValueRange As ClsInterval
 
+    'Status Parameters
+    WriteOnly Property PhasePortrait As PictureBox
 
-    'The profile of the billiard table is defined by the parameter C
-    Property C As Decimal
+    WriteOnly Property ValueProtocol As ListBox
 
-    'in addtion, the ball protocols its movement in a phase portrait
-    WriteOnly Property Phaseportrait As PictureBox
-
-    WriteOnly Property ParameterProtocol As ListBox
-
+    'The profile of the billiard table is defined by the parameter a,b
+    WriteOnly Property A As Decimal
+    WriteOnly Property B As Decimal
 
     'Properties of the ball
-    WriteOnly Property Ballcolor As Brush
-    WriteOnly Property Ballsize As Integer
-    WriteOnly Property Ballspeed As Integer
-
+    WriteOnly Property BallColor As Brush
+    WriteOnly Property BallSpeed As Integer
 
     'Parameter of the start
     Property Startparameter As Decimal 'defines the start point
     WriteOnly Property Startangle As Decimal 'defines the start angle in [0, 2pi[
     Property IsStartpositionSet As Boolean
     Property IsStartangleSet As Boolean
-
-    'Drawing the Billiard Table
-    Sub DrawBilliardtable()
-
-    'Clearing Billiard Table
-    Sub ClearBilliardTable()
 
     'The following method receives a mouse position relative to the bitmap
     'It pulls the ball according to the mouse position on its start position
@@ -51,11 +48,17 @@ Public Interface IBilliardball
     'see mathematical documentation
     Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal
 
+    Sub DrawFirstUserStartposition()
+
+    'starts the iteration
+    Sub IterationStep()
+
+    'This is the main Function to get the next Iteration Point
+    'especially used in the C-Diagram
+    Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
+
     'Alfa is the hit angle: that is the angle between the ball orbit
     'and the tangent on the billiard table in the hit point
     Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal
-
-    'starts the iteration
-    Sub Iteration(NumberOfSteps As Integer)
 
 End Interface
