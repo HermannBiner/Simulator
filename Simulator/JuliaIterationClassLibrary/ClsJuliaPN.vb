@@ -5,7 +5,7 @@
 'Status Checked
 
 
-Public Class ClsJuliaN
+Public Class ClsJuliaPN
     Inherits ClsJuliaAbstract
 
     'the precision of the border of the Julia set
@@ -17,6 +17,13 @@ Public Class ClsJuliaN
 
     Private UpperBoundSteps As Integer = 0
     Private LowerBoundSteps As Integer = MaxSteps
+
+    'Iteration Parameter Instances
+    Private Zi As ClsComplexNumber
+    Private Shadows Steps As Integer
+    Private Radius As Decimal
+    Private ColorIndex As Double
+    Private MyBrush As Brush
 
     Public Sub New()
 
@@ -31,6 +38,9 @@ Public Class ClsJuliaN
 
         MyIsTrackImplemented = False
 
+        'Iteration Parameter
+        Zi = New ClsComplexNumber(0, 0)
+
     End Sub
 
     Protected Overrides WriteOnly Property N As Integer
@@ -42,37 +52,31 @@ Public Class ClsJuliaN
     Public Overrides Sub IterationStep(Startpoint As Point)
 
         'Transform the PixelPoint to a Complex Number
-        Dim Zi As ClsComplexNumber
-
-        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
+        With MyBmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
-            Zi = New ClsComplexNumber(.X, .Y)
+            Zi.X = .X
+            Zi.Y = .Y
         End With
 
-        Dim Steps As Integer = 0
-        Dim R As Decimal = CDec(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
+        Steps = 0
+        Radius = CDec(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
 
-        Do Until (Zi.AbsoluteValue > R) Or (Steps > MaxSteps)
-
+        Do Until (Zi.AbsoluteValue > Radius) Or (Steps > MaxSteps)
             Steps += 1
 
             'This is the formula for the classic Julia set
             Zi = Zi.Power(MyN).Add(MyC)
-
         Loop
 
         'depending on the #of steps, the color of the brush is choosen
         'there are 25 colors available and the steps are between 0 and MaxSteps
         'The lowest color-index is for the highest # steps, therefore:
-        Dim MyBrush As Brush
-        Dim ColorIndex As Double
 
         If Steps > MaxSteps Then
             MyBrush = New SolidBrush(Color.Black)
         Else
             'if steps = 0, the color would be black as well, therefore we set
             Steps = Math.Max(1, Steps)
-
 
             If MyUseSystemColors Then
                 MyBrush = StandardColors.GetSystemBrush(Steps)
@@ -101,7 +105,7 @@ Public Class ClsJuliaN
 
         End If
 
-        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
         MyBrush.Dispose()
 
     End Sub

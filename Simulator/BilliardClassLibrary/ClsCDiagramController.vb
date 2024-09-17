@@ -1,5 +1,7 @@
 ﻿'This class contains the controller for the FrmCDiagram
 
+Imports System.Reflection
+
 Public Class ClsCDiagramController
 
 
@@ -28,7 +30,7 @@ Public Class ClsCDiagramController
     Private MyValueRange As ClsInterval = New ClsInterval(0, 1) 'set later
 
     'IterationStatus
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Iteration Parameters
     'Startpoint
@@ -100,8 +102,8 @@ Public Class ClsCDiagramController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
-        Set(value As ClsGeneral.EnIterationStatus)
+    Property IterationStatus As ClsDynamics.EnIterationStatus
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
         Get
@@ -109,9 +111,26 @@ Public Class ClsCDiagramController
         End Get
     End Property
 
-    Public Sub IterationLoop(p As Integer)
+    Public Sub DoIteration()
 
-        If MyIterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+        'In the direction of the x-axis, we work with pixel coordinates
+        Dim p As Integer
+
+        For p = 1 To MyPicDiagram.Width
+
+            'for each p, the according parametervalue a is calculated
+            'and then, the iteration runs until RuntimeUntilCycle
+            'finally, the iteration cycle is drawn
+            IterationLoop(p)
+        Next
+
+        DrawSplitPoints()
+
+    End Sub
+
+    Private Sub IterationLoop(p As Integer)
+
+        If MyIterationStatus = ClsDynamics.EnIterationStatus.Ready Then
             'Initialize
 
             ActualPair = New ClsValuePair(0, 0)
@@ -125,7 +144,7 @@ Public Class ClsCDiagramController
             LengthOfCycle = Math.Min(LengthOfCycle, 5 * MyPicDiagram.Height)
         End If
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Running
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Running
 
         'Calculate the parameter C for the iteration depending on p
         MyDS.C = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
@@ -151,7 +170,7 @@ Public Class ClsCDiagramController
 
         For n = 0 To LengthOfCycle
 
-            Select Case MyValueParameter.Tag
+            Select Case MyValueParameter.ID
                 Case 1
                     CyclePoint.Y = ActualPair.X
                 Case Else
@@ -167,8 +186,6 @@ Public Class ClsCDiagramController
         Next
 
         MyPicDiagram.Refresh()
-
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
 
     End Sub
 
@@ -187,7 +204,7 @@ Public Class ClsCDiagramController
         MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 

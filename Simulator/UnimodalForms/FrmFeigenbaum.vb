@@ -42,7 +42,6 @@ Public Class FrmFeigenbaum
 
         DiagramAreaSelector = New ClsDiagramAreaSelector
 
-
         'Initialize Language
         InitializeLanguage()
 
@@ -146,13 +145,13 @@ Public Class FrmFeigenbaum
         End With
 
         With DiagramAreaSelector
-            .ParameterRange = DS.ParameterInterval
-            .ValueRange = DS.IterationInterval
+            .XRange = DS.ParameterInterval
+            .YRange = DS.IterationInterval
             .PicDiagram = PicDiagram
-            .TxtParameterMin = TxtAMin
-            .TxtParameterMax = TxtAMax
-            .TxtValueMin = TxtXMin
-            .TxtValueMax = TxtXMax
+            .TxtXMin = TxtAMin
+            .TxtXMax = TxtAMax
+            .TxtYMin = TxtXMin
+            .TxtYMax = TxtXMax
         End With
 
     End Sub
@@ -188,7 +187,6 @@ Public Class FrmFeigenbaum
         End If
     End Sub
 
-
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
         If IsFormLoaded Then
             SetDS()
@@ -200,30 +198,6 @@ Public Class FrmFeigenbaum
             'The precision defines how precise the diagram is generated
             LblPrecision.Text = FrmMain.LM.GetString("Precision") & ": " & (1000 * TrbPrecision.Value).ToString(CultureInfo.CurrentCulture)
             FeigenbaumController.Precision = TrbPrecision.Value
-        End If
-    End Sub
-
-    Private Sub TxtAMax_TextChanged(sender As Object, e As EventArgs) Handles TxtAMax.TextChanged
-        If IsFormLoaded Then
-            SetDelta()
-        End If
-    End Sub
-
-    Private Sub TxtAMin_TextChanged(sender As Object, e As EventArgs) Handles TxtAMin.TextChanged
-        If IsFormLoaded Then
-            SetDelta()
-        End If
-    End Sub
-
-    Private Sub TxtXMax_TextChanged(sender As Object, e As EventArgs) Handles TxtXMax.TextChanged
-        If IsFormLoaded Then
-            SetDelta()
-        End If
-    End Sub
-
-    Private Sub TxtXMin_TextChanged(sender As Object, e As EventArgs) Handles TxtXMin.TextChanged
-        If IsFormLoaded Then
-            SetDelta()
         End If
     End Sub
 
@@ -242,6 +216,30 @@ Public Class FrmFeigenbaum
         End If
     End Sub
 
+    Private Sub TxtAMax_LostFocus(sender As Object, e As EventArgs) Handles TxtAMax.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtAMin_LostFocus(sender As Object, e As EventArgs) Handles TxtAMin.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
     'SECTOR ITERATION
 
     Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
@@ -249,13 +247,14 @@ Public Class FrmFeigenbaum
         If IsFormLoaded Then
             With FeigenbaumController
                 .ResetIteration()
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                     If IsUserDataOK() Then
-                        .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                        DiagramAreaSelector.IsActivated = False
+                        .IterationStatus = ClsDynamics.EnIterationStatus.Ready
                         .ParameterRange = New ClsInterval(CDec(TxtAMin.Text), CDec(TxtAMax.Text))
                         .IterationRange = New ClsInterval(CDec(TxtXMin.Text), CDec(TxtXMax.Text))
-                        DiagramAreaSelector.UserParameterRange = .ParameterRange
-                        DiagramAreaSelector.UserValueRange = .IterationRange
+                        DiagramAreaSelector.UserXRange = .ParameterRange
+                        DiagramAreaSelector.UserYRange = .IterationRange
                         BtnStartIteration.Enabled = False
                         BtnReset.Enabled = False
                         BtnStartIteration.Enabled = True
@@ -265,9 +264,12 @@ Public Class FrmFeigenbaum
                     End If
                 End If
 
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
                     DoIteration()
                 End If
+
+                DiagramAreaSelector.IsActivated = True
+                .IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
             End With
         End If

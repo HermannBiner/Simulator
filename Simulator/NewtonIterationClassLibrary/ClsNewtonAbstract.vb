@@ -5,8 +5,8 @@
 
 'Status Checked
 
-Public MustInherit Class ClsPolynomAbstract
-    Implements IPolynom
+Public MustInherit Class ClsNewtonAbstract
+    Implements INewton
 
     'the radius where Zi is regarded as belonging to a root
     Protected MyRadius As Double
@@ -15,12 +15,12 @@ Public MustInherit Class ClsPolynomAbstract
     Protected MyIterationDeepness As Integer
 
     'Drawing MapCPlane
-    Protected MyMapCPlane As Bitmap
-    Protected MyMapCPlaneGraphics As ClsGraphicTool
+    Protected MyBmpDiagram As Bitmap
+    Protected MyBmpGraphics As ClsGraphicTool
 
     'Drawing PicCPlane
-    Protected MyPicCPlane As PictureBox
-    Protected MyPicCPlaneGraphics As ClsGraphicTool
+    Protected MyPicDiagram As PictureBox
+    Protected MyPicGraphics As ClsGraphicTool
 
     'Allowed Interval for the x-Values
     Protected MyAllowedXRange As ClsInterval
@@ -35,13 +35,12 @@ Public MustInherit Class ClsPolynomAbstract
     Protected MyActualYRange As ClsInterval
 
     'Controlling the Iteration Loop
-    Protected Property MyStopIteration As Boolean
     Protected Property MyTxtNumberofSteps As TextBox
     Protected Property MyTxtElapsedTime As TextBox
 
     'Parameters for the Iteration
 
-    Protected Property MyIterationStatus As ClsGeneral.EnIterationStatus
+    Protected Property MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Number of examinated points in the complex plane
     Protected ExaminatedPoints As Integer
@@ -78,188 +77,208 @@ Public MustInherit Class ClsPolynomAbstract
     Protected Property MyC As ClsComplexNumber
 
     'Mixing
-    Protected Property MyMixing As IPolynom.EnMixing
+    Protected Property MyMixing As INewton.EnMixing
 
     'Color
-    Protected Property MyColor As IPolynom.EnColor
+    Protected Property MyColor As INewton.EnColor
 
     'List of roots of the polynom
-    Protected Roots As Collection
+    Protected UnitRootCollection As Collection
 
     Public Sub New()
-        Roots = New Collection
+        UnitRootCollection = New Collection
         Watch = New Stopwatch
     End Sub
 
     'SECTOR INTERFACE
 
-    WriteOnly Property MapCPlane As Bitmap Implements IPolynom.MapCPlane
-        Set(value As Bitmap)
-            MyMapCPlane = value
-            MyMapCPlaneGraphics = New ClsGraphicTool(MyMapCPlane, MyActualXRange, MyActualYRange)
-        End Set
-    End Property
-
-    WriteOnly Property PicCPlane As PictureBox Implements IPolynom.PicCPlane
+    WriteOnly Property PicDiagram As PictureBox Implements INewton.PicDiagram
         Set(value As PictureBox)
-            MyPicCPlane = value
-            MyPicCPlaneGraphics = New ClsGraphicTool(MyPicCPlane, MyActualXRange, MyActualYRange)
+            MyPicDiagram = value
+            'Generate objects
+            'The PictureBox should be a square
+            Dim Square As Integer = Math.Min(MyPicDiagram.Height, MyPicDiagram.Width)
+
+            MyPicDiagram.Height = Square
+            MyPicDiagram.Width = Square
+
+            MyBmpDiagram = New Bitmap(Square, Square)
+            MyPicDiagram.Image = MyBmpDiagram
+
+            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
-    ReadOnly Property AllowedXRange As ClsInterval Implements IPolynom.AllowedXRange
+    ReadOnly Property AllowedXRange As ClsInterval Implements INewton.AllowedXRange
         Get
             AllowedXRange = MyAllowedXRange
         End Get
     End Property
 
-    ReadOnly Property AllowedYRange As ClsInterval Implements IPolynom.AllowedYRange
+    ReadOnly Property AllowedYRange As ClsInterval Implements INewton.AllowedYRange
         Get
             AllowedYRange = MyAllowedYRange
         End Get
     End Property
 
-    Property ActualXRange As ClsInterval Implements IPolynom.ActualXRange
+    Property ActualXRange As ClsInterval Implements INewton.ActualXRange
         Get
             ActualXRange = MyActualXRange
         End Get
         Set(value As ClsInterval)
             MyActualXRange = value
+            MyPicGraphics.MathXInterval = value
+            MyBmpGraphics.MathXInterval = value
         End Set
     End Property
 
-    Property ActualYRange As ClsInterval Implements IPolynom.ActualYRange
+    Property ActualYRange As ClsInterval Implements INewton.ActualYRange
         Get
             ActualYRange = MyActualYRange
         End Get
         Set(value As ClsInterval)
             MyActualYRange = value
+            MyPicGraphics.MathYInterval = value
+            MyBmpGraphics.MathYInterval = value
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus Implements IPolynom.IterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus Implements INewton.IterationStatus
         Get
             IterationStatus = MyIterationStatus
         End Get
-        Set(value As ClsGeneral.EnIterationStatus)
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
     End Property
 
-    WriteOnly Property TxtNumberofSteps As TextBox Implements IPolynom.TxtNumberOfSteps
+    WriteOnly Property TxtNumberofSteps As TextBox Implements INewton.TxtNumberOfSteps
         Set(value As TextBox)
             MyTxtNumberofSteps = value
         End Set
     End Property
 
-    WriteOnly Property TxtElapsedTime As TextBox Implements IPolynom.TxtElapsedTime
+    WriteOnly Property TxtElapsedTime As TextBox Implements INewton.TxtElapsedTime
         Set(value As TextBox)
             MyTxtElapsedTime = value
         End Set
     End Property
 
-    WriteOnly Property ProcotolList As ListBox Implements IPolynom.ProcotolList
+    WriteOnly Property ProcotolList As ListBox Implements INewton.ProcotolList
         Set(value As ListBox)
             MyProtocolList = value
         End Set
     End Property
 
-    WriteOnly Property IsProtocol As Boolean Implements IPolynom.IsProtocol
+    WriteOnly Property IsProtocol As Boolean Implements INewton.IsProtocol
         Set(value As Boolean)
             MyIsProtocol = value
         End Set
     End Property
 
-    ReadOnly Property UseN As Boolean Implements IPolynom.UseN
+    ReadOnly Property UseN As Boolean Implements INewton.UseN
         Get
             UseN = MyUseN
         End Get
     End Property
 
-    WriteOnly Property N As Integer Implements IPolynom.N
+    WriteOnly Property N As Integer Implements INewton.N
         Set(value As Integer)
             MyN = value
             MyRadius = Math.Min(0.1, 1 - Math.Pow(2, -1 / MyN))
         End Set
     End Property
 
-    ReadOnly Property UseC As Boolean Implements IPolynom.UseC
+    ReadOnly Property UseC As Boolean Implements INewton.UseC
         Get
             UseC = MyUseC
         End Get
     End Property
 
-    WriteOnly Property C As ClsComplexNumber Implements IPolynom.C
+    WriteOnly Property C As ClsComplexNumber Implements INewton.C
         Set(value As ClsComplexNumber)
             MyC = value
         End Set
     End Property
 
-    WriteOnly Property UseMixing As IPolynom.EnMixing Implements IPolynom.UseMixing
-        Set(value As IPolynom.EnMixing)
+    WriteOnly Property UseMixing As INewton.EnMixing Implements INewton.UseMixing
+        Set(value As INewton.EnMixing)
             MyMixing = value
         End Set
     End Property
 
-    WriteOnly Property UseColor As IPolynom.EnColor Implements IPolynom.UseColor
-        Set(value As IPolynom.EnColor)
+    WriteOnly Property UseColor As INewton.EnColor Implements INewton.UseColor
+        Set(value As INewton.EnColor)
             MyColor = value
         End Set
     End Property
 
-    Public Sub DrawCoordinateSystem() Implements IPolynom.DrawCoordinateSystem
+    Public Sub DrawCoordinateSystem() Implements INewton.DrawCoordinateSystem
 
         If ActualXRange.IsNumberInInterval(0) Then
 
             'Draw y-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
+            MyBmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
                                              New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
         End If
 
         If ActualYRange.IsNumberInInterval(0) Then
 
             'Draw x-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
+            MyBmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
                                          New ClsMathpoint(ActualXRange.B, 0), Color.Black, 1)
         End If
 
+        MyPicDiagram.Refresh()
+
     End Sub
 
-    Public Sub Reset() Implements IPolynom.Reset
+    Public Sub ResetIteration() Implements INewton.ResetIteration
 
         'Clear MapCPlane
-        If MyMapCPlaneGraphics IsNot Nothing Then
-            MyMapCPlaneGraphics.Clear(Color.White)
+        If MyBmpGraphics IsNot Nothing Then
+            MyBmpGraphics.Clear(Color.White)
             DrawCoordinateSystem()
             DrawRoots(False)
-            L = 0
-            Watch.Reset()
-            ExaminatedPoints = 0
         End If
+
+        MyTxtNumberofSteps.Text = "0"
+        MyTxtElapsedTime.Text = "0"
+        L = 0
+        Watch.Reset()
+        ExaminatedPoints = 0
 
         'Clear Protocol
         If MyProtocolList IsNot Nothing Then
             MyProtocolList.Items.Clear()
         End If
+
+        MyPicDiagram.Refresh()
+
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
     End Sub
 
 
     'Draws roots of the polynom
-    Public Sub DrawRoots(Finished As Boolean) Implements IPolynom.DrawRoots
+    Public Sub DrawRoots(Finished As Boolean) Implements INewton.DrawRoots
 
         'Roots
         Dim Col As Brush
 
         'Finished = PicCPlane is generated
 
-        For Each MyRoot As ClsRoot In Roots
+        For Each MyRoot As ClsUnitRoot In UnitRootCollection
             If Finished Then
                 Col = Brushes.Black
             Else
-                Col = MyRoot.GetColor(0)
+                Col = MyRoot.GetColor(1)
             End If
-            MyMapCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+            MyBmpGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
         Next
+
+        MyPicDiagram.Refresh()
 
     End Sub
 
@@ -275,7 +294,7 @@ Public MustInherit Class ClsPolynomAbstract
 
         Dim FinalBrightness As Double
 
-        If MyColor = IPolynom.EnColor.Bright Then
+        If MyColor = INewton.EnColor.Bright Then
             FinalBrightness = 1
         Else
 
@@ -301,8 +320,7 @@ Public MustInherit Class ClsPolynomAbstract
             FinalBrightness = Math.Min(FinalBrightness, 1)
         End If
 
-
-        For Each Root As ClsRoot In Roots
+        For Each Root As ClsUnitRoot In UnitRootCollection
             Difference = Z.Add(Root.Stretch(-1)).AbsoluteValue
             If Difference < Temp Then
                 Temp = Difference
@@ -314,13 +332,13 @@ Public MustInherit Class ClsPolynomAbstract
 
     End Function
 
-    Public Function GenerateImage() As Task Implements IPolynom.GenerateImage
+    Public Async Function GenerateImage() As Task Implements INewton.GenerateImage
 
         'This algorithm goes through the CPlane in a spiral starting in the midpoint
         'In case of Symmetry, only the lower halfplane is examinated
         If ExaminatedPoints = 0 Then
-            p = CInt(MyPicCPlane.Width / 2)
-            q = CInt(MyPicCPlane.Height / 2)
+            p = CInt(MyPicDiagram.Width / 2)
+            q = CInt(MyPicDiagram.Height / 2)
 
             PixelPoint = New Point
 
@@ -342,26 +360,24 @@ Public MustInherit Class ClsPolynomAbstract
 
             IterationLoop()
 
+            If p >= MyPicDiagram.Width Or q >= MyPicDiagram.Height Then
 
-            If p >= MyPicCPlane.Width Or q >= MyPicCPlane.Height Then
-
-                MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+                MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
                 Watch.Stop()
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
 
             End If
 
             If ExaminatedPoints Mod 100 = 0 Then
                 MyTxtNumberofSteps.Text = Steps.ToString
                 MyTxtElapsedTime.Text = Watch.Elapsed.ToString
-                Application.DoEvents()
-                Task.Delay(2)
+                Await Task.Delay(1)
             End If
 
-        Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted _
-            Or MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+            Or MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
-        Return Task.CompletedTask
+        DrawRoots(True)
 
     End Function
 
@@ -388,7 +404,7 @@ Public MustInherit Class ClsPolynomAbstract
             IterationStep(PixelPoint)
 
             If Steps Mod 10000 = 0 Then
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
             End If
 
             Steps += 1
@@ -410,7 +426,7 @@ Public MustInherit Class ClsPolynomAbstract
             IterationStep(PixelPoint)
 
             If Steps Mod 10000 = 0 Then
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
             End If
 
             Steps += 1
@@ -424,7 +440,7 @@ Public MustInherit Class ClsPolynomAbstract
         'Transform the PixelPoint to a Complex Number
         Dim MathStartpoint As ClsComplexNumber
 
-        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
+        With MyBmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
             MathStartpoint = New ClsComplexNumber(.X, .Y)
         End With
@@ -465,7 +481,7 @@ Public MustInherit Class ClsPolynomAbstract
             MyBrush = Brushes.Black
         End If
 
-        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
 
         'Protocol of the PixelStartpoint and the Endpoint as Mathpoint
         If MyIsProtocol Then
@@ -478,7 +494,7 @@ Public MustInherit Class ClsPolynomAbstract
 
     Public MustOverride Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 
-    Protected MustOverride Sub PrepareIteration() Implements IPolynom.PrepareIteration
+    Protected MustOverride Sub PrepareUnitRoots() Implements INewton.PrepareUnitRoots
 
     Public MustOverride Function Denominator(Z As ClsComplexNumber) As ClsComplexNumber
 

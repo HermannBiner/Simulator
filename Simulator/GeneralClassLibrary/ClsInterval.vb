@@ -1,4 +1,5 @@
 ﻿'Represents an interval of real numbers [A,B] with A < B
+
 'Status Checked
 
 Public Class ClsInterval
@@ -49,7 +50,7 @@ Public Class ClsInterval
 
     Public Function IsNumberInInterval(number As Object) As Boolean
 
-        'Checks if the Number belongs to the interval [A,B]
+        'Checks if the Number is in the interval [A,B]
 
         If TypeOf number Is Integer Then
             Dim IntNumber As Integer = DirectCast(number, Integer)

@@ -1,4 +1,5 @@
 ﻿'This is the start window for the program
+
 'Status checked
 
 Imports System.IO
@@ -140,7 +141,7 @@ Public Class FrmMain
     End Sub
 
     Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
-        FrmSpringPendulum.Show()
+        FrmNumericMethods.Show()
     End Sub
 
     Private Sub MnuNewton_Click(sender As Object, e As EventArgs) Handles MnuNewton.Click

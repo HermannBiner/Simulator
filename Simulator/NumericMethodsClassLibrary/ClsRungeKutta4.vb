@@ -15,10 +15,10 @@ Public Class ClsRungeKutta4
     Private v As Decimal
 
     'The Runge Kutta Parameters for u
-    Private ReadOnly k As New ClsVector(3)
+    Private ReadOnly k As New ClsNTupel(3)
 
     'the Runge Kutta Parameters for v
-    Private ReadOnly l As New ClsVector(3)
+    Private ReadOnly l As New ClsNTupel(3)
 
     Protected Overrides Sub Iteration()
 

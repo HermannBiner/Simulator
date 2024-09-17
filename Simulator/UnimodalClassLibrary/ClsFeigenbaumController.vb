@@ -22,7 +22,7 @@ Public Class ClsFeigenbaumController
     Private MyPrecision As Integer
 
     'IterationStatus
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Iteration Parameters
     Private x As Decimal
@@ -79,8 +79,8 @@ Public Class ClsFeigenbaumController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
-        Set(value As ClsGeneral.EnIterationStatus)
+    Property IterationStatus As ClsDynamics.EnIterationStatus
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
         Get
@@ -90,7 +90,7 @@ Public Class ClsFeigenbaumController
 
     Public Sub IterationLoop(p As Integer)
 
-        If MyIterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+        If MyIterationStatus = ClsDynamics.EnIterationStatus.Ready Then
             'Initialize
             'First, the iteration runs a while until it gets periodic (if the behaviour is not chaotic)
             RunTimeUntilCycle = 1000 * MyPrecision
@@ -106,7 +106,7 @@ Public Class ClsFeigenbaumController
             CyclePoint = New ClsMathpoint(MyDS.Parameter, x)
         End If
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Running
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Running
 
         'Calculate the parameter a for the iteration depending on p
         MyDS.Parameter = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
@@ -135,8 +135,6 @@ Public Class ClsFeigenbaumController
         Loop Until (i > RunTimeUntilCycle + LengthOfCycle)
 
         MyPicDiagram.Refresh()
-
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
 
     End Sub
 
@@ -192,7 +190,7 @@ Public Class ClsFeigenbaumController
         MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 

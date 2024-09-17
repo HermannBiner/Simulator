@@ -39,7 +39,7 @@ Public MustInherit Class ClsBilliardTableAbstract
     Private MyLblN As Label
 
     'Iteration Control
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     Public Sub New()
         MyBilliardballCollection = New List(Of IBilliardball)
@@ -146,11 +146,11 @@ Public MustInherit Class ClsBilliardTableAbstract
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus Implements IBilliardTable.IterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus Implements IBilliardTable.IterationStatus
         Get
             IterationStatus = MyIterationStatus
         End Get
-        Set(value As ClsGeneral.EnIterationStatus)
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
     End Property
@@ -170,7 +170,7 @@ Public MustInherit Class ClsBilliardTableAbstract
         MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 
@@ -196,7 +196,7 @@ Public MustInherit Class ClsBilliardTableAbstract
                 Await Task.Delay(2)
             End If
 
-        Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted
 
     End Function
 

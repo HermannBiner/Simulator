@@ -3,6 +3,8 @@
 '1: is a user parameter contained in a given interval
 '2: is a user interval contained in a given interval
 
+'Status Checked
+
 Imports System.Globalization
 
 Public Class ClsCheckUserData
@@ -24,31 +26,31 @@ Public Class ClsCheckUserData
     Private MyCheckIsInterval As ClsCheckIsInterval
     Private MyCheckIsNumeric As ClsCheckIsNumeric
 
-    Public WriteOnly Property TxtX As TextBox
+    WriteOnly Property TxtX As TextBox
         Set(value As TextBox)
             MyTxtX = value
         End Set
     End Property
 
-    Public WriteOnly Property TxtA As TextBox
+    WriteOnly Property TxtA As TextBox
         Set(value As TextBox)
             MyTxtA = value
         End Set
     End Property
 
-    Public WriteOnly Property TxtB As TextBox
+    WriteOnly Property TxtB As TextBox
         Set(value As TextBox)
             MyTxtB = value
         End Set
     End Property
 
-    Public WriteOnly Property X As Decimal
+    WriteOnly Property X As Decimal
         Set(value As Decimal)
             MyX = value
         End Set
     End Property
 
-    Public WriteOnly Property TargetInterval As ClsInterval
+    WriteOnly Property TargetInterval As ClsInterval
         Set(value As ClsInterval)
             MyTargetInterval = value
         End Set
@@ -65,8 +67,9 @@ Public Class ClsCheckUserData
         MyTargetInterval = TargetInterval
     End Sub
 
-    Public Sub New(a As Decimal, TargetInterval As ClsInterval)
-
+    Public Sub New(X As Decimal, TargetInterval As ClsInterval)
+        MyX = X
+        MyTargetInterval = TargetInterval
     End Sub
 
     Public Function IsTxtValueAllowed() As Boolean
@@ -131,7 +134,4 @@ Public Class ClsCheckUserData
 
 
     End Function
-
-
-
 End Class

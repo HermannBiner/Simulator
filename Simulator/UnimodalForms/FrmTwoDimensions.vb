@@ -204,8 +204,8 @@ Public Class FrmTwoDimensions
             SetBrush()
 
             With TwoDimensionsController
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
-                    .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+                    .IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
                 End If
             End With
 
@@ -250,34 +250,34 @@ Public Class FrmTwoDimensions
         With TwoDimensionsController
 
             'New Iteration
-            If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+            If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                 If IsUserDataOK() Then
                     .PrepareDiagram()
                     DS.Parameter = CDec(TxtParameter.Text)
                     .StartValueX = CDec(TxtX.Text)
                     .StartValueY = CDec(TxtY.Text)
-                    .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                    .IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
                     SetDefaultUserData()
                 End If
             End If
 
             'New Experiment with new UserData
-            If .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
+            If .IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
                 If IsUserDataOK() Then
                     .StartValueX = CDec(TxtX.Text)
                     .StartValueY = CDec(TxtY.Text)
-                    .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                    .IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
                     SetDefaultUserData()
                 End If
             End If
 
             'Next steps of a running Iteration
-            If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
-                .IterationStatus = ClsGeneral.EnIterationStatus.Running
+            If .IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+                .IterationStatus = ClsDynamics.EnIterationStatus.Running
                 .IterationLoop(EndOfLoop)
-                .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                .IterationStatus = ClsDynamics.EnIterationStatus.Ready
             End If
         End With
 

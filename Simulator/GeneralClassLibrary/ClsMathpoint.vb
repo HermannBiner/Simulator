@@ -1,10 +1,11 @@
 ﻿'This class represents a point in mathematical coordinates
-'See ClsGraphicTool 
+'See e.g. ClsGraphicTool
+
 'Status Checked
 
 Public Class ClsMathpoint
 
-    'These Variables should be accessible as well for interhiting classes
+    'These Variables should be accessible as well for inerhited classes
     Protected MyX As Decimal
     Protected MyY As Decimal
 
@@ -18,7 +19,7 @@ Public Class ClsMathpoint
 
     Public Sub New()
 
-        'If the math. coordinates X and Y are set after the Initialization
+        'If the math. coordinates X and Y are set later after the Initialization
 
     End Sub
 

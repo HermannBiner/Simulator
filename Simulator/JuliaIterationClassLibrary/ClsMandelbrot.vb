@@ -18,6 +18,13 @@ Public Class ClsMandelbrot
     Private UpperBoundSteps As Integer = 0
     Private LowerBoundSteps As Integer = MaxSteps
 
+    'Iteration Parameter
+    Private Zi As ClsComplexNumber
+    Private Shadows Steps As Integer
+    Private Radius As Decimal
+    Private ColorIndex As Double
+    Private MyBrush As Brush
+
     Public Sub New()
 
         If MyN = 2 Or MyN = 0 Then
@@ -37,6 +44,11 @@ Public Class ClsMandelbrot
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
         MyIsTrackImplemented = True
+
+        'Iteration Parameter
+        Zi = New ClsComplexNumber(0, 0)
+
+        MyBrush = New SolidBrush(Color.Black)
 
     End Sub
 
@@ -71,25 +83,26 @@ Public Class ClsMandelbrot
     Public Overrides Sub IterationStep(Startpoint As Point)
 
         'Transform the PixelPoint to a Complex Number
-        Dim Zi As ClsComplexNumber
 
-        With MyMapCPlaneGraphics.PixelToMathpoint(Startpoint)
+        With MyBmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
-            Zi = New ClsComplexNumber(.X, .Y)
+            Zi.X = .X
+            Zi.Y = .Y
         End With
 
-        Dim Steps As Integer = 0
-        Dim R As Decimal = CDec(Math.Pow(2, 1 / (MyN - 1)))
-
+        Steps = 0
 
         'For the Mandelbrot-Set, the Point Zi is replaced by C
         MyC.X = Zi.X
         MyC.Y = Zi.Y
 
         'For the Mandelbrot set, the Iteration starts always with Zi = 0
-        Zi = New ClsComplexNumber(0, 0)
+        Zi.X = 0
+        Zi.Y = 0
 
-        Do Until (Zi.AbsoluteValue > R) Or (Steps > MaxSteps)
+        Radius = CDec(Math.Pow(2, 1 / (MyN - 1)))
+
+        Do Until (Zi.AbsoluteValue > Radius) Or (Steps > MaxSteps)
 
             Steps += 1
 
@@ -101,15 +114,12 @@ Public Class ClsMandelbrot
         'depending on the #of steps, the color of the brush is choosen
         'there are 25 colors available and the steps are between 0 and MaxSteps
         'The lowest color-index is for the highest # steps, therefore:
-        Dim MyBrush As Brush
-        Dim ColorIndex As Double
 
         If Steps > MaxSteps Then
             MyBrush = New SolidBrush(Color.Black)
         Else
             'if steps = 0, the color would be black as well, therefore we set
             Steps = Math.Max(1, Steps)
-
 
             If MyUseSystemColors Then
                 MyBrush = StandardColors.GetSystemBrush(Steps)
@@ -123,7 +133,7 @@ Public Class ClsMandelbrot
                 ColorIndex = Math.Pow(ColorIndex, 1 / 5)
 
                 MyBrush = New SolidBrush(Color.FromArgb(255, CInt(255 * ColorIndex * MyRedPercent),
-                       CInt(255 * ColorIndex * MyGreenPercent), CInt(255 * ColorIndex * MyBluePercent)))
+                CInt(255 * ColorIndex * MyGreenPercent), CInt(255 * ColorIndex * MyBluePercent)))
             End If
         End If
 
@@ -137,7 +147,7 @@ Public Class ClsMandelbrot
             End If
         End If
 
-        MyMapCPlaneGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
         MyBrush.Dispose()
 
     End Sub
@@ -146,13 +156,13 @@ Public Class ClsMandelbrot
         Dim i As Integer = 1
         Dim w As ClsComplexNumber = MyC
 
-        MyPicCPlane.Refresh()
+        MyPicDiagram.Refresh()
 
-        MyPicCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
+        MyPicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
 
         Do
             w = w.Power(MyN).Add(MyC)
-            MyPicCPlaneGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
+            MyPicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
 
             i += 1
         Loop Until i > 50 Or w.AbsoluteValue > 2

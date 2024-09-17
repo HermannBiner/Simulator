@@ -1,7 +1,7 @@
 ﻿'Contains mathematical help functions for all kind of unimodal functions
 'see mathematical documentation
 
-'Status Redesign Tested
+'Status Checked
 
 Public Class ClsMathhelperUnimodal
 
@@ -152,7 +152,7 @@ Public Class ClsMathhelperUnimodal
         'Check: A dual number can only contain the digits 0 and 1
         Dim digit As String 'The examinated digit
         Dim position As Integer 'Position of this digit
-        Dim IsFormatValid As Boolean = True
+        Dim IsFormatValid As Boolean = (dualnumber.Length > 0)
 
         For position = 1 To dualnumber.Length
             digit = Mid(dualnumber, position, 1)

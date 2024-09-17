@@ -7,12 +7,12 @@ Public MustInherit Class ClsJuliaAbstract
     Implements IJulia
 
     'Drawing MapCPlane
-    Protected MyMapCPlane As Bitmap
-    Protected MyMapCPlaneGraphics As ClsGraphicTool
+    Protected MyBmpDiagram As Bitmap
+    Protected MyBmpGraphics As ClsGraphicTool
 
     'Drawing PicCPlane
-    Protected MyPicCPlane As PictureBox
-    Protected MyPicCPlaneGraphics As ClsGraphicTool
+    Protected MyPicDiagram As PictureBox
+    Protected MyPicGraphics As ClsGraphicTool
 
     'Allowed Interval for the x-Values
     Protected MyAllowedXRange As ClsInterval
@@ -27,13 +27,12 @@ Public MustInherit Class ClsJuliaAbstract
     Protected MyActualYRange As ClsInterval
 
     'Controlling the Iteration Loop
-    Protected Property MyStopIteration As Boolean
     Protected Property MyTxtNumberofSteps As TextBox
     Protected Property MyTxtElapsedTime As TextBox
 
     'Parameters for the Iteration
 
-    Protected Property MyIterationStatus As ClsGeneral.EnIterationStatus
+    Protected Property MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Number of examinated points in the complex plane
     Protected ExaminatedPoints As Integer
@@ -85,17 +84,22 @@ Public MustInherit Class ClsJuliaAbstract
 
     'SECTOR INTERFACE
 
-    WriteOnly Property MapCPlane As Bitmap Implements IJulia.MapCPlane
-        Set(value As Bitmap)
-            MyMapCPlane = value
-            MyMapCPlaneGraphics = New ClsGraphicTool(MyMapCPlane, MyActualXRange, MyActualYRange)
-        End Set
-    End Property
-
-    WriteOnly Property PicCPlane As PictureBox Implements IJulia.PicCPlane
+    WriteOnly Property PicDiagram As PictureBox Implements IJulia.PicDiagram
         Set(value As PictureBox)
-            MyPicCPlane = value
-            MyPicCPlaneGraphics = New ClsGraphicTool(MyPicCPlane, MyActualXRange, MyActualYRange)
+            MyPicDiagram = value
+            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+
+            'The PictureBox should be a square
+            Dim Square As Integer = Math.Min(MyPicDiagram.Height, MyPicDiagram.Width)
+
+            MyPicDiagram.Height = Square
+            MyPicDiagram.Width = Square
+
+            MyBmpDiagram = New Bitmap(Square, Square)
+            MyPicDiagram.Image = MyBmpDiagram
+
+            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
@@ -117,6 +121,8 @@ Public MustInherit Class ClsJuliaAbstract
         End Get
         Set(value As ClsInterval)
             MyActualXRange = value
+            MyPicGraphics.MathXInterval = value
+            MyBmpGraphics.MathXInterval = value
         End Set
     End Property
 
@@ -126,6 +132,8 @@ Public MustInherit Class ClsJuliaAbstract
         End Get
         Set(value As ClsInterval)
             MyActualYRange = value
+            MyPicGraphics.MathYInterval = value
+            MyBmpGraphics.MathYInterval = value
         End Set
     End Property
 
@@ -135,11 +143,11 @@ Public MustInherit Class ClsJuliaAbstract
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus Implements IJulia.IterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus Implements IJulia.IterationStatus
         Get
             IterationStatus = MyIterationStatus
         End Get
-        Set(value As ClsGeneral.EnIterationStatus)
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
     End Property
@@ -203,43 +211,52 @@ Public MustInherit Class ClsJuliaAbstract
         If ActualXRange.IsNumberInInterval(0) Then
 
             'Draw y-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
+            MyBmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
                                              New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
         End If
 
         If ActualYRange.IsNumberInInterval(0) Then
 
             'Draw x-axis
-            MyMapCPlaneGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
+            MyBmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
                                          New ClsMathpoint(ActualXRange.B, 0), Color.Black, 1)
         End If
 
+        MyPicDiagram.Refresh()
+
     End Sub
 
-    Public Sub Reset() Implements IJulia.Reset
+    Public Sub ResetIteration() Implements IJulia.ResetIteration
 
         'Clear MapCPlane
-        If MyMapCPlaneGraphics IsNot Nothing Then
-            MyMapCPlaneGraphics.Clear(Color.White)
+        If MyBmpGraphics IsNot Nothing Then
+            MyBmpGraphics.Clear(Color.White)
             DrawCoordinateSystem()
-            L = 0
-            Watch.Reset()
-            ExaminatedPoints = 0
         End If
+
+        MyTxtNumberofSteps.Text = "0"
+        MyTxtElapsedTime.Text = "0"
+        L = 0
+        Watch.Reset()
+        ExaminatedPoints = 0
 
         'Clear Protocol
         If MyProtocolList IsNot Nothing Then
             MyProtocolList.Items.Clear()
         End If
 
+        MyPicDiagram.Refresh()
+
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
     End Sub
 
-    Public Function GenerateImage() As Task Implements IJulia.GenerateImage
+    Public Async Function GenerateImage() As Task Implements IJulia.GenerateImage
 
         'This algorithm goes through the CPlane in a spiral starting in the midpoint
         If ExaminatedPoints = 0 Then
-            p = CInt(MyPicCPlane.Width / 2)
-            q = CInt(MyPicCPlane.Height / 2)
+            p = CInt(MyPicDiagram.Width / 2)
+            q = CInt(MyPicDiagram.Height / 2)
 
             PixelPoint = New Point
 
@@ -262,25 +279,22 @@ Public MustInherit Class ClsJuliaAbstract
             IterationLoop()
 
 
-            If p >= MyPicCPlane.Width Or q >= MyPicCPlane.Height Then
+            If p >= MyPicDiagram.Width Or q >= MyPicDiagram.Height Then
 
-                MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+                MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
                 Watch.Stop()
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
 
             End If
 
             If ExaminatedPoints Mod 100 = 0 Then
                 MyTxtNumberofSteps.Text = Steps.ToString
                 MyTxtElapsedTime.Text = Watch.Elapsed.ToString
-                Application.DoEvents()
-                Task.Delay(2)
+                Await Task.Delay(1)
             End If
 
-        Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted _
-            Or MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
-
-        Return Task.CompletedTask
+        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+            Or MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Function
 
@@ -307,7 +321,7 @@ Public MustInherit Class ClsJuliaAbstract
             IterationStep(PixelPoint)
 
             If Steps Mod 10000 = 0 Then
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
             End If
 
             Steps += 1
@@ -329,7 +343,7 @@ Public MustInherit Class ClsJuliaAbstract
             IterationStep(PixelPoint)
 
             If Steps Mod 10000 = 0 Then
-                MyPicCPlane.Refresh()
+                MyPicDiagram.Refresh()
             End If
 
             Steps += 1

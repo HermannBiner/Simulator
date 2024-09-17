@@ -138,7 +138,7 @@ Public Class FrmHistogram
             .DS = DS
             .LblN = LblSteps
             .PicDiagram = PicDiagram
-            .IterationStatus = ClsGeneral.EnIterationStatus.Stopped
+            .IterationStatus = ClsDynamics.EnIterationStatus.Stopped
         End With
     End Sub
 
@@ -199,14 +199,14 @@ Public Class FrmHistogram
 
             With HistogramController
 
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                     'Check User Data
                     If IsUserDataOK() Then
 
                         'Set Ds Parameters
                         DS.Parameter = CDec(TxtParameter.Text)
                         .StartValue = CDec(TxtStartValue.Text)
-                        .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                        .IterationStatus = ClsDynamics.EnIterationStatus.Ready
 
                         If DS.IsBehaviourChaotic() Then
                             'OK
@@ -219,10 +219,10 @@ Public Class FrmHistogram
                     End If
                 End If
 
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready _
-                Or .IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Ready _
+                Or .IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
 
-                    .IterationStatus = ClsGeneral.EnIterationStatus.Running
+                    .IterationStatus = ClsDynamics.EnIterationStatus.Running
 
                     BtnStart.Text = FrmMain.LM.GetString("Continue")
                     BtnStart.Enabled = False
@@ -246,7 +246,7 @@ Public Class FrmHistogram
         If IsFormLoaded Then
 
             'the iteration is running and should be stopped
-            HistogramController.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+            HistogramController.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
 
             BtnStart.Enabled = True
             BtnReset.Enabled = True

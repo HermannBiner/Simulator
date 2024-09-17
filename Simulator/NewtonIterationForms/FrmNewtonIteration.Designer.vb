@@ -23,7 +23,7 @@ Partial Class FrmNewtonIteration
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmNewtonIteration))
-        PicCPlane = New PictureBox()
+        PicDiagram = New PictureBox()
         CboFunction = New ComboBox()
         LblXMin = New Label()
         TxtXMin = New TextBox()
@@ -61,19 +61,19 @@ Partial Class FrmNewtonIteration
         TxtSteps = New TextBox()
         TxtTime = New TextBox()
         BtnShowBasin = New Button()
-        CType(PicCPlane, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         GrpMixing.SuspendLayout()
         GrpColor.SuspendLayout()
         SuspendLayout()
         ' 
-        ' PicCPlane
+        ' PicDiagram
         ' 
-        PicCPlane.Location = New Point(2, 12)
-        PicCPlane.Margin = New Padding(4, 5, 4, 5)
-        PicCPlane.Name = "PicCPlane"
-        PicCPlane.Size = New Size(1398, 1588)
-        PicCPlane.TabIndex = 0
-        PicCPlane.TabStop = False
+        PicDiagram.Location = New Point(2, 12)
+        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(1398, 1588)
+        PicDiagram.TabIndex = 0
+        PicDiagram.TabStop = False
         ' 
         ' CboFunction
         ' 
@@ -461,13 +461,13 @@ Partial Class FrmNewtonIteration
         Controls.Add(TxtXMin)
         Controls.Add(LblXMin)
         Controls.Add(CboFunction)
-        Controls.Add(PicCPlane)
+        Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4, 5, 4, 5)
         Name = "FrmNewtonIteration"
         Text = "NewtonIteration"
         WindowState = FormWindowState.Maximized
-        CType(PicCPlane, ComponentModel.ISupportInitialize).EndInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
         GrpMixing.ResumeLayout(False)
         GrpMixing.PerformLayout()
         GrpColor.ResumeLayout(False)
@@ -477,7 +477,7 @@ Partial Class FrmNewtonIteration
 
     End Sub
 
-    Friend WithEvents PicCPlane As PictureBox
+    Friend WithEvents PicDiagram As PictureBox
     Friend WithEvents CboFunction As ComboBox
     Friend WithEvents LblXMin As Label
     Friend WithEvents TxtXMin As TextBox

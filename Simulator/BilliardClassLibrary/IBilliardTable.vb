@@ -27,7 +27,7 @@ Public Interface IBilliardTable
     ReadOnly Property B As Decimal
 
     'IterationStatus
-    Property IterationStatus As ClsGeneral.EnIterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus
 
     'Reset all diagrams and clear all balls
     Sub ResetIteration()

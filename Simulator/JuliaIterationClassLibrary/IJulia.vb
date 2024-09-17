@@ -6,11 +6,7 @@
 
 Public Interface IJulia
 
-    'The Iteration plots the Orbit into MapCPlane
-    WriteOnly Property MapCPlane As Bitmap
-
-    'The Mandelbrot Class draws into the Picturebox as well
-    WriteOnly Property PicCPlane As PictureBox
+    WriteOnly Property PicDiagram As PictureBox
 
     'Allowed Interval for the x-Values
     ReadOnly Property AllowedXRange As ClsInterval
@@ -46,7 +42,7 @@ Public Interface IJulia
     ReadOnly Property IsTrackImplemented As Boolean
 
     'Iteration Control
-    Property IterationStatus As ClsGeneral.EnIterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus
 
     WriteOnly Property TxtNumberOfSteps As TextBox
     WriteOnly Property TxtElapsedTime As TextBox
@@ -61,6 +57,6 @@ Public Interface IJulia
     Sub ShowCTrack()
 
     'Reset
-    Sub Reset()
+    Sub ResetIteration()
 
 End Interface

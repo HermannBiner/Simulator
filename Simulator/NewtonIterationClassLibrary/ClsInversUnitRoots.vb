@@ -5,7 +5,7 @@
 'Status Checked
 
 Public Class ClsInversUnitRoots
-    Inherits ClsPolynomAbstract
+    Inherits ClsNewtonAbstract
 
     'SECTOR INITIALIZATION
 
@@ -22,18 +22,18 @@ Public Class ClsInversUnitRoots
 
     End Sub
 
-    Protected Overrides Sub PrepareIteration()
+    Protected Overrides Sub PrepareUnitRoots()
 
         Dim k As Integer
 
         'Generate Roots
-        Roots.Clear()
+        UnitRootCollection.Clear()
 
         Dim W = New ClsComplexNumber(1, 0)
-        Roots.Add(New ClsRoot(W, 1))
+        UnitRootCollection.Add(New ClsUnitRoot(W, 1))
 
         For k = 2 To MyN
-            Roots.Add(New ClsRoot(W.Rotate(CDec(2 * Math.PI * (k - 1) / MyN)), k))
+            UnitRootCollection.Add(New ClsUnitRoot(W.Rotate(CDec(2 * Math.PI * (k - 1) / MyN)), k))
         Next
 
         MyIterationDeepness = 60 * MyN
@@ -59,9 +59,9 @@ Public Class ClsInversUnitRoots
     Public Overrides Function Newton(Z As ClsComplexNumber) As ClsComplexNumber
 
         Select Case MyMixing
-            Case IPolynom.EnMixing.Conjugate
+            Case INewton.EnMixing.Conjugate
                 Z = Z.Conjugate
-            Case IPolynom.EnMixing.Rotate
+            Case INewton.EnMixing.Rotate
                 Dim Phi As Double = 2 * Math.PI / MyN
                 Z = Z.Mult(New ClsComplexNumber(Math.Cos(Phi), Math.Sin(Phi)))
             Case Else

@@ -1,4 +1,5 @@
 ﻿'This class provides Labels, Messages and any other text in the actual language
+
 'Status Checked
 
 Imports System.Resources

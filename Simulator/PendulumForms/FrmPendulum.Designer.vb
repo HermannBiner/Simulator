@@ -23,464 +23,439 @@ Partial Class FrmPendulum
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPendulum))
-        Me.CboPendulum = New System.Windows.Forms.ComboBox()
-        Me.LblPendulum = New System.Windows.Forms.Label()
-        Me.LstParameterList = New System.Windows.Forms.ListBox()
-        Me.GrpStartParameter = New System.Windows.Forms.GroupBox()
-        Me.TxtP6 = New System.Windows.Forms.TextBox()
-        Me.LblP6 = New System.Windows.Forms.Label()
-        Me.TxtP5 = New System.Windows.Forms.TextBox()
-        Me.LblP5 = New System.Windows.Forms.Label()
-        Me.TxtP4 = New System.Windows.Forms.TextBox()
-        Me.TxtP3 = New System.Windows.Forms.TextBox()
-        Me.LblP4 = New System.Windows.Forms.Label()
-        Me.LblP3 = New System.Windows.Forms.Label()
-        Me.BtnTakeOverStartParameter = New System.Windows.Forms.Button()
-        Me.TxtP2 = New System.Windows.Forms.TextBox()
-        Me.TxtP1 = New System.Windows.Forms.TextBox()
-        Me.LblP2 = New System.Windows.Forms.Label()
-        Me.LblP1 = New System.Windows.Forms.Label()
-        Me.LblPhasePortrait = New System.Windows.Forms.Label()
-        Me.LblAdditionalParameter = New System.Windows.Forms.Label()
-        Me.TrbAdditionalParameter = New System.Windows.Forms.TrackBar()
-        Me.PicPhasePortrait = New System.Windows.Forms.PictureBox()
-        Me.TxtFactor = New System.Windows.Forms.TextBox()
-        Me.LblParameterc = New System.Windows.Forms.Label()
-        Me.PicPendulum = New System.Windows.Forms.PictureBox()
-        Me.LblSteps = New System.Windows.Forms.Label()
-        Me.LblNumberOfSteps = New System.Windows.Forms.Label()
-        Me.BtnReset = New System.Windows.Forms.Button()
-        Me.BtnStart = New System.Windows.Forms.Button()
-        Me.LblStepWidth = New System.Windows.Forms.Label()
-        Me.TrbStepWidth = New System.Windows.Forms.TrackBar()
-        Me.PicStatus = New System.Windows.Forms.PictureBox()
-        Me.CboTypeofPhaseportrait = New System.Windows.Forms.ComboBox()
-        Me.LblTypeofPhaseportrait = New System.Windows.Forms.Label()
-        Me.LblParameterlist = New System.Windows.Forms.Label()
-        Me.BtnStop = New System.Windows.Forms.Button()
-        Me.GrpStartParameter.SuspendLayout()
-        CType(Me.TrbAdditionalParameter, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicPhasePortrait, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicPendulum, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TrbStepWidth, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicStatus, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'CboPendulum
-        '
-        Me.CboPendulum.FormattingEnabled = True
-        Me.CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
-        Me.CboPendulum.Location = New System.Drawing.Point(1284, 37)
-        Me.CboPendulum.Margin = New System.Windows.Forms.Padding(4)
-        Me.CboPendulum.Name = "CboPendulum"
-        Me.CboPendulum.Size = New System.Drawing.Size(364, 33)
-        Me.CboPendulum.TabIndex = 38
-        '
-        'LblPendulum
-        '
-        Me.LblPendulum.AutoSize = True
-        Me.LblPendulum.Location = New System.Drawing.Point(1280, 8)
-        Me.LblPendulum.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblPendulum.Name = "LblPendulum"
-        Me.LblPendulum.Size = New System.Drawing.Size(108, 25)
-        Me.LblPendulum.TabIndex = 37
-        Me.LblPendulum.Text = "Pendulum"
-        '
-        'LstParameterList
-        '
-        Me.LstParameterList.FormattingEnabled = True
-        Me.LstParameterList.ItemHeight = 25
-        Me.LstParameterList.Location = New System.Drawing.Point(1662, 881)
-        Me.LstParameterList.Margin = New System.Windows.Forms.Padding(4)
-        Me.LstParameterList.Name = "LstParameterList"
-        Me.LstParameterList.Size = New System.Drawing.Size(840, 304)
-        Me.LstParameterList.TabIndex = 36
-        '
-        'GrpStartParameter
-        '
-        Me.GrpStartParameter.Controls.Add(Me.TxtP6)
-        Me.GrpStartParameter.Controls.Add(Me.LblP6)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP5)
-        Me.GrpStartParameter.Controls.Add(Me.LblP5)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP4)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP3)
-        Me.GrpStartParameter.Controls.Add(Me.LblP4)
-        Me.GrpStartParameter.Controls.Add(Me.LblP3)
-        Me.GrpStartParameter.Controls.Add(Me.BtnTakeOverStartParameter)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP2)
-        Me.GrpStartParameter.Controls.Add(Me.TxtP1)
-        Me.GrpStartParameter.Controls.Add(Me.LblP2)
-        Me.GrpStartParameter.Controls.Add(Me.LblP1)
-        Me.GrpStartParameter.Location = New System.Drawing.Point(1288, 267)
-        Me.GrpStartParameter.Margin = New System.Windows.Forms.Padding(4)
-        Me.GrpStartParameter.Name = "GrpStartParameter"
-        Me.GrpStartParameter.Padding = New System.Windows.Forms.Padding(4)
-        Me.GrpStartParameter.Size = New System.Drawing.Size(364, 387)
-        Me.GrpStartParameter.TabIndex = 35
-        Me.GrpStartParameter.TabStop = False
-        Me.GrpStartParameter.Text = "StartParameter"
-        '
-        'TxtP6
-        '
-        Me.TxtP6.Location = New System.Drawing.Point(84, 277)
-        Me.TxtP6.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP6.Name = "TxtP6"
-        Me.TxtP6.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP6.TabIndex = 12
-        Me.TxtP6.Visible = False
-        '
-        'LblP6
-        '
-        Me.LblP6.AutoSize = True
-        Me.LblP6.Location = New System.Drawing.Point(12, 283)
-        Me.LblP6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP6.Name = "LblP6"
-        Me.LblP6.Size = New System.Drawing.Size(38, 25)
-        Me.LblP6.TabIndex = 11
-        Me.LblP6.Text = "P6"
-        Me.LblP6.Visible = False
-        '
-        'TxtP5
-        '
-        Me.TxtP5.Location = New System.Drawing.Point(84, 231)
-        Me.TxtP5.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP5.Name = "TxtP5"
-        Me.TxtP5.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP5.TabIndex = 10
-        Me.TxtP5.Visible = False
-        '
-        'LblP5
-        '
-        Me.LblP5.AutoSize = True
-        Me.LblP5.Location = New System.Drawing.Point(12, 237)
-        Me.LblP5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP5.Name = "LblP5"
-        Me.LblP5.Size = New System.Drawing.Size(38, 25)
-        Me.LblP5.TabIndex = 9
-        Me.LblP5.Text = "P5"
-        Me.LblP5.Visible = False
-        '
-        'TxtP4
-        '
-        Me.TxtP4.Location = New System.Drawing.Point(84, 183)
-        Me.TxtP4.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP4.Name = "TxtP4"
-        Me.TxtP4.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP4.TabIndex = 8
-        Me.TxtP4.Visible = False
-        '
-        'TxtP3
-        '
-        Me.TxtP3.Location = New System.Drawing.Point(84, 135)
-        Me.TxtP3.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP3.Name = "TxtP3"
-        Me.TxtP3.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP3.TabIndex = 7
-        Me.TxtP3.Visible = False
-        '
-        'LblP4
-        '
-        Me.LblP4.AutoSize = True
-        Me.LblP4.Location = New System.Drawing.Point(12, 188)
-        Me.LblP4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP4.Name = "LblP4"
-        Me.LblP4.Size = New System.Drawing.Size(38, 25)
-        Me.LblP4.TabIndex = 6
-        Me.LblP4.Text = "P4"
-        Me.LblP4.Visible = False
-        '
-        'LblP3
-        '
-        Me.LblP3.AutoSize = True
-        Me.LblP3.Location = New System.Drawing.Point(12, 142)
-        Me.LblP3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP3.Name = "LblP3"
-        Me.LblP3.Size = New System.Drawing.Size(38, 25)
-        Me.LblP3.TabIndex = 5
-        Me.LblP3.Text = "P3"
-        Me.LblP3.Visible = False
-        '
-        'BtnTakeOverStartParameter
-        '
-        Me.BtnTakeOverStartParameter.Location = New System.Drawing.Point(8, 323)
-        Me.BtnTakeOverStartParameter.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
-        Me.BtnTakeOverStartParameter.Size = New System.Drawing.Size(340, 48)
-        Me.BtnTakeOverStartParameter.TabIndex = 4
-        Me.BtnTakeOverStartParameter.Text = "TakeOver"
-        Me.BtnTakeOverStartParameter.UseVisualStyleBackColor = True
-        '
-        'TxtP2
-        '
-        Me.TxtP2.Location = New System.Drawing.Point(84, 88)
-        Me.TxtP2.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP2.Name = "TxtP2"
-        Me.TxtP2.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP2.TabIndex = 3
-        Me.TxtP2.Visible = False
-        '
-        'TxtP1
-        '
-        Me.TxtP1.Location = New System.Drawing.Point(84, 40)
-        Me.TxtP1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtP1.Name = "TxtP1"
-        Me.TxtP1.Size = New System.Drawing.Size(208, 31)
-        Me.TxtP1.TabIndex = 2
-        Me.TxtP1.Visible = False
-        '
-        'LblP2
-        '
-        Me.LblP2.AutoSize = True
-        Me.LblP2.Location = New System.Drawing.Point(12, 94)
-        Me.LblP2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP2.Name = "LblP2"
-        Me.LblP2.Size = New System.Drawing.Size(38, 25)
-        Me.LblP2.TabIndex = 1
-        Me.LblP2.Text = "P2"
-        Me.LblP2.Visible = False
-        '
-        'LblP1
-        '
-        Me.LblP1.AutoSize = True
-        Me.LblP1.Location = New System.Drawing.Point(12, 48)
-        Me.LblP1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblP1.Name = "LblP1"
-        Me.LblP1.Size = New System.Drawing.Size(38, 25)
-        Me.LblP1.TabIndex = 0
-        Me.LblP1.Text = "P1"
-        Me.LblP1.Visible = False
-        '
-        'LblPhasePortrait
-        '
-        Me.LblPhasePortrait.AutoSize = True
-        Me.LblPhasePortrait.Location = New System.Drawing.Point(1656, 819)
-        Me.LblPhasePortrait.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblPhasePortrait.Name = "LblPhasePortrait"
-        Me.LblPhasePortrait.Size = New System.Drawing.Size(142, 25)
-        Me.LblPhasePortrait.TabIndex = 34
-        Me.LblPhasePortrait.Text = "PhasePortrait"
-        Me.LblPhasePortrait.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblAdditionalParameter
-        '
-        Me.LblAdditionalParameter.AutoSize = True
-        Me.LblAdditionalParameter.Location = New System.Drawing.Point(1280, 140)
-        Me.LblAdditionalParameter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblAdditionalParameter.Name = "LblAdditionalParameter"
-        Me.LblAdditionalParameter.Size = New System.Drawing.Size(206, 25)
-        Me.LblAdditionalParameter.TabIndex = 33
-        Me.LblAdditionalParameter.Text = "AdditionalParameter"
-        '
-        'TrbAdditionalParameter
-        '
-        Me.TrbAdditionalParameter.Location = New System.Drawing.Point(1288, 173)
-        Me.TrbAdditionalParameter.Margin = New System.Windows.Forms.Padding(4)
-        Me.TrbAdditionalParameter.Maximum = 100
-        Me.TrbAdditionalParameter.Minimum = 1
-        Me.TrbAdditionalParameter.Name = "TrbAdditionalParameter"
-        Me.TrbAdditionalParameter.Size = New System.Drawing.Size(364, 90)
-        Me.TrbAdditionalParameter.TabIndex = 32
-        Me.TrbAdditionalParameter.Value = 50
-        '
-        'PicPhasePortrait
-        '
-        Me.PicPhasePortrait.BackColor = System.Drawing.Color.White
-        Me.PicPhasePortrait.Location = New System.Drawing.Point(1662, 2)
-        Me.PicPhasePortrait.Margin = New System.Windows.Forms.Padding(4)
-        Me.PicPhasePortrait.Name = "PicPhasePortrait"
-        Me.PicPhasePortrait.Size = New System.Drawing.Size(840, 808)
-        Me.PicPhasePortrait.TabIndex = 31
-        Me.PicPhasePortrait.TabStop = False
-        '
-        'TxtFactor
-        '
-        Me.TxtFactor.BackColor = System.Drawing.Color.White
-        Me.TxtFactor.Enabled = False
-        Me.TxtFactor.Location = New System.Drawing.Point(1440, 90)
-        Me.TxtFactor.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtFactor.Name = "TxtFactor"
-        Me.TxtFactor.Size = New System.Drawing.Size(208, 31)
-        Me.TxtFactor.TabIndex = 30
-        '
-        'LblParameterc
-        '
-        Me.LblParameterc.AutoSize = True
-        Me.LblParameterc.Location = New System.Drawing.Point(1280, 92)
-        Me.LblParameterc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblParameterc.Name = "LblParameterc"
-        Me.LblParameterc.Size = New System.Drawing.Size(128, 25)
-        Me.LblParameterc.TabIndex = 29
-        Me.LblParameterc.Text = "TotalEnergy"
-        '
-        'PicPendulum
-        '
-        Me.PicPendulum.BackColor = System.Drawing.Color.White
-        Me.PicPendulum.Location = New System.Drawing.Point(0, 2)
-        Me.PicPendulum.Margin = New System.Windows.Forms.Padding(4)
-        Me.PicPendulum.Name = "PicPendulum"
-        Me.PicPendulum.Size = New System.Drawing.Size(1260, 1212)
-        Me.PicPendulum.TabIndex = 28
-        Me.PicPendulum.TabStop = False
-        '
-        'LblSteps
-        '
-        Me.LblSteps.AutoSize = True
-        Me.LblSteps.Location = New System.Drawing.Point(1465, 904)
-        Me.LblSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblSteps.Name = "LblSteps"
-        Me.LblSteps.Size = New System.Drawing.Size(24, 25)
-        Me.LblSteps.TabIndex = 43
-        Me.LblSteps.Text = "0"
-        '
-        'LblNumberOfSteps
-        '
-        Me.LblNumberOfSteps.AutoSize = True
-        Me.LblNumberOfSteps.Location = New System.Drawing.Point(1283, 904)
-        Me.LblNumberOfSteps.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblNumberOfSteps.Name = "LblNumberOfSteps"
-        Me.LblNumberOfSteps.Size = New System.Drawing.Size(178, 25)
-        Me.LblNumberOfSteps.TabIndex = 42
-        Me.LblNumberOfSteps.Text = "Number of Steps:"
-        '
-        'BtnReset
-        '
-        Me.BtnReset.Location = New System.Drawing.Point(1284, 1148)
-        Me.BtnReset.Margin = New System.Windows.Forms.Padding(6)
-        Me.BtnReset.Name = "BtnReset"
-        Me.BtnReset.Size = New System.Drawing.Size(364, 65)
-        Me.BtnReset.TabIndex = 41
-        Me.BtnReset.Text = "Reset"
-        Me.BtnReset.UseVisualStyleBackColor = True
-        '
-        'BtnStart
-        '
-        Me.BtnStart.Location = New System.Drawing.Point(1284, 950)
-        Me.BtnStart.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(364, 65)
-        Me.BtnStart.TabIndex = 39
-        Me.BtnStart.Text = "Start"
-        Me.BtnStart.UseVisualStyleBackColor = True
-        '
-        'LblStepWidth
-        '
-        Me.LblStepWidth.AutoSize = True
-        Me.LblStepWidth.Location = New System.Drawing.Point(1284, 667)
-        Me.LblStepWidth.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblStepWidth.Name = "LblStepWidth"
-        Me.LblStepWidth.Size = New System.Drawing.Size(111, 25)
-        Me.LblStepWidth.TabIndex = 45
-        Me.LblStepWidth.Text = "StepWidth"
-        '
-        'TrbStepWidth
-        '
-        Me.TrbStepWidth.Location = New System.Drawing.Point(1288, 696)
-        Me.TrbStepWidth.Margin = New System.Windows.Forms.Padding(4)
-        Me.TrbStepWidth.Maximum = 50
-        Me.TrbStepWidth.Minimum = 1
-        Me.TrbStepWidth.Name = "TrbStepWidth"
-        Me.TrbStepWidth.Size = New System.Drawing.Size(364, 90)
-        Me.TrbStepWidth.TabIndex = 44
-        Me.TrbStepWidth.Value = 15
-        '
-        'PicStatus
-        '
-        Me.PicStatus.BackColor = System.Drawing.Color.White
-        Me.PicStatus.Location = New System.Drawing.Point(1662, 1187)
-        Me.PicStatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.PicStatus.Name = "PicStatus"
-        Me.PicStatus.Size = New System.Drawing.Size(840, 27)
-        Me.PicStatus.TabIndex = 47
-        Me.PicStatus.TabStop = False
-        '
-        'CboTypeofPhaseportrait
-        '
-        Me.CboTypeofPhaseportrait.FormattingEnabled = True
-        Me.CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
-        Me.CboTypeofPhaseportrait.Location = New System.Drawing.Point(1286, 819)
-        Me.CboTypeofPhaseportrait.Margin = New System.Windows.Forms.Padding(6)
-        Me.CboTypeofPhaseportrait.Name = "CboTypeofPhaseportrait"
-        Me.CboTypeofPhaseportrait.Size = New System.Drawing.Size(344, 33)
-        Me.CboTypeofPhaseportrait.TabIndex = 48
-        '
-        'LblTypeofPhaseportrait
-        '
-        Me.LblTypeofPhaseportrait.AutoSize = True
-        Me.LblTypeofPhaseportrait.Location = New System.Drawing.Point(1284, 785)
-        Me.LblTypeofPhaseportrait.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
-        Me.LblTypeofPhaseportrait.Size = New System.Drawing.Size(206, 25)
-        Me.LblTypeofPhaseportrait.TabIndex = 49
-        Me.LblTypeofPhaseportrait.Text = "TypeofPhaseportrait"
-        '
-        'LblParameterlist
-        '
-        Me.LblParameterlist.AutoSize = True
-        Me.LblParameterlist.Location = New System.Drawing.Point(1656, 850)
-        Me.LblParameterlist.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblParameterlist.Name = "LblParameterlist"
-        Me.LblParameterlist.Size = New System.Drawing.Size(145, 25)
-        Me.LblParameterlist.TabIndex = 50
-        Me.LblParameterlist.Text = "ParameterList"
-        Me.LblParameterlist.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BtnStop
-        '
-        Me.BtnStop.Location = New System.Drawing.Point(1284, 1032)
-        Me.BtnStop.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnStop.Name = "BtnStop"
-        Me.BtnStop.Size = New System.Drawing.Size(364, 65)
-        Me.BtnStop.TabIndex = 51
-        Me.BtnStop.Text = "Stop"
-        Me.BtnStop.UseVisualStyleBackColor = True
-        '
-        'FrmPendulum
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2524, 1219)
-        Me.Controls.Add(Me.BtnStop)
-        Me.Controls.Add(Me.LblParameterlist)
-        Me.Controls.Add(Me.LblTypeofPhaseportrait)
-        Me.Controls.Add(Me.CboTypeofPhaseportrait)
-        Me.Controls.Add(Me.PicStatus)
-        Me.Controls.Add(Me.LblStepWidth)
-        Me.Controls.Add(Me.TrbStepWidth)
-        Me.Controls.Add(Me.LblSteps)
-        Me.Controls.Add(Me.LblNumberOfSteps)
-        Me.Controls.Add(Me.BtnReset)
-        Me.Controls.Add(Me.BtnStart)
-        Me.Controls.Add(Me.CboPendulum)
-        Me.Controls.Add(Me.LblPendulum)
-        Me.Controls.Add(Me.LstParameterList)
-        Me.Controls.Add(Me.GrpStartParameter)
-        Me.Controls.Add(Me.LblPhasePortrait)
-        Me.Controls.Add(Me.LblAdditionalParameter)
-        Me.Controls.Add(Me.TrbAdditionalParameter)
-        Me.Controls.Add(Me.PicPhasePortrait)
-        Me.Controls.Add(Me.TxtFactor)
-        Me.Controls.Add(Me.LblParameterc)
-        Me.Controls.Add(Me.PicPendulum)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(6)
-        Me.Name = "FrmPendulum"
-        Me.Text = "Pendulum"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.GrpStartParameter.ResumeLayout(False)
-        Me.GrpStartParameter.PerformLayout()
-        CType(Me.TrbAdditionalParameter, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicPhasePortrait, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicPendulum, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TrbStepWidth, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicStatus, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CboPendulum = New ComboBox()
+        LblPendulum = New Label()
+        LstProtocol = New ListBox()
+        GrpStartParameter = New GroupBox()
+        TxtP6 = New TextBox()
+        LblP6 = New Label()
+        TxtP5 = New TextBox()
+        LblP5 = New Label()
+        TxtP4 = New TextBox()
+        TxtP3 = New TextBox()
+        LblP4 = New Label()
+        LblP3 = New Label()
+        BtnTakeOverStartParameter = New Button()
+        TxtP2 = New TextBox()
+        TxtP1 = New TextBox()
+        LblP2 = New Label()
+        LblP1 = New Label()
+        LblPhasePortrait = New Label()
+        LblAdditionalParameter = New Label()
+        TrbAdditionalParameter = New TrackBar()
+        PicPhasePortrait = New PictureBox()
+        PicDiagram = New PictureBox()
+        LblSteps = New Label()
+        LblNumberOfSteps = New Label()
+        BtnReset = New Button()
+        BtnStart = New Button()
+        LblStepWidth = New Label()
+        TrbStepWidth = New TrackBar()
+        PicEnergy = New PictureBox()
+        CboTypeofPhaseportrait = New ComboBox()
+        LblTypeofPhaseportrait = New Label()
+        LblProtocol = New Label()
+        BtnStop = New Button()
+        GrpStartParameter.SuspendLayout()
+        CType(TrbAdditionalParameter, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PicPhasePortrait, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
+        CType(TrbStepWidth, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PicEnergy, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' CboPendulum
+        ' 
+        CboPendulum.FormattingEnabled = True
+        CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
+        CboPendulum.Location = New Point(1391, 47)
+        CboPendulum.Margin = New Padding(4, 5, 4, 5)
+        CboPendulum.Name = "CboPendulum"
+        CboPendulum.Size = New Size(394, 40)
+        CboPendulum.TabIndex = 38
+        ' 
+        ' LblPendulum
+        ' 
+        LblPendulum.AutoSize = True
+        LblPendulum.Location = New Point(1387, 10)
+        LblPendulum.Margin = New Padding(4, 0, 4, 0)
+        LblPendulum.Name = "LblPendulum"
+        LblPendulum.Size = New Size(122, 32)
+        LblPendulum.TabIndex = 37
+        LblPendulum.Text = "Pendulum"
+        ' 
+        ' LstProtocol
+        ' 
+        LstProtocol.FormattingEnabled = True
+        LstProtocol.Location = New Point(1801, 1128)
+        LstProtocol.Margin = New Padding(4, 5, 4, 5)
+        LstProtocol.Name = "LstProtocol"
+        LstProtocol.Size = New Size(910, 388)
+        LstProtocol.TabIndex = 36
+        ' 
+        ' GrpStartParameter
+        ' 
+        GrpStartParameter.Controls.Add(TxtP6)
+        GrpStartParameter.Controls.Add(LblP6)
+        GrpStartParameter.Controls.Add(TxtP5)
+        GrpStartParameter.Controls.Add(LblP5)
+        GrpStartParameter.Controls.Add(TxtP4)
+        GrpStartParameter.Controls.Add(TxtP3)
+        GrpStartParameter.Controls.Add(LblP4)
+        GrpStartParameter.Controls.Add(LblP3)
+        GrpStartParameter.Controls.Add(BtnTakeOverStartParameter)
+        GrpStartParameter.Controls.Add(TxtP2)
+        GrpStartParameter.Controls.Add(TxtP1)
+        GrpStartParameter.Controls.Add(LblP2)
+        GrpStartParameter.Controls.Add(LblP1)
+        GrpStartParameter.Location = New Point(1391, 204)
+        GrpStartParameter.Margin = New Padding(4, 5, 4, 5)
+        GrpStartParameter.Name = "GrpStartParameter"
+        GrpStartParameter.Padding = New Padding(4, 5, 4, 5)
+        GrpStartParameter.Size = New Size(394, 495)
+        GrpStartParameter.TabIndex = 35
+        GrpStartParameter.TabStop = False
+        GrpStartParameter.Text = "StartParameter"
+        ' 
+        ' TxtP6
+        ' 
+        TxtP6.Location = New Point(91, 355)
+        TxtP6.Margin = New Padding(4, 5, 4, 5)
+        TxtP6.Name = "TxtP6"
+        TxtP6.Size = New Size(225, 39)
+        TxtP6.TabIndex = 12
+        TxtP6.Visible = False
+        ' 
+        ' LblP6
+        ' 
+        LblP6.AutoSize = True
+        LblP6.Location = New Point(13, 362)
+        LblP6.Margin = New Padding(4, 0, 4, 0)
+        LblP6.Name = "LblP6"
+        LblP6.Size = New Size(40, 32)
+        LblP6.TabIndex = 11
+        LblP6.Text = "P6"
+        LblP6.Visible = False
+        ' 
+        ' TxtP5
+        ' 
+        TxtP5.Location = New Point(91, 296)
+        TxtP5.Margin = New Padding(4, 5, 4, 5)
+        TxtP5.Name = "TxtP5"
+        TxtP5.Size = New Size(225, 39)
+        TxtP5.TabIndex = 10
+        TxtP5.Visible = False
+        ' 
+        ' LblP5
+        ' 
+        LblP5.AutoSize = True
+        LblP5.Location = New Point(13, 303)
+        LblP5.Margin = New Padding(4, 0, 4, 0)
+        LblP5.Name = "LblP5"
+        LblP5.Size = New Size(40, 32)
+        LblP5.TabIndex = 9
+        LblP5.Text = "P5"
+        LblP5.Visible = False
+        ' 
+        ' TxtP4
+        ' 
+        TxtP4.Location = New Point(91, 234)
+        TxtP4.Margin = New Padding(4, 5, 4, 5)
+        TxtP4.Name = "TxtP4"
+        TxtP4.Size = New Size(225, 39)
+        TxtP4.TabIndex = 8
+        TxtP4.Visible = False
+        ' 
+        ' TxtP3
+        ' 
+        TxtP3.Location = New Point(91, 173)
+        TxtP3.Margin = New Padding(4, 5, 4, 5)
+        TxtP3.Name = "TxtP3"
+        TxtP3.Size = New Size(225, 39)
+        TxtP3.TabIndex = 7
+        TxtP3.Visible = False
+        ' 
+        ' LblP4
+        ' 
+        LblP4.AutoSize = True
+        LblP4.Location = New Point(13, 241)
+        LblP4.Margin = New Padding(4, 0, 4, 0)
+        LblP4.Name = "LblP4"
+        LblP4.Size = New Size(40, 32)
+        LblP4.TabIndex = 6
+        LblP4.Text = "P4"
+        LblP4.Visible = False
+        ' 
+        ' LblP3
+        ' 
+        LblP3.AutoSize = True
+        LblP3.Location = New Point(13, 182)
+        LblP3.Margin = New Padding(4, 0, 4, 0)
+        LblP3.Name = "LblP3"
+        LblP3.Size = New Size(40, 32)
+        LblP3.TabIndex = 5
+        LblP3.Text = "P3"
+        LblP3.Visible = False
+        ' 
+        ' BtnTakeOverStartParameter
+        ' 
+        BtnTakeOverStartParameter.Location = New Point(9, 413)
+        BtnTakeOverStartParameter.Margin = New Padding(4, 5, 4, 5)
+        BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
+        BtnTakeOverStartParameter.Size = New Size(368, 75)
+        BtnTakeOverStartParameter.TabIndex = 4
+        BtnTakeOverStartParameter.Text = "TakeOver"
+        BtnTakeOverStartParameter.UseVisualStyleBackColor = True
+        ' 
+        ' TxtP2
+        ' 
+        TxtP2.Location = New Point(91, 113)
+        TxtP2.Margin = New Padding(4, 5, 4, 5)
+        TxtP2.Name = "TxtP2"
+        TxtP2.Size = New Size(225, 39)
+        TxtP2.TabIndex = 3
+        TxtP2.Visible = False
+        ' 
+        ' TxtP1
+        ' 
+        TxtP1.Location = New Point(91, 51)
+        TxtP1.Margin = New Padding(4, 5, 4, 5)
+        TxtP1.Name = "TxtP1"
+        TxtP1.Size = New Size(225, 39)
+        TxtP1.TabIndex = 2
+        TxtP1.Visible = False
+        ' 
+        ' LblP2
+        ' 
+        LblP2.AutoSize = True
+        LblP2.Location = New Point(13, 120)
+        LblP2.Margin = New Padding(4, 0, 4, 0)
+        LblP2.Name = "LblP2"
+        LblP2.Size = New Size(40, 32)
+        LblP2.TabIndex = 1
+        LblP2.Text = "P2"
+        LblP2.Visible = False
+        ' 
+        ' LblP1
+        ' 
+        LblP1.AutoSize = True
+        LblP1.Location = New Point(13, 61)
+        LblP1.Margin = New Padding(4, 0, 4, 0)
+        LblP1.Name = "LblP1"
+        LblP1.Size = New Size(40, 32)
+        LblP1.TabIndex = 0
+        LblP1.Text = "P1"
+        LblP1.Visible = False
+        ' 
+        ' LblPhasePortrait
+        ' 
+        LblPhasePortrait.AutoSize = True
+        LblPhasePortrait.Location = New Point(1794, 1048)
+        LblPhasePortrait.Margin = New Padding(4, 0, 4, 0)
+        LblPhasePortrait.Name = "LblPhasePortrait"
+        LblPhasePortrait.Size = New Size(152, 32)
+        LblPhasePortrait.TabIndex = 34
+        LblPhasePortrait.Text = "PhasePortrait"
+        LblPhasePortrait.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' LblAdditionalParameter
+        ' 
+        LblAdditionalParameter.AutoSize = True
+        LblAdditionalParameter.Location = New Point(1383, 104)
+        LblAdditionalParameter.Margin = New Padding(4, 0, 4, 0)
+        LblAdditionalParameter.Name = "LblAdditionalParameter"
+        LblAdditionalParameter.Size = New Size(230, 32)
+        LblAdditionalParameter.TabIndex = 33
+        LblAdditionalParameter.Text = "AdditionalParameter"
+        ' 
+        ' TrbAdditionalParameter
+        ' 
+        TrbAdditionalParameter.Location = New Point(1391, 146)
+        TrbAdditionalParameter.Margin = New Padding(4, 5, 4, 5)
+        TrbAdditionalParameter.Maximum = 100
+        TrbAdditionalParameter.Minimum = 1
+        TrbAdditionalParameter.Name = "TrbAdditionalParameter"
+        TrbAdditionalParameter.Size = New Size(394, 90)
+        TrbAdditionalParameter.TabIndex = 32
+        TrbAdditionalParameter.Value = 50
+        ' 
+        ' PicPhasePortrait
+        ' 
+        PicPhasePortrait.BackColor = Color.White
+        PicPhasePortrait.Location = New Point(1801, 3)
+        PicPhasePortrait.Margin = New Padding(4, 5, 4, 5)
+        PicPhasePortrait.Name = "PicPhasePortrait"
+        PicPhasePortrait.Size = New Size(910, 1034)
+        PicPhasePortrait.TabIndex = 31
+        PicPhasePortrait.TabStop = False
+        ' 
+        ' PicDiagram
+        ' 
+        PicDiagram.BackColor = Color.White
+        PicDiagram.Location = New Point(0, 3)
+        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(1365, 1551)
+        PicDiagram.TabIndex = 28
+        PicDiagram.TabStop = False
+        ' 
+        ' LblSteps
+        ' 
+        LblSteps.AutoSize = True
+        LblSteps.Location = New Point(1579, 964)
+        LblSteps.Margin = New Padding(4, 0, 4, 0)
+        LblSteps.Name = "LblSteps"
+        LblSteps.Size = New Size(27, 32)
+        LblSteps.TabIndex = 43
+        LblSteps.Text = "0"
+        ' 
+        ' LblNumberOfSteps
+        ' 
+        LblNumberOfSteps.AutoSize = True
+        LblNumberOfSteps.Location = New Point(1382, 964)
+        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Name = "LblNumberOfSteps"
+        LblNumberOfSteps.Size = New Size(200, 32)
+        LblNumberOfSteps.TabIndex = 42
+        LblNumberOfSteps.Text = "Number of Steps:"
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Location = New Point(1391, 1469)
+        BtnReset.Margin = New Padding(6, 8, 6, 8)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(394, 83)
+        BtnReset.TabIndex = 41
+        BtnReset.Text = "Reset"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' BtnStart
+        ' 
+        BtnStart.Location = New Point(1383, 1023)
+        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Name = "BtnStart"
+        BtnStart.Size = New Size(394, 75)
+        BtnStart.TabIndex = 39
+        BtnStart.Text = "Start"
+        BtnStart.UseVisualStyleBackColor = True
+        ' 
+        ' LblStepWidth
+        ' 
+        LblStepWidth.AutoSize = True
+        LblStepWidth.Location = New Point(1387, 727)
+        LblStepWidth.Margin = New Padding(4, 0, 4, 0)
+        LblStepWidth.Name = "LblStepWidth"
+        LblStepWidth.Size = New Size(125, 32)
+        LblStepWidth.TabIndex = 45
+        LblStepWidth.Text = "StepWidth"
+        ' 
+        ' TrbStepWidth
+        ' 
+        TrbStepWidth.Location = New Point(1391, 764)
+        TrbStepWidth.Margin = New Padding(4, 5, 4, 5)
+        TrbStepWidth.Maximum = 50
+        TrbStepWidth.Minimum = 1
+        TrbStepWidth.Name = "TrbStepWidth"
+        TrbStepWidth.Size = New Size(394, 90)
+        TrbStepWidth.TabIndex = 44
+        TrbStepWidth.Value = 15
+        ' 
+        ' PicEnergy
+        ' 
+        PicEnergy.BackColor = Color.White
+        PicEnergy.Location = New Point(1801, 1519)
+        PicEnergy.Margin = New Padding(4, 5, 4, 5)
+        PicEnergy.Name = "PicEnergy"
+        PicEnergy.Size = New Size(910, 35)
+        PicEnergy.TabIndex = 47
+        PicEnergy.TabStop = False
+        ' 
+        ' CboTypeofPhaseportrait
+        ' 
+        CboTypeofPhaseportrait.FormattingEnabled = True
+        CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
+        CboTypeofPhaseportrait.Location = New Point(1396, 886)
+        CboTypeofPhaseportrait.Margin = New Padding(6, 8, 6, 8)
+        CboTypeofPhaseportrait.Name = "CboTypeofPhaseportrait"
+        CboTypeofPhaseportrait.Size = New Size(372, 40)
+        CboTypeofPhaseportrait.TabIndex = 48
+        ' 
+        ' LblTypeofPhaseportrait
+        ' 
+        LblTypeofPhaseportrait.AutoSize = True
+        LblTypeofPhaseportrait.Location = New Point(1394, 843)
+        LblTypeofPhaseportrait.Margin = New Padding(4, 0, 4, 0)
+        LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
+        LblTypeofPhaseportrait.Size = New Size(227, 32)
+        LblTypeofPhaseportrait.TabIndex = 49
+        LblTypeofPhaseportrait.Text = "TypeofPhaseportrait"
+        ' 
+        ' LblProtocol
+        ' 
+        LblProtocol.AutoSize = True
+        LblProtocol.Location = New Point(1794, 1088)
+        LblProtocol.Margin = New Padding(4, 0, 4, 0)
+        LblProtocol.Name = "LblProtocol"
+        LblProtocol.Size = New Size(102, 32)
+        LblProtocol.TabIndex = 50
+        LblProtocol.Text = "Protocol"
+        LblProtocol.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' BtnStop
+        ' 
+        BtnStop.Location = New Point(1383, 1128)
+        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Name = "BtnStop"
+        BtnStop.Size = New Size(394, 75)
+        BtnStop.TabIndex = 51
+        BtnStop.Text = "Stop"
+        BtnStop.UseVisualStyleBackColor = True
+        ' 
+        ' FrmPendulum
+        ' 
+        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(2734, 1560)
+        Controls.Add(BtnStop)
+        Controls.Add(LblProtocol)
+        Controls.Add(LblTypeofPhaseportrait)
+        Controls.Add(CboTypeofPhaseportrait)
+        Controls.Add(PicEnergy)
+        Controls.Add(LblStepWidth)
+        Controls.Add(TrbStepWidth)
+        Controls.Add(LblSteps)
+        Controls.Add(LblNumberOfSteps)
+        Controls.Add(BtnReset)
+        Controls.Add(BtnStart)
+        Controls.Add(CboPendulum)
+        Controls.Add(LblPendulum)
+        Controls.Add(LstProtocol)
+        Controls.Add(GrpStartParameter)
+        Controls.Add(LblPhasePortrait)
+        Controls.Add(LblAdditionalParameter)
+        Controls.Add(TrbAdditionalParameter)
+        Controls.Add(PicPhasePortrait)
+        Controls.Add(PicDiagram)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(6, 8, 6, 8)
+        Name = "FrmPendulum"
+        Text = "Pendulum"
+        WindowState = FormWindowState.Maximized
+        GrpStartParameter.ResumeLayout(False)
+        GrpStartParameter.PerformLayout()
+        CType(TrbAdditionalParameter, ComponentModel.ISupportInitialize).EndInit()
+        CType(PicPhasePortrait, ComponentModel.ISupportInitialize).EndInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
+        CType(TrbStepWidth, ComponentModel.ISupportInitialize).EndInit()
+        CType(PicEnergy, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
 
     Friend WithEvents CboPendulum As ComboBox
     Friend WithEvents LblPendulum As Label
-    Friend WithEvents LstParameterList As ListBox
+    Friend WithEvents LstProtocol As ListBox
     Friend WithEvents GrpStartParameter As GroupBox
     Friend WithEvents TxtP5 As TextBox
     Friend WithEvents LblP5 As Label
@@ -497,9 +472,7 @@ Partial Class FrmPendulum
     Friend WithEvents LblAdditionalParameter As Label
     Friend WithEvents TrbAdditionalParameter As TrackBar
     Friend WithEvents PicPhasePortrait As PictureBox
-    Friend WithEvents TxtFactor As TextBox
-    Friend WithEvents LblParameterc As Label
-    Friend WithEvents PicPendulum As PictureBox
+    Friend WithEvents PicDiagram As PictureBox
     Friend WithEvents LblSteps As Label
     Friend WithEvents LblNumberOfSteps As Label
     Friend WithEvents BtnReset As Button
@@ -508,9 +481,9 @@ Partial Class FrmPendulum
     Friend WithEvents LblP6 As Label
     Friend WithEvents LblStepWidth As Label
     Friend WithEvents TrbStepWidth As TrackBar
-    Friend WithEvents PicStatus As PictureBox
+    Friend WithEvents PicEnergy As PictureBox
     Friend WithEvents CboTypeofPhaseportrait As ComboBox
     Friend WithEvents LblTypeofPhaseportrait As Label
-    Friend WithEvents LblParameterlist As Label
+    Friend WithEvents LblProtocol As Label
     Friend WithEvents BtnStop As Button
 End Class

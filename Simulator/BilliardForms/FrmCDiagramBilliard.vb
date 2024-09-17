@@ -46,7 +46,7 @@ Public Class FrmCDiagramBilliard
 
     Private Sub FrmCDiagram_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        CboFunction.SelectedIndex = 0
+        CboFunction.SelectedIndex = 1
         LblPrecision.Text = FrmMain.LM.GetString("Precision") & ": " & (1000 * TrbPrecision.Value).ToString(CultureInfo.CurrentCulture)
 
         SetDS()
@@ -159,13 +159,13 @@ Public Class FrmCDiagramBilliard
         End With
 
         With DiagramAreaSelector
-            .ParameterRange = DS.ParameterRange
-            .ValueRange = SelectedValueParameter.Range
+            .XRange = DS.ParameterRange
+            .YRange = SelectedValueParameter.Range
             .PicDiagram = PicDiagram
-            .TxtParameterMin = TxtCMin
-            .TxtParameterMax = TxtCMax
-            .TxtValueMin = TxtVMin
-            .TxtValueMax = TxtVMax
+            .TxtXMin = TxtCMin
+            .TxtXMax = TxtCMax
+            .TxtYMin = TxtVMin
+            .TxtYMax = TxtVMax
         End With
 
     End Sub
@@ -259,6 +259,31 @@ Public Class FrmCDiagramBilliard
         End If
     End Sub
 
+
+    Private Sub TxtCMin_LostFocus(sender As Object, e As EventArgs) Handles TxtCMin.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtCMax_LostFocus(sender As Object, e As EventArgs) Handles TxtCMax.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtVMin_LostFocus(sender As Object, e As EventArgs) Handles TxtVMin.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
+    Private Sub TxtVMax_LostFocus(sender As Object, e As EventArgs) Handles TxtVMax.LostFocus
+        If IsFormLoaded Then
+            SetDelta()
+        End If
+    End Sub
+
     'SECTOR ITERATION
 
     Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
@@ -266,48 +291,34 @@ Public Class FrmCDiagramBilliard
         If IsFormLoaded Then
             With CDiagramController
                 .ResetIteration()
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                     If IsUserDataOK() Then
-                        .IterationStatus = ClsGeneral.EnIterationStatus.Ready
-                        .ParameterRange = New ClsInterval(CDec(TxtCMin.Text), CDec(TxtCMax.Text))
-                        .ValueRange = New ClsInterval(CDec(TxtVMin.Text), CDec(TxtVMax.Text))
-                        DiagramAreaSelector.UserParameterRange = .ParameterRange
-                        DiagramAreaSelector.UserValueRange = .ValueRange
+                        DiagramAreaSelector.IsActivated = False
                         BtnStartIteration.Enabled = False
                         BtnReset.Enabled = False
-                        BtnStartIteration.Enabled = True
-                        BtnReset.Enabled = True
+                        .IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                        .ParameterRange = New ClsInterval(CDec(TxtCMin.Text), CDec(TxtCMax.Text))
+                        .ValueRange = New ClsInterval(CDec(TxtVMin.Text), CDec(TxtVMax.Text))
+                        DiagramAreaSelector.UserXRange = .ParameterRange
+                        DiagramAreaSelector.UserYRange = .ValueRange
                     Else
                         SetDefaultUserData()
                     End If
                 End If
 
-                If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
-                    DoIteration()
+                If .IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+                    CDiagramController.DoIteration()
                 End If
 
+                BtnStartIteration.Enabled = True
+                BtnReset.Enabled = True
+                .IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+                DiagramAreaSelector.IsActivated = True
             End With
         End If
 
     End Sub
 
-    Private Sub DoIteration()
-
-        'In the direction of the x-axis, we work with pixel coordinates
-        Dim p As Integer
-
-        For p = 1 To PicDiagram.Width
-
-            'for each p, the according parametervalue a is calculated
-            'and then, the iteration runs until RuntimeUntilCycle
-            'finally, the iteration cycle is drawn
-            CDiagramController.IterationLoop(p)
-
-        Next
-
-        CDiagramController.DrawSplitPoints()
-
-    End Sub
 
     'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 

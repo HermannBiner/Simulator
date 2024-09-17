@@ -9,128 +9,27 @@
 'Status Checked
 
 Public Class ClsDoublePendulum
-    Implements IPendulum
+    Inherits ClsPendulumAbstract
 
-    'The actual position of the Pendulum is drawn into this PictureBox
-    'and shown by the Refresh-Method
-    Private MyPicPendulum As PictureBox
-    Private MyPicPendulumGraphics As ClsGraphicTool
-
-    'The permanent Track of the Pendulum is drawn into the BitMap
-    Private MyMapPendulum As Bitmap
-    Private MyMapPendulumGraphics As ClsGraphicTool
-
-    'The Pendulum draws as well into the Phase Portrait
-    Private MyPicPhaseportrait As PictureBox
-    Private MyPicPhaseportraitGraphics As ClsGraphicTool
-
-    'Permanent Track in the Phaseportrait
-    Private MyMapPhaseportrait As Bitmap
-    Private MyMapPhaseportraitGraphics As ClsGraphicTool
-
-    'Labeling
-    Private MyPhaseportraitLabel As String
-    Private ReadOnly MyLabelParameterC As String
-
-    Private MyPhaseportraitType As TypeofPhaseportraitEnum
-
-    Private ReadOnly MyAdditionalParameter As ClsValueParameter
-    Private MyAdditionalParameterValue As Integer
-
-    'and protocols its Parametervalues into a ListBox
-    Private MyParameterlistbox As ListBox
-
-    'Calculations
-    Private ReadOnly MyMathhelper As ClsMathHelperPendulum
-
-    'Factor C for the C-Diagram
-    'this will be the Startenergy of the Double Pendulum
-    Private MyC As Decimal
 
     'Mass ratio M: m2 = MyM*m1
-    Private MyM As Decimal
+    Private M As Decimal
 
     'and ratio Mu: Mu = MyM/(1+MyM)
     Private Mu As Decimal
 
-    'Collection of the two ValueRanges for the C-Diagram
-    Private ReadOnly MyValueParameters As List(Of ClsValueParameter)
-
-    'The Value Range of the Mathematical Coordinates - Standard is the Interval [-1,1]
-    'and the Coordinate System as Square [-1,1] x [-1,1]
-    Private ReadOnly MyMathValuerange As ClsInterval
-
-    'The Interval in whitch the Startenergy of the Pendulum can be
-    Private MyStartenergyRange As ClsInterval
-
-    'Constant parameters
-    Private ReadOnly MyConstants As ClsVector
-
-    'Variable parameters
-    Private ReadOnly MyVariables As ClsVector
-
     'Size of Pendulums
-    Private ReadOnly MyPendulumSize As ClsVector
-
-    'Startparameter1 is Phi1
-    Private MyIsStartparameter1Set As Boolean
-
-    'Startparameter2 is Phi2
-    Private MyIsStartparameter2Set As Boolean
-
-    'To perform the iteration
-    'Positions of the pendulums
-    Private ReadOnly Position1 As ClsMathpoint
-    Private ReadOnly Position2 As ClsMathpoint
-    Private ReadOnly OldPosition1 As ClsMathpoint
-    Private ReadOnly OldPosition2 As ClsMathpoint
-
-    'Runge Kutta Parameters
-    Private u1 As Decimal
-    Private v1 As Decimal
-    Private u2 As Decimal
-    Private v2 As Decimal
-
-    'For Poincaré Sections
-    Private SignumChanged As Boolean
-
-    'And their definition range
-    Private UInterval As ClsInterval
-    Private VInterval As ClsInterval
-
-    'And additional Parameters for Runge Kutta
-    Private ReadOnly x As ClsVector
-    Private ReadOnly k1 As ClsVector
-    Private ReadOnly h1 As ClsVector
-    Private ReadOnly k2 As ClsVector
-    Private ReadOnly h2 As ClsVector
-
-    'Step Width
-    Private d As Decimal
-
-    Private IsTestMode As Boolean
-
-    Private Enum TypeofPhaseportraitEnum
-        Independent 'Both Pendulums are shown independently
-        Torus 'Phi1, Phi2 are shown on a torus
-        PoincareSection 'see math. doc.
-    End Enum
-
-    'Gravitation acceleration
-    Const g As Decimal = CDec(9.81)
-
-    'Level of the x-Axis in the Diagram as math. y-Coordinate
-    Const MyY0 As Decimal = 0
+    Private ReadOnly PendulumSize As ClsNTupel
 
     'SECTOR INITIALIZATION
 
     Public Sub New()
 
-        MyMathhelper = New ClsMathHelperPendulum
+        Y0 = 0
 
-        MyMathValuerange = New ClsInterval(-1, 1)
+        MyLabelProtocol = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
 
-        MyValueParameters = New List(Of ClsValueParameter)
+        MyValueParameterDefinition = New List(Of ClsValueParameter)
 
         Dim ValueParameter(3) As ClsValueParameter
 
@@ -138,286 +37,51 @@ Public Class ClsDoublePendulum
         'Tag is the Number of the Label in the Pendulum Form
         'L1
         ValueParameter(0) = New ClsValueParameter(1, "L1", New ClsInterval(CDec(0.1), CDec(0.85)))
-        MyValueParameters.Add(ValueParameter(0))
+        MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L2
         ValueParameter(1) = New ClsValueParameter(2, "L2", New ClsInterval(CDec(0.1), CDec(0.85)))
-        MyValueParameters.Add(ValueParameter(1))
+        MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi1
         ValueParameter(2) = New ClsValueParameter(3, "Phi 1", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
-        MyValueParameters.Add(ValueParameter(2))
+        MyValueParameterDefinition.Add(ValueParameter(2))
 
         'Phi2
         ValueParameter(3) = New ClsValueParameter(4, "Phi 2", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
-        MyValueParameters.Add(ValueParameter(3))
+        MyValueParameterDefinition.Add(ValueParameter(3))
 
         'Labels
-        MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": -- "
-        MyLabelParameterC = FrmMain.LM.GetString("DoublePendulumC")
+        MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": -- "
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
-        'and the Tag its Value of the Additional PArameter as Standard
+        'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 2  'that means mass m2 = m1
         MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
                                                       FrmMain.LM.GetString("MassRatioM"), New ClsInterval(0, 4))
 
         'Calculates mass ratio M = m2/m1
-        MyM = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
-        Mu = MyM / (1 + MyM)
+        M = GetAddParameterValue(MyAdditionalParameterValue)
+        Mu = M / (1 + M)
 
         'Vectors
         'We have two constant parameters: L1 = .Component(0), L2 = Component(1)
-        MyConstants = New ClsVector(1)
-
-        'Standardvalues
-        With MyConstants
-            .Component(0) = CDec(0.7)  'L1
-            .Component(1) = CDec(0.2)  'L2
-        End With
+        MyCalculationConstants = New ClsNTupel(1)
 
         'We have two variable parameters: Phi1 = MyVariables.Components(0), Phi2 = MyVariables.components(1)
-        MyVariables = New ClsVector(1)
-
-        'Standardvalues
-        With MyVariables
-            .Component(0) = CDec(Math.PI / 4) 'Phi1
-            u1 = .Component(0)
-            v1 = 0
-            .Component(1) = CDec(Math.PI / 6) 'Phi2
-            u2 = .Component(1)
-            v2 = 0
-        End With
-
-        SetStartenergyRange()
-
-        'For the Double Pendulum is the Factor C 
-        'the Energy
-        MyC = GetEnergy()
+        MyCalculationVariables = New ClsNTupel(1)
 
         'StandardSize
-        MyPendulumSize = New ClsVector(1)
+        PendulumSize = New ClsNTupel(1)
         SetPendulumSize()
-
-        'To perform the iteration
-        'Positions of the pendulums
-        Position1 = New ClsMathpoint
-        Position2 = New ClsMathpoint
-        OldPosition1 = New ClsMathpoint
-        OldPosition2 = New ClsMathpoint
-
-        SetPosition()
-
-        'Runge Kutta Parameters
-        x = New ClsVector(3)
-        k1 = New ClsVector(3)
-        h1 = New ClsVector(3)
-        k2 = New ClsVector(3)
-        h2 = New ClsVector(3)
 
     End Sub
 
-    'SECTOR INTERFACE
 
-    WriteOnly Property PicPendulum As PictureBox Implements IPendulum.PicPendulum
-        Set(value As PictureBox)
-            MyPicPendulum = value
-            MyPicPendulumGraphics = New ClsGraphicTool(MyPicPendulum, MyMathValuerange, MyMathValuerange)
-        End Set
-    End Property
-
-    ReadOnly Property Y0 As Decimal Implements IPendulum.Y0
-        Get
-            Y0 = MyY0
-        End Get
-    End Property
-
-    WriteOnly Property MapPendulum As Bitmap Implements IPendulum.MapPendulum
-        Set(value As Bitmap)
-            MyMapPendulum = value
-            MyMapPendulumGraphics = New ClsGraphicTool(MyMapPendulum, MyMathValuerange, MyMathValuerange)
-        End Set
-    End Property
-
-    WriteOnly Property PicPhaseportrait As PictureBox Implements IPendulum.PicPhaseportrait
-        Set(value As PictureBox)
-            MyPicPhaseportrait = value
-        End Set
-    End Property
-
-    WriteOnly Property MapPhaseportrait As Bitmap Implements IPendulum.MapPhaseportrait
-        Set(value As Bitmap)
-            MyMapPhaseportrait = value
-        End Set
-    End Property
-
-    ReadOnly Property LabelParameterlist As String Implements IPendulum.LabelParameterList
-        Get
-            LabelParameterlist = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
-        End Get
-    End Property
-    WriteOnly Property ParameterListbox As ListBox Implements IPendulum.ParameterListbox
-        Set(value As ListBox)
-            MyParameterlistbox = value
-        End Set
-    End Property
-
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements IPendulum.ValueParameters
-        Get
-            ValueParameters = MyValueParameters
-        End Get
-    End Property
-
-    ReadOnly Property LabelPhasePortrait As String Implements IPendulum.LabelPhasePortrait
-        Get
-            LabelPhasePortrait = MyPhaseportraitLabel
-        End Get
-    End Property
-
-    ReadOnly Property AdditionalParameter As ClsValueParameter Implements IPendulum.AdditionalParameter
-        Get
-            AdditionalParameter = MyAdditionalParameter
-        End Get
-    End Property
-
-    ReadOnly Property LabelParameterC As String Implements IPendulum.LabelParameterC
-        Get
-            LabelParameterC = MyLabelParameterC
-        End Get
-    End Property
-
-    ReadOnly Property C As Decimal Implements IPendulum.C
-        Get
-            MyC = GetEnergy()
-            C = MyC
-        End Get
-    End Property
-
-    WriteOnly Property AdditionalParameterValue As Integer Implements IPendulum.AdditionalParameterValue
-        Set(value As Integer)
-            MyAdditionalParameterValue = value
-            MyM = CalcValuefromTrbAddParameter(MyAdditionalParameterValue)
-
-            'Factor Mu in Differential Equations
-            Mu = MyM / (1 + MyM)
-            SetPendulumSize()
-            SetStartenergyRange()
-        End Set
-    End Property
-
-    Property Constants As ClsVector Implements IPendulum.Constants
-        Set(value As ClsVector)
-            With MyConstants
-                .Component(0) = value.Component(0)
-                .Component(1) = value.Component(1)
-            End With
-            SetPosition()
-        End Set
-        Get
-            Constants = New ClsVector(1)
-            With Constants
-                .Component(0) = MyConstants.Component(0)
-                .Component(1) = MyConstants.Component(1)
-            End With
-        End Get
-    End Property
-
-    Property Variables As ClsVector Implements IPendulum.Variables
-        Set(value As ClsVector)
-            With MyVariables
-                .Component(0) = value.Component(0)
-                .Component(1) = value.Component(1)
-                u1 = .Component(0)
-                v1 = 0
-                u2 = .Component(1)
-                v2 = 0
-            End With
-            SetPosition()
-        End Set
-        Get
-            Variables = New ClsVector(1)
-            With Variables
-                .Component(0) = MyVariables.Component(0)
-                .Component(1) = MyVariables.Component(1)
-            End With
-        End Get
-    End Property
-
-    Public Function GetTypesofPhaseportrait() As List(Of String) Implements IPendulum.GetTypesofPhaseportrait
-
-        Return [Enum].GetNames(GetType(TypeofPhaseportraitEnum)).ToList
-    End Function
-
-    WriteOnly Property PhaseportraitIndex As Integer Implements IPendulum.PhaseportraitIndex
-        Set(value As Integer)
-            Dim PhaPorTypes As Array = [Enum].GetValues(GetType(TypeofPhaseportraitEnum))
-            MyPhaseportraitType = CType(PhaPorTypes.GetValue(value), TypeofPhaseportraitEnum)
-            'Labeling and preparing UInterval, VInterval and MapPhaseportraitGraphics
-            Select Case MyPhaseportraitType
-                Case TypeofPhaseportraitEnum.Torus
-                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Phi1, Phi2. Tangent: Phi1', Phi2'"
-                    UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                    VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                Case TypeofPhaseportraitEnum.PoincareSection
-                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Phi1 = 0, Phi2, Phi2'"
-                    UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                    VInterval = New ClsInterval(CDec(-10), CDec(10))
-                Case Else
-                    MyPhaseportraitLabel = FrmMain.LM.GetString("PhasePortrait") & ": Red: Phi1, Phi1'. Green: Phi2, Phi2'"
-                    UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                    VInterval = New ClsInterval(CDec(-10), CDec(10))
-            End Select
-            MyPicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, UInterval, VInterval)
-            MyMapPhaseportraitGraphics = New ClsGraphicTool(MyMapPhaseportrait, UInterval, VInterval)
-        End Set
-    End Property
-
-    Property IsStartparameter1Set As Boolean Implements IPendulum.IsStartparameter1Set
-        Set(value As Boolean)
-            MyIsStartparameter1Set = value
-        End Set
-        Get
-            IsStartparameter1Set = MyIsStartparameter1Set
-        End Get
-    End Property
-
-    Property IsStartparameter2Set As Boolean Implements IPendulum.IsStartparameter2Set
-        Set(value As Boolean)
-            MyIsStartparameter2Set = value
-        End Set
-        Get
-            IsStartparameter2Set = MyIsStartparameter2Set
-        End Get
-    End Property
-
-    WriteOnly Property TestMode As Boolean Implements IPendulum.TestMode
-        Set(value As Boolean)
-            IsTestMode = value
-        End Set
-    End Property
-
-    WriteOnly Property StepWidth As Decimal Implements IPendulum.StepWidth
-        Set(value As Decimal)
-            d = value
-        End Set
-    End Property
-
-    ReadOnly Property Energy As Decimal Implements IPendulum.Energy
-        Get
-            Energy = GetEnergy()
-        End Get
-    End Property
-
-    ReadOnly Property StartEnergyRange As ClsInterval Implements IPendulum.StartEnergyRange
-        Get
-            StartEnergyRange = MyStartenergyRange
-        End Get
-    End Property
 
     'SECTOR CALCULATION AND DRAWING
 
-    Public Function CalcValuefromTrbAddParameter(AddParameter As Integer) As Decimal _
-        Implements IPendulum.CalcValuefromTrbAddParameter
+    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
 
         Dim Temp As Decimal = CDec(Math.Pow(2, AddParameter - 2))
 
@@ -425,72 +89,90 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Sub DrawCoordinateSystem() Implements IPendulum.DrawCoordinateSystem
-
-        If MyMapPendulumGraphics IsNot Nothing Then
-
-            'x-Axis
-            MyMapPendulumGraphics.DrawLine(New ClsMathpoint(-1, MyY0), New ClsMathpoint(1, MyY0), Color.Aquamarine, 1)
-            'y-Axis
-            MyMapPendulumGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
-        End If
-
+    Protected Overrides Sub DrawCoordinateSystem()
+        'x-Axis
+        BmpGraphics.DrawLine(New ClsMathpoint(-1, Y0), New ClsMathpoint(1, Y0), Color.Aquamarine, 1)
+        'y-Axis
+        BmpGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
     End Sub
 
-    Public Sub DrawPendulums() Implements IPendulum.DrawPendulums
+    Protected Overrides Sub DrawPendulums()
 
-        With MyPicPendulumGraphics
+        With PicGraphics
 
             'Clear Graphic
-            MyPicPendulum.Refresh()
+            MyPicDiagram.Refresh()
 
             'First Pendulum
             .DrawLine(New ClsMathpoint(0, 0), Position1, Color.Red, 2)
-            .FillCircle(Position1, MyPendulumSize.Component(0), Brushes.Red)
+            .FillCircle(Position1, PendulumSize.Component(0), Brushes.Red)
 
             'Second Pendulum
             .DrawLine(Position1, Position2, Color.Green, 2)
-            .FillCircle(Position2, MyPendulumSize.Component(1), Brushes.Green)
+            .FillCircle(Position2, PendulumSize.Component(1), Brushes.Green)
 
         End With
-
-    End Sub
-
-    Sub Reset() Implements IPendulum.Reset
-
-        MyMapPendulumGraphics.Clear(Color.White)
-        MyMapPhaseportraitGraphics?.Clear(Color.White)
 
     End Sub
 
     'Sets the position of the Pendulums
-    Private Sub SetPosition()
+    Protected Overrides Sub SetPosition()
 
         'See math. doc.
         With Position1
-            .X = MyConstants.Component(0) * CDec(Math.Sin(MyVariables.Component(0)))
-            .Y = -MyConstants.Component(0) * CDec(Math.Cos(MyVariables.Component(0)))
+            .X = MyCalculationConstants.Component(0) * CDec(Math.Sin(MyCalculationVariables.Component(0)))
+            .Y = -MyCalculationConstants.Component(0) * CDec(Math.Cos(MyCalculationVariables.Component(0)))
         End With
 
         With Position2
-            .X = Position1.X + MyConstants.Component(1) * CDec(Math.Sin(MyVariables.Component(1)))
-            .Y = Position1.Y - MyConstants.Component(1) * CDec(Math.Cos(MyVariables.Component(1)))
+            .X = Position1.X + MyCalculationConstants.Component(1) * CDec(Math.Sin(MyCalculationVariables.Component(1)))
+            .Y = Position1.Y - MyCalculationConstants.Component(1) * CDec(Math.Cos(MyCalculationVariables.Component(1)))
         End With
 
     End Sub
 
-    Private Sub SetStartenergyRange()
+    Protected Overrides Sub SetPhasePortraitParameters()
+
+        Select Case TypeofPhasePortrait
+            Case TypeofPhaseportraitEnum.TorusOrCylinder
+                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Phi1, Phi2. Tangent: Phi1', Phi2'"
+                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+            Case TypeofPhaseportraitEnum.PoincareSection
+                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Phi1 = 0, Phi2, Phi2'"
+                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                VInterval = New ClsInterval(CDec(-10), CDec(10))
+            Case Else 'independent
+                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Red: Phi1, Phi1'. Green: Phi2, Phi2'"
+                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                VInterval = New ClsInterval(CDec(-10), CDec(10))
+        End Select
+
+    End Sub
+
+    Protected Overrides Sub SetAdditionalParameters()
+        M = GetAddParameterValue(MyAdditionalParameterValue)
+
+        'Factor Mu in Differential Equations
+        Mu = M / (1 + M)
+        SetPendulumSize()
+        SetPosition()
+        ResetIteration()
+        SetEnergyRange()
+    End Sub
+
+    Protected Overrides Sub SetEnergyRange()
 
         Dim Emin As Decimal
         Dim Emax As Decimal
 
         'Emin = g*((1-l1)*(1+MyM)-MyM*l2)
         'Emax = g*((1+l1)*(1+MyM)+MyM*l2)
-        With Constants
-            Emin = g * ((1 - .Component(0)) * (1 + MyM) - MyM * .Component(1))
-            Emax = g * ((1 + .Component(0)) * (1 + MyM) + MyM * .Component(1))
+        With MyCalculationConstants
+            Emin = g * ((1 - .Component(0)) * (1 + M) - M * .Component(1))
+            Emax = g * ((1 + .Component(0)) * (1 + M) + M * .Component(1))
         End With
-        MyStartenergyRange = New ClsInterval(Emin, Emax)
+        EnergyRange = New ClsInterval(Emin, Emax)
 
     End Sub
 
@@ -499,48 +181,44 @@ Public Class ClsDoublePendulum
         'The smaller Pendulum has about the Size 12 (in Pixels)
         'that is 12/1260 in Math. Coordinates - we set 0.01
         'and m2 = MyM*m1
-        With MyPendulumSize
-            If MyM >= 1 Then
+        With PendulumSize
+            If M >= 1 Then
                 .Component(0) = CDec(0.01)
-                .Component(1) = MyM * .Component(0)
+                .Component(1) = M * .Component(0)
             Else
                 .Component(1) = CDec(0.01)
-                .Component(0) = .Component(1) / MyM
+                .Component(0) = .Component(1) / M
             End If
         End With
-
-        MyC = GetEnergy()
-
     End Sub
 
     'SECTOR SETSTARTPARAMETER
-    Sub SetAndDrawStartparameter1(Mouseposition As Point) Implements IPendulum.SetAndDrawStartparameter1
+    Public Overrides Sub SetAndDrawStartparameter1(Mouseposition As Point)
 
-        Dim ActualPosition As ClsMathpoint = MyPicPendulumGraphics.PixelToMathpoint(Mouseposition)
+        Dim ActualPosition As ClsMathpoint = PicGraphics.PixelToMathpoint(Mouseposition)
 
         With ActualPosition
             'L1 should be maximal 0.8 to reserve some place for L2 and minimal 0.01
             'because of the divisor in the Differential Equation
             Dim LocRange As ClsInterval
             'L1
-            LocRange = New ClsInterval(MyValueParameters.Item(0).Range.A, MyValueParameters.Item(0).Range.B)
+            LocRange = New ClsInterval(MyValueParameterDefinition.Item(0).Range.A, MyValueParameterDefinition.Item(0).Range.B)
             Dim L1 As Decimal = CDec(Math.Max(LocRange.A, Math.Min(Math.Sqrt(.X * .X + .Y * .Y), LocRange.B)))
 
             'L2 standard
-            Dim L2 As Decimal = CDec(Math.Min(MyConstants.Component(1), 0.95 - L1))
+            Dim L2 As Decimal = CDec(Math.Min(MyCalculationConstants.Component(1), 0.95 - L1))
 
             'Phi1
-            Dim Phi1 As Decimal = MyMathhelper.GetAngle(.X, .Y)
+            Dim Phi1 As Decimal = MathHelper.GetAngle(.X, .Y)
 
             'Set parameters
-            MyConstants.Component(0) = L1
-            MyConstants.Component(1) = L2
-            MyVariables.Component(0) = MyMathhelper.AngleInMinusPiAndPi(Phi1)
-            MyC = GetEnergy()
+            MyCalculationConstants.Component(0) = L1
+            MyCalculationConstants.Component(1) = L2
+            MyCalculationVariables.Component(0) = MathHelper.AngleInMinusPiAndPi(Phi1)
 
             SetPosition()
 
-            SetStartenergyRange()
+            SetEnergyRange()
 
             'Draw pendulum
             DrawPendulums()
@@ -553,9 +231,9 @@ Public Class ClsDoublePendulum
 
     End Sub
 
-    Sub SetAndDrawStartparameter2(Mouseposition As Point) Implements IPendulum.SetAndDrawStartparameter2
+    Public Overrides Sub SetAndDrawStartparameter2(Mouseposition As Point)
 
-        Dim ActualPosition As ClsMathpoint = MyPicPendulumGraphics.PixelToMathpoint(Mouseposition)
+        Dim ActualPosition As ClsMathpoint = PicGraphics.PixelToMathpoint(Mouseposition)
 
         With ActualPosition
 
@@ -566,19 +244,18 @@ Public Class ClsDoublePendulum
             'because of the divisor in the Differential Equation
             Dim LocRange As ClsInterval
             'L2
-            LocRange = New ClsInterval(MyValueParameters.Item(1).Range.A, MyValueParameters.Item(1).Range.B)
+            LocRange = New ClsInterval(MyValueParameterDefinition.Item(1).Range.A, MyValueParameterDefinition.Item(1).Range.B)
             Dim L2 As Decimal = CDec(Math.Max(LocRange.A, (Math.Min(Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY),
-                                                                    0.95 - MyConstants.Component(0)))))
-            Dim Phi2 As Decimal = MyMathhelper.GetAngle(DeltaX, DeltaY)
+                                                                    0.95 - MyCalculationConstants.Component(0)))))
+            Dim Phi2 As Decimal = MathHelper.GetAngle(DeltaX, DeltaY)
 
             'Set parameters
-            MyConstants.Component(1) = L2
-            MyVariables.Component(1) = MyMathhelper.AngleInMinusPiAndPi(Phi2)
-            MyC = GetEnergy()
+            MyCalculationConstants.Component(1) = L2
+            MyCalculationVariables.Component(1) = MathHelper.AngleInMinusPiAndPi(Phi2)
 
             SetPosition()
 
-            SetStartenergyRange()
+            SetEnergyRange()
 
             'Draw pendulum
             DrawPendulums()
@@ -591,10 +268,30 @@ Public Class ClsDoublePendulum
 
     End Sub
 
+    Protected Overrides Sub SetDefaultUserData()
+
+        'Standardvalues
+        With MyCalculationConstants
+            .Component(0) = CDec(0.7)  'L1
+            .Component(1) = CDec(0.2)  'L2
+        End With
+
+        With MyCalculationVariables
+            .Component(0) = CDec(Math.PI / 4) 'Phi1
+            u1 = .Component(0)
+            v1 = 0
+            .Component(1) = CDec(Math.PI / 6) 'Phi2
+            u2 = .Component(1)
+            v2 = 0
+        End With
+
+        SetEnergyRange()
+        SetPosition()
+    End Sub
 
     'SECTOR ITERATION
 
-    Sub Iteration(TestMode As Boolean) Implements IPendulum.Iteration
+    Protected Overrides Sub IterationStep(TestMode As Boolean)
 
         'Performs one iteration step
         'and does all drawings
@@ -707,11 +404,11 @@ Public Class ClsDoublePendulum
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
 
-        u1 = MyMathhelper.AngleInMinusPiAndPi(u1)
-        u2 = MyMathhelper.AngleInMinusPiAndPi(u2)
+        u1 = MathHelper.AngleInMinusPiAndPi(u1)
+        u2 = MathHelper.AngleInMinusPiAndPi(u2)
 
         'New Values to MyVariables
-        With MyVariables
+        With MyCalculationVariables
             If .Component(0) * u1 <= 0 Then
                 SignumChanged = True
             Else
@@ -722,7 +419,7 @@ Public Class ClsDoublePendulum
         End With
 
         'Draw Phase Diagram
-        DrawPhaseportrait()
+        '**DrawPhaseportrait()
 
         'Transfer new Values to Position
         SetPosition()
@@ -739,38 +436,30 @@ Public Class ClsDoublePendulum
 
         'The track of Pendulum1 is always on a circle and not interesting
         'MyBitmapGraphics.DrawLine(OldPosition1, Position1, Color.Red, 1)
-        MyMapPendulumGraphics.DrawLine(OldPosition2, Position2, Color.Green, 1)
-        MyPicPendulum.Invalidate()
+        BmpGraphics.DrawLine(OldPosition2, Position2, Color.Green, 1)
+        MyPicDiagram.Invalidate()
 
     End Sub
 
     Private Sub DrawPhaseportrait()
-        Select Case MyPhaseportraitType
-            Case TypeofPhaseportraitEnum.Torus
+        Select Case TypeofPhasePortrait
+            Case TypeofPhaseportraitEnum.TorusOrCylinder
                 MyPicPhaseportrait.Refresh()
-                MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
-                MyMapPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
+                PicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
+                BmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
             Case TypeofPhaseportraitEnum.PoincareSection
                 If SignumChanged Then
-                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 2)
+                    PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 2)
                 End If
             Case Else
                 'Draw only into PicPhaseportrait
-                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
-                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
+                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
+                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
         End Select
 
     End Sub
 
-    Private Sub ProtocolValues()
-
-        MyParameterlistbox.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
-                                     u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
-                                     GetEnergy.ToString("N11"))
-
-    End Sub
-
-    Private Function GetEnergy() As Decimal
+    Protected Overrides Function GetEnergy() As Decimal
 
         'This routine protocols the total Energy of the double pendulum
         'to have a control that it is constant
@@ -780,36 +469,36 @@ Public Class ClsDoublePendulum
         Dim EPot As Decimal
         Dim Etotal As Decimal
 
-        With Constants
+        With MyCalculationConstants
             'we set as norm m1 = 1, m2 = M
             'kinetic energy of m1: L1^2*v1^2/2
             EKin = CDec(Math.Pow(.Component(0) * v1, 2) / 2)
 
             'kinetic energy of m2: see math. doc.
-            EKin += CDec(MyM * (Math.Pow(.Component(0) * v1, 2) +
+            EKin += CDec(M * (Math.Pow(.Component(0) * v1, 2) +
                 2 * .Component(0) * v1 * .Component(1) * v2 * Math.Cos(u1 - u2) +
                 Math.Pow(.Component(1) * v2, 2)) / 2)
 
             'potential energy of m1 and m2: see math.doc.
-            EPot = g * CDec((1 - .Component(0) * Math.Cos(u1)) * (1 + MyM) - MyM * .Component(1) * Math.Cos(u2))
+            EPot = g * CDec((1 - .Component(0) * Math.Cos(u1)) * (1 + M) - M * .Component(1) * Math.Cos(u2))
 
             'Etotal in the possible interval of StartEnergyRange
-            Etotal = Math.Min(EKin + EPot, StartEnergyRange.B)
-            Etotal = Math.Max(Etotal, StartEnergyRange.A)
+            Etotal = Math.Min(EKin + EPot, EnergyRange.B)
+            Etotal = Math.Max(Etotal, EnergyRange.A)
 
             Return EKin + EPot
         End With
 
     End Function
 
-    Private Function F1(x As ClsVector) As Decimal
+    Private Function F1(x As ClsNTupel) As Decimal
 
         'calculates next u1' = v1 = x.component(1)
         Return x.Component(1)
 
     End Function
 
-    Private Function G1(x As ClsVector) As Decimal
+    Private Function G1(x As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
@@ -818,8 +507,8 @@ Public Class ClsDoublePendulum
             Dim DeltaU As Decimal = .Component(2) - .Component(0)
 
             'L2*V2*V2 + L1*cos(DeltaU)*V1*V1
-            Temp = CDec(MyConstants.Component(1) * Math.Pow(.Component(3), 2) +
-                MyConstants.Component(0) * Math.Cos(DeltaU) * Math.Pow(.Component(1), 2))
+            Temp = CDec(MyCalculationConstants.Component(1) * Math.Pow(.Component(3), 2) +
+                MyCalculationConstants.Component(0) * Math.Cos(DeltaU) * Math.Pow(.Component(1), 2))
 
             '*-Mu*sin(deltaU)
             Temp *= -Mu * CDec(Math.Sin(DeltaU))
@@ -831,20 +520,20 @@ Public Class ClsDoublePendulum
             Dim Check2 As Decimal = CDec(Math.Sin(.Component(0)))
 
             'Divisor L1*(1-Mu*cos2(Deltau))
-            Temp /= MyConstants.Component(0) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
+            Temp /= MyCalculationConstants.Component(0) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
         End With
 
         Return Temp
 
     End Function
 
-    Private Function F2(x As ClsVector) As Decimal
+    Private Function F2(x As ClsNTupel) As Decimal
 
         'calculates next u2' = v2 = x.component(3)
         Return x.Component(3)
     End Function
 
-    Private Function G2(x As ClsVector) As Decimal
+    Private Function G2(x As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
@@ -853,8 +542,8 @@ Public Class ClsDoublePendulum
             Dim DeltaU As Decimal = .Component(2) - .Component(0)
 
             'L1*V1*V1 + Mu*L2*cos(DeltaU)*V2*V2
-            Temp = CDec(MyConstants.Component(0) * Math.Pow(.Component(1), 2) +
-                Mu * MyConstants.Component(1) * Math.Cos(DeltaU) * Math.Pow(.Component(3), 2))
+            Temp = CDec(MyCalculationConstants.Component(0) * Math.Pow(.Component(1), 2) +
+                Mu * MyCalculationConstants.Component(1) * Math.Cos(DeltaU) * Math.Pow(.Component(3), 2))
 
             '*sin(deltaU)
             Temp *= CDec(Math.Sin(DeltaU))
@@ -866,21 +555,21 @@ Public Class ClsDoublePendulum
             Dim Check2 As Decimal = CDec(Math.Sin(.Component(0)))
 
             'Divisor L2*(1-Mu*cos2(Deltau))
-            Temp /= MyConstants.Component(1) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
+            Temp /= MyCalculationConstants.Component(1) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
         End With
 
         Return Temp
 
     End Function
 
-    Private Function G1Test(x As ClsVector) As Decimal
+    Private Function G1Test(x As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
         With x
 
-            Temp = -g * CDec(Math.Sin(.Component(0)) / MyConstants.Component(0))
+            Temp = -g * CDec(Math.Sin(.Component(0)) / MyCalculationConstants.Component(0))
 
         End With
 
@@ -888,14 +577,14 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function G2Test(x As ClsVector) As Decimal
+    Private Function G2Test(x As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
         With x
 
-            Temp = -g * CDec(Math.Sin(.Component(2)) / MyConstants.Component(1))
+            Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
 
         End With
 

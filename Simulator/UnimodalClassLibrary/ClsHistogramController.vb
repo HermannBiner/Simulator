@@ -22,7 +22,7 @@ Public Class ClsHistogramController
     'Number of Iteration Steps
     Private n As Integer
     Private MyLblN As Label
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Actual value of the iteration
     Private x As Decimal
@@ -54,8 +54,8 @@ Public Class ClsHistogramController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
-        Set(value As ClsGeneral.EnIterationStatus)
+    Property IterationStatus As ClsDynamics.EnIterationStatus
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
         Get
@@ -106,8 +106,8 @@ Public Class ClsHistogramController
 
             End If
 
-        Loop Until IterationStatus = ClsGeneral.EnIterationStatus.Stopped _
-            Or IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Stopped _
+            Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
 
         Return Task.CompletedTask
 
@@ -122,7 +122,7 @@ Public Class ClsHistogramController
         MyLblN.Text = "0"
         n = 0
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
         ReDim NumberOfHits(MyPicDiagram.Width)
 
     End Sub

@@ -2,7 +2,7 @@
 
 'Status Redesign Checked
 
-Public Class ClsSpringPendulumController
+Public Class ClsNumericMethodsController
 
     'Iteration parameters Pendulum A: The real spring pendulum
     Private MyDSA As ISpringPendulum
@@ -11,7 +11,7 @@ Public Class ClsSpringPendulumController
     'the y-coordinate is a numeric approach depending on the chosen method
     Private MyDSB As ISpringPendulum
 
-    'Mathematicel Interval in y-direction
+    'Mathematical Interval in y-direction
     Private MyMathRange As ClsInterval
 
     'Draws into the picturebox
@@ -40,7 +40,7 @@ Public Class ClsSpringPendulumController
     Private MyBmpGraphics As ClsGraphicTool
 
     'Iteration control
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     'Status Parameters
     Private n As Integer '#Steps
@@ -98,11 +98,11 @@ Public Class ClsSpringPendulumController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus
         Get
             IterationStatus = MyIterationStatus
         End Get
-        Set(value As ClsGeneral.EnIterationStatus)
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
     End Property
@@ -203,7 +203,7 @@ Public Class ClsSpringPendulumController
 
     Public Sub ResetIteration()
 
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
         MyBmpGraphics.Clear(Color.White)
         MyPicDiagram.Refresh()
         MyValueList.Items.Clear()
@@ -223,7 +223,7 @@ Public Class ClsSpringPendulumController
 
         'MyStartposition is already set by the user
 
-        If MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+        If MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
 
             'Initializing only in the beginning
             'that gives the possibility to continue after an interrupt
@@ -254,13 +254,13 @@ Public Class ClsSpringPendulumController
             'but the minimum is of course 1
             NumberOfStepsUntilShift = Math.Max(1, CInt(0.02 / MyStepWidthA))
 
-            MyIterationStatus = ClsGeneral.EnIterationStatus.Ready
+            MyIterationStatus = ClsDynamics.EnIterationStatus.Ready
 
         End If
 
-        If MyIterationStatus = ClsGeneral.EnIterationStatus.Ready Or MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
+        If MyIterationStatus = ClsDynamics.EnIterationStatus.Ready Or MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
 
-            MyIterationStatus = ClsGeneral.EnIterationStatus.Running
+            MyIterationStatus = ClsDynamics.EnIterationStatus.Running
             Do
                 n += 1
 
@@ -303,14 +303,12 @@ Public Class ClsSpringPendulumController
 
                 If n Mod 5 = 0 Then
                     MyLblN.Text = n.ToString
-
-                    Application.DoEvents()
-                    Await Task.Delay(2)
+                    Await Task.Delay(1)
 
                 End If
 
-            Loop Until MyIterationStatus = ClsGeneral.EnIterationStatus.Interrupted Or
-                MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+            Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted Or
+                MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
 
         End If

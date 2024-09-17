@@ -12,10 +12,12 @@ Public Class ClsIterationController
 
     'The PicDiagram
     Private MyPicDiagram As PictureBox
-    Private MyPicDiagramSize As Integer
+    Private PicDiagramSize As Integer
+    Private BmpDiagram As Bitmap
+    Private BmpGraphics As ClsGraphicTool
 
     'The Graphic Helper for PicDiagram
-    Private MyPicGraphics As ClsGraphicTool
+    Private PicGraphics As ClsGraphicTool
 
     'Math Helper
     Private Mathhelper As New ClsMathhelperUnimodal
@@ -37,12 +39,14 @@ Public Class ClsIterationController
     'Number of Iteration Steps
     Private n As Integer
     Private MyLblN As Label
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
     Private MyValueList As ListBox
     Private MyProtocol As ListBox
 
     'X-Stretching: the x-axis can be stretched
     Private MyXStretching As Integer
+
+    Private Const TargetValuePrecision As Decimal = CDec(0.001)
 
     'Presentation in FrmIteration
     Public Enum PresentationEnum
@@ -67,8 +71,11 @@ Public Class ClsIterationController
     WriteOnly Property PicDiagram As PictureBox
         Set(value As PictureBox)
             MyPicDiagram = value
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyDS.IterationInterval, MyDS.IterationInterval)
-            MyPicDiagramSize = Math.Min(MyPicDiagram.Width, MyPicDiagram.Height)
+            PicGraphics = New ClsGraphicTool(MyPicDiagram, MyDS.IterationInterval, MyDS.IterationInterval)
+            PicDiagramSize = Math.Min(MyPicDiagram.Width, MyPicDiagram.Height)
+            BmpDiagram = New Bitmap(PicDiagramSize, PicDiagramSize)
+            MyPicDiagram.Image = BmpDiagram
+            BmpGraphics = New ClsGraphicTool(BmpDiagram, MyDS.IterationInterval, MyDS.IterationInterval)
         End Set
     End Property
 
@@ -78,8 +85,8 @@ Public Class ClsIterationController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
-        Set(value As ClsGeneral.EnIterationStatus)
+    Property IterationStatus As ClsDynamics.EnIterationStatus
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
         Get
@@ -99,7 +106,10 @@ Public Class ClsIterationController
         End Set
     End Property
 
-    WriteOnly Property Presentation As PresentationEnum
+    Property Presentation As PresentationEnum
+        Get
+            Presentation = MyPresentation
+        End Get
         Set(value As PresentationEnum)
             MyPresentation = value
         End Set
@@ -137,20 +147,36 @@ Public Class ClsIterationController
     End Property
 
     Public Sub PrepareDiagram()
+        DrawCoordinateSystem()
+        If MyPresentation = PresentationEnum.Functionsgraph Then
+            DrawFunctionGraph()
+        End If
+    End Sub
 
-        'This method draws the Graph of the Function
+    Private Sub DrawCoordinateSystem()
+
+        BmpGraphics.Clear(Color.White)
 
         'Draw coordinate system
-        MyPicGraphics.DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
+        BmpGraphics.DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
 
-        'Draw the 45° line - needed to show the iteration in the function graph
-        MyPicGraphics.DrawLine(New ClsMathpoint(MyDS.IterationInterval.A, MyDS.IterationInterval.A),
+        If MyPresentation = PresentationEnum.Functionsgraph Then
+            'Draw the 45° line - needed to show the iteration in the function graph
+            BmpGraphics.DrawLine(New ClsMathpoint(MyDS.IterationInterval.A, MyDS.IterationInterval.A),
                             New ClsMathpoint(MyDS.IterationInterval.B, MyDS.IterationInterval.B),
                             Color.Black, 1)
+        End If
+        MyPicDiagram.Refresh()
+
+    End Sub
+
+    Public Sub DrawFunctionGraph()
+
+        MyPicDiagram.Refresh()
 
         'Draw function graph
         'The step-wide in X-direction is:
-        Dim deltaX As Decimal = MyDS.IterationInterval.IntervalWidth / MyPicDiagramSize
+        Dim deltaX As Decimal = MyDS.IterationInterval.IntervalWidth / PicDiagramSize
 
         'actual mathpoint
         Dim X As New ClsMathpoint
@@ -162,14 +188,12 @@ Public Class ClsIterationController
         Dim m As Integer
 
         'X and XPlus are increased stepwise and the line betweens these points is drawn
-        For m = 0 To MyPicDiagramSize - 2
-
+        For m = 0 To PicDiagramSize - 2
             X.X = MyDS.IterationInterval.A + (m * deltaX)
             X.Y = MyDS.FN(X.X)
             Xplus.X = X.X + deltaX
             Xplus.Y = MyDS.FN(Xplus.X)
-            MyPicGraphics.DrawLine(X, Xplus, Color.Blue, 1)
-
+            PicGraphics.DrawLine(X, Xplus, Color.Blue, 1)
         Next
     End Sub
 
@@ -208,14 +232,14 @@ Public Class ClsIterationController
             UpdateListboxes(MyX)
 
             'Connect the Point G on the 45° line to then Point P on the Function Graph
-            MyPicGraphics.DrawLine(G, P, Color.Red, 1)
+            PicGraphics.DrawLine(G, P, Color.Red, 1)
 
             'Set the next Point on the 45° Line
             G.X = MyDS.FN(MyX)
             G.Y = G.X
 
             'Connect the Point P on the Function Graph with G
-            MyPicGraphics.DrawLine(P, G, Color.Red, 1)
+            PicGraphics.DrawLine(P, G, Color.Red, 1)
 
             'Set the next Iteration Value
             MyX = MyDS.FN(MyX)
@@ -239,14 +263,14 @@ Public Class ClsIterationController
         If MyTargetValue <> 0 Then
             Dim A As New ClsMathpoint(MyDS.IterationInterval.A, MyTargetValue)
             Dim B As New ClsMathpoint(MyDS.IterationInterval.B, MyTargetValue)
-            MyPicGraphics.DrawLine(A, B, Color.Green, 1)
+            PicGraphics.DrawLine(A, B, Color.Green, 1)
         End If
 
         'The variable in x-direction starts at the left interval border
         Dim u As Decimal = MyDS.IterationInterval.A
 
         'this is the step-wide in x-direction
-        Dim deltaU As Decimal = MyDS.IterationInterval.IntervalWidth * MyXStretching / MyPicDiagramSize
+        Dim deltaU As Decimal = MyDS.IterationInterval.IntervalWidth * MyXStretching / PicDiagramSize
 
         'and there are the two points of the graph to be connented
         Dim P As New ClsMathpoint(u, MyX)
@@ -255,10 +279,16 @@ Public Class ClsIterationController
         Do
             n += 1
 
-            MyPicGraphics.DrawLine(P, NextP, Color.Red, 1)
+            PicGraphics.DrawLine(P, NextP, Color.Red, 1)
 
             'transmit the actual iteration value to the LstValueList
             UpdateListboxes(MyX)
+
+            If MyTargetValue > 0 Then
+                If Math.Abs(MyX - MyTargetValue) < TargetValuePrecision Then
+                    u = MyDS.IterationInterval.B + 1
+                End If
+            End If
 
             'P takes over NextP
             P.X = NextP.X
@@ -271,6 +301,7 @@ Public Class ClsIterationController
             'and NextP is set
             NextP.X = u
             NextP.Y = MyDS.FN(MyX)
+
 
         Loop Until u >= MyDS.IterationInterval.B
 
@@ -299,7 +330,7 @@ Public Class ClsIterationController
     Public Sub ResetIteration()
 
         'clear display
-        MyPicGraphics.Clear(Color.White)
+        PicGraphics.Clear(Color.White)
         MyValueList.Items.Clear()
         MyProtocol.Items.Clear()
 
@@ -308,7 +339,7 @@ Public Class ClsIterationController
         n = 0
 
         'Clear Statusparameter
-        MyIterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 

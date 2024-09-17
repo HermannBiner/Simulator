@@ -1,4 +1,5 @@
 ﻿'This class provides the Standard System Brushes
+'they are used e.g. to color Julia or Mandelbrot sets
 
 'Status Checked
 
@@ -9,7 +10,6 @@ Public Class ClsSystemBrushes
     Public Sub New(MaxSteps As Integer)
         MyMaxSteps = MaxSteps
     End Sub
-
 
     Public Function GetSystemBrush(Steps As Integer) As Brush
 

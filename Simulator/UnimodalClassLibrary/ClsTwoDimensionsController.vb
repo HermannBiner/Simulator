@@ -30,7 +30,7 @@ Public Class ClsTwoDimensionsController
     Private MyBrush As SolidBrush
 
     'Iteration Status
-    Private MyIterationStatus As ClsGeneral.EnIterationStatus
+    Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
     WriteOnly Property DS As IIteration
         Set(value As IIteration)
@@ -64,8 +64,8 @@ Public Class ClsTwoDimensionsController
         End Set
     End Property
 
-    Property IterationStatus As ClsGeneral.EnIterationStatus
-        Set(value As ClsGeneral.EnIterationStatus)
+    Property IterationStatus As ClsDynamics.EnIterationStatus
+        Set(value As ClsDynamics.EnIterationStatus)
             MyIterationStatus = value
         End Set
         Get
@@ -135,7 +135,7 @@ Public Class ClsTwoDimensionsController
 
         'Clear Display
         MyPicGraphics.Clear(Color.White)
-        IterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 

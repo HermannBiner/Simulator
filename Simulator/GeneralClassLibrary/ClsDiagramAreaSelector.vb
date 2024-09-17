@@ -1,6 +1,8 @@
 ﻿'This class allows to select an area of a PicDiagram
 'by using the mouse
 
+'Status Checked
+
 Imports System.Globalization
 
 Public Class ClsDiagramAreaSelector
@@ -11,19 +13,19 @@ Public Class ClsDiagramAreaSelector
     'Allowed global Ranges
     'they are needed to check if the
     'UserRanges are in these ranges
-    Private MyParameterRange As ClsInterval
-    Private MyValueRange As ClsInterval
+    Private MyXRange As ClsInterval
+    Private MyYRange As ClsInterval
 
     'Selected UserRanges
-    Private MyUserParameterRange As ClsInterval
-    Private MyUserValueRange As ClsInterval
+    Private MyUserXRange As ClsInterval
+    Private MyUserYRange As ClsInterval
 
     'Result of the Selection
     'A is the Parameter, X is the Iterationvalue
-    Private MyTxtParameterMin As TextBox
-    Private MyTxtParameterMax As TextBox
-    Private MyTxtValueMin As TextBox
-    Private MyTxtValueMax As TextBox
+    Private MyTxtXMin As TextBox
+    Private MyTxtXMax As TextBox
+    Private MyTxtYMin As TextBox
+    Private MyTxtYMax As TextBox
 
     'Mouse Status
     Private IsMouseDown As Boolean
@@ -33,6 +35,8 @@ Public Class ClsDiagramAreaSelector
 
     'Point where the left mouse button was released
     Private UserSelectionEndpoint As Point
+
+    Private MyIsActivated As Boolean
 
     WriteOnly Property PicDiagram As PictureBox
         Set(value As PictureBox)
@@ -44,63 +48,70 @@ Public Class ClsDiagramAreaSelector
         End Set
     End Property
 
-    WriteOnly Property UserParameterRange As ClsInterval
+    WriteOnly Property UserXRange As ClsInterval
         Set(value As ClsInterval)
-            MyUserParameterRange = value
+            MyUserXRange = value
         End Set
     End Property
 
-    WriteOnly Property UserValueRange As ClsInterval
+    WriteOnly Property UserYRange As ClsInterval
         Set(value As ClsInterval)
-            MyUserValueRange = value
+            MyUserYRange = value
         End Set
     End Property
 
-    WriteOnly Property ParameterRange As ClsInterval
+    WriteOnly Property XRange As ClsInterval
         Set(value As ClsInterval)
-            MyParameterRange = value
+            MyXRange = value
         End Set
     End Property
 
-    WriteOnly Property ValueRange As ClsInterval
+    WriteOnly Property YRange As ClsInterval
         Set(value As ClsInterval)
-            MyValueRange = value
+            MyYRange = value
         End Set
     End Property
 
-    WriteOnly Property TxtParameterMin As TextBox
+    WriteOnly Property TxtXMin As TextBox
         Set(value As TextBox)
-            MyTxtParameterMin = value
+            MyTxtXMin = value
         End Set
     End Property
 
-    WriteOnly Property TxtParameterMax As TextBox
+    WriteOnly Property TxtXMax As TextBox
         Set(value As TextBox)
-            MyTxtParameterMax = value
+            MyTxtXMax = value
         End Set
     End Property
 
-    WriteOnly Property TxtValueMin As TextBox
+    WriteOnly Property TxtYMin As TextBox
         Set(value As TextBox)
-            MyTxtValueMin = value
+            MyTxtYMin = value
         End Set
     End Property
 
-    WriteOnly Property TxtValueMax As TextBox
+    WriteOnly Property TxtYMax As TextBox
         Set(value As TextBox)
-            MyTxtValueMax = value
+            MyTxtYMax = value
+        End Set
+    End Property
+
+    WriteOnly Property IsActivated As Boolean
+        Set(value As Boolean)
+            MyIsActivated = value
         End Set
     End Property
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs)
 
-        'The user can choose a range by a flexible rectangle
-        IsMouseDown = True
+        If MyIsActivated Then
+            'The user can choose a range by a flexible rectangle
+            IsMouseDown = True
 
-        'e guarantees, that the mouse position is relative to PicDiagram
-        'and the Startpoint is the position, where the left mouse button was first pushed down
-        UserSelectionStartpoint = e.Location
-
+            'e guarantees, that the mouse position is relative to PicDiagram
+            'and the Startpoint is the position, where the left mouse button was first pushed down
+            UserSelectionStartpoint = e.Location
+        End If
     End Sub
 
     Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs)
@@ -146,41 +157,41 @@ Public Class ClsDiagramAreaSelector
 
                 'The selection is OK
 
-                'Now, we adjust the interval of p. p moves between pMin and pMax
+                'Now, we adjust the interval of p in pixel coordinates. p moves between pMin and pMax
                 Dim pMin As Integer = Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
                 Dim pMax As Integer = Math.Max(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
 
-                'as well, in direction of the y-axis we have to adjust the relevant interval
+                'as well, in direction of the y-axis we have to adjust the relevant interval. That is q in Pixelcoordinates.
                 Dim qMin As Integer = Math.Min(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
                 Dim qMax As Integer = Math.Max(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
 
-                'transmit the selection to the parameter range
-                MyTxtParameterMin.Text = Math.Max(PixelToA(pMin), MyParameterRange.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtParameterMax.Text = Math.Min(PixelToA(pMax), MyParameterRange.B).ToString(CultureInfo.CurrentCulture)
+                'convert the selection to the mathematical coordinate x
+                MyTxtXMin.Text = Math.Max(PixelToX(pMin), MyXRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtXMax.Text = Math.Min(PixelToX(pMax), MyXRange.B).ToString(CultureInfo.CurrentCulture)
 
-                'transmit the selection to the value range of x
-                MyTxtValueMin.Text = Math.Max(PixelToX(qMin), MyValueRange.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtValueMax.Text = Math.Min(PixelToX(qMax), MyValueRange.B).ToString(CultureInfo.CurrentCulture)
+                'convert the selection to the mathematical coordinate y
+                MyTxtYMin.Text = Math.Max(PixelToY(qMin), MyYRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtYMax.Text = Math.Min(PixelToY(qMax), MyYRange.B).ToString(CultureInfo.CurrentCulture)
 
             End If
         End If
 
     End Sub
 
-    Private Function PixelToA(p As Integer) As Decimal
+    Private Function PixelToX(p As Integer) As Decimal
 
-        'calculates the parametervalue a according to p
-        Dim a As Decimal = MyUserParameterRange.A + ((p - 1) * MyUserParameterRange.IntervalWidth / MyPicDiagram.Width)
-        Return a
+        'calculates the x-parametervalue according to p in x-axis direction
+        Dim x As Decimal = MyUserXRange.A + ((p - 1) * MyUserXRange.IntervalWidth / MyPicDiagram.Width)
+        Return x
 
     End Function
 
-    Private Function PixelToX(q As Integer) As Decimal
+    Private Function PixelToY(q As Integer) As Decimal
 
-        'calculates the x-value that belongs to a q-pixel coordinate in y-axis direction
-        Dim x As Decimal = CDec(MyUserValueRange.A + (q * MyUserValueRange.IntervalWidth / (MyPicDiagram.Height * 0.99)))
+        'calculates the y-value that belongs to a q-pixel coordinate in y-axis direction
+        Dim y As Decimal = CDec(MyUserYRange.A + (q * MyUserYRange.IntervalWidth / (MyPicDiagram.Height * 0.99)))
 
-        Return x
+        Return y
 
     End Function
 

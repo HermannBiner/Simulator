@@ -7,10 +7,10 @@
 
 Imports System.Reflection
 
-Public Class FrmSpringPendulum
+Public Class FrmNumericMethods
 
     Private IsFormLoaded As Boolean
-    Private SpringPendulumController As ClsSpringPendulumController
+    Private SpringPendulumController As ClsNumericMethodsController
 
     'User Startposition is set by pushing the left mouse button down
     Private IsMouseDown As Boolean = False
@@ -35,7 +35,7 @@ Public Class FrmSpringPendulum
     Private Sub FrmSpringPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         IsFormLoaded = False
-        SpringPendulumController = New ClsSpringPendulumController
+        SpringPendulumController = New ClsNumericMethodsController
 
         'Initialize Language
         InitializeLanguage()
@@ -43,7 +43,6 @@ Public Class FrmSpringPendulum
         FillDynamicSystem()
 
     End Sub
-
 
     Private Sub FrmSpringPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
@@ -121,6 +120,8 @@ Public Class FrmSpringPendulum
 
         InitializeDS()
 
+        SetDefaultUserData()
+
         'If the type of iteration changes, everything has to be reset
         ResetIteration()
 
@@ -164,7 +165,7 @@ Public Class FrmSpringPendulum
 
         BtnStart.Enabled = True
         BtnStart.Text = FrmMain.LM.GetString("Start")
-        SpringPendulumController.IterationStatus = ClsGeneral.EnIterationStatus.Stopped
+        SpringPendulumController.IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
         SetDefaultUserData()
 
@@ -207,7 +208,7 @@ Public Class FrmSpringPendulum
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
-        If SpringPendulumController.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+        If SpringPendulumController.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If e.X < 100 Then
 
                 Cursor = Cursors.Hand
@@ -295,7 +296,7 @@ Public Class FrmSpringPendulum
         If IsFormLoaded Then
             BtnStart.Enabled = True
             BtnReset.Enabled = True
-            SpringPendulumController.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+            SpringPendulumController.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
         End If
     End Sub
 

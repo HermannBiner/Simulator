@@ -11,37 +11,13 @@ Imports System.Reflection
 
 Public Class FrmPendulum
 
-    'Graphic object for local drawings
-    Private MapPendulum As Bitmap
-    Private MapPhaseportrait As Bitmap
-
-    'To show the total energy
-    Private StatusGraphics As Graphics
+    Private IsFormLoaded As Boolean
 
     'Active Pendulum
-    Private ActivePendulum As IPendulum
-
-    'Mathematical Coordinates
-    Private MathInterval As ClsInterval
-
-    'Iteration Control
-    Private StopIteration As Boolean
-
-    'Number of Steps
-    Private n As Integer
-
-    'Start Energy
-    Private StartEnergy As Decimal
+    Private DS As IPendulum
 
     'The Startposition of the Pendulum is set by the Mouse
     Private IsMousedown As Boolean = False
-
-    Private Const EnergyTolerance As Decimal = CDec(0.1)
-    Private Const StepWidthUnit As Decimal = CDec(0.0001)
-
-    'For debugging issues
-    Private Const IsTestMode As Boolean = False
-
 
     'SECTOR INITIALIZATION
 
@@ -52,11 +28,31 @@ Public Class FrmPendulum
 
     End Sub
 
+    Private Sub FrmPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        IsFormLoaded = False
+
+        'Initialize Language
+        InitializeLanguage()
+
+        FillDynamicSystem()
+
+    End Sub
+
+    Private Sub FrmPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        CboPendulum.SelectedIndex = 0
+        CboTypeofPhaseportrait.SelectedIndex = 0
+
+        SetDS()
+        IsFormLoaded = True
+
+    End Sub
+
     Private Sub InitializeLanguage()
 
         Text = FrmMain.LM.GetString("Pendulum")
         LblPendulum.Text = FrmMain.LM.GetString("Pendulum")
-        LblParameterc.Text = FrmMain.LM.GetString("Energy")
 
         'LblSteps contains the  #Steps
         LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
@@ -65,11 +61,12 @@ Public Class FrmPendulum
         BtnTakeOverStartParameter.Text = FrmMain.LM.GetString("TakeOver")
         GrpStartParameter.Text = FrmMain.LM.GetString("StartParameter")
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        TxtFactor.Text = ""
         BtnStart.Text = FrmMain.LM.GetString("Start")
-        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
+        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": "
         LblTypeofPhaseportrait.Text = FrmMain.LM.GetString("TypeofPhaseportrait")
+    End Sub
 
+    Private Sub FillDynamicSystem()
         CboPendulum.Items.Clear()
 
         'Add the classes implementing IPendulum
@@ -89,96 +86,13 @@ Public Class FrmPendulum
                 PendulumName = FrmMain.LM.GetString(type.Name, True)
                 CboPendulum.Items.Add(PendulumName)
             Next
-
-            CboPendulum.SelectedIndex = CboPendulum.Items.Count - 1
-            CboPendulum.Select()
-
         Else
             Throw New ArgumentNullException("MissingImplementation")
         End If
-
     End Sub
 
-    Private Sub FrmPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        'The Bitmap "MapPendulum" shows the Trace of the Pendulum
-        'the actual position of the Pendulum is shown in the PicPendulum and 
-        'actualized by refreshing PicPendulum
-        'the Bitmap and PicDiagram are Squares
-
-        MathInterval = New ClsInterval(-1, 1)
-
-        Dim Squareside As Integer = Math.Min(PicPendulum.Width, PicPendulum.Height)
-        PicPendulum.Width = Squareside
-        PicPendulum.Height = Squareside
-
-        MapPendulum = New Bitmap(Squareside, Squareside)
-
-        'The Bitmap MapPendulum is then shown as Image of PicPendulum
-        PicPendulum.Image = MapPendulum
-
-        'The Phase Portrait is a square
-        Squareside = Math.Min(PicPhasePortrait.Width, PicPhasePortrait.Height)
-        PicPhasePortrait.Width = Squareside
-        PicPhasePortrait.Height = Squareside
-
-        MapPhaseportrait = New Bitmap(Squareside, Squareside)
-        PicPhasePortrait.Image = MapPhaseportrait
-
-        'to show the total energy
-        StatusGraphics = PicStatus.CreateGraphics
-
-        'Initialize Language
-        InitializeLanguage()
-
-    End Sub
-
-    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
-
-        Reset()
-
-    End Sub
-
-    Sub Reset()
-
-        'Clear Diagram and Bitmap
-        ActivePendulum.Reset()
-        PicPhasePortrait.Refresh()
-        LstParameterList.Items.Clear()
-        n = 0
-        LblSteps.Text = "0"
-
-        ActivePendulum.IsStartparameter1Set = False
-        ActivePendulum.IsStartparameter2Set = False
-
-        ActivePendulum.DrawCoordinateSystem()
-        PicPendulum.Invalidate()
-
-        'Draw active pendulum
-        ActivePendulum.DrawPendulums()
-
-        'Iteration Control
-        StopIteration = True
-
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnTakeOverStartParameter.Enabled = True
-        TrbAdditionalParameter.Enabled = True
-
-    End Sub
-
-    Private Sub CboPendulum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPendulum.SelectedIndexChanged
-
-        ActivePendulum = InitializePendulum()
-        Reset()
-
-    End Sub
-
-    Function InitializePendulum() As IPendulum
-
+    Private Sub SetDS()
         'This sets the type of Pendulum by Reflection
-        'Default is DoublePendulum
-        Dim LocPendulum As IPendulum = New ClsDoublePendulum
-
         Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
                                  Where(Function(t) t.GetInterfaces().Contains(GetType(IPendulum)) AndAlso
                                  t.IsClass AndAlso Not t.IsAbstract).ToList()
@@ -190,58 +104,47 @@ Public Class FrmPendulum
             If types.Count > 0 Then
                 For Each type In types
                     If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
-                        LocPendulum = CType(Activator.CreateInstance(type), IPendulum)
+                        DS = CType(Activator.CreateInstance(type), IPendulum)
                     End If
                 Next
             End If
-
         End If
 
-        With LocPendulum
-            .PicPendulum = PicPendulum
-            .MapPendulum = MapPendulum
-            .PicPhaseportrait = PicPhasePortrait
-            .MapPhaseportrait = MapPhaseportrait
-            .ParameterListbox = LstParameterList
+        InitializeDS()
 
-            TxtFactor.Text = .C.ToString("N10")
-            LblParameterc.Text = .LabelParameterC
+        SetDefaultUserData()
+
+        ResetIteration()
+
+    End Sub
+
+    Private Sub InitializeDS()
+        With DS
+            .PicDiagram = PicDiagram
+            .PicPhaseportrait = PicPhasePortrait
+            .PicEnergy = PicEnergy
+            .Protocol = LstProtocol
+            .LblStepWidth = LblStepWidth
+            .LblN = LblSteps
+
             TrbAdditionalParameter.Minimum = CInt(.AdditionalParameter.Range.A)
             TrbAdditionalParameter.Maximum = CInt(.AdditionalParameter.Range.B)
-            TrbAdditionalParameter.Value = CInt(.AdditionalParameter.Tag)
+            TrbAdditionalParameter.Value = CInt(.AdditionalParameter.ID)
 
-            LblAdditionalParameter.Text = .AdditionalParameter.Name & ": " & .CalcValuefromTrbAddParameter(TrbAdditionalParameter.Value).ToString
-            LblPhasePortrait.Text = .LabelPhasePortrait
+            LblAdditionalParameter.Text = .AdditionalParameter.Name & ": " & .GetAddParameterValue(TrbAdditionalParameter.Value).ToString
 
             Dim i As Integer
             For i = 1 To 6
-                GrpStartParameter.Controls.Item("LblP" & i.ToString).Visible = (i <= .ValueParameters.Count)
-                GrpStartParameter.Controls.Item("TxtP" & i.ToString).Visible = (i <= .ValueParameters.Count)
+                GrpStartParameter.Controls.Item("LblP" & i.ToString).Visible = (i <= .ValueParameterDefinition.Count)
+                GrpStartParameter.Controls.Item("TxtP" & i.ToString).Visible = (i <= .ValueParameterDefinition.Count)
             Next
 
             Dim LocValueParameter As ClsValueParameter
-            For Each LocValueParameter In .ValueParameters
-                GrpStartParameter.Controls.Item("LblP" & LocValueParameter.Tag).Text = LocValueParameter.Name
+            For Each LocValueParameter In .ValueParameterDefinition
+                GrpStartParameter.Controls.Item("LblP" & LocValueParameter.ID).Text = LocValueParameter.Name
             Next
 
-            Dim ConstantsDimension As Integer
-            If .Constants IsNot Nothing Then
-                ConstantsDimension = .Constants.Dimension
-                For i = 0 To ConstantsDimension
-                    GrpStartParameter.Controls.Item("TxtP" & (i + 1).ToString).Text = .Constants.Component(i).ToString
-                Next
-            Else
-                ConstantsDimension = -1
-            End If
-
-            For i = 0 To .Variables.Dimension
-                GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension).ToString).Text = .Variables.Component(i).ToString
-            Next
-
-            .AdditionalParameterValue = TrbAdditionalParameter.Value
-            .StepWidth = TrbStepWidth.Value * StepWidthUnit
-            .TestMode = IsTestMode
-            StartEnergy = .Energy
+            .StepWidth = TrbStepWidth.Value
 
             CboTypeofPhaseportrait.Items.Clear()
 
@@ -253,56 +156,86 @@ Public Class FrmPendulum
             CboTypeofPhaseportrait.SelectedIndex = 0
             .PhaseportraitIndex = 0
             LblPhasePortrait.Text = .LabelPhasePortrait
-            LblParameterlist.Text = .LabelParameterList
+            LblProtocol.Text = .LabelProtocol
         End With
+    End Sub
 
-        Return LocPendulum
+    Private Sub SetDefaultUserData()
+        With DS
+            .SetDefaultUserData()
 
-    End Function
+            Dim ConstantsDimension As Integer
+            If .CalculationConstants IsNot Nothing Then
+                ConstantsDimension = .CalculationConstants.Dimension
+                For i = 0 To ConstantsDimension
+                    GrpStartParameter.Controls.Item("TxtP" & (i + 1).ToString).Text = .CalculationConstants.Component(i).ToString
+                Next
+            Else
+                ConstantsDimension = -1
+            End If
+
+            Dim Debug As Decimal
+
+            For i = 0 To .CalculationVariables.Dimension
+                Debug = .CalculationVariables.Component(i)
+                GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension).ToString).Text = .CalculationVariables.Component(i).ToString
+            Next
+
+        End With
+    End Sub
+
+    Sub ResetIteration()
+
+        'Clear Diagram and Bitmap and all Iteration Parameters
+        DS.ResetIteration()
+        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnTakeOverStartParameter.Enabled = True
+        TrbAdditionalParameter.Enabled = True
+
+    End Sub
+
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        If IsFormLoaded Then
+            ResetIteration()
+        End If
+    End Sub
+
+    Private Sub CboPendulum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPendulum.SelectedIndexChanged
+        If IsFormLoaded Then
+            SetDS()
+        End If
+    End Sub
 
     Private Sub TrbAdditionalParameter_Scroll(sender As Object, e As EventArgs) Handles TrbAdditionalParameter.Scroll
-
-        With ActivePendulum
-            LblAdditionalParameter.Text = .AdditionalParameter.Name & ": " & .CalcValuefromTrbAddParameter(TrbAdditionalParameter.Value).ToString
-            .AdditionalParameterValue = TrbAdditionalParameter.Value
-            .DrawCoordinateSystem()
-            .DrawPendulums()
-            TxtFactor.Text = .C.ToString("N10")
-            StartEnergy = .Energy
-        End With
-
+        If IsFormLoaded Then
+            With DS
+                LblAdditionalParameter.Text = .AdditionalParameter.Name & ": " & .GetAddParameterValue(TrbAdditionalParameter.Value).ToString
+                .AdditionalParameterValue = TrbAdditionalParameter.Value
+            End With
+        End If
     End Sub
 
     Private Sub CboTypeofPhaseportrait_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboTypeofPhaseportrait.SelectedIndexChanged
-
-        If ActivePendulum IsNot Nothing Then
-            ActivePendulum.PhaseportraitIndex = CboTypeofPhaseportrait.SelectedIndex
-            LblPhasePortrait.Text = ActivePendulum.LabelPhasePortrait
-            Reset()
+        If IsFormLoaded Then
+            DS.PhaseportraitIndex = CboTypeofPhaseportrait.SelectedIndex
+            LblPhasePortrait.Text = DS.LabelPhasePortrait
         End If
-
     End Sub
 
     Private Sub TrbStepWide_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
-
-        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & (TrbStepWidth.Value * StepWidthUnit).ToString
-        ActivePendulum.StepWidth = CDec(TrbStepWidth.Value * StepWidthUnit)
-
+        If IsFormLoaded Then
+            DS.StepWidth = TrbStepWidth.Value
+        End If
     End Sub
 
-    Private Sub FrmPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        Reset()
-
-    End Sub
 
     'SECTOR SET STARTPOSITION
 
-    Private Sub PicPendulum_MouseDown(sender As Object, e As MouseEventArgs) Handles PicPendulum.MouseDown
+    Private Sub PicPendulum_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
 
-        If ActivePendulum IsNot Nothing Then
+        If DS IsNot Nothing Then
 
-            If Not (ActivePendulum.IsStartparameter1Set And ActivePendulum.IsStartparameter2Set) Then
+            If Not (DS.IsStartparameter1Set And DS.IsStartparameter2Set) Then
 
                 Cursor = Cursors.Hand
                 IsMousedown = True
@@ -314,7 +247,7 @@ Public Class FrmPendulum
         End If
     End Sub
 
-    Private Sub PicPendulum_MouseMove(sender As Object, e As MouseEventArgs) Handles PicPendulum.MouseMove
+    Private Sub PicPendulum_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
 
         If IsMousedown Then
             MouseMoving(e)
@@ -322,12 +255,12 @@ Public Class FrmPendulum
 
     End Sub
 
-    Private Sub PicPendulum_MouseUp(sender As Object, e As MouseEventArgs) Handles PicPendulum.MouseUp
+    Private Sub PicPendulum_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
 
         'Has only an effect, if the Mouse was down
         If IsMousedown Then
 
-            With ActivePendulum
+            With DS
                 If Not .IsStartparameter1Set Then
 
                     'The setting of Parameter1 i now blocked
@@ -358,9 +291,9 @@ Public Class FrmPendulum
             .Y = e.Y
         }
 
-        If ActivePendulum IsNot Nothing Then
+        If DS IsNot Nothing Then
 
-            With ActivePendulum
+            With DS
                 If Not .IsStartparameter1Set Then
 
                     'The actual Position of the Mouse sets Parameter1
@@ -375,20 +308,18 @@ Public Class FrmPendulum
 
                 Dim ConstantsDimension As Integer
 
-                If .Constants IsNot Nothing Then
-                    ConstantsDimension = .Constants.Dimension
-                    For i = 0 To .Constants.Dimension
-                        GrpStartParameter.Controls.Item("TxtP" & (i + 1).ToString).Text = .Constants.Component(i).ToString
+                If .CalculationConstants IsNot Nothing Then
+                    ConstantsDimension = .CalculationConstants.Dimension
+                    For i = 0 To .CalculationConstants.Dimension
+                        GrpStartParameter.Controls.Item("TxtP" & (i + 1).ToString).Text = .CalculationConstants.Component(i).ToString
                     Next
                 Else
                     ConstantsDimension = -1
                 End If
 
-                For i = 0 To .Variables.Dimension
-                    GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension).ToString).Text = .Variables.Component(i).ToString
+                For i = 0 To .CalculationVariables.Dimension
+                    GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension).ToString).Text = .CalculationVariables.Component(i).ToString
                 Next
-
-                TxtFactor.Text = .C.ToString("N10")
 
             End With
 
@@ -396,78 +327,77 @@ Public Class FrmPendulum
     End Sub
 
     Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
+        If IsFormLoaded Then
+            If IsUserDataOK() Then
 
-        If CheckParametersOK() Then
+                With DS
 
-            With ActivePendulum
+                    Dim i As Integer
+                    Dim ConstantsDimension As Integer
+                    Dim LocVector As ClsNTupel
 
-                Dim i As Integer
-                Dim ConstantsDimension As Integer
-                Dim LocVector As ClsVector
+                    If .CalculationConstants IsNot Nothing Then
+                        LocVector = New ClsNTupel(.CalculationConstants.Dimension)
 
-                If .Constants IsNot Nothing Then
-                    LocVector = New ClsVector(.Constants.Dimension)
+                        ConstantsDimension = .CalculationConstants.Dimension
+                        'Constants
+                        For i = 0 To .CalculationConstants.Dimension
+                            LocVector.Component(i) = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
+                        Next
+                        .CalculationConstants = LocVector
+                    Else
+                        ConstantsDimension = -1
+                    End If
 
-                    ConstantsDimension = .Constants.Dimension
-                    'Constants
-                    For i = 0 To .Constants.Dimension
-                        LocVector.Component(i) = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
+
+                    LocVector = New ClsNTupel(.CalculationVariables.Dimension)
+
+                    'Variables
+                    For i = 0 To .CalculationVariables.Dimension
+                        LocVector.Component(i) = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
                     Next
-                    .Constants = LocVector
-                Else
-                    ConstantsDimension = -1
-                End If
+                    .CalculationVariables = LocVector
+                    .IsStartparameter1Set = True
+                    .IsStartparameter2Set = True
 
+                    .PrepareDiagram()
 
-                LocVector = New ClsVector(.Variables.Dimension)
-
-                'Variables
-                For i = 0 To .Variables.Dimension
-                    LocVector.Component(i) = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
-                Next
-                .Variables = LocVector
-                TxtFactor.Text = .C.ToString("N10")
-                StartEnergy = .Energy
-                .IsStartparameter1Set = True
-                .IsStartparameter2Set = True
-
-                .DrawPendulums()
-
-            End With
-        Else
-            MessageBox.Show(FrmMain.LM.GetString("InvalidParameters"))
+                End With
+            Else
+                MessageBox.Show(FrmMain.LM.GetString("InvalidParameters"))
+            End If
         End If
-
     End Sub
 
     'SECTOR CHECKS
 
-    Private Function CheckParametersOK() As Boolean
+    Private Function IsUserDataOK() As Boolean
 
         Dim i As Integer
-        Dim LocValue As Decimal
         Dim OK As Boolean = True
 
-        With ActivePendulum
+        With DS
 
             Dim ConstantsDimension As Integer
 
             'Maybe, in some pendulums are no constants needed
-            If .Constants IsNot Nothing Then
-                ConstantsDimension = .Constants.Dimension
+            If .CalculationConstants IsNot Nothing Then
+                ConstantsDimension = .CalculationConstants.Dimension
                 'Constants
-                For i = 0 To .Constants.Dimension
-                    LocValue = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
-                    OK = OK And .ValueParameters.Item(i).Range.A <= LocValue And LocValue <= .ValueParameters.Item(i).Range.B
+                For i = 0 To .CalculationConstants.Dimension
+                    Dim CheckUserData As New ClsCheckUserData(DirectCast(GrpStartParameter.Controls.Item("TxtP" & (i + 1)), TextBox),
+                                                              .ValueParameterDefinition.Item(i).Range)
+                    OK = OK And CheckUserData.IsTxtValueAllowed
                 Next
             Else
                 ConstantsDimension = -1
             End If
 
             'Variables
-            For i = 0 To .Variables.Dimension
-                LocValue = CDec(GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
-                OK = OK And .ValueParameters.Item(i + 1 + ConstantsDimension).Range.A <= LocValue And LocValue <= .ValueParameters.Item(i + 1 + ConstantsDimension).Range.B
+            For i = 0 To .CalculationVariables.Dimension
+                Dim CheckUserData As New ClsCheckUserData(DirectCast(GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)), TextBox),
+                                                          .ValueParameterDefinition.Item(i + 1 + ConstantsDimension).Range)
+                OK = OK And CheckUserData.IsTxtValueAllowed
             Next
 
         End With
@@ -479,78 +409,48 @@ Public Class FrmPendulum
     'SECTOR ITERATION
 
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        If IsFormLoaded Then
 
-        'the iteration was stopped or reset
-        'and should start from the beginning
-        StopIteration = False
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+                If IsUserDataOK() Then
+                    BtnStart.Text = FrmMain.LM.GetString("Continue")
+                    BtnStart.Enabled = False
+                    With DS
+                        .IsStartparameter1Set = True
+                        .IsStartparameter2Set = True
+                        .IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    End With
 
-        BtnStart.Text = FrmMain.LM.GetString("Continue")
-        BtnStart.Enabled = False
+                    BtnReset.Enabled = False
+                    BtnTakeOverStartParameter.Enabled = False
+                    TrbAdditionalParameter.Enabled = False
+                End If
+            End If
 
-        With ActivePendulum
-            .IsStartparameter1Set = True
-            .IsStartparameter2Set = True
-            StartEnergy = .Energy
-        End With
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready _
+                Or DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+                DS.IterationStatus = ClsDynamics.EnIterationStatus.Running
 
-        BtnReset.Enabled = False
-        BtnTakeOverStartParameter.Enabled = False
-        TrbAdditionalParameter.Enabled = False
+                Application.DoEvents()
 
-        Application.DoEvents()
+                Await DS.IterationLoop(False)
+            End If
 
-        Await IterationLoop()
-
+        End If
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
-        'the iteration is running and should be stopped
-        StopIteration = True
+        If IsFormLoaded Then
+            'the iteration was running and is interrupted
+            DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+            'the iteration is stooped by reset the iteration
 
-        BtnStart.Enabled = True
-        BtnReset.Enabled = True
-        BtnTakeOverStartParameter.Enabled = True
-        TrbAdditionalParameter.Enabled = True
-
+            BtnStart.Enabled = True
+            BtnReset.Enabled = True
+            BtnTakeOverStartParameter.Enabled = True
+            TrbAdditionalParameter.Enabled = True
+        End If
     End Sub
-
-    Private Async Function IterationLoop() As Task
-
-        Dim StartEnergyRange As ClsInterval = ActivePendulum.StartEnergyRange
-        Dim ActualEnergy As Decimal
-        Dim MyBrush As Brush
-        Dim Value As Integer
-
-        Do
-            n += 1
-            ActivePendulum.Iteration(IsTestMode)
-            ActualEnergy = CDec(ActivePendulum.Energy)
-
-            Select Case True
-                Case ActualEnergy > StartEnergy + EnergyTolerance * StartEnergyRange.IntervalWidth
-                    MyBrush = Brushes.Red
-                Case ActualEnergy < StartEnergy - EnergyTolerance * StartEnergyRange.IntervalWidth
-                    MyBrush = Brushes.DarkViolet
-                Case Else
-                    MyBrush = Brushes.Green
-            End Select
-
-            PicStatus.Refresh()
-
-            'Set the StatusBar
-            Value = CInt(Math.Min(PicStatus.Width, (ActualEnergy - StartEnergyRange.A) * PicStatus.Width / StartEnergyRange.IntervalWidth))
-            StatusGraphics.FillRectangle(MyBrush, New Rectangle(0, 0, Value, PicStatus.Height))
-
-            If n Mod 10 = 0 Then
-
-                LblSteps.Text = n.ToString
-
-                Await Task.Delay(2)
-            End If
-
-        Loop Until StopIteration
-
-    End Function
 
 End Class

@@ -155,12 +155,14 @@ Public Class FrmBilliardtable
             .LblN = LblSteps
             .PhasePortrait = PicPhasePortrait
             .ValueProtocol = LstValueList
+            .C = CDec(TrbParameterC.Value * 0.01)
         End With
     End Sub
 
     Private Sub SetDefaultUserData()
         TxtT.Text = "0"
         TxtAlfa.Text = "1"
+        TxtParameter.Text = DS.C.ToString
     End Sub
 
     Private Sub ResetIteration()
@@ -227,10 +229,20 @@ Public Class FrmBilliardtable
         End If
     End Sub
 
-    Private Sub TrbC_Scroll(sender As Object, e As EventArgs) Handles TrbC.Scroll
+    Private Sub TrbParameterC_Scroll(sender As Object, e As EventArgs) Handles TrbParameterC.Scroll
         If IsFormLoaded Then
-            DS.C = CDec(TrbC.Value * 0.01)
+            DS.C = CDec(TrbParameterC.Value * 0.01)
+            TxtParameter.Text = DS.C.ToString
             ResetIteration()
+        End If
+    End Sub
+
+    Private Sub TxtParameter_LostFocus(sender As Object, e As EventArgs) Handles TxtParameter.LostFocus
+        If IsFormLoaded Then
+            If IsParameterOK() Then
+                DS.C = CDec(TxtParameter.Text)
+                ResetIteration()
+            End If
         End If
     End Sub
 
@@ -363,7 +375,15 @@ Public Class FrmBilliardtable
         Dim CheckStartposition = New ClsCheckUserData(TxtT, DS.TValueRange)
         Dim CheckStartangle = New ClsCheckUserData(TxtAlfa, DS.AlfaValueRange)
 
-        Return CheckStartposition.IsTxtValueAllowed And CheckStartangle.IsTxtValueAllowed
+        Return CheckStartposition.IsTxtValueAllowed And CheckStartangle.IsTxtValueAllowed _
+            And IsParameterOK()
+    End Function
+
+    Private Function IsParameterOK() As Boolean
+
+        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterRange)
+
+        Return CheckParameter.IsTxtValueAllowed
     End Function
 
     Private Function IsBilliardballExisting() As Boolean
@@ -407,17 +427,17 @@ Public Class FrmBilliardtable
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
 
         If IsFormLoaded Then
-            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                 If IsBilliardballExisting() Then
                     If IsUserDataOK() Then
-                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                        DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready
                     Else
                         'Message already generated
                     End If
                 End If
             End If
 
-            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
 
                 DS.IterationStep()
 
@@ -431,7 +451,7 @@ Public Class FrmBilliardtable
     Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
 
         If IsFormLoaded Then
-            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
                 If IsBilliardballExisting() Then
                     If IsUserDataOK() Then
                         BtnStart.Text = FrmMain.LM.GetString("Continue")
@@ -440,16 +460,16 @@ Public Class FrmBilliardtable
                         BtnTakeOverStartParameter.Enabled = False
                         BtnNewBall.Enabled = False
                         BtnNextStep.Enabled = False
-                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                        DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready
                     Else
                         'Message already generated
                     End If
                 End If
             End If
 
-            If DS.IterationStatus = ClsGeneral.EnIterationStatus.Ready Or
-                        DS.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted Then
-                DS.IterationStatus = ClsGeneral.EnIterationStatus.Running
+            If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
+                        DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+                DS.IterationStatus = ClsDynamics.EnIterationStatus.Running
                 Application.DoEvents()
 
                 Await DS.IterationLoop()
@@ -462,7 +482,7 @@ Public Class FrmBilliardtable
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
 
         If IsFormLoaded Then
-            DS.IterationStatus = ClsGeneral.EnIterationStatus.Interrupted
+            DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
             BtnStart.Enabled = True
             BtnReset.Enabled = True
             BtnTakeOverStartParameter.Enabled = True

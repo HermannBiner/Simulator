@@ -1,8 +1,8 @@
-﻿'This Class contains general definitions and tools
+﻿'This Class contains general definitions for the dymanics
 
 'Status Checked
 
-Public Class ClsGeneral
+Public Class ClsDynamics
 
     'Status of the Iteration
     Public Enum EnIterationStatus

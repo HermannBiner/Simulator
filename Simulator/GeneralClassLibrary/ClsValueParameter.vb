@@ -4,26 +4,35 @@
 'other examples are the two angles of a double pendulum
 'or the dilatation and angle of an oscillating spring pendulum
 
-'Status checked
+'Status Checked
 
 Public Class ClsValueParameter
 
     'To identify the parameter
-    Private ReadOnly MyID As Integer
-    Private ReadOnly MyName As String
+    Private MyID As Integer
+    Private MyName As String
 
     'The definition interval of the parameter
     Private MyRange As ClsInterval
+    Private MyDefaultValue As Decimal
 
     Public Sub New(Tag As Integer, Name As String, Range As ClsInterval)
         MyID = Tag
         MyName = Name
         MyRange = Range
+        MyDefaultValue = 0
     End Sub
 
-    ReadOnly Property Tag As Integer
+    Public Sub New(Tag As Integer, Name As String, Range As ClsInterval, DefaultValue As Decimal)
+        MyID = Tag
+        MyName = Name
+        MyRange = Range
+        MyDefaultValue = DefaultValue
+    End Sub
+
+    ReadOnly Property ID As Integer
         Get
-            Tag = MyID
+            ID = MyID
         End Get
     End Property
 
@@ -34,13 +43,22 @@ Public Class ClsValueParameter
     End Property
 
     'whitch interval is allowed for the value-parameter
-    Public Property Range As ClsInterval
+    Property Range As ClsInterval
         Get
             Return MyRange
         End Get
         Set(value As ClsInterval)
             MyRange = value
         End Set
+    End Property
+
+    Property DefaultValue As Decimal
+        Set(value As Decimal)
+            MyDefaultValue = value
+        End Set
+        Get
+            DefaultValue = MyDefaultValue
+        End Get
     End Property
 
 End Class

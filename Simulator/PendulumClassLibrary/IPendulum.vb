@@ -5,82 +5,69 @@
 Public Interface IPendulum
 
     'the pendulum needs the following references to draw its movement
-    WriteOnly Property PicPendulum As PictureBox
+    WriteOnly Property PicDiagram As PictureBox
 
-    'the permanent track of the orbit is drawn into a Bitmap
-    WriteOnly Property MapPendulum As Bitmap
-
-    ReadOnly Property Y0 As Decimal
-
-    'in addtion, the ball protocols its movement in a phase portrait
+    'in addtion, the pendulum protocols its movement in a phase portrait
     WriteOnly Property PicPhaseportrait As PictureBox
 
-    'the permanent track of the orbit is drawn into a Bitmap
-    WriteOnly Property MapPhaseportrait As Bitmap
-
-    WriteOnly Property ParameterListbox As ListBox
-
-    'To label fields P1...P8 and set the Valueranges
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter)
+    'the Type of PhasePortrait that is selected
+    WriteOnly Property PhaseportraitIndex As Integer
 
     'label the Phaseportrait
     ReadOnly Property LabelPhasePortrait As String
 
-    'Label of the Parameterlist
-    ReadOnly Property LabelParameterList As String
+    WriteOnly Property Protocol As ListBox
 
-    'Label Parameter C
-    ReadOnly Property LabelParameterC As String
+    'Label of the Parameterlist
+    ReadOnly Property LabelProtocol As String
+
+    'The total Energy of the Pendulum
+    WriteOnly Property PicEnergy As PictureBox
 
     'To set the parameters of the TrbAdditionalParameter
     ReadOnly Property AdditionalParameter As ClsValueParameter
 
-    'The total Energy of the Pendulum
-    ReadOnly Property Energy As Decimal
-
-    'The Interval of the StartEnergy
-    ReadOnly Property StartEnergyRange As ClsInterval
-
     'contains the value of the trackbar TrbAdditionalParameter
     WriteOnly Property AdditionalParameterValue As Integer
 
-    'The parameter C for the C-DiagraM
-    ReadOnly Property C As Decimal
+    Property IterationStatus As ClsDynamics.EnIterationStatus
 
-    'The constant parameters
-    Property Constants As ClsVector
+    'To label fields P1...P8 and set the Valueranges
+    ReadOnly Property ValueParameterDefinition As List(Of ClsValueParameter)
 
-    'The variable Parameters
-    Property Variables As ClsVector
+    'To TakeOverParameter
+    Property CalculationConstants As ClsNTupel
 
-    'To Calculate the Mass Ratio out of the Trackbar Value
-    Function CalcValuefromTrbAddParameter(TbrValue As Integer) As Decimal
-
-    Sub DrawCoordinateSystem()
-
-    Sub DrawPendulums()
-
-    Sub Reset()
+    Property CalculationVariables As ClsNTupel
 
     Property IsStartparameter1Set As Boolean
 
     Property IsStartparameter2Set As Boolean
 
-    WriteOnly Property TestMode As Boolean
+    WriteOnly Property StepWidth As Integer
 
-    WriteOnly Property StepWidth As Decimal
+    WriteOnly Property LblN As Label
+
+    WriteOnly Property LblStepWidth As Label
+
+    'Calculate value od the additional Paremeter by the Trackbar Value
+    Function GetAddParameterValue(TbrValue As Integer) As Decimal
+
+    Sub PrepareDiagram()
+
+    Sub ResetIteration()
 
     Function GetTypesofPhaseportrait() As List(Of String)
-
-    WriteOnly Property PhaseportraitIndex As Integer
 
     Sub SetAndDrawStartparameter1(Mouseposition As Point)
 
     Sub SetAndDrawStartparameter2(Mouseposition As Point)
 
+    Sub SetDefaultUserData()
+
     'The variable Parameters are changed during the iteration
     'Iteration performs one approximation step
     'and draws everything into Bitmaps and Pictureboxes
-    Sub Iteration(TestMode As Boolean)
+    Function IterationLoop(TestMode As Boolean) As Task
 
 End Interface

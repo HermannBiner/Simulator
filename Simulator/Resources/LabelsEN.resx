@@ -201,7 +201,7 @@
     <value>Complex Unit Roots inverted</value>
     <comment>Lbl</comment>
   </data>
-  <data name="ClsJuliaN" xml:space="preserve">
+  <data name="ClsJuliaPN" xml:space="preserve">
     <value>Julia Set with Exponent n</value>
     <comment>Lbl</comment>
   </data>
@@ -304,6 +304,10 @@
   <data name="CYNotAllowed" xml:space="preserve">
     <value>The b-part of c is not allowed. It must be in the interval</value>
     <comment>Msg</comment>
+  </data>
+  <data name="DefaultUserData" xml:space="preserve">
+    <value>Set Default User Data</value>
+    <comment>Lbl</comment>
   </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>

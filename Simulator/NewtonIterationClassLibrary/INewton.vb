@@ -5,7 +5,7 @@
 
 'Status Checked
 
-Public Interface IPolynom
+Public Interface INewton
 
     Enum EnColor
         Bright
@@ -18,11 +18,8 @@ Public Interface IPolynom
         Rotate
     End Enum
 
-    'The Polynom plots the Orbit into MapCPlane
-    WriteOnly Property MapCPlane As Bitmap
-
     'The Iteration needs the Picturebox as well
-    WriteOnly Property PicCPlane As PictureBox
+    WriteOnly Property PicDiagram As PictureBox
 
     'Allowed Interval for the x-Values
     ReadOnly Property AllowedXRange As ClsInterval
@@ -59,7 +56,7 @@ Public Interface IPolynom
     WriteOnly Property UseColor As EnColor
 
     'Iteration Control
-    Property IterationStatus As ClsGeneral.EnIterationStatus
+    Property IterationStatus As ClsDynamics.EnIterationStatus
 
     WriteOnly Property TxtNumberOfSteps As TextBox
     WriteOnly Property TxtElapsedTime As TextBox
@@ -72,11 +69,11 @@ Public Interface IPolynom
 
     'Iteration
     'Prepare the Root-Colors
-    Sub PrepareIteration()
+    Sub PrepareUnitRoots()
 
     Function GenerateImage() As Task
 
     'Reset
-    Sub Reset()
+    Sub ResetIteration()
 
 End Interface

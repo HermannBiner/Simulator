@@ -1,4 +1,5 @@
 ﻿'Checks if the manual input in a textbox is numeric
+
 'Status Checked
 
 Public Class ClsCheckIsNumeric
@@ -10,13 +11,13 @@ Public Class ClsCheckIsNumeric
         MyTextbox = Textbox
     End Sub
 
-    Public WriteOnly Property TxtBox As TextBox
+    WriteOnly Property TxtBox As TextBox
         Set(value As TextBox)
             MyTextbox = value
         End Set
     End Property
 
-    Public ReadOnly Property NumericValue As Decimal
+    ReadOnly Property NumericValue As Decimal
         Get
             Return MyNumericValue
         End Get

@@ -23,7 +23,7 @@ Partial Class FrmJulia
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmJulia))
-        PicCPlane = New PictureBox()
+        PicDiagram = New PictureBox()
         TxtTime = New TextBox()
         TxtSteps = New TextBox()
         LblTime = New Label()
@@ -62,7 +62,7 @@ Partial Class FrmJulia
         OptSystem = New RadioButton()
         OptUser = New RadioButton()
         ChkTrack = New CheckBox()
-        CType(PicCPlane, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbRed, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbGreen, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbBlue, ComponentModel.ISupportInitialize).BeginInit()
@@ -71,14 +71,14 @@ Partial Class FrmJulia
         GrpColors.SuspendLayout()
         SuspendLayout()
         ' 
-        ' PicCPlane
+        ' PicDiagram
         ' 
-        PicCPlane.Location = New Point(-2, 15)
-        PicCPlane.Margin = New Padding(4)
-        PicCPlane.Name = "PicCPlane"
-        PicCPlane.Size = New Size(1398, 1587)
-        PicCPlane.TabIndex = 1
-        PicCPlane.TabStop = False
+        PicDiagram.Location = New Point(-2, 15)
+        PicDiagram.Margin = New Padding(4)
+        PicDiagram.Name = "PicDiagram"
+        PicDiagram.Size = New Size(1398, 1587)
+        PicDiagram.TabIndex = 1
+        PicDiagram.TabStop = False
         ' 
         ' TxtTime
         ' 
@@ -485,13 +485,13 @@ Partial Class FrmJulia
         Controls.Add(TxtXMin)
         Controls.Add(LblXMin)
         Controls.Add(CboFunction)
-        Controls.Add(PicCPlane)
+        Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4, 2, 4, 2)
         Name = "FrmJulia"
         Text = "QuadraticFunction"
         WindowState = FormWindowState.Maximized
-        CType(PicCPlane, ComponentModel.ISupportInitialize).EndInit()
+        CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
         CType(TrbRed, ComponentModel.ISupportInitialize).EndInit()
         CType(TrbGreen, ComponentModel.ISupportInitialize).EndInit()
         CType(TrbBlue, ComponentModel.ISupportInitialize).EndInit()
@@ -503,7 +503,7 @@ Partial Class FrmJulia
         PerformLayout()
     End Sub
 
-    Friend WithEvents PicCPlane As PictureBox
+    Friend WithEvents PicDiagram As PictureBox
     Friend WithEvents TxtTime As TextBox
     Friend WithEvents TxtSteps As TextBox
     Friend WithEvents LblTime As Label

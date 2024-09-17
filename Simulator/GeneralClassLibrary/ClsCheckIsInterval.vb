@@ -21,13 +21,13 @@ Public Class ClsCheckIsInterval
         MyTextboxB = TextboxB
     End Sub
 
-    Public ReadOnly Property A As Decimal
+    ReadOnly Property A As Decimal
         Get
             Return MyA
         End Get
     End Property
 
-    Public ReadOnly Property B As Decimal
+    ReadOnly Property B As Decimal
         Get
             Return MyB
         End Get

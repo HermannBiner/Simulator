@@ -1,7 +1,7 @@
 ﻿'In cases where the dynamic system is described by a Value-Pair
 'This class allows to treat this pair as one object
 
-'Status checked
+'Status Checked
 
 Public Class ClsValuePair
 

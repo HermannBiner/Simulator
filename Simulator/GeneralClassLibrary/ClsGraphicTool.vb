@@ -1,4 +1,5 @@
 ﻿'This class supports all kind of drawings used by all classes on higher architecture level
+
 'Status Checked
 
 Public Class ClsGraphicTool
@@ -15,7 +16,8 @@ Public Class ClsGraphicTool
     'All classes using this ClsGraphicTool are working with mathematical coordinates
     'that means, the X-coordinate (horizontal axis) is in an interval [Xmin, Xmax] =: MyMathXInterval
     'and the Y-coordinate (vertical axis) is in an interval [Ymin, Ymax] =: MyMathYInterval
-    'this intervals are committed to the constructor as well
+    'these intervals are set depensing of the dynamical system
+    'and they are committed to the constructor as well
 
     'the ClsGraphictool "knows" the size of the PictureBox / Bitmap
     'and when knowing the X-range and Y-range of the matemathical coordinates, they are transformed
@@ -26,15 +28,19 @@ Public Class ClsGraphicTool
     'on higher architecture level
     'he just works with his mathematical coordinate system
     'and objects of type ClsMathPoint
-    'ClsGraphicTool uses then objects of type Point in Pixel-coordinates
+    'that are transmitted to ClsGraphicTool
+    'ClsGraphicTool uses then internally objects of type Point in Pixel-coordinates
+    'if (x,y) are the mathematical coordinates, the according pixel coordinates are (p,q)
 
     'although in the mathematical coordinate-system the Y-axis shows uppwards
     'and the X-axis to the right
-    'in the pixel-coordinate-system, the Y-axis shows downwards
+    'in the pixel-coordinate-system, the p-axis shows to the right
+    'and the q-axis shows downwards
     'but the programmer doesn't have to take care of that
+    'because the ClsGrahicTool does
 
-    'but of course, of there is drawing in pixel coordinates needed
-    'at least to draw a point is possible by overloading
+    'but of course, if there is a drawing in pixel coordinates needed
+    'it is possible by overloading by objects of type Point instead of ClsMathPoint
 
     Private ReadOnly MyPicturebox As PictureBox
     Private ReadOnly MyBitmap As Bitmap
@@ -51,7 +57,7 @@ Public Class ClsGraphicTool
 
     'the upper right corner point of the PictureBox / Bitmap
     'it defines the size of the PictureBox / Bitmap
-    Private MyDiagramCornerpoint As Point
+    Private DiagramCornerpoint As Point
 
     'SECTOR CONSTRUCTOR
 
@@ -64,7 +70,7 @@ Public Class ClsGraphicTool
         'Because of better visibility in the User-Window,
         'the maximal ImageRange and DiagramSize are reduced by -1
         Imagerange = New Rectangle(1, MyPicturebox.Height - 1, MyPicturebox.Width - 1, MyPicturebox.Height - 1)
-        MyDiagramCornerpoint = New Point(Picturebox.Width - 1, Picturebox.Height - 1)
+        DiagramCornerpoint = New Point(Picturebox.Width - 1, Picturebox.Height - 1)
 
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
@@ -79,7 +85,7 @@ Public Class ClsGraphicTool
 
         'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
         Imagerange = New Rectangle(1, MyBitmap.Height - 1, MyBitmap.Width - 1, MyBitmap.Height - 1)
-        MyDiagramCornerpoint = New Point(MyBitmap.Width - 1, MyBitmap.Height - 1)
+        DiagramCornerpoint = New Point(MyBitmap.Width - 1, MyBitmap.Height - 1)
 
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
@@ -88,13 +94,13 @@ Public Class ClsGraphicTool
 
     Public Sub New(Image As Image, MathXInterval As ClsInterval, MathYInterval As ClsInterval)
 
-        'In this case, ClsGraphics draws into a Bitmap
+        'In this case, ClsGraphics draws into an image
         MyImage = Image
         Graphs = Graphics.FromImage(MyImage)
 
         'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
         Imagerange = New Rectangle(1, MyImage.Height - 1, MyImage.Width - 1, MyImage.Height - 1)
-        MyDiagramCornerpoint = New Point(MyImage.Width - 1, MyImage.Height - 1)
+        DiagramCornerpoint = New Point(MyImage.Width - 1, MyImage.Height - 1)
 
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
@@ -150,7 +156,7 @@ Public Class ClsGraphicTool
 
     Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, color As Color, wide As Integer)
 
-        'Draws a line between the points A and B in mathematical coordinates
+        'Draws a line between the points A and B, given in mathematical coordinates
 
         Using MyPen As New Pen(color, wide)
             Graphs.DrawLine(MyPen, MathpointToPixel(A), MathpointToPixel(B))
@@ -159,11 +165,39 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, brush As Brush, wide As Integer)
+
+        'Draws a line between the points A and B, given in mathematical coordinates
+
+        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+            Graphs.DrawLine(MyPen, MathpointToPixel(A), MathpointToPixel(B))
+        End Using
+
+
+    End Sub
+
+    Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As SolidBrush, wide As Integer)
+
+        'Draws a point in mathematical coordinates filled with SolidBrush, Wide = 1 is about one pixel
+
+        Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / DiagramCornerpoint.X
+        FillCircle(MathPoint, size, brush)
+
+    End Sub
+
+    Public Sub DrawPoint(PixelPoint As Point, brush As SolidBrush, wide As Integer)
+
+        'Draws a point in pixel coordinates filled with SolidBrush, Wide = 1 is about one pixel
+
+        FillCircle(PixelPoint, wide, brush)
+
+    End Sub
+
     Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As Brush, wide As Integer)
 
         'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
-        Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / MyDiagramCornerpoint.X
+        Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / DiagramCornerpoint.X
         FillCircle(MathPoint, size, brush)
 
     End Sub
@@ -178,7 +212,7 @@ Public Class ClsGraphicTool
 
     Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, color As Color, wide As Integer)
 
-        'Draws a rectangle with left lower corner A and right upper corner C
+        'Draws a rectangle with left lower corner A, given as ClsMathpoint and right upper corner C
 
         Using MyPen As New Pen(color, wide)
             Dim PixelA As Point = MathpointToPixel(A)
@@ -187,14 +221,38 @@ Public Class ClsGraphicTool
             'The object Graphs expects the upper left corner to be committed, therefore:
             Graphs.DrawRectangle(MyPen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
         End Using
+    End Sub
 
+    Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As Brush, wide As Integer)
 
+        'Draws a rectangle with left lower corner A and right upper corner C
+
+        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+            Dim PixelA As Point = MathpointToPixel(A)
+            Dim PixelC As Point = MathpointToPixel(C)
+
+            'The object Graphs expects the upper left corner to be committed, therefore:
+            Graphs.DrawRectangle(MyPen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+        End Using
     End Sub
 
     Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As Brush)
 
         'Draws a rectangle with lower left corner A and upper right corner C
         'filled with Brush
+
+        Dim PixelA As Point = MathpointToPixel(A)
+        Dim PixelC As Point = MathpointToPixel(C)
+
+        'The object Graphs expects the upper left corner to be committed, therefore:
+        Graphs.FillRectangle(brush, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+
+    End Sub
+
+    Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As SolidBrush)
+
+        'Draws a rectangle with lower left corner A and upper right corner C
+        'filled with SolidBrush
 
         Dim PixelA As Point = MathpointToPixel(A)
         Dim PixelC As Point = MathpointToPixel(C)
@@ -219,6 +277,22 @@ Public Class ClsGraphicTool
             Graphs.DrawEllipse(MyPen, rect)
         End Using
 
+    End Sub
+
+    Public Sub DrawCircle(Midpoint As ClsMathpoint, radius As Decimal, brush As Brush, wide As Integer)
+
+        'Draws a circle with MidPoint and Radius in mathematicel coordinates
+        'Wide is the thickness of the line
+
+        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+            Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
+
+            'The object Graphs expects a rectangle where the circle is drawed into
+            Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+            Graphs.DrawEllipse(MyPen, rect)
+        End Using
 
     End Sub
 
@@ -248,10 +322,36 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub FillCircle(Midpoint As ClsMathpoint, radius As Decimal, brush As SolidBrush)
+
+        'Draws a circle with MidPoint and Radius in mathematicel coordinates
+        'and fills the circle with SolidBrush
+
+        Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
+        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+        Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
+
+        'The object Graphs expects a rectangle where the circle is drawed into
+        Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+        Graphs.FillEllipse(brush, rect)
+
+    End Sub
+
+    Public Sub FillCircle(PixelMidPoint As Point, radius As Integer, brush As SolidBrush)
+
+        'Draws a circle with MidPoint and Radius in pixel coordinates
+        'and fills the circle with SolidBrush
+
+        'The object Graphs expects a rectangle where the circle is drawed into
+        Dim rect As New Rectangle(PixelMidPoint.X - radius, PixelMidPoint.Y - radius, 2 * radius, 2 * radius)
+        Graphs.FillEllipse(brush, rect)
+
+    End Sub
+
     Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, color As Color, wide As Integer)
 
         'Draws an ellipse with MidPoint, major axis a and minor axis b
-        'in mathematical coordinates
+        'given in mathematical coordinates
 
         Using MyPen As New Pen(color, wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
@@ -273,7 +373,25 @@ Public Class ClsGraphicTool
     Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, brush As Brush)
 
         'Draws an ellipse with MidPoint, major axis a and minor axis b
-        'in mathematical coordinates and fills it with Brush
+        'given in mathematical coordinates and fills it with Brush
+
+        Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
+        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + a, Midpoint.Y + b))
+
+        'Axis-size in pixel coordinates
+        Dim PixelA As Integer = PixelBorderpoint.X - PixelMidpoint.X
+        Dim PixelB As Integer = PixelBorderpoint.Y - PixelMidpoint.Y
+
+        'The object Graphs expects a rectangle where the ellipse is drawed into
+        Dim rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
+        Graphs.FillEllipse(brush, rect)
+
+    End Sub
+
+    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, brush As SolidBrush)
+
+        'Draws an ellipse with MidPoint, major axis a and minor axis b
+        'given in mathematical coordinates and fills it with SolidBrush
 
         Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
         Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + a, Midpoint.Y + b))
@@ -308,9 +426,7 @@ Public Class ClsGraphicTool
             Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
         End Using
 
-
     End Sub
-
 
     Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, startarc As Decimal, arclength As Decimal, color As Color, wide As Integer)
 
@@ -335,6 +451,50 @@ Public Class ClsGraphicTool
 
     End Sub
 
+    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, radius As Decimal, arc As Decimal, arclength As Decimal, brush As Brush, wide As Integer)
+
+        'Draws a circular arc around MidPoint and Radius in mathematical coordinates
+        'The angle starts at StartArc and has the lenghts ArcLangth
+        'all in radian measure contained in [0, 2*Pi[
+
+        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+            Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
+
+            'The object Graphs expects the angles in Degrees
+            Dim PixelStartarc As Integer = RadiantToDegree(arc)
+            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+
+            'The object Graphs expects a rectangle where the circular arc is drawed into
+            Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+        End Using
+
+    End Sub
+
+    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, startarc As Decimal, arclength As Decimal, brush As Brush, wide As Integer)
+
+        'Draws an elliptic arc contained in a rectangle with left lower corner A
+        'and right uppper corner B in mathematical coordinates
+        'The angle starts at StartArc and has the lenghts ArcLangth
+        'all in radian measure contained in [0, 2*Pi[
+
+        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+            Dim PixelA As Point = MathpointToPixel(A)
+            Dim PixelC As Point = MathpointToPixel(C)
+
+            'The object Graphs expects the angles in Degrees
+            Dim PixelStartarc As Integer = RadiantToDegree(startarc)
+            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+
+            'The object Graphs expects a rectangle where the circular arc is drawed into
+            Dim rect As New Rectangle(PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+        End Using
+
+    End Sub
+
     Public Sub DrawImage(Image As Image, XShift As Integer, YShift As Integer)
 
         'Draws an image on position (XShift, YShift) in Pixel Coordinates
@@ -345,7 +505,7 @@ Public Class ClsGraphicTool
     'SECTOR COORDINATE TRANSFORMATION
 
     'In the following sector, the range of the Pixel-coordinates is in
-    '[0, MyDiagramSize.X]
+    '[0, MyDiagramSize.X] x [0,MyDiagramSize.Y]
 
     Public Function PixelToMathpoint(Pixelpoint As Point) As ClsMathpoint
 
@@ -354,9 +514,9 @@ Public Class ClsGraphicTool
         '-1 because the DiagramSize is already reduced by -1 in the beginning
 
         Dim Mathpoint = New ClsMathpoint With {
-            .X = MyMathXInterval.A + ((Pixelpoint.X - 1) * MyMathXInterval.IntervalWidth / MyDiagramCornerpoint.X),
+            .X = MyMathXInterval.A + ((Pixelpoint.X - 1) * MyMathXInterval.IntervalWidth / DiagramCornerpoint.X),
             .Y = MyMathYInterval.B - ((Pixelpoint.Y - 1) * MyMathYInterval.IntervalWidth _
-            / MyDiagramCornerpoint.Y)
+            / DiagramCornerpoint.Y)
         }
 
         Return Mathpoint
@@ -370,8 +530,8 @@ Public Class ClsGraphicTool
         '+1 because we had a -1 in the inverse transformation
 
         Dim Pixelpoint = New Point With {
-            .X = 1 + CInt((Mathpoint.X - MyMathXInterval.A) * MyDiagramCornerpoint.X / MyMathXInterval.IntervalWidth),
-            .Y = 1 + CInt((MyMathYInterval.B - Mathpoint.Y) * MyDiagramCornerpoint.Y / MyMathYInterval.IntervalWidth)
+            .X = 1 + CInt((Mathpoint.X - MyMathXInterval.A) * DiagramCornerpoint.X / MyMathXInterval.IntervalWidth),
+            .Y = 1 + CInt((MyMathYInterval.B - Mathpoint.Y) * DiagramCornerpoint.Y / MyMathYInterval.IntervalWidth)
         }
 
         Return Pixelpoint

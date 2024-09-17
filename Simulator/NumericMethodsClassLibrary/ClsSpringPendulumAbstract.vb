@@ -23,7 +23,7 @@ Public MustInherit Class ClsSpringPendulumAbstract
     'Data transfer is here based on a vector
     'ActualParameter(0) is the "time"-Parameter t
     'and ActualParameter(1) is the Y-Position of the Pendulum
-    Protected MyActualParameter As New ClsVector(2)
+    Protected MyActualParameter As New ClsNTupel(2)
 
     Property h As Decimal Implements ISpringPendulum.h
         Get

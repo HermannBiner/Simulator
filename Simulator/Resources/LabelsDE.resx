@@ -201,7 +201,7 @@
     <value>Komplexe Einheitswurzeln invertiert</value>
     <comment>Lbl</comment>
   </data>
-  <data name="ClsJuliaN" xml:space="preserve">
+  <data name="ClsJuliaPN" xml:space="preserve">
     <value>Julia Menge mit Exponent n</value>
     <comment>Lbl</comment>
   </data>
@@ -304,6 +304,10 @@
   <data name="CYNotAllowed" xml:space="preserve">
     <value>Der b-Teil von c ist nicht erlaubt. Er muss im Intervall sein</value>
     <comment>Msg</comment>
+  </data>
+  <data name="DefaultUserData" xml:space="preserve">
+    <value>Setze Standard Userdaten</value>
+    <comment>Lbl</comment>
   </data>
   <data name="Delta" xml:space="preserve">
     <value>Delta</value>

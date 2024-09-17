@@ -181,15 +181,13 @@ Public Class ClsOvalBilliardball
             MyPicDiagram.Refresh()
 
             'The Track of the first Hit of the Ball is drawn only into the PicDiagram
-            MyPicGraphics.DrawLine(UserStartposition, UserEndposition,
-                                   DirectCast(MyColor, SolidBrush).Color, 1)
+            MyPicGraphics.DrawLine(UserStartposition, UserEndposition, MyColor, 1)
         Else
             MyPicDiagram.Refresh()
 
             'The actual Ballposition is drawn only into the PicDiagram
             MyPicGraphics.DrawPoint(UserEndposition, MyColor, Size)
-            MyPicGraphics.DrawLine(UserStartposition, UserEndposition,
-                                   DirectCast(MyColor, SolidBrush).Color, 1)
+            MyPicGraphics.DrawLine(UserStartposition, UserEndposition, MyColor, 1)
         End If
 
     End Sub
@@ -286,8 +284,7 @@ Public Class ClsOvalBilliardball
             End If
 
             'Draw the trace of this part of the Orbit permanentely into the BitMap
-            MyBmpGraphics.DrawLine(Actualposition, Nextposition,
-                                DirectCast(MyColor, SolidBrush).Color, 1)
+            MyBmpGraphics.DrawLine(Actualposition, Nextposition, MyColor, 1)
 
             'and show the trace by refreshing the Diagram
             MyPicDiagram.Refresh()

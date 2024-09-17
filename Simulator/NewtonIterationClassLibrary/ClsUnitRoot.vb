@@ -5,7 +5,7 @@
 
 'Status Checked
 
-Public Class ClsRoot
+Public Class ClsUnitRoot
     Inherits ClsComplexNumber
 
     Private MyRedPart As Double

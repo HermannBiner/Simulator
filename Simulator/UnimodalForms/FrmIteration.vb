@@ -31,8 +31,6 @@ Public Class FrmIteration
 
     Private Const XStretchingDefault As Integer = 2
 
-    Private Presentation As ClsIterationController.PresentationEnum
-
     'SECTOR INITIALIZATION
 
     Public Sub New()
@@ -60,11 +58,10 @@ Public Class FrmIteration
         CboFunction.SelectedIndex = 0
         OptFunctionGraph.Checked = True
 
-        'Default Presentation
-        SetPresentation()
         SetDS()
-        IsFormLoaded = True
+        IterationController.Presentation = ClsIterationController.PresentationEnum.Functionsgraph
 
+        IsFormLoaded = True
 
     End Sub
 
@@ -79,7 +76,6 @@ Public Class FrmIteration
         LblLog.Text = FrmMain.LM.GetString("Log")
         LblXValues.Text = FrmMain.LM.GetString("XValues")
         LblIterationDepth.Text = FrmMain.LM.GetString("IterationDepth")
-        BtnDrawDiagram.Text = FrmMain.LM.GetString("DrawFunctionGraph")
         BtnProtocolStartvalue.Text = FrmMain.LM.GetString("StartvalueForProtocol")
         GrpProtocol.Text = FrmMain.LM.GetString("TargetProtocol")
         LblTargetValue.Text = FrmMain.LM.GetString("TargetValue") & " = "
@@ -91,6 +87,8 @@ Public Class FrmIteration
         BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
         LblStartValue.Text = FrmMain.LM.GetString("StartValue") & " = "
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
+        LblParameterA.Text = FrmMain.LM.GetString("Parameter") & " a"
+        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
 
     End Sub
 
@@ -161,7 +159,11 @@ Public Class FrmIteration
             .DS = DS
             .LblN = LblSteps
             .PicDiagram = PicDiagram
-            .Presentation = Presentation
+            If OptFunctionGraph.Checked Then
+                .Presentation = ClsIterationController.PresentationEnum.Functionsgraph
+            Else
+                .Presentation = ClsIterationController.PresentationEnum.TimeAxis
+            End If
             .XStretching = XStretchingDefault
             .Protocol = LstProtocol
             .ValueList = LstValueList
@@ -178,11 +180,17 @@ Public Class FrmIteration
             (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
         TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
         TxtTargetValue.Text = "0"
+        IterationController.TargetValue = 0
+        IterationController.TargetProtocol = ""
+        TxtTargetProtocol.Text = ""
+        DS.Parameter = DS.ParameterInterval.A + DS.ParameterInterval.IntervalWidth * TrbParameterA.Value / 1000
+        TxtParameter.Text = DS.Parameter.ToString
 
     End Sub
 
     Private Sub ResetIteration()
         IterationController.ResetIteration()
+        IterationController.PrepareDiagram()
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
@@ -191,6 +199,11 @@ Public Class FrmIteration
         End If
     End Sub
 
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            SetDefaultUserData()
+        End If
+    End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
         If IsFormLoaded Then
@@ -207,21 +220,14 @@ Public Class FrmIteration
         End If
     End Sub
 
-    Private Sub TxtParameter_TextChanged(sender As Object, e As EventArgs) Handles TxtParameter.TextChanged
+    Private Sub TxtStartValue_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
             ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtStartValue_TextChanged(sender As Object, e As EventArgs) Handles TxtStartValue.TextChanged
-        If IsFormLoaded Then
-            'If this value changes, the Iteration has to be reset
-            ResetIteration()
-        End If
-    End Sub
-
-    Private Sub TxtXStretching_TextChanged(sender As Object, e As EventArgs) Handles TxtXStretching.TextChanged
+    Private Sub TxtXStretching_LostFocus(sender As Object, e As EventArgs) Handles TxtXStretching.LostFocus
         If IsFormLoaded Then 'If this value changes, the Iteration has to be reset
             ResetIteration()
         End If
@@ -229,15 +235,29 @@ Public Class FrmIteration
 
     Private Sub OptFunctionGraph_CheckedChanged(sender As Object, e As EventArgs) Handles OptFunctionGraph.CheckedChanged
         If IsFormLoaded Then
-            SetPresentation()
-            ResetIteration()
+            If OptFunctionGraph.Checked Then
+                SetPresentation()
+                ResetIteration()
+            End If
         End If
     End Sub
 
     Private Sub OptTimeAxis_CheckedChanged(sender As Object, e As EventArgs) Handles OptTimeAxis.CheckedChanged
         If IsFormLoaded Then
-            SetPresentation()
-            ResetIteration()
+            If OptTimeAxis.Checked Then
+                SetPresentation()
+                ResetIteration()
+            End If
+        End If
+    End Sub
+
+    Private Sub TrbParameterA_Scroll(sender As Object, e As EventArgs) Handles TrbParameterA.Scroll
+        If IsFormLoaded Then
+            DS.Parameter = DS.ParameterInterval.A + DS.ParameterInterval.IntervalWidth * TrbParameterA.Value / 1000
+            TxtParameter.Text = DS.Parameter.ToString
+            If OptFunctionGraph.Checked Then
+                IterationController.DrawFunctionGraph()
+            End If
         End If
     End Sub
 
@@ -245,15 +265,15 @@ Public Class FrmIteration
 
         'The type of presentation has changed
         If OptFunctionGraph.Checked Then
-            Presentation = ClsIterationController.PresentationEnum.Functionsgraph
+            IterationController.Presentation = ClsIterationController.PresentationEnum.Functionsgraph
             TxtXStretching.Visible = False
-            TxtXStretching.Text = ""
+            TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
             LblStretching.Visible = False
             LblxStretching.Visible = False
             BtnNext10Steps.Text = FrmMain.LM.GetString("Next10Steps")
             BtnNextStep.Visible = True
         Else
-            Presentation = ClsIterationController.PresentationEnum.TimeAxis
+            IterationController.Presentation = ClsIterationController.PresentationEnum.TimeAxis
             TxtXStretching.Visible = True
             TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
             IterationController.XStretching = XStretchingDefault
@@ -278,26 +298,6 @@ Public Class FrmIteration
             And CheckTargetValue.IsTxtValueAllowed And CheckStretchInterval.IsTxtValueAllowed
 
     End Function
-
-    'SECTOR FUNCTIONSGRAPH
-
-    Private Sub BtnDrawDiagram_Click(sender As Object, e As EventArgs) Handles BtnDrawDiagram.Click
-
-        If IsFormLoaded Then
-            'Checks the parametervalue and draws the graph of the function
-            If IsUserDataOK() Then
-                DS.Parameter = CDec(TxtParameter.Text)
-
-                'Initialization was successful
-                ResetIteration()
-                IterationController.PrepareDiagram()
-            Else
-                'There is already a message generated
-                SetDefaultUserData()
-            End If
-        End If
-
-    End Sub
 
     'SECTOR STARTVALUE FOR PROTOCOL
 
@@ -337,10 +337,6 @@ Public Class FrmIteration
             'The original startvalue should be adapted minimally
             'So that the target value will be reached nearly during the iteration
 
-            'Reset an existing iteration
-            ResetIteration()
-
-
             Dim CheckTargetvalue As New ClsCheckIsNumeric(TxtTargetValue)
 
             If IsUserDataOK() Then
@@ -377,9 +373,11 @@ Public Class FrmIteration
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
 
         If IsFormLoaded Then
+
             'Perform one iteration step
             DoIteration(1)
         End If
+
     End Sub
 
     Private Sub BtnNext10Steps_Click(sender As Object, e As EventArgs) Handles BtnNext10Steps.Click
@@ -395,26 +393,23 @@ Public Class FrmIteration
         With IterationController
 
             'New iteration
-            If .IterationStatus = ClsGeneral.EnIterationStatus.Stopped Then
+            If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
 
                 If IsUserDataOK() Then
                     DS.Parameter = CDec(TxtParameter.Text)
                     .StartValue = CDec(TxtStartValue.Text)
                     .XStretching = CInt(TxtXStretching.Text)
-                    .IterationStatus = ClsGeneral.EnIterationStatus.Ready
-                    If Presentation = ClsIterationController.PresentationEnum.Functionsgraph Then
-                        'Draw the functiongraph
-                        .PrepareDiagram()
-                    End If
+                    .IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    .PrepareDiagram()
                 Else
                     SetDefaultUserData()
                 End If
 
             End If
 
-            If .IterationStatus = ClsGeneral.EnIterationStatus.Ready Then
-                .IterationStatus = ClsGeneral.EnIterationStatus.Running
-                If Presentation = ClsIterationController.PresentationEnum.Functionsgraph Then
+            If .IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+                .IterationStatus = ClsDynamics.EnIterationStatus.Running
+                If .Presentation = ClsIterationController.PresentationEnum.Functionsgraph Then
 
                     'This perfoms NumberOfSteps steps of the iteration
                     'and draws the display in the Function Graph and 45° line
@@ -427,7 +422,7 @@ Public Class FrmIteration
                     'and draw the iteration on the time-axis (Number of Steps in x-Direction)
                     .ShowFullDiagram()
                 End If
-                .IterationStatus = ClsGeneral.EnIterationStatus.Ready
+                .IterationStatus = ClsDynamics.EnIterationStatus.Ready
             End If
 
         End With

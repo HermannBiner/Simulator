@@ -6,7 +6,7 @@
 'Status Checked
 
 Public Class ClsPolynom3C
-    Inherits ClsPolynomAbstract
+    Inherits ClsNewtonAbstract
 
     'SECTOR INITIALIZATION
 
@@ -23,14 +23,14 @@ Public Class ClsPolynom3C
 
     End Sub
 
-    Protected Overrides Sub PrepareIteration()
+    Protected Overrides Sub PrepareUnitRoots()
 
         'Generate Roots
-        Roots.Clear()
+        UnitRootCollection.Clear()
 
-        Roots.Add(New ClsRoot(New ClsComplexNumber(-1, 0), 1))
-        Roots.Add(New ClsRoot(New ClsComplexNumber(1, 0), 2))
-        Roots.Add(New ClsRoot(New ClsComplexNumber(MyC.X, MyC.Y), 3))
+        UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(-1, 0), 1))
+        UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(1, 0), 2))
+        UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(MyC.X, MyC.Y), 3))
 
 
         MyN = 3
@@ -91,9 +91,9 @@ Public Class ClsPolynom3C
 
 
         Select Case MyMixing
-            Case IPolynom.EnMixing.Conjugate
+            Case INewton.EnMixing.Conjugate
                 Z = Z.Conjugate
-            Case IPolynom.EnMixing.Rotate
+            Case INewton.EnMixing.Rotate
                 Dim Phi As Double = 2 * Math.PI / 3
                 Z = Z.Mult(New ClsComplexNumber(Math.Cos(Phi), Math.Sin(Phi)))
             Case Else
