@@ -2,10 +2,10 @@
 'together with the "Runge Kutta 4" numerical Method 
 'based on the differential equation of a real spring pendulum
 
-'Status Redesign Checked
+'Status Checked
 
 Public Class ClsRungeKutta4
-    Inherits ClsSpringPendulumAbstract
+    Inherits ClsNumericMethodAbstract
 
     'These are the parameters according to the mathematical documentation
     'first the y-substitution component(1)
@@ -50,7 +50,7 @@ Public Class ClsRungeKutta4
 
             Next
 
-            'the Conponent(0) holds the "time" t with 2*pi period
+            'the Component(0) holds the "time" t with 2*pi period
             .Component(0) = .Component(0) Mod CDec(2 * Math.PI)
 
         End With

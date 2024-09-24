@@ -1,28 +1,24 @@
 ﻿'This Class contains the iteration controller for FrmHistogram
 
-'Status Redesign Tested
+'Status Checked
 
 Imports System.Globalization
+Imports System.Reflection
 
 Public Class ClsHistogramController
 
     'The dynamic System
-    Private MyDS As IIteration
+    Private DS As IIteration
 
-    'The PicDiagram
-    Private MyPicDiagram As PictureBox
-
-    'The x-axis in the PicDiagram
-    Private XRange As ClsInterval
+    Private MyForm As FrmHistogram
 
     'The Graphic Helper for PicDiagram
-    Private MyPicGraphics As ClsGraphicTool
+    Private PicGraphics As ClsGraphicTool
 
     'Status Parameters
     'Number of Iteration Steps
     Private n As Integer
-    Private MyLblN As Label
-    Private MyIterationStatus As ClsDynamics.EnIterationStatus
+    Private IterationStatus As ClsDynamics.EnIterationStatus
 
     'Actual value of the iteration
     Private x As Decimal
@@ -31,45 +27,151 @@ Public Class ClsHistogramController
     'NumberOfHits is an array if those intervals
     Private NumberOfHits() As Integer
 
-    WriteOnly Property DS As IIteration
-        Set(value As IIteration)
-            MyDS = value
-        End Set
-    End Property
+    Public Sub New(Form As FrmHistogram)
+        MyForm = Form
+        Dim XRange As ClsInterval = New ClsInterval(1, MyForm.PicDiagram.Width)
+        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, XRange, XRange)
 
-    WriteOnly Property PicDiagram As PictureBox
-        Set(value As PictureBox)
-            MyPicDiagram = value
-            XRange = New ClsInterval(1, MyPicDiagram.Width)
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, XRange, XRange)
+        'the array of small intervals is defined (pixel-size)
+        ReDim NumberOfHits(MyForm.PicDiagram.Width)
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
-            'Now, the array of small intervals is defined (pixel-size)
-            ReDim NumberOfHits(MyPicDiagram.Width)
-        End Set
-    End Property
+    End Sub
 
-    WriteOnly Property LblN As Label
-        Set(value As Label)
-            MyLblN = value
-        End Set
-    End Property
+    Public Sub FillDynamicSystem()
 
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-        Set(value As ClsDynamics.EnIterationStatus)
-            MyIterationStatus = value
-        End Set
-        Get
-            IterationStatus = MyIterationStatus
-        End Get
-    End Property
+        MyForm.CboFunction.Items.Clear()
 
-    WriteOnly Property StartValue As Decimal
-        Set(value As Decimal)
-            x = value
-        End Set
-    End Property
+        'Add the classes implementing IIteration
+        'to the Combobox CboPendulum by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    Public Function IterationLoop() As Task
+        If types.Count > 0 Then
+            Dim DSName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                'The case of Mandelbrot is only used for Feigenbaum Diagram
+                If Not DSName.Contains("Mandel") Then
+                    MyForm.CboFunction.Items.Add(DSName)
+                End If
+            Next
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+        MyForm.CboFunction.SelectedIndex = 0
+
+    End Sub
+
+    Public Sub SetDS()
+        'This sets the type of Iterator by Reflection
+
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                             Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                             t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If MyForm.CboFunction.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = MyForm.CboFunction.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DS = CType(Activator.CreateInstance(type), IIteration)
+                    End If
+                Next
+            End If
+
+        End If
+
+        'As standard, the function is repeated 1x in each iteration step
+        InitializeMe()
+
+        'The parameter and startvalue are depending on the type of iteration
+        SetDefaultUserData()
+
+        'If the type of iteration changes, everything has to be reset
+        'especially the status parameters
+        ResetIteration()
+
+    End Sub
+
+    'This routine sets the DS parameters to a default
+    'the trigger is, that the DS has changed
+    Private Sub InitializeMe()
+
+        DS.Power = 1
+
+    End Sub
+
+    'This routine sets the user data to the default
+    'the trigger is, that the DS has changed
+    Public Sub SetDefaultUserData()
+        'default settings
+        MyForm.TxtParameter.Text = DS.ChaoticParameterValue.ToString(CultureInfo.CurrentCulture)
+        MyForm.TxtStartValue.Text = DS.ValueParameter.DefaultValue.ToString(CultureInfo.CurrentCulture)
+
+    End Sub
+
+    Public Async Sub StartIteration()
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            'Check User Data
+            If IsUserDataOK() Then
+
+                'Set Ds Parameters
+                DS.ParameterA = CDec(MyForm.TxtParameter.Text)
+                x = CDec(MyForm.TxtStartValue.Text)
+                IterationStatus = ClsDynamics.EnIterationStatus.Ready
+
+                If DS.IsBehaviourChaotic() Then
+                    'OK
+                Else
+                    'nothing to do, a message is already generated
+                End If
+
+            Else
+                'nothing - Iterationstatus stays stopped
+            End If
+        End If
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready _
+        Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+
+            IterationStatus = ClsDynamics.EnIterationStatus.Running
+
+            MyForm.BtnStart.Text = FrmMain.LM.GetString("Continue")
+            MyForm.BtnStart.Enabled = False
+            MyForm.BtnReset.Enabled = False
+            MyForm.BtnDefault.Enabled = False
+
+            Application.DoEvents()
+
+            'Iteration loop
+            Await IterationLoop()
+
+        Else
+            SetDefaultUserData()
+        End If
+    End Sub
+
+    Public Sub StopIteration()
+        'the iteration is running and should be stopped
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+        MyForm.BtnDefault.Enabled = True
+
+    End Sub
+
+    Private Function IterationLoop() As Task
 
         'p is the pixel coordinate of the x-axis and the number of the interval that is hit
         Dim p As Integer
@@ -77,28 +179,28 @@ Public Class ClsHistogramController
         Do
 
             'calculating the location of the interval that is hit
-            p = CInt((x - MyDS.IterationInterval.A) * MyPicDiagram.Width _
-                / MyDS.IterationInterval.IntervalWidth)
+            p = CInt((x - DS.ValueParameter.Range.A) * MyForm.PicDiagram.Width _
+                / DS.ValueParameter.Range.IntervalWidth)
 
             'and increasing the number of hits for this interval
             NumberOfHits(p) += 1
 
             'increasing the number of iteration steps
             n += 1
-            MyLblN.Text = n.ToString(CultureInfo.CurrentCulture)
+            MyForm.LblSteps.Text = n.ToString(CultureInfo.CurrentCulture)
 
             'Next step of the iteration
-            x = MyDS.FN(x)
+            x = DS.FN(x)
 
             If n Mod 1000 = 0 Then
 
                 'redraw the actualized histogram
                 Dim Brush = Brushes.CadetBlue
-                For i = 1 To MyPicDiagram.Width
+                For i = 1 To MyForm.PicDiagram.Width
 
                     Dim A As New ClsMathpoint(i - 1, 0)
                     Dim B As New ClsMathpoint(i, NumberOfHits(i))
-                    MyPicGraphics.FillRectangle(A, B, Brush)
+                    PicGraphics.FillRectangle(A, B, Brush)
                 Next
 
                 Application.DoEvents()
@@ -116,15 +218,25 @@ Public Class ClsHistogramController
     Public Sub ResetIteration()
 
         'PicDiagram cleared
-        MyPicGraphics.Clear(Color.White)
+        PicGraphics.Clear(Color.White)
 
         'Status Parameters Cleared
-        MyLblN.Text = "0"
+        MyForm.LblSteps.Text = "0"
         n = 0
 
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        ReDim NumberOfHits(MyPicDiagram.Width)
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        ReDim NumberOfHits(MyForm.PicDiagram.Width)
+        MyForm.BtnStart.Text = FrmMain.LM.GetString("Start")
 
     End Sub
 
+    Private Function IsUserDataOK() As Boolean
+
+        'Is the value of TxtParameter in the Iteration Interval?
+        Dim CheckParameter = New ClsCheckUserData(MyForm.TxtParameter, DS.FormulaParameter.Range)
+        Dim CheckStartValue = New ClsCheckUserData(MyForm.TxtStartValue, DS.ValueParameter.Range)
+
+        Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
+
+    End Function
 End Class

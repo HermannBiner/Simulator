@@ -34,11 +34,11 @@ Public Class ClsMathHelperPendulum
     End Function
 
 
-    Public Function AngleInMinusPiAndPi(angle As Decimal) As Decimal
+    Public Function AngleInMinusPiAndPi(Angle As Decimal) As Decimal
 
         'makes sure that an angle is in the interval [-pi, pi[
 
-        Dim Tempangle As Decimal = angle
+        Dim Tempangle As Decimal = Angle
 
         'Make sure that angle is > -Pi
         Do Until Tempangle > -CDec(Math.PI)

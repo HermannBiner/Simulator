@@ -1,5 +1,6 @@
 ﻿'This Class contains mathematical calculations
 'supporting complex numbers
+'that allows easy implementations of complex number formulas
 
 'Status Checked
 
@@ -23,17 +24,17 @@ Public Class ClsMathHelperComplex
                     Arg = 3 * Math.PI / 2
             End Select
         Else
-            Dim phi As Double = Math.Atan(Y / X)
+            Dim Phi As Double = Math.Atan(Y / X)
             'phi is in [-pi,pi]
             'arg should be in [0,2*pi[
 
             Select Case True
                 Case X < 0
-                    Arg = phi + Math.PI
+                    Arg = Phi + Math.PI
                 Case Y < 0 And X > 0
-                    Arg = phi + 2 * Math.PI
+                    Arg = Phi + 2 * Math.PI
                 Case Else 'x > 0, y > 0
-                    Arg = phi
+                    Arg = Phi
             End Select
         End If
 

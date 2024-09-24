@@ -21,11 +21,13 @@ Public MustInherit Class ClsBilliardTableAbstract
     Protected MyC As Decimal
 
     'Ranges
-    Protected MyMathValueRange As New ClsInterval(-1, 1)
-    Protected MyValueParameters As List(Of ClsValueParameter)
-    Protected MyTValueRange As ClsInterval
-    Protected MyAlfaValueRange As ClsInterval
-    Protected MyParameterRange As New ClsInterval(CDec(0.5), 2)
+    Protected MyMathInterval As New ClsInterval(-1, 1)
+    Protected MyTValueParameter As ClsGeneralParameter
+    Protected MyAlfaValueParameter As ClsGeneralParameter
+    Protected MyFormulaParameter As ClsGeneralParameter
+
+    'The whole List of ValueParameters
+    Protected MyValueParameterList As List(Of ClsGeneralParameter)
 
     'Control of all BilliardBalls
 
@@ -41,9 +43,38 @@ Public MustInherit Class ClsBilliardTableAbstract
     'Iteration Control
     Private MyIterationStatus As ClsDynamics.EnIterationStatus
 
-    Public Sub New()
-        MyBilliardballCollection = New List(Of IBilliardball)
-    End Sub
+    'When distributing BilliardBalls for the full PhasePortrait
+    Protected Const NumberOfBilliardBalls As Integer = 30
+
+    ReadOnly Property MathInterval As ClsInterval Implements IBilliardTable.MathInterval
+        Get
+            MathInterval = MyMathInterval
+        End Get
+    End Property
+
+    ReadOnly Property TValueParameter As ClsGeneralParameter Implements IBilliardTable.TValueParameter
+        Get
+            TValueParameter = MyTValueParameter
+        End Get
+    End Property
+
+    ReadOnly Property AlfaValueParameterr As ClsGeneralParameter Implements IBilliardTable.AlfaValueParameter
+        Get
+            AlfaValueParameterr = MyAlfaValueParameter
+        End Get
+    End Property
+
+    ReadOnly Property FormulaParameter As ClsGeneralParameter Implements IBilliardTable.FormulaParameter
+        Get
+            FormulaParameter = MyFormulaParameter
+        End Get
+    End Property
+
+    ReadOnly Property ValueParameterList As List(Of ClsGeneralParameter) Implements IBilliardTable.ValueParameterList
+        Get
+            ValueParameterList = MyValueParameterList
+        End Get
+    End Property
 
     ReadOnly Property BilliardBallCollection As List(Of IBilliardball) _
         Implements IBilliardTable.BilliardBallCollection
@@ -70,36 +101,6 @@ Public MustInherit Class ClsBilliardTableAbstract
         End Set
     End Property
 
-    ReadOnly Property MathValueRange As ClsInterval
-        Get
-            MathValueRange = MyMathValueRange
-        End Get
-    End Property
-
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter) Implements IBilliardTable.ValueParameters
-        Get
-            ValueParameters = MyValueParameters
-        End Get
-    End Property
-
-    ReadOnly Property TValueRange As ClsInterval Implements IBilliardTable.TValueRange
-        Get
-            TValueRange = MyTValueRange
-        End Get
-    End Property
-
-    ReadOnly Property AlfaValueRange As ClsInterval Implements IBilliardTable.AlfaValueRange
-        Get
-            AlfaValueRange = MyAlfaValueRange
-        End Get
-    End Property
-
-    ReadOnly Property ParameterRange As ClsInterval Implements IBilliardTable.ParameterRange
-        Get
-            ParameterRange = MyParameterRange
-        End Get
-    End Property
-
     Property PicDiagram As PictureBox Implements IBilliardTable.PicDiagram
         Get
             PicDiagram = MyPicDiagram
@@ -109,10 +110,10 @@ Public MustInherit Class ClsBilliardTableAbstract
             Dim PicDiagramSize As Integer = Math.Min(MyPicDiagram.Width, MyPicDiagram.Height)
             MyPicDiagram.Width = PicDiagramSize
             MyPicDiagram.Height = PicDiagramSize
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyMathValueRange, MyMathValueRange)
+            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyMathInterval, MyMathInterval)
             MyBmpDiagram = New Bitmap(PicDiagramSize, PicDiagramSize)
             MyPicDiagram.Image = MyBmpDiagram
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyMathValueRange, MyMathValueRange)
+            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyMathInterval, MyMathInterval)
         End Set
     End Property
 
@@ -155,6 +156,16 @@ Public MustInherit Class ClsBilliardTableAbstract
         End Set
     End Property
 
+    Public Sub New()
+        MyBilliardballCollection = New List(Of IBilliardball)
+
+        'The FormulaParameter is the same for all Billiaard Tables
+        MyFormulaParameter = New ClsGeneralParameter(3, "Parameter C", New ClsInterval(CDec(0.5), 2), ClsGeneralParameter.TypeOfParameterEnum.Formula)
+
+        MyValueParameterList = New List(Of ClsGeneralParameter)
+
+    End Sub
+
     Public Sub ResetIteration() Implements IBilliardTable.ResetIteration
 
         If BilliardBallCollection IsNot Nothing Then
@@ -174,29 +185,28 @@ Public MustInherit Class ClsBilliardTableAbstract
 
     End Sub
 
-    Public Sub IterationStep() Implements IBilliardTable.IterationStep
-
-        n += 1
-        MyLblN.Text = n.ToString(CultureInfo.CurrentCulture)
-
-        'Each Ball is now iterated 1x
-        For Each Ball As IBilliardball In BilliardBallCollection
-            Ball.IterationStep()
-        Next
-
-    End Sub
-
-    Public Async Function IterationLoop() As Task Implements IBilliardTable.IterationLoop
+    Public Async Function IterationLoop(NumberOfSteps As Integer) As Task Implements IBilliardTable.IterationLoop
 
         Do
-            IterationStep()
+            n += 1
+            MyLblN.Text = n.ToString(CultureInfo.CurrentCulture)
 
-            If n Mod 2 = 0 Then
-                Application.DoEvents()
-                Await Task.Delay(2)
+            'Each Ball is now iterated 1x
+            For Each Ball As IBilliardball In BilliardBallCollection
+                Ball.IterationStep()
+            Next
+
+            Application.DoEvents()
+            Await Task.Delay(2)
+
+            If NumberOfSteps > 0 Then
+                If n >= NumberOfSteps Then
+                    MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
+                End If
             End If
 
-        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+            Or MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Function
 
@@ -206,7 +216,6 @@ Public MustInherit Class ClsBilliardTableAbstract
         'that is the zenith of the billardtable
         'and different startangles
 
-        Dim NumberOfBalls As Integer = 30
         Dim i As Integer
 
         'Startparameter
@@ -219,21 +228,27 @@ Public MustInherit Class ClsBilliardTableAbstract
         C = MyC
 
         'the next start parameters are chosen that the phaseportrait gets a nice image
-        Select Case True
-            Case TypeOf LocBilliardBall Is ClsEllipseBilliardball
-                t = CDec(Math.PI / 2)
-                Alfa = CDec(0.001)
-            Case TypeOf LocBilliardBall Is ClsOvalBilliardball
-                t = CDec(Math.PI / 2)
-                Alfa = CDec(Math.PI / NumberOfBalls)
-            Case Else
-                t = CDec(0.95) / (1 + MyC)
-                Alfa = CDec(Math.PI / NumberOfBalls)
-        End Select
+        If C < 1 Then
+            t = CDec(Math.PI / 2)
+        Else
+            t = 0
+        End If
 
-        For i = 0 To NumberOfBalls
+        Alfa = AlfaValueParameterr.DefaultValue
+
+        With LocBilliardBall
+            .BallColor = Brushes.Blue
+            .Startparameter = t
+            .IsStartpositionSet = True
+            .Startangle = Alfa
+            .IsStartangleSet = True
+            .BallSpeed = 1000
+            .IterationStep()
+        End With
+
+        For i = 0 To NumberOfBilliardBalls
             LocBilliardBall = GetBilliardBall()
-            Alfa += CDec(Math.PI / NumberOfBalls)
+            Alfa += CDec(Math.PI / NumberOfBilliardBalls)
             If Alfa < Math.PI Then
                 With LocBilliardBall
                     Select Case i Mod 5
@@ -258,6 +273,7 @@ Public MustInherit Class ClsBilliardTableAbstract
                     .IsStartpositionSet = True
                     .Startangle = Alfa
                     .IsStartangleSet = True
+                    .BallSpeed = 1000
                     .IterationStep()
                 End With
                 BilliardBallCollection.Add(LocBilliardBall)

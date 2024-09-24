@@ -1,13 +1,12 @@
 ﻿'This is the interface for different kind of pendulum
 'together with its numeric method to calculate its position
 'thereby e.g. a Spring Pendulum with the Euler Explicit approximation method
-'is treated as a different pendulum than a Spring Pendulum with e.g. 
-'the Euler Implicit Method
-'Terefore, the kind of Pendulum and the numerical method is regardet as "unit"
+'is treated as a different pendulum than a Spring Pendulum with the Euler Implicit Method
+'Terefore, the kind of Pendulum is implicitely defined by its numerical method
 
-'Status Redesign Checked
+'Status Checked
 
-Public Interface ISpringPendulum
+Public Interface INumericMethod
 
     'step width for each approximation step
     'this is set before the approximation starts
@@ -25,7 +24,7 @@ Public Interface ISpringPendulum
     'y-position of the Pendulum in its Component(1)
     'and the "time" t in its Component(0)
     'and additional values like the derivate y' in Component(2)
-    Property ActualParameter(index As Integer) As Decimal
+    Property ActualParameter(Index As Integer) As Decimal
 
     'The variable Parameters are changed during the iteration
     'Iteration performs one approximation step

@@ -32,8 +32,6 @@ Partial Class FrmFeigenbaum
         TxtAMax = New TextBox()
         LblAmax = New Label()
         CboFunction = New ComboBox()
-        TrbPrecision = New TrackBar()
-        LblPrecision = New Label()
         TxtXMax = New TextBox()
         LblXmax = New Label()
         TxtXMin = New TextBox()
@@ -43,44 +41,44 @@ Partial Class FrmFeigenbaum
         LblDeltaX = New Label()
         ChkSplitPoints = New CheckBox()
         ChkColored = New CheckBox()
+        BtnDefault = New Button()
         CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
-        CType(TrbPrecision, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(2, 9)
-        PicDiagram.Margin = New Padding(2, 2, 2, 2)
+        PicDiagram.Location = New Point(9, 0)
+        PicDiagram.Margin = New Padding(2)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(725, 690)
+        PicDiagram.Size = New Size(800, 800)
         PicDiagram.TabIndex = 2
         PicDiagram.TabStop = False
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(751, 662)
-        BtnReset.Margin = New Padding(2, 2, 2, 2)
+        BtnReset.Location = New Point(818, 765)
+        BtnReset.Margin = New Padding(2)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(231, 37)
+        BtnReset.Size = New Size(230, 34)
         BtnReset.TabIndex = 4
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStartIteration
         ' 
-        BtnStartIteration.Location = New Point(751, 470)
-        BtnStartIteration.Margin = New Padding(2, 2, 2, 2)
+        BtnStartIteration.Location = New Point(818, 396)
+        BtnStartIteration.Margin = New Padding(2)
         BtnStartIteration.Name = "BtnStartIteration"
-        BtnStartIteration.Size = New Size(231, 37)
+        BtnStartIteration.Size = New Size(230, 34)
         BtnStartIteration.TabIndex = 3
-        BtnStartIteration.Text = "StartIteration"
+        BtnStartIteration.Text = "Start"
         BtnStartIteration.UseVisualStyleBackColor = True
         ' 
         ' LblParameterRange
         ' 
         LblParameterRange.AutoSize = True
-        LblParameterRange.Location = New Point(747, 56)
+        LblParameterRange.Location = New Point(814, 73)
         LblParameterRange.Margin = New Padding(2, 0, 2, 0)
         LblParameterRange.Name = "LblParameterRange"
         LblParameterRange.Size = New Size(156, 15)
@@ -90,7 +88,7 @@ Partial Class FrmFeigenbaum
         ' LblAmin
         ' 
         LblAmin.AutoSize = True
-        LblAmin.Location = New Point(747, 85)
+        LblAmin.Location = New Point(814, 102)
         LblAmin.Margin = New Padding(2, 0, 2, 0)
         LblAmin.Name = "LblAmin"
         LblAmin.Size = New Size(45, 15)
@@ -101,8 +99,8 @@ Partial Class FrmFeigenbaum
         ' 
         TxtAMin.AcceptsReturn = True
         TxtAMin.AcceptsTab = True
-        TxtAMin.Location = New Point(796, 80)
-        TxtAMin.Margin = New Padding(2, 2, 2, 2)
+        TxtAMin.Location = New Point(863, 97)
+        TxtAMin.Margin = New Padding(2)
         TxtAMin.Name = "TxtAMin"
         TxtAMin.Size = New Size(185, 23)
         TxtAMin.TabIndex = 1
@@ -111,8 +109,8 @@ Partial Class FrmFeigenbaum
         ' 
         TxtAMax.AcceptsReturn = True
         TxtAMax.AcceptsTab = True
-        TxtAMax.Location = New Point(796, 112)
-        TxtAMax.Margin = New Padding(2, 2, 2, 2)
+        TxtAMax.Location = New Point(863, 129)
+        TxtAMax.Margin = New Padding(2)
         TxtAMax.Name = "TxtAMax"
         TxtAMax.Size = New Size(185, 23)
         TxtAMax.TabIndex = 2
@@ -120,7 +118,7 @@ Partial Class FrmFeigenbaum
         ' LblAmax
         ' 
         LblAmax.AutoSize = True
-        LblAmax.Location = New Point(746, 116)
+        LblAmax.Location = New Point(813, 133)
         LblAmax.Margin = New Padding(2, 0, 2, 0)
         LblAmax.Name = "LblAmax"
         LblAmax.Size = New Size(47, 15)
@@ -131,39 +129,18 @@ Partial Class FrmFeigenbaum
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        CboFunction.Location = New Point(751, 9)
-        CboFunction.Margin = New Padding(2, 2, 2, 2)
+        CboFunction.Location = New Point(818, 0)
+        CboFunction.Margin = New Padding(2)
         CboFunction.Name = "CboFunction"
         CboFunction.Size = New Size(232, 23)
         CboFunction.TabIndex = 30
-        ' 
-        ' TrbPrecision
-        ' 
-        TrbPrecision.Location = New Point(751, 341)
-        TrbPrecision.Margin = New Padding(2, 2, 2, 2)
-        TrbPrecision.Maximum = 100
-        TrbPrecision.Minimum = 1
-        TrbPrecision.Name = "TrbPrecision"
-        TrbPrecision.Size = New Size(231, 45)
-        TrbPrecision.TabIndex = 32
-        TrbPrecision.Value = 25
-        ' 
-        ' LblPrecision
-        ' 
-        LblPrecision.AutoSize = True
-        LblPrecision.Location = New Point(747, 310)
-        LblPrecision.Margin = New Padding(2, 0, 2, 0)
-        LblPrecision.Name = "LblPrecision"
-        LblPrecision.Size = New Size(91, 15)
-        LblPrecision.TabIndex = 33
-        LblPrecision.Text = "Precision: 25000"
         ' 
         ' TxtXMax
         ' 
         TxtXMax.AcceptsReturn = True
         TxtXMax.AcceptsTab = True
-        TxtXMax.Location = New Point(796, 237)
-        TxtXMax.Margin = New Padding(2, 2, 2, 2)
+        TxtXMax.Location = New Point(863, 254)
+        TxtXMax.Margin = New Padding(2)
         TxtXMax.Name = "TxtXMax"
         TxtXMax.Size = New Size(187, 23)
         TxtXMax.TabIndex = 36
@@ -171,7 +148,7 @@ Partial Class FrmFeigenbaum
         ' LblXmax
         ' 
         LblXmax.AutoSize = True
-        LblXmax.Location = New Point(747, 241)
+        LblXmax.Location = New Point(814, 258)
         LblXmax.Margin = New Padding(2, 0, 2, 0)
         LblXmax.Name = "LblXmax"
         LblXmax.Size = New Size(48, 15)
@@ -182,8 +159,8 @@ Partial Class FrmFeigenbaum
         ' 
         TxtXMin.AcceptsReturn = True
         TxtXMin.AcceptsTab = True
-        TxtXMin.Location = New Point(796, 205)
-        TxtXMin.Margin = New Padding(2, 2, 2, 2)
+        TxtXMin.Location = New Point(863, 222)
+        TxtXMin.Margin = New Padding(2)
         TxtXMin.Name = "TxtXMin"
         TxtXMin.Size = New Size(187, 23)
         TxtXMin.TabIndex = 35
@@ -191,7 +168,7 @@ Partial Class FrmFeigenbaum
         ' LblXmin
         ' 
         LblXmin.AutoSize = True
-        LblXmin.Location = New Point(747, 209)
+        LblXmin.Location = New Point(814, 226)
         LblXmin.Margin = New Padding(2, 0, 2, 0)
         LblXmin.Name = "LblXmin"
         LblXmin.Size = New Size(46, 15)
@@ -201,7 +178,7 @@ Partial Class FrmFeigenbaum
         ' LblValueRange
         ' 
         LblValueRange.AutoSize = True
-        LblValueRange.Location = New Point(746, 182)
+        LblValueRange.Location = New Point(813, 199)
         LblValueRange.Margin = New Padding(2, 0, 2, 0)
         LblValueRange.Name = "LblValueRange"
         LblValueRange.Size = New Size(130, 15)
@@ -211,7 +188,7 @@ Partial Class FrmFeigenbaum
         ' LblDeltaA
         ' 
         LblDeltaA.AutoSize = True
-        LblDeltaA.Location = New Point(746, 149)
+        LblDeltaA.Location = New Point(813, 166)
         LblDeltaA.Margin = New Padding(2, 0, 2, 0)
         LblDeltaA.Name = "LblDeltaA"
         LblDeltaA.Size = New Size(48, 15)
@@ -221,7 +198,7 @@ Partial Class FrmFeigenbaum
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
-        LblDeltaX.Location = New Point(746, 274)
+        LblDeltaX.Location = New Point(813, 291)
         LblDeltaX.Margin = New Padding(2, 0, 2, 0)
         LblDeltaX.Name = "LblDeltaX"
         LblDeltaX.Size = New Size(48, 15)
@@ -233,8 +210,8 @@ Partial Class FrmFeigenbaum
         ChkSplitPoints.AutoSize = True
         ChkSplitPoints.Checked = True
         ChkSplitPoints.CheckState = CheckState.Checked
-        ChkSplitPoints.Location = New Point(751, 397)
-        ChkSplitPoints.Margin = New Padding(2, 2, 2, 2)
+        ChkSplitPoints.Location = New Point(818, 319)
+        ChkSplitPoints.Margin = New Padding(2)
         ChkSplitPoints.Name = "ChkSplitPoints"
         ChkSplitPoints.Size = New Size(111, 19)
         ChkSplitPoints.TabIndex = 44
@@ -244,19 +221,30 @@ Partial Class FrmFeigenbaum
         ' ChkColored
         ' 
         ChkColored.AutoSize = True
-        ChkColored.Location = New Point(751, 435)
-        ChkColored.Margin = New Padding(2, 2, 2, 2)
+        ChkColored.Location = New Point(818, 357)
+        ChkColored.Margin = New Padding(2)
         ChkColored.Name = "ChkColored"
         ChkColored.Size = New Size(113, 19)
         ChkColored.TabIndex = 46
         ChkColored.Text = "ColoredDiagram"
         ChkColored.UseVisualStyleBackColor = True
         ' 
+        ' BtnDefault
+        ' 
+        BtnDefault.Location = New Point(818, 727)
+        BtnDefault.Margin = New Padding(2)
+        BtnDefault.Name = "BtnDefault"
+        BtnDefault.Size = New Size(230, 34)
+        BtnDefault.TabIndex = 47
+        BtnDefault.Text = "DefaultUserData"
+        BtnDefault.UseVisualStyleBackColor = True
+        ' 
         ' FrmFeigenbaum
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1370, 708)
+        ClientSize = New Size(1059, 808)
+        Controls.Add(BtnDefault)
         Controls.Add(ChkColored)
         Controls.Add(ChkSplitPoints)
         Controls.Add(LblDeltaX)
@@ -266,8 +254,6 @@ Partial Class FrmFeigenbaum
         Controls.Add(TxtXMin)
         Controls.Add(LblXmin)
         Controls.Add(LblValueRange)
-        Controls.Add(LblPrecision)
-        Controls.Add(TrbPrecision)
         Controls.Add(CboFunction)
         Controls.Add(TxtAMax)
         Controls.Add(LblAmax)
@@ -279,12 +265,11 @@ Partial Class FrmFeigenbaum
         Controls.Add(PicDiagram)
         ForeColor = SystemColors.ControlText
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(2, 2, 2, 2)
+        Margin = New Padding(2)
         Name = "FrmFeigenbaum"
         Text = "FeigenbaumDiagram"
         WindowState = FormWindowState.Maximized
         CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
-        CType(TrbPrecision, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
 
@@ -299,8 +284,6 @@ Partial Class FrmFeigenbaum
     Friend WithEvents TxtAMax As TextBox
     Friend WithEvents LblAmax As Label
     Friend WithEvents CboFunction As ComboBox
-    Friend WithEvents TrbPrecision As TrackBar
-    Friend WithEvents LblPrecision As Label
     Friend WithEvents TxtXMax As TextBox
     Friend WithEvents LblXmax As Label
     Friend WithEvents TxtXMin As TextBox
@@ -310,4 +293,5 @@ Partial Class FrmFeigenbaum
     Friend WithEvents LblDeltaX As Label
     Friend WithEvents ChkSplitPoints As CheckBox
     Friend WithEvents ChkColored As CheckBox
+    Friend WithEvents BtnDefault As Button
 End Class

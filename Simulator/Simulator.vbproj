@@ -11,10 +11,12 @@
     <ApplicationIcon>Resources\Gear.ico</ApplicationIcon>
     <OptionStrict>On</OptionStrict>
     <Title>Simulator</Title>
-    <Version>5.0.0</Version>
+    <Version>6.0.0</Version>
     <Product>Simulator</Product>
     <Authors>Hermann Biner</Authors>
     <OptionInfer>On</OptionInfer>
+    <Description>Simulation of Dynamical Systems</Description>
+    <Copyright>Hermann Biner</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

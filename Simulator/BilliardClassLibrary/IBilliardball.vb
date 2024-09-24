@@ -13,13 +13,17 @@ Public Interface IBilliardball
     WriteOnly Property BmpGraphics As ClsGraphicTool
 
     'MathValue for graphic calculation
-    WriteOnly Property MathValueRange As ClsInterval
+    WriteOnly Property MathInterval As ClsInterval
+
+    'These parameters are set by the user 
+    'when selecting a diagram area
+    'the Defaults are hold by the BilliardTable
     WriteOnly Property TValueRange As ClsInterval
     WriteOnly Property AlfaValueRange As ClsInterval
+    WriteOnly Property ParameterRange As ClsInterval
 
     'Status Parameters
     WriteOnly Property PhasePortrait As PictureBox
-
     WriteOnly Property ValueProtocol As ListBox
 
     'The profile of the billiard table is defined by the parameter a,b

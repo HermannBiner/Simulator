@@ -19,19 +19,19 @@ Public Class ClsOvalBilliardball
 
     Overrides Property Startparameter As Decimal
         Get
-            Startparameter = MyT
+            Startparameter = T
         End Get
         'The user can set the Startparameter t also manually (when not setting it by the mouse)
         'and transmit this value to the Ball
         Set(value As Decimal)
-            MyT = value
+            T = value
 
             If IsNothing(UserStartposition) Then
                 UserStartposition = New ClsMathpoint(0, 0)
             End If
 
             'and then, the Startposition according to the mathematical documentation is:
-            Dim TempMathpoint As ClsMathpoint = CalculateBallPositionFromT(MyT)
+            Dim TempMathpoint As ClsMathpoint = CalculateBallPositionFromT(T)
 
             UserStartposition.X = TempMathpoint.X
             UserStartposition.Y = TempMathpoint.Y
@@ -51,15 +51,15 @@ Public Class ClsOvalBilliardball
 
             'first, we calculate the angle between tangent in the hit point
             'and the positive xaxis
-            Dim psi As Decimal = CalculatePsi(MyT)
-            psi = MyMathhelper.AngleInNullTwoPi(psi)
+            Dim psi As Decimal = CalculatePsi(T)
+            psi = Mathhelper.AngleInNullTwoPi(psi)
 
             'Now the angle between the next moving-direction and the positive x-axis is:
-            MyPhi = psi + alfa
+            Phi = psi + alfa
 
             'With these parameters, we can calculate the next Hit Point
             'and its Parameter NextT
-            Dim nextT As Decimal = ParameterOfNextHitPoint(MyT, MyPhi)
+            Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
 
             If IsNothing(UserEndposition) Then
                 UserEndposition = New ClsMathpoint(0, 0)
@@ -67,7 +67,7 @@ Public Class ClsOvalBilliardball
 
             'The Position von the next Hit Point is the Endposition
             'of this part of the Ball-Movement
-            Dim Userposition As ClsMathpoint = CalculateBallPositionFromT(nextT)
+            Dim Userposition As ClsMathpoint = CalculateBallPositionFromT(NextT)
 
             UserEndposition.X = Userposition.X
             UserEndposition.Y = Userposition.Y
@@ -81,10 +81,10 @@ Public Class ClsOvalBilliardball
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 
-    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal
+    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal
 
         Dim t As Decimal = SetUserStartposition(Mouseposition)
-        DrawUserStartposition(definitive)
+        DrawUserStartposition(IsDefinitive)
 
         'we need t for the Protocol
         Return t
@@ -98,14 +98,14 @@ Public Class ClsOvalBilliardball
         UserStartposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
         'Parameter of this Startpoint
-        MyT = MyMathhelper.CalculateAngleOfDirection(UserStartposition.X, UserStartposition.Y)
+        T = Mathhelper.CalculateAngleOfDirection(UserStartposition.X, UserStartposition.Y)
 
         'Now, the Startposition is set on the border of the Oval
-        Dim StartpointBall As ClsMathpoint = CalculateBallPositionFromT(MyT)
+        Dim StartpointBall As ClsMathpoint = CalculateBallPositionFromT(T)
         UserStartposition.X = StartpointBall.X
         UserStartposition.Y = StartpointBall.Y
 
-        Return MyT
+        Return T
 
     End Function
 
@@ -123,8 +123,8 @@ Public Class ClsOvalBilliardball
 
     End Sub
 
-    Private Sub DrawUserStartposition(definitive As Boolean)
-        If definitive Then
+    Private Sub DrawUserStartposition(IsDefinitive As Boolean)
+        If IsDefinitive Then
 
             'The Ball is drawn permanentely into the BitMap
             MyBmpGraphics.DrawPoint(UserStartposition, MyColor, Size)
@@ -137,13 +137,13 @@ Public Class ClsOvalBilliardball
         End If
     End Sub
 
-    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal _
+    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
 
 
         'The Endposition is definied by the angle phi of the next moving direction
         Dim phi As Decimal = SetUserEndposition(Mouseposition)
 
-        DrawUserEndPosition(definitive)
+        DrawUserEndPosition(IsDefinitive)
 
         'We need Phi to calculate Alfa and for the Procotol in the Phase Portrait
         Return phi
@@ -157,24 +157,24 @@ Public Class ClsOvalBilliardball
         UserEndposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
         'TempPhi is a provisional angle between the UserEndPosition and the x-axis
-        Dim TempPhi As Decimal = MyMathhelper.CalculateAngleOfDirection(UserEndposition.X, UserEndposition.Y)
+        Dim TempPhi As Decimal = Mathhelper.CalculateAngleOfDirection(UserEndposition.X, UserEndposition.Y)
         Dim Ballpoint As ClsMathpoint = CalculateBallPositionFromT(TempPhi)
         UserEndposition.X = Ballpoint.X
         UserEndposition.Y = Ballpoint.Y
 
         'With this Endposition, we calculate the definitive Angle phi
         'that is the Angle of the next moving-direction and the positive x-axis
-        Dim deltaX As Decimal = UserEndposition.X - UserStartposition.X
-        Dim deltaY As Decimal = UserEndposition.Y - UserStartposition.Y
-        Dim phi = MyMathhelper.CalculateAngleOfDirection(deltaX, deltaY)
+        Dim DeltaX As Decimal = UserEndposition.X - UserStartposition.X
+        Dim DeltaY As Decimal = UserEndposition.Y - UserStartposition.Y
+        Dim phi = Mathhelper.CalculateAngleOfDirection(DeltaX, DeltaY)
 
         Return phi
 
     End Function
 
-    Private Sub DrawUserEndPosition(definitive As Boolean)
+    Private Sub DrawUserEndPosition(IsDefinitive As Boolean)
 
-        If definitive Then
+        If IsDefinitive Then
 
             'The Endposition of the Ball is drawn permanentely into the BitMap
             MyBmpGraphics.DrawPoint(UserEndposition, MyColor, Size)
@@ -200,58 +200,58 @@ Public Class ClsOvalBilliardball
         Dim Startpoint As New ClsMathpoint
 
         'Parameter of the next Endpoint of the actual part of the Orbit
-        Dim nextT As Decimal
+        Dim NextT As Decimal
 
         'and the according EndPoint
         Dim Endpoint As New ClsMathpoint
 
 
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
-        Dim TempBallpoint As ClsMathpoint = CalculateBallPositionFromT(MyT)
-            Startpoint.X = TempBallpoint.X
-            Startpoint.Y = TempBallpoint.Y
+        Dim TempBallpoint As ClsMathpoint = CalculateBallPositionFromT(T)
+        Startpoint.X = TempBallpoint.X
+        Startpoint.Y = TempBallpoint.Y
 
-            'NextT is the Parameter of the EndPoint of the actual part of the Orbit
-            nextT = ParameterOfNextHitPoint(MyT, MyPhi)
-            TempBallpoint = CalculateBallPositionFromT(nextT)
-            Endpoint.X = TempBallpoint.X
-            Endpoint.Y = TempBallpoint.Y
+        'NextT is the Parameter of the EndPoint of the actual part of the Orbit
+        NextT = ParameterOfNextHitPoint(T, Phi)
+        TempBallpoint = CalculateBallPositionFromT(NextT)
+        Endpoint.X = TempBallpoint.X
+        Endpoint.Y = TempBallpoint.Y
 
-            'The Ball moves between these Points
-            MoveOnOrbitPart(Startpoint, Endpoint)
+        'The Ball moves between these Points
+        MoveOnOrbitPart(Startpoint, Endpoint)
 
-            'The EndPoint is then the StartPoint of the following part of the Orbit
-            MyT = nextT
-            Startpoint.X = Endpoint.X
+        'The EndPoint is then the StartPoint of the following part of the Orbit
+        T = NextT
+        Startpoint.X = Endpoint.X
             Startpoint.Y = Endpoint.Y
 
             'in addition, we calculate the angle of the following movement
-            MyPhi = CalculateNextPhi(MyT, MyPhi)
+            Phi = CalculateNextPhi(T, Phi)
 
 
     End Sub
 
     Public Overrides Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
 
-        MyT = ActualPoint.X
+        T = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y
 
         'first, we calculate the angle between tangent in the hit point
         'and the positive x-axis
-        Dim psi As Decimal = MyMathhelper.AngleInNullTwoPi(CalculatePsi(MyT))
+        Dim psi As Decimal = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
 
         'Now the angle between the next moving-direction and the positive x-axis is:
-        MyPhi = psi + alfa
+        Phi = psi + alfa
 
         'Parameter of the next Enpoint of the actual part of the Orbit
-        Dim nextT As Decimal = ParameterOfNextHitPoint(MyT, MyPhi)
+        Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
 
         'in addition, we calculate the angle of the following movement
-        MyPhi = CalculateNextPhi(nextT, MyPhi)
+        Phi = CalculateNextPhi(NextT, Phi)
 
-        alfa = CalculateAlfa(nextT, MyPhi)
+        alfa = CalculateAlfa(NextT, Phi)
 
-        Dim NextPoint As New ClsValuePair(nextT, alfa)
+        Dim NextPoint As New ClsValuePair(NextT, alfa)
 
         Return NextPoint
 
@@ -271,7 +271,7 @@ Public Class ClsOvalBilliardball
         Dim i As Integer = 0
 
         'The following Stepwide was defined by an Experiment
-        Dim Stepwide As Decimal = MyMathValuerange.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Decimal = MyMathInterval.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1
@@ -443,12 +443,12 @@ Public Class ClsOvalBilliardball
         Else
 
             'Calculate the Parameter T according to the Intersection Point
-            Dim nextT = CalculateTFromBallPosition(IntersectionPoint)
+            Dim NextT = CalculateTFromBallPosition(IntersectionPoint)
 
             'and make sure that it is in the ParameterValueRange
-            MyMathhelper.AngleInNullTwoPi(nextT)
+            Mathhelper.AngleInNullTwoPi(NextT)
 
-            Return nextT
+            Return NextT
 
         End If
 
@@ -475,26 +475,26 @@ Public Class ClsOvalBilliardball
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
         Dim psi As Decimal = CalculatePsi(t)
-        psi = MyMathhelper.AngleInNullTwoPi(psi)
+        psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'This gives the angle NextPhi - see math. doc
-        Dim nextPhi As Decimal = 2 * psi - phi
-        nextPhi = MyMathhelper.AngleInNullTwoPi(nextPhi)
+        Dim NextPhi As Decimal = 2 * psi - phi
+        NextPhi = Mathhelper.AngleInNullTwoPi(NextPhi)
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
-        If MyPhaseportraitGraphics IsNot Nothing Then
-            Dim Alfa As Decimal = CalculateAlfa(t, nextPhi)
-            MyPhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyT, Alfa), MyColor, p)
+        If PhaseportraitGraphics IsNot Nothing Then
+            Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
+            PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
             If MyValueProtocol IsNot Nothing Then
                 MyValueProtocol.Items.Add(FrmMain.LM.GetString(
                                           DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
-                                             MyT.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+                                             MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
                 MyValueProtocol.Refresh()
             End If
         End If
 
-        Return nextPhi
+        Return NextPhi
 
     End Function
 
@@ -504,11 +504,11 @@ Public Class ClsOvalBilliardball
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
         Dim psi As Decimal = CalculatePsi(t)
-        psi = MyMathhelper.AngleInNullTwoPi(psi)
+        psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'and then - see math. doc.
         Dim alfa As Decimal = phi - psi
-        alfa = MyMathhelper.AngleInNullTwoPi(alfa)
+        alfa = Mathhelper.AngleInNullTwoPi(alfa)
 
         Return alfa
 
@@ -520,7 +520,7 @@ Public Class ClsOvalBilliardball
         'and we have different cases
         Dim TempHitpoint As New ClsMathpoint
 
-        t = MyMathhelper.AngleInNullTwoPi(t)
+        t = Mathhelper.AngleInNullTwoPi(t)
         If (0 <= t And t <= Math.PI / 2) Or (3 * Math.PI / 2 <= t And t < 2 * Math.PI) Then
 
             'The TempHitPoint is on the Circle
@@ -534,7 +534,7 @@ Public Class ClsOvalBilliardball
         'in both cases
         TempHitpoint.Y = MyB * CDec(Math.Cos(t))
 
-        Dim psi As Decimal = MyMathhelper.CalculateAngleOfDirection(TempHitpoint.X, TempHitpoint.Y)
+        Dim psi As Decimal = Mathhelper.CalculateAngleOfDirection(TempHitpoint.X, TempHitpoint.Y)
 
         Return psi
 
@@ -548,7 +548,7 @@ Public Class ClsOvalBilliardball
         Dim TempMathpoint As New ClsMathpoint
         Dim m As Decimal = (MyA - MyB) / 2
 
-        t = MyMathhelper.AngleInNullTwoPi(t)
+        t = Mathhelper.AngleInNullTwoPi(t)
         If (0 <= t And t <= Math.PI / 2) Or (3 * Math.PI / 2 <= t And t < 2 * Math.PI) Then
 
             'The Point is on the Circle
@@ -578,11 +578,11 @@ Public Class ClsOvalBilliardball
         If Mathpoint.X >= m Then
 
             'The Point is on the Circle
-            TempT = MyMathhelper.CalculateAngleOfDirection((Mathpoint.X - m), Mathpoint.Y)
+            TempT = Mathhelper.CalculateAngleOfDirection((Mathpoint.X - m), Mathpoint.Y)
         Else
 
             'The Point is on the Ellipse
-            TempT = MyMathhelper.CalculateAngleOfDirection((Mathpoint.X - m) / MyA, Mathpoint.Y / MyB)
+            TempT = Mathhelper.CalculateAngleOfDirection((Mathpoint.X - m) / MyA, Mathpoint.Y / MyB)
         End If
 
         Return TempT

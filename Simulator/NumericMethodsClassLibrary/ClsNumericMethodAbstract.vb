@@ -1,14 +1,14 @@
 ﻿'This class is the abstract Spring Pendulum
 'and contains parameters, that are needed for all kind of spring pendulums
-'the iteration-Method is MustOverride
-'The real pendulums differ only in this Iteration-Method
+'the iteration-Method is "MustOverride"
+'The real pendulums differs only in this Iteration-Method
 'with maybe some more local parameters
 'to apply the numeric method for the iteration
 
-'Status Redesign Checked
+'Status Checked
 
-Public MustInherit Class ClsSpringPendulumAbstract
-    Implements ISpringPendulum
+Public MustInherit Class ClsNumericMethodAbstract
+    Implements INumericMethod
 
     'Step Width for the approximation
     Protected MyH As Decimal
@@ -25,7 +25,7 @@ Public MustInherit Class ClsSpringPendulumAbstract
     'and ActualParameter(1) is the Y-Position of the Pendulum
     Protected MyActualParameter As New ClsNTupel(2)
 
-    Property h As Decimal Implements ISpringPendulum.h
+    Property h As Decimal Implements INumericMethod.h
         Get
             h = MyH
         End Get
@@ -34,20 +34,20 @@ Public MustInherit Class ClsSpringPendulumAbstract
         End Set
     End Property
 
-    WriteOnly Property NumberOfApproxSteps As Integer Implements ISpringPendulum.NumberOfApproxSteps
+    WriteOnly Property NumberOfApproxSteps As Integer Implements INumericMethod.NumberOfApproxSteps
         Set(value As Integer)
             MyNumberOfApproxSteps = value
         End Set
     End Property
 
-    WriteOnly Property Amplitude As Decimal Implements ISpringPendulum.Amplitude
+    WriteOnly Property Amplitude As Decimal Implements INumericMethod.Amplitude
         Set(value As Decimal)
             MyAmplitude = value
             MyActualParameter.Component(1) = value
         End Set
     End Property
 
-    Property ActualParameter(index As Integer) As Decimal Implements ISpringPendulum.ActualParameter
+    Property ActualParameter(index As Integer) As Decimal Implements INumericMethod.ActualParameter
         Get
             ActualParameter = MyActualParameter.Component(index)
         End Get
@@ -56,6 +56,6 @@ Public MustInherit Class ClsSpringPendulumAbstract
         End Set
     End Property
 
-    Protected MustOverride Sub Iteration() Implements ISpringPendulum.Iteration
+    Protected MustOverride Sub Iteration() Implements INumericMethod.Iteration
 
 End Class

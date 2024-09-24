@@ -14,19 +14,19 @@ Public MustInherit Class ClsNewtonAbstract
     'How many steps should be iterated?
     Protected MyIterationDeepness As Integer
 
-    'Drawing MapCPlane
-    Protected MyBmpDiagram As Bitmap
-    Protected MyBmpGraphics As ClsGraphicTool
-
     'Drawing PicCPlane
     Protected MyPicDiagram As PictureBox
-    Protected MyPicGraphics As ClsGraphicTool
+    Protected PicGraphics As ClsGraphicTool
 
-    'Allowed Interval for the x-Values
-    Protected MyAllowedXRange As ClsInterval
+    'Drawing permanently into the C-Plane
+    Protected BmpDiagram As Bitmap
+    Protected BmpGraphics As ClsGraphicTool
 
-    'Allowed Interval for the y-Values
-    Protected MyAllowedYRange As ClsInterval
+    'ValueParameter Definition for the x-Values
+    Protected MyXValueParameter As ClsGeneralParameter
+
+    'ValueParameter Definition  for the y-Values
+    Protected MyYValueParameter As ClsGeneralParameter
 
     'the actual range for the x-coordinate
     Protected MyActualXRange As ClsInterval
@@ -69,11 +69,11 @@ Public MustInherit Class ClsNewtonAbstract
     Protected MyIsProtocol As Boolean
 
     'N (number of roots)
-    Protected Property MyUseN As Boolean
+    Protected Property MyIsUseN As Boolean
     Protected Property MyN As Integer
 
     'Parameter C
-    Protected Property MyUseC As Boolean
+    Protected Property MyIsUseC As Boolean
     Protected Property MyC As ClsComplexNumber
 
     'Mixing
@@ -86,6 +86,13 @@ Public MustInherit Class ClsNewtonAbstract
     Protected UnitRootCollection As Collection
 
     Public Sub New()
+
+        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+
+        MyActualXRange = MyXValueParameter.Range
+        MyActualYRange = MyYValueParameter.Range
+
         UnitRootCollection = New Collection
         Watch = New Stopwatch
     End Sub
@@ -102,23 +109,23 @@ Public MustInherit Class ClsNewtonAbstract
             MyPicDiagram.Height = Square
             MyPicDiagram.Width = Square
 
-            MyBmpDiagram = New Bitmap(Square, Square)
-            MyPicDiagram.Image = MyBmpDiagram
+            BmpDiagram = New Bitmap(Square, Square)
+            MyPicDiagram.Image = BmpDiagram
 
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyActualXRange, MyActualYRange)
+            PicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+            BmpGraphics = New ClsGraphicTool(BmpDiagram, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
-    ReadOnly Property AllowedXRange As ClsInterval Implements INewton.AllowedXRange
+    ReadOnly Property XValueParameter As ClsGeneralParameter Implements INewton.XValueParameter
         Get
-            AllowedXRange = MyAllowedXRange
+            XValueParameter = MyXValueParameter
         End Get
     End Property
 
-    ReadOnly Property AllowedYRange As ClsInterval Implements INewton.AllowedYRange
+    ReadOnly Property YValueParameter As ClsGeneralParameter Implements INewton.YValueParameter
         Get
-            AllowedYRange = MyAllowedYRange
+            YValueParameter = MyYValueParameter
         End Get
     End Property
 
@@ -128,8 +135,8 @@ Public MustInherit Class ClsNewtonAbstract
         End Get
         Set(value As ClsInterval)
             MyActualXRange = value
-            MyPicGraphics.MathXInterval = value
-            MyBmpGraphics.MathXInterval = value
+            PicGraphics.MathXInterval = value
+            BmpGraphics.MathXInterval = value
         End Set
     End Property
 
@@ -139,8 +146,8 @@ Public MustInherit Class ClsNewtonAbstract
         End Get
         Set(value As ClsInterval)
             MyActualYRange = value
-            MyPicGraphics.MathYInterval = value
-            MyBmpGraphics.MathYInterval = value
+            PicGraphics.MathYInterval = value
+            BmpGraphics.MathYInterval = value
         End Set
     End Property
 
@@ -177,22 +184,25 @@ Public MustInherit Class ClsNewtonAbstract
         End Set
     End Property
 
-    ReadOnly Property UseN As Boolean Implements INewton.UseN
+    ReadOnly Property IsUseN As Boolean Implements INewton.IsUseN
         Get
-            UseN = MyUseN
+            IsUseN = MyIsUseN
         End Get
     End Property
 
-    WriteOnly Property N As Integer Implements INewton.N
+    Property N As Integer Implements INewton.N
+        Get
+            N = MyN
+        End Get
         Set(value As Integer)
             MyN = value
             MyRadius = Math.Min(0.1, 1 - Math.Pow(2, -1 / MyN))
         End Set
     End Property
 
-    ReadOnly Property UseC As Boolean Implements INewton.UseC
+    ReadOnly Property IsUseC As Boolean Implements INewton.IsUseC
         Get
-            UseC = MyUseC
+            IsUseC = MyIsUseC
         End Get
     End Property
 
@@ -219,14 +229,14 @@ Public MustInherit Class ClsNewtonAbstract
         If ActualXRange.IsNumberInInterval(0) Then
 
             'Draw y-axis
-            MyBmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
+            BmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
                                              New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
         End If
 
         If ActualYRange.IsNumberInInterval(0) Then
 
             'Draw x-axis
-            MyBmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
+            BmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
                                          New ClsMathpoint(ActualXRange.B, 0), Color.Black, 1)
         End If
 
@@ -236,28 +246,28 @@ Public MustInherit Class ClsNewtonAbstract
 
     Public Sub ResetIteration() Implements INewton.ResetIteration
 
+        PrepareUnitRoots()
+
         'Clear MapCPlane
-        If MyBmpGraphics IsNot Nothing Then
-            MyBmpGraphics.Clear(Color.White)
+        If BmpGraphics IsNot Nothing Then
+            BmpGraphics.Clear(Color.White)
             DrawCoordinateSystem()
             DrawRoots(False)
         End If
+        MyPicDiagram.Refresh()
 
         MyTxtNumberofSteps.Text = "0"
         MyTxtElapsedTime.Text = "0"
-        L = 0
-        Watch.Reset()
-        ExaminatedPoints = 0
-
         'Clear Protocol
         If MyProtocolList IsNot Nothing Then
             MyProtocolList.Items.Clear()
         End If
 
-        MyPicDiagram.Refresh()
+        L = 0
+        Watch.Reset()
+        ExaminatedPoints = 0
 
         MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
     End Sub
 
 
@@ -275,7 +285,7 @@ Public MustInherit Class ClsNewtonAbstract
             Else
                 Col = MyRoot.GetColor(1)
             End If
-            MyBmpGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+            BmpGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
         Next
 
         MyPicDiagram.Refresh()
@@ -440,7 +450,7 @@ Public MustInherit Class ClsNewtonAbstract
         'Transform the PixelPoint to a Complex Number
         Dim MathStartpoint As ClsComplexNumber
 
-        With MyBmpGraphics.PixelToMathpoint(Startpoint)
+        With BmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
             MathStartpoint = New ClsComplexNumber(.X, .Y)
         End With
@@ -481,7 +491,7 @@ Public MustInherit Class ClsNewtonAbstract
             MyBrush = Brushes.Black
         End If
 
-        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        BmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
 
         'Protocol of the PixelStartpoint and the Endpoint as Mathpoint
         If MyIsProtocol Then
@@ -489,6 +499,8 @@ Public MustInherit Class ClsNewtonAbstract
                 ", " & Zi.X.ToString("N5") & ", " & Zi.Y.ToString("N5"))
         End If
     End Sub
+
+    MustOverride ReadOnly Property IsShowBasin As Boolean Implements INewton.IsShowBasin
 
     Public MustOverride Function StopCondition(Z As ClsComplexNumber) As Boolean
 

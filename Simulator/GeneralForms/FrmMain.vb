@@ -25,9 +25,8 @@ Public Class FrmMain
     Private Sub InitializeLanguage()
 
         MnuMain.Text = LM.GetString("MnuMain")
-        MnuFile.Text = LM.GetString("MnuFile")
-        MnuClose.Text = LM.GetString("MnuClose")
-        MnuUnimodal.Text = LM.GetString("MnuUnimodal")
+        MnuLanguage.Text = LM.GetString("MnuLanguage")
+        MnuGrowthModels.Text = LM.GetString("MnuGrowthModels")
         MnuIteration.Text = LM.GetString("MnuIteration")
         MnuSensitivity.Text = LM.GetString("MnuSensitivity")
         MnuHistogram.Text = LM.GetString("MnuHistogram")
@@ -35,8 +34,9 @@ Public Class FrmMain
         MnuFeigenbaum.Text = LM.GetString("MnuFeigenbaum")
         MnuMechanics.Text = LM.GetString("MnuMechanics")
         MnuBilliard.Text = LM.GetString("MnuBilliard")
+        MnuBilliardTable.Text = LM.GetString("BilliardTable")
         MnuPendulum.Text = LM.GetString("MnuPendulum")
-        MnuCDiagram.Text = LM.GetString("MnuCDiagramBilliard")
+        MnuCDiagram.Text = LM.GetString("MnuCDiagram")
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
         MnuNewton.Text = LM.GetString("MnuNewton")
         MnuJuliaSet.Text = LM.GetString("MnuJuliaSet")
@@ -51,10 +51,6 @@ Public Class FrmMain
         Text = LM.GetString("Simulator")
         MnuNumericMethods.Text = FrmMain.LM.GetString("NumericMethods")
 
-    End Sub
-
-    Private Sub MnuClose_Click(sender As Object, e As EventArgs) Handles MnuClose.Click
-        Close()
     End Sub
 
     Private Sub MnuIteration_Click(sender As Object, e As EventArgs) Handles MnuIteration.Click
@@ -93,7 +89,7 @@ Public Class FrmMain
         FrmInfo.Show()
     End Sub
 
-    Private Sub MnuBilliard_Click(sender As Object, e As EventArgs) Handles MnuBilliard.Click
+    Private Sub MnuBilliardTable_Click(sender As Object, e As EventArgs) Handles MnuBilliardTable.Click
         FrmBilliardtable.Show()
     End Sub
 
@@ -110,7 +106,7 @@ Public Class FrmMain
         InitializeLanguage()
     End Sub
 
-    Private Sub MnuDeutsch_Click(sender As Object, e As EventArgs) Handles MnuGerman.Click
+    Private Sub MnuGerman_Click(sender As Object, e As EventArgs) Handles MnuGerman.Click
         LM.Language = ClsLanguageManager.LanguageEnum.Deutsch
         InitializeLanguage()
     End Sub

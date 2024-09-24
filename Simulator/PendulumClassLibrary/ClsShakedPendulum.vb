@@ -12,6 +12,8 @@ Public Class ClsShakedPendulum
     Inherits ClsPendulumAbstract
 
 
+    Private ValueParameter(2) As ClsGeneralParameter
+
     'Spring constant of the shaking pendulum
     'set as additional parameter
     Private MyD As Decimal
@@ -36,30 +38,32 @@ Public Class ClsShakedPendulum
         MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": -- "
         MyLabelProtocol = FrmMain.LM.GetString("Protocol") & ": u1, v1, u2, v2, Etot"
 
-        MyValueParameterDefinition = New List(Of ClsValueParameter)
-
-        Dim ValueParameter(2) As ClsValueParameter
+        MyValueParameterDefinition = New List(Of ClsGeneralParameter)
 
         'Inizialize all parameters - variables and constants
         'Tag is the Number of the Label in the Pendulum Form
 
-        'l
-        ValueParameter(0) = New ClsValueParameter(1, "l", New ClsInterval(CDec(0.05), CDec(0.98)))
+        'L
+        ValueParameter(0) = New ClsGeneralParameter(1, "l", New ClsInterval(CDec(0.05), CDec(0.98)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.5))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'x
-        ValueParameter(1) = New ClsValueParameter(2, "x", New ClsInterval(-MaxX, MaxX))
+        ValueParameter(1) = New ClsGeneralParameter(2, "x", New ClsInterval(-MaxX, MaxX),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, MaxX / 2)
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi
-        ValueParameter(2) = New ClsValueParameter(3, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
+        ValueParameter(2) = New ClsGeneralParameter(3, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 60  'that means MyM in the middle
-        MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
-                                                      FrmMain.LM.GetString("SpringConstant"), New ClsInterval(20, 100))
+        MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
+                                                      FrmMain.LM.GetString("SpringConstant"), New ClsInterval(20, 100),
+                                                      ClsGeneralParameter.TypeOfParameterEnum.Formula)
         MyD = MyAdditionalParameterValue
 
         'Vectors
@@ -233,12 +237,12 @@ Public Class ClsShakedPendulum
 
         'Standardvalues
         With MyCalculationConstants
-            .Component(0) = CDec(0.5)
+            .Component(0) = ValueParameter(0).DefaultValue 'L
         End With
 
         With MyCalculationVariables
-            .Component(0) = MaxX / 2 'x
-            .Component(1) = CDec(Math.PI / 4) 'Phi
+            .Component(0) = ValueParameter(1).DefaultValue 'x
+            .Component(1) = ValueParameter(2).DefaultValue 'Phi
             u1 = .Component(0)
             v1 = 0
             u2 = .Component(1)

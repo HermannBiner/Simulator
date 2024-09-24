@@ -10,7 +10,7 @@
 'Therefore, more cases of unimodal functions could be easely programmed
 'just by implementing this interface
 
-'Status Redesign Tested
+'Status Checked
 
 Imports System.Globalization
 Imports System.Reflection
@@ -21,40 +21,29 @@ Public Class FrmHistogram
     Private IsFormLoaded As Boolean
     Private LM As ClsLanguageManager
 
-    'Prepare basic objects
-    Private DS As IIteration
-
     'Histogram Controller
-    Private HistogramController As ClsHistogramController
+    Private FC As ClsHistogramController
 
     'SECTOR INITIALIZATION
-
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
-
     End Sub
 
     Private Sub FrmHistogramm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         IsFormLoaded = False
-
         'Form Controller
-        HistogramController = New ClsHistogramController
+        FC = New ClsHistogramController(Me)
 
         'Initialize Language
         InitializeLanguage()
 
-        'Fill DS-List into CboFunction
-        FillDynamicSystem()
-
+        FC.FillDynamicSystem()
     End Sub
 
     Private Sub FrmHistogram_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        CboFunction.SelectedIndex = 0
-        SetDS()
+        FC.SetDS()
         IsFormLoaded = True
     End Sub
 
@@ -67,201 +56,55 @@ Public Class FrmHistogram
         BtnStop.Text = FrmMain.LM.GetString("Stop")
         LblStartValue.Text = FrmMain.LM.GetString("StartValue") & " ="
         LblParameter.Text = FrmMain.LM.GetString("Parameter") & " = "
-
-    End Sub
-
-    Private Sub FillDynamicSystem()
-
-        CboFunction.Items.Clear()
-
-        'Add the classes implementing IIteration
-        'to the Combobox CboPendulum by Reflection
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
-                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If types.Count > 0 Then
-            Dim DSName As String
-            For Each type In types
-
-                'GetString is calle dwith the option IsClass = true
-                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
-                'the name of the Class implementing an Interface is used as default
-                'suppressing the extension "Cls"
-                DSName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(DSName)
-            Next
-        Else
-            Throw New ArgumentNullException("MissingImplementation")
-        End If
-    End Sub
-
-    Private Sub SetDS()
-        'This sets the type of Iterator by Reflection
-
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                             Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
-                             t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If CboFunction.SelectedIndex >= 0 Then
-
-            Dim SelectedName As String = CboFunction.SelectedItem.ToString
-
-            If types.Count > 0 Then
-                For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
-                        DS = CType(Activator.CreateInstance(type), IIteration)
-                    End If
-                Next
-            End If
-
-        End If
-
-        'As standard, the function is repeated 1x in each iteration step
-        InitializeDS()
-
-        'The parameter and startvalue are depending on the type of iteration
-        SetDefaultUserData()
-
-        'If the type of iteration changes, everything has to be reset
-        'especially the status parameters
-        ResetIteration()
-    End Sub
-
-    'This routine sets the DS parameters to a default
-    'the trigger is, that the DS has changed
-    Private Sub InitializeDS()
-
-        DS.Power = 1
-
-        With HistogramController
-            .DS = DS
-            .LblN = LblSteps
-            .PicDiagram = PicDiagram
-            .IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        End With
-    End Sub
-
-    'This routine sets the user data to the default
-    'the trigger is, that the DS has changed
-    Private Sub SetDefaultUserData()
-        'default settings
-        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
-        TxtStartValue.Text = (DS.IterationInterval.A +
-            (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
-
-    End Sub
-
-    'This routine reset all iteration parameters
-    'except user data and DS parameter
-    'the meaning is, that DS has not changed
-    'and the iteration is newly started
-    Private Sub ResetIteration()
-
-        'Clear display
-        HistogramController.ResetIteration()
-        BtnStart.Text = FrmMain.LM.GetString("Start")
+        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
 
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         If IsFormLoaded Then
-            ResetIteration()
+            FC.ResetIteration()
+        End If
+    End Sub
+
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            FC.ResetIteration()
+            FC.SetDefaultUserData()
         End If
     End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
 
         If IsFormLoaded Then
-            SetDS()
+            FC.SetDS()
         End If
     End Sub
 
-    Private Sub TxtParameter_TextChanged(sender As Object, e As EventArgs) Handles TxtParameter.TextChanged
+    Private Sub TxtParameter_LostFocus(sender As Object, e As EventArgs) Handles TxtParameter.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtStartWert_TextChanged(sender As Object, e As EventArgs) Handles TxtStartValue.TextChanged
+    Private Sub TxtStartWert_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
     'SECTOR HISTOGRAM
 
-    Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then
-
-            With HistogramController
-
-                If .IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
-                    'Check User Data
-                    If IsUserDataOK() Then
-
-                        'Set Ds Parameters
-                        DS.Parameter = CDec(TxtParameter.Text)
-                        .StartValue = CDec(TxtStartValue.Text)
-                        .IterationStatus = ClsDynamics.EnIterationStatus.Ready
-
-                        If DS.IsBehaviourChaotic() Then
-                            'OK
-                        Else
-                            'nothing to do, a message is already generated
-                        End If
-
-                    Else
-                        'nothing - Iterationstatus stays stopped
-                    End If
-                End If
-
-                If .IterationStatus = ClsDynamics.EnIterationStatus.Ready _
-                Or .IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
-
-                    .IterationStatus = ClsDynamics.EnIterationStatus.Running
-
-                    BtnStart.Text = FrmMain.LM.GetString("Continue")
-                    BtnStart.Enabled = False
-                    BtnReset.Enabled = False
-
-                    Application.DoEvents()
-
-                    'Iteration loop
-                    Await .IterationLoop()
-
-                Else
-                    SetDefaultUserData()
-                End If
-            End With
+            FC.StartIteration()
         End If
-
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
-
         If IsFormLoaded Then
-
-            'the iteration is running and should be stopped
-            HistogramController.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
-
-            BtnStart.Enabled = True
-            BtnReset.Enabled = True
+            FC.StopIteration()
         End If
-
     End Sub
-
-    Private Function IsUserDataOK() As Boolean
-
-        'Is the value of TxtParameter in the Iteration Interval?
-        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim CheckStartValue = New ClsCheckUserData(TxtStartValue, DS.IterationInterval)
-
-        Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
-
-    End Function
-
 End Class

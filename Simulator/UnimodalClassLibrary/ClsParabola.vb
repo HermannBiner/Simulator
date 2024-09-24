@@ -2,7 +2,7 @@
 'with the Iteration Formula: f(x) = 1 - a*x*x, x in [-1,1], a in ]0,2]
 'and "knows" everything about this kind of iteration
 
-'Status Redesign Tested
+'Status Checked
 
 Public Class ClsParabola
     Inherits ClsIterationAbstract
@@ -10,10 +10,14 @@ Public Class ClsParabola
     Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
-        MyParameterInterval = New ClsInterval(0, 2)
-        MyIterationInterval = New ClsInterval(-1, 1)
+        MyFormulaParameter = New ClsGeneralParameter(1, "Parameter a", New ClsInterval(0, 2),
+                                                     ClsGeneralParameter.TypeOfParameterEnum.Formula, 2)
+
+        MyValueParameter = New ClsGeneralParameter(2, "Value x", New ClsInterval(-1, 1),
+                                                   ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(0.314159))
+
         MyCriticalPoint = 0
-        MyChaoticParameter = 2
+        MyChaoticParameterValue = 2
 
         'Setting split points to be drawn in the image
         MySplitpoints = New List(Of Decimal) From {
@@ -29,7 +33,7 @@ Public Class ClsParabola
     Protected Overrides Function F(x As Decimal) As Decimal
 
         'This is the original iteration function
-        Return 1 - (MyParameter * x * x)
+        Return 1 - (MyParameterA * x * x)
 
     End Function
 

@@ -16,47 +16,30 @@ Public Class FrmJulia
 
     'Private global variables
     Private IsFormLoaded As Boolean
-    Private JuliaController As ClsJuliaIterationController
-
-    Private DiagramAreaSelector As ClsDiagramAreaSelector
-
-    'Prepare basic objects
-    Private DS As IJulia
-
+    Private FC As ClsJuliaIterationController
 
     'SECTOR INITIALIZATION
-
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
-
     End Sub
 
     Private Sub FrmJuliaSet_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         'Generate objects
         IsFormLoaded = False
-
-        JuliaController = New ClsJuliaIterationController
-
-        DiagramAreaSelector = New ClsDiagramAreaSelector
+        FC = New ClsJuliaIterationController(Me)
 
         'Initialize Language
         InitializeLanguage()
-
-        FillDynamicSystem()
-
+        FC.FillDynamicSystem()
     End Sub
 
     Private Sub FrmJuliaSet_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        CboFunction.SelectedIndex = 0
-        CboN.SelectedIndex = 0
-
-        SetDS()
+        FC.SetDS()
         IsFormLoaded = True
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -73,261 +56,56 @@ Public Class FrmJulia
         OptSystem.Text = FrmMain.LM.GetString("System")
         OptUser.Text = FrmMain.LM.GetString("UserDefined")
         ChkTrack.Text = FrmMain.LM.GetString("CTrack")
+        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
 
     End Sub
 
-    Private Sub FillDynamicSystem()
 
-        CboFunction.Items.Clear()
 
-        'Add the classes implementing IPolynom
-        'to the Combobox CboFunction by Reflection
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IJulia)) AndAlso
-                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If types.Count > 0 Then
-            Dim JuliaName As String
-            For Each type In types
-
-                'GetString is calle dwith the option IsClass = true
-                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
-                'the name of the Class implementing an Interface is used as default
-                'suppressing the extension "Cls"
-                JuliaName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(JuliaName)
-            Next
-        Else
-            Throw New ArgumentNullException("MissingImplementation")
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            FC.ResetIteration()
+            FC.SetDefaultUserData()
         End If
-
-    End Sub
-
-    Private Sub SetDS()
-
-        'This sets the type of ClsJulia by Reflection
-
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IJulia)) AndAlso
-                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If CboFunction.SelectedIndex >= 0 Then
-
-            Dim SelectedName As String = CboFunction.SelectedItem.ToString
-
-            If types.Count > 0 Then
-                For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
-                        DS = CType(Activator.CreateInstance(type), IJulia)
-                    End If
-                Next
-            End If
-        End If
-
-        InitializeDS()
-
-        SetDefaultUserData()
-
-        ResetIteration()
-
-    End Sub
-
-    Private Sub InitializeDS()
-
-        With DS
-            .PicDiagram = PicDiagram
-
-            .ActualXRange = .AllowedXRange
-            .ActualYRange = .AllowedYRange
-
-            .TxtNumberOfSteps = TxtSteps
-            .TxtElapsedTime = TxtTime
-            .N = CInt(CboN.SelectedItem)
-            .ProcotolList = LstProtocol
-            .IsProtocol = ChkProtocol.Checked
-            .RedPercent = TrbRed.Value / 10
-            .GreenPercent = TrbGreen.Value / 10
-            .BluePercent = TrbBlue.Value / 10
-        End With
-
-        With DiagramAreaSelector
-            .XRange = DS.AllowedXRange
-            .YRange = DS.AllowedYRange
-            .PicDiagram = PicDiagram
-            .TxtXMin = TxtXMin
-            .TxtXMax = TxtXMax
-            .TxtYMin = TxtYMin
-            .TxtYMax = TxtYMax
-        End With
-
-    End Sub
-
-    Private Sub SetDefaultUserData()
-
-        TxtA.Text = "-0.2"
-        TxtB.Text = "0.7"
-        With DS
-            TxtXMin.Text = .ActualXRange.A.ToString(CultureInfo.CurrentCulture)
-            TxtXMax.Text = .ActualXRange.B.ToString(CultureInfo.CurrentCulture)
-            TxtYMin.Text = .ActualYRange.A.ToString(CultureInfo.CurrentCulture)
-            TxtYMax.Text = .ActualYRange.B.ToString(CultureInfo.CurrentCulture)
-            SetDelta()
-        End With
-
-    End Sub
-
-    Private Sub ResetIteration()
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        DS.ResetIteration()
-        ChkTrack.Visible = False
-        ChkTrack.Checked = False
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         If IsFormLoaded Then
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
         If IsFormLoaded Then
-            SetDS()
+            FC.SetDS()
         End If
-
     End Sub
 
 
     'SECTOR ITERATION
 
-    Private Async Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then
-            If ChkTrack.Checked Then
-
-                DS.C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
-                ShowCTrack()
-
-            Else
-                If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
-
-                    'the iteration was stopped or reset
-                    'and should start from the beginning
-                    If IsUserDataOK() Then
-                        ResetIteration()
-                        DiagramAreaSelector.IsActivated = False
-                        BtnStart.Text = FrmMain.LM.GetString("Continue")
-
-                        With DS
-                            .IterationStatus = ClsDynamics.EnIterationStatus.Ready
-                            .ActualXRange = New ClsInterval(CDec(TxtXMin.Text), CDec(TxtXMax.Text))
-                            .ActualYRange = New ClsInterval(CDec(TxtYMin.Text), CDec(TxtYMax.Text))
-                            DiagramAreaSelector.UserXRange = .ActualXRange
-                            DiagramAreaSelector.UserYRange = .ActualYRange
-
-                            'Check if c=a+ib is a complex number and part if the square ActualXRange X ActualYRange
-                            'if not, the standard value is set: c=i
-                            If IsCParameterOK() Then
-                                DS.C = New ClsComplexNumber(CDbl(TxtA.Text), CDbl(TxtB.Text))
-                            End If
-                            .UseSystemColors = OptSystem.Checked
-                        End With
-
-                        If OptSystem.Checked Then
-                            TrbBlue.Visible = False
-                            TrbGreen.Visible = False
-                            TrbRed.Visible = False
-                            PicBright.Visible = False
-                            PicDark.Visible = False
-                        Else
-                            TrbBlue.Visible = True
-                            TrbGreen.Visible = True
-                            TrbRed.Visible = True
-                            PicBright.Visible = True
-                            PicDark.Visible = True
-                            SetColors()
-                        End If
-
-                    End If
-                End If
-
-                If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready _
-                    Or DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
-                    DS.IterationStatus = ClsDynamics.EnIterationStatus.Running
-
-                    BtnStart.Enabled = False
-                    BtnReset.Enabled = False
-                    ChkProtocol.Enabled = False
-
-                    Await DS.GenerateImage()
-
-                End If
-
-                BtnStart.Text = FrmMain.LM.GetString("Start")
-                BtnStart.Enabled = True
-                BtnReset.Enabled = True
-
-                If DS.IsTrackImplemented Then
-                    ChkTrack.Visible = True
-                End If
-                DiagramAreaSelector.IsActivated = True
-
-            End If
+            FC.StartIteration()
         End If
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
         If IsFormLoaded Then
-            'the iteration was running and is interrupted
-            DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
-            'the iteration is stooped by reset the iteration
-
-            BtnStart.Enabled = True
-            BtnReset.Enabled = True
-            ChkProtocol.Enabled = True
+            FC.StopIteration()
         End If
-
     End Sub
-
-    Private Sub ShowCTrack()
-        DS.ShowCTrack()
-    End Sub
-
-    'CHECK USER RANGES AND SET X- AND Y- RANGE
-
-    Private Function IsUserDataOK() As Boolean
-
-        Dim CheckXUserData As New ClsCheckUserData(TxtXMin, TxtXMax, DS.AllowedXRange)
-        Dim CheckYUserData As New ClsCheckUserData(TxtYMin, TxtYMax, DS.AllowedYRange)
-
-        Return CheckXUserData.IsIntervalAllowed And CheckYUserData.IsIntervalAllowed
-
-    End Function
-
-    'Checks the Parameter C
-    Private Function IsCParameterOK() As Boolean
-
-        Dim CheckParameterA As New ClsCheckUserData(TxtA, DS.AllowedXRange)
-        Dim CheckParameterB As New ClsCheckUserData(TxtB, DS.AllowedYRange)
-
-        Return CheckParameterA.IsTxtValueAllowed And CheckParameterB.IsTxtValueAllowed
-    End Function
 
     Private Sub CboN_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboN.SelectedIndexChanged
         If IsFormLoaded Then
-            If CboN.SelectedIndex >= 0 Then
-                DS.N = CInt(CboN.SelectedItem)
-            End If
-            SetDefaultUserData()
-            ResetIteration()
+            FC.SetExponent()
         End If
     End Sub
-
 
     Private Sub TxtA_LostFocus(sender As Object, e As EventArgs) Handles TxtA.LostFocus
         If IsFormLoaded Then
             If Not ChkTrack.Checked Then
-                SetDefaultUserData()
-                ResetIteration()
+                FC.ResetIteration()
             End If
         End If
     End Sub
@@ -335,84 +113,76 @@ Public Class FrmJulia
     Private Sub TxtB_LostFocus(sender As Object, e As EventArgs) Handles TxtB.LostFocus
         If IsFormLoaded Then
             If Not ChkTrack.Checked Then
-                SetDefaultUserData()
-                ResetIteration()
+                FC.ResetIteration()
             End If
         End If
     End Sub
 
     Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
         If IsFormLoaded Then
-            SetDelta()
+            FC.SetDelta()
         End If
     End Sub
 
     Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
         If IsFormLoaded Then
-            SetDelta()
+            FC.SetDelta()
         End If
     End Sub
 
     Private Sub TxtYMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
         If IsFormLoaded Then
-            SetDelta()
+            FC.SetDelta()
         End If
     End Sub
 
     Private Sub TxtYMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
         If IsFormLoaded Then
-            SetDelta()
+            FC.SetDelta()
         End If
     End Sub
 
-    Private Sub SetDelta()
-        If IsNumeric(TxtXMax.Text) And IsNumeric(TxtXMin.Text) Then
-            TxtDeltaX.Text = "Delta = " & (CDec(TxtXMax.Text) - CDec(TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
-        End If
-        If IsNumeric(TxtYMax.Text) And IsNumeric(TxtYMin.Text) Then
-            TxtDeltaY.Text = "Delta = " & (CDec(TxtYMax.Text) - CDec(TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
-        End If
-    End Sub
 
-    Private Sub TrbBlue_ValueChanged(sender As Object, e As EventArgs) Handles TrbBlue.ValueChanged
+    Private Sub TrbBlue_Scroll(sender As Object, e As EventArgs) Handles TrbBlue.Scroll
         If IsFormLoaded Then
-            DS.BluePercent = TrbBlue.Value / 10
-            SetColors()
+            FC.SetColors()
         End If
     End Sub
 
-    Private Sub TrbGreen_ValueChanged(sender As Object, e As EventArgs) Handles TrbGreen.ValueChanged
+    Private Sub TrbGreen_Scroll(sender As Object, e As EventArgs) Handles TrbGreen.Scroll
         If IsFormLoaded Then
-            DS.GreenPercent = TrbGreen.Value / 10
-            SetColors()
+            FC.SetColors()
         End If
     End Sub
 
-    Private Sub TrbRed_ValueChanged(sender As Object, e As EventArgs) Handles TrbRed.ValueChanged
+    Private Sub TrbRed_Scroll(sender As Object, e As EventArgs) Handles TrbRed.Scroll
         If IsFormLoaded Then
-            DS.RedPercent = TrbRed.Value / 10
-            SetColors()
+            FC.SetColors()
         End If
     End Sub
 
-    Private Sub SetColors()
-        PicBright.BackColor = Color.FromArgb(255, CInt(255 * TrbRed.Value / 10), CInt(255 * TrbGreen.Value / 10),
-                                             CInt(255 * TrbBlue.Value / 10))
-        PicDark.BackColor = Color.FromArgb(255, CInt(150 * TrbRed.Value / 10), CInt(150 * TrbGreen.Value / 10),
-                                             CInt(150 * TrbBlue.Value / 10))
-    End Sub
 
     Private Sub OptSystem_CheckedChanged(sender As Object, e As EventArgs) Handles OptSystem.CheckedChanged
         If IsFormLoaded Then
-            SetDefaultUserData()
-            ResetIteration()
+            If OptSystem.Checked Then
+                FC.SetDefaultUserData()
+                FC.ResetIteration()
+            End If
         End If
     End Sub
 
     Private Sub OptUser_CheckedChanged(sender As Object, e As EventArgs) Handles OptUser.CheckedChanged
         If IsFormLoaded Then
-            SetDefaultUserData()
-            ResetIteration()
+            If OptUser.Checked Then
+                FC.SetDefaultUserData()
+                FC.ResetIteration()
+            End If
+        End If
+    End Sub
+
+    Private Sub CboSamples_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboJuliaSamples.SelectedIndexChanged
+        If IsFormLoaded Then
+            FC.SetSample()
         End If
     End Sub
 End Class

@@ -62,6 +62,9 @@ Partial Class FrmJulia
         OptSystem = New RadioButton()
         OptUser = New RadioButton()
         ChkTrack = New CheckBox()
+        BtnDefault = New Button()
+        CboJuliaSamples = New ComboBox()
+        LblJuliaSets = New Label()
         CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbRed, ComponentModel.ISupportInitialize).BeginInit()
         CType(TrbGreen, ComponentModel.ISupportInitialize).BeginInit()
@@ -73,212 +76,212 @@ Partial Class FrmJulia
         ' 
         ' PicDiagram
         ' 
-        PicDiagram.Location = New Point(-2, 15)
-        PicDiagram.Margin = New Padding(4)
+        PicDiagram.Location = New Point(-1, 7)
+        PicDiagram.Margin = New Padding(2)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1398, 1587)
+        PicDiagram.Size = New Size(800, 800)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
         ' TxtTime
         ' 
-        TxtTime.Location = New Point(1824, 966)
-        TxtTime.Margin = New Padding(4, 2, 4, 2)
+        TxtTime.Location = New Point(1012, 480)
+        TxtTime.Margin = New Padding(2, 1, 2, 1)
         TxtTime.Name = "TxtTime"
-        TxtTime.Size = New Size(214, 39)
+        TxtTime.Size = New Size(111, 23)
         TxtTime.TabIndex = 62
         ' 
         ' TxtSteps
         ' 
-        TxtSteps.Location = New Point(1543, 966)
-        TxtSteps.Margin = New Padding(4, 2, 4, 2)
+        TxtSteps.Location = New Point(861, 480)
+        TxtSteps.Margin = New Padding(2, 1, 2, 1)
         TxtSteps.Name = "TxtSteps"
-        TxtSteps.Size = New Size(177, 39)
+        TxtSteps.Size = New Size(97, 23)
         TxtSteps.TabIndex = 61
         ' 
         ' LblTime
         ' 
         LblTime.AutoSize = True
-        LblTime.Location = New Point(1737, 972)
-        LblTime.Margin = New Padding(4, 0, 4, 0)
+        LblTime.Location = New Point(965, 483)
+        LblTime.Margin = New Padding(2, 0, 2, 0)
         LblTime.Name = "LblTime"
-        LblTime.Size = New Size(67, 32)
+        LblTime.Size = New Size(33, 15)
         LblTime.TabIndex = 60
         LblTime.Text = "Time"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(1450, 972)
-        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Location = New Point(811, 483)
+        LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(71, 32)
+        LblNumberOfSteps.Size = New Size(35, 15)
         LblNumberOfSteps.TabIndex = 59
         LblNumberOfSteps.Text = "Steps"
         ' 
         ' LblI
         ' 
         LblI.AutoSize = True
-        LblI.Location = New Point(1766, 88)
-        LblI.Margin = New Padding(4, 0, 4, 0)
+        LblI.Location = New Point(978, 42)
+        LblI.Margin = New Padding(2, 0, 2, 0)
         LblI.Name = "LblI"
-        LblI.Size = New Size(43, 32)
+        LblI.Size = New Size(21, 15)
         LblI.TabIndex = 58
         LblI.Text = "+ i"
         ' 
         ' LblC
         ' 
         LblC.AutoSize = True
-        LblC.Location = New Point(1450, 85)
-        LblC.Margin = New Padding(4, 0, 4, 0)
+        LblC.Location = New Point(808, 41)
+        LblC.Margin = New Padding(2, 0, 2, 0)
         LblC.Name = "LblC"
-        LblC.Size = New Size(48, 32)
+        LblC.Size = New Size(24, 15)
         LblC.TabIndex = 57
         LblC.Text = "c ="
         ' 
         ' TxtA
         ' 
-        TxtA.Location = New Point(1543, 81)
-        TxtA.Margin = New Padding(4, 2, 4, 2)
+        TxtA.Location = New Point(858, 39)
+        TxtA.Margin = New Padding(2, 1, 2, 1)
         TxtA.Name = "TxtA"
-        TxtA.Size = New Size(214, 39)
+        TxtA.Size = New Size(117, 23)
         TxtA.TabIndex = 56
         TxtA.Text = "0"
         ' 
         ' TxtB
         ' 
-        TxtB.Location = New Point(1824, 81)
-        TxtB.Margin = New Padding(4, 2, 4, 2)
+        TxtB.Location = New Point(1009, 39)
+        TxtB.Margin = New Padding(2, 1, 2, 1)
         TxtB.Name = "TxtB"
-        TxtB.Size = New Size(214, 39)
+        TxtB.Size = New Size(117, 23)
         TxtB.TabIndex = 55
         TxtB.Text = "0"
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1443, 1126)
-        BtnStop.Margin = New Padding(4)
+        BtnStop.Location = New Point(804, 546)
+        BtnStop.Margin = New Padding(2)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(594, 75)
+        BtnStop.Size = New Size(320, 34)
         BtnStop.TabIndex = 54
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1443, 1030)
-        BtnStart.Margin = New Padding(4)
+        BtnStart.Location = New Point(804, 508)
+        BtnStart.Margin = New Padding(2)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(594, 75)
+        BtnStart.Size = New Size(320, 34)
         BtnStart.TabIndex = 53
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
         ' 
         ' TxtDeltaY
         ' 
-        TxtDeltaY.Location = New Point(1543, 402)
-        TxtDeltaY.Margin = New Padding(4)
+        TxtDeltaY.Location = New Point(858, 228)
+        TxtDeltaY.Margin = New Padding(2)
         TxtDeltaY.Name = "TxtDeltaY"
-        TxtDeltaY.Size = New Size(494, 39)
+        TxtDeltaY.Size = New Size(268, 23)
         TxtDeltaY.TabIndex = 50
         ' 
         ' LblDeltaY
         ' 
         LblDeltaY.AutoSize = True
-        LblDeltaY.Location = New Point(1443, 408)
-        LblDeltaY.Margin = New Padding(4, 0, 4, 0)
+        LblDeltaY.Location = New Point(804, 231)
+        LblDeltaY.Margin = New Padding(2, 0, 2, 0)
         LblDeltaY.Name = "LblDeltaY"
-        LblDeltaY.Size = New Size(83, 32)
+        LblDeltaY.Size = New Size(41, 15)
         LblDeltaY.TabIndex = 49
         LblDeltaY.Text = "DeltaY"
         ' 
         ' TxtYMax
         ' 
-        TxtYMax.Location = New Point(1543, 349)
-        TxtYMax.Margin = New Padding(4)
+        TxtYMax.Location = New Point(858, 204)
+        TxtYMax.Margin = New Padding(2)
         TxtYMax.Name = "TxtYMax"
-        TxtYMax.Size = New Size(494, 39)
+        TxtYMax.Size = New Size(268, 23)
         TxtYMax.TabIndex = 48
         ' 
         ' LblYMax
         ' 
         LblYMax.AutoSize = True
-        LblYMax.Location = New Point(1443, 355)
-        LblYMax.Margin = New Padding(4, 0, 4, 0)
+        LblYMax.Location = New Point(804, 206)
+        LblYMax.Margin = New Padding(2, 0, 2, 0)
         LblYMax.Name = "LblYMax"
-        LblYMax.Size = New Size(72, 32)
+        LblYMax.Size = New Size(37, 15)
         LblYMax.TabIndex = 47
         LblYMax.Text = "YMax"
         ' 
         ' TxtYMin
         ' 
-        TxtYMin.Location = New Point(1543, 294)
-        TxtYMin.Margin = New Padding(4)
+        TxtYMin.Location = New Point(858, 178)
+        TxtYMin.Margin = New Padding(2)
         TxtYMin.Name = "TxtYMin"
-        TxtYMin.Size = New Size(494, 39)
+        TxtYMin.Size = New Size(268, 23)
         TxtYMin.TabIndex = 46
         ' 
         ' LblYMin
         ' 
         LblYMin.AutoSize = True
-        LblYMin.Location = New Point(1443, 300)
-        LblYMin.Margin = New Padding(4, 0, 4, 0)
+        LblYMin.Location = New Point(804, 181)
+        LblYMin.Margin = New Padding(2, 0, 2, 0)
         LblYMin.Name = "LblYMin"
-        LblYMin.Size = New Size(69, 32)
+        LblYMin.Size = New Size(35, 15)
         LblYMin.TabIndex = 45
         LblYMin.Text = "YMin"
         ' 
         ' TxtDeltaX
         ' 
-        TxtDeltaX.Location = New Point(1543, 241)
-        TxtDeltaX.Margin = New Padding(4)
+        TxtDeltaX.Location = New Point(858, 153)
+        TxtDeltaX.Margin = New Padding(2)
         TxtDeltaX.Name = "TxtDeltaX"
-        TxtDeltaX.Size = New Size(494, 39)
+        TxtDeltaX.Size = New Size(268, 23)
         TxtDeltaX.TabIndex = 44
         ' 
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
-        LblDeltaX.Location = New Point(1443, 252)
-        LblDeltaX.Margin = New Padding(4, 0, 4, 0)
+        LblDeltaX.Location = New Point(804, 158)
+        LblDeltaX.Margin = New Padding(2, 0, 2, 0)
         LblDeltaX.Name = "LblDeltaX"
-        LblDeltaX.Size = New Size(84, 32)
+        LblDeltaX.Size = New Size(41, 15)
         LblDeltaX.TabIndex = 43
         LblDeltaX.Text = "DeltaX"
         ' 
         ' TxtXMax
         ' 
-        TxtXMax.Location = New Point(1543, 188)
-        TxtXMax.Margin = New Padding(4)
+        TxtXMax.Location = New Point(858, 128)
+        TxtXMax.Margin = New Padding(2)
         TxtXMax.Name = "TxtXMax"
-        TxtXMax.Size = New Size(494, 39)
+        TxtXMax.Size = New Size(268, 23)
         TxtXMax.TabIndex = 42
         ' 
         ' LblXMax
         ' 
         LblXMax.AutoSize = True
-        LblXMax.Location = New Point(1443, 197)
-        LblXMax.Margin = New Padding(4, 0, 4, 0)
+        LblXMax.Location = New Point(804, 132)
+        LblXMax.Margin = New Padding(2, 0, 2, 0)
         LblXMax.Name = "LblXMax"
-        LblXMax.Size = New Size(73, 32)
+        LblXMax.Size = New Size(37, 15)
         LblXMax.TabIndex = 41
         LblXMax.Text = "XMax"
         ' 
         ' TxtXMin
         ' 
-        TxtXMin.Location = New Point(1543, 138)
-        TxtXMin.Margin = New Padding(4)
+        TxtXMin.Location = New Point(858, 105)
+        TxtXMin.Margin = New Padding(2)
         TxtXMin.Name = "TxtXMin"
-        TxtXMin.Size = New Size(494, 39)
+        TxtXMin.Size = New Size(268, 23)
         TxtXMin.TabIndex = 40
         ' 
         ' LblXMin
         ' 
         LblXMin.AutoSize = True
-        LblXMin.Location = New Point(1443, 144)
-        LblXMin.Margin = New Padding(4, 0, 4, 0)
+        LblXMin.Location = New Point(804, 108)
+        LblXMin.Margin = New Padding(2, 0, 2, 0)
         LblXMin.Name = "LblXMin"
-        LblXMin.Size = New Size(70, 32)
+        LblXMin.Size = New Size(35, 15)
         LblXMin.TabIndex = 39
         LblXMin.Text = "XMin"
         ' 
@@ -286,18 +289,18 @@ Partial Class FrmJulia
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"JuliaSet", "MandelbrotSet"})
-        CboFunction.Location = New Point(1449, 15)
-        CboFunction.Margin = New Padding(4)
+        CboFunction.Location = New Point(807, 8)
+        CboFunction.Margin = New Padding(2)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(455, 40)
+        CboFunction.Size = New Size(247, 23)
         CboFunction.TabIndex = 38
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1443, 1515)
-        BtnReset.Margin = New Padding(4)
+        BtnReset.Location = New Point(803, 772)
+        BtnReset.Margin = New Padding(2)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(594, 75)
+        BtnReset.Size = New Size(320, 34)
         BtnReset.TabIndex = 63
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -305,10 +308,10 @@ Partial Class FrmJulia
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Location = New Point(1904, 1209)
-        ChkProtocol.Margin = New Padding(4, 2, 4, 2)
+        ChkProtocol.Location = New Point(1053, 584)
+        ChkProtocol.Margin = New Padding(2, 1, 2, 1)
         ChkProtocol.Name = "ChkProtocol"
-        ChkProtocol.Size = New Size(134, 36)
+        ChkProtocol.Size = New Size(71, 19)
         ChkProtocol.TabIndex = 66
         ChkProtocol.Text = "Protocol"
         ChkProtocol.UseVisualStyleBackColor = True
@@ -316,10 +319,10 @@ Partial Class FrmJulia
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1450, 1214)
-        LblProtocol.Margin = New Padding(4, 0, 4, 0)
+        LblProtocol.Location = New Point(807, 588)
+        LblProtocol.Margin = New Padding(2, 0, 2, 0)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(102, 32)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 65
         LblProtocol.Text = "Protocol"
         ' 
@@ -327,19 +330,20 @@ Partial Class FrmJulia
         ' 
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
-        LstProtocol.Location = New Point(1443, 1265)
-        LstProtocol.Margin = New Padding(4)
+        LstProtocol.ItemHeight = 15
+        LstProtocol.Location = New Point(804, 605)
+        LstProtocol.Margin = New Padding(2)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(595, 228)
+        LstProtocol.Size = New Size(319, 124)
         LstProtocol.TabIndex = 64
         ' 
         ' LblPower
         ' 
         LblPower.AutoSize = True
-        LblPower.Location = New Point(1911, 17)
-        LblPower.Margin = New Padding(4, 0, 4, 0)
+        LblPower.Location = New Point(1056, 9)
+        LblPower.Margin = New Padding(2, 0, 2, 0)
         LblPower.Name = "LblPower"
-        LblPower.Size = New Size(51, 32)
+        LblPower.Size = New Size(25, 15)
         LblPower.TabIndex = 68
         LblPower.Text = "n ="
         ' 
@@ -347,56 +351,56 @@ Partial Class FrmJulia
         ' 
         CboN.FormattingEnabled = True
         CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboN.Location = New Point(1969, 15)
-        CboN.Margin = New Padding(4, 2, 4, 2)
+        CboN.Location = New Point(1087, 8)
+        CboN.Margin = New Padding(2, 1, 2, 1)
         CboN.Name = "CboN"
-        CboN.Size = New Size(69, 40)
+        CboN.Size = New Size(39, 23)
         CboN.TabIndex = 67
         ' 
         ' TrbRed
         ' 
         TrbRed.BackColor = SystemColors.Control
-        TrbRed.Location = New Point(1443, 623)
-        TrbRed.Margin = New Padding(4, 2, 4, 2)
+        TrbRed.Location = New Point(804, 332)
+        TrbRed.Margin = New Padding(2, 1, 2, 1)
         TrbRed.Name = "TrbRed"
-        TrbRed.Size = New Size(407, 90)
+        TrbRed.Size = New Size(219, 45)
         TrbRed.TabIndex = 69
         ' 
         ' TrbGreen
         ' 
         TrbGreen.BackColor = SystemColors.Control
-        TrbGreen.Location = New Point(1443, 738)
-        TrbGreen.Margin = New Padding(4, 2, 4, 2)
+        TrbGreen.Location = New Point(804, 379)
+        TrbGreen.Margin = New Padding(2, 1, 2, 1)
         TrbGreen.Name = "TrbGreen"
-        TrbGreen.Size = New Size(407, 90)
+        TrbGreen.Size = New Size(219, 45)
         TrbGreen.TabIndex = 70
         TrbGreen.Value = 10
         ' 
         ' TrbBlue
         ' 
         TrbBlue.BackColor = SystemColors.Control
-        TrbBlue.Location = New Point(1443, 847)
-        TrbBlue.Margin = New Padding(4, 2, 4, 2)
+        TrbBlue.Location = New Point(804, 426)
+        TrbBlue.Margin = New Padding(2, 1, 2, 1)
         TrbBlue.Name = "TrbBlue"
-        TrbBlue.Size = New Size(407, 90)
+        TrbBlue.Size = New Size(219, 45)
         TrbBlue.TabIndex = 71
         TrbBlue.Value = 2
         ' 
         ' PicBright
         ' 
-        PicBright.Location = New Point(1893, 623)
-        PicBright.Margin = New Padding(4, 2, 4, 2)
+        PicBright.Location = New Point(1046, 332)
+        PicBright.Margin = New Padding(2, 1, 2, 1)
         PicBright.Name = "PicBright"
-        PicBright.Size = New Size(137, 156)
+        PicBright.Size = New Size(74, 60)
         PicBright.TabIndex = 72
         PicBright.TabStop = False
         ' 
         ' PicDark
         ' 
-        PicDark.Location = New Point(1893, 789)
-        PicDark.Margin = New Padding(4, 2, 4, 2)
+        PicDark.Location = New Point(1046, 410)
+        PicDark.Margin = New Padding(2, 1, 2, 1)
         PicDark.Name = "PicDark"
-        PicDark.Size = New Size(137, 156)
+        PicDark.Size = New Size(74, 61)
         PicDark.TabIndex = 73
         PicDark.TabStop = False
         ' 
@@ -404,9 +408,11 @@ Partial Class FrmJulia
         ' 
         GrpColors.Controls.Add(OptSystem)
         GrpColors.Controls.Add(OptUser)
-        GrpColors.Location = New Point(1450, 464)
+        GrpColors.Location = New Point(808, 258)
+        GrpColors.Margin = New Padding(2, 1, 2, 1)
         GrpColors.Name = "GrpColors"
-        GrpColors.Size = New Size(587, 140)
+        GrpColors.Padding = New Padding(2, 1, 2, 1)
+        GrpColors.Size = New Size(316, 56)
         GrpColors.TabIndex = 74
         GrpColors.TabStop = False
         GrpColors.Text = "Colors"
@@ -415,9 +421,10 @@ Partial Class FrmJulia
         ' 
         OptSystem.AutoSize = True
         OptSystem.Checked = True
-        OptSystem.Location = New Point(20, 57)
+        OptSystem.Location = New Point(50, 27)
+        OptSystem.Margin = New Padding(2, 1, 2, 1)
         OptSystem.Name = "OptSystem"
-        OptSystem.Size = New Size(121, 36)
+        OptSystem.Size = New Size(63, 19)
         OptSystem.TabIndex = 75
         OptSystem.TabStop = True
         OptSystem.Text = "System"
@@ -426,9 +433,10 @@ Partial Class FrmJulia
         ' OptUser
         ' 
         OptUser.AutoSize = True
-        OptUser.Location = New Point(290, 57)
+        OptUser.Location = New Point(170, 27)
+        OptUser.Margin = New Padding(2, 1, 2, 1)
         OptUser.Name = "OptUser"
-        OptUser.Size = New Size(177, 36)
+        OptUser.Size = New Size(89, 19)
         OptUser.TabIndex = 76
         OptUser.Text = "UserDefined"
         OptUser.UseVisualStyleBackColor = True
@@ -436,19 +444,51 @@ Partial Class FrmJulia
         ' ChkTrack
         ' 
         ChkTrack.AutoSize = True
-        ChkTrack.Location = New Point(1766, 1207)
-        ChkTrack.Margin = New Padding(4, 2, 4, 2)
+        ChkTrack.Location = New Point(978, 584)
+        ChkTrack.Margin = New Padding(2, 1, 2, 1)
         ChkTrack.Name = "ChkTrack"
-        ChkTrack.Size = New Size(115, 36)
+        ChkTrack.Size = New Size(61, 19)
         ChkTrack.TabIndex = 75
         ChkTrack.Text = "CTrack"
         ChkTrack.UseVisualStyleBackColor = True
         ' 
+        ' BtnDefault
+        ' 
+        BtnDefault.Location = New Point(804, 734)
+        BtnDefault.Margin = New Padding(2)
+        BtnDefault.Name = "BtnDefault"
+        BtnDefault.Size = New Size(320, 34)
+        BtnDefault.TabIndex = 76
+        BtnDefault.Text = "DefaultUserData"
+        BtnDefault.UseVisualStyleBackColor = True
+        ' 
+        ' CboJuliaSamples
+        ' 
+        CboJuliaSamples.FormattingEnabled = True
+        CboJuliaSamples.Location = New Point(858, 73)
+        CboJuliaSamples.Margin = New Padding(2)
+        CboJuliaSamples.Name = "CboJuliaSamples"
+        CboJuliaSamples.Size = New Size(268, 23)
+        CboJuliaSamples.TabIndex = 77
+        ' 
+        ' LblJuliaSets
+        ' 
+        LblJuliaSets.AutoSize = True
+        LblJuliaSets.Location = New Point(803, 76)
+        LblJuliaSets.Margin = New Padding(2, 0, 2, 0)
+        LblJuliaSets.Name = "LblJuliaSets"
+        LblJuliaSets.Size = New Size(51, 15)
+        LblJuliaSets.TabIndex = 78
+        LblJuliaSets.Text = "Samples"
+        ' 
         ' FrmJulia
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2058, 1625)
+        ClientSize = New Size(1136, 815)
+        Controls.Add(LblJuliaSets)
+        Controls.Add(CboJuliaSamples)
+        Controls.Add(BtnDefault)
         Controls.Add(ChkTrack)
         Controls.Add(GrpColors)
         Controls.Add(PicDark)
@@ -487,9 +527,9 @@ Partial Class FrmJulia
         Controls.Add(CboFunction)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 2, 4, 2)
+        Margin = New Padding(2, 1, 2, 1)
         Name = "FrmJulia"
-        Text = "QuadraticFunction"
+        Text = "JuliaSet"
         WindowState = FormWindowState.Maximized
         CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
         CType(TrbRed, ComponentModel.ISupportInitialize).EndInit()
@@ -543,4 +583,7 @@ Partial Class FrmJulia
     Friend WithEvents OptSystem As RadioButton
     Friend WithEvents OptUser As RadioButton
     Friend WithEvents ChkTrack As CheckBox
+    Friend WithEvents BtnDefault As Button
+    Friend WithEvents CboJuliaSamples As ComboBox
+    Friend WithEvents LblJuliaSets As Label
 End Class

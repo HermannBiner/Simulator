@@ -129,6 +129,10 @@
     <value>Alfa</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Angle Alfa" xml:space="preserve">
+    <value>Angle Alfa</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="BallColor" xml:space="preserve">
     <value>Color of the next Ball</value>
     <comment>Lbl</comment>
@@ -193,6 +197,10 @@
     <value>Elliptic Billiard</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsEllipseBilliardTable" xml:space="preserve">
+    <value>Elliptic Billiard Table</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsForwardEuler" xml:space="preserve">
     <value>Forward Euler</value>
     <comment>Cls</comment>
@@ -225,6 +233,10 @@
     <value>Oval Billiard</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsOvalBilliardTable" xml:space="preserve">
+    <value>Oval Billiard Table</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsParabola" xml:space="preserve">
     <value>Parabola</value>
     <comment>Cls</comment>
@@ -249,11 +261,15 @@
     <value>Stadium Billiard</value>
     <comment>Cls</comment>
   </data>
+  <data name="ClsStadiumBilliardTable" xml:space="preserve">
+    <value>Stadium Billiard Table</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsTentmap" xml:space="preserve">
     <value>Tentmap</value>
     <comment>Cls</comment>
   </data>
-  <data name="ClsUnitRoots" xml:space="preserve">
+  <data name="ClsUnitRootCollection" xml:space="preserve">
     <value>Complex Unit Roots</value>
     <comment>Lbl</comment>
   </data>
@@ -333,6 +349,10 @@
     <value>Total Energy</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Dragon" xml:space="preserve">
+    <value>Dragon</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="DrawBilliardTable" xml:space="preserve">
     <value>Draw Billiard Table</value>
     <comment>Lbl</comment>
@@ -387,6 +407,14 @@
   </data>
   <data name="FillPhasePortrait" xml:space="preserve">
     <value>Fill Phase Portrait</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Flake" xml:space="preserve">
+    <value>Flake</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Flash" xml:space="preserve">
+    <value>Flash</value>
     <comment>Lbl</comment>
   </data>
   <data name="FunctionGraph" xml:space="preserve">
@@ -493,12 +521,8 @@
     <value>&amp;Billiard</value>
     <comment>Mnu</comment>
   </data>
-  <data name="MnuCDiagramBilliard" xml:space="preserve">
-    <value>&amp;C-DiagramBilliard</value>
-    <comment>Mnu</comment>
-  </data>
-  <data name="MnuClose" xml:space="preserve">
-    <value>&amp;Close</value>
+  <data name="MnuCDiagram" xml:space="preserve">
+    <value>&amp;C-Diagram Billiard</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuDocumentation" xml:space="preserve">
@@ -513,16 +537,16 @@
     <value>&amp;Feigenbaum</value>
     <comment>Mnu</comment>
   </data>
-  <data name="MnuFile" xml:space="preserve">
-    <value>&amp;File</value>
-    <comment>Mnu</comment>
-  </data>
   <data name="MnuFractals" xml:space="preserve">
     <value>&amp;Fractals</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuGerman" xml:space="preserve">
     <value>German</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuGrowthModels" xml:space="preserve">
+    <value>&amp;Growth Models</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuHistogram" xml:space="preserve">
@@ -583,10 +607,6 @@
   </data>
   <data name="MnuTwoDimensions" xml:space="preserve">
     <value>&amp;Two Dimensions</value>
-    <comment>Mnu</comment>
-  </data>
-  <data name="MnuUnimodal" xml:space="preserve">
-    <value>&amp;Growth Models</value>
     <comment>Mnu</comment>
   </data>
   <data name="NewBall" xml:space="preserve">
@@ -725,6 +745,10 @@
     <value>Quadratic Function</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Rabbit" xml:space="preserve">
+    <value>Rabbit</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="RangeNotAllowed" xml:space="preserve">
     <value>This Range is not allowed! It must be part of the interval</value>
     <comment>Msg</comment>
@@ -747,6 +771,10 @@
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotate</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Seehorse" xml:space="preserve">
+    <value>Seehorse</value>
     <comment>Lbl</comment>
   </data>
   <data name="Sensitivity" xml:space="preserve">
@@ -787,6 +815,10 @@
   </data>
   <data name="SingleOrbits" xml:space="preserve">
     <value>Single Orbits</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Spider" xml:space="preserve">
+    <value>Spider</value>
     <comment>Lbl</comment>
   </data>
   <data name="SpringConstant" xml:space="preserve">
@@ -895,6 +927,10 @@
   </data>
   <data name="TimeAxis" xml:space="preserve">
     <value>Time Axis</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Tornado" xml:space="preserve">
+    <value>Tornado</value>
     <comment>Lbl</comment>
   </data>
   <data name="Torus" xml:space="preserve">

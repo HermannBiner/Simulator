@@ -3,7 +3,7 @@
 'a in ]0,2]. Interesting is only the case a = 2
 'and "knows" everything about this kind of iteration
 
-'Status Redesign Tested
+'Status Checked
 
 Public Class ClsTentmap
     Inherits ClsIterationAbstract
@@ -11,10 +11,13 @@ Public Class ClsTentmap
     Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
-        MyParameterInterval = New ClsInterval(0, 2)
-        MyIterationInterval = New ClsInterval(0, 1)
+        MyFormulaParameter = New ClsGeneralParameter(1, "Parameter a", New ClsInterval(0, 2),
+                                                     ClsGeneralParameter.TypeOfParameterEnum.Formula, 2)
+
+        MyValueParameter = New ClsGeneralParameter(2, "Value x", New ClsInterval(0, 1),
+                                                   ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(0.314159))
         MyCriticalPoint = CDec(0.4999)
-        MyChaoticParameter = 2 'is not used
+        MyChaoticParameterValue = 2 'is not used
 
         'Setting split points
         MySplitpoints = New List(Of Decimal) From {
@@ -26,7 +29,7 @@ Public Class ClsTentmap
     Protected Overrides Function F(u As Decimal) As Decimal
 
         'This is the original iteration function
-        u = If(u < 0.5, MyParameter * u, MyParameter * (1 - u))
+        u = If(u < 0.5, MyParameterA * u, MyParameterA * (1 - u))
 
         Return u
 

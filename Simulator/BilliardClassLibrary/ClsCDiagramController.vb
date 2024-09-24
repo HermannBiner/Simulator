@@ -1,36 +1,35 @@
 ﻿'This class contains the controller for the FrmCDiagram
 
+'Status Checked
+
+Imports System.Globalization
 Imports System.Reflection
 
 Public Class ClsCDiagramController
 
+    Private MyForm As FrmCDiagramBilliard
 
     'The dynamic System
-    Private MyDS As IBilliardTable
+    Private DS As IBilliardTable
     Private ActualBilliardBall As IBilliardball
 
-    'The PicDiagram and Bitmasp
-    Private MyPicDiagram As PictureBox
+    Private DiagramAreaSelector As ClsDiagramAreaSelector
+
+    'Graphics
     Private MyBmpDiagram As Bitmap
 
-    'The Graphic Helper for the Graphics
-    Private MyPicGraphics As ClsGraphicTool
-    Private MyBmpGraphics As ClsGraphicTool
+    'The Graphic Helper
+    'drawing into Bmp -
+    'because the DiagramAreaSelector draws into Pic
+    Private BmpGraphics As ClsGraphicTool
 
-    'Precision
-    Private MyPrecision As Integer
-    Private MyTrbStartPosition As Integer
-
-    'Value Range for the Iteration Value to be învestigated
-    'selected in the CboValueRange
-    Private MyValueParameter As ClsValueParameter
-
-    'User Ranges for Parameter and Iteration
-    Private MyParameterRange As ClsInterval = New ClsInterval(CDec(0.5), 2)
-    Private MyValueRange As ClsInterval = New ClsInterval(0, 1) 'set later
+    'Diagram Ranges
+    Private ActualParameterRange As ClsInterval
+    Private ActualValueRange As ClsInterval
+    Private SelectedValueParameter As ClsGeneralParameter
 
     'IterationStatus
-    Private MyIterationStatus As ClsDynamics.EnIterationStatus
+    Private IterationStatus As ClsDynamics.EnIterationStatus
 
     'Iteration Parameters
     'Startpoint
@@ -39,84 +38,206 @@ Public Class ClsCDiagramController
     Private CyclePoint As ClsMathpoint
     Private LengthOfCycle As Integer
 
+    Public Sub New(Form As FrmCDiagramBilliard)
+        MyForm = Form
+        DiagramAreaSelector = New ClsDiagramAreaSelector
+    End Sub
 
-    WriteOnly Property DS As IBilliardTable
-        Set(value As IBilliardTable)
-            MyDS = value
-            ActualBilliardBall = MyDS.GetBilliardBall
-        End Set
-    End Property
+    Public Sub FillDynamicSystem()
 
-    WriteOnly Property PicDiagram As PictureBox
-        Set(value As PictureBox)
-            MyPicDiagram = value
-            MyBmpDiagram = New Bitmap(MyPicDiagram.Width, MyPicDiagram.Height)
-            MyPicDiagram.Image = MyBmpDiagram
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyParameterRange, MyValueParameter.Range)
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyParameterRange, MyValueParameter.Range)
-        End Set
-    End Property
+        MyForm.CboFunction.Items.Clear()
 
-    Property ParameterRange As ClsInterval
-        Get
-            ParameterRange = MyParameterRange
-        End Get
-        Set(value As ClsInterval)
-            MyParameterRange = value
-            MyBmpGraphics.MathXInterval = MyParameterRange
-        End Set
-    End Property
+        'Add the classes implementing IBilliardBall
+        'to the Combobox CboBilliardTable by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardTable)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    Property ValueRange As ClsInterval
-        Get
-            ValueRange = MyValueRange
-        End Get
-        Set(value As ClsInterval)
-            MyValueRange = value
-            If Not IsNothing(MyPicGraphics) Then
-                'PicGraphics is existing and ValueParameter was changed
-                MyPicGraphics.MathYInterval = MyValueRange
-                MyBmpGraphics.MathYInterval = MyValueRange
+        If types.Count > 0 Then
+            Dim BilliardName As String
+            For Each type In types
+
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                BilliardName = FrmMain.LM.GetString(type.Name, True)
+                MyForm.CboFunction.Items.Add(BilliardName)
+            Next
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+        MyForm.CboFunction.SelectedIndex = 1
+
+        'The identifier of the ValueParameter into the CboValueParameters
+        'is added when the ValueParameters are known
+        'depending on the type of iteration
+
+    End Sub
+
+    Public Sub SetDS()
+
+        'This sets the type of BilliardBall by Reflection
+
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IBilliardTable)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
+
+        If MyForm.CboFunction.SelectedIndex >= 0 Then
+
+            Dim SelectedName As String = MyForm.CboFunction.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DS = CType(Activator.CreateInstance(type), IBilliardTable)
+                    End If
+                Next
             End If
-        End Set
-    End Property
+        End If
 
-    Property ValueParameter As ClsValueParameter
-        Get
-            ValueParameter = MyValueParameter
-        End Get
-        Set(value As ClsValueParameter)
-            MyValueParameter = value
-        End Set
-    End Property
+        InitializeMe()
 
-    WriteOnly Property Precision As Integer
-        Set(value As Integer)
-            MyPrecision = value
-        End Set
-    End Property
+        'The parameter and startvalue are depending on the type of iteration
+        SetDefaultUserData()
 
-    WriteOnly Property TrbStartPosition As Integer
-        Set(value As Integer)
-            MyTrbStartPosition = value
-        End Set
-    End Property
+        'If the type of iteration changes, everything has to be reset
+        ResetIteration()
 
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-        Set(value As ClsDynamics.EnIterationStatus)
-            MyIterationStatus = value
-        End Set
-        Get
-            IterationStatus = MyIterationStatus
-        End Get
-    End Property
+    End Sub
 
-    Public Sub DoIteration()
+    Private Sub FillValueParameters()
+
+        MyForm.CboValueParameter.Items.Clear()
+        For Each VP As ClsGeneralParameter In DS.ValueParameterList
+            MyForm.CboValueParameter.Items.Add(FrmMain.LM.GetString(VP.Name))
+        Next
+        MyForm.CboValueParameter.SelectedIndex = MyForm.CboValueParameter.Items.Count - 1
+        SelectedValueParameter = DS.ValueParameterList(MyForm.CboValueParameter.SelectedIndex)
+
+    End Sub
+
+    Private Sub InitializeMe()
+
+        FillValueParameters()
+
+        ActualBilliardBall = DS.GetBilliardBall
+        ActualParameterRange = DS.FormulaParameter.Range
+        ActualValueRange = SelectedValueParameter.Range
+
+        With DiagramAreaSelector
+            .XRange = ActualParameterRange
+            .YRange = ActualValueRange
+            .PicDiagram = MyForm.PicDiagram
+            .TxtXMin = MyForm.TxtCMin
+            .TxtXMax = MyForm.TxtCMax
+            .TxtYMin = MyForm.TxtVMin
+            .TxtYMax = MyForm.TxtVMax
+        End With
+
+        MyBmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+        MyForm.PicDiagram.Image = MyBmpDiagram
+        BmpGraphics = New ClsGraphicTool(MyBmpDiagram, ActualParameterRange, ActualValueRange)
+
+    End Sub
+
+    Public Sub SetDefaultUserData()
+
+        ActualParameterRange = DS.FormulaParameter.Range
+        ActualValueRange = SelectedValueParameter.Range
+        With MyForm
+            .TxtCMin.Text = ActualParameterRange.A.ToString(CultureInfo.CurrentCulture)
+            .TxtCMax.Text = ActualParameterRange.B.ToString(CultureInfo.CurrentCulture)
+            .TxtVMin.Text = ActualValueRange.A.ToString(CultureInfo.CurrentCulture)
+            .TxtVMax.Text = ActualValueRange.B.ToString(CultureInfo.CurrentCulture)
+        End With
+        SetDelta()
+
+        MyForm.TrbPositionStartValues.Value = 60
+        MyForm.LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
+            MyForm.TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
+    End Sub
+
+    Public Sub SetValueParameter()
+        SelectedValueParameter = DS.ValueParameterList(MyForm.CboValueParameter.SelectedIndex)
+
+        SelectedValueParameter = SelectedValueParameter
+        ActualValueRange = SelectedValueParameter.Range
+        BmpGraphics.MathYInterval = ActualValueRange
+
+        InitializeMe()
+
+        'The parameter and startvalue are depending on the type of iteration
+        SetDefaultUserData()
+
+        'If the type of iteration changes, everything has to be reset
+        ResetIteration()
+    End Sub
+
+    Public Sub SetDelta()
+        With MyForm
+            If IsNumeric(.TxtCMax.Text) And IsNumeric(.TxtCMin.Text) Then
+                .LblDeltaC.Text = "Delta = " & (CDec(.TxtCMax.Text) - CDec(.TxtCMin.Text)).ToString(CultureInfo.CurrentCulture)
+            End If
+            If IsNumeric(.TxtVMax.Text) And IsNumeric(.TxtVMin.Text) Then
+                .LblDeltaV.Text = "Delta = " & (CDec(.TxtVMax.Text) - CDec(.TxtVMin.Text)).ToString(CultureInfo.CurrentCulture)
+            End If
+        End With
+    End Sub
+
+    Public Sub ResetIteration()
+
+        BmpGraphics.Clear(Color.White)
+        MyForm.PicDiagram.Refresh()
+
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+    End Sub
+
+    'SECTOR ITERATION
+
+    Public Async Sub StartIteration()
+
+        ResetIteration()
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            If IsUserDataOK() Then
+                DiagramAreaSelector.IsActivated = False
+                With MyForm
+                    .BtnStartIteration.Enabled = False
+                    .BtnReset.Enabled = False
+                    .BtnDefault.Enabled = False
+                    ActualParameterRange = New ClsInterval(CDec(.TxtCMin.Text), CDec(.TxtCMax.Text))
+                    ActualValueRange = New ClsInterval(CDec(.TxtVMin.Text), CDec(.TxtVMax.Text))
+                End With
+                DiagramAreaSelector.UserXRange = ActualParameterRange
+                DiagramAreaSelector.UserYRange = ActualValueRange
+                BmpGraphics.MathXInterval = ActualParameterRange
+                BmpGraphics.MathYInterval = ActualValueRange
+                IterationStatus = ClsDynamics.EnIterationStatus.Ready
+            Else
+                SetDefaultUserData()
+            End If
+        End If
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+            Await DoIteration()
+        End If
+
+        With MyForm
+            .BtnStartIteration.Enabled = True
+            .BtnReset.Enabled = True
+            .BtnDefault.Enabled = True
+            IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+            DiagramAreaSelector.IsActivated = True
+        End With
+    End Sub
+
+    Private Async Function DoIteration() As Task
 
         'In the direction of the x-axis, we work with pixel coordinates
         Dim p As Integer
 
-        For p = 1 To MyPicDiagram.Width
+        For p = 1 To MyForm.PicDiagram.Width
 
             'for each p, the according parametervalue a is calculated
             'and then, the iteration runs until RuntimeUntilCycle
@@ -126,58 +247,55 @@ Public Class ClsCDiagramController
 
         DrawSplitPoints()
 
-    End Sub
+        Await Task.Delay(1)
+
+    End Function
 
     Private Sub IterationLoop(p As Integer)
 
-        If MyIterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
             'Initialize
-
             ActualPair = New ClsValuePair(0, 0)
             CyclePoint = New ClsMathpoint(0, 0)
 
-            'After that, the number of iterations must be big enough before drawing the cycle
-            LengthOfCycle = CInt(MyPicDiagram.Height * MyValueParameter.Range.IntervalWidth _
-                * MyTrbStartPosition / 25 / Math.Max(MyValueParameter.Range.IntervalWidth, 0.01))
-
-            '..but not bigger than the y-axis allows
-            LengthOfCycle = Math.Min(LengthOfCycle, 5 * MyPicDiagram.Height)
+            'enough, but not bigger than the y-axis allows
+            LengthOfCycle = MyForm.PicDiagram.Height
         End If
 
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Running
+        IterationStatus = ClsDynamics.EnIterationStatus.Running
 
         'Calculate the parameter C for the iteration depending on p
-        MyDS.C = MyParameterRange.A + (MyParameterRange.IntervalWidth * p / MyPicDiagram.Width)
+        DS.C = ActualParameterRange.A + (ActualParameterRange.IntervalWidth * p / MyForm.PicDiagram.Width)
 
-        ActualBilliardBall.A = MyDS.A
-        ActualBilliardBall.B = MyDS.B
+        ActualBilliardBall.A = DS.A
+        ActualBilliardBall.B = DS.B
 
         'Setting the Start-Parameterpair for the Iteration
 
         With ActualPair
             'The Startpoint has to be the same for all Values of C to avoid side effects
-            .X = MyDS.ValueParameters.Item(0).Range.A +
-                MyDS.ValueParameters.Item(0).Range.IntervalWidth / 3
+            .X = DS.ValueParameterList.Item(0).Range.A +
+                DS.ValueParameterList.Item(0).Range.IntervalWidth / 3
 
             '.. and the second value depending on TrbPositionStartValues
-            .Y = MyDS.ValueParameters.Item(1).Range.A +
-                    MyTrbStartPosition * MyDS.ValueParameters.Item(1).Range.IntervalWidth / 120
+            .Y = DS.ValueParameterList.Item(1).Range.A +
+                    MyForm.TrbPositionStartValues.Value * DS.ValueParameterList.Item(1).Range.IntervalWidth / 120
         End With
 
         'the cycle is drawn
 
-        CyclePoint.X = MyDS.C
+        CyclePoint.X = DS.C
 
         For n = 0 To LengthOfCycle
 
-            Select Case MyValueParameter.ID
+            Select Case SelectedValueParameter.ID
                 Case 1
                     CyclePoint.Y = ActualPair.X
                 Case Else
                     CyclePoint.Y = ActualPair.Y
             End Select
 
-            MyBmpGraphics.DrawPoint(CyclePoint, Brushes.Blue, 1)
+            BmpGraphics.DrawPoint(CyclePoint, Brushes.Blue, 1)
 
             NextPair = ActualBilliardBall.GetNextValuePair(ActualPair)
             ActualPair.X = NextPair.X
@@ -185,28 +303,31 @@ Public Class ClsCDiagramController
 
         Next
 
-        MyPicDiagram.Refresh()
+        MyForm.PicDiagram.Refresh()
 
     End Sub
 
-    Public Sub DrawSplitPoints()
+    Private Sub DrawSplitPoints()
 
         'Draw the C = 1 Line
         Dim A As New ClsMathpoint(1, 0)
-        Dim B As New ClsMathpoint(1, MyPicDiagram.Height)
-        MyBmpGraphics.DrawLine(A, B, Color.Red, 1)
-        MyPicDiagram.Refresh()
+        Dim B As New ClsMathpoint(1, MyForm.PicDiagram.Height)
+        BmpGraphics.DrawLine(A, B, Color.Red, 1)
+        MyForm.PicDiagram.Refresh()
 
     End Sub
 
-    Public Sub ResetIteration()
+    'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
 
-        MyBmpGraphics.Clear(Color.White)
-        MyPicDiagram.Refresh()
+    Private Function IsUserDataOK() As Boolean
 
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        With MyForm
+            Dim CheckParameterRange As New ClsCheckUserData(.TxtCMin, .TxtCMax, DS.FormulaParameter.Range)
+            Dim CheckValueRange As New ClsCheckUserData(.TxtVMin, .TxtVMax, SelectedValueParameter.Range)
 
-    End Sub
+            Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed
+        End With
 
+    End Function
 End Class
 

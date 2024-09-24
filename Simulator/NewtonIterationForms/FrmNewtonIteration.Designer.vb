@@ -61,6 +61,7 @@ Partial Class FrmNewtonIteration
         TxtSteps = New TextBox()
         TxtTime = New TextBox()
         BtnShowBasin = New Button()
+        BtnDefault = New Button()
         CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         GrpMixing.SuspendLayout()
         GrpColor.SuspendLayout()
@@ -68,10 +69,10 @@ Partial Class FrmNewtonIteration
         ' 
         ' PicDiagram
         ' 
-        PicDiagram.Location = New Point(2, 12)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(1, 6)
+        PicDiagram.Margin = New Padding(2)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1398, 1588)
+        PicDiagram.Size = New Size(800, 800)
         PicDiagram.TabIndex = 0
         PicDiagram.TabStop = False
         ' 
@@ -79,136 +80,136 @@ Partial Class FrmNewtonIteration
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"z^3-1", "z^4-1"})
-        CboFunction.Location = New Point(1465, 12)
-        CboFunction.Margin = New Padding(4, 5, 4, 5)
+        CboFunction.Location = New Point(818, 6)
+        CboFunction.Margin = New Padding(2)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(456, 40)
+        CboFunction.Size = New Size(247, 23)
         CboFunction.TabIndex = 1
         ' 
         ' LblXMin
         ' 
         LblXMin.AutoSize = True
-        LblXMin.Location = New Point(1460, 137)
-        LblXMin.Margin = New Padding(4, 0, 4, 0)
+        LblXMin.Location = New Point(815, 64)
+        LblXMin.Margin = New Padding(2, 0, 2, 0)
         LblXMin.Name = "LblXMin"
-        LblXMin.Size = New Size(70, 32)
+        LblXMin.Size = New Size(35, 15)
         LblXMin.TabIndex = 3
         LblXMin.Text = "XMin"
         ' 
         ' TxtXMin
         ' 
-        TxtXMin.Location = New Point(1560, 130)
-        TxtXMin.Margin = New Padding(4, 5, 4, 5)
+        TxtXMin.Location = New Point(869, 61)
+        TxtXMin.Margin = New Padding(2)
         TxtXMin.Name = "TxtXMin"
-        TxtXMin.Size = New Size(494, 39)
+        TxtXMin.Size = New Size(268, 23)
         TxtXMin.TabIndex = 4
         ' 
         ' TxtXMax
         ' 
-        TxtXMax.Location = New Point(1560, 191)
-        TxtXMax.Margin = New Padding(4, 5, 4, 5)
+        TxtXMax.Location = New Point(869, 90)
+        TxtXMax.Margin = New Padding(2)
         TxtXMax.Name = "TxtXMax"
-        TxtXMax.Size = New Size(494, 39)
+        TxtXMax.Size = New Size(268, 23)
         TxtXMax.TabIndex = 6
         ' 
         ' LblXMax
         ' 
         LblXMax.AutoSize = True
-        LblXMax.Location = New Point(1460, 199)
-        LblXMax.Margin = New Padding(4, 0, 4, 0)
+        LblXMax.Location = New Point(815, 93)
+        LblXMax.Margin = New Padding(2, 0, 2, 0)
         LblXMax.Name = "LblXMax"
-        LblXMax.Size = New Size(73, 32)
+        LblXMax.Size = New Size(37, 15)
         LblXMax.TabIndex = 5
         LblXMax.Text = "XMax"
         ' 
         ' TxtDeltaX
         ' 
-        TxtDeltaX.Location = New Point(1560, 255)
-        TxtDeltaX.Margin = New Padding(4, 5, 4, 5)
+        TxtDeltaX.Location = New Point(869, 120)
+        TxtDeltaX.Margin = New Padding(2)
         TxtDeltaX.Name = "TxtDeltaX"
-        TxtDeltaX.Size = New Size(494, 39)
+        TxtDeltaX.Size = New Size(268, 23)
         TxtDeltaX.TabIndex = 8
         ' 
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
-        LblDeltaX.Location = New Point(1460, 265)
-        LblDeltaX.Margin = New Padding(4, 0, 4, 0)
+        LblDeltaX.Location = New Point(815, 124)
+        LblDeltaX.Margin = New Padding(2, 0, 2, 0)
         LblDeltaX.Name = "LblDeltaX"
-        LblDeltaX.Size = New Size(84, 32)
+        LblDeltaX.Size = New Size(41, 15)
         LblDeltaX.TabIndex = 7
         LblDeltaX.Text = "DeltaX"
         ' 
         ' TxtDeltaY
         ' 
-        TxtDeltaY.Location = New Point(1560, 444)
-        TxtDeltaY.Margin = New Padding(4, 5, 4, 5)
+        TxtDeltaY.Location = New Point(869, 208)
+        TxtDeltaY.Margin = New Padding(2)
         TxtDeltaY.Name = "TxtDeltaY"
-        TxtDeltaY.Size = New Size(494, 39)
+        TxtDeltaY.Size = New Size(268, 23)
         TxtDeltaY.TabIndex = 14
         ' 
         ' LblDeltaY
         ' 
         LblDeltaY.AutoSize = True
-        LblDeltaY.Location = New Point(1460, 452)
-        LblDeltaY.Margin = New Padding(4, 0, 4, 0)
+        LblDeltaY.Location = New Point(815, 212)
+        LblDeltaY.Margin = New Padding(2, 0, 2, 0)
         LblDeltaY.Name = "LblDeltaY"
-        LblDeltaY.Size = New Size(83, 32)
+        LblDeltaY.Size = New Size(41, 15)
         LblDeltaY.TabIndex = 13
         LblDeltaY.Text = "DeltaY"
         ' 
         ' TxtYMax
         ' 
-        TxtYMax.Location = New Point(1560, 380)
-        TxtYMax.Margin = New Padding(4, 5, 4, 5)
+        TxtYMax.Location = New Point(869, 178)
+        TxtYMax.Margin = New Padding(2)
         TxtYMax.Name = "TxtYMax"
-        TxtYMax.Size = New Size(494, 39)
+        TxtYMax.Size = New Size(268, 23)
         TxtYMax.TabIndex = 12
         ' 
         ' LblYMax
         ' 
         LblYMax.AutoSize = True
-        LblYMax.Location = New Point(1460, 388)
-        LblYMax.Margin = New Padding(4, 0, 4, 0)
+        LblYMax.Location = New Point(815, 182)
+        LblYMax.Margin = New Padding(2, 0, 2, 0)
         LblYMax.Name = "LblYMax"
-        LblYMax.Size = New Size(72, 32)
+        LblYMax.Size = New Size(37, 15)
         LblYMax.TabIndex = 11
         LblYMax.Text = "YMax"
         ' 
         ' TxtYMin
         ' 
-        TxtYMin.Location = New Point(1560, 319)
-        TxtYMin.Margin = New Padding(4, 5, 4, 5)
+        TxtYMin.Location = New Point(869, 150)
+        TxtYMin.Margin = New Padding(2)
         TxtYMin.Name = "TxtYMin"
-        TxtYMin.Size = New Size(494, 39)
+        TxtYMin.Size = New Size(268, 23)
         TxtYMin.TabIndex = 10
         ' 
         ' LblYMin
         ' 
         LblYMin.AutoSize = True
-        LblYMin.Location = New Point(1460, 326)
-        LblYMin.Margin = New Padding(4, 0, 4, 0)
+        LblYMin.Location = New Point(815, 153)
+        LblYMin.Margin = New Padding(2, 0, 2, 0)
         LblYMin.Name = "LblYMin"
-        LblYMin.Size = New Size(69, 32)
+        LblYMin.Size = New Size(35, 15)
         LblYMin.TabIndex = 9
         LblYMin.Text = "YMin"
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1460, 1526)
-        BtnReset.Margin = New Padding(4, 5, 4, 5)
+        BtnReset.Location = New Point(813, 772)
+        BtnReset.Margin = New Padding(2)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(594, 74)
+        BtnReset.Size = New Size(320, 34)
         BtnReset.TabIndex = 21
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1460, 912)
-        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Location = New Point(815, 421)
+        BtnStop.Margin = New Padding(2)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(594, 74)
+        BtnStop.Size = New Size(320, 34)
         BtnStop.TabIndex = 24
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
@@ -217,19 +218,20 @@ Partial Class FrmNewtonIteration
         ' 
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
-        LstProtocol.Location = New Point(1460, 1160)
-        LstProtocol.Margin = New Padding(4, 5, 4, 5)
+        LstProtocol.ItemHeight = 15
+        LstProtocol.Location = New Point(813, 525)
+        LstProtocol.Margin = New Padding(2)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(594, 356)
+        LstProtocol.Size = New Size(322, 139)
         LstProtocol.TabIndex = 25
         ' 
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1460, 1114)
-        LblProtocol.Margin = New Padding(4, 0, 4, 0)
+        LblProtocol.Location = New Point(815, 504)
+        LblProtocol.Margin = New Padding(2, 0, 2, 0)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(102, 32)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 26
         LblProtocol.Text = "Protocol"
         ' 
@@ -237,51 +239,57 @@ Partial Class FrmNewtonIteration
         ' 
         CboN.FormattingEnabled = True
         CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboN.Location = New Point(1985, 12)
+        CboN.Location = New Point(1098, 6)
+        CboN.Margin = New Padding(2, 1, 2, 1)
         CboN.Name = "CboN"
-        CboN.Size = New Size(69, 40)
+        CboN.Size = New Size(39, 23)
         CboN.TabIndex = 27
         ' 
         ' TxtB
         ' 
-        TxtB.Location = New Point(1746, 74)
+        TxtB.Location = New Point(969, 35)
+        TxtB.Margin = New Padding(2, 1, 2, 1)
         TxtB.Name = "TxtB"
-        TxtB.Size = New Size(130, 39)
+        TxtB.Size = New Size(72, 23)
         TxtB.TabIndex = 28
         TxtB.Text = "1"
         ' 
         ' TxtA
         ' 
-        TxtA.Location = New Point(1560, 73)
+        TxtA.Location = New Point(869, 34)
+        TxtA.Margin = New Padding(2, 1, 2, 1)
         TxtA.Name = "TxtA"
-        TxtA.Size = New Size(130, 39)
+        TxtA.Size = New Size(72, 23)
         TxtA.TabIndex = 30
         TxtA.Text = "0"
         ' 
         ' LblC
         ' 
         LblC.AutoSize = True
-        LblC.Location = New Point(1468, 77)
+        LblC.Location = New Point(819, 36)
+        LblC.Margin = New Padding(2, 0, 2, 0)
         LblC.Name = "LblC"
-        LblC.Size = New Size(48, 32)
+        LblC.Size = New Size(24, 15)
         LblC.TabIndex = 31
         LblC.Text = "c ="
         ' 
         ' LblI
         ' 
         LblI.AutoSize = True
-        LblI.Location = New Point(1697, 76)
+        LblI.Location = New Point(943, 36)
+        LblI.Margin = New Padding(2, 0, 2, 0)
         LblI.Name = "LblI"
-        LblI.Size = New Size(43, 32)
+        LblI.Size = New Size(21, 15)
         LblI.TabIndex = 33
         LblI.Text = "+ i"
         ' 
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Location = New Point(1879, 1110)
+        ChkProtocol.Location = New Point(1044, 503)
+        ChkProtocol.Margin = New Padding(2, 1, 2, 1)
         ChkProtocol.Name = "ChkProtocol"
-        ChkProtocol.Size = New Size(134, 36)
+        ChkProtocol.Size = New Size(71, 19)
         ChkProtocol.TabIndex = 38
         ChkProtocol.Text = "Protocol"
         ChkProtocol.UseVisualStyleBackColor = True
@@ -289,9 +297,10 @@ Partial Class FrmNewtonIteration
         ' LblPower
         ' 
         LblPower.AutoSize = True
-        LblPower.Location = New Point(1928, 15)
+        LblPower.Location = New Point(1067, 7)
+        LblPower.Margin = New Padding(2, 0, 2, 0)
         LblPower.Name = "LblPower"
-        LblPower.Size = New Size(51, 32)
+        LblPower.Size = New Size(25, 15)
         LblPower.TabIndex = 39
         LblPower.Text = "n ="
         ' 
@@ -300,9 +309,11 @@ Partial Class FrmNewtonIteration
         GrpMixing.Controls.Add(OptRotate)
         GrpMixing.Controls.Add(OptConjugate)
         GrpMixing.Controls.Add(OptNone)
-        GrpMixing.Location = New Point(1468, 513)
+        GrpMixing.Location = New Point(819, 240)
+        GrpMixing.Margin = New Padding(2, 1, 2, 1)
         GrpMixing.Name = "GrpMixing"
-        GrpMixing.Size = New Size(313, 212)
+        GrpMixing.Padding = New Padding(2, 1, 2, 1)
+        GrpMixing.Size = New Size(169, 99)
         GrpMixing.TabIndex = 40
         GrpMixing.TabStop = False
         GrpMixing.Text = "Mixing"
@@ -310,9 +321,10 @@ Partial Class FrmNewtonIteration
         ' OptRotate
         ' 
         OptRotate.AutoSize = True
-        OptRotate.Location = New Point(32, 157)
+        OptRotate.Location = New Point(17, 74)
+        OptRotate.Margin = New Padding(2, 1, 2, 1)
         OptRotate.Name = "OptRotate"
-        OptRotate.Size = New Size(113, 36)
+        OptRotate.Size = New Size(59, 19)
         OptRotate.TabIndex = 2
         OptRotate.Text = "Rotate"
         OptRotate.UseVisualStyleBackColor = True
@@ -320,9 +332,10 @@ Partial Class FrmNewtonIteration
         ' OptConjugate
         ' 
         OptConjugate.AutoSize = True
-        OptConjugate.Location = New Point(34, 103)
+        OptConjugate.Location = New Point(18, 48)
+        OptConjugate.Margin = New Padding(2, 1, 2, 1)
         OptConjugate.Name = "OptConjugate"
-        OptConjugate.Size = New Size(155, 36)
+        OptConjugate.Size = New Size(80, 19)
         OptConjugate.TabIndex = 1
         OptConjugate.Text = "Conjugate"
         OptConjugate.UseVisualStyleBackColor = True
@@ -331,9 +344,10 @@ Partial Class FrmNewtonIteration
         ' 
         OptNone.AutoSize = True
         OptNone.Checked = True
-        OptNone.Location = New Point(34, 48)
+        OptNone.Location = New Point(18, 22)
+        OptNone.Margin = New Padding(2, 1, 2, 1)
         OptNone.Name = "OptNone"
-        OptNone.Size = New Size(104, 36)
+        OptNone.Size = New Size(54, 19)
         OptNone.TabIndex = 0
         OptNone.TabStop = True
         OptNone.Text = "None"
@@ -343,9 +357,11 @@ Partial Class FrmNewtonIteration
         ' 
         GrpColor.Controls.Add(OptShadowed)
         GrpColor.Controls.Add(OptBright)
-        GrpColor.Location = New Point(1787, 513)
+        GrpColor.Location = New Point(991, 240)
+        GrpColor.Margin = New Padding(2, 1, 2, 1)
         GrpColor.Name = "GrpColor"
-        GrpColor.Size = New Size(267, 212)
+        GrpColor.Padding = New Padding(2, 1, 2, 1)
+        GrpColor.Size = New Size(144, 99)
         GrpColor.TabIndex = 41
         GrpColor.TabStop = False
         GrpColor.Text = "Color"
@@ -353,31 +369,33 @@ Partial Class FrmNewtonIteration
         ' OptShadowed
         ' 
         OptShadowed.AutoSize = True
-        OptShadowed.Location = New Point(17, 117)
+        OptShadowed.Checked = True
+        OptShadowed.Location = New Point(9, 55)
+        OptShadowed.Margin = New Padding(2, 1, 2, 1)
         OptShadowed.Name = "OptShadowed"
-        OptShadowed.Size = New Size(156, 36)
+        OptShadowed.Size = New Size(80, 19)
         OptShadowed.TabIndex = 1
+        OptShadowed.TabStop = True
         OptShadowed.Text = "Shadowed"
         OptShadowed.UseVisualStyleBackColor = True
         ' 
         ' OptBright
         ' 
         OptBright.AutoSize = True
-        OptBright.Checked = True
-        OptBright.Location = New Point(17, 57)
+        OptBright.Location = New Point(9, 27)
+        OptBright.Margin = New Padding(2, 1, 2, 1)
         OptBright.Name = "OptBright"
-        OptBright.Size = New Size(109, 36)
+        OptBright.Size = New Size(57, 19)
         OptBright.TabIndex = 0
-        OptBright.TabStop = True
         OptBright.Text = "Bright"
         OptBright.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1460, 818)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Location = New Point(815, 383)
+        BtnStart.Margin = New Padding(2)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(594, 74)
+        BtnStart.Size = New Size(320, 34)
         BtnStart.TabIndex = 20
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -385,50 +403,65 @@ Partial Class FrmNewtonIteration
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1462, 759)
+        LblSteps.Location = New Point(816, 356)
+        LblSteps.Margin = New Padding(2, 0, 2, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(71, 32)
+        LblSteps.Size = New Size(35, 15)
         LblSteps.TabIndex = 34
         LblSteps.Text = "Steps"
         ' 
         ' LblTime
         ' 
         LblTime.AutoSize = True
-        LblTime.Location = New Point(1748, 759)
+        LblTime.Location = New Point(970, 356)
+        LblTime.Margin = New Padding(2, 0, 2, 0)
         LblTime.Name = "LblTime"
-        LblTime.Size = New Size(67, 32)
+        LblTime.Size = New Size(33, 15)
         LblTime.TabIndex = 35
         LblTime.Text = "Time"
         ' 
         ' TxtSteps
         ' 
-        TxtSteps.Location = New Point(1560, 752)
+        TxtSteps.Location = New Point(869, 352)
+        TxtSteps.Margin = New Padding(2, 1, 2, 1)
         TxtSteps.Name = "TxtSteps"
-        TxtSteps.Size = New Size(187, 39)
+        TxtSteps.Size = New Size(103, 23)
         TxtSteps.TabIndex = 36
         ' 
         ' TxtTime
         ' 
-        TxtTime.Location = New Point(1821, 752)
+        TxtTime.Location = New Point(1010, 352)
+        TxtTime.Margin = New Padding(2, 1, 2, 1)
         TxtTime.Name = "TxtTime"
-        TxtTime.Size = New Size(233, 39)
+        TxtTime.Size = New Size(127, 23)
         TxtTime.TabIndex = 37
         ' 
         ' BtnShowBasin
         ' 
-        BtnShowBasin.Location = New Point(1460, 1009)
-        BtnShowBasin.Margin = New Padding(4, 5, 4, 5)
+        BtnShowBasin.Location = New Point(815, 459)
+        BtnShowBasin.Margin = New Padding(2)
         BtnShowBasin.Name = "BtnShowBasin"
-        BtnShowBasin.Size = New Size(594, 74)
+        BtnShowBasin.Size = New Size(320, 34)
         BtnShowBasin.TabIndex = 42
         BtnShowBasin.Text = "ShowBasin"
         BtnShowBasin.UseVisualStyleBackColor = True
         ' 
+        ' BtnDefault
+        ' 
+        BtnDefault.Location = New Point(813, 734)
+        BtnDefault.Margin = New Padding(2)
+        BtnDefault.Name = "BtnDefault"
+        BtnDefault.Size = New Size(320, 34)
+        BtnDefault.TabIndex = 43
+        BtnDefault.Text = "DefaultUserData"
+        BtnDefault.UseVisualStyleBackColor = True
+        ' 
         ' FrmNewtonIteration
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2091, 1612)
+        ClientSize = New Size(1147, 816)
+        Controls.Add(BtnDefault)
         Controls.Add(BtnShowBasin)
         Controls.Add(GrpColor)
         Controls.Add(GrpMixing)
@@ -463,7 +496,7 @@ Partial Class FrmNewtonIteration
         Controls.Add(CboFunction)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 5, 4, 5)
+        Margin = New Padding(2)
         Name = "FrmNewtonIteration"
         Text = "NewtonIteration"
         WindowState = FormWindowState.Maximized
@@ -515,4 +548,5 @@ Partial Class FrmNewtonIteration
     Friend WithEvents OptShadowed As RadioButton
     Friend WithEvents OptBright As RadioButton
     Friend WithEvents BtnShowBasin As Button
+    Friend WithEvents BtnDefault As Button
 End Class

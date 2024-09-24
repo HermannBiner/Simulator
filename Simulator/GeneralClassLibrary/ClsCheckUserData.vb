@@ -20,7 +20,7 @@ Public Class ClsCheckUserData
     Private MyX As Decimal
 
     'The TargetInterval
-    Private MyTargetInterval As ClsInterval
+    Private MyTargetRange As ClsInterval
 
     'Check Classes
     Private MyCheckIsInterval As ClsCheckIsInterval
@@ -50,26 +50,26 @@ Public Class ClsCheckUserData
         End Set
     End Property
 
-    WriteOnly Property TargetInterval As ClsInterval
+    WriteOnly Property TargetRange As ClsInterval
         Set(value As ClsInterval)
-            MyTargetInterval = value
+            MyTargetRange = value
         End Set
     End Property
 
     Public Sub New(TxtX As TextBox, TargetInterval As ClsInterval)
         MyTxtX = TxtX
-        MyTargetInterval = TargetInterval
+        MyTargetRange = TargetInterval
     End Sub
 
     Public Sub New(TxtA As TextBox, TxtB As TextBox, TargetInterval As ClsInterval)
         MyTxtA = TxtA
         MyTxtB = TxtB
-        MyTargetInterval = TargetInterval
+        MyTargetRange = TargetInterval
     End Sub
 
     Public Sub New(X As Decimal, TargetInterval As ClsInterval)
         MyX = X
-        MyTargetInterval = TargetInterval
+        MyTargetRange = TargetInterval
     End Sub
 
     Public Function IsTxtValueAllowed() As Boolean
@@ -80,13 +80,13 @@ Public Class ClsCheckUserData
 
             Dim X As Decimal = MyCheckIsNumeric.NumericValue
 
-            If MyTargetInterval.IsNumberInInterval(X) Then
+            If MyTargetRange.IsNumberInInterval(X) Then
                 Return True
             Else
                 MessageBox.Show(FrmMain.LM.GetString("TheValue") & X.ToString(CultureInfo.CurrentCulture) &
                             FrmMain.LM.GetString("ValueNotAllowed") & "[" &
-                            MyTargetInterval.A.ToString(CultureInfo.CurrentCulture) &
-                            ", " & MyTargetInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
+                            MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
+                            ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) & "]!")
                 MyTxtX.Select()
                 Return False
             End If
@@ -98,13 +98,13 @@ Public Class ClsCheckUserData
     End Function
 
     Public Function IsValueAllowed() As Boolean
-        If MyTargetInterval.IsNumberInInterval(MyX) Then
+        If MyTargetRange.IsNumberInInterval(MyX) Then
             Return True
         Else
             MessageBox.Show(FrmMain.LM.GetString("TheValue") & MyX.ToString(CultureInfo.CurrentCulture) &
                         FrmMain.LM.GetString("ValueNotAllowed") & "[" &
-                        MyTargetInterval.A.ToString(CultureInfo.CurrentCulture) &
-                        ", " & MyTargetInterval.B.ToString(CultureInfo.CurrentCulture) & "]!")
+                        MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
+                        ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) & "]!")
             Return False
         End If
     End Function
@@ -116,12 +116,12 @@ Public Class ClsCheckUserData
         If MyCheckIsInterval.IsIntervalValid Then
 
             Dim UserInterval = New ClsInterval(MyCheckIsInterval.A, MyCheckIsInterval.B)
-            If MyTargetInterval.IsInterval2PartOfInterval(UserInterval) Then
+            If MyTargetRange.IsInterval2PartOfInterval(UserInterval) Then
                 Return True
             Else
                 MessageBox.Show(FrmMain.LM.GetString("ValueRangeNotAllowed") & " [" &
-                       MyTargetInterval.A.ToString(CultureInfo.CurrentCulture) &
-                       ", " & MyTargetInterval.B.ToString(CultureInfo.CurrentCulture) &
+                       MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
+                       ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")
                 MyTxtA.Select()
                 Return False

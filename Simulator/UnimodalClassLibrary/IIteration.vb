@@ -3,16 +3,18 @@
 'To program a new unimodal function
 'just this interface has to be implemented
 
-'Status Redesign Tested
+'Status Checked
 
 Public Interface IIteration
 
-    'Steering parameter of the iteration
-    '"a" in the mathematical documentation
-    Property Parameter As Decimal
+    'Steering parameter definition of the iteration 
+    ReadOnly Property FormulaParameter As ClsGeneralParameter
 
-    'Allowed interval for the steering parameter
-    ReadOnly Property ParameterInterval As ClsInterval
+    'Value of the steering Parameter
+    Property ParameterA As Decimal
+
+    'Definition of the x-Value for the Iteration
+    ReadOnly Property ValueParameter As ClsGeneralParameter
 
     'How many times is the function F performed in one iteration step
     WriteOnly Property Power As Integer
@@ -23,11 +25,9 @@ Public Interface IIteration
     'Critical Point for attractive basins
     ReadOnly Property CriticalPoint As Decimal
 
-    'The Chaotic Parameter
-    ReadOnly Property ChaoticParameter As Decimal
+    'The Chaotic ParameterValue
+    ReadOnly Property ChaoticParameterValue As Decimal
 
-    'the interval in which the iteration values are
-    ReadOnly Property IterationInterval As ClsInterval
 
     'If there is a given protocol by the user
     'the program should calculate an appropriate start value (in case of chaos)

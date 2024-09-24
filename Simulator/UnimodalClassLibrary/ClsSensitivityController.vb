@@ -1,105 +1,145 @@
 ﻿'This class contains the iteration controller for FrmSensitivity
 
-'Status Redesign Tested
+'Status Checked
 
 Imports System.Globalization
+Imports System.Reflection
 
 Public Class ClsSensitivityController
 
     'The dynamic System
-    Private MyDS As IIteration
+    Private DS As IIteration
+    Private MyForm As FrmSensitivity
 
-    'The PicDiagram
-    Private MyPicDiagram As PictureBox
-
-    'The x-axis in the PicDiagram
-    Private XRange As ClsInterval
-
-    'The Graphic Helper for PicDiagram
-    Private MyPicGraphics As ClsGraphicTool
+    'Graphics
+    Private PicGraphics As ClsGraphicTool
 
     'Status Parameters
     'Number of Iteration Steps
     Private n As Integer
-    Private MyLblN As Label
-    Private MyValueList1 As ListBox
-    Private MyValueList2 As ListBox
 
     'Actual values of the iteration
     Private x1 As Decimal
     Private x2 As Decimal
 
-    'X-Stretching: the x-axis can be stretched
-    Private MyXStretching As Integer
+    Private Const XStretchingDefault As Integer = 2
 
+    Public Sub New(Form As FrmSensitivity)
+        MyForm = Form
+    End Sub
 
-    'Presentation in FrmSensitivity
-    Public Enum PresentationEnum
+    Public Sub FillDynamicSystem()
 
-        'the diagram shows the difference between the orbits of x1, x2
-        Difference
-        'The orbits of x1, x2 are shown separately
-        SingleOrbits
+        MyForm.CboFunction.Items.Clear()
 
-    End Enum
+        'Add the classes implementing IIteration
+        'to the Combobox CboPendulum by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    Private MyPresentation As PresentationEnum
+        If types.Count > 0 Then
+            Dim DSName As String
+            For Each type In types
 
-    WriteOnly Property DS As IIteration
-        Set(value As IIteration)
-            MyDS = value
-        End Set
-    End Property
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                'The case of Mandelbrot is only used for Feigenbaum Diagram
+                If Not DSName.Contains("Mandel") Then
+                    MyForm.CboFunction.Items.Add(DSName)
+                End If
+            Next
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+        MyForm.CboFunction.SelectedIndex = 0
+        MyForm.CboIterationDepth.SelectedIndex = 0
 
-    WriteOnly Property PicDiagram As PictureBox
-        Set(value As PictureBox)
-            MyPicDiagram = value
-            XRange = New ClsInterval(1, MyPicDiagram.Width)
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, XRange, MyDS.IterationInterval)
-        End Set
-    End Property
+    End Sub
 
-    WriteOnly Property LblN As Label
-        Set(value As Label)
-            MyLblN = value
-        End Set
-    End Property
+    Public Sub SetDS()
 
-    WriteOnly Property StartValue1 As Decimal
-        Set(value As Decimal)
-            x1 = value
-        End Set
-    End Property
+        'This sets the type of Iterator by Reflection
 
-    WriteOnly Property StartValue2 As Decimal
-        Set(value As Decimal)
-            x2 = value
-        End Set
-    End Property
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                             Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
+                             t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    WriteOnly Property XStretching As Integer
-        Set(value As Integer)
-            MyXStretching = value
-        End Set
-    End Property
+        If MyForm.CboFunction.SelectedIndex >= 0 Then
 
-    WriteOnly Property Presentation As PresentationEnum
-        Set(value As PresentationEnum)
-            MyPresentation = value
-        End Set
-    End Property
+            Dim SelectedName As String = MyForm.CboFunction.SelectedItem.ToString
 
-    WriteOnly Property ValueList1 As ListBox
-        Set(value As ListBox)
-            MyValueList1 = value
-        End Set
-    End Property
+            If types.Count > 0 Then
+                For Each type In types
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DS = CType(Activator.CreateInstance(type), IIteration)
+                    End If
+                Next
+            End If
 
-    WriteOnly Property ValueList2 As ListBox
-        Set(value As ListBox)
-            MyValueList2 = value
-        End Set
-    End Property
+        End If
+
+        InitializeMe()
+
+        'The parameter and startvalue are depending on the type of iteration
+        SetDefaultUserData()
+
+        'If the type of iteration changes, everything has to be reset
+        ResetIteration()
+
+    End Sub
+
+    Private Sub InitializeMe()
+
+        MyForm.CboIterationDepth.SelectedIndex = 0
+        DS.Power = CInt(MyForm.CboIterationDepth.SelectedItem)
+        Dim XRange As ClsInterval = New ClsInterval(1, MyForm.PicDiagram.Width)
+        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, XRange, DS.ValueParameter.Range)
+
+    End Sub
+
+    Public Sub SetDefaultUserData()
+
+        With MyForm
+            'default settings
+            .TxtParameter.Text = DS.ChaoticParameterValue.ToString(CultureInfo.CurrentCulture)
+            .TxtStartValue1.Text = DS.ValueParameter.DefaultValue.ToString(CultureInfo.CurrentCulture)
+            .TxtStartValue2.Text = (DS.ValueParameter.DefaultValue + 0.000000001).ToString(CultureInfo.CurrentCulture)
+            .TxtxStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
+        End With
+
+    End Sub
+
+    Public Sub StartIteration()
+        'This starts the whole iteration
+
+        If IsUserDataOK() Then
+            With MyForm
+                'Set Ds Parameters
+                DS.ParameterA = CDec(.TxtParameter.Text)
+                DS.Power = CInt(.CboIterationDepth.SelectedItem)
+                x1 = CDec(.TxtStartValue1.Text)
+                x2 = CDec(.TxtStartValue2.Text)
+
+                'The initialization was successful
+                If DS.IsBehaviourChaotic Then
+                    .BtnDefault.Enabled = False
+                    .BtnReset.Enabled = False
+                    IterationLoop()
+                    .BtnReset.Enabled = True
+                    .BtnDefault.Enabled = True
+                Else
+                    'nothing to do, a message is already generated by the test
+                End If
+            End With
+        Else
+            'there is already a message generated
+            SetDefaultUserData()
+        End If
+    End Sub
 
     Public Sub IterationLoop()
 
@@ -107,33 +147,36 @@ Public Class ClsSensitivityController
 
         'P1 and NextP1 are the points for the interation of x1 = Startvalue1
         Dim P1 As New ClsMathpoint
-        Dim nextP1 As New ClsMathpoint
+        Dim NextP1 As New ClsMathpoint
 
         'P2 and NextP2 are the points for the interation of x2 = Startvalue2
         Dim P2 As New ClsMathpoint
-        Dim nextP2 As New ClsMathpoint
+        Dim NextP2 As New ClsMathpoint
 
         'This will be the variable of the x-axis
         Dim p As Decimal = 0
+
+        'The check, is XStretching is numeric is done by IsUserDataOK
+        Dim XStretching As Integer = CInt(MyForm.TxtxStretching.Text)
 
         Do
 
             'P1.X is the coordinate on the x-axis
             'and increased by one pixel*xstretching in each iteration step
-            P1.X = p * MyXStretching
+            P1.X = p * XStretching
             'P1.Y is the y-coordinate and equal to the iteration of x1
             P1.Y = x1
 
             'similar settings for the next point
-            nextP1.X = (p + 1) * MyXStretching
-            nextP1.Y = MyDS.FN(x1)
+            NextP1.X = (p + 1) * XStretching
+            NextP1.Y = DS.FN(x1)
 
             'and similar for the points P2, NextP2
             'for the iteration of x2
-            P2.X = p * MyXStretching
+            P2.X = p * XStretching
             P2.Y = x2
-            nextP2.X = (p + 1) * MyXStretching
-            nextP2.Y = MyDS.FN(x1)
+            NextP2.X = (p + 1) * XStretching
+            NextP2.Y = DS.FN(x1)
 
             'Increase number of steps
             n += 1
@@ -142,65 +185,79 @@ Public Class ClsSensitivityController
             UpdateListboxes(x1, x2)
 
             'and draw the diagram according to the points
-            DrawDiagram(P1, nextP1, P2, nextP2)
+            DrawDiagram(P1, NextP1, P2, NextP2)
 
             'do the ntext iteration step
-            x1 = MyDS.FN(x1)
-            x2 = MyDS.FN(x2)
+            x1 = DS.FN(x1)
+            x2 = DS.FN(x2)
             p += 1
 
-        Loop Until p * MyXStretching >= MyPicDiagram.Width
+        Loop Until p * XStretching >= MyForm.PicDiagram.Width
 
-        MyLblN.Text = n.ToString(CultureInfo.CurrentCulture)
+        MyForm.LblSteps.Text = n.ToString(CultureInfo.CurrentCulture)
 
     End Sub
 
     Private Sub UpdateListboxes(u1 As Decimal, u2 As Decimal)
+        With MyForm
+            'LstValueList1 and 2 are filled with the actual iteration value
+            .LstValueList1.Items.Add(u1.ToString(CultureInfo.CurrentCulture))
+            .LstValueList1.SelectedIndex = .LstValueList1.Items.Count - 1
 
-        'LstValueList1 and 2 are filled with the actual iteration value
-        MyValueList1.Items.Add(u1.ToString(CultureInfo.CurrentCulture))
-        MyValueList1.SelectedIndex = MyValueList1.Items.Count - 1
-
-        MyValueList2.Items.Add(u2.ToString(CultureInfo.CurrentCulture))
-        MyValueList2.SelectedIndex = MyValueList2.Items.Count - 1
-
+            .LstValueList2.Items.Add(u2.ToString(CultureInfo.CurrentCulture))
+            .LstValueList2.SelectedIndex = .LstValueList2.Items.Count - 1
+        End With
     End Sub
 
     'Overloading if u2 is not relevant
     Private Sub UpdateListboxes(u1 As Decimal)
-
         UpdateListboxes(u1, -1)
-
     End Sub
 
     Private Sub DrawDiagram(P1 As ClsMathpoint, nextP1 As ClsMathpoint, P2 As ClsMathpoint, nextP2 As ClsMathpoint)
 
-        If MyPresentation = PresentationEnum.Difference Then
+        If MyForm.OptDifference.Checked Then 'The difference of the two orbits is shown
 
             'Draw the difference of the orbits: x2 - x1
-            Dim D As New ClsMathpoint(P1.X, MyDS.IterationInterval.A + Math.Abs(P2.Y - P1.Y))
-            Dim NextD As New ClsMathpoint(nextP1.X, MyDS.IterationInterval.A + Math.Abs(nextP2.Y - nextP1.Y))
-            MyPicGraphics.DrawLine(D, NextD, Color.Blue, 1)
+            Dim D As New ClsMathpoint(P1.X, DS.ValueParameter.Range.A + Math.Abs(P2.Y - P1.Y))
+            Dim NextD As New ClsMathpoint(nextP1.X, DS.ValueParameter.Range.A + Math.Abs(nextP2.Y - nextP1.Y))
+            PicGraphics.DrawLine(D, NextD, Color.Blue, 1)
 
         Else
 
             'Draw the single orbits x1, x2
-            MyPicGraphics.DrawLine(P1, nextP1, Color.Red, 1)
-            MyPicGraphics.DrawLine(P2, nextP2, Color.Green, 1)
+            PicGraphics.DrawLine(P1, nextP1, Color.Red, 1)
+            PicGraphics.DrawLine(P2, nextP2, Color.Green, 1)
 
         End If
 
     End Sub
 
     Public Sub ResetIteration()
+        With MyForm
+            'clear display
+            .LstValueList1.Items.Clear()
+            .LstValueList2.Items.Clear()
+            PicGraphics.Clear(Color.White)
 
-        'clear display
-        MyValueList1.Items.Clear()
-        MyValueList2.Items.Clear()
-        MyPicGraphics.Clear(Color.White)
-
-        'Reset Number of steps
-        MyLblN.Text = "0"
+            'Reset Number of steps
+            .LblSteps.Text = "0"
+        End With
         n = 0
     End Sub
+
+    Private Function IsUserDataOK() As Boolean
+
+        'Is the value of TxtParameter in the Iteration Interval?
+        Dim CheckParameter = New ClsCheckUserData(MyForm.TxtParameter, DS.FormulaParameter.Range)
+        Dim CheckStartValue1 = New ClsCheckUserData(MyForm.TxtStartValue1, DS.ValueParameter.Range)
+        Dim CheckStartValue2 = New ClsCheckUserData(MyForm.TxtStartValue2, DS.ValueParameter.Range)
+
+        Dim StretchInterval = New ClsInterval(1, 10)
+        Dim CheckStretchInterval = New ClsCheckUserData(MyForm.TxtxStretching, StretchInterval)
+
+        Return CheckParameter.IsTxtValueAllowed And CheckStartValue1.IsTxtValueAllowed _
+            And CheckStartValue2.IsTxtValueAllowed And CheckStretchInterval.IsTxtValueAllowed
+
+    End Function
 End Class

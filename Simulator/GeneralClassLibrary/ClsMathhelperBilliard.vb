@@ -5,39 +5,39 @@
 
 Public Class ClsMathhelperBilliard
 
-    Public Function CalculateAngleOfDirection(deltaX As Decimal, deltaY As Decimal) As Decimal
+    Public Function CalculateAngleOfDirection(DeltaX As Decimal, DeltaY As Decimal) As Decimal
 
         'receives a vector (deltaX, deltaY)
         'return the angle between this vector and the positive x-axis in [0, 2*pi[
 
-        Dim phi As Decimal
+        Dim Phi As Decimal
 
-        If deltaX > 0 Then
-            If deltaY >= 0 Then
-                phi = CDec(Math.Atan(deltaY / deltaX))
+        If DeltaX > 0 Then
+            If DeltaY >= 0 Then
+                Phi = CDec(Math.Atan(DeltaY / DeltaX))
             Else
-                phi = CDec(2 * Math.PI + Math.Atan(deltaY / deltaX))
+                Phi = CDec(2 * Math.PI + Math.Atan(DeltaY / DeltaX))
             End If
-        ElseIf deltaX < 0 Then
-            phi = CDec(Math.PI + Math.Atan(deltaY / deltaX))
+        ElseIf DeltaX < 0 Then
+            Phi = CDec(Math.PI + Math.Atan(DeltaY / DeltaX))
         Else
             'here is DeltaX = 0
-            If deltaY > 0 Then
-                phi = CDec(Math.PI / 2)
+            If DeltaY > 0 Then
+                Phi = CDec(Math.PI / 2)
             Else
-                phi = CDec(Math.PI * 3 / 2)
+                Phi = CDec(Math.PI * 3 / 2)
             End If
         End If
 
-        Return phi
+        Return Phi
 
     End Function
 
-    Public Function AngleInNullTwoPi(angle As Decimal) As Decimal
+    Public Function AngleInNullTwoPi(Angle As Decimal) As Decimal
 
         'makes sure that an angle is in the interval [0, 2*pi[
 
-        Dim Tempangle As Decimal = angle
+        Dim Tempangle As Decimal = Angle
 
         Do Until Tempangle > 0
             Tempangle = CDec(Tempangle + Math.PI * 2)

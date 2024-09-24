@@ -8,20 +8,26 @@ Public Interface IBilliardTable
     'The Billiardtable can draw itself
     Property PicDiagram As PictureBox
 
+    ReadOnly Property MathInterval As ClsInterval
+
     'Status Parameter
     WriteOnly Property LblN As Label
 
-    'For Checks in FrmBillardTable
-    ReadOnly Property TValueRange As ClsInterval
-    ReadOnly Property AlfaValueRange As ClsInterval
+    'The parameter defining the form of the Billiardtable
+    ReadOnly Property FormulaParameter As ClsGeneralParameter
+
+    'The definition of the Iteration Parameter
+    ReadOnly Property TValueParameter As ClsGeneralParameter
+    ReadOnly Property AlfaValueParameter As ClsGeneralParameter
+
+    ReadOnly Property ValueParameterList As List(Of ClsGeneralParameter)
+
+    'Status protocol
     WriteOnly Property PhasePortrait As PictureBox
     WriteOnly Property ValueProtocol As ListBox
 
-    ReadOnly Property ValueParameters As List(Of ClsValueParameter)
-
     'The parameter defining the form of the Billiardtable
     Property C As Decimal
-    ReadOnly Property ParameterRange As ClsInterval
 
     ReadOnly Property A As Decimal
     ReadOnly Property B As Decimal
@@ -38,9 +44,7 @@ Public Interface IBilliardTable
     'Drawing the Billiard Table
     Sub DrawBilliardtable()
 
-    Sub IterationStep()
-
-    Function IterationLoop() As Task
+    Function IterationLoop(NumberOfSTeps As Integer) As Task
 
     Sub PrepareBallsForPhaseportrait()
 

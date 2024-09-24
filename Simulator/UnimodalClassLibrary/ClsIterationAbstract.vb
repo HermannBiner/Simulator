@@ -1,19 +1,19 @@
 ﻿'This is the abstract class for all kind of Growth-Models
 
-'Status Redesign Tested
+'Status Checked
 
 Public MustInherit Class ClsIterationAbstract
     Implements IIteration
 
     'This is the steering parameter for the iteration
     '"a" in the mathematical documentation 
-    Protected MyParameter As Decimal
+    Protected MyParameterA As Decimal
 
     'in whitch Interval the Parameter a should be
-    Protected MyParameterInterval As ClsInterval
+    Protected MyFormulaParameter As ClsGeneralParameter
 
     'in whitch Interval the iterated Value x should be
-    Protected MyIterationInterval As ClsInterval
+    Protected MyValueParameter As ClsGeneralParameter
 
     'Power of the iteration function f:
     'How many times the iteration function f is performed in one iteration step
@@ -26,7 +26,7 @@ Public MustInherit Class ClsIterationAbstract
     Protected MyCriticalPoint As Decimal
 
     'Chaotic Parameter
-    Protected MyChaoticParameter As Decimal
+    Protected MyChaoticParameterValue As Decimal
 
     'SECTOR INITIALISATION
 
@@ -40,24 +40,24 @@ Public MustInherit Class ClsIterationAbstract
         End Set
     End Property
 
-    Overridable Property Parameter As Decimal Implements IIteration.Parameter
+    Overridable Property ParameterA As Decimal Implements IIteration.ParameterA
         Get
-            Parameter = MyParameter
+            ParameterA = MyParameterA
         End Get
         Set(Value As Decimal)
-            MyParameter = Value
+            MyParameterA = Value
         End Set
     End Property
 
-    ReadOnly Property ParameterInterval As ClsInterval Implements IIteration.ParameterInterval
+    ReadOnly Property FormulaParameter As ClsGeneralParameter Implements IIteration.FormulaParameter
         Get
-            ParameterInterval = MyParameterInterval
+            FormulaParameter = MyFormulaParameter
         End Get
     End Property
 
-    ReadOnly Property IterationInterval As ClsInterval Implements IIteration.IterationInterval
+    ReadOnly Property ValueParameter As ClsGeneralParameter Implements IIteration.ValueParameter
         Get
-            IterationInterval = MyIterationInterval
+            ValueParameter = MyValueParameter
         End Get
     End Property
 
@@ -73,9 +73,9 @@ Public MustInherit Class ClsIterationAbstract
         End Get
     End Property
 
-    ReadOnly Property ChaoticParameter As Decimal Implements IIteration.ChaoticParameter
+    ReadOnly Property ChaoticParameterValue As Decimal Implements IIteration.ChaoticParameterValue
         Get
-            ChaoticParameter = MyChaoticParameter
+            ChaoticParameterValue = MyChaoticParameterValue
         End Get
     End Property
 
@@ -84,8 +84,8 @@ Public MustInherit Class ClsIterationAbstract
 
         'Chaotic behaviour is only guaranteed for the right border of the parameter interval
         'see mathematical documentation
-        If (0 < MyParameter And MyParameter < ParameterInterval.B) Or
-            (ParameterInterval.A < MyParameter And MyParameter < 0) Then
+        If (0 <= MyParameterA And MyParameterA < MyFormulaParameter.Range.B) Or
+            (MyFormulaParameter.Range.A < MyParameterA And MyParameterA <= 0) Then
             MessageBox.Show(FrmMain.LM.GetString("NonChaoticBehaviour"))
             Return False
         Else
@@ -128,6 +128,7 @@ Public MustInherit Class ClsIterationAbstract
 
         'Finally, we use the conjugation between the tentmap and the parabola
         Return TentmapToIteration(DecimalTentmapStartvalue)
+
     End Function
 
     Public Overridable Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal _

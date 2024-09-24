@@ -3,10 +3,10 @@
 'in German "Implizite Mittelpunktsregel"
 'based on the differential equation of a real spring pendulum
 
-'Status Redesign Checked
+'Status Checked
 
 Public Class ClsMidpointImplicit
-    Inherits ClsSpringPendulumAbstract
+    Inherits ClsNumericMethodAbstract
 
     'These are the parameters according to the mathematical documentation
     'first the y-substitution component(1)
@@ -32,7 +32,6 @@ Public Class ClsMidpointImplicit
 
                 'the numerical equation is described in the mathematical documentation
 
-
                 'Component(1) holds the y-value
                 u = .Component(1)
                 v = .Component(2)
@@ -46,7 +45,7 @@ Public Class ClsMidpointImplicit
                 .Component(2) = v - uHalf * MyH
             Next
 
-            'the Conponent(0) holds the "time" t with 2*pi period
+            'the Component(0) holds the "time" t with 2*pi period
             .Component(0) = .Component(0) Mod CDec(2 * Math.PI)
 
         End With

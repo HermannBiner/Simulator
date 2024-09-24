@@ -25,7 +25,7 @@ Public Interface IPendulum
     WriteOnly Property PicEnergy As PictureBox
 
     'To set the parameters of the TrbAdditionalParameter
-    ReadOnly Property AdditionalParameter As ClsValueParameter
+    ReadOnly Property AdditionalParameter As ClsGeneralParameter
 
     'contains the value of the trackbar TrbAdditionalParameter
     WriteOnly Property AdditionalParameterValue As Integer
@@ -33,7 +33,7 @@ Public Interface IPendulum
     Property IterationStatus As ClsDynamics.EnIterationStatus
 
     'To label fields P1...P8 and set the Valueranges
-    ReadOnly Property ValueParameterDefinition As List(Of ClsValueParameter)
+    ReadOnly Property ValueParameterDefinition As List(Of ClsGeneralParameter)
 
     'To TakeOverParameter
     Property CalculationConstants As ClsNTupel

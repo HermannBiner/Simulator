@@ -4,7 +4,6 @@
 
 'Status Checked
 
-
 Public Class ClsJuliaPN
     Inherits ClsJuliaAbstract
 
@@ -27,12 +26,11 @@ Public Class ClsJuliaPN
 
     Public Sub New()
 
-        'The Julia set is contained in a circle of radius 2
-        MyAllowedXRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-        MyAllowedYRange = New ClsInterval(CDec(-1.5), CDec(1.5))
+        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.32))
+        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.043))
 
-        MyActualXRange = MyAllowedXRange
-        MyActualYRange = MyAllowedYRange
+        MyActualXRange = MyXValueParameter.Range
+        MyActualYRange = MyYValueParameter.Range
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
@@ -49,10 +47,17 @@ Public Class ClsJuliaPN
         End Set
     End Property
 
+    Protected Overrides ReadOnly Property IsSampleList As Boolean
+        Get
+            IsSampleList = True
+        End Get
+    End Property
+
+
     Public Overrides Sub IterationStep(Startpoint As Point)
 
         'Transform the PixelPoint to a Complex Number
-        With MyBmpGraphics.PixelToMathpoint(Startpoint)
+        With BmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
             Zi.X = .X
             Zi.Y = .Y
@@ -78,7 +83,7 @@ Public Class ClsJuliaPN
             'if steps = 0, the color would be black as well, therefore we set
             Steps = Math.Max(1, Steps)
 
-            If MyUseSystemColors Then
+            If MyIsUseSystemColors Then
                 MyBrush = StandardColors.GetSystemBrush(Steps)
                 ColorIndex = 1
             Else
@@ -105,7 +110,7 @@ Public Class ClsJuliaPN
 
         End If
 
-        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        BmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
         MyBrush.Dispose()
 
     End Sub

@@ -1,10 +1,10 @@
 ﻿'This class is the "real" Spring Pendulum
 'that oscillates like cos(t)
 
-'Status Redesign Checked
+'Status Checked
 
 Public Class ClsRealSpringPendulum
-    Inherits ClsSpringPendulumAbstract
+    Inherits ClsNumericMethodAbstract
 
     Protected Overrides Sub Iteration()
 

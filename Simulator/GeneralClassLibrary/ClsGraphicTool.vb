@@ -42,7 +42,7 @@ Public Class ClsGraphicTool
     'but of course, if there is a drawing in pixel coordinates needed
     'it is possible by overloading by objects of type Point instead of ClsMathPoint
 
-    Private ReadOnly MyPicturebox As PictureBox
+    Private ReadOnly MyPicDiagram As PictureBox
     Private ReadOnly MyBitmap As Bitmap
     Private ReadOnly MyImage As Image
 
@@ -61,16 +61,16 @@ Public Class ClsGraphicTool
 
     'SECTOR CONSTRUCTOR
 
-    Public Sub New(Picturebox As PictureBox, MathXInterval As ClsInterval, MathYInterval As ClsInterval)
+    Public Sub New(PicDiagram As PictureBox, MathXInterval As ClsInterval, MathYInterval As ClsInterval)
 
         'In this case, ClsGraphics draws into a PictureBox
-        MyPicturebox = Picturebox
-        Graphs = MyPicturebox.CreateGraphics
+        MyPicDiagram = PicDiagram
+        Graphs = MyPicDiagram.CreateGraphics
 
         'Because of better visibility in the User-Window,
         'the maximal ImageRange and DiagramSize are reduced by -1
-        Imagerange = New Rectangle(1, MyPicturebox.Height - 1, MyPicturebox.Width - 1, MyPicturebox.Height - 1)
-        DiagramCornerpoint = New Point(Picturebox.Width - 1, Picturebox.Height - 1)
+        Imagerange = New Rectangle(1, MyPicDiagram.Height - 1, MyPicDiagram.Width - 1, MyPicDiagram.Height - 1)
+        DiagramCornerpoint = New Point(MyPicDiagram.Width - 1, MyPicDiagram.Height - 1)
 
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
@@ -135,108 +135,108 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawCoordinateSystem(Midpoint As ClsMathpoint, color As Color, wide As Integer)
+    Public Sub DrawCoordinateSystem(Midpoint As ClsMathpoint, Color As Color, Wide As Integer)
 
         'Draws the coordinate system with MidPoint in mathematial coordinates
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
 
             'the midpoint is transferred in pixel-coordinates
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
 
             'Pixel X-axis
-            Graphs.DrawLine(MyPen, 0, PixelMidpoint.Y, Imagerange.Width, PixelMidpoint.Y)
+            Graphs.DrawLine(Pen, 0, PixelMidpoint.Y, Imagerange.Width, PixelMidpoint.Y)
 
             'Pixel Y-axis
-            Graphs.DrawLine(MyPen, PixelMidpoint.X, 0, PixelMidpoint.X, Imagerange.Height)
+            Graphs.DrawLine(Pen, PixelMidpoint.X, 0, PixelMidpoint.X, Imagerange.Height)
         End Using
 
 
     End Sub
 
-    Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, color As Color, wide As Integer)
+    Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, Color As Color, Wide As Integer)
 
         'Draws a line between the points A and B, given in mathematical coordinates
 
-        Using MyPen As New Pen(color, wide)
-            Graphs.DrawLine(MyPen, MathpointToPixel(A), MathpointToPixel(B))
+        Using Pen As New Pen(Color, Wide)
+            Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
         End Using
 
 
     End Sub
 
-    Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, brush As Brush, wide As Integer)
+    Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, Brush As Brush, Wide As Integer)
 
         'Draws a line between the points A and B, given in mathematical coordinates
 
-        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
-            Graphs.DrawLine(MyPen, MathpointToPixel(A), MathpointToPixel(B))
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
+            Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
         End Using
 
 
     End Sub
 
-    Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As SolidBrush, wide As Integer)
+    Public Sub DrawPoint(MathPoint As ClsMathpoint, Brush As SolidBrush, Wide As Integer)
 
         'Draws a point in mathematical coordinates filled with SolidBrush, Wide = 1 is about one pixel
 
-        Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / DiagramCornerpoint.X
-        FillCircle(MathPoint, size, brush)
+        Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+        FillCircle(MathPoint, Size, Brush)
 
     End Sub
 
-    Public Sub DrawPoint(PixelPoint As Point, brush As SolidBrush, wide As Integer)
+    Public Sub DrawPoint(PixelPoint As Point, Brush As SolidBrush, Wide As Integer)
 
         'Draws a point in pixel coordinates filled with SolidBrush, Wide = 1 is about one pixel
 
-        FillCircle(PixelPoint, wide, brush)
+        FillCircle(PixelPoint, Wide, Brush)
 
     End Sub
 
-    Public Sub DrawPoint(MathPoint As ClsMathpoint, brush As Brush, wide As Integer)
+    Public Sub DrawPoint(MathPoint As ClsMathpoint, Brush As Brush, Wide As Integer)
 
         'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
-        Dim size As Decimal = MyMathXInterval.IntervalWidth * wide / DiagramCornerpoint.X
-        FillCircle(MathPoint, size, brush)
+        Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+        FillCircle(MathPoint, Size, Brush)
 
     End Sub
 
-    Public Sub DrawPoint(PixelPoint As Point, brush As Brush, wide As Integer)
+    Public Sub DrawPoint(PixelPoint As Point, Brush As Brush, Wide As Integer)
 
         'Draws a point in pixel coordinates filled with Brush, Wide = 1 is about one pixel
 
-        FillCircle(PixelPoint, wide, brush)
+        FillCircle(PixelPoint, Wide, Brush)
 
     End Sub
 
-    Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, color As Color, wide As Integer)
+    Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, Color As Color, Wide As Integer)
 
         'Draws a rectangle with left lower corner A, given as ClsMathpoint and right upper corner C
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
             Dim PixelA As Point = MathpointToPixel(A)
             Dim PixelC As Point = MathpointToPixel(C)
 
             'The object Graphs expects the upper left corner to be committed, therefore:
-            Graphs.DrawRectangle(MyPen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+            Graphs.DrawRectangle(Pen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
         End Using
     End Sub
 
-    Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As Brush, wide As Integer)
+    Public Sub DrawRectangle(A As ClsMathpoint, C As ClsMathpoint, Brush As Brush, Wide As Integer)
 
         'Draws a rectangle with left lower corner A and right upper corner C
 
-        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
             Dim PixelA As Point = MathpointToPixel(A)
             Dim PixelC As Point = MathpointToPixel(C)
 
             'The object Graphs expects the upper left corner to be committed, therefore:
-            Graphs.DrawRectangle(MyPen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+            Graphs.DrawRectangle(Pen, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
         End Using
     End Sub
 
-    Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As Brush)
+    Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, Brush As Brush)
 
         'Draws a rectangle with lower left corner A and upper right corner C
         'filled with Brush
@@ -245,11 +245,11 @@ Public Class ClsGraphicTool
         Dim PixelC As Point = MathpointToPixel(C)
 
         'The object Graphs expects the upper left corner to be committed, therefore:
-        Graphs.FillRectangle(brush, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+        Graphs.FillRectangle(Brush, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
 
     End Sub
 
-    Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, brush As SolidBrush)
+    Public Sub FillRectangle(A As ClsMathpoint, C As ClsMathpoint, Brush As SolidBrush)
 
         'Draws a rectangle with lower left corner A and upper right corner C
         'filled with SolidBrush
@@ -258,102 +258,102 @@ Public Class ClsGraphicTool
         Dim PixelC As Point = MathpointToPixel(C)
 
         'The object Graphs expects the upper left corner to be committed, therefore:
-        Graphs.FillRectangle(brush, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+        Graphs.FillRectangle(Brush, PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
 
     End Sub
 
-    Public Sub DrawCircle(Midpoint As ClsMathpoint, radius As Decimal, color As Color, wide As Integer)
+    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Decimal, Color As Color, Wide As Integer)
 
         'Draws a circle with MidPoint and Radius in mathematicel coordinates
         'Wide is the thickness of the line
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
             Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
             'The object Graphs expects a rectangle where the circle is drawed into
             Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-            Graphs.DrawEllipse(MyPen, rect)
+            Graphs.DrawEllipse(Pen, rect)
         End Using
 
     End Sub
 
-    Public Sub DrawCircle(Midpoint As ClsMathpoint, radius As Decimal, brush As Brush, wide As Integer)
+    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As Brush, Wide As Integer)
 
         'Draws a circle with MidPoint and Radius in mathematicel coordinates
         'Wide is the thickness of the line
 
-        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
             Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
             'The object Graphs expects a rectangle where the circle is drawed into
             Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-            Graphs.DrawEllipse(MyPen, rect)
+            Graphs.DrawEllipse(Pen, rect)
         End Using
 
     End Sub
 
-    Public Sub FillCircle(Midpoint As ClsMathpoint, radius As Decimal, brush As Brush)
+    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As Brush)
 
         'Draws a circle with MidPoint and Radius in mathematicel coordinates
         'and fills the circle with Brush
 
         Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
         Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
         'The object Graphs expects a rectangle where the circle is drawed into
-        Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub FillCircle(PixelMidPoint As Point, radius As Integer, brush As Brush)
+    Public Sub FillCircle(PixelMidPoint As Point, Radius As Integer, Brush As Brush)
 
         'Draws a circle with MidPoint and Radius in pixel coordinates
         'and fills the circle with Brush
 
         'The object Graphs expects a rectangle where the circle is drawed into
-        Dim rect As New Rectangle(PixelMidPoint.X - radius, PixelMidPoint.Y - radius, 2 * radius, 2 * radius)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidPoint.X - Radius, PixelMidPoint.Y - Radius, 2 * Radius, 2 * Radius)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub FillCircle(Midpoint As ClsMathpoint, radius As Decimal, brush As SolidBrush)
+    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As SolidBrush)
 
         'Draws a circle with MidPoint and Radius in mathematicel coordinates
         'and fills the circle with SolidBrush
 
         Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+        Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
         Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
         'The object Graphs expects a rectangle where the circle is drawed into
-        Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub FillCircle(PixelMidPoint As Point, radius As Integer, brush As SolidBrush)
+    Public Sub FillCircle(PixelMidPoint As Point, Radius As Integer, Brush As SolidBrush)
 
         'Draws a circle with MidPoint and Radius in pixel coordinates
         'and fills the circle with SolidBrush
 
         'The object Graphs expects a rectangle where the circle is drawed into
-        Dim rect As New Rectangle(PixelMidPoint.X - radius, PixelMidPoint.Y - radius, 2 * radius, 2 * radius)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidPoint.X - Radius, PixelMidPoint.Y - Radius, 2 * Radius, 2 * Radius)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, color As Color, wide As Integer)
+    Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Color As Color, Wide As Integer)
 
         'Draws an ellipse with MidPoint, major axis a and minor axis b
         'given in mathematical coordinates
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
 
             Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + a, Midpoint.Y + b))
@@ -363,14 +363,14 @@ Public Class ClsGraphicTool
             Dim PixelB As Integer = PixelBorderpoint.Y - PixelMidpoint.Y
 
             'The object Graphs expects a rectangle where the ellipse is drawed into
-            Dim rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
-            Graphs.DrawEllipse(MyPen, rect)
+            Dim Rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
+            Graphs.DrawEllipse(Pen, Rect)
         End Using
 
 
     End Sub
 
-    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, brush As Brush)
+    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Brush As Brush)
 
         'Draws an ellipse with MidPoint, major axis a and minor axis b
         'given in mathematical coordinates and fills it with Brush
@@ -383,12 +383,12 @@ Public Class ClsGraphicTool
         Dim PixelB As Integer = PixelBorderpoint.Y - PixelMidpoint.Y
 
         'The object Graphs expects a rectangle where the ellipse is drawed into
-        Dim rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, brush As SolidBrush)
+    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Brush As SolidBrush)
 
         'Draws an ellipse with MidPoint, major axis a and minor axis b
         'given in mathematical coordinates and fills it with SolidBrush
@@ -401,96 +401,96 @@ Public Class ClsGraphicTool
         Dim PixelB As Integer = PixelBorderpoint.Y - PixelMidpoint.Y
 
         'The object Graphs expects a rectangle where the ellipse is drawed into
-        Dim rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
-        Graphs.FillEllipse(brush, rect)
+        Dim Rect As New Rectangle(PixelMidpoint.X - PixelA, PixelMidpoint.Y - PixelB, 2 * PixelA, 2 * PixelB)
+        Graphs.FillEllipse(Brush, Rect)
 
     End Sub
 
-    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, radius As Decimal, arc As Decimal, arclength As Decimal, color As Color, wide As Integer)
+    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Decimal, Arc As Decimal, ArcLength As Decimal, Color As Color, Wide As Integer)
 
         'Draws a circular arc around MidPoint and Radius in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
         'all in radian measure contained in [0, 2*Pi[
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
             Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
             'The object Graphs expects the angles in Degrees
-            Dim PixelStartarc As Integer = RadiantToDegree(arc)
-            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+            Dim PixelStartarc As Integer = RadiantToDegree(Arc)
+            Dim PixelArclength As Integer = RadiantToDegree(ArcLength)
 
             'The object Graphs expects a rectangle where the circular arc is drawed into
-            Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+            Dim Rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+            Graphs.DrawArc(Pen, Rect, PixelStartarc, PixelArclength)
         End Using
 
     End Sub
 
-    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, startarc As Decimal, arclength As Decimal, color As Color, wide As Integer)
+    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Decimal, ArcLength As Decimal, Color As Color, Wide As Integer)
 
         'Draws an elliptic arc contained in a rectangle with left lower corner A
         'and right uppper corner B in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
         'all in radian measure contained in [0, 2*Pi[
 
-        Using MyPen As New Pen(color, wide)
+        Using Pen As New Pen(Color, Wide)
             Dim PixelA As Point = MathpointToPixel(A)
             Dim PixelC As Point = MathpointToPixel(C)
 
             'The object Graphs expects the angles in Degrees
-            Dim PixelStartarc As Integer = RadiantToDegree(startarc)
-            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+            Dim PixelStartarc As Integer = RadiantToDegree(StartArc)
+            Dim PixelArclength As Integer = RadiantToDegree(ArcLength)
 
             'The object Graphs expects a rectangle where the circular arc is drawed into
-            Dim rect As New Rectangle(PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
-            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+            Dim Rect As New Rectangle(PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
+            Graphs.DrawArc(Pen, Rect, PixelStartarc, PixelArclength)
         End Using
 
 
     End Sub
 
-    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, radius As Decimal, arc As Decimal, arclength As Decimal, brush As Brush, wide As Integer)
+    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Decimal, Arc As Decimal, ArcLength As Decimal, Brush As Brush, Wide As Integer)
 
         'Draws a circular arc around MidPoint and Radius in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
         'all in radian measure contained in [0, 2*Pi[
 
-        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
             Dim PixelMidpoint As Point = MathpointToPixel(Midpoint)
-            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + radius, Midpoint.Y))
+            Dim PixelBorderpoint As Point = MathpointToPixel(New ClsMathpoint(Midpoint.X + Radius, Midpoint.Y))
             Dim PixelRadius As Integer = PixelBorderpoint.X - PixelMidpoint.X
 
             'The object Graphs expects the angles in Degrees
-            Dim PixelStartarc As Integer = RadiantToDegree(arc)
-            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+            Dim PixelStartarc As Integer = RadiantToDegree(Arc)
+            Dim PixelArclength As Integer = RadiantToDegree(ArcLength)
 
             'The object Graphs expects a rectangle where the circular arc is drawed into
-            Dim rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
-            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+            Dim Rect As New Rectangle(PixelMidpoint.X - PixelRadius, PixelMidpoint.Y - PixelRadius, 2 * PixelRadius, 2 * PixelRadius)
+            Graphs.DrawArc(Pen, Rect, PixelStartarc, PixelArclength)
         End Using
 
     End Sub
 
-    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, startarc As Decimal, arclength As Decimal, brush As Brush, wide As Integer)
+    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Decimal, ArcLength As Decimal, Brush As Brush, Wide As Integer)
 
         'Draws an elliptic arc contained in a rectangle with left lower corner A
         'and right uppper corner B in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
         'all in radian measure contained in [0, 2*Pi[
 
-        Using MyPen As New Pen(DirectCast(brush, SolidBrush).Color, wide)
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
             Dim PixelA As Point = MathpointToPixel(A)
             Dim PixelC As Point = MathpointToPixel(C)
 
             'The object Graphs expects the angles in Degrees
-            Dim PixelStartarc As Integer = RadiantToDegree(startarc)
-            Dim PixelArclength As Integer = RadiantToDegree(arclength)
+            Dim PixelStartarc As Integer = RadiantToDegree(StartArc)
+            Dim PixelArclength As Integer = RadiantToDegree(ArcLength)
 
             'The object Graphs expects a rectangle where the circular arc is drawed into
             Dim rect As New Rectangle(PixelA.X, PixelC.Y, PixelC.X - PixelA.X, PixelA.Y - PixelC.Y)
-            Graphs.DrawArc(MyPen, rect, PixelStartarc, PixelArclength)
+            Graphs.DrawArc(Pen, rect, PixelStartarc, PixelArclength)
         End Using
 
     End Sub
@@ -538,11 +538,11 @@ Public Class ClsGraphicTool
 
     End Function
 
-    Public Function RadiantToDegree(arc As Decimal) As Integer
+    Public Function RadiantToDegree(Arc As Decimal) As Integer
 
         'Transformation of Radian into Degree
-        Dim degree As Integer = CInt(180 * arc / Math.PI)
-        Return degree
+        Dim Degree As Integer = CInt(180 * Arc / Math.PI)
+        Return Degree
 
     End Function
 

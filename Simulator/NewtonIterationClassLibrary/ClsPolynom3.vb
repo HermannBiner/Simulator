@@ -12,16 +12,16 @@ Public Class ClsPolynom3C
 
     Public Sub New()
 
-        MyAllowedXRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-        MyAllowedYRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-
-        MyActualXRange = MyAllowedXRange
-        MyActualYRange = MyAllowedYRange
-
-        MyUseN = False
-        MyUseC = True
+        MyIsUseN = False
+        MyIsUseC = True
 
     End Sub
+
+    Public Overrides ReadOnly Property IsShowBasin As Boolean
+        Get
+            IsShowBasin = False
+        End Get
+    End Property
 
     Protected Overrides Sub PrepareUnitRoots()
 

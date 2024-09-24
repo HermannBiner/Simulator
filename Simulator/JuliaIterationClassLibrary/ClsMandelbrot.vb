@@ -27,19 +27,7 @@ Public Class ClsMandelbrot
 
     Public Sub New()
 
-        If MyN = 2 Or MyN = 0 Then
-            'Size of the Mandelbrot set in case MyN = 2
-            MyAllowedXRange = New ClsInterval(CDec(-2), CDec(0.6))
-            MyAllowedYRange = New ClsInterval(CDec(-1.3), CDec(1.3))
-        Else
-            'centered
-            MyAllowedXRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-            MyAllowedYRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-        End If
-
-
-        MyActualXRange = MyAllowedXRange
-        MyActualYRange = MyAllowedYRange
+        SetParameterRange()
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
@@ -58,25 +46,32 @@ Public Class ClsMandelbrot
                 MyN = value
                 SetParameterRange()
             End If
-
         End Set
+    End Property
+
+    Protected Overrides ReadOnly Property IsSampleList As Boolean
+        Get
+            IsSampleList = False
+        End Get
     End Property
 
     Private Sub SetParameterRange()
 
         If MyN = 2 Then
+
             'Size of the Mandelbrot set in case MyN = 2
-            MyAllowedXRange = New ClsInterval(CDec(-2), CDec(0.6))
-            MyAllowedYRange = New ClsInterval(CDec(-1.3), CDec(1.3))
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-2), CDec(0.6)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.3), CDec(1.3)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+
         Else
+
             'centered
-            MyAllowedXRange = New ClsInterval(CDec(-1.5), CDec(1.5))
-            MyAllowedYRange = New ClsInterval(CDec(-1.5), CDec(1.5))
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
         End If
 
-
-        MyActualXRange = MyAllowedXRange
-        MyActualYRange = MyAllowedYRange
+        MyActualXRange = MyXValueParameter.Range
+        MyActualYRange = MyYValueParameter.Range
 
     End Sub
 
@@ -84,7 +79,7 @@ Public Class ClsMandelbrot
 
         'Transform the PixelPoint to a Complex Number
 
-        With MyBmpGraphics.PixelToMathpoint(Startpoint)
+        With BmpGraphics.PixelToMathpoint(Startpoint)
             'Saved for debugging
             Zi.X = .X
             Zi.Y = .Y
@@ -121,7 +116,7 @@ Public Class ClsMandelbrot
             'if steps = 0, the color would be black as well, therefore we set
             Steps = Math.Max(1, Steps)
 
-            If MyUseSystemColors Then
+            If MyIsUseSystemColors Then
                 MyBrush = StandardColors.GetSystemBrush(Steps)
                 ColorIndex = 1
             Else
@@ -147,7 +142,7 @@ Public Class ClsMandelbrot
             End If
         End If
 
-        MyBmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
+        BmpGraphics.DrawPoint(Startpoint, MyBrush, 1)
         MyBrush.Dispose()
 
     End Sub
@@ -158,11 +153,11 @@ Public Class ClsMandelbrot
 
         MyPicDiagram.Refresh()
 
-        MyPicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
+        PicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
 
         Do
             w = w.Power(MyN).Add(MyC)
-            MyPicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
+            PicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
 
             i += 1
         Loop Until i > 50 Or w.AbsoluteValue > 2

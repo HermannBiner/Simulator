@@ -8,11 +8,11 @@ Public Interface IJulia
 
     WriteOnly Property PicDiagram As PictureBox
 
-    'Allowed Interval for the x-Values
-    ReadOnly Property AllowedXRange As ClsInterval
+    'Value Parameter Definition for the x-Values
+    ReadOnly Property XValueParameter As ClsGeneralParameter
 
-    'Allowed Interval for the y-Values
-    ReadOnly Property AllowedYRange As ClsInterval
+    'Value Parameter Definition  for the y-Values
+    ReadOnly Property YValueParameter As ClsGeneralParameter
 
     'Actual interval for the x-Values
     Property ActualXRange As ClsInterval
@@ -36,15 +36,19 @@ Public Interface IJulia
     WriteOnly Property BluePercent As Double
 
     'Use the System Colors
-    WriteOnly Property UseSystemColors As Boolean
+    WriteOnly Property IsUseSystemColors As Boolean
 
     'Draw Track
     ReadOnly Property IsTrackImplemented As Boolean
+
+    'Fill Sample List
+    ReadOnly Property IsSampleList As Boolean
 
     'Iteration Control
     Property IterationStatus As ClsDynamics.EnIterationStatus
 
     WriteOnly Property TxtNumberOfSteps As TextBox
+
     WriteOnly Property TxtElapsedTime As TextBox
 
     'Draws the coordinatesystem

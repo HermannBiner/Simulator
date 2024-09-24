@@ -21,11 +21,11 @@ Public Interface INewton
     'The Iteration needs the Picturebox as well
     WriteOnly Property PicDiagram As PictureBox
 
-    'Allowed Interval for the x-Values
-    ReadOnly Property AllowedXRange As ClsInterval
+    'Value Parameter Definition for the x-Values
+    ReadOnly Property XValueParameter As ClsGeneralParameter
 
-    'Allowed Interval for the y-Values
-    ReadOnly Property AllowedYRange As ClsInterval
+    'Value Parameter Definition  for the y-Values
+    ReadOnly Property YValueParameter As ClsGeneralParameter
 
     'Actual interval for the x-Values
     Property ActualXRange As ClsInterval
@@ -38,13 +38,13 @@ Public Interface INewton
     WriteOnly Property IsProtocol As Boolean
 
     'Using N as parameter
-    ReadOnly Property UseN As Boolean
+    ReadOnly Property IsUseN As Boolean
 
     'N (number of roots)
-    WriteOnly Property N As Integer
+    Property N As Integer
 
     'Using C as parameter
-    ReadOnly Property UseC As Boolean
+    ReadOnly Property IsUseC As Boolean
 
     'Parameter C
     WriteOnly Property C As ClsComplexNumber
@@ -54,6 +54,9 @@ Public Interface INewton
 
     'Color
     WriteOnly Property UseColor As EnColor
+
+    'IsShowBasin
+    ReadOnly Property IsShowBasin As Boolean
 
     'Iteration Control
     Property IterationStatus As ClsDynamics.EnIterationStatus

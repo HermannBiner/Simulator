@@ -6,7 +6,7 @@
 
 'Status Checked
 
-Public Class ClsValueParameter
+Public Class ClsGeneralParameter
 
     'To identify the parameter
     Private MyID As Integer
@@ -15,18 +15,26 @@ Public Class ClsValueParameter
     'The definition interval of the parameter
     Private MyRange As ClsInterval
     Private MyDefaultValue As Decimal
+    Private MyTypeOfParameter As TypeOfParameterEnum
 
-    Public Sub New(Tag As Integer, Name As String, Range As ClsInterval)
-        MyID = Tag
+    Public Enum TypeOfParameterEnum
+        Value
+        Formula
+    End Enum
+
+    Public Sub New(ID As Integer, Name As String, Range As ClsInterval, TypeOfParameter As TypeOfParameterEnum)
+        MyID = ID
         MyName = Name
         MyRange = Range
+        MyTypeOfParameter = TypeOfParameter
         MyDefaultValue = 0
     End Sub
 
-    Public Sub New(Tag As Integer, Name As String, Range As ClsInterval, DefaultValue As Decimal)
-        MyID = Tag
+    Public Sub New(ID As Integer, Name As String, Range As ClsInterval, TypeOfParameter As TypeOfParameterEnum, DefaultValue As Decimal)
+        MyID = ID
         MyName = Name
         MyRange = Range
+        MyTypeOfParameter = TypeOfParameter
         MyDefaultValue = DefaultValue
     End Sub
 

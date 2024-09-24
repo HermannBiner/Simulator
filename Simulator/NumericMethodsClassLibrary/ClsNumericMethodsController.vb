@@ -1,23 +1,26 @@
 ﻿'This class contains the Iteration Controller for FrmSpringPendulum
 
-'Status Redesign Checked
+'Status Checked
+
+Imports System.Reflection
 
 Public Class ClsNumericMethodsController
 
     'Iteration parameters Pendulum A: The real spring pendulum
-    Private MyDSA As ISpringPendulum
+    Private DSA As INumericMethod
 
     'Iteration parameters Pendulum B: The approximated spring pendulum
     'the y-coordinate is a numeric approach depending on the chosen method
-    Private MyDSB As ISpringPendulum
+    Private DSB As INumericMethod
+
+    Private MyForm As FrmNumericMethods
 
     'Mathematical Interval in y-direction
-    Private MyMathRange As ClsInterval
+    Private MathInterval As ClsInterval
 
     'Draws into the picturebox
     'this is drawing the actual status of the pendulums
-    Private MyPicDiagram As PictureBox
-    Private MyPicGraphics As ClsGraphicTool
+    Private PicGraphics As ClsGraphicTool
 
     'Bitmap and shifted Bitmap to draw the traces
     'the trick of the track moving to the right is
@@ -30,27 +33,25 @@ Public Class ClsNumericMethodsController
     'this shift happens only after a number 
     'of iteration steps - therefore
     'we need "NumberOfStepsUntilShift"
-    Private MyBmpDiagram As Bitmap
-    Private MyShiftedBmpDiagram As Bitmap
+    Private BmpDiagram As Bitmap
+    Private ShiftedBmpDiagram As Bitmap
     Private XShift As Integer = 1
     Private NumberOfStepsUntilShift As Integer = 1
 
     'Draws persistently into the bitmap
     'this is to draw the track of the pendulum-movement
-    Private MyBmpGraphics As ClsGraphicTool
+    Private BmpGraphics As ClsGraphicTool
 
     'Iteration control
-    Private MyIterationStatus As ClsDynamics.EnIterationStatus
+    Private IterationStatus As ClsDynamics.EnIterationStatus
 
     'Status Parameters
     Private n As Integer '#Steps
-    Private MyLblN As Label
-    Private MyValueList As ListBox
 
     'The X-Position of both Pendulums
     'this is a fixed value
-    Const MyXPositionA As Decimal = CDec(-0.97)
-    Const MyXPositionB As Decimal = CDec(-0.94)
+    Const XPositionA As Decimal = CDec(-0.97)
+    Const XPositionB As Decimal = CDec(-0.94)
 
     'to draw the trace we need:
     Private TraceA As ClsMathpoint
@@ -60,93 +61,110 @@ Public Class ClsNumericMethodsController
     Private NextTraceB As ClsMathpoint
 
     'and the step width of the iteration is 
-    Private MyStepWidthA As Decimal = CDec(0.1)
+    Private StepWidthA As Decimal = CDec(0.1)
 
     'CDec(0.1) is the Standard, but the StepWidthB is calculated
     'in SetStepWidthB based on TrbStepWidth.value
-    Private MyStepWidthB As Decimal = CDec(0.1)
+    Private StepWidthB As Decimal = CDec(0.1)
 
-    'Is Diagram Stretched
-    Private IsStretched As Boolean
-    Private MyStretchFactor As Integer
+    'Setting UsereStartPosition
+    Private IsMouseDown As Boolean = False
 
-    WriteOnly Property DSA As ISpringPendulum
-        Set(value As ISpringPendulum)
-            MyDSA = value
-        End Set
-    End Property
+    Public Sub New(Form As FrmNumericMethods)
+        MyForm = Form
+        MathInterval = New ClsInterval(-1, 1)
+    End Sub
 
-    WriteOnly Property DSB As ISpringPendulum
-        Set(value As ISpringPendulum)
-            MyDSB = value
-        End Set
-    End Property
+    Public Sub FillDynamicSystem()
 
-    ReadOnly Property MathRange As ClsInterval
-        Get
-            MathRange = MyMathRange
-        End Get
-    End Property
+        MyForm.CboPendulum.Items.Clear()
 
-    WriteOnly Property PicDiagram As PictureBox
-        Set(value As PictureBox)
-            MyPicDiagram = value
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyMathRange, MyMathRange)
-            MyBmpDiagram = New Bitmap(MyPicDiagram.Width, MyPicDiagram.Height)
-            MyPicDiagram.Image = MyBmpDiagram
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyMathRange, MyMathRange)
-        End Set
-    End Property
+        'Add the classes implementing ISpringPendulum
+        'to the Combobox CboPendulum by Reflection
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(INumericMethod)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-        Get
-            IterationStatus = MyIterationStatus
-        End Get
-        Set(value As ClsDynamics.EnIterationStatus)
-            MyIterationStatus = value
-        End Set
-    End Property
+        If types.Count > 0 Then
+            Dim DSName As String
+            For Each type In types
 
-    WriteOnly Property LblSteps As Label
-        Set(value As Label)
-            MyLblN = value
-        End Set
-    End Property
+                'GetString is calle dwith the option IsClass = true
+                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
+                'the name of the Class implementing an Interface is used as default
+                'suppressing the extension "Cls"
+                DSName = FrmMain.LM.GetString(type.Name, True)
+                MyForm.CboPendulum.Items.Add(DSName)
+            Next
+        Else
+            Throw New ArgumentNullException("MissingImplementation")
+        End If
+        MyForm.CboPendulum.SelectedIndex = 0
 
-    WriteOnly Property ValueList As ListBox
-        Set(value As ListBox)
-            MyValueList = value
-        End Set
-    End Property
+    End Sub
 
-    ReadOnly Property StepWidthA As Decimal
-        Get
-            StepWidthA = MyStepWidthA
-        End Get
-    End Property
+    Public Sub SetDS()
 
-    ReadOnly Property StepWidthB As Decimal
-        Get
-            StepWidthB = MyStepWidthB
-        End Get
-    End Property
+        'This sets the type of PendulumB by Reflection
 
-    WriteOnly Property Stretched As Boolean
-        Set(value As Boolean)
-            IsStretched = value
-            SetStepWidthAB()
-        End Set
-    End Property
+        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
+                                 Where(Function(t) t.GetInterfaces().Contains(GetType(INumericMethod)) AndAlso
+                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
 
-    WriteOnly Property StretchFactor As Integer
-        Set(value As Integer)
-            MyStretchFactor = value
-            SetStepWidthAB()
-        End Set
-    End Property
+        If MyForm.CboPendulum.SelectedIndex >= 0 Then
 
-    Public Sub New()
-        MyMathRange = New ClsInterval(-1, 1)
+            Dim SelectedName As String = MyForm.CboPendulum.SelectedItem.ToString
+
+            If types.Count > 0 Then
+                For Each type In types
+                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                        DSB = CType(Activator.CreateInstance(type), INumericMethod)
+                    End If
+                Next
+            End If
+
+        End If
+
+        DSA = New ClsRealSpringPendulum
+
+        InitializeDS()
+
+        SetDefaultUserData()
+
+        'If the type of iteration changes, everything has to be reset
+        ResetIteration()
+
+    End Sub
+
+    'PendulumA is just a real Spring Pendulum
+    Private Sub InitializeDS()
+
+        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, MathInterval, MathInterval)
+        BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+        MyForm.PicDiagram.Image = BmpDiagram
+        BmpGraphics = New ClsGraphicTool(BmpDiagram, MathInterval, MathInterval)
+
+        MyForm.ChkStretched.Checked = False
+        DrawPicPendulums()
+    End Sub
+
+    Public Sub SetDefaultUserData()
+
+        'all default start parameters are zero
+        With DSA
+            .Amplitude = CDec(0.5) 'this sets .ActualParameter(1)
+            .ActualParameter(0) = 0
+            .ActualParameter(2) = 0
+        End With
+
+        With DSB
+            .Amplitude = CDec(0.5) 'this sets .ActualParameter(1)
+            .ActualParameter(0) = 0
+            .ActualParameter(2) = 0
+        End With
+
+        PrepareDiagram()
+        DrawPicPendulums()
     End Sub
 
     Private Sub SetStepWidthAB()
@@ -167,82 +185,107 @@ Public Class ClsNumericMethodsController
         'thereby both pendulums are synchronized
 
         Dim LocStepWidth As Decimal
+        Dim StretchFactor As Integer = MyForm.TrbStepWidth.Value
 
-        If MyStretchFactor > 5 Then
-            LocStepWidth = CDec(Math.Max(0.01 - 0.001 * (MyStretchFactor - 6), 0.001))
+        If StretchFactor > 5 Then
+            LocStepWidth = CDec(Math.Max(0.01 - 0.001 * (StretchFactor - 6), 0.001))
         Else
-            LocStepWidth = CDec(0.1 - 0.02 * (MyStretchFactor - 1))
+            LocStepWidth = CDec(0.1 - 0.02 * (StretchFactor - 1))
         End If
 
-        If IsStretched Then
+        If MyForm.ChkStretched.Checked Then
 
             'in that case, the stepwidth of both pendulums are the same
             'and therefore also the NumberOfApproxStepsB is = 1
             'like NumberOfApproxStepsA
-            MyStepWidthA = LocStepWidth
-            MyStepWidthB = StepWidthA
+            StepWidthA = LocStepWidth
+            StepWidthB = StepWidthA
             NumberOfApproxStepsB = 1
 
         Else
             'StepWidthA is set as Standard = 0.1
-            MyStepWidthA = CDec(0.1)
+            StepWidthA = CDec(0.1)
 
             'and StepWidthB is equal locStepWidth and adapted
             'so that StepWidthB x NumberOfApproxStepsB = StepWidthA
             NumberOfApproxStepsB = CInt(Math.Round(StepWidthA / LocStepWidth))
-            MyStepWidthB = MyStepWidthA / NumberOfApproxStepsB
+            StepWidthB = StepWidthA / NumberOfApproxStepsB
         End If
 
-        MyDSA.h = StepWidthA
-        MyDSA.NumberOfApproxSteps = 1
+        DSA.h = StepWidthA
+        DSA.NumberOfApproxSteps = 1
 
-        MyDSB.h = StepWidthB
-        MyDSB.NumberOfApproxSteps = NumberOfApproxStepsB
+        DSB.h = StepWidthB
+        DSB.NumberOfApproxSteps = NumberOfApproxStepsB
 
     End Sub
 
     Public Sub ResetIteration()
 
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        MyBmpGraphics.Clear(Color.White)
-        MyPicDiagram.Refresh()
-        MyValueList.Items.Clear()
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        BmpGraphics.Clear(Color.White)
+        MyForm.PicDiagram.Refresh()
+
+        MyForm.LstValueList.Items.Clear()
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnStart.Text = FrmMain.LM.GetString("Start")
+
+        PrepareDiagram()
+        DrawPicPendulums()
+    End Sub
+
+    Private Sub PrepareDiagram()
+
+        'Draw the x-axis (time - axis) of the Coordinate System
+        BmpGraphics.Clear(Color.White)
+        BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
+        MyForm.PicDiagram.Refresh()
 
     End Sub
 
-    Public Sub PrepareDiagram()
+    Public Sub SetStepWidth()
+        'Set Stepwidth
+        MyForm.LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
+        ResetIteration()
+    End Sub
 
-        'Draw the x-axis (time - axis) of the Coordinate System
-        MyBmpGraphics.Clear(Color.White)
-        MyBmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Black, 1)
-        MyPicDiagram.Refresh()
+    Public Async Sub StartIteration()
+        With MyForm
+            .BtnStart.Enabled = False
+            .BtnStart.Text = FrmMain.LM.GetString("Continue")
+            .BtnReset.Enabled = False
+            .BtnDefault.Enabled = False
+            .ChkStretched.Enabled = False
+        End With
 
+        'The loop controls as well the Iterationstatus
+        Await IterationLoop()
     End Sub
 
     Public Async Function IterationLoop() As Task
 
         'MyStartposition is already set by the user
 
-        If MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
 
             'Initializing only in the beginning
             'that gives the possibility to continue after an interrupt
             n = 0
 
-            TraceA = New ClsMathpoint(MyXPositionA, MyDSA.ActualParameter(1))
-            TraceB = New ClsMathpoint(MyXPositionB, MyDSB.ActualParameter(1))
-            NextTraceA = New ClsMathpoint(MyXPositionA, MyDSA.ActualParameter(1))
-            NextTraceB = New ClsMathpoint(MyXPositionB, MyDSB.ActualParameter(1))
+            TraceA = New ClsMathpoint(XPositionA, DSA.ActualParameter(1))
+            TraceB = New ClsMathpoint(XPositionB, DSB.ActualParameter(1))
+            NextTraceA = New ClsMathpoint(XPositionA, DSA.ActualParameter(1))
+            NextTraceB = New ClsMathpoint(XPositionB, DSB.ActualParameter(1))
 
             'prepare stepwidth and NumberOfApproxSteps
-            If IsStretched Then
+            If MyForm.ChkStretched.Checked Then
                 'both pendulums have the same stepwidth
                 'and the same number of approx steps
-                MyDSB.h = MyDSA.h
-                MyDSB.NumberOfApproxSteps = 1
+                DSB.h = DSA.h
+                DSB.NumberOfApproxSteps = 1
                 'remark: PendulumA has already NumberOfApproxSteps = 1
             Else
-                MyDSA.h = MyStepWidthA
+                DSA.h = StepWidthA
                 'remark: PendulumB is set in CalcStepWidth
                 SetStepWidthAB()
             End If
@@ -252,15 +295,15 @@ Public Class ClsNumericMethodsController
             'and this should be equal to "NumberOfStepsUntilShift x StepWidthA"
             'so that the Shift is done when the Width if 1 pixel is reached by "NumberOfStepsUntilShift x StepWidthA"
             'but the minimum is of course 1
-            NumberOfStepsUntilShift = Math.Max(1, CInt(0.02 / MyStepWidthA))
+            NumberOfStepsUntilShift = Math.Max(1, CInt(0.02 / StepWidthA))
 
-            MyIterationStatus = ClsDynamics.EnIterationStatus.Ready
+            IterationStatus = ClsDynamics.EnIterationStatus.Ready
 
         End If
 
-        If MyIterationStatus = ClsDynamics.EnIterationStatus.Ready Or MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
 
-            MyIterationStatus = ClsDynamics.EnIterationStatus.Running
+            IterationStatus = ClsDynamics.EnIterationStatus.Running
             Do
                 n += 1
 
@@ -270,68 +313,141 @@ Public Class ClsNumericMethodsController
                 TraceB.X = NextTraceB.X
                 TraceB.Y = NextTraceB.Y
 
-                MyDSA.Iteration()
-                MyDSB.Iteration()
+                DSA.Iteration()
+                DSB.Iteration()
 
-                NextTraceA = New ClsMathpoint(MyXPositionA, MyDSA.ActualParameter(1))
-                NextTraceB = New ClsMathpoint(MyXPositionB, MyDSB.ActualParameter(1))
+                NextTraceA = New ClsMathpoint(XPositionA, DSA.ActualParameter(1))
+                NextTraceB = New ClsMathpoint(XPositionB, DSB.ActualParameter(1))
 
                 'Draw the line of movement into the bitmap
-                MyBmpGraphics.DrawLine(TraceA, NextTraceA, Color.Green, 1)
-                MyBmpGraphics.DrawLine(TraceB, NextTraceB, Color.Red, 1)
+                BmpGraphics.DrawLine(TraceA, NextTraceA, Color.Green, 1)
+                BmpGraphics.DrawLine(TraceB, NextTraceB, Color.Red, 1)
 
                 'copy the bitmap
-                MyShiftedBmpDiagram = New Bitmap(MyBmpDiagram)
+                ShiftedBmpDiagram = New Bitmap(BmpDiagram)
 
                 If n Mod NumberOfStepsUntilShift = 0 Then
 
                     'Draw this copy right-shifted into the bitmap
-                    MyBmpGraphics.Clear(Color.White)
-                    MyBmpGraphics.DrawImage(MyShiftedBmpDiagram, XShift, 0)
+                    BmpGraphics.Clear(Color.White)
+                    BmpGraphics.DrawImage(ShiftedBmpDiagram, XShift, 0)
 
                     'Coordinate system x-axis
-                    MyBmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDec(-0.9), 0), Color.Black, 1)
+                    BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDec(-0.9), 0), Color.Black, 1)
 
                     'update Picdiagram
-                    MyPicDiagram.Refresh()
+                    MyForm.PicDiagram.Refresh()
                 End If
 
 
                 DrawPicPendulums()
 
-                MyValueList.Items.Add(n.ToString("00000") & ": " & (TraceA.Y - TraceB.Y).ToString("0.##########"))
+                MyForm.LstValueList.Items.Add(n.ToString("00000") & ": " & (TraceA.Y - TraceB.Y).ToString("0.##########"))
 
-                If n Mod 5 = 0 Then
-                    MyLblN.Text = n.ToString
+                If n Mod 50 = 0 Then
+                    MyForm.LblSteps.Text = n.ToString
                     Await Task.Delay(1)
 
                 End If
 
-            Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted Or
-                MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-
+            Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Or
+                IterationStatus = ClsDynamics.EnIterationStatus.Stopped
         End If
 
     End Function
 
+    Public Sub StopIteration()
+
+        With MyForm
+            .BtnStart.Enabled = True
+            .BtnReset.Enabled = True
+            .BtnDefault.Enabled = True
+            .ChkStretched.Enabled = True
+        End With
+
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+    End Sub
+
     'SECTOR DRAWINGS
 
-    Public Sub DrawPicPendulums()
+    Private Sub DrawPicPendulums()
 
-        MyPicDiagram.Refresh()
+        MyForm.PicDiagram.Refresh()
 
-        Dim PositionA As New ClsMathpoint(MyXPositionA, MyDSA.ActualParameter(1))
-        Dim SuspensionA As New ClsMathpoint(MyXPositionA, 1)
-        Dim PositionB As New ClsMathpoint(MyXPositionB, MyDSB.ActualParameter(1))
-        Dim SuspensionB As New ClsMathpoint(MyXPositionB, 1)
+        Dim PositionA As New ClsMathpoint(XPositionA, DSA.ActualParameter(1))
+        Dim SuspensionA As New ClsMathpoint(XPositionA, 1)
+        Dim PositionB As New ClsMathpoint(XPositionB, DSB.ActualParameter(1))
+        Dim SuspensionB As New ClsMathpoint(XPositionB, 1)
 
-        MyPicGraphics.DrawPoint(PositionA, Brushes.Green, 5)
-        MyPicGraphics.DrawLine(PositionA, SuspensionA, Color.Green, 2)
+        PicGraphics.DrawPoint(PositionA, Brushes.Green, 5)
+        PicGraphics.DrawLine(PositionA, SuspensionA, Color.Green, 2)
 
-        MyPicGraphics.DrawPoint(PositionB, Brushes.Red, 5)
-        MyPicGraphics.DrawLine(PositionB, SuspensionB, Color.Red, 2)
+        PicGraphics.DrawPoint(PositionB, Brushes.Red, 5)
+        PicGraphics.DrawLine(PositionB, SuspensionB, Color.Red, 2)
 
     End Sub
+
+    'SECTOR SET USERSTARTPOSITION
+
+    Public Sub MouseDown(e As MouseEventArgs)
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            If e.X < 100 Then
+
+                MyForm.Cursor = Cursors.Hand
+                IsMouseDown = True
+
+                'Now, Moving the Mouse moves the pendulum as well
+                MouseMoving(e)
+
+            End If
+        End If
+    End Sub
+
+    Public Sub MouseMoving(e As MouseEventArgs)
+
+        If IsMouseDown Then
+            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            Dim Mouseposition As New Point With {
+            .X = e.X + 2,
+            .Y = e.Y - 25
+        }
+
+            If Mouseposition.X >= 100 Then
+                IsMouseDown = False
+                MyForm.Cursor = Cursors.Arrow
+            Else
+                PrepareDiagram()
+                'Setting the Amplitude sets also the ActualParameter(1)
+                DSA.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDec(-0.95)), CDec(0.95))
+                DSB.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDec(-0.95)), CDec(0.95))
+                DrawPicPendulums()
+            End If
+        End If
+    End Sub
+
+    Public Sub MouseUp(e As MouseEventArgs)
+        'Has only an effect, if the Mouse was down
+        If IsMouseDown Then
+
+            'The Position of the Mouse sets the Position of the pendulum
+            'e: Mouseposition is relative to PicDiagram
+            Dim Mouseposition As Point
+            Mouseposition.X = e.X + 2
+            Mouseposition.Y = e.Y - 25
+
+            'The Mouse gets its normal behaviour again
+            MyForm.Cursor = Cursors.Arrow
+            IsMouseDown = False
+        End If
+    End Sub
+
+    Private Function PixelqToMathy(q As Integer) As Decimal
+
+        Dim y As Decimal = MathInterval.B - (q * MathInterval.IntervalWidth _
+            / MyForm.PicDiagram.Height)
+
+        Return y
+    End Function
 
 End Class

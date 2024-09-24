@@ -7,18 +7,11 @@ Public Class ClsOvalBilliardTable
     Public Sub New()
 
         'Set specific parameters and ranges
-        MyAlfaValueRange = New ClsInterval(0, CDec(Math.PI))
-        MyTValueRange = New ClsInterval(0, CDec(Math.PI * 2))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(Math.PI * 2)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 2))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(0, CDec(Math.PI)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / NumberOfBilliardBalls))
 
-        MyValueParameters = New List(Of ClsValueParameter)
-
-        Dim ValueRange As ClsValueParameter
-
-        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValueRange)
-        MyValueParameters.Add(ValueRange)
-
-        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValueRange)
-        MyValueParameters.Add(ValueRange)
+        MyValueParameterList.Add(MyTValueParameter)
+        MyValueParameterList.Add(MyAlfaValueParameter)
 
         'Default
         MyC = CDec(0.5)
@@ -47,14 +40,14 @@ Public Class ClsOvalBilliardTable
 
             'Special Points
             'MidPoint of the Circle and the Ellipse
-            Dim Midpoint As New ClsMathpoint((MyA - b) / 2, 0)
+            Dim Midpoint As New ClsMathpoint((MyA - B) / 2, 0)
 
             'Focal Point of the Ellipse
             Dim Focalpoint As ClsMathpoint
-            If MyA >= b Then
-                Focalpoint = New ClsMathpoint(Midpoint.X - CDec(Math.Sqrt(MyA * MyA - b * b)), 0) ''linker Brennpunkt
+            If MyA >= B Then
+                Focalpoint = New ClsMathpoint(Midpoint.X - CDec(Math.Sqrt(MyA * MyA - B * B)), 0) ''linker Brennpunkt
             Else
-                Focalpoint = New ClsMathpoint(Midpoint.X, CDec(Math.Sqrt(b * b - MyA * MyA)))
+                Focalpoint = New ClsMathpoint(Midpoint.X, CDec(Math.Sqrt(B * B - MyA * MyA)))
             End If
 
             'Draw these points
@@ -62,14 +55,14 @@ Public Class ClsOvalBilliardTable
             .DrawPoint(Focalpoint, Brushes.Blue, 2)
 
             'Draw half-Circle
-            .DrawCircleArc(Midpoint, b, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(Midpoint, B, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
 
             'Draw half-Ellipse
             'Rectangle for the Ellipse bottom-left
-            Dim BottomLeft As New ClsMathpoint(Midpoint.X - MyA, -b)
+            Dim BottomLeft As New ClsMathpoint(Midpoint.X - MyA, -B)
 
             'Rectangle for the Ellipse top-right
-            Dim TopRight As New ClsMathpoint(Midpoint.X + MyA, b)
+            Dim TopRight As New ClsMathpoint(Midpoint.X + MyA, B)
 
             .DrawEllipticArc(BottomLeft, TopRight, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
         End With
@@ -81,13 +74,15 @@ Public Class ClsOvalBilliardTable
         Dim BilliardBall As New ClsOvalBilliardball
 
         With BilliardBall
-            .MathValueRange = MyMathValueRange
-            .AlfaValueRange = MyAlfaValueRange
-            .TValueRange = MyTValueRange
+            .MathInterval = MyMathInterval
+            .AlfaValueRange = MyAlfaValueParameter.Range
+            .TValueRange = MyTValueParameter.Range
+            .ParameterRange = MyFormulaParameter.Range
             .PicDiagram = MyPicDiagram
             .PicGraphics = MyPicGraphics
             .BmpDiagram = MyBmpDiagram
             .BmpGraphics = MyBmpGraphics
+
             'PhasePortrait and ValueProtocol is not allways needed
             If MyPhasePortrait IsNot Nothing Then
                 .PhasePortrait = MyPhasePortrait
@@ -95,8 +90,9 @@ Public Class ClsOvalBilliardTable
             If MyValueProtocol IsNot Nothing Then
                 .ValueProtocol = MyValueProtocol
             End If
+
             .A = MyA
-            .B = b
+            .B = B
             .IsStartangleSet = False
             .IsStartpositionSet = False
         End With

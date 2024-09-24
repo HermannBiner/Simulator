@@ -1,5 +1,7 @@
 ﻿'This class is only to generate the Feigenbaum Diagram in case of the Mandelbrot set
-'It doesn't give any relevant result for the other forms except FrmFeigenbaum
+'when the Mandelbrot set is only using real numbers
+
+'Status Checked
 
 Public Class ClsMandelbrotReal
     Inherits ClsIterationAbstract
@@ -7,13 +9,15 @@ Public Class ClsMandelbrotReal
     Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
-        MyParameterInterval = New ClsInterval(-2, 0)
 
-        'This is adapted when the Parameter is changed
-        MyIterationInterval = New ClsInterval(-2, 2)
+        MyFormulaParameter = New ClsGeneralParameter(1, "Parameter a", New ClsInterval(-2, 0),
+                                                     ClsGeneralParameter.TypeOfParameterEnum.Formula, -1)
+
+        MyValueParameter = New ClsGeneralParameter(2, "Value x", New ClsInterval(-2, 2),
+                                                   ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(0.314159))
 
         MyCriticalPoint = 0
-        MyChaoticParameter = -2
+        MyChaoticParameterValue = -2
 
         'Setting split points to be drawn in the image
         MySplitpoints = New List(Of Decimal) From {
@@ -25,22 +29,25 @@ Public Class ClsMandelbrotReal
             }
     End Sub
 
-    Overrides Property Parameter As Decimal
+    Overrides Property ParameterA As Decimal
         Get
-            Parameter = MyParameter
+            ParameterA = MyParameterA
         End Get
         Set(Value As Decimal)
-            MyParameter = Value
-            Dim b As Decimal
-            b = CDec(1 + Math.Sqrt(1 - 4 * MyParameter) / 2)
-            MyIterationInterval = New ClsInterval(-b, b)
+            MyParameterA = Value
+            'the following would be nessecary 
+            'if the ClsMandelbrotReal should be ready
+            'for FrmIteration etc.
+            'Dim b As Decimal
+            'b = CDec(1 + Math.Sqrt(1 - 4 * MyParameterA) / 2)
+            'MyValueParameter.Range = New ClsInterval(-b, b)
         End Set
     End Property
 
     Protected Overrides Function F(x As Decimal) As Decimal
 
         'This is the original iteration function
-        Return MyParameter + x * x
+        Return MyParameterA + x * x
 
     End Function
 

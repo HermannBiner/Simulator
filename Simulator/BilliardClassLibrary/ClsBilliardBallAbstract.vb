@@ -13,13 +13,14 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected MyBmpGraphics As ClsGraphicTool
 
     'Used for calculations
-    Protected MyMathValueRange As ClsInterval
+    Protected MyMathInterval As ClsInterval
     Protected MyTValueRange As ClsInterval
     Protected MyAlfaValueRange As ClsInterval
+    Protected MyParameterRange As ClsInterval
 
     'The ball draws as well into the Phase Portrait
     Protected MyPhaseportrait As PictureBox
-    Protected MyPhaseportraitGraphics As ClsGraphicTool
+    Protected PhaseportraitGraphics As ClsGraphicTool
 
     'and protocols its Position (Parameter t and reflexion-angle Alfa) into a ListBox
     Protected MyValueProtocol As ListBox
@@ -29,14 +30,14 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected MyB As Decimal
 
     'The class for general mathematical Calculations
-    Protected MyMathhelper As ClsMathhelperBilliard
+    Protected Mathhelper As ClsMathhelperBilliard
 
     'Parameter that defines the actual hit point
     'see mathematical documentation
-    Protected MyT As Decimal
+    Protected T As Decimal
 
     'This is the angle between the actual moving-direction and the positive x-axis
-    Protected MyPhi As Decimal
+    Protected Phi As Decimal
 
     'Properties of the Ball
     Protected MyColor As Brush
@@ -84,15 +85,26 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
-    WriteOnly Property MathValueRange As ClsInterval Implements IBilliardball.MathValueRange
+    WriteOnly Property MathInterval As ClsInterval Implements IBilliardball.MathInterval
         Set(value As ClsInterval)
-            MyMathValueRange = value
+            MyMathInterval = value
         End Set
     End Property
 
     WriteOnly Property TValueRange As ClsInterval Implements IBilliardball.TValueRange
         Set(value As ClsInterval)
             MyTValueRange = value
+        End Set
+    End Property
+
+    WriteOnly Property AlfaValueRange As ClsInterval Implements IBilliardball.AlfaValueRange
+        Set(value As ClsInterval)
+            MyAlfaValueRange = value
+        End Set
+    End Property
+    WriteOnly Property ParameterRange As ClsInterval Implements IBilliardball.ParameterRange
+        Set(value As ClsInterval)
+            MyParameterRange = value
         End Set
     End Property
 
@@ -108,16 +120,10 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
-    WriteOnly Property AlfaValueRange As ClsInterval Implements IBilliardball.AlfaValueRange
-        Set(value As ClsInterval)
-            MyAlfaValueRange = value
-        End Set
-    End Property
-
     Public WriteOnly Property PhasePortrait As PictureBox Implements IBilliardball.PhasePortrait
         Set(value As PictureBox)
             MyPhaseportrait = value
-            MyPhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, MyTValuerange, MyAlfaValuerange)
+            PhaseportraitGraphics = New ClsGraphicTool(MyPhaseportrait, MyTValueRange, MyAlfaValueRange)
         End Set
     End Property
 
@@ -127,13 +133,13 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
-    WriteOnly Property Ballcolor As Brush Implements IBilliardball.Ballcolor
+    WriteOnly Property Ballcolor As Brush Implements IBilliardball.BallColor
         Set(value As Brush)
             MyColor = value
         End Set
     End Property
 
-    WriteOnly Property Ballspeed As Integer Implements IBilliardball.Ballspeed
+    WriteOnly Property Ballspeed As Integer Implements IBilliardball.BallSpeed
         Set(value As Integer)
             MySpeed = value
         End Set
@@ -158,7 +164,7 @@ Public MustInherit Class ClsBilliardBallAbstract
     End Property
 
     Public Sub New()
-        MyMathhelper = New ClsMathhelperBilliard
+        Mathhelper = New ClsMathhelperBilliard
     End Sub
 
     MustOverride Property Startparameter As Decimal Implements IBilliardball.Startparameter

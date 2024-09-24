@@ -6,24 +6,19 @@ Public Class ClsEllipseBilliardTable
 
     Public Sub New()
 
-        'Set specific parameters and ranges
-        MyAlfaValueRange = New ClsInterval(0, CDec(Math.PI))
-        MyTValueRange = New ClsInterval(0, CDec(Math.PI * 2))
-
-        MyValueParameters = New List(Of ClsValueParameter)
-
-        Dim ValueRange As ClsValueParameter
-
-        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValueRange)
-        MyValueParameters.Add(ValueRange)
-
-        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValueRange)
-        MyValueParameters.Add(ValueRange)
-
         'Default
         MyC = CDec(0.8)
         MyA = CDec(0.99)
         MyB = MyA * MyC
+
+        'Set specific parameters and ranges
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(Math.PI * 2)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 2))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(0, CDec(Math.PI)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.001))
+
+        MyValueParameterList.Add(MyTValueParameter)
+        MyValueParameterList.Add(MyAlfaValueParameter)
+
+
     End Sub
 
     Public Overrides Function GetBilliardBall() As IBilliardball
@@ -31,13 +26,15 @@ Public Class ClsEllipseBilliardTable
         Dim BilliardBall As New ClsEllipseBilliardball
 
         With BilliardBall
+            .MathInterval = MyMathInterval
+            .AlfaValueRange = MyAlfaValueParameter.Range
+            .TValueRange = MyTValueParameter.Range
+            .ParameterRange = MyFormulaParameter.Range
             .PicDiagram = MyPicDiagram
             .PicGraphics = MyPicGraphics
             .BmpDiagram = MyBmpDiagram
             .BmpGraphics = MyBmpGraphics
-            .MathValueRange = MyMathValueRange
-            .AlfaValueRange = MyAlfaValueRange
-            .TValueRange = MyTValueRange
+
             'PhasePortrait and ValueProtocol is not allways needed
             If MyPhasePortrait IsNot Nothing Then
                 .PhasePortrait = MyPhasePortrait
@@ -45,8 +42,9 @@ Public Class ClsEllipseBilliardTable
             If MyValueProtocol IsNot Nothing Then
                 .ValueProtocol = MyValueProtocol
             End If
+
             .A = MyA
-            .B = b
+            .B = MyB
             .IsStartangleSet = False
             .IsStartpositionSet = False
         End With
@@ -81,21 +79,21 @@ Public Class ClsEllipseBilliardTable
             .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
 
             'The MidPoint of the Ellipse is always (0/0)
-            .DrawEllipse(New ClsMathpoint(0, 0), MyA, b, Color.Blue, 1)
+            .DrawEllipse(New ClsMathpoint(0, 0), MyA, B, Color.Blue, 1)
 
             'Set Focal Points F1 and F2 of the Ellipse
             Dim F1 As New ClsMathpoint
             Dim F2 As New ClsMathpoint
 
             Dim f As Decimal
-            If MyA > b Then
-                f = CDec(Math.Sqrt(MyA * MyA - b * b))
+            If MyA > B Then
+                f = CDec(Math.Sqrt(MyA * MyA - B * B))
                 F1.X = f
                 F1.Y = 0
                 F2.X = -f
                 F2.Y = 0
             Else
-                f = CDec(Math.Sqrt(b * b - MyA * MyA))
+                f = CDec(Math.Sqrt(B * B - MyA * MyA))
                 F1.X = 0
                 F1.Y = f
                 F2.X = 0

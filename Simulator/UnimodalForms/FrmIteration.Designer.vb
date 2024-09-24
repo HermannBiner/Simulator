@@ -40,7 +40,7 @@ Partial Class FrmIteration
         GrpProtocol = New GroupBox()
         BtnProtocolStartvalue = New Button()
         TxtTargetProtocol = New TextBox()
-        TxtParameter = New TextBox()
+        TxtParameterA = New TextBox()
         TxtStartValue = New TextBox()
         CboFunction = New ComboBox()
         LblIterationDepth = New Label()
@@ -78,10 +78,10 @@ Partial Class FrmIteration
         ' BtnReset
         ' 
         BtnReset.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnReset.Location = New Point(892, 635)
+        BtnReset.Location = New Point(891, 682)
         BtnReset.Margin = New Padding(2)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(303, 37)
+        BtnReset.Size = New Size(303, 34)
         BtnReset.TabIndex = 17
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -114,7 +114,7 @@ Partial Class FrmIteration
         BtnNextStep.Location = New Point(7, 25)
         BtnNextStep.Margin = New Padding(2)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(143, 37)
+        BtnNextStep.Size = New Size(143, 34)
         BtnNextStep.TabIndex = 3
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
@@ -125,7 +125,7 @@ Partial Class FrmIteration
         BtnNext10Steps.Location = New Point(166, 25)
         BtnNext10Steps.Margin = New Padding(2)
         BtnNext10Steps.Name = "BtnNext10Steps"
-        BtnNext10Steps.Size = New Size(143, 37)
+        BtnNext10Steps.Size = New Size(143, 34)
         BtnNext10Steps.TabIndex = 4
         BtnNext10Steps.Text = "Next10Steps"
         BtnNext10Steps.UseVisualStyleBackColor = True
@@ -158,7 +158,7 @@ Partial Class FrmIteration
         ' 
         GrpStep.Controls.Add(BtnNextStep)
         GrpStep.Controls.Add(BtnNext10Steps)
-        GrpStep.Location = New Point(885, 460)
+        GrpStep.Location = New Point(885, 493)
         GrpStep.Margin = New Padding(2)
         GrpStep.Name = "GrpStep"
         GrpStep.Padding = New Padding(2)
@@ -171,7 +171,7 @@ Partial Class FrmIteration
         ' 
         LblNumberOfSteps.AutoSize = True
         LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblNumberOfSteps.Location = New Point(884, 544)
+        LblNumberOfSteps.Location = New Point(886, 468)
         LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
         LblNumberOfSteps.Size = New Size(82, 13)
@@ -198,7 +198,7 @@ Partial Class FrmIteration
         BtnTransitiveStartValue.Location = New Point(9, 55)
         BtnTransitiveStartValue.Margin = New Padding(2)
         BtnTransitiveStartValue.Name = "BtnTransitiveStartValue"
-        BtnTransitiveStartValue.Size = New Size(303, 37)
+        BtnTransitiveStartValue.Size = New Size(303, 34)
         BtnTransitiveStartValue.TabIndex = 13
         BtnTransitiveStartValue.Text = "StartvalueForTargetvalue"
         BtnTransitiveStartValue.UseVisualStyleBackColor = True
@@ -241,7 +241,7 @@ Partial Class FrmIteration
         BtnProtocolStartvalue.Location = New Point(7, 52)
         BtnProtocolStartvalue.Margin = New Padding(2)
         BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
-        BtnProtocolStartvalue.Size = New Size(305, 37)
+        BtnProtocolStartvalue.Size = New Size(305, 34)
         BtnProtocolStartvalue.TabIndex = 8
         BtnProtocolStartvalue.Text = "StartvalueForProtocol"
         BtnProtocolStartvalue.UseVisualStyleBackColor = True
@@ -254,14 +254,14 @@ Partial Class FrmIteration
         TxtTargetProtocol.Size = New Size(304, 23)
         TxtTargetProtocol.TabIndex = 10
         ' 
-        ' TxtParameter
+        ' TxtParameterA
         ' 
-        TxtParameter.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TxtParameter.Location = New Point(964, 89)
-        TxtParameter.Margin = New Padding(2)
-        TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(241, 23)
-        TxtParameter.TabIndex = 2
+        TxtParameterA.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameterA.Location = New Point(964, 89)
+        TxtParameterA.Margin = New Padding(2)
+        TxtParameterA.Name = "TxtParameterA"
+        TxtParameterA.Size = New Size(241, 23)
+        TxtParameterA.TabIndex = 2
         ' 
         ' TxtStartValue
         ' 
@@ -304,7 +304,7 @@ Partial Class FrmIteration
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(974, 542)
+        LblSteps.Location = New Point(976, 466)
         LblSteps.Margin = New Padding(2, 0, 2, 0)
         LblSteps.Name = "LblSteps"
         LblSteps.Size = New Size(13, 15)
@@ -423,12 +423,12 @@ Partial Class FrmIteration
         ' BtnDefault
         ' 
         BtnDefault.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnDefault.Location = New Point(890, 676)
+        BtnDefault.Location = New Point(890, 641)
         BtnDefault.Margin = New Padding(2)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(303, 37)
+        BtnDefault.Size = New Size(303, 34)
         BtnDefault.TabIndex = 37
-        BtnDefault.Text = "ResetUserData"
+        BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmIteration
@@ -447,7 +447,7 @@ Partial Class FrmIteration
         Controls.Add(CboIterationDepth)
         Controls.Add(LblIterationDepth)
         Controls.Add(CboFunction)
-        Controls.Add(TxtParameter)
+        Controls.Add(TxtParameterA)
         Controls.Add(GrpProtocol)
         Controls.Add(GrpTargetValue)
         Controls.Add(GrpStep)
@@ -494,7 +494,7 @@ Partial Class FrmIteration
     Friend WithEvents BtnProtocolStartvalue As Button
     Friend WithEvents TxtTargetProtocol As TextBox
     Friend WithEvents LblNumberOfSteps As Label
-    Friend WithEvents TxtParameter As TextBox
+    Friend WithEvents TxtParameterA As TextBox
     Friend WithEvents TxtStartValue As TextBox
     Friend WithEvents CboFunction As ComboBox
     Friend WithEvents LblIterationDepth As Label

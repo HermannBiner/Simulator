@@ -9,54 +9,35 @@
 'Therefore, more cases of unimodal functions could be easely programmed
 'just by implementing this interface
 
-'Status Redesign Tested
+'Status Checked
 
 Imports System.Globalization
 Imports System.Reflection
+Imports System.Security.Cryptography
 
 Public Class FrmSensitivity
 
     Private IsFormLoaded As Boolean
-    Private SensitivityController As ClsSensitivityController
-
-    'Prepare basic objects
-    Private DS As IIteration
-
-    Private Const XStretchingDefault As Integer = 2
-
-    Private Presentation As ClsSensitivityController.PresentationEnum
+    Private FC As ClsSensitivityController
 
     'SECTOR INITIALIZATION
 
     Public Sub New()
-
         'This is necessary for the designer
         InitializeComponent()
-
     End Sub
 
     Private Sub FrmSensitivity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         IsFormLoaded = False
-        SensitivityController = New ClsSensitivityController
-
+        FC = New ClsSensitivityController(Me)
         'Initialize Language
         InitializeLanguage()
-
-        FillDynamicSystem()
-
+        FC.FillDynamicSystem()
     End Sub
 
     Private Sub FrmSensitivity_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        CboFunction.SelectedIndex = 0
-        CboIterationDepth.SelectedIndex = 0
-
-        'Default Presentation
-        SetPresentation()
-        SetDS()
+        FC.SetDS()
         IsFormLoaded = True
-
     End Sub
 
     Private Sub InitializeLanguage()
@@ -75,224 +56,85 @@ Public Class FrmSensitivity
         LblValueList2.Text = FrmMain.LM.GetString("ValueList2")
         LblValueList1.Text = FrmMain.LM.GetString("ValueList1")
         LblIterationDepth.Text = FrmMain.LM.GetString("IterationDepth")
-
-    End Sub
-
-    Private Sub FillDynamicSystem()
-
-        CboFunction.Items.Clear()
-
-        'Add the classes implementing IIteration
-        'to the Combobox CboPendulum by Reflection
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                                 Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
-                                 t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If types.Count > 0 Then
-            Dim DSName As String
-            For Each type In types
-
-                'GetString is calle dwith the option IsClass = true
-                'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
-                'the name of the Class implementing an Interface is used as default
-                'suppressing the extension "Cls"
-                DSName = FrmMain.LM.GetString(type.Name, True)
-                CboFunction.Items.Add(DSName)
-            Next
-        Else
-            Throw New ArgumentNullException("MissingImplementation")
-        End If
-    End Sub
-
-    Private Sub SetDS()
-
-        'This sets the type of Iterator by Reflection
-
-        Dim types As List(Of Type) = Assembly.GetExecutingAssembly().GetTypes().
-                             Where(Function(t) t.GetInterfaces().Contains(GetType(IIteration)) AndAlso
-                             t.IsClass AndAlso Not t.IsAbstract).ToList()
-
-        If CboFunction.SelectedIndex >= 0 Then
-
-            Dim SelectedName As String = CboFunction.SelectedItem.ToString
-
-            If types.Count > 0 Then
-                For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
-                        DS = CType(Activator.CreateInstance(type), IIteration)
-                    End If
-                Next
-            End If
-
-        End If
-
-        InitializeDS()
-
-        'The parameter and startvalue are depending on the type of iteration
-        SetDefaultUserData()
-
-        'If the type of iteration changes, everything has to be reset
-        ResetIteration()
-
-    End Sub
-
-    Private Sub InitializeDS()
-
-        DS.Power = CInt(CboIterationDepth.SelectedItem)
-
-        With SensitivityController
-            .DS = DS
-            .LblN = LblSteps
-            .PicDiagram = PicDiagram
-            .Presentation = Presentation
-            .ValueList1 = LstValueList1
-            .ValueList2 = LstValueList2
-            .XStretching = XStretchingDefault
-        End With
-
-    End Sub
-
-    Private Sub SetDefaultUserData()
-
-        'default settings
-        TxtParameter.Text = DS.ChaoticParameter.ToString(CultureInfo.CurrentCulture)
-        TxtStartValue1.Text = (DS.IterationInterval.A +
-            (DS.IterationInterval.IntervalWidth * 0.314159)).ToString(CultureInfo.CurrentCulture)
-        TxtStartValue2.Text = (DS.IterationInterval.A +
-            (DS.IterationInterval.IntervalWidth * 0.3141590000001)).ToString(CultureInfo.CurrentCulture)
-        TxtxStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
-
-    End Sub
-
-    Private Sub ResetIteration()
-
-        SensitivityController.ResetIteration()
+        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
 
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         If IsFormLoaded Then
-            ResetIteration()
+            FC.ResetIteration()
+        End If
+    End Sub
+
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            FC.ResetIteration()
+            FC.SetDefaultUserData()
         End If
     End Sub
 
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
         If IsFormLoaded Then
-            SetDS()
+            FC.SetDS()
         End If
     End Sub
 
     Private Sub CboIterationDepth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboIterationDepth.SelectedIndexChanged
         If IsFormLoaded Then
-            'The iteration depth defines how many times the function is repeated in each iteration step
-            DS.Power = CInt(CboIterationDepth.SelectedItem)
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtParameter_TextChanged(sender As Object, e As EventArgs) Handles TxtParameter.TextChanged
+    Private Sub TxtParameter_LostFocus(sender As Object, e As EventArgs) Handles TxtParameter.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtStartValue1_TextChanged(sender As Object, e As EventArgs) Handles TxtStartValue1.TextChanged
+    Private Sub TxtStartValue1_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue1.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtStartValue2_TextChanged(sender As Object, e As EventArgs) Handles TxtStartValue2.TextChanged
+    Private Sub TxtStartValue2_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue2.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtxStretching_TextChanged(sender As Object, e As EventArgs) Handles TxtxStretching.TextChanged
+    Private Sub TxtxStretching_LostFocus(sender As Object, e As EventArgs) Handles TxtxStretching.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
-            ResetIteration()
+            FC.ResetIteration()
         End If
     End Sub
 
     Private Sub OptDifference_CheckedChanged(sender As Object, e As EventArgs) Handles OptDifference.CheckedChanged
         If IsFormLoaded Then
-            SetPresentation()
-            ResetIteration()
+            If OptDifference.Checked Then
+                FC.ResetIteration()
+            End If
         End If
     End Sub
 
     Private Sub OptSingleOrbit_CheckedChanged(sender As Object, e As EventArgs) Handles OptSingleOrbit.CheckedChanged
         If IsFormLoaded Then
-            SetPresentation()
-            ResetIteration()
-        End If
-    End Sub
-
-    Private Sub SetPresentation()
-
-        'The type of presentation has changed
-        Presentation = If(OptDifference.Checked, ClsSensitivityController.PresentationEnum.Difference,
-            ClsSensitivityController.PresentationEnum.SingleOrbits)
-
-    End Sub
-
-    Private Function IsUserDataOK() As Boolean
-
-        'Is the value of TxtParameter in the Iteration Interval?
-        Dim CheckParameter = New ClsCheckUserData(TxtParameter, DS.ParameterInterval)
-        Dim CheckStartValue1 = New ClsCheckUserData(TxtStartValue1, DS.IterationInterval)
-        Dim CheckStartValue2 = New ClsCheckUserData(TxtStartValue2, DS.IterationInterval)
-
-        Dim StretchInterval = New ClsInterval(1, 10)
-        Dim CheckStretchInterval = New ClsCheckUserData(TxtxStretching, StretchInterval)
-
-        Return CheckParameter.IsTxtValueAllowed And CheckStartValue1.IsTxtValueAllowed _
-            And CheckStartValue2.IsTxtValueAllowed And CheckStretchInterval.IsTxtValueAllowed
-
-    End Function
-
-    'SECTOR SENSITIVITY
-
-    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
-
-        If IsFormLoaded Then
-
-            'This starts the whole iteration
-
-            If IsUserDataOK() Then
-
-                With SensitivityController
-
-                    'Set Ds Parameters
-                    DS.Parameter = CDec(TxtParameter.Text)
-                    .StartValue1 = CDec(TxtStartValue1.Text)
-                    .StartValue2 = CDec(TxtStartValue2.Text)
-                    .XStretching = CInt(TxtxStretching.Text)
-                    .Presentation = Presentation
-
-                    'The initialization was successful
-                    If DS.IsBehaviourChaotic Then
-
-                        BtnReset.Enabled = False
-                        .IterationLoop()
-                        BtnReset.Enabled = True
-
-                    Else
-                        'nothing to do, a message is already generated by the test
-                    End If
-                End With
-            Else
-                'there is already a message generated
-                SetDefaultUserData()
+            If OptSingleOrbit.Checked Then
+                FC.ResetIteration()
             End If
-
         End If
-
     End Sub
 
+
+    'SECTOR ITERATION
+    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
+        If IsFormLoaded Then
+            FC.StartIteration()
+        End If
+    End Sub
 End Class

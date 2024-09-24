@@ -12,6 +12,8 @@ Public Class ClsDoublePendulum
     Inherits ClsPendulumAbstract
 
 
+    Private ValueParameter(3) As ClsGeneralParameter
+
     'Mass ratio M: m2 = MyM*m1
     Private M As Decimal
 
@@ -29,26 +31,28 @@ Public Class ClsDoublePendulum
 
         MyLabelProtocol = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
 
-        MyValueParameterDefinition = New List(Of ClsValueParameter)
-
-        Dim ValueParameter(3) As ClsValueParameter
+        MyValueParameterDefinition = New List(Of ClsGeneralParameter)
 
         'Inizialize all parameters
         'Tag is the Number of the Label in the Pendulum Form
         'L1
-        ValueParameter(0) = New ClsValueParameter(1, "L1", New ClsInterval(CDec(0.1), CDec(0.85)))
+        ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDec(0.1), CDec(0.85)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.7))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L2
-        ValueParameter(1) = New ClsValueParameter(2, "L2", New ClsInterval(CDec(0.1), CDec(0.85)))
+        ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDec(0.1), CDec(0.85)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.2))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi1
-        ValueParameter(2) = New ClsValueParameter(3, "Phi 1", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
+        ValueParameter(2) = New ClsGeneralParameter(3, "Phi 1", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'Phi2
-        ValueParameter(3) = New ClsValueParameter(4, "Phi 2", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)))
+        ValueParameter(3) = New ClsGeneralParameter(4, "Phi 2", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 6))
         MyValueParameterDefinition.Add(ValueParameter(3))
 
         'Labels
@@ -57,8 +61,8 @@ Public Class ClsDoublePendulum
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 2  'that means mass m2 = m1
-        MyAdditionalParameter = New ClsValueParameter(MyAdditionalParameterValue,
-                                                      FrmMain.LM.GetString("MassRatioM"), New ClsInterval(0, 4))
+        MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
+                                                      FrmMain.LM.GetString("MassRatioM"), New ClsInterval(0, 4), ClsGeneralParameter.TypeOfParameterEnum.Formula)
 
         'Calculates mass ratio M = m2/m1
         M = GetAddParameterValue(MyAdditionalParameterValue)
@@ -272,15 +276,15 @@ Public Class ClsDoublePendulum
 
         'Standardvalues
         With MyCalculationConstants
-            .Component(0) = CDec(0.7)  'L1
-            .Component(1) = CDec(0.2)  'L2
+            .Component(0) = ValueParameter(0).DefaultValue  'L1
+            .Component(1) = ValueParameter(1).DefaultValue  'L2
         End With
 
         With MyCalculationVariables
-            .Component(0) = CDec(Math.PI / 4) 'Phi1
+            .Component(0) = ValueParameter(2).DefaultValue 'Phi1
             u1 = .Component(0)
             v1 = 0
-            .Component(1) = CDec(Math.PI / 6) 'Phi2
+            .Component(1) = ValueParameter(3).DefaultValue 'Phi2
             u2 = .Component(1)
             v2 = 0
         End With
@@ -419,7 +423,7 @@ Public Class ClsDoublePendulum
         End With
 
         'Draw Phase Diagram
-        '**DrawPhaseportrait()
+        DrawPhaseportrait()
 
         'Transfer new Values to Position
         SetPosition()

@@ -38,6 +38,7 @@ Partial Class FrmTwoDimensions
         TxtParameter = New TextBox()
         LblParameter = New Label()
         CboFunction = New ComboBox()
+        BtnDefault = New Button()
         CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         GrpStartpoint.SuspendLayout()
         GrpExperiment.SuspendLayout()
@@ -47,10 +48,10 @@ Partial Class FrmTwoDimensions
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(1, 0)
-        PicDiagram.Margin = New Padding(2, 2, 2, 2)
+        PicDiagram.Location = New Point(-1, 5)
+        PicDiagram.Margin = New Padding(2)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(725, 699)
+        PicDiagram.Size = New Size(800, 800)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
@@ -60,11 +61,11 @@ Partial Class FrmTwoDimensions
         GrpStartpoint.Controls.Add(TxtX)
         GrpStartpoint.Controls.Add(LblY)
         GrpStartpoint.Controls.Add(LblX)
-        GrpStartpoint.Location = New Point(737, 115)
-        GrpStartpoint.Margin = New Padding(2, 2, 2, 2)
+        GrpStartpoint.Location = New Point(814, 111)
+        GrpStartpoint.Margin = New Padding(2)
         GrpStartpoint.Name = "GrpStartpoint"
-        GrpStartpoint.Padding = New Padding(2, 2, 2, 2)
-        GrpStartpoint.Size = New Size(212, 82)
+        GrpStartpoint.Padding = New Padding(2)
+        GrpStartpoint.Size = New Size(230, 99)
         GrpStartpoint.TabIndex = 1
         GrpStartpoint.TabStop = False
         GrpStartpoint.Text = "CoordinatesStartpoint"
@@ -74,9 +75,9 @@ Partial Class FrmTwoDimensions
         TxtY.AcceptsReturn = True
         TxtY.AcceptsTab = True
         TxtY.Location = New Point(49, 58)
-        TxtY.Margin = New Padding(2, 2, 2, 2)
+        TxtY.Margin = New Padding(2)
         TxtY.Name = "TxtY"
-        TxtY.Size = New Size(150, 23)
+        TxtY.Size = New Size(163, 23)
         TxtY.TabIndex = 3
         ' 
         ' TxtX
@@ -84,9 +85,9 @@ Partial Class FrmTwoDimensions
         TxtX.AcceptsReturn = True
         TxtX.AcceptsTab = True
         TxtX.Location = New Point(49, 31)
-        TxtX.Margin = New Padding(2, 2, 2, 2)
+        TxtX.Margin = New Padding(2)
         TxtX.Name = "TxtX"
-        TxtX.Size = New Size(150, 23)
+        TxtX.Size = New Size(163, 23)
         TxtX.TabIndex = 2
         ' 
         ' LblY
@@ -111,30 +112,30 @@ Partial Class FrmTwoDimensions
         ' 
         ' BtnNext10
         ' 
-        BtnNext10.Location = New Point(743, 345)
-        BtnNext10.Margin = New Padding(2, 2, 2, 2)
+        BtnNext10.Location = New Point(814, 353)
+        BtnNext10.Margin = New Padding(2)
         BtnNext10.Name = "BtnNext10"
-        BtnNext10.Size = New Size(208, 37)
+        BtnNext10.Size = New Size(230, 34)
         BtnNext10.TabIndex = 9
         BtnNext10.Text = "Next10Steps"
         BtnNext10.UseVisualStyleBackColor = True
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(743, 660)
-        BtnReset.Margin = New Padding(2, 2, 2, 2)
+        BtnReset.Location = New Point(814, 772)
+        BtnReset.Margin = New Padding(2)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(208, 37)
+        BtnReset.Size = New Size(230, 34)
         BtnReset.TabIndex = 10
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnNextStep
         ' 
-        BtnNextStep.Location = New Point(743, 300)
-        BtnNextStep.Margin = New Padding(2, 2, 2, 2)
+        BtnNextStep.Location = New Point(814, 315)
+        BtnNextStep.Margin = New Padding(2)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(208, 37)
+        BtnNextStep.Size = New Size(230, 34)
         BtnNextStep.TabIndex = 8
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
@@ -142,11 +143,11 @@ Partial Class FrmTwoDimensions
         ' GrpExperiment
         ' 
         GrpExperiment.Controls.Add(CboExperiment)
-        GrpExperiment.Location = New Point(737, 209)
-        GrpExperiment.Margin = New Padding(2, 2, 2, 2)
+        GrpExperiment.Location = New Point(810, 224)
+        GrpExperiment.Margin = New Padding(2)
         GrpExperiment.Name = "GrpExperiment"
-        GrpExperiment.Padding = New Padding(2, 2, 2, 2)
-        GrpExperiment.Size = New Size(212, 77)
+        GrpExperiment.Padding = New Padding(2)
+        GrpExperiment.Size = New Size(230, 77)
         GrpExperiment.TabIndex = 6
         GrpExperiment.TabStop = False
         GrpExperiment.Text = "ExperimentNo"
@@ -156,20 +157,20 @@ Partial Class FrmTwoDimensions
         CboExperiment.FormattingEnabled = True
         CboExperiment.Items.AddRange(New Object() {"Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"})
         CboExperiment.Location = New Point(12, 31)
-        CboExperiment.Margin = New Padding(2, 2, 2, 2)
+        CboExperiment.Margin = New Padding(2)
         CboExperiment.Name = "CboExperiment"
-        CboExperiment.Size = New Size(187, 23)
+        CboExperiment.Size = New Size(200, 23)
         CboExperiment.TabIndex = 7
         ' 
         ' GrpParameter
         ' 
         GrpParameter.Controls.Add(TxtParameter)
         GrpParameter.Controls.Add(LblParameter)
-        GrpParameter.Location = New Point(737, 49)
-        GrpParameter.Margin = New Padding(2, 2, 2, 2)
+        GrpParameter.Location = New Point(814, 45)
+        GrpParameter.Margin = New Padding(2)
         GrpParameter.Name = "GrpParameter"
-        GrpParameter.Padding = New Padding(2, 2, 2, 2)
-        GrpParameter.Size = New Size(212, 61)
+        GrpParameter.Padding = New Padding(2)
+        GrpParameter.Size = New Size(230, 61)
         GrpParameter.TabIndex = 4
         GrpParameter.TabStop = False
         GrpParameter.Text = "Parameter"
@@ -179,9 +180,9 @@ Partial Class FrmTwoDimensions
         TxtParameter.AcceptsReturn = True
         TxtParameter.AcceptsTab = True
         TxtParameter.Location = New Point(47, 20)
-        TxtParameter.Margin = New Padding(2, 2, 2, 2)
+        TxtParameter.Margin = New Padding(2)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(149, 23)
+        TxtParameter.Size = New Size(179, 23)
         TxtParameter.TabIndex = 5
         ' 
         ' LblParameter
@@ -198,17 +199,28 @@ Partial Class FrmTwoDimensions
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic growth", "Parabola"})
-        CboFunction.Location = New Point(737, 9)
-        CboFunction.Margin = New Padding(2, 2, 2, 2)
+        CboFunction.Location = New Point(814, 5)
+        CboFunction.Margin = New Padding(2)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(212, 23)
+        CboFunction.Size = New Size(230, 23)
         CboFunction.TabIndex = 11
+        ' 
+        ' BtnDefault
+        ' 
+        BtnDefault.Location = New Point(814, 734)
+        BtnDefault.Margin = New Padding(2)
+        BtnDefault.Name = "BtnDefault"
+        BtnDefault.Size = New Size(230, 34)
+        BtnDefault.TabIndex = 12
+        BtnDefault.Text = "DefaultUserData"
+        BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmTwoDimensions
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(971, 708)
+        ClientSize = New Size(1059, 811)
+        Controls.Add(BtnDefault)
         Controls.Add(CboFunction)
         Controls.Add(GrpParameter)
         Controls.Add(GrpExperiment)
@@ -218,7 +230,7 @@ Partial Class FrmTwoDimensions
         Controls.Add(GrpStartpoint)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(2, 2, 2, 2)
+        Margin = New Padding(2)
         Name = "FrmTwoDimensions"
         Text = "TwoDimensions"
         WindowState = FormWindowState.Maximized
@@ -247,4 +259,5 @@ Partial Class FrmTwoDimensions
     Friend WithEvents TxtParameter As TextBox
     Friend WithEvents LblParameter As Label
     Friend WithEvents CboFunction As ComboBox
+    Friend WithEvents BtnDefault As Button
 End Class

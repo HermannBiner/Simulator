@@ -6,19 +6,19 @@
 Public MustInherit Class ClsJuliaAbstract
     Implements IJulia
 
-    'Drawing MapCPlane
-    Protected MyBmpDiagram As Bitmap
-    Protected MyBmpGraphics As ClsGraphicTool
-
     'Drawing PicCPlane
     Protected MyPicDiagram As PictureBox
-    Protected MyPicGraphics As ClsGraphicTool
+    Protected PicGraphics As ClsGraphicTool
 
-    'Allowed Interval for the x-Values
-    Protected MyAllowedXRange As ClsInterval
+    'Drawing MapCPlane
+    Protected BmpDiagram As Bitmap
+    Protected BmpGraphics As ClsGraphicTool
 
-    'Allowed Interval for the y-Values
-    Protected MyAllowedYRange As ClsInterval
+    'ValueParameter Definition for the x-Values
+    Protected MyXValueParameter As ClsGeneralParameter
+
+    'ValueParameter Definition  for the y-Values
+    Protected MyYValueParameter As ClsGeneralParameter
 
     'the actual range for the x-coordinate
     Protected MyActualXRange As ClsInterval
@@ -62,13 +62,15 @@ Public MustInherit Class ClsJuliaAbstract
     'Power of z
     Protected MustOverride WriteOnly Property N As Integer Implements IJulia.N
 
+    Protected MustOverride ReadOnly Property IsSampleList As Boolean Implements IJulia.IsSampleList
+
     'Color Intensity
     Protected Property MyRedPercent As Double
     Protected Property MyGreenPercent As Double
     Protected Property MyBluePercent As Double
 
     'Use SystemColors
-    Protected Property MyUseSystemColors As Boolean
+    Protected Property MyIsUseSystemColors As Boolean
 
     'Track
     Protected Property MyIsTrackImplemented As Boolean
@@ -87,7 +89,7 @@ Public MustInherit Class ClsJuliaAbstract
     WriteOnly Property PicDiagram As PictureBox Implements IJulia.PicDiagram
         Set(value As PictureBox)
             MyPicDiagram = value
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+            PicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
 
             'The PictureBox should be a square
             Dim Square As Integer = Math.Min(MyPicDiagram.Height, MyPicDiagram.Width)
@@ -95,23 +97,23 @@ Public MustInherit Class ClsJuliaAbstract
             MyPicDiagram.Height = Square
             MyPicDiagram.Width = Square
 
-            MyBmpDiagram = New Bitmap(Square, Square)
-            MyPicDiagram.Image = MyBmpDiagram
+            BmpDiagram = New Bitmap(Square, Square)
+            MyPicDiagram.Image = BmpDiagram
 
-            MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
-            MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MyActualXRange, MyActualYRange)
+            PicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
+            BmpGraphics = New ClsGraphicTool(BmpDiagram, MyActualXRange, MyActualYRange)
         End Set
     End Property
 
-    ReadOnly Property AllowedXRange As ClsInterval Implements IJulia.AllowedXRange
+    ReadOnly Property XValueParameter As ClsGeneralParameter Implements IJulia.XValueParameter
         Get
-            AllowedXRange = MyAllowedXRange
+            XValueParameter = MyXValueParameter
         End Get
     End Property
 
-    ReadOnly Property AllowedYRange As ClsInterval Implements IJulia.AllowedYRange
+    ReadOnly Property YValueParameter As ClsGeneralParameter Implements IJulia.YValueParameter
         Get
-            AllowedYRange = MyAllowedYRange
+            YValueParameter = MyYValueParameter
         End Get
     End Property
 
@@ -121,8 +123,8 @@ Public MustInherit Class ClsJuliaAbstract
         End Get
         Set(value As ClsInterval)
             MyActualXRange = value
-            MyPicGraphics.MathXInterval = value
-            MyBmpGraphics.MathXInterval = value
+            PicGraphics.MathXInterval = value
+            BmpGraphics.MathXInterval = value
         End Set
     End Property
 
@@ -132,8 +134,8 @@ Public MustInherit Class ClsJuliaAbstract
         End Get
         Set(value As ClsInterval)
             MyActualYRange = value
-            MyPicGraphics.MathYInterval = value
-            MyBmpGraphics.MathYInterval = value
+            PicGraphics.MathYInterval = value
+            BmpGraphics.MathYInterval = value
         End Set
     End Property
 
@@ -182,9 +184,9 @@ Public MustInherit Class ClsJuliaAbstract
         End Set
     End Property
 
-    WriteOnly Property UseSystemColors As Boolean Implements IJulia.UseSystemColors
+    WriteOnly Property IsUseSystemColors As Boolean Implements IJulia.IsUseSystemColors
         Set(value As Boolean)
-            MyUseSystemColors = value
+            MyIsUseSystemColors = value
         End Set
     End Property
 
@@ -211,14 +213,14 @@ Public MustInherit Class ClsJuliaAbstract
         If ActualXRange.IsNumberInInterval(0) Then
 
             'Draw y-axis
-            MyBmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
+            BmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
                                              New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
         End If
 
         If ActualYRange.IsNumberInInterval(0) Then
 
             'Draw x-axis
-            MyBmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
+            BmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
                                          New ClsMathpoint(ActualXRange.B, 0), Color.Black, 1)
         End If
 
@@ -229,10 +231,10 @@ Public MustInherit Class ClsJuliaAbstract
     Public Sub ResetIteration() Implements IJulia.ResetIteration
 
         'Clear MapCPlane
-        If MyBmpGraphics IsNot Nothing Then
-            MyBmpGraphics.Clear(Color.White)
-            DrawCoordinateSystem()
-        End If
+
+        BmpGraphics.Clear(Color.White)
+        DrawCoordinateSystem()
+
 
         MyTxtNumberofSteps.Text = "0"
         MyTxtElapsedTime.Text = "0"
@@ -352,8 +354,11 @@ Public MustInherit Class ClsJuliaAbstract
 
     End Sub
 
+    'Public MustOverride Property IsSampelList As Boolean Implements IJulia.IsSampleList
+
     Public MustOverride Sub ShowCTrack() Implements IJulia.ShowCTrack
 
     Public MustOverride Sub IterationStep(PicelPoint As Point)
+
 
 End Class

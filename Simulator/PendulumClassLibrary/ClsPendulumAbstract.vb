@@ -1,6 +1,8 @@
 ﻿'This class is the abstract Pendulum
 'and contains parameters, that are needed for all kind of pendulums
-'the iteration-Method is MustOverride
+'the iteration-Method is "MustOverride"
+
+'Status Checked
 
 Public MustInherit Class ClsPendulumAbstract
     Implements IPendulum
@@ -48,12 +50,12 @@ Public MustInherit Class ClsPendulumAbstract
 
     Protected MathInterval As ClsInterval
 
-    Protected MyAdditionalParameter As ClsValueParameter
+    Protected MyAdditionalParameter As ClsGeneralParameter
     Protected MyAdditionalParameterValue As Integer
 
     'Parameters for the Iteration
     Protected MyIterationStatus As ClsDynamics.EnIterationStatus
-    Protected MyValueParameterDefinition As List(Of ClsValueParameter)
+    Protected MyValueParameterDefinition As List(Of ClsGeneralParameter)
     Protected MyCalculationConstants As ClsNTupel
     Protected MyCalculationVariables As ClsNTupel
 
@@ -151,6 +153,7 @@ Public MustInherit Class ClsPendulumAbstract
             Dim PhaPorTypes As Array = [Enum].GetValues(GetType(TypeofPhaseportraitEnum))
             TypeofPhasePortrait = CType(PhaPorTypes.GetValue(value), TypeofPhaseportraitEnum)
 
+            'just to label the PhasePortrait Parameters
             SetPhasePortraitParameters()
 
             PicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, UInterval, VInterval)
@@ -189,7 +192,7 @@ Public MustInherit Class ClsPendulumAbstract
         End Set
     End Property
 
-    ReadOnly Property AdditionalParameter As ClsValueParameter Implements IPendulum.AdditionalParameter
+    ReadOnly Property AdditionalParameter As ClsGeneralParameter Implements IPendulum.AdditionalParameter
         Get
             AdditionalParameter = MyAdditionalParameter
         End Get
@@ -212,7 +215,7 @@ Public MustInherit Class ClsPendulumAbstract
         End Set
     End Property
 
-    ReadOnly Property ValueParameterDefinition As List(Of ClsValueParameter) Implements IPendulum.ValueParameterDefinition
+    ReadOnly Property ValueParameterDefinition As List(Of ClsGeneralParameter) Implements IPendulum.ValueParameterDefinition
         Get
             ValueParameterDefinition = MyValueParameterDefinition
         End Get
@@ -220,6 +223,8 @@ Public MustInherit Class ClsPendulumAbstract
 
     Property CalculationConstants As ClsNTupel Implements IPendulum.CalculationConstants
         Set(value As ClsNTupel)
+
+            'Calculation Constants are not changeable while the Iteration
             'Some Pendulums don't use CalculationConstants
             If MyCalculationConstants IsNot Nothing Then
                 Dim i As Integer
@@ -243,6 +248,8 @@ Public MustInherit Class ClsPendulumAbstract
 
     Property CalculationVariables As ClsNTupel Implements IPendulum.CalculationVariables
         Set(value As ClsNTupel)
+
+            'CalculationVariables are changing while the Iteration
             'For our pendulums, the number of variables is fixed: 2
             'if this changes, the whole Runge Kutta Method has to be redesigned
             With MyCalculationVariables
@@ -265,6 +272,8 @@ Public MustInherit Class ClsPendulumAbstract
     End Property
 
     Property IsStartparameter1Set As Boolean Implements IPendulum.IsStartparameter1Set
+
+        'Has the user the first Startparameter set by the mouse?
         Get
             IsStartparameter1Set = MyIsStartParameter1Set
         End Get
@@ -274,6 +283,8 @@ Public MustInherit Class ClsPendulumAbstract
     End Property
 
     Property IsStartparameter2Set As Boolean Implements IPendulum.IsStartparameter2Set
+
+        'Has the user the second Startparameter set by the mouse?
         Get
             IsStartparameter2Set = MyIsStartParameter2Set
         End Get
@@ -283,6 +294,8 @@ Public MustInherit Class ClsPendulumAbstract
     End Property
 
     WriteOnly Property StepWidth As Integer Implements IPendulum.StepWidth
+
+        'StepWidth of Runge Kutta
         Set(value As Integer)
             d = value * StepWidthUnit
             MyLblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & d.ToString
@@ -290,12 +303,15 @@ Public MustInherit Class ClsPendulumAbstract
     End Property
 
     WriteOnly Property LblN As Label Implements IPendulum.LblN
+
+        'Label in the form that shows the Number of Iterationsteps
         Set(value As Label)
             MyLblN = value
         End Set
     End Property
 
     Public Sub New()
+
         MathInterval = New ClsInterval(-1, 1)
         MathHelper = New ClsMathHelperPendulum
 
@@ -347,6 +363,8 @@ Public MustInherit Class ClsPendulumAbstract
     End Sub
 
     Protected Sub ProtocolValues()
+
+        'For debugging e.g.
         MyProtocol.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
             u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
                                      GetEnergy.ToString("N11"))
@@ -354,13 +372,18 @@ Public MustInherit Class ClsPendulumAbstract
 
     Public Async Function IterationLoop(Testmode As Boolean) As Task Implements IPendulum.IterationLoop
 
+        'This is the main Iteraion Loop
         Dim ActualEnergy As Decimal
         Dim MyBrush As Brush
         Dim Value As Integer
 
         Do
             N += 1
+
+            'Testmode for Debugging possible
             IterationStep(Testmode)
+
+            'Controlling the Energy Range
             ActualEnergy = GetEnergy()
 
             Select Case True
@@ -374,7 +397,7 @@ Public MustInherit Class ClsPendulumAbstract
 
             MyPicEnergy.Refresh()
 
-            'Set the StatusBar
+            'Set the StatusBar of the Energy
             Value = CInt(Math.Min(MyPicEnergy.Width, (ActualEnergy - EnergyRange.A) * MyPicEnergy.Width / EnergyRange.IntervalWidth))
             PicEnergyGraphics.FillRectangle(MyBrush, New Rectangle(0, 0, Value, MyPicEnergy.Height))
 
@@ -423,5 +446,6 @@ Public MustInherit Class ClsPendulumAbstract
     'OK
 
     Protected MustOverride Sub DrawCoordinateSystem()
+    'OK
 
 End Class

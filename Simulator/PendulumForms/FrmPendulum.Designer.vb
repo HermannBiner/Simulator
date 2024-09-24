@@ -56,6 +56,7 @@ Partial Class FrmPendulum
         LblTypeofPhaseportrait = New Label()
         LblProtocol = New Label()
         BtnStop = New Button()
+        BtnDefault = New Button()
         GrpStartParameter.SuspendLayout()
         CType(TrbAdditionalParameter, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicPhasePortrait, ComponentModel.ISupportInitialize).BeginInit()
@@ -68,29 +69,30 @@ Partial Class FrmPendulum
         ' 
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
-        CboPendulum.Location = New Point(1391, 47)
-        CboPendulum.Margin = New Padding(4, 5, 4, 5)
+        CboPendulum.Location = New Point(726, 22)
+        CboPendulum.Margin = New Padding(2)
         CboPendulum.Name = "CboPendulum"
-        CboPendulum.Size = New Size(394, 40)
+        CboPendulum.Size = New Size(226, 23)
         CboPendulum.TabIndex = 38
         ' 
         ' LblPendulum
         ' 
         LblPendulum.AutoSize = True
-        LblPendulum.Location = New Point(1387, 10)
-        LblPendulum.Margin = New Padding(4, 0, 4, 0)
+        LblPendulum.Location = New Point(724, 5)
+        LblPendulum.Margin = New Padding(2, 0, 2, 0)
         LblPendulum.Name = "LblPendulum"
-        LblPendulum.Size = New Size(122, 32)
+        LblPendulum.Size = New Size(62, 15)
         LblPendulum.TabIndex = 37
         LblPendulum.Text = "Pendulum"
         ' 
         ' LstProtocol
         ' 
         LstProtocol.FormattingEnabled = True
-        LstProtocol.Location = New Point(1801, 1128)
-        LstProtocol.Margin = New Padding(4, 5, 4, 5)
+        LstProtocol.ItemHeight = 15
+        LstProtocol.Location = New Point(973, 497)
+        LstProtocol.Margin = New Padding(2)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(910, 388)
+        LstProtocol.Size = New Size(450, 184)
         LstProtocol.TabIndex = 36
         ' 
         ' GrpStartParameter
@@ -108,80 +110,80 @@ Partial Class FrmPendulum
         GrpStartParameter.Controls.Add(TxtP1)
         GrpStartParameter.Controls.Add(LblP2)
         GrpStartParameter.Controls.Add(LblP1)
-        GrpStartParameter.Location = New Point(1391, 204)
-        GrpStartParameter.Margin = New Padding(4, 5, 4, 5)
+        GrpStartParameter.Location = New Point(726, 124)
+        GrpStartParameter.Margin = New Padding(2)
         GrpStartParameter.Name = "GrpStartParameter"
-        GrpStartParameter.Padding = New Padding(4, 5, 4, 5)
-        GrpStartParameter.Size = New Size(394, 495)
+        GrpStartParameter.Padding = New Padding(2)
+        GrpStartParameter.Size = New Size(228, 232)
         GrpStartParameter.TabIndex = 35
         GrpStartParameter.TabStop = False
         GrpStartParameter.Text = "StartParameter"
         ' 
         ' TxtP6
         ' 
-        TxtP6.Location = New Point(91, 355)
-        TxtP6.Margin = New Padding(4, 5, 4, 5)
+        TxtP6.Location = New Point(49, 166)
+        TxtP6.Margin = New Padding(2)
         TxtP6.Name = "TxtP6"
-        TxtP6.Size = New Size(225, 39)
+        TxtP6.Size = New Size(163, 23)
         TxtP6.TabIndex = 12
         TxtP6.Visible = False
         ' 
         ' LblP6
         ' 
         LblP6.AutoSize = True
-        LblP6.Location = New Point(13, 362)
-        LblP6.Margin = New Padding(4, 0, 4, 0)
+        LblP6.Location = New Point(7, 170)
+        LblP6.Margin = New Padding(2, 0, 2, 0)
         LblP6.Name = "LblP6"
-        LblP6.Size = New Size(40, 32)
+        LblP6.Size = New Size(20, 15)
         LblP6.TabIndex = 11
         LblP6.Text = "P6"
         LblP6.Visible = False
         ' 
         ' TxtP5
         ' 
-        TxtP5.Location = New Point(91, 296)
-        TxtP5.Margin = New Padding(4, 5, 4, 5)
+        TxtP5.Location = New Point(49, 139)
+        TxtP5.Margin = New Padding(2)
         TxtP5.Name = "TxtP5"
-        TxtP5.Size = New Size(225, 39)
+        TxtP5.Size = New Size(163, 23)
         TxtP5.TabIndex = 10
         TxtP5.Visible = False
         ' 
         ' LblP5
         ' 
         LblP5.AutoSize = True
-        LblP5.Location = New Point(13, 303)
-        LblP5.Margin = New Padding(4, 0, 4, 0)
+        LblP5.Location = New Point(7, 142)
+        LblP5.Margin = New Padding(2, 0, 2, 0)
         LblP5.Name = "LblP5"
-        LblP5.Size = New Size(40, 32)
+        LblP5.Size = New Size(20, 15)
         LblP5.TabIndex = 9
         LblP5.Text = "P5"
         LblP5.Visible = False
         ' 
         ' TxtP4
         ' 
-        TxtP4.Location = New Point(91, 234)
-        TxtP4.Margin = New Padding(4, 5, 4, 5)
+        TxtP4.Location = New Point(49, 110)
+        TxtP4.Margin = New Padding(2)
         TxtP4.Name = "TxtP4"
-        TxtP4.Size = New Size(225, 39)
+        TxtP4.Size = New Size(163, 23)
         TxtP4.TabIndex = 8
         TxtP4.Visible = False
         ' 
         ' TxtP3
         ' 
-        TxtP3.Location = New Point(91, 173)
-        TxtP3.Margin = New Padding(4, 5, 4, 5)
+        TxtP3.Location = New Point(49, 81)
+        TxtP3.Margin = New Padding(2)
         TxtP3.Name = "TxtP3"
-        TxtP3.Size = New Size(225, 39)
+        TxtP3.Size = New Size(163, 23)
         TxtP3.TabIndex = 7
         TxtP3.Visible = False
         ' 
         ' LblP4
         ' 
         LblP4.AutoSize = True
-        LblP4.Location = New Point(13, 241)
-        LblP4.Margin = New Padding(4, 0, 4, 0)
+        LblP4.Location = New Point(7, 113)
+        LblP4.Margin = New Padding(2, 0, 2, 0)
         LblP4.Name = "LblP4"
-        LblP4.Size = New Size(40, 32)
+        LblP4.Size = New Size(20, 15)
         LblP4.TabIndex = 6
         LblP4.Text = "P4"
         LblP4.Visible = False
@@ -189,49 +191,49 @@ Partial Class FrmPendulum
         ' LblP3
         ' 
         LblP3.AutoSize = True
-        LblP3.Location = New Point(13, 182)
-        LblP3.Margin = New Padding(4, 0, 4, 0)
+        LblP3.Location = New Point(7, 85)
+        LblP3.Margin = New Padding(2, 0, 2, 0)
         LblP3.Name = "LblP3"
-        LblP3.Size = New Size(40, 32)
+        LblP3.Size = New Size(20, 15)
         LblP3.TabIndex = 5
         LblP3.Text = "P3"
         LblP3.Visible = False
         ' 
         ' BtnTakeOverStartParameter
         ' 
-        BtnTakeOverStartParameter.Location = New Point(9, 413)
-        BtnTakeOverStartParameter.Margin = New Padding(4, 5, 4, 5)
+        BtnTakeOverStartParameter.Location = New Point(5, 194)
+        BtnTakeOverStartParameter.Margin = New Padding(2)
         BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
-        BtnTakeOverStartParameter.Size = New Size(368, 75)
+        BtnTakeOverStartParameter.Size = New Size(209, 34)
         BtnTakeOverStartParameter.TabIndex = 4
         BtnTakeOverStartParameter.Text = "TakeOver"
         BtnTakeOverStartParameter.UseVisualStyleBackColor = True
         ' 
         ' TxtP2
         ' 
-        TxtP2.Location = New Point(91, 113)
-        TxtP2.Margin = New Padding(4, 5, 4, 5)
+        TxtP2.Location = New Point(49, 53)
+        TxtP2.Margin = New Padding(2)
         TxtP2.Name = "TxtP2"
-        TxtP2.Size = New Size(225, 39)
+        TxtP2.Size = New Size(163, 23)
         TxtP2.TabIndex = 3
         TxtP2.Visible = False
         ' 
         ' TxtP1
         ' 
-        TxtP1.Location = New Point(91, 51)
-        TxtP1.Margin = New Padding(4, 5, 4, 5)
+        TxtP1.Location = New Point(49, 24)
+        TxtP1.Margin = New Padding(2)
         TxtP1.Name = "TxtP1"
-        TxtP1.Size = New Size(225, 39)
+        TxtP1.Size = New Size(163, 23)
         TxtP1.TabIndex = 2
         TxtP1.Visible = False
         ' 
         ' LblP2
         ' 
         LblP2.AutoSize = True
-        LblP2.Location = New Point(13, 120)
-        LblP2.Margin = New Padding(4, 0, 4, 0)
+        LblP2.Location = New Point(7, 56)
+        LblP2.Margin = New Padding(2, 0, 2, 0)
         LblP2.Name = "LblP2"
-        LblP2.Size = New Size(40, 32)
+        LblP2.Size = New Size(20, 15)
         LblP2.TabIndex = 1
         LblP2.Text = "P2"
         LblP2.Visible = False
@@ -239,10 +241,10 @@ Partial Class FrmPendulum
         ' LblP1
         ' 
         LblP1.AutoSize = True
-        LblP1.Location = New Point(13, 61)
-        LblP1.Margin = New Padding(4, 0, 4, 0)
+        LblP1.Location = New Point(7, 29)
+        LblP1.Margin = New Padding(2, 0, 2, 0)
         LblP1.Name = "LblP1"
-        LblP1.Size = New Size(40, 32)
+        LblP1.Size = New Size(20, 15)
         LblP1.TabIndex = 0
         LblP1.Text = "P1"
         LblP1.Visible = False
@@ -250,10 +252,10 @@ Partial Class FrmPendulum
         ' LblPhasePortrait
         ' 
         LblPhasePortrait.AutoSize = True
-        LblPhasePortrait.Location = New Point(1794, 1048)
-        LblPhasePortrait.Margin = New Padding(4, 0, 4, 0)
+        LblPhasePortrait.Location = New Point(973, 5)
+        LblPhasePortrait.Margin = New Padding(2, 0, 2, 0)
         LblPhasePortrait.Name = "LblPhasePortrait"
-        LblPhasePortrait.Size = New Size(152, 32)
+        LblPhasePortrait.Size = New Size(77, 15)
         LblPhasePortrait.TabIndex = 34
         LblPhasePortrait.Text = "PhasePortrait"
         LblPhasePortrait.TextAlign = ContentAlignment.MiddleCenter
@@ -261,80 +263,80 @@ Partial Class FrmPendulum
         ' LblAdditionalParameter
         ' 
         LblAdditionalParameter.AutoSize = True
-        LblAdditionalParameter.Location = New Point(1383, 104)
-        LblAdditionalParameter.Margin = New Padding(4, 0, 4, 0)
+        LblAdditionalParameter.Location = New Point(724, 58)
+        LblAdditionalParameter.Margin = New Padding(2, 0, 2, 0)
         LblAdditionalParameter.Name = "LblAdditionalParameter"
-        LblAdditionalParameter.Size = New Size(230, 32)
+        LblAdditionalParameter.Size = New Size(116, 15)
         LblAdditionalParameter.TabIndex = 33
         LblAdditionalParameter.Text = "AdditionalParameter"
         ' 
         ' TrbAdditionalParameter
         ' 
-        TrbAdditionalParameter.Location = New Point(1391, 146)
-        TrbAdditionalParameter.Margin = New Padding(4, 5, 4, 5)
+        TrbAdditionalParameter.Location = New Point(726, 75)
+        TrbAdditionalParameter.Margin = New Padding(2)
         TrbAdditionalParameter.Maximum = 100
         TrbAdditionalParameter.Minimum = 1
         TrbAdditionalParameter.Name = "TrbAdditionalParameter"
-        TrbAdditionalParameter.Size = New Size(394, 90)
+        TrbAdditionalParameter.Size = New Size(228, 45)
         TrbAdditionalParameter.TabIndex = 32
         TrbAdditionalParameter.Value = 50
         ' 
         ' PicPhasePortrait
         ' 
         PicPhasePortrait.BackColor = Color.White
-        PicPhasePortrait.Location = New Point(1801, 3)
-        PicPhasePortrait.Margin = New Padding(4, 5, 4, 5)
+        PicPhasePortrait.Location = New Point(973, 22)
+        PicPhasePortrait.Margin = New Padding(2)
         PicPhasePortrait.Name = "PicPhasePortrait"
-        PicPhasePortrait.Size = New Size(910, 1034)
+        PicPhasePortrait.Size = New Size(450, 450)
         PicPhasePortrait.TabIndex = 31
         PicPhasePortrait.TabStop = False
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(0, 3)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(0, 1)
+        PicDiagram.Margin = New Padding(2)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1365, 1551)
+        PicDiagram.Size = New Size(700, 700)
         PicDiagram.TabIndex = 28
         PicDiagram.TabStop = False
         ' 
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1579, 964)
-        LblSteps.Margin = New Padding(4, 0, 4, 0)
+        LblSteps.Location = New Point(827, 485)
+        LblSteps.Margin = New Padding(2, 0, 2, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(27, 32)
+        LblSteps.Size = New Size(13, 15)
         LblSteps.TabIndex = 43
         LblSteps.Text = "0"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(1382, 964)
-        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Location = New Point(722, 485)
+        LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(200, 32)
+        LblNumberOfSteps.Size = New Size(99, 15)
         LblNumberOfSteps.TabIndex = 42
         LblNumberOfSteps.Text = "Number of Steps:"
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1391, 1469)
-        BtnReset.Margin = New Padding(6, 8, 6, 8)
+        BtnReset.Location = New Point(722, 666)
+        BtnReset.Margin = New Padding(3, 4, 3, 4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(394, 83)
+        BtnReset.Size = New Size(230, 34)
         BtnReset.TabIndex = 41
-        BtnReset.Text = "Reset"
+        BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1383, 1023)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Location = New Point(722, 508)
+        BtnStart.Margin = New Padding(2)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(394, 75)
+        BtnStart.Size = New Size(230, 34)
         BtnStart.TabIndex = 39
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -342,31 +344,31 @@ Partial Class FrmPendulum
         ' LblStepWidth
         ' 
         LblStepWidth.AutoSize = True
-        LblStepWidth.Location = New Point(1387, 727)
-        LblStepWidth.Margin = New Padding(4, 0, 4, 0)
+        LblStepWidth.Location = New Point(724, 369)
+        LblStepWidth.Margin = New Padding(2, 0, 2, 0)
         LblStepWidth.Name = "LblStepWidth"
-        LblStepWidth.Size = New Size(125, 32)
+        LblStepWidth.Size = New Size(62, 15)
         LblStepWidth.TabIndex = 45
         LblStepWidth.Text = "StepWidth"
         ' 
         ' TrbStepWidth
         ' 
-        TrbStepWidth.Location = New Point(1391, 764)
-        TrbStepWidth.Margin = New Padding(4, 5, 4, 5)
+        TrbStepWidth.Location = New Point(726, 386)
+        TrbStepWidth.Margin = New Padding(2)
         TrbStepWidth.Maximum = 50
         TrbStepWidth.Minimum = 1
         TrbStepWidth.Name = "TrbStepWidth"
-        TrbStepWidth.Size = New Size(394, 90)
+        TrbStepWidth.Size = New Size(226, 45)
         TrbStepWidth.TabIndex = 44
         TrbStepWidth.Value = 15
         ' 
         ' PicEnergy
         ' 
         PicEnergy.BackColor = Color.White
-        PicEnergy.Location = New Point(1801, 1519)
-        PicEnergy.Margin = New Padding(4, 5, 4, 5)
+        PicEnergy.Location = New Point(973, 684)
+        PicEnergy.Margin = New Padding(2)
         PicEnergy.Name = "PicEnergy"
-        PicEnergy.Size = New Size(910, 35)
+        PicEnergy.Size = New Size(450, 16)
         PicEnergy.TabIndex = 47
         PicEnergy.TabStop = False
         ' 
@@ -374,48 +376,59 @@ Partial Class FrmPendulum
         ' 
         CboTypeofPhaseportrait.FormattingEnabled = True
         CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
-        CboTypeofPhaseportrait.Location = New Point(1396, 886)
-        CboTypeofPhaseportrait.Margin = New Padding(6, 8, 6, 8)
+        CboTypeofPhaseportrait.Location = New Point(724, 453)
+        CboTypeofPhaseportrait.Margin = New Padding(3, 4, 3, 4)
         CboTypeofPhaseportrait.Name = "CboTypeofPhaseportrait"
-        CboTypeofPhaseportrait.Size = New Size(372, 40)
+        CboTypeofPhaseportrait.Size = New Size(228, 23)
         CboTypeofPhaseportrait.TabIndex = 48
         ' 
         ' LblTypeofPhaseportrait
         ' 
         LblTypeofPhaseportrait.AutoSize = True
-        LblTypeofPhaseportrait.Location = New Point(1394, 843)
-        LblTypeofPhaseportrait.Margin = New Padding(4, 0, 4, 0)
+        LblTypeofPhaseportrait.Location = New Point(724, 434)
+        LblTypeofPhaseportrait.Margin = New Padding(2, 0, 2, 0)
         LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
-        LblTypeofPhaseportrait.Size = New Size(227, 32)
+        LblTypeofPhaseportrait.Size = New Size(112, 15)
         LblTypeofPhaseportrait.TabIndex = 49
         LblTypeofPhaseportrait.Text = "TypeofPhaseportrait"
         ' 
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1794, 1088)
-        LblProtocol.Margin = New Padding(4, 0, 4, 0)
+        LblProtocol.Location = New Point(973, 480)
+        LblProtocol.Margin = New Padding(2, 0, 2, 0)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(102, 32)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 50
         LblProtocol.Text = "Protocol"
         LblProtocol.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1383, 1128)
-        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Location = New Point(722, 546)
+        BtnStop.Margin = New Padding(2)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(394, 75)
+        BtnStop.Size = New Size(230, 34)
         BtnStop.TabIndex = 51
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
+        ' BtnDefault
+        ' 
+        BtnDefault.Location = New Point(724, 624)
+        BtnDefault.Margin = New Padding(3, 4, 3, 4)
+        BtnDefault.Name = "BtnDefault"
+        BtnDefault.Size = New Size(230, 34)
+        BtnDefault.TabIndex = 52
+        BtnDefault.Text = "DefaultUserData"
+        BtnDefault.UseVisualStyleBackColor = True
+        ' 
         ' FrmPendulum
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2734, 1560)
+        ClientSize = New Size(1434, 709)
+        Controls.Add(BtnDefault)
         Controls.Add(BtnStop)
         Controls.Add(LblProtocol)
         Controls.Add(LblTypeofPhaseportrait)
@@ -437,7 +450,7 @@ Partial Class FrmPendulum
         Controls.Add(PicPhasePortrait)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(6, 8, 6, 8)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "FrmPendulum"
         Text = "Pendulum"
         WindowState = FormWindowState.Maximized
@@ -486,4 +499,5 @@ Partial Class FrmPendulum
     Friend WithEvents LblTypeofPhaseportrait As Label
     Friend WithEvents LblProtocol As Label
     Friend WithEvents BtnStop As Button
+    Friend WithEvents BtnDefault As Button
 End Class

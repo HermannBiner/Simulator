@@ -4,25 +4,16 @@
 Public Class ClsStadiumBilliardTable
     Inherits ClsBilliardTableAbstract
 
-
     Public Sub New()
 
         'Set specific parameters and ranges
-        MyAlfaValueRange = New ClsInterval(0, CDec(Math.PI))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(0.95 * (2 + Math.PI))), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.95) / (1 + MyC))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(0, CDec(Math.PI)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / NumberOfBilliardBalls))
 
-        'The ValueRange of MyT is only known, after a, b and C are set
-        'here is set as default C = 1 (a = b)
-        MyTValueRange = New ClsInterval(0, CDec(0.95 * (4 + 2 * Math.PI)))
+        MyValueParameterList.Add(MyTValueParameter)
+        MyValueParameterList.Add(MyAlfaValueParameter)
 
-        MyValueParameters = New List(Of ClsValueParameter)
-
-        Dim ValueRange As ClsValueParameter
-
-        ValueRange = New ClsValueParameter(1, "t-Parameter", MyTValueRange)
-        MyValueParameters.Add(ValueRange)
-
-        ValueRange = New ClsValueParameter(2, "Angle Alfa", MyAlfaValueRange)
-        MyValueParameters.Add(ValueRange)
+        'The final ValueRange of T is only known, after a, b and C are set
 
         'Default
         MyC = 2
@@ -69,9 +60,10 @@ Public Class ClsStadiumBilliardTable
         Dim BilliardBall As New ClsStadiumBilliardball
 
         With BilliardBall
-            .MathValueRange = MyMathValueRange
-            .AlfaValueRange = MyAlfaValueRange
-            .TValueRange = MyTValueRange
+            .MathInterval = MyMathInterval
+            .AlfaValueRange = MyAlfaValueParameter.Range
+            .TValueRange = MyTValueParameter.Range
+            .ParameterRange = MyFormulaParameter.Range
             .PicDiagram = MyPicDiagram
             .PicGraphics = MyPicGraphics
             .BmpDiagram = MyBmpDiagram

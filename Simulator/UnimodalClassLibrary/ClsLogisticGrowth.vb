@@ -2,7 +2,7 @@
 'with the iteration formula: f(x) = a*x*(1-x), x in [0,1], a in ]0,4]
 'and "knows" everything about this kind of iteration
 
-'Status Redesign Tested
+'Status Checked
 
 Public Class ClsLogisticGrowth
     Inherits ClsIterationAbstract
@@ -10,10 +10,13 @@ Public Class ClsLogisticGrowth
     Protected Overrides Sub InitializeIterator()
 
         'Generate the needed objects
-        MyParameterInterval = New ClsInterval(0, 4)
-        MyIterationInterval = New ClsInterval(0, 1)
+        MyFormulaParameter = New ClsGeneralParameter(1, "Parameter a", New ClsInterval(0, 4),
+                                                     ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(2.8))
+
+        MyValueParameter = New ClsGeneralParameter(2, "Value x", New ClsInterval(0, 1),
+                                                   ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(0.314159))
         MyCriticalPoint = CDec(0.5)
-        MyChaoticParameter = 4
+        MyChaoticParameterValue = 4
 
         'Setting split points to be drawn in the image
         MySplitpoints = New List(Of Decimal) From {
@@ -29,7 +32,7 @@ Public Class ClsLogisticGrowth
     Protected Overrides Function F(x As Decimal) As Decimal
 
         'This is the original iteration function
-        Return MyParameter * x * (1 - x)
+        Return MyParameterA * x * (1 - x)
 
     End Function
 
