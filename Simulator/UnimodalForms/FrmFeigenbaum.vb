@@ -11,9 +11,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmFeigenbaum
 
     Private IsFormLoaded As Boolean
@@ -74,25 +71,25 @@ Public Class FrmFeigenbaum
         End If
     End Sub
 
-    Private Sub TxtAMax_LostFocus(sender As Object, e As EventArgs) Handles TxtAMax.LostFocus
+    Private Sub TxtAMax_TextChanged(sender As Object, e As EventArgs) Handles TxtAMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtAMin_LostFocus(sender As Object, e As EventArgs) Handles TxtAMin.LostFocus
+    Private Sub TxtAMin_TextChanged(sender As Object, e As EventArgs) Handles TxtAMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+    Private Sub TxtXMax_TextChanged(sender As Object, e As EventArgs) Handles TxtXMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+    Private Sub TxtXMin_TextChanged(sender As Object, e As EventArgs) Handles TxtXMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If

@@ -215,7 +215,7 @@ Public Class ClsCDiagramController
                 BmpGraphics.MathYInterval = ActualValueRange
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
-                SetDefaultUserData()
+                'Message already generated
             End If
         End If
 

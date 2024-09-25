@@ -5,8 +5,6 @@
 
 'Status Redesign Checked
 
-Imports System.Reflection
-
 Public Class FrmNumericMethods
 
     Private IsFormLoaded As Boolean
@@ -78,7 +76,7 @@ Public Class FrmNumericMethods
 
     Private Sub TrbStepWidth_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
         If IsFormLoaded Then
-            FC.SetStepWidth()
+            FC.SetStepWidthAB()
         End If
     End Sub
 

@@ -30,11 +30,14 @@ Public Class ClsPolynom3C
 
         UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(-1, 0), 1))
         UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(1, 0), 2))
-        UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(MyC.X, MyC.Y), 3))
 
+        If MyC IsNot Nothing Then
+            'The third Zero c = a + ib is defined
+            UnitRootCollection.Add(New ClsUnitRoot(New ClsComplexNumber(MyC.X, MyC.Y), 3))
+        End If
 
         MyN = 3
-        MyIterationDeepness = 100
+        IterationDeepness = 100
 
     End Sub
 

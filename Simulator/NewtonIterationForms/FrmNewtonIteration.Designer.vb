@@ -29,9 +29,7 @@ Partial Class FrmNewtonIteration
         TxtXMin = New TextBox()
         TxtXMax = New TextBox()
         LblXMax = New Label()
-        TxtDeltaX = New TextBox()
         LblDeltaX = New Label()
-        TxtDeltaY = New TextBox()
         LblDeltaY = New Label()
         TxtYMax = New TextBox()
         LblYMax = New Label()
@@ -53,7 +51,7 @@ Partial Class FrmNewtonIteration
         OptConjugate = New RadioButton()
         OptNone = New RadioButton()
         GrpColor = New GroupBox()
-        OptShadowed = New RadioButton()
+        OptShaded = New RadioButton()
         OptBright = New RadioButton()
         BtnStart = New Button()
         LblSteps = New Label()
@@ -122,14 +120,6 @@ Partial Class FrmNewtonIteration
         LblXMax.TabIndex = 5
         LblXMax.Text = "XMax"
         ' 
-        ' TxtDeltaX
-        ' 
-        TxtDeltaX.Location = New Point(869, 120)
-        TxtDeltaX.Margin = New Padding(2)
-        TxtDeltaX.Name = "TxtDeltaX"
-        TxtDeltaX.Size = New Size(268, 23)
-        TxtDeltaX.TabIndex = 8
-        ' 
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
@@ -139,14 +129,6 @@ Partial Class FrmNewtonIteration
         LblDeltaX.Size = New Size(41, 15)
         LblDeltaX.TabIndex = 7
         LblDeltaX.Text = "DeltaX"
-        ' 
-        ' TxtDeltaY
-        ' 
-        TxtDeltaY.Location = New Point(869, 208)
-        TxtDeltaY.Margin = New Padding(2)
-        TxtDeltaY.Name = "TxtDeltaY"
-        TxtDeltaY.Size = New Size(268, 23)
-        TxtDeltaY.TabIndex = 14
         ' 
         ' LblDeltaY
         ' 
@@ -222,7 +204,7 @@ Partial Class FrmNewtonIteration
         LstProtocol.Location = New Point(813, 525)
         LstProtocol.Margin = New Padding(2)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(322, 139)
+        LstProtocol.Size = New Size(322, 199)
         LstProtocol.TabIndex = 25
         ' 
         ' LblProtocol
@@ -355,7 +337,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' GrpColor
         ' 
-        GrpColor.Controls.Add(OptShadowed)
+        GrpColor.Controls.Add(OptShaded)
         GrpColor.Controls.Add(OptBright)
         GrpColor.Location = New Point(991, 240)
         GrpColor.Margin = New Padding(2, 1, 2, 1)
@@ -366,18 +348,18 @@ Partial Class FrmNewtonIteration
         GrpColor.TabStop = False
         GrpColor.Text = "Color"
         ' 
-        ' OptShadowed
+        ' OptShaded
         ' 
-        OptShadowed.AutoSize = True
-        OptShadowed.Checked = True
-        OptShadowed.Location = New Point(9, 55)
-        OptShadowed.Margin = New Padding(2, 1, 2, 1)
-        OptShadowed.Name = "OptShadowed"
-        OptShadowed.Size = New Size(80, 19)
-        OptShadowed.TabIndex = 1
-        OptShadowed.TabStop = True
-        OptShadowed.Text = "Shadowed"
-        OptShadowed.UseVisualStyleBackColor = True
+        OptShaded.AutoSize = True
+        OptShaded.Checked = True
+        OptShaded.Location = New Point(9, 55)
+        OptShaded.Margin = New Padding(2, 1, 2, 1)
+        OptShaded.Name = "OptShaded"
+        OptShaded.Size = New Size(64, 19)
+        OptShaded.TabIndex = 1
+        OptShaded.TabStop = True
+        OptShaded.Text = "Shaded"
+        OptShaded.UseVisualStyleBackColor = True
         ' 
         ' OptBright
         ' 
@@ -481,13 +463,11 @@ Partial Class FrmNewtonIteration
         Controls.Add(BtnStop)
         Controls.Add(BtnStart)
         Controls.Add(BtnReset)
-        Controls.Add(TxtDeltaY)
         Controls.Add(LblDeltaY)
         Controls.Add(TxtYMax)
         Controls.Add(LblYMax)
         Controls.Add(TxtYMin)
         Controls.Add(LblYMin)
-        Controls.Add(TxtDeltaX)
         Controls.Add(LblDeltaX)
         Controls.Add(TxtXMax)
         Controls.Add(LblXMax)
@@ -545,7 +525,7 @@ Partial Class FrmNewtonIteration
     Friend WithEvents OptConjugate As RadioButton
     Friend WithEvents OptNone As RadioButton
     Friend WithEvents GrpColor As GroupBox
-    Friend WithEvents OptShadowed As RadioButton
+    Friend WithEvents OptShaded As RadioButton
     Friend WithEvents OptBright As RadioButton
     Friend WithEvents BtnShowBasin As Button
     Friend WithEvents BtnDefault As Button

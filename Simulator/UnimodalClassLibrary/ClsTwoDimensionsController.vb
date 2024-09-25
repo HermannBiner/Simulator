@@ -173,7 +173,7 @@ Public Class ClsTwoDimensionsController
                 IterationPoint.Y = CDec(MyForm.TxtY.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
-                SetDefaultUserData()
+                'Message already generated
             End If
         End If
 
@@ -184,7 +184,7 @@ Public Class ClsTwoDimensionsController
                 IterationPoint.Y = CDec(MyForm.TxtY.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
-                SetDefaultUserData()
+                'Message already generated
             End If
         End If
 

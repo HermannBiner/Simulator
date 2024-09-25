@@ -138,12 +138,14 @@ Public Class ClsIterationController
     End Sub
 
     Public Sub SetDefaultUserData()
+
         With MyForm
             'default settings
             .TxtParameterA.Text = DS.ChaoticParameterValue.ToString(CultureInfo.CurrentCulture)
             .TxtStartValue.Text = DS.ValueParameter.DefaultValue.ToString(CultureInfo.CurrentCulture)
             .TxtXStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
             .TxtTargetValue.Text = "0"
+            TargetValue = 0
             .TxtTargetProtocol.Text = ""
 
             MyForm.CboIterationDepth.SelectedIndex = 0
@@ -155,6 +157,7 @@ Public Class ClsIterationController
             .TrbParameterA.Value = TrbValue
             .TxtParameterA.Text = DS.FormulaParameter.DefaultValue.ToString(CultureInfo.CurrentCulture)
         End With
+
     End Sub
 
     Public Sub SetPresentation()
@@ -231,11 +234,21 @@ Public Class ClsIterationController
         Next
     End Sub
 
-    Public Sub SetTrbParameterA()
+    Public Sub SetParameterA()
         DS.ParameterA = DS.FormulaParameter.Range.A + DS.FormulaParameter.Range.IntervalWidth * (MyForm.TrbParameterA.Value - 1) / 999
         MyForm.TxtParameterA.Text = DS.ParameterA.ToString
         If MyForm.OptFunctionGraph.Checked Then
             DrawFunctionGraph()
+        End If
+    End Sub
+
+    Public Sub SetTrbA()
+        If IsUserDataOK() Then
+            DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
+            MyForm.TrbParameterA.Value = CInt((DS.ParameterA - DS.FormulaParameter.Range.A) * 999 / DS.FormulaParameter.Range.IntervalWidth + 1)
+            If MyForm.OptFunctionGraph.Checked Then
+                DrawFunctionGraph()
+            End If
         End If
     End Sub
 
@@ -319,7 +332,7 @@ Public Class ClsIterationController
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 PrepareDiagram()
             Else
-                SetDefaultUserData()
+                'Message already generated
             End If
 
         End If

@@ -38,11 +38,8 @@ Public Interface IJulia
     'Use the System Colors
     WriteOnly Property IsUseSystemColors As Boolean
 
-    'Draw Track
-    ReadOnly Property IsTrackImplemented As Boolean
-
-    'Fill Sample List
-    ReadOnly Property IsSampleList As Boolean
+    'That means, it is a landscape of Julia Parameters
+    ReadOnly Property IsMandelbrot As Boolean
 
     'Iteration Control
     Property IterationStatus As ClsDynamics.EnIterationStatus
@@ -56,9 +53,6 @@ Public Interface IJulia
 
     'Iteration
     Function GenerateImage() As Task
-
-    'C-Track - Orbit with STartpoint c
-    Sub ShowCTrack()
 
     'Reset
     Sub ResetIteration()

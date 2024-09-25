@@ -7,8 +7,6 @@
 
 'Status Checked
 
-Imports System.Reflection
-
 Public Class FrmPendulum
 
     Private IsFormLoaded As Boolean

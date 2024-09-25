@@ -110,6 +110,7 @@ Public Class ClsBilliardTableController
             .TxtT.Text = "0"
             .TxtAlfa.Text = "1"
             .TxtParameter.Text = DS.C.ToString
+            .LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & .TrbSpeed.Value.ToString
         End With
     End Sub
 
@@ -133,8 +134,14 @@ Public Class ClsBilliardTableController
     End Sub
 
     Public Sub SetParameterC()
+        DS.C = CDec(MyForm.TxtParameter.Text)
+        ResetIteration()
+    End Sub
+
+    Public Sub SetTrbC()
         If IsParameterOK() Then
             DS.C = CDec(MyForm.TxtParameter.Text)
+            MyForm.TrbParameterC.Value = CInt(DS.C * 100)
             ResetIteration()
         End If
     End Sub

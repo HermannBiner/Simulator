@@ -34,13 +34,11 @@ Partial Class FrmJulia
         TxtB = New TextBox()
         BtnStop = New Button()
         BtnStart = New Button()
-        TxtDeltaY = New TextBox()
         LblDeltaY = New Label()
         TxtYMax = New TextBox()
         LblYMax = New Label()
         TxtYMin = New TextBox()
         LblYMin = New Label()
-        TxtDeltaX = New TextBox()
         LblDeltaX = New Label()
         TxtXMax = New TextBox()
         LblXMax = New Label()
@@ -61,7 +59,6 @@ Partial Class FrmJulia
         GrpColors = New GroupBox()
         OptSystem = New RadioButton()
         OptUser = New RadioButton()
-        ChkTrack = New CheckBox()
         BtnDefault = New Button()
         CboJuliaSamples = New ComboBox()
         LblJuliaSets = New Label()
@@ -177,14 +174,6 @@ Partial Class FrmJulia
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
         ' 
-        ' TxtDeltaY
-        ' 
-        TxtDeltaY.Location = New Point(858, 228)
-        TxtDeltaY.Margin = New Padding(2)
-        TxtDeltaY.Name = "TxtDeltaY"
-        TxtDeltaY.Size = New Size(268, 23)
-        TxtDeltaY.TabIndex = 50
-        ' 
         ' LblDeltaY
         ' 
         LblDeltaY.AutoSize = True
@@ -230,14 +219,6 @@ Partial Class FrmJulia
         LblYMin.Size = New Size(35, 15)
         LblYMin.TabIndex = 45
         LblYMin.Text = "YMin"
-        ' 
-        ' TxtDeltaX
-        ' 
-        TxtDeltaX.Location = New Point(858, 153)
-        TxtDeltaX.Margin = New Padding(2)
-        TxtDeltaX.Name = "TxtDeltaX"
-        TxtDeltaX.Size = New Size(268, 23)
-        TxtDeltaX.TabIndex = 44
         ' 
         ' LblDeltaX
         ' 
@@ -441,17 +422,6 @@ Partial Class FrmJulia
         OptUser.Text = "UserDefined"
         OptUser.UseVisualStyleBackColor = True
         ' 
-        ' ChkTrack
-        ' 
-        ChkTrack.AutoSize = True
-        ChkTrack.Location = New Point(978, 584)
-        ChkTrack.Margin = New Padding(2, 1, 2, 1)
-        ChkTrack.Name = "ChkTrack"
-        ChkTrack.Size = New Size(61, 19)
-        ChkTrack.TabIndex = 75
-        ChkTrack.Text = "CTrack"
-        ChkTrack.UseVisualStyleBackColor = True
-        ' 
         ' BtnDefault
         ' 
         BtnDefault.Location = New Point(804, 734)
@@ -489,7 +459,6 @@ Partial Class FrmJulia
         Controls.Add(LblJuliaSets)
         Controls.Add(CboJuliaSamples)
         Controls.Add(BtnDefault)
-        Controls.Add(ChkTrack)
         Controls.Add(GrpColors)
         Controls.Add(PicDark)
         Controls.Add(PicBright)
@@ -512,13 +481,11 @@ Partial Class FrmJulia
         Controls.Add(TxtB)
         Controls.Add(BtnStop)
         Controls.Add(BtnStart)
-        Controls.Add(TxtDeltaY)
         Controls.Add(LblDeltaY)
         Controls.Add(TxtYMax)
         Controls.Add(LblYMax)
         Controls.Add(TxtYMin)
         Controls.Add(LblYMin)
-        Controls.Add(TxtDeltaX)
         Controls.Add(LblDeltaX)
         Controls.Add(TxtXMax)
         Controls.Add(LblXMax)
@@ -554,13 +521,11 @@ Partial Class FrmJulia
     Friend WithEvents TxtB As TextBox
     Friend WithEvents BtnStop As Button
     Friend WithEvents BtnStart As Button
-    Friend WithEvents TxtDeltaY As TextBox
     Friend WithEvents LblDeltaY As Label
     Friend WithEvents TxtYMax As TextBox
     Friend WithEvents LblYMax As Label
     Friend WithEvents TxtYMin As TextBox
     Friend WithEvents LblYMin As Label
-    Friend WithEvents TxtDeltaX As TextBox
     Friend WithEvents LblDeltaX As Label
     Friend WithEvents TxtXMax As TextBox
     Friend WithEvents LblXMax As Label
@@ -582,7 +547,6 @@ Partial Class FrmJulia
     Friend WithEvents GrpColors As GroupBox
     Friend WithEvents OptSystem As RadioButton
     Friend WithEvents OptUser As RadioButton
-    Friend WithEvents ChkTrack As CheckBox
     Friend WithEvents BtnDefault As Button
     Friend WithEvents CboJuliaSamples As ComboBox
     Friend WithEvents LblJuliaSets As Label

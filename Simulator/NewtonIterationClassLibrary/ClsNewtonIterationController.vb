@@ -87,12 +87,12 @@ Public Class ClsNewtonIterationController
             .TxtA.Visible = DS.IsUseC
             .TxtB.Visible = DS.IsUseC
 
-            MyForm.CboN.SelectedIndex = 1
-
             DS.PicDiagram = .PicDiagram
             DS.ProcotolList = .LstProtocol
             DS.TxtElapsedTime = .TxtTime
             DS.TxtNumberOfSteps = .TxtSteps
+
+            MyForm.CboN.SelectedIndex = 1
 
             'In the beginning, the ActualRanges as set to the 
             'defined ValueParameterRanges
@@ -116,6 +116,7 @@ Public Class ClsNewtonIterationController
             .TxtYMin = MyForm.TxtYMin
             .TxtYMax = MyForm.TxtYMax
         End With
+
         SetExponent()
 
     End Sub
@@ -127,6 +128,11 @@ Public Class ClsNewtonIterationController
             .TxtXMax.Text = DS.ActualXRange.B.ToString(CultureInfo.CurrentCulture)
             .TxtYMin.Text = DS.ActualYRange.A.ToString(CultureInfo.CurrentCulture)
             .TxtYMax.Text = DS.ActualYRange.B.ToString(CultureInfo.CurrentCulture)
+
+            If DS.IsUseC Then
+                .TxtA.Text = "0.5"
+                .TxtB.Text = "1"
+            End If
         End With
         SetDelta()
 
@@ -135,10 +141,10 @@ Public Class ClsNewtonIterationController
     Public Sub SetDelta()
         With MyForm
             If IsNumeric(.TxtXMax.Text) And IsNumeric(.TxtXMin.Text) Then
-                .TxtDeltaX.Text = (CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
+                .LblDeltaX.Text = "Delta = " & (CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
             If IsNumeric(.TxtYMax.Text) And IsNumeric(.TxtYMin.Text) Then
-                .TxtDeltaY.Text = (CDec(.TxtYMax.Text) - CDec(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
+                .LblDeltaY.Text = "Delta = " & (CDec(.TxtYMax.Text) - CDec(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
         End With
     End Sub
@@ -152,6 +158,18 @@ Public Class ClsNewtonIterationController
             End If
         End With
         ResetIteration()
+    End Sub
+
+    Public Sub SetOptions()
+
+        'The Option Shadowed together with Rotate or Conjugate is not the Standard
+        With MyForm
+            If .OptRotate.Checked Or .OptConjugate.Checked Then
+                .OptBright.Checked = True
+            Else
+                .OptShaded.Checked = True
+            End If
+        End With
     End Sub
 
     Public Sub ResetIteration()
@@ -205,7 +223,8 @@ Public Class ClsNewtonIterationController
                     End If
 
                 End With
-
+            Else
+                'Message already generated
             End If
         End If
 
@@ -281,6 +300,8 @@ Public Class ClsNewtonIterationController
     Public Sub ShowBasin()
         'Shows the approximated basin(1)
         'that is an area where |Np'(z)|<1
+
+        DiagramAreaSelector.IsActivated = False
 
         SetExponent()
 

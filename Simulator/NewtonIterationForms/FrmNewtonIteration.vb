@@ -11,9 +11,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmNewtonIteration
 
     'Private global variables
@@ -60,7 +57,7 @@ Public Class FrmNewtonIteration
         OptRotate.Text = FrmMain.LM.GetString("Rotate")
         GrpColor.Text = FrmMain.LM.GetString("Color")
         OptBright.Text = FrmMain.LM.GetString("Bright")
-        OptShadowed.Text = FrmMain.LM.GetString("Shadowed")
+        OptShaded.Text = FrmMain.LM.GetString("Shaded")
         BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
 
     End Sub
@@ -110,41 +107,65 @@ Public Class FrmNewtonIteration
         End If
     End Sub
 
-    Private Sub TxtA_LostFocus(sender As Object, e As EventArgs) Handles TxtA.LostFocus
+    Private Sub TxtA_TextChanged(sender As Object, e As EventArgs) Handles TxtA.TextChanged
         If IsFormLoaded Then
             FC.SetDefaultUserData()
             FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtB_LostFocus(sender As Object, e As EventArgs) Handles TxtB.LostFocus
+    Private Sub TxtB_TextChanged(sender As Object, e As EventArgs) Handles TxtB.TextChanged
         If IsFormLoaded Then
             FC.SetDefaultUserData()
             FC.ResetIteration()
         End If
     End Sub
 
-    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+    Private Sub TxtXMax_TextChanged(sender As Object, e As EventArgs) Handles TxtXMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+    Private Sub TxtXMin_TextChanged(sender As Object, e As EventArgs) Handles TxtXMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtYMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+    Private Sub TxtYMax_TextChanged(sender As Object, e As EventArgs) Handles TxtYMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtYMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+    Private Sub TxtYMin_TextChanged(sender As Object, e As EventArgs) Handles TxtYMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
+        End If
+    End Sub
+
+    Private Sub OptNone_CheckedChanged(sender As Object, e As EventArgs) Handles OptNone.CheckedChanged
+        If IsFormLoaded Then
+            If OptNone.Checked Then
+                FC.SetOptions
+            End If
+        End If
+    End Sub
+
+    Private Sub OptRotate_CheckedChanged(sender As Object, e As EventArgs) Handles OptRotate.CheckedChanged
+        If IsFormLoaded Then
+            If OptRotate.Checked Then
+                FC.SetOptions()
+            End If
+        End If
+    End Sub
+
+    Private Sub OptConjugate_CheckedChanged(sender As Object, e As EventArgs) Handles OptConjugate.CheckedChanged
+        If IsFormLoaded Then
+            If OptConjugate.Checked Then
+                FC.SetOptions()
+            End If
         End If
     End Sub
 

@@ -204,6 +204,8 @@ Public Class ClsPendulumController
     End Sub
 
     Public Async Sub StartIteration()
+
+        'UserData are always OK
         If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsUserDataOK() Then
                 With DS

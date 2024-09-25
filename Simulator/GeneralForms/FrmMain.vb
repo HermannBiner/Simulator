@@ -44,6 +44,7 @@ Public Class FrmMain
         MnuDocumentation.Text = LM.GetString("MnuDocumentation")
         MnuManual.Text = LM.GetString("MnuManual")
         MnuMathematics.Text = LM.GetString("MnuMathematics")
+        MnuTechnical.Text = LM.GetString("MnuTechnical")
         MnuInfo.Text = LM.GetString("MnuInfo")
         MnuLanguage.Text = LM.GetString("MnuLanguage")
         MnuEnglish.Text = LM.GetString("MnuEnglish")
@@ -148,4 +149,7 @@ Public Class FrmMain
         FrmJulia.Show()
     End Sub
 
+    Private Sub MnuTechnical_Click(sender As Object, e As EventArgs) Handles MnuTechnical.Click
+        MessageBox.Show(LM.GetString("NotImplemented"))
+    End Sub
 End Class

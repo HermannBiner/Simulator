@@ -18,9 +18,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmIteration
 
     Private IsFormLoaded As Boolean
@@ -82,8 +79,8 @@ Public Class FrmIteration
 
     Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
         If IsFormLoaded Then
-            FC.ResetIteration()
             FC.SetDefaultUserData()
+            FC.ResetIteration()
         End If
     End Sub
 
@@ -126,7 +123,13 @@ Public Class FrmIteration
 
     Private Sub TrbParameterA_Scroll(sender As Object, e As EventArgs) Handles TrbParameterA.Scroll
         If IsFormLoaded Then
-            FC.SetTrbParameterA()
+            FC.SetParameterA()
+        End If
+    End Sub
+
+    Private Sub TxtParameterA_LostFocus(sender As Object, e As EventArgs) Handles TxtParameterA.LostFocus
+        If IsFormLoaded Then
+            FC.SetTrbA()
         End If
     End Sub
 

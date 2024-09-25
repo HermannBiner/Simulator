@@ -2,6 +2,7 @@
 
 'Status Checked
 
+Imports System.Globalization
 Imports System.Reflection
 
 Public Class ClsNumericMethodsController
@@ -167,7 +168,7 @@ Public Class ClsNumericMethodsController
         DrawPicPendulums()
     End Sub
 
-    Private Sub SetStepWidthAB()
+    Public Sub SetStepWidthAB()
 
         'concernes the number of approximation steps for the PendulumB.Y-value
         'the Default is 1, but the final value is calculated here 
@@ -218,6 +219,9 @@ Public Class ClsNumericMethodsController
         DSB.h = StepWidthB
         DSB.NumberOfApproxSteps = NumberOfApproxStepsB
 
+        'Set Stepwidth
+        MyForm.LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
+
     End Sub
 
     Public Sub ResetIteration()
@@ -229,6 +233,9 @@ Public Class ClsNumericMethodsController
         MyForm.LstValueList.Items.Clear()
         MyForm.BtnStart.Enabled = True
         MyForm.BtnStart.Text = FrmMain.LM.GetString("Start")
+
+        n = 0
+        MyForm.LblSteps.Text = "0"
 
         PrepareDiagram()
         DrawPicPendulums()
@@ -243,19 +250,16 @@ Public Class ClsNumericMethodsController
 
     End Sub
 
-    Public Sub SetStepWidth()
-        'Set Stepwidth
-        MyForm.LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
-        ResetIteration()
-    End Sub
-
     Public Async Sub StartIteration()
+
+        'UserData are always OK
         With MyForm
             .BtnStart.Enabled = False
             .BtnStart.Text = FrmMain.LM.GetString("Continue")
             .BtnReset.Enabled = False
             .BtnDefault.Enabled = False
             .ChkStretched.Enabled = False
+            .TrbStepWidth.Enabled = False
         End With
 
         'The loop controls as well the Iterationstatus
@@ -363,6 +367,7 @@ Public Class ClsNumericMethodsController
             .BtnReset.Enabled = True
             .BtnDefault.Enabled = True
             .ChkStretched.Enabled = True
+            .TrbStepWidth.Enabled = True
         End With
 
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted

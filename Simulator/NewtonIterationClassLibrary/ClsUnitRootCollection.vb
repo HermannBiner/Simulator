@@ -36,7 +36,7 @@ Public Class ClsUnitRootCollection
             UnitRootCollection.Add(New ClsUnitRoot(W.Rotate(CDec(2 * Math.PI * (k - 1) / MyN)), k))
         Next
 
-        MyIterationDeepness = 60 * MyN
+        IterationDeepness = 60 * MyN
 
     End Sub
 

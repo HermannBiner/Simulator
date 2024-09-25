@@ -137,7 +137,6 @@ Public Class ClsSensitivityController
             End With
         Else
             'there is already a message generated
-            SetDefaultUserData()
         End If
     End Sub
 

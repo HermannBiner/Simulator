@@ -12,7 +12,7 @@ Public MustInherit Class ClsNewtonAbstract
     Protected MyRadius As Double
 
     'How many steps should be iterated?
-    Protected MyIterationDeepness As Integer
+    Protected IterationDeepness As Integer
 
     'Drawing PicCPlane
     Protected MyPicDiagram As PictureBox
@@ -468,7 +468,7 @@ Public MustInherit Class ClsNewtonAbstract
             Dim i As Integer = 1
 
 
-            Do While i <= MyIterationDeepness And Not StopCondition(Zi)
+            Do While i <= IterationDeepness And Not StopCondition(Zi)
 
                 i += 1
 
@@ -477,7 +477,7 @@ Public MustInherit Class ClsNewtonAbstract
 
             Loop
 
-            If (i > MyIterationDeepness) Or (Denominator(Zi).AbsoluteValue = 0) Then
+            If (i > IterationDeepness) Or (Denominator(Zi).AbsoluteValue = 0) Then
 
                 'the point doesn't converge to a root
                 MyBrush = Brushes.Black

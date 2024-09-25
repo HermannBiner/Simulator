@@ -9,9 +9,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmJulia
 
     'Private global variables
@@ -55,12 +52,10 @@ Public Class FrmJulia
         GrpColors.Text = FrmMain.LM.GetString("Colors")
         OptSystem.Text = FrmMain.LM.GetString("System")
         OptUser.Text = FrmMain.LM.GetString("UserDefined")
-        ChkTrack.Text = FrmMain.LM.GetString("CTrack")
         BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        LblJuliaSets.Text = FrmMain.LM.GetString("Samples")
 
     End Sub
-
-
 
     Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
         If IsFormLoaded Then
@@ -80,7 +75,6 @@ Public Class FrmJulia
             FC.SetDS()
         End If
     End Sub
-
 
     'SECTOR ITERATION
 
@@ -102,46 +96,29 @@ Public Class FrmJulia
         End If
     End Sub
 
-    Private Sub TxtA_LostFocus(sender As Object, e As EventArgs) Handles TxtA.LostFocus
-        If IsFormLoaded Then
-            If Not ChkTrack.Checked Then
-                FC.ResetIteration()
-            End If
-        End If
-    End Sub
-
-    Private Sub TxtB_LostFocus(sender As Object, e As EventArgs) Handles TxtB.LostFocus
-        If IsFormLoaded Then
-            If Not ChkTrack.Checked Then
-                FC.ResetIteration()
-            End If
-        End If
-    End Sub
-
-    Private Sub TxtXMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+    Private Sub TxtXMax_TextChanged(sender As Object, e As EventArgs) Handles TxtXMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtXMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+    Private Sub TxtXMin_TextChanged(sender As Object, e As EventArgs) Handles TxtXMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtYMax_LostFocus(sender As Object, e As EventArgs) Handles TxtXMax.LostFocus
+    Private Sub TxtYMax_TextChanged(sender As Object, e As EventArgs) Handles TxtYMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtYMin_LostFocus(sender As Object, e As EventArgs) Handles TxtXMin.LostFocus
+    Private Sub TxtYMin_TextChanged(sender As Object, e As EventArgs) Handles TxtYMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
-
 
     Private Sub TrbBlue_Scroll(sender As Object, e As EventArgs) Handles TrbBlue.Scroll
         If IsFormLoaded Then
@@ -161,10 +138,10 @@ Public Class FrmJulia
         End If
     End Sub
 
-
     Private Sub OptSystem_CheckedChanged(sender As Object, e As EventArgs) Handles OptSystem.CheckedChanged
         If IsFormLoaded Then
             If OptSystem.Checked Then
+                FC.SetColors()
                 FC.SetDefaultUserData()
                 FC.ResetIteration()
             End If
@@ -174,6 +151,7 @@ Public Class FrmJulia
     Private Sub OptUser_CheckedChanged(sender As Object, e As EventArgs) Handles OptUser.CheckedChanged
         If IsFormLoaded Then
             If OptUser.Checked Then
+                FC.SetColors()
                 FC.SetDefaultUserData()
                 FC.ResetIteration()
             End If

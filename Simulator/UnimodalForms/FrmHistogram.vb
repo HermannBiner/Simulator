@@ -12,9 +12,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmHistogram
 
     'Loading Control

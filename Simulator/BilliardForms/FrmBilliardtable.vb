@@ -7,9 +7,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmBilliardtable
 
     'Controlling Form Load
@@ -41,8 +38,9 @@ Public Class FrmBilliardtable
         BtnStart.Text = FrmMain.LM.GetString("Start")
         BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
         BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
-        LblParameterc.Text = FrmMain.LM.GetString("FactorC")
+        LblParameterc.Text = FrmMain.LM.GetString("ParameterC")
         BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        LblProtocol.Text = FrmMain.LM.GetString("Protocol")
 
         CboBallColor.Items.Clear()
 
@@ -105,7 +103,7 @@ Public Class FrmBilliardtable
 
     Private Sub TxtParameter_LostFocus(sender As Object, e As EventArgs) Handles TxtParameter.LostFocus
         If IsFormLoaded Then
-            FC.SetParameterC()
+            FC.SetTrbC()
         End If
     End Sub
 

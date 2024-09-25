@@ -47,13 +47,14 @@ Partial Class FrmMain
         MnuManual = New ToolStripMenuItem()
         MnuMathematics = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
+        MnuTechnical = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
         ' MnuMain
         ' 
         MnuMain.ImageScalingSize = New Size(24, 24)
-        MnuMain.Items.AddRange(New ToolStripItem() {MnuLanguage, MnuBilliard, MnuGrowthModels, MnuComplexIteration, MnuMechanics, MnuTest, MnuDocumentation})
+        MnuMain.Items.AddRange(New ToolStripItem() {MnuLanguage, MnuBilliard, MnuGrowthModels, MnuComplexIteration, MnuMechanics, MnuDocumentation, MnuTest})
         MnuMain.Location = New Point(0, 0)
         MnuMain.Name = "MnuMain"
         MnuMain.Padding = New Padding(5, 1, 0, 1)
@@ -71,13 +72,13 @@ Partial Class FrmMain
         ' MnuEnglish
         ' 
         MnuEnglish.Name = "MnuEnglish"
-        MnuEnglish.Size = New Size(180, 22)
+        MnuEnglish.Size = New Size(118, 22)
         MnuEnglish.Text = "Englisch"
         ' 
         ' MnuGerman
         ' 
         MnuGerman.Name = "MnuGerman"
-        MnuGerman.Size = New Size(180, 22)
+        MnuGerman.Size = New Size(118, 22)
         MnuGerman.Text = "German"
         ' 
         ' MnuBilliard
@@ -165,13 +166,13 @@ Partial Class FrmMain
         ' MnuNumericMethods
         ' 
         MnuNumericMethods.Name = "MnuNumericMethods"
-        MnuNumericMethods.Size = New Size(167, 22)
+        MnuNumericMethods.Size = New Size(180, 22)
         MnuNumericMethods.Text = "NumericMethods"
         ' 
         ' MnuPendulum
         ' 
         MnuPendulum.Name = "MnuPendulum"
-        MnuPendulum.Size = New Size(167, 22)
+        MnuPendulum.Size = New Size(180, 22)
         MnuPendulum.Text = "Pendulum"
         ' 
         ' MnuTest
@@ -183,7 +184,7 @@ Partial Class FrmMain
         ' 
         ' MnuDocumentation
         ' 
-        MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuMathematics, MnuInfo})
+        MnuDocumentation.DropDownItems.AddRange(New ToolStripItem() {MnuManual, MnuTechnical, MnuMathematics, MnuInfo})
         MnuDocumentation.Name = "MnuDocumentation"
         MnuDocumentation.Size = New Size(102, 22)
         MnuDocumentation.Text = "Documentation"
@@ -191,20 +192,26 @@ Partial Class FrmMain
         ' MnuManual
         ' 
         MnuManual.Name = "MnuManual"
-        MnuManual.Size = New Size(143, 22)
+        MnuManual.Size = New Size(180, 22)
         MnuManual.Text = "Manual"
         ' 
         ' MnuMathematics
         ' 
         MnuMathematics.Name = "MnuMathematics"
-        MnuMathematics.Size = New Size(143, 22)
+        MnuMathematics.Size = New Size(180, 22)
         MnuMathematics.Text = "Mathematics"
         ' 
         ' MnuInfo
         ' 
         MnuInfo.Name = "MnuInfo"
-        MnuInfo.Size = New Size(143, 22)
+        MnuInfo.Size = New Size(180, 22)
         MnuInfo.Text = "Info"
+        ' 
+        ' MnuTechnical
+        ' 
+        MnuTechnical.Name = "MnuTechnical"
+        MnuTechnical.Size = New Size(180, 22)
+        MnuTechnical.Text = "TechnicalDoc"
         ' 
         ' FrmMain
         ' 
@@ -249,4 +256,5 @@ Partial Class FrmMain
     Friend WithEvents MnuBilliard As ToolStripMenuItem
     Friend WithEvents MnuBilliardTable As ToolStripMenuItem
     Friend WithEvents MnuCDiagram As ToolStripMenuItem
+    Friend WithEvents MnuTechnical As ToolStripMenuItem
 End Class

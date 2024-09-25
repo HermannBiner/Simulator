@@ -62,7 +62,7 @@ Public MustInherit Class ClsJuliaAbstract
     'Power of z
     Protected MustOverride WriteOnly Property N As Integer Implements IJulia.N
 
-    Protected MustOverride ReadOnly Property IsSampleList As Boolean Implements IJulia.IsSampleList
+    Protected MustOverride ReadOnly Property IsMandelbrot As Boolean Implements IJulia.IsMandelbrot
 
     'Color Intensity
     Protected Property MyRedPercent As Double
@@ -71,9 +71,6 @@ Public MustInherit Class ClsJuliaAbstract
 
     'Use SystemColors
     Protected Property MyIsUseSystemColors As Boolean
-
-    'Track
-    Protected Property MyIsTrackImplemented As Boolean
 
     'Protocol
     Protected MyProtocolList As ListBox
@@ -190,12 +187,6 @@ Public MustInherit Class ClsJuliaAbstract
         End Set
     End Property
 
-    ReadOnly Property IsTrackImplemented As Boolean Implements IJulia.IsTrackImplemented
-        Get
-            IsTrackImplemented = MyIsTrackImplemented
-        End Get
-    End Property
-
     WriteOnly Property ProcotolList As ListBox Implements IJulia.ProcotolList
         Set(value As ListBox)
             MyProtocolList = value
@@ -210,14 +201,18 @@ Public MustInherit Class ClsJuliaAbstract
 
     Public Sub DrawCoordinateSystem() Implements IJulia.DrawCoordinateSystem
 
-        If ActualXRange.IsNumberInInterval(0) Then
+        If MyActualXRange.IsNumberInInterval(0) Then
+
+            BmpGraphics.MathXInterval = MyActualXRange
 
             'Draw y-axis
             BmpGraphics.DrawLine(New ClsMathpoint(0, ActualYRange.A),
                                              New ClsMathpoint(0, ActualYRange.B), Color.Black, 1)
         End If
 
-        If ActualYRange.IsNumberInInterval(0) Then
+        If MyActualYRange.IsNumberInInterval(0) Then
+
+            BmpGraphics.MathYInterval = MyActualYRange
 
             'Draw x-axis
             BmpGraphics.DrawLine(New ClsMathpoint(ActualXRange.A, 0),
@@ -355,8 +350,6 @@ Public MustInherit Class ClsJuliaAbstract
     End Sub
 
     'Public MustOverride Property IsSampelList As Boolean Implements IJulia.IsSampleList
-
-    Public MustOverride Sub ShowCTrack() Implements IJulia.ShowCTrack
 
     Public MustOverride Sub IterationStep(PicelPoint As Point)
 

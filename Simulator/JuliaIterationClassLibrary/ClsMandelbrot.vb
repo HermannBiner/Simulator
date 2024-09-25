@@ -31,8 +31,6 @@ Public Class ClsMandelbrot
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
-        MyIsTrackImplemented = True
-
         'Iteration Parameter
         Zi = New ClsComplexNumber(0, 0)
 
@@ -49,9 +47,9 @@ Public Class ClsMandelbrot
         End Set
     End Property
 
-    Protected Overrides ReadOnly Property IsSampleList As Boolean
+    Protected Overrides ReadOnly Property IsMandelbrot As Boolean
         Get
-            IsSampleList = False
+            IsMandelbrot = True
         End Get
     End Property
 
@@ -146,23 +144,5 @@ Public Class ClsMandelbrot
         MyBrush.Dispose()
 
     End Sub
-
-    Public Overrides Sub ShowCTrack()
-        Dim i As Integer = 1
-        Dim w As ClsComplexNumber = MyC
-
-        MyPicDiagram.Refresh()
-
-        PicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Red, 2)
-
-        Do
-            w = w.Power(MyN).Add(MyC)
-            PicGraphics.DrawPoint(New ClsMathpoint(CDec(w.X), CDec(w.Y)), Brushes.Yellow, 1)
-
-            i += 1
-        Loop Until i > 50 Or w.AbsoluteValue > 2
-
-    End Sub
-
 
 End Class

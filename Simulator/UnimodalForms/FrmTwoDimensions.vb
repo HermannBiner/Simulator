@@ -15,9 +15,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-
 Public Class FrmTwoDimensions
 
     Private IsFormLoaded As Boolean

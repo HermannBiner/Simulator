@@ -11,10 +11,6 @@
 
 'Status Checked
 
-Imports System.Globalization
-Imports System.Reflection
-Imports System.Security.Cryptography
-
 Public Class FrmSensitivity
 
     Private IsFormLoaded As Boolean

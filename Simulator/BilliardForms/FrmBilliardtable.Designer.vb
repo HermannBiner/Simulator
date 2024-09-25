@@ -82,7 +82,7 @@ Partial Class FrmBilliardtable
         ' 
         ' BtnNextStep
         ' 
-        BtnNextStep.Location = New Point(705, 423)
+        BtnNextStep.Location = New Point(705, 437)
         BtnNextStep.Margin = New Padding(2)
         BtnNextStep.Name = "BtnNextStep"
         BtnNextStep.Size = New Size(212, 34)
@@ -102,7 +102,7 @@ Partial Class FrmBilliardtable
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(704, 496)
+        BtnStart.Location = New Point(704, 508)
         BtnStart.Margin = New Padding(2)
         BtnStart.Name = "BtnStart"
         BtnStart.Size = New Size(212, 34)
@@ -153,7 +153,7 @@ Partial Class FrmBilliardtable
         ' 
         ' TrbSpeed
         ' 
-        TrbSpeed.Location = New Point(709, 374)
+        TrbSpeed.Location = New Point(709, 388)
         TrbSpeed.Margin = New Padding(2)
         TrbSpeed.Maximum = 500
         TrbSpeed.Minimum = 1
@@ -165,7 +165,7 @@ Partial Class FrmBilliardtable
         ' LblSpeed
         ' 
         LblSpeed.AutoSize = True
-        LblSpeed.Location = New Point(710, 357)
+        LblSpeed.Location = New Point(710, 368)
         LblSpeed.Margin = New Padding(2, 0, 2, 0)
         LblSpeed.Name = "LblSpeed"
         LblSpeed.Size = New Size(58, 15)
@@ -286,7 +286,7 @@ Partial Class FrmBilliardtable
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(705, 469)
+        LblNumberOfSteps.Location = New Point(705, 483)
         LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
         LblNumberOfSteps.Size = New Size(92, 15)
@@ -296,7 +296,7 @@ Partial Class FrmBilliardtable
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(817, 469)
+        LblSteps.Location = New Point(817, 483)
         LblSteps.Margin = New Padding(2, 0, 2, 0)
         LblSteps.Name = "LblSteps"
         LblSteps.Size = New Size(13, 15)
@@ -315,7 +315,7 @@ Partial Class FrmBilliardtable
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(704, 534)
+        BtnStop.Location = New Point(704, 546)
         BtnStop.Margin = New Padding(2)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(212, 34)

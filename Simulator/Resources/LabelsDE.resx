@@ -181,6 +181,10 @@
     <value>Ein Klassenname muss mit derm Prefic 'Cls' starten und eine Länge &gt; 3 haben!</value>
     <comment>Msg</comment>
   </data>
+  <data name="Cloud" xml:space="preserve">
+    <value>Wolke</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="ClsBackwardEuler" xml:space="preserve">
     <value>Euler Implizit</value>
     <comment>Cls</comment>
@@ -305,6 +309,10 @@
     <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Cristal" xml:space="preserve">
+    <value>Kristall</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="CTrack" xml:space="preserve">
     <value>C-Track</value>
     <comment>Lbl</comment>
@@ -322,7 +330,7 @@
     <comment>Msg</comment>
   </data>
   <data name="DefaultUserData" xml:space="preserve">
-    <value>Setze Standard Userdaten</value>
+    <value>Setze Standard Startwerte</value>
     <comment>Lbl</comment>
   </data>
   <data name="Delta" xml:space="preserve">
@@ -365,6 +373,10 @@
     <value>Dr. math. ETHZ Hermann Biner, Zermatt</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Dust" xml:space="preserve">
+    <value>Staub</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Elliptic" xml:space="preserve">
     <value>Elliptisch</value>
     <comment>Lbl</comment>
@@ -393,10 +405,6 @@
     <value>Experiment No</value>
     <comment>Lbl</comment>
   </data>
-  <data name="FactorC" xml:space="preserve">
-    <value>Faktor C</value>
-    <comment>Lbl</comment>
-  </data>
   <data name="Feedback" xml:space="preserve">
     <value>Feedback ist willkommen</value>
     <comment>Lbl</comment>
@@ -421,6 +429,10 @@
     <value>Funktionsgraph</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Galaxy" xml:space="preserve">
+    <value>Galaxie</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Green" xml:space="preserve">
     <value>Grün</value>
     <comment>Col</comment>
@@ -435,6 +447,10 @@
   </data>
   <data name="HitPoint" xml:space="preserve">
     <value>Stosspunkt Parameter t</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Hurrican" xml:space="preserve">
+    <value>Hurrikan</value>
     <comment>Lbl</comment>
   </data>
   <data name="Independent" xml:space="preserve">
@@ -497,8 +513,12 @@
     <value>Gerne per Mail an h.biner@bluewin.ch</value>
     <comment>Lbl</comment>
   </data>
+  <data name="MandelbrotSelection" xml:space="preserve">
+    <value>Mandelbrot Auswahl</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Manual" xml:space="preserve">
-    <value>Handbuch.pdf</value>
+    <value>Benutzerhandbuch.pdf</value>
     <comment>Doc</comment>
   </data>
   <data name="MassRatioM" xml:space="preserve">
@@ -578,11 +598,11 @@
     <comment>Mnu</comment>
   </data>
   <data name="MnuManual" xml:space="preserve">
-    <value>&amp;Handbuch</value>
+    <value>&amp;Benutzerhandbuch</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuMathematics" xml:space="preserve">
-    <value>M&amp;athematik</value>
+    <value>Mathematische Dokumentation</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuMechanics" xml:space="preserve">
@@ -601,6 +621,10 @@
     <value>&amp;Sensitivität</value>
     <comment>Mnu</comment>
   </data>
+  <data name="MnuTechnical" xml:space="preserve">
+    <value>Technische Dokumentation</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="MnuTest" xml:space="preserve">
     <value>&amp;Test</value>
     <comment>Mnu</comment>
@@ -608,6 +632,10 @@
   <data name="MnuTwoDimensions" xml:space="preserve">
     <value>&amp;Zweidimensional</value>
     <comment>Mnu</comment>
+  </data>
+  <data name="Needle" xml:space="preserve">
+    <value>Nadel</value>
+    <comment>Lbl</comment>
   </data>
   <data name="NewBall" xml:space="preserve">
     <value>Neue Kugel</value>
@@ -687,6 +715,10 @@
   </data>
   <data name="Parameter" xml:space="preserve">
     <value>Parameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ParameterC" xml:space="preserve">
+    <value>Parameter C</value>
     <comment>Lbl</comment>
   </data>
   <data name="ParameterList" xml:space="preserve">
@@ -773,6 +805,10 @@
     <value>Rotation</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Samples" xml:space="preserve">
+    <value>Beispiele</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Seehorse" xml:space="preserve">
     <value>Seepferdchen</value>
     <comment>Lbl</comment>
@@ -785,7 +821,7 @@
     <value>Setze die Startposition mit der Maus</value>
     <comment>Msg</comment>
   </data>
-  <data name="Shadowed" xml:space="preserve">
+  <data name="Shaded" xml:space="preserve">
     <value>Schattiert</value>
     <comment>Lbl</comment>
   </data>
@@ -929,12 +965,12 @@
     <value>Zeitachse</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Tornado" xml:space="preserve">
-    <value>Tornado</value>
-    <comment>Lbl</comment>
-  </data>
   <data name="Torus" xml:space="preserve">
     <value>Torus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TorusOrCylinder" xml:space="preserve">
+    <value>Torus oder Zylinder</value>
     <comment>Lbl</comment>
   </data>
   <data name="Transitivity" xml:space="preserve">

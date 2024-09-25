@@ -34,8 +34,6 @@ Public Class ClsJuliaPN
 
         StandardColors = New ClsSystemBrushes(MaxSteps)
 
-        MyIsTrackImplemented = False
-
         'Iteration Parameter
         Zi = New ClsComplexNumber(0, 0)
 
@@ -47,9 +45,9 @@ Public Class ClsJuliaPN
         End Set
     End Property
 
-    Protected Overrides ReadOnly Property IsSampleList As Boolean
+    Protected Overrides ReadOnly Property IsMandelbrot As Boolean
         Get
-            IsSampleList = True
+            IsMandelbrot = False
         End Get
     End Property
 
@@ -114,11 +112,5 @@ Public Class ClsJuliaPN
         MyBrush.Dispose()
 
     End Sub
-
-    Public Overrides Sub ShowCTrack()
-        'is not relevant for a Julia Set Generation
-        Throw New NotImplementedException()
-    End Sub
-
 
 End Class

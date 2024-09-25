@@ -176,7 +176,7 @@ Public Class ClsFeigenbaumController
                     .BtnDefault.Enabled = False
                 End With
             Else
-                SetDefaultUserData()
+                'Message already generated
             End If
         End If
 

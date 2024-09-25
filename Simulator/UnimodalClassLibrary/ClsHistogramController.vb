@@ -137,7 +137,7 @@ Public Class ClsHistogramController
                 End If
 
             Else
-                'nothing - Iterationstatus stays stopped
+                'Message already generated
             End If
         End If
 

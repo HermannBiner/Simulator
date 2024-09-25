@@ -7,7 +7,6 @@
 'that is implemented by the Billiard-Classes, Pendulum-Classes and other
 
 Imports System.Globalization
-Imports System.Reflection
 
 Public Class FrmCDiagramBilliard
 
@@ -79,25 +78,25 @@ Public Class FrmCDiagramBilliard
         End If
     End Sub
 
-    Private Sub TxtCMin_LostFocus(sender As Object, e As EventArgs) Handles TxtCMin.LostFocus
+    Private Sub TxtCMin_TextChanged(sender As Object, e As EventArgs) Handles TxtCMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtCMax_LostFocus(sender As Object, e As EventArgs) Handles TxtCMax.LostFocus
+    Private Sub TxtCMax_TextChanged(sender As Object, e As EventArgs) Handles TxtCMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtVMin_LostFocus(sender As Object, e As EventArgs) Handles TxtVMin.LostFocus
+    Private Sub TxtVMin_TextChanged(sender As Object, e As EventArgs) Handles TxtVMin.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
     End Sub
 
-    Private Sub TxtVMax_LostFocus(sender As Object, e As EventArgs) Handles TxtVMax.LostFocus
+    Private Sub TxtVMax_TextChanged(sender As Object, e As EventArgs) Handles TxtVMax.TextChanged
         If IsFormLoaded Then
             FC.SetDelta()
         End If
