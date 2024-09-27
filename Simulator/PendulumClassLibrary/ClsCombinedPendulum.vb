@@ -119,7 +119,7 @@ Public Class ClsCombinedPendulum
             .X = MyCalculationVariables.Component(0) * CDec(Math.Sin(MyCalculationVariables.Component(1)))
             .Y = -MyCalculationVariables.Component(0) * CDec(Math.Cos(MyCalculationVariables.Component(1))) + Y0
         End With
-        StartEnergy = GetEnergy()
+
     End Sub
 
     Protected Overrides Sub SetPhasePortraitParameters()
@@ -147,11 +147,11 @@ Public Class ClsCombinedPendulum
         Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
 
         ResetIteration()
-        SetEnergyRange()
+        SetStartEnergyRange()
         SetPosition()
     End Sub
 
-    Protected Overrides Sub SetEnergyRange()
+    Protected Overrides Sub SetStartEnergyRange()
 
         Dim Emin As Decimal
         Dim Emax As Decimal
@@ -159,7 +159,7 @@ Public Class ClsCombinedPendulum
         Emin = -CDec(Math.Pow(g / Omega, 2)) / 2
         Emax = CDec(Math.Pow(Omega * (1 - Y0 - L0), 2)) / 2 + g * (L0 + 1 - Y0)
 
-        EnergyRange = New ClsInterval(Emin, Emax)
+        StartEnergyRange = New ClsInterval(Emin, Emax)
 
     End Sub
 
@@ -191,7 +191,7 @@ Public Class ClsCombinedPendulum
             MyCalculationVariables.Component(0) = LocL
             MyCalculationVariables.Component(1) = Phi
 
-            SetEnergyRange()
+            SetStartEnergyRange()
 
             SetPosition()
 
@@ -419,7 +419,7 @@ Public Class ClsCombinedPendulum
         Omega = GetAddParameterValue(MyAdditionalParameterValue)
         Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
 
-        SetEnergyRange()
+        SetStartEnergyRange()
         SetPosition()
 
     End Sub

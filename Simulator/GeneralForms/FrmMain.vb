@@ -79,11 +79,11 @@ Public Class FrmMain
     End Sub
 
     Private Sub MnuMathematics_Click(sender As Object, e As EventArgs) Handles MnuMathematics.Click
-        OpenDocument(LM.GetString("MathDoc"))
+        OpenDocument("Documentation\" & LM.GetString("MathDoc"))
     End Sub
 
     Private Sub MnuManual_Click(sender As Object, e As EventArgs) Handles MnuManual.Click
-        OpenDocument(LM.GetString("Manual"))
+        OpenDocument("Documentation\" & LM.GetString("Manual"))
     End Sub
 
     Private Sub MnuInfo_Click(sender As Object, e As EventArgs) Handles MnuInfo.Click

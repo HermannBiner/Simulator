@@ -160,7 +160,7 @@ Public MustInherit Class ClsBilliardTableAbstract
         MyBilliardballCollection = New List(Of IBilliardball)
 
         'The FormulaParameter is the same for all Billiaard Tables
-        MyFormulaParameter = New ClsGeneralParameter(3, "Parameter C", New ClsInterval(CDec(0.5), 2), ClsGeneralParameter.TypeOfParameterEnum.Formula)
+        MyFormulaParameter = New ClsGeneralParameter(3, "Parameter C", New ClsInterval(CDec(0.5), 2), ClsGeneralParameter.TypeOfParameterEnum.Formula, CDec(0.8))
 
         MyValueParameterList = New List(Of ClsGeneralParameter)
 

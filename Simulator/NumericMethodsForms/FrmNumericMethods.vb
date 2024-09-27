@@ -71,6 +71,7 @@ Public Class FrmNumericMethods
     Private Sub ChkStretched_CheckedChanged(sender As Object, e As EventArgs) Handles ChkStretched.CheckedChanged
         If IsFormLoaded Then
             FC.ResetIteration()
+            FC.SetStepWidthAB()
         End If
     End Sub
 

@@ -124,10 +124,10 @@ Public Class ClsNewtonIterationController
     Public Sub SetDefaultUserData()
 
         With MyForm
-            .TxtXMin.Text = DS.ActualXRange.A.ToString(CultureInfo.CurrentCulture)
-            .TxtXMax.Text = DS.ActualXRange.B.ToString(CultureInfo.CurrentCulture)
-            .TxtYMin.Text = DS.ActualYRange.A.ToString(CultureInfo.CurrentCulture)
-            .TxtYMax.Text = DS.ActualYRange.B.ToString(CultureInfo.CurrentCulture)
+            .TxtXMin.Text = DS.XValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
+            .TxtXMax.Text = DS.XValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
+            .TxtYMin.Text = DS.YValueParameter.Range.A.ToString(CultureInfo.CurrentCulture)
+            .TxtYMax.Text = DS.YValueParameter.Range.B.ToString(CultureInfo.CurrentCulture)
 
             If DS.IsUseC Then
                 .TxtA.Text = "0.5"
@@ -157,6 +157,7 @@ Public Class ClsNewtonIterationController
                 .N = 3
             End If
         End With
+        SetDefaultUserData()
         ResetIteration()
     End Sub
 

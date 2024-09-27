@@ -164,11 +164,7 @@ Public Class ClsCDiagramController
         SelectedValueParameter = SelectedValueParameter
         ActualValueRange = SelectedValueParameter.Range
         BmpGraphics.MathYInterval = ActualValueRange
-
-        InitializeMe()
-
-        'The parameter and startvalue are depending on the type of iteration
-        SetDefaultUserData()
+        DiagramAreaSelector.YRange = ActualValueRange
 
         'If the type of iteration changes, everything has to be reset
         ResetIteration()

@@ -14,6 +14,7 @@ Public Class ClsPolynom3C
 
         MyIsUseN = False
         MyIsUseC = True
+        IterationDeepness = 100
 
     End Sub
 
@@ -37,7 +38,6 @@ Public Class ClsPolynom3C
         End If
 
         MyN = 3
-        IterationDeepness = 100
 
     End Sub
 

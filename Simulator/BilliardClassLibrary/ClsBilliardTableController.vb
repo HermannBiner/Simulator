@@ -93,7 +93,7 @@ Public Class ClsBilliardTableController
             MyForm.TrbParameterC.Minimum = CInt(.FormulaParameter.Range.A * 100)
             MyForm.TrbParameterC.Maximum = CInt(.FormulaParameter.Range.B * 100)
             MyForm.TrbParameterC.Value = CInt(.FormulaParameter.Range.A + .FormulaParameter.Range.IntervalWidth * 0.5 * 100)
-            .C = CDec(MyForm.TrbParameterC.Value * 0.01)
+            .C = .FormulaParameter.DefaultValue
         End With
 
         'Setting Standard Values
@@ -194,10 +194,14 @@ Public Class ClsBilliardTableController
     Public Sub TakeOverStartParameter()
 
         If IsUserDataOK() Then
-                DS.BilliardBallCollection.Clear()
-                ResetIteration()
 
+            If DS.BilliardBallCollection.Count = 0 Then
                 CreateNewBall()
+            End If
+
+            If ActiveBilliardball.IsStartpositionSet Then
+                CreateNewBall()
+            End If
 
             'Parameter of the Start Point
             Dim t As Decimal = CDec(MyForm.TxtT.Text)

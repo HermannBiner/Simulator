@@ -148,10 +148,10 @@ Public Class ClsShakedPendulum
         MyD = GetAddParameterValue(MyAdditionalParameterValue)
         SetPosition()
         ResetIteration()
-        SetEnergyRange()
+        SetStartEnergyRange()
     End Sub
 
-    Protected Overrides Sub SetEnergyRange()
+    Protected Overrides Sub SetStartEnergyRange()
 
         Dim Emin As Decimal
         Dim Emax As Decimal
@@ -160,7 +160,7 @@ Public Class ClsShakedPendulum
             Emin = -m * g * .Component(0)
             Emax = MyD / 2 + m * g * .Component(0)
         End With
-        EnergyRange = New ClsInterval(Emin, Emax)
+        StartEnergyRange = New ClsInterval(Emin, Emax)
 
     End Sub
 
@@ -178,7 +178,7 @@ Public Class ClsShakedPendulum
 
             SetPosition()
 
-            SetEnergyRange()
+            SetStartEnergyRange()
 
             'Draw pendulum
             DrawPendulums()
@@ -220,7 +220,7 @@ Public Class ClsShakedPendulum
 
             SetPosition()
 
-            SetEnergyRange()
+            SetStartEnergyRange()
 
             'Draw pendulum
             DrawPendulums()
@@ -249,7 +249,7 @@ Public Class ClsShakedPendulum
             v2 = 0
         End With
 
-        SetEnergyRange()
+        SetStartEnergyRange()
         SetPosition()
 
     End Sub
@@ -440,8 +440,8 @@ Public Class ClsShakedPendulum
             EPot = MyD * u1 * u1 / 2 - m * g * CDec(Math.Cos(u2)) * .Component(0)
 
             'Etotal in the possible interval of StartEnergyRange
-            Etotal = Math.Min(EKin + EPot, EnergyRange.B)
-            Etotal = Math.Max(Etotal, EnergyRange.A)
+            Etotal = Math.Min(EKin + EPot, StartEnergyRange.B)
+            Etotal = Math.Max(Etotal, StartEnergyRange.A)
 
             Return EKin + EPot
         End With

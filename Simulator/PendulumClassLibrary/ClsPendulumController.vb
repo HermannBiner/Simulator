@@ -197,6 +197,7 @@ Public Class ClsPendulumController
 
                 .PrepareDiagram()
 
+
             End With
         Else
             MessageBox.Show(FrmMain.LM.GetString("InvalidParameters"))
@@ -212,6 +213,7 @@ Public Class ClsPendulumController
                     .IsStartparameter1Set = True
                     .IsStartparameter2Set = True
                     .IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    .StartEnergy = .GetEnergy
                 End With
             End If
         End If

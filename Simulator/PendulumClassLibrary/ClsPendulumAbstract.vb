@@ -44,8 +44,8 @@ Public MustInherit Class ClsPendulumAbstract
     'MyEnergy
     Protected MyPicEnergy As PictureBox
     Protected PicEnergyGraphics As Graphics
-    Protected EnergyRange As ClsInterval
-    Protected StartEnergy As Decimal
+    Protected StartEnergyRange As ClsInterval
+    Protected MyStartEnergy As Decimal
     Protected Energy As Decimal
 
     Protected MathInterval As ClsInterval
@@ -310,6 +310,15 @@ Public MustInherit Class ClsPendulumAbstract
         End Set
     End Property
 
+    Property StartEnergy As Decimal Implements IPendulum.StartEnergy
+        Get
+            StartEnergy = MyStartEnergy
+        End Get
+        Set(value As Decimal)
+            MyStartEnergy = value
+        End Set
+    End Property
+
     Public Sub New()
 
         MathInterval = New ClsInterval(-1, 1)
@@ -387,9 +396,9 @@ Public MustInherit Class ClsPendulumAbstract
             ActualEnergy = GetEnergy()
 
             Select Case True
-                Case ActualEnergy > StartEnergy + EnergyTolerance * EnergyRange.IntervalWidth
+                Case ActualEnergy > StartEnergy + EnergyTolerance * StartEnergyRange.IntervalWidth
                     MyBrush = Brushes.Red
-                Case ActualEnergy < StartEnergy - EnergyTolerance * EnergyRange.IntervalWidth
+                Case ActualEnergy < StartEnergy - EnergyTolerance * StartEnergyRange.IntervalWidth
                     MyBrush = Brushes.DarkViolet
                 Case Else
                     MyBrush = Brushes.Green
@@ -398,7 +407,7 @@ Public MustInherit Class ClsPendulumAbstract
             MyPicEnergy.Refresh()
 
             'Set the StatusBar of the Energy
-            Value = CInt(Math.Min(MyPicEnergy.Width, (ActualEnergy - EnergyRange.A) * MyPicEnergy.Width / EnergyRange.IntervalWidth))
+            Value = CInt(Math.Min(MyPicEnergy.Width, (ActualEnergy - StartEnergyRange.A) * MyPicEnergy.Width / StartEnergyRange.IntervalWidth))
             PicEnergyGraphics.FillRectangle(MyBrush, New Rectangle(0, 0, Value, MyPicEnergy.Height))
 
             If N Mod 100 = 0 Then
@@ -430,7 +439,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MustOverride Sub SetPosition()
     'OK
 
-    Protected MustOverride Sub SetEnergyRange()
+    Protected MustOverride Sub SetStartEnergyRange()
     'OK
 
     Protected MustOverride Sub SetPhasePortraitParameters()
@@ -439,7 +448,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MustOverride Sub SetAdditionalParameters()
     'OK
 
-    Protected MustOverride Function GetEnergy() As Decimal
+    Protected MustOverride Function GetEnergy() As Decimal Implements IPendulum.GetEnergy
     'OK
 
     Protected MustOverride Sub SetDefaultUserData() Implements IPendulum.SetDefaultUserData

@@ -263,6 +263,8 @@ Public Class ClsIterationController
 
         If IsUserDataOK() Then
 
+            ResetIteration()
+
             DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
 
             'Initialization was successful
@@ -297,6 +299,8 @@ Public Class ClsIterationController
         Dim CheckTargetvalue As New ClsCheckIsNumeric(MyForm.TxtTargetValue)
 
         If IsUserDataOK() Then
+
+            ResetIteration()
 
             DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
 

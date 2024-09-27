@@ -50,6 +50,8 @@ Public Interface IPendulum
 
     WriteOnly Property LblStepWidth As Label
 
+    Property StartEnergy As Decimal
+
     'Calculate value od the additional Paremeter by the Trackbar Value
     Function GetAddParameterValue(TbrValue As Integer) As Decimal
 
@@ -64,6 +66,8 @@ Public Interface IPendulum
     Sub SetAndDrawStartparameter2(Mouseposition As Point)
 
     Sub SetDefaultUserData()
+
+    Function GetEnergy() As Decimal
 
     'The variable Parameters are changed during the iteration
     'Iteration performs one approximation step
