@@ -58,14 +58,14 @@ Public Class ClsMandelbrot
         If MyN = 2 Then
 
             'Size of the Mandelbrot set in case MyN = 2
-            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-2), CDec(0.6)), ClsGeneralParameter.TypeOfParameterEnum.Value)
-            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.3), CDec(1.3)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-2), CDec(0.6)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.3), CDec(1.3)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         Else
 
             'centered
-            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
-            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
         End If
 
         MyActualXRange = MyXValueParameter.Range

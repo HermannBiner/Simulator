@@ -15,6 +15,12 @@ Imports System.Globalization
 Public Class ClsEllipseBilliardball
     Inherits ClsBilliardBallAbstract
 
+    Private LM As ClsLanguageManager
+
+    Public Sub New()
+        LM = ClsLanguageManager.LM
+    End Sub
+
     'SECTOR INITIALIZATION
 
     Overrides Property Startparameter As Decimal
@@ -35,7 +41,7 @@ Public Class ClsEllipseBilliardball
             UserStartposition.Y = CDec(MyB * Math.Sin(T))
 
             DrawUserStartposition(True)
-            MyStartPositionSet = True
+            MyIsStartParameterSet = True
         End Set
     End Property
 
@@ -68,7 +74,7 @@ Public Class ClsEllipseBilliardball
             UserEndposition.Y = CDec(MyB * Math.Sin(NextT))
             DrawUserEndPosition(True)
 
-            MyStartAngleSet = True
+            MyIsStartAngleSet = True
 
         End Set
     End Property
@@ -194,13 +200,10 @@ Public Class ClsEllipseBilliardball
 
         'Startpoint of the actual part of the Orbit
         Dim Startpoint As New ClsMathpoint
-
         'Parameter of the next Endpoint of the actual part of the Orbit
         Dim NextT As Decimal
-
         'and the according EndPoint
         Dim Endpoint As New ClsMathpoint
-
 
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
         Startpoint.X = CDec(MyA * Math.Cos(T))
@@ -212,7 +215,7 @@ Public Class ClsEllipseBilliardball
         Endpoint.Y = CDec(MyB * Math.Sin(NextT))
 
         'The Ball moves between these Points
-        MoveOnOrbitPart(Startpoint, Endpoint)
+        MoveOnSegment(Startpoint, Endpoint)
 
         'The EndPoint is then the StartPoint of the following part of the Orbit
         T = NextT
@@ -252,7 +255,7 @@ Public Class ClsEllipseBilliardball
 
     'SECTOR BALL MOVEMENT
 
-    Private Sub MoveOnOrbitPart(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
+    Private Sub MoveOnSegment(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
 
         Dim Actualposition As New ClsMathpoint With {
             .X = Startposition.X,
@@ -352,14 +355,14 @@ Public Class ClsEllipseBilliardball
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
+
+        Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
         If PhaseportraitGraphics IsNot Nothing Then
-            Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
             PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
-            If MyValueProtocol IsNot Nothing Then
-                MyValueProtocol.Items.Add(FrmMain.LM.GetString(
-                                          DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
-                                             MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
-                MyValueProtocol.Refresh()
+            If MyIsProtocol And MyValueProtocol IsNot Nothing Then
+                MyValueProtocol.Items.Add(LM.GetString(
+                                              DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
+                                                 MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
             End If
         End If
 

@@ -7,8 +7,10 @@ Public Class ClsStadiumBilliardTable
     Public Sub New()
 
         'Set specific parameters and ranges
-        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(0.95 * (2 + Math.PI))), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.95) / (1 + MyC))
-        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(0, CDec(Math.PI)), ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / NumberOfBilliardBalls))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(0.95 * (2 + Math.PI))),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(0.95) / (1 + MyC))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDec(0.01), CDec(3.13)),
+                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 30))
 
         MyValueParameterList.Add(MyTValueParameter)
         MyValueParameterList.Add(MyAlfaValueParameter)
@@ -63,7 +65,7 @@ Public Class ClsStadiumBilliardTable
             .MathInterval = MyMathInterval
             .AlfaValueRange = MyAlfaValueParameter.Range
             .TValueRange = MyTValueParameter.Range
-            .ParameterRange = MyFormulaParameter.Range
+            .ParameterRange = MyDSParameter.Range
             .PicDiagram = MyPicDiagram
             .PicGraphics = MyPicGraphics
             .BmpDiagram = MyBmpDiagram
@@ -78,7 +80,7 @@ Public Class ClsStadiumBilliardTable
             .A = MyA
             .B = b
             .IsStartangleSet = False
-            .IsStartpositionSet = False
+            .IsStartParameterSet = False
         End With
 
         Return BilliardBall

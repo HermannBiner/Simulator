@@ -11,7 +11,6 @@
 Public Class ClsDoublePendulum
     Inherits ClsPendulumAbstract
 
-
     Private ValueParameter(3) As ClsGeneralParameter
 
     'Mass ratio M: m2 = MyM*m1
@@ -29,7 +28,7 @@ Public Class ClsDoublePendulum
 
         Y0 = 0
 
-        MyLabelProtocol = FrmMain.LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
+        MyLabelProtocol = LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
 
         MyValueParameterDefinition = New List(Of ClsGeneralParameter)
 
@@ -37,32 +36,32 @@ Public Class ClsDoublePendulum
         'Tag is the Number of the Label in the Pendulum Form
         'L1
         ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDec(0.1), CDec(0.85)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.7))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.7))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L2
         ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDec(0.1), CDec(0.85)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.2))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.2))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi1
         ValueParameter(2) = New ClsGeneralParameter(3, "Phi 1", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 4))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'Phi2
         ValueParameter(3) = New ClsGeneralParameter(4, "Phi 2", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 6))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 6))
         MyValueParameterDefinition.Add(ValueParameter(3))
 
         'Labels
-        MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": -- "
+        MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": -- "
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 2  'that means mass m2 = m1
         MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
-                                                      FrmMain.LM.GetString("MassRatioM"), New ClsInterval(0, 4), ClsGeneralParameter.TypeOfParameterEnum.Formula)
+                                                      LM.GetString("MassRatioM"), New ClsInterval(0, 4), ClsGeneralParameter.TypeOfParameterEnum.DS)
 
         'Calculates mass ratio M = m2/m1
         M = GetAddParameterValue(MyAdditionalParameterValue)
@@ -138,15 +137,15 @@ Public Class ClsDoublePendulum
 
         Select Case TypeofPhasePortrait
             Case TypeofPhaseportraitEnum.TorusOrCylinder
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Phi1, Phi2. Tangent: Phi1', Phi2'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi1, Phi2. Tangent: Phi1', Phi2'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Phi1 = 0, Phi2, Phi2'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi1 = 0, Phi2, Phi2'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(CDec(-10), CDec(10))
             Case Else 'independent
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Red: Phi1, Phi1'. Green: Phi2, Phi2'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Red: Phi1, Phi1'. Green: Phi2, Phi2'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(CDec(-10), CDec(10))
         End Select
@@ -175,7 +174,7 @@ Public Class ClsDoublePendulum
             Emin = g * ((1 - .Component(0)) * (1 + M) - M * .Component(1))
             Emax = g * ((1 + .Component(0)) * (1 + M) + M * .Component(1))
         End With
-        StartEnergyRange = New ClsInterval(Emin, Emax)
+        MyStartEnergyRange = New ClsInterval(Emin, Emax)
 
     End Sub
 
@@ -295,7 +294,7 @@ Public Class ClsDoublePendulum
 
     'SECTOR ITERATION
 
-    Protected Overrides Sub IterationStep(TestMode As Boolean)
+    Public Overrides Sub IterationStep(IsTestMode As Boolean)
 
         'Performs one iteration step
         'and does all drawings
@@ -335,7 +334,7 @@ Public Class ClsDoublePendulum
         'k,h.component(i): step i-1 in Runge Kutta
         k1.Component(0) = F1(x)
         k2.Component(0) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(0) = G1Test(x)
             h2.Component(0) = G2Test(x)
         Else
@@ -355,7 +354,7 @@ Public Class ClsDoublePendulum
         'Second Runge Kutta Step
         k1.Component(1) = F1(x)
         k2.Component(1) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(1) = G1Test(x)
             h2.Component(1) = G2Test(x)
         Else
@@ -374,7 +373,7 @@ Public Class ClsDoublePendulum
         'Third Runge Kutta Step
         k1.Component(2) = F1(x)
         k2.Component(2) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(2) = G1Test(x)
             h2.Component(2) = G2Test(x)
         Else
@@ -393,7 +392,7 @@ Public Class ClsDoublePendulum
         'Fourth Runge Kutta Step
         k1.Component(3) = F1(x)
         k2.Component(3) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(3) = G1Test(x)
             h2.Component(3) = G2Test(x)
         Else
@@ -414,9 +413,9 @@ Public Class ClsDoublePendulum
         'New Values to MyVariables
         With MyCalculationVariables
             If .Component(0) * u1 <= 0 Then
-                SignumChanged = True
+                IsSignumChanged = True
             Else
-                SignumChanged = False
+                IsSignumChanged = False
             End If
             .Component(0) = u1
             .Component(1) = u2
@@ -452,7 +451,7 @@ Public Class ClsDoublePendulum
                 PicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
                 BmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
             Case TypeofPhaseportraitEnum.PoincareSection
-                If SignumChanged Then
+                If IsSignumChanged Then
                     PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 2)
                 End If
             Case Else

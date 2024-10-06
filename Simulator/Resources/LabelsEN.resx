@@ -945,6 +945,10 @@
     <value>Targetvalue</value>
     <comment>Lbl</comment>
   </data>
+  <data name="TechDoc" xml:space="preserve">
+    <value>Technical Documentation.pdf</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Test" xml:space="preserve">
     <value>Test</value>
     <comment>Lbl</comment>

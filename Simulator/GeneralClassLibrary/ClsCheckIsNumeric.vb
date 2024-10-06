@@ -4,10 +4,13 @@
 
 Public Class ClsCheckIsNumeric
 
+    Private LM As ClsLanguageManager
+
     Private MyTextbox As TextBox
     Private MyNumericValue As Decimal
 
     Public Sub New(Textbox As TextBox)
+        LM = ClsLanguageManager.LM
         MyTextbox = Textbox
     End Sub
 
@@ -25,26 +28,26 @@ Public Class ClsCheckIsNumeric
 
     Public Function IsInputValid() As Boolean
 
-        Dim Valid As Boolean
+        Dim IsValid As Boolean
 
         If Not IsNumeric(MyTextbox.Text) Then
-            MessageBox.Show(FrmMain.LM.GetString("NumericValue"))
+            MessageBox.Show(LM.GetString("NumericValue"))
             MyTextbox.Text = ""
             MyTextbox.Select()
-            Valid = False
+            IsValid = False
         Else
             Try
                 MyNumericValue = CDec(MyTextbox.Text)
-                Valid = True
+                IsValid = True
             Catch ex As ArgumentException
                 MessageBox.Show(ex.Message)
                 MyTextbox.Text = ""
                 MyTextbox.Select()
-                Valid = False
+                IsValid = False
             End Try
         End If
 
-        Return Valid
+        Return IsValid
 
     End Function
 

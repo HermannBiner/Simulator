@@ -8,6 +8,8 @@
 Public MustInherit Class ClsNewtonAbstract
     Implements INewton
 
+    Protected LM As ClsLanguageManager
+
     'the radius where Zi is regarded as belonging to a root
     Protected MyRadius As Double
 
@@ -34,36 +36,6 @@ Public MustInherit Class ClsNewtonAbstract
     'the actual range for the y-coordinate
     Protected MyActualYRange As ClsInterval
 
-    'Controlling the Iteration Loop
-    Protected Property MyTxtNumberofSteps As TextBox
-    Protected Property MyTxtElapsedTime As TextBox
-
-    'Parameters for the Iteration
-
-    Protected Property MyIterationStatus As ClsDynamics.EnIterationStatus
-
-    'Number of examinated points in the complex plane
-    Protected ExaminatedPoints As Integer
-
-    'Coordinates of the pixel with the startvalue
-    Protected p As Integer
-    Protected q As Integer
-    Protected PixelPoint As Point
-
-    'Length of a branche of the spiral
-    'see Sub IterationLoop
-    Protected L As Integer = 0
-
-    'Sig = 1 if n odd, = -1 else
-    Protected Sig As Integer
-
-    'Parameter k = 1...L
-    Protected k As Integer
-
-    'Number of iteration steps per pixelpoint
-    Protected Steps As Integer
-    Protected Watch As Stopwatch
-
     'Protocol
     Protected MyProtocolList As ListBox
     Protected MyIsProtocol As Boolean
@@ -87,14 +59,16 @@ Public MustInherit Class ClsNewtonAbstract
 
     Public Sub New()
 
-        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
-        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Value)
+        LM = ClsLanguageManager.LM
+
+        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyActualXRange = MyXValueParameter.Range
         MyActualYRange = MyYValueParameter.Range
 
         UnitRootCollection = New Collection
-        Watch = New Stopwatch
+
     End Sub
 
     'SECTOR INTERFACE
@@ -148,27 +122,6 @@ Public MustInherit Class ClsNewtonAbstract
             MyActualYRange = value
             PicGraphics.MathYInterval = value
             BmpGraphics.MathYInterval = value
-        End Set
-    End Property
-
-    Property IterationStatus As ClsDynamics.EnIterationStatus Implements INewton.IterationStatus
-        Get
-            IterationStatus = MyIterationStatus
-        End Get
-        Set(value As ClsDynamics.EnIterationStatus)
-            MyIterationStatus = value
-        End Set
-    End Property
-
-    WriteOnly Property TxtNumberofSteps As TextBox Implements INewton.TxtNumberOfSteps
-        Set(value As TextBox)
-            MyTxtNumberofSteps = value
-        End Set
-    End Property
-
-    WriteOnly Property TxtElapsedTime As TextBox Implements INewton.TxtElapsedTime
-        Set(value As TextBox)
-            MyTxtElapsedTime = value
         End Set
     End Property
 
@@ -256,18 +209,11 @@ Public MustInherit Class ClsNewtonAbstract
         End If
         MyPicDiagram.Refresh()
 
-        MyTxtNumberofSteps.Text = "0"
-        MyTxtElapsedTime.Text = "0"
         'Clear Protocol
         If MyProtocolList IsNot Nothing Then
             MyProtocolList.Items.Clear()
         End If
 
-        L = 0
-        Watch.Reset()
-        ExaminatedPoints = 0
-
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
     End Sub
 
 
@@ -342,110 +288,7 @@ Public MustInherit Class ClsNewtonAbstract
 
     End Function
 
-    Public Async Function GenerateImage() As Task Implements INewton.GenerateImage
-
-        'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        'In case of Symmetry, only the lower halfplane is examinated
-        If ExaminatedPoints = 0 Then
-            p = CInt(MyPicDiagram.Width / 2)
-            q = CInt(MyPicDiagram.Height / 2)
-
-            PixelPoint = New Point
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            IterationStep(PixelPoint)
-
-            Steps = 1
-            Watch.Start()
-
-        End If
-
-
-        Do
-            ExaminatedPoints += 1
-
-            IterationLoop()
-
-            If p >= MyPicDiagram.Width Or q >= MyPicDiagram.Height Then
-
-                MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-                Watch.Stop()
-                MyPicDiagram.Refresh()
-
-            End If
-
-            If ExaminatedPoints Mod 100 = 0 Then
-                MyTxtNumberofSteps.Text = Steps.ToString
-                MyTxtElapsedTime.Text = Watch.Elapsed.ToString
-                Await Task.Delay(1)
-            End If
-
-        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
-            Or MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-        DrawRoots(True)
-
-    End Function
-
-    Private Sub IterationLoop()
-
-        If ExaminatedPoints Mod 2 = 0 Then
-            Sig = -1
-        Else
-            Sig = 1
-        End If
-
-        L += 1
-
-        k = 1
-        Do While k < L
-            p += Sig
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            IterationStep(PixelPoint)
-
-            If Steps Mod 10000 = 0 Then
-                MyPicDiagram.Refresh()
-            End If
-
-            Steps += 1
-            k += 1
-        Loop
-
-        k = 1
-
-        Do While k < L
-            q += Sig
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            IterationStep(PixelPoint)
-
-            If Steps Mod 10000 = 0 Then
-                MyPicDiagram.Refresh()
-            End If
-
-            Steps += 1
-            k += 1
-        Loop
-
-    End Sub
-
-    Public Sub IterationStep(Startpoint As Point)
+    Public Sub IterationStep(Startpoint As Point) Implements INewton.IterationStep
 
         'Transform the PixelPoint to a Complex Number
         Dim MathStartpoint As ClsComplexNumber
@@ -495,7 +338,8 @@ Public MustInherit Class ClsNewtonAbstract
 
         'Protocol of the PixelStartpoint and the Endpoint as Mathpoint
         If MyIsProtocol Then
-            MyProtocolList.Items.Add(MathStartpoint.X.ToString("N5") & ", " & MathStartpoint.Y.ToString("N5") &
+            MyProtocolList.Items.Add(MathStartpoint.X.ToString("N5") & ", " &
+                                     MathStartpoint.Y.ToString("N5") &
                 ", " & Zi.X.ToString("N5") & ", " & Zi.Y.ToString("N5"))
         End If
     End Sub

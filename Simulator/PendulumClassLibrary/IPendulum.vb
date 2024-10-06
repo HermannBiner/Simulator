@@ -18,19 +18,16 @@ Public Interface IPendulum
 
     WriteOnly Property Protocol As ListBox
 
+    WriteOnly Property IsProtocol As Boolean
+
     'Label of the Parameterlist
     ReadOnly Property LabelProtocol As String
-
-    'The total Energy of the Pendulum
-    WriteOnly Property PicEnergy As PictureBox
 
     'To set the parameters of the TrbAdditionalParameter
     ReadOnly Property AdditionalParameter As ClsGeneralParameter
 
     'contains the value of the trackbar TrbAdditionalParameter
     WriteOnly Property AdditionalParameterValue As Integer
-
-    Property IterationStatus As ClsDynamics.EnIterationStatus
 
     'To label fields P1...P8 and set the Valueranges
     ReadOnly Property ValueParameterDefinition As List(Of ClsGeneralParameter)
@@ -46,11 +43,9 @@ Public Interface IPendulum
 
     WriteOnly Property StepWidth As Integer
 
-    WriteOnly Property LblN As Label
-
     WriteOnly Property LblStepWidth As Label
 
-    Property StartEnergy As Decimal
+    ReadOnly Property StartEnergyRange As ClsInterval
 
     'Calculate value od the additional Paremeter by the Trackbar Value
     Function GetAddParameterValue(TbrValue As Integer) As Decimal
@@ -69,9 +64,6 @@ Public Interface IPendulum
 
     Function GetEnergy() As Decimal
 
-    'The variable Parameters are changed during the iteration
-    'Iteration performs one approximation step
-    'and draws everything into Bitmaps and Pictureboxes
-    Function IterationLoop(TestMode As Boolean) As Task
+    Sub IterationStep(IsTestmode As Boolean)
 
 End Interface

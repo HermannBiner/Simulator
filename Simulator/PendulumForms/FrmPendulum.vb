@@ -12,12 +12,15 @@ Public Class FrmPendulum
     Private IsFormLoaded As Boolean
     Private FC As ClsPendulumController
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
 
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
+        LM = ClsLanguageManager.LM
     End Sub
 
     Private Sub FrmPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -37,20 +40,20 @@ Public Class FrmPendulum
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("Pendulum")
-        LblPendulum.Text = FrmMain.LM.GetString("Pendulum")
+        Text = LM.GetString("Pendulum")
+        LblPendulum.Text = LM.GetString("Pendulum")
 
         'LblSteps contains the  #Steps
-        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
+        LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
 
         'LblAdditionParameter, LblP1 ... LblP5 is set by the Active Pendulum
-        BtnTakeOverStartParameter.Text = FrmMain.LM.GetString("TakeOver")
-        GrpStartParameter.Text = FrmMain.LM.GetString("StartParameter")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": "
-        LblTypeofPhaseportrait.Text = FrmMain.LM.GetString("TypeofPhaseportrait")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        BtnTakeOverStartParameter.Text = LM.GetString("TakeOver")
+        GrpStartParameter.Text = LM.GetString("StartParameter")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        BtnStart.Text = LM.GetString("Start")
+        LblStepWidth.Text = LM.GetString("StepWidth") & ": "
+        LblTypeofPhaseportrait.Text = LM.GetString("TypeofPhaseportrait")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
 
     End Sub
 

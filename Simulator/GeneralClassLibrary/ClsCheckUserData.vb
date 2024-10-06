@@ -9,6 +9,8 @@ Imports System.Globalization
 
 Public Class ClsCheckUserData
 
+    Private LM As ClsLanguageManager
+
     'Contains the value that should be in an interval
     Private MyTxtX As TextBox
 
@@ -57,17 +59,20 @@ Public Class ClsCheckUserData
     End Property
 
     Public Sub New(TxtX As TextBox, TargetInterval As ClsInterval)
+        LM = ClsLanguageManager.LM
         MyTxtX = TxtX
         MyTargetRange = TargetInterval
     End Sub
 
     Public Sub New(TxtA As TextBox, TxtB As TextBox, TargetInterval As ClsInterval)
+        LM = ClsLanguageManager.LM
         MyTxtA = TxtA
         MyTxtB = TxtB
         MyTargetRange = TargetInterval
     End Sub
 
     Public Sub New(X As Decimal, TargetInterval As ClsInterval)
+        LM = ClsLanguageManager.LM
         MyX = X
         MyTargetRange = TargetInterval
     End Sub
@@ -83,8 +88,8 @@ Public Class ClsCheckUserData
             If MyTargetRange.IsNumberInInterval(X) Then
                 Return True
             Else
-                MessageBox.Show(FrmMain.LM.GetString("TheValue") & X.ToString(CultureInfo.CurrentCulture) &
-                            FrmMain.LM.GetString("ValueNotAllowed") & "[" &
+                MessageBox.Show(LM.GetString("TheValue") & X.ToString(CultureInfo.CurrentCulture) &
+                            LM.GetString("ValueNotAllowed") & "[" &
                             MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
                             ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) & "]!")
                 MyTxtX.Select()
@@ -101,8 +106,8 @@ Public Class ClsCheckUserData
         If MyTargetRange.IsNumberInInterval(MyX) Then
             Return True
         Else
-            MessageBox.Show(FrmMain.LM.GetString("TheValue") & MyX.ToString(CultureInfo.CurrentCulture) &
-                        FrmMain.LM.GetString("ValueNotAllowed") & "[" &
+            MessageBox.Show(LM.GetString("TheValue") & MyX.ToString(CultureInfo.CurrentCulture) &
+                        LM.GetString("ValueNotAllowed") & "[" &
                         MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
                         ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) & "]!")
             Return False
@@ -119,7 +124,7 @@ Public Class ClsCheckUserData
             If MyTargetRange.IsInterval2PartOfInterval(UserInterval) Then
                 Return True
             Else
-                MessageBox.Show(FrmMain.LM.GetString("ValueRangeNotAllowed") & " [" &
+                MessageBox.Show(LM.GetString("ValueRangeNotAllowed") & " [" &
                        MyTargetRange.A.ToString(CultureInfo.CurrentCulture) &
                        ", " & MyTargetRange.B.ToString(CultureInfo.CurrentCulture) &
                        "] ")

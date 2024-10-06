@@ -18,8 +18,9 @@ Public Class ClsGeneralParameter
     Private MyTypeOfParameter As TypeOfParameterEnum
 
     Public Enum TypeOfParameterEnum
-        Value
-        Formula
+        Variable
+        DS
+        Constant
     End Enum
 
     Public Sub New(ID As Integer, Name As String, Range As ClsInterval, TypeOfParameter As TypeOfParameterEnum)

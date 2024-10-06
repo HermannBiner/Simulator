@@ -4,7 +4,11 @@
 
 Public Class FrmInfo
 
+    Private LM As ClsLanguageManager
+
     Public Sub New()
+
+        LM = ClsLanguageManager.LM
 
         'This is necessary for the designer
         InitializeComponent()
@@ -16,10 +20,10 @@ Public Class FrmInfo
 
     Private Sub InitializeLanguage()
 
-        LblFeedback.Text = FrmMain.LM.GetString("Feedback")
-        LblMail.Text = FrmMain.LM.GetString("MailTo")
-        Text = FrmMain.LM.GetString("AboutSimulator")
-        LblPersonalData.Text = "Author: " & FrmMain.LM.GetString("DrMathETH")
+        LblFeedback.Text = LM.GetString("Feedback")
+        LblMail.Text = LM.GetString("MailTo")
+        Text = LM.GetString("AboutSimulator")
+        LblPersonalData.Text = "Author: " & LM.GetString("DrMathETH")
 
         Dim version As Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
         LblVersion.Text = "Version " & String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision)

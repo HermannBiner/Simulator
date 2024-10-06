@@ -7,6 +7,8 @@
 Public MustInherit Class ClsPendulumAbstract
     Implements IPendulum
 
+    Protected LM As ClsLanguageManager
+
     'The actual position of the Pendulum is drawn into this PictureBox
     'and shown by the Refresh-Method
     Protected MyPicDiagram As PictureBox
@@ -40,13 +42,7 @@ Public MustInherit Class ClsPendulumAbstract
 
     'Status Parameters 
     Protected MyProtocol As ListBox
-
-    'MyEnergy
-    Protected MyPicEnergy As PictureBox
-    Protected PicEnergyGraphics As Graphics
-    Protected StartEnergyRange As ClsInterval
-    Protected MyStartEnergy As Decimal
-    Protected Energy As Decimal
+    Protected MyIsProtocol As Boolean
 
     Protected MathInterval As ClsInterval
 
@@ -85,7 +81,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected v2 As Decimal
 
     'For Poincaré Sections
-    Protected SignumChanged As Boolean
+    Protected IsSignumChanged As Boolean
 
     'And their definition range
     Protected UInterval As ClsInterval
@@ -98,16 +94,14 @@ Public MustInherit Class ClsPendulumAbstract
     Protected ReadOnly k2 As ClsNTupel
     Protected ReadOnly h2 As ClsNTupel
 
-    'Number of Steps
-    Protected N As Integer
-    Protected MyLblN As Label
-
     'Global Constants
-    Protected Const EnergyTolerance As Decimal = CDec(0.1)
     Protected Const StepWidthUnit As Decimal = CDec(0.0001)
 
     'Gravitation acceleration
     Protected Const g As Decimal = CDec(9.81)
+
+    'StartEnergyRange
+    Protected MyStartEnergyRange As ClsInterval
 
     WriteOnly Property PicDiagram As PictureBox Implements IPendulum.PicDiagram
         Set(value As PictureBox)
@@ -173,6 +167,11 @@ Public MustInherit Class ClsPendulumAbstract
         End Get
     End Property
 
+    WriteOnly Property IsProtocol As Boolean Implements IPendulum.IsProtocol
+        Set(value As Boolean)
+            MyIsProtocol = value
+        End Set
+    End Property
     WriteOnly Property LblStepWidth As Label Implements IPendulum.LblStepWidth
         Set(value As Label)
             MyLblStepWidth = value
@@ -182,13 +181,6 @@ Public MustInherit Class ClsPendulumAbstract
     WriteOnly Property Protocol As ListBox Implements IPendulum.Protocol
         Set(value As ListBox)
             MyProtocol = value
-        End Set
-    End Property
-
-    WriteOnly Property PicEnergy As PictureBox Implements IPendulum.PicEnergy
-        Set(value As PictureBox)
-            MyPicEnergy = value
-            PicEnergyGraphics = MyPicEnergy.CreateGraphics
         End Set
     End Property
 
@@ -206,18 +198,15 @@ Public MustInherit Class ClsPendulumAbstract
         End Set
     End Property
 
-    Property IterationStatus As ClsDynamics.EnIterationStatus Implements IPendulum.IterationStatus
-        Get
-            IterationStatus = MyIterationStatus
-        End Get
-        Set(value As ClsDynamics.EnIterationStatus)
-            MyIterationStatus = value
-        End Set
-    End Property
-
     ReadOnly Property ValueParameterDefinition As List(Of ClsGeneralParameter) Implements IPendulum.ValueParameterDefinition
         Get
             ValueParameterDefinition = MyValueParameterDefinition
+        End Get
+    End Property
+
+    ReadOnly Property StartEnergyRange As ClsInterval Implements IPendulum.StartEnergyRange
+        Get
+            StartEnergyRange = MyStartEnergyRange
         End Get
     End Property
 
@@ -298,28 +287,13 @@ Public MustInherit Class ClsPendulumAbstract
         'StepWidth of Runge Kutta
         Set(value As Integer)
             d = value * StepWidthUnit
-            MyLblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & ": " & d.ToString
-        End Set
-    End Property
-
-    WriteOnly Property LblN As Label Implements IPendulum.LblN
-
-        'Label in the form that shows the Number of Iterationsteps
-        Set(value As Label)
-            MyLblN = value
-        End Set
-    End Property
-
-    Property StartEnergy As Decimal Implements IPendulum.StartEnergy
-        Get
-            StartEnergy = MyStartEnergy
-        End Get
-        Set(value As Decimal)
-            MyStartEnergy = value
+            MyLblStepWidth.Text = LM.GetString("StepWidth") & ": " & d.ToString
         End Set
     End Property
 
     Public Sub New()
+
+        LM = ClsLanguageManager.LM
 
         MathInterval = New ClsInterval(-1, 1)
         MathHelper = New ClsMathHelperPendulum
@@ -342,9 +316,6 @@ Public MustInherit Class ClsPendulumAbstract
 
     Public Sub ResetIteration() Implements IPendulum.ResetIteration
 
-        N = 0
-        MyLblN.Text = "0"
-        StartEnergy = 0
         MyProtocol.Items.Clear()
 
         BmpGraphics.Clear(Color.White)
@@ -374,87 +345,31 @@ Public MustInherit Class ClsPendulumAbstract
     Protected Sub ProtocolValues()
 
         'For debugging e.g.
-        MyProtocol.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
-            u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
+        If MyIsProtocol Then
+            MyProtocol.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
+        u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
                                      GetEnergy.ToString("N11"))
+        End If
     End Sub
 
-    Public Async Function IterationLoop(Testmode As Boolean) As Task Implements IPendulum.IterationLoop
+    Public MustOverride Function GetAddParameterValue(TbrValue As Integer) As Decimal _
+        Implements IPendulum.GetAddParameterValue
+    Public MustOverride Sub SetAndDrawStartparameter1(Mouseposition As Point) _
+        Implements IPendulum.SetAndDrawStartparameter1
+    Public MustOverride Sub SetAndDrawStartparameter2(Mouseposition As Point) _
+        Implements IPendulum.SetAndDrawStartparameter2
 
-        'This is the main Iteraion Loop
-        Dim ActualEnergy As Decimal
-        Dim MyBrush As Brush
-        Dim Value As Integer
-
-        Do
-            N += 1
-
-            'Testmode for Debugging possible
-            IterationStep(Testmode)
-
-            'Controlling the Energy Range
-            ActualEnergy = GetEnergy()
-
-            Select Case True
-                Case ActualEnergy > StartEnergy + EnergyTolerance * StartEnergyRange.IntervalWidth
-                    MyBrush = Brushes.Red
-                Case ActualEnergy < StartEnergy - EnergyTolerance * StartEnergyRange.IntervalWidth
-                    MyBrush = Brushes.DarkViolet
-                Case Else
-                    MyBrush = Brushes.Green
-            End Select
-
-            MyPicEnergy.Refresh()
-
-            'Set the StatusBar of the Energy
-            Value = CInt(Math.Min(MyPicEnergy.Width, (ActualEnergy - StartEnergyRange.A) * MyPicEnergy.Width / StartEnergyRange.IntervalWidth))
-            PicEnergyGraphics.FillRectangle(MyBrush, New Rectangle(0, 0, Value, MyPicEnergy.Height))
-
-            If N Mod 100 = 0 Then
-
-                MyLblN.Text = N.ToString
-
-                Await Task.Delay(2)
-            End If
-
-        Loop Until MyIterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
-            Or MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-    End Function
-
-    Public MustOverride Function GetAddParameterValue(TbrValue As Integer) As Decimal Implements IPendulum.GetAddParameterValue
-    'OK
-
-    Public MustOverride Sub SetAndDrawStartparameter1(Mouseposition As Point) Implements IPendulum.SetAndDrawStartparameter1
-    'OK
-
-    Public MustOverride Sub SetAndDrawStartparameter2(Mouseposition As Point) Implements IPendulum.SetAndDrawStartparameter2
-    'OK
-
-    Protected MustOverride Sub IterationStep(TestMode As Boolean)
+    Public MustOverride Sub IterationStep(IsTestMode As Boolean) Implements IPendulum.IterationStep
 
     Protected MustOverride Sub DrawPendulums()
-    'OK
-
     Protected MustOverride Sub SetPosition()
-    'OK
 
     Protected MustOverride Sub SetStartEnergyRange()
-    'OK
-
     Protected MustOverride Sub SetPhasePortraitParameters()
-    'OK
-
     Protected MustOverride Sub SetAdditionalParameters()
-    'OK
-
     Protected MustOverride Function GetEnergy() As Decimal Implements IPendulum.GetEnergy
-    'OK
 
     Protected MustOverride Sub SetDefaultUserData() Implements IPendulum.SetDefaultUserData
-    'OK
-
     Protected MustOverride Sub DrawCoordinateSystem()
-    'OK
 
 End Class

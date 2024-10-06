@@ -15,11 +15,14 @@ Public Class FrmJulia
     Private IsFormLoaded As Boolean
     Private FC As ClsJuliaIterationController
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
+        LM = ClsLanguageManager.LM
     End Sub
 
     Private Sub FrmJuliaSet_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -41,19 +44,19 @@ Public Class FrmJulia
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("JuliaMandelbrot")
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnStop.Text = FrmMain.LM.GetString("Stop")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        LblTime.Text = FrmMain.LM.GetString("Time")
-        LblNumberOfSteps.Text = FrmMain.LM.GetString("Steps")
-        LblProtocol.Text = FrmMain.LM.GetString("ProtocolJulia")
-        ChkProtocol.Text = FrmMain.LM.GetString("Protocol")
-        GrpColors.Text = FrmMain.LM.GetString("Colors")
-        OptSystem.Text = FrmMain.LM.GetString("System")
-        OptUser.Text = FrmMain.LM.GetString("UserDefined")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
-        LblJuliaSets.Text = FrmMain.LM.GetString("Samples")
+        Text = LM.GetString("JuliaMandelbrot")
+        BtnStart.Text = LM.GetString("Start")
+        BtnStop.Text = LM.GetString("Stop")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        LblTime.Text = LM.GetString("Time")
+        LblNumberOfSteps.Text = LM.GetString("Steps")
+        LblProtocol.Text = LM.GetString("ProtocolJulia")
+        ChkProtocol.Text = LM.GetString("Protocol")
+        GrpColors.Text = LM.GetString("Colors")
+        OptSystem.Text = LM.GetString("System")
+        OptUser.Text = LM.GetString("UserDefined")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
+        LblJuliaSets.Text = LM.GetString("Samples")
 
     End Sub
 
@@ -163,4 +166,5 @@ Public Class FrmJulia
             FC.SetSample()
         End If
     End Sub
+
 End Class

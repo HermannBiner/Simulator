@@ -8,7 +8,9 @@
 Public Class FrmNumericMethods
 
     Private IsFormLoaded As Boolean
-    Private FC As ClsNumericMethodsController
+    Private FC As ClsNumericMethodController
+
+    Private LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -16,13 +18,13 @@ Public Class FrmNumericMethods
 
         'This is necessary for the designer
         InitializeComponent()
-
+        LM = ClsLanguageManager.LM
     End Sub
 
     Private Sub FrmSpringPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         IsFormLoaded = False
-        FC = New ClsNumericMethodsController(Me)
+        FC = New ClsNumericMethodController(Me)
 
         'Initialize Language
         InitializeLanguage()
@@ -36,16 +38,16 @@ Public Class FrmNumericMethods
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("SpringPendulum")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnStop.Text = FrmMain.LM.GetString("Stop")
-        LblNumMethod.Text = FrmMain.LM.GetString("NumericMethods")
-        LblStepWidth.Text = FrmMain.LM.GetString("StepWidth") & " 0.02"
-        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
-        ChkStretched.Text = FrmMain.LM.GetString("StretchedMode")
-        LblDifference.Text = FrmMain.LM.GetString("Difference")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        Text = LM.GetString("SpringPendulum")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        BtnStart.Text = LM.GetString("Start")
+        BtnStop.Text = LM.GetString("Stop")
+        LblNumMethod.Text = LM.GetString("NumericMethods")
+        LblStepWidth.Text = LM.GetString("StepWidth") & " 0.02"
+        LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
+        ChkStretched.Text = LM.GetString("StretchedMode")
+        LblDifference.Text = LM.GetString("Difference")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
 
     End Sub
 

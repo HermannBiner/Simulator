@@ -25,6 +25,7 @@ Public Interface IBilliardball
     'Status Parameters
     WriteOnly Property PhasePortrait As PictureBox
     WriteOnly Property ValueProtocol As ListBox
+    WriteOnly Property IsProtocol As Boolean
 
     'The profile of the billiard table is defined by the parameter a,b
     WriteOnly Property A As Decimal
@@ -37,7 +38,7 @@ Public Interface IBilliardball
     'Parameter of the start
     Property Startparameter As Decimal 'defines the start point
     WriteOnly Property Startangle As Decimal 'defines the start angle in [0, 2pi[
-    Property IsStartpositionSet As Boolean
+    Property IsStartParameterSet As Boolean
     Property IsStartangleSet As Boolean
 
     'The following method receives a mouse position relative to the bitmap

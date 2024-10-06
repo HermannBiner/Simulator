@@ -11,7 +11,6 @@ Imports System.Net
 Public Class ClsShakedPendulum
     Inherits ClsPendulumAbstract
 
-
     Private ValueParameter(2) As ClsGeneralParameter
 
     'Spring constant of the shaking pendulum
@@ -35,8 +34,8 @@ Public Class ClsShakedPendulum
         Y0 = 0
 
         'Labels
-        MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": -- "
-        MyLabelProtocol = FrmMain.LM.GetString("Protocol") & ": u1, v1, u2, v2, Etot"
+        MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": -- "
+        MyLabelProtocol = LM.GetString("Protocol") & ": u1, v1, u2, v2, Etot"
 
         MyValueParameterDefinition = New List(Of ClsGeneralParameter)
 
@@ -45,25 +44,25 @@ Public Class ClsShakedPendulum
 
         'L
         ValueParameter(0) = New ClsGeneralParameter(1, "l", New ClsInterval(CDec(0.05), CDec(0.98)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(0.5))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.5))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'x
         ValueParameter(1) = New ClsGeneralParameter(2, "x", New ClsInterval(-MaxX, MaxX),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, MaxX / 2)
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, MaxX / 2)
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi
         ValueParameter(2) = New ClsGeneralParameter(3, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Value, CDec(Math.PI / 4))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 60  'that means MyM in the middle
         MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
-                                                      FrmMain.LM.GetString("SpringConstant"), New ClsInterval(20, 100),
-                                                      ClsGeneralParameter.TypeOfParameterEnum.Formula)
+                                                      LM.GetString("SpringConstant"), New ClsInterval(20, 100),
+                                                      ClsGeneralParameter.TypeOfParameterEnum.DS)
         MyD = MyAdditionalParameterValue
 
         'Vectors
@@ -130,15 +129,15 @@ Public Class ClsShakedPendulum
     Protected Overrides Sub SetPhasePortraitParameters()
         Select Case TypeofPhasePortrait
             Case TypeofPhaseportraitEnum.TorusOrCylinder
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": x, Phi. Tangent: x', Phi'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": x, Phi. Tangent: x', Phi'"
                 UInterval = New ClsInterval(-1, 1)
                 VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": x = 0, Phi, Phi'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": x = 0, Phi, Phi'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
             Case Else 'independent
-                MyLabelPhasePortrait = FrmMain.LM.GetString("PhasePortrait") & ": Red: x, x'. Green: Phi, Phi'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Red: x, x'. Green: Phi, Phi'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
         End Select
@@ -160,7 +159,7 @@ Public Class ClsShakedPendulum
             Emin = -m * g * .Component(0)
             Emax = MyD / 2 + m * g * .Component(0)
         End With
-        StartEnergyRange = New ClsInterval(Emin, Emax)
+        MyStartEnergyRange = New ClsInterval(Emin, Emax)
 
     End Sub
 
@@ -256,7 +255,7 @@ Public Class ClsShakedPendulum
 
     'SECTOR ITERATION
 
-    Protected Overrides Sub IterationStep(TestMode As Boolean)
+    Public Overrides Sub IterationStep(IsTestMode As Boolean)
 
         'Performs one iteration step
         'and does all drawings
@@ -296,7 +295,7 @@ Public Class ClsShakedPendulum
         'k,h.component(i): step i-1 in Runge Kutta
         k1.Component(0) = F1(x)
         k2.Component(0) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(0) = G1Test(x)
             h2.Component(0) = G2Test(x)
         Else
@@ -316,7 +315,7 @@ Public Class ClsShakedPendulum
         'Second Runge Kutta Step
         k1.Component(1) = F1(x)
         k2.Component(1) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(1) = G1Test(x)
             h2.Component(1) = G2Test(x)
         Else
@@ -335,7 +334,7 @@ Public Class ClsShakedPendulum
         'Third Runge Kutta Step
         k1.Component(2) = F1(x)
         k2.Component(2) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(2) = G1Test(x)
             h2.Component(2) = G2Test(x)
         Else
@@ -354,7 +353,7 @@ Public Class ClsShakedPendulum
         'Fourth Runge Kutta Step
         k1.Component(3) = F1(x)
         k2.Component(3) = F2(x)
-        If TestMode Then
+        If IsTestMode Then
             h1.Component(3) = G1Test(x)
             h2.Component(3) = G2Test(x)
         Else
@@ -374,9 +373,9 @@ Public Class ClsShakedPendulum
         'New Values to MyVariables
         With MyCalculationVariables
             If .Component(0) * u1 <= 0 Then
-                SignumChanged = True
+                IsSignumChanged = True
             Else
-                SignumChanged = False
+                IsSignumChanged = False
             End If
             .Component(0) = u1
             .Component(1) = u2
@@ -411,7 +410,7 @@ Public Class ClsShakedPendulum
                 PicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
                 BmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
             Case TypeofPhaseportraitEnum.PoincareSection
-                If SignumChanged Then
+                If IsSignumChanged Then
                     PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 2)
                 End If
             Case Else

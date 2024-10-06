@@ -4,16 +4,19 @@
 
 Public Class ClsInterval
 
+    Private LM As ClsLanguageManager
+
     'left and right interval border
     Private ReadOnly MyA As Decimal
     Private ReadOnly MyB As Decimal
 
     Public Sub New(a As Decimal, b As Decimal)
+        LM = ClsLanguageManager.LM
 
         'The interval borders A and B are committed
 
         If a >= b Then
-            Throw New ArgumentException(FrmMain.LM.GetString("LeftSmallerRight"))
+            Throw New ArgumentException(LM.GetString("LeftSmallerRight"))
         Else
             MyA = a
             MyB = b
@@ -62,7 +65,7 @@ Public Class ClsInterval
             Dim DecNumber As Double = DirectCast(Number, Double)
             Return DecNumber >= MyA And DecNumber <= MyB
         Else
-            MessageBox.Show(FrmMain.LM.GetString("OnlyDecAndIntAndDbl"))
+            MessageBox.Show(LM.GetString("OnlyDecAndIntAndDbl"))
             Return False
         End If
 

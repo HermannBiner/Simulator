@@ -22,8 +22,6 @@ Public Class ClsUnitRoot
         'The composition for the base color depending of an index
         'Parts in % of RGB
 
-
-
         'RedPart
         Select Case Index
             Case 1, 4, 6, 9, 10, 11, 12

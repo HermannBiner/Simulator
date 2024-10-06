@@ -41,20 +41,12 @@ Public Interface IJulia
     'That means, it is a landscape of Julia Parameters
     ReadOnly Property IsMandelbrot As Boolean
 
-    'Iteration Control
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-
-    WriteOnly Property TxtNumberOfSteps As TextBox
-
-    WriteOnly Property TxtElapsedTime As TextBox
-
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()
 
-    'Iteration
-    Function GenerateImage() As Task
-
     'Reset
     Sub ResetIteration()
+
+    Sub IterationStep(PixelPoint As Point)
 
 End Interface

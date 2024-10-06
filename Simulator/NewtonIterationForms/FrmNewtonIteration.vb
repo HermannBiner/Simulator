@@ -17,12 +17,15 @@ Public Class FrmNewtonIteration
     Private IsFormLoaded As Boolean
     Private FC As ClsNewtonIterationController
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
 
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
+        LM = ClsLanguageManager.LM
 
     End Sub
 
@@ -42,23 +45,23 @@ Public Class FrmNewtonIteration
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("NewtonIteration")
-        LblProtocol.Text = FrmMain.LM.GetString("ProtocolNewton")
-        ChkProtocol.Text = FrmMain.LM.GetString("Protocol")
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnStop.Text = FrmMain.LM.GetString("Stop")
-        BtnShowBasin.Text = FrmMain.LM.GetString("ShowBasin")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        LblTime.Text = FrmMain.LM.GetString("Time")
-        LblSteps.Text = FrmMain.LM.GetString("Steps")
-        GrpMixing.Text = FrmMain.LM.GetString("Mixing")
-        OptNone.Text = FrmMain.LM.GetString("None")
-        OptConjugate.Text = FrmMain.LM.GetString("Conjugate")
-        OptRotate.Text = FrmMain.LM.GetString("Rotate")
-        GrpColor.Text = FrmMain.LM.GetString("Color")
-        OptBright.Text = FrmMain.LM.GetString("Bright")
-        OptShaded.Text = FrmMain.LM.GetString("Shaded")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        Text = LM.GetString("NewtonIteration")
+        LblProtocol.Text = LM.GetString("ProtocolNewton")
+        ChkProtocol.Text = LM.GetString("Protocol")
+        BtnStart.Text = LM.GetString("Start")
+        BtnStop.Text = LM.GetString("Stop")
+        BtnShowBasin.Text = LM.GetString("ShowBasin")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        LblTime.Text = LM.GetString("Time")
+        LblSteps.Text = LM.GetString("Steps")
+        GrpMixing.Text = LM.GetString("Mixing")
+        OptNone.Text = LM.GetString("None")
+        OptConjugate.Text = LM.GetString("Conjugate")
+        OptRotate.Text = LM.GetString("Rotate")
+        GrpColor.Text = LM.GetString("Color")
+        OptBright.Text = LM.GetString("Bright")
+        OptShaded.Text = LM.GetString("Shaded")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
 
     End Sub
 

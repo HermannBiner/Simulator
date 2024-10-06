@@ -9,6 +9,8 @@ Public Class ClsCDiagramController
 
     Private MyForm As FrmCDiagramBilliard
 
+    Private LM As ClsLanguageManager
+
     'The dynamic System
     Private DS As IBilliardTable
     Private ActualBilliardBall As IBilliardball
@@ -40,6 +42,7 @@ Public Class ClsCDiagramController
 
     Public Sub New(Form As FrmCDiagramBilliard)
         MyForm = Form
+        LM = ClsLanguageManager.LM
         DiagramAreaSelector = New ClsDiagramAreaSelector
     End Sub
 
@@ -61,7 +64,7 @@ Public Class ClsCDiagramController
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                BilliardName = FrmMain.LM.GetString(type.Name, True)
+                BilliardName = LM.GetString(type.Name, True)
                 MyForm.CboFunction.Items.Add(BilliardName)
             Next
         Else
@@ -89,7 +92,7 @@ Public Class ClsCDiagramController
 
             If types.Count > 0 Then
                 For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                    If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IBilliardTable)
                     End If
                 Next
@@ -110,7 +113,7 @@ Public Class ClsCDiagramController
 
         MyForm.CboValueParameter.Items.Clear()
         For Each VP As ClsGeneralParameter In DS.ValueParameterList
-            MyForm.CboValueParameter.Items.Add(FrmMain.LM.GetString(VP.Name))
+            MyForm.CboValueParameter.Items.Add(LM.GetString(VP.Name))
         Next
         MyForm.CboValueParameter.SelectedIndex = MyForm.CboValueParameter.Items.Count - 1
         SelectedValueParameter = DS.ValueParameterList(MyForm.CboValueParameter.SelectedIndex)
@@ -122,7 +125,7 @@ Public Class ClsCDiagramController
         FillValueParameters()
 
         ActualBilliardBall = DS.GetBilliardBall
-        ActualParameterRange = DS.FormulaParameter.Range
+        ActualParameterRange = DS.DSParameter.Range
         ActualValueRange = SelectedValueParameter.Range
 
         With DiagramAreaSelector
@@ -143,7 +146,7 @@ Public Class ClsCDiagramController
 
     Public Sub SetDefaultUserData()
 
-        ActualParameterRange = DS.FormulaParameter.Range
+        ActualParameterRange = DS.DSParameter.Range
         ActualValueRange = SelectedValueParameter.Range
         With MyForm
             .TxtCMin.Text = ActualParameterRange.A.ToString(CultureInfo.CurrentCulture)
@@ -154,7 +157,7 @@ Public Class ClsCDiagramController
         SetDelta()
 
         MyForm.TrbPositionStartValues.Value = 60
-        MyForm.LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
+        MyForm.LblStartValues.Text = LM.GetString("PositionStartValue2") &
             MyForm.TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
     End Sub
 
@@ -168,6 +171,7 @@ Public Class ClsCDiagramController
 
         'If the type of iteration changes, everything has to be reset
         ResetIteration()
+        SetDefaultUserData()
     End Sub
 
     Public Sub SetDelta()
@@ -216,19 +220,21 @@ Public Class ClsCDiagramController
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
-            Await DoIteration()
+            MyForm.Cursor = Cursors.WaitCursor
+            Await PerformIteration()
         End If
 
         With MyForm
             .BtnStartIteration.Enabled = True
             .BtnReset.Enabled = True
             .BtnDefault.Enabled = True
+            .Cursor = Cursors.Arrow
             IterationStatus = ClsDynamics.EnIterationStatus.Stopped
             DiagramAreaSelector.IsActivated = True
         End With
     End Sub
 
-    Private Async Function DoIteration() As Task
+    Private Async Function PerformIteration() As Task
 
         'In the direction of the x-axis, we work with pixel coordinates
         Dim p As Integer
@@ -306,9 +312,7 @@ Public Class ClsCDiagramController
     Private Sub DrawSplitPoints()
 
         'Draw the C = 1 Line
-        Dim A As New ClsMathpoint(1, 0)
-        Dim B As New ClsMathpoint(1, MyForm.PicDiagram.Height)
-        BmpGraphics.DrawLine(A, B, Color.Red, 1)
+        BmpGraphics.DrawVerticalLine(1, Color.Red, 1)
         MyForm.PicDiagram.Refresh()
 
     End Sub
@@ -318,7 +322,7 @@ Public Class ClsCDiagramController
     Private Function IsUserDataOK() As Boolean
 
         With MyForm
-            Dim CheckParameterRange As New ClsCheckUserData(.TxtCMin, .TxtCMax, DS.FormulaParameter.Range)
+            Dim CheckParameterRange As New ClsCheckUserData(.TxtCMin, .TxtCMax, DS.DSParameter.Range)
             Dim CheckValueRange As New ClsCheckUserData(.TxtVMin, .TxtVMax, SelectedValueParameter.Range)
 
             Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed

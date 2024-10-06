@@ -14,9 +14,11 @@ Public Class FrmCDiagramBilliard
     Private IsFormLoaded As Boolean
     Private FC As ClsCDiagramController
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
     Public Sub New()
-
+        LM = ClsLanguageManager.LM
         'This is necessary for the designer
         InitializeComponent()
     End Sub
@@ -38,16 +40,16 @@ Public Class FrmCDiagramBilliard
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("C-Diagram")
-        LblDeltaV.Text = FrmMain.LM.GetString("Delta") & " = "
-        LblDeltaC.Text = FrmMain.LM.GetString("Delta") & " = "
-        LblValueParameter.Text = FrmMain.LM.GetString("ExaminatedValueParameter")
-        LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
+        Text = LM.GetString("C-Diagram")
+        LblDeltaV.Text = LM.GetString("Delta") & " = "
+        LblDeltaC.Text = LM.GetString("Delta") & " = "
+        LblValueParameter.Text = LM.GetString("ExaminatedValueParameter")
+        LblStartValues.Text = LM.GetString("PositionStartValue2") &
             TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
-        LblParameterRange.Text = FrmMain.LM.GetString("ExaminatedParameterRange")
-        BtnStartIteration.Text = FrmMain.LM.GetString("StartIteration")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
+        LblParameterRange.Text = LM.GetString("ExaminatedParameterRange")
+        BtnStartIteration.Text = LM.GetString("StartIteration")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
 
     End Sub
 
@@ -73,7 +75,7 @@ Public Class FrmCDiagramBilliard
         If IsFormLoaded Then
             'The position of the start values is a number "pos" between 1 and 11
             'each startvalue is then set = ValueRange.A + pos * ValueRange.IntervalWidth / 120
-            LblStartValues.Text = FrmMain.LM.GetString("PositionStartValue2") &
+            LblStartValues.Text = LM.GetString("PositionStartValue2") &
             TrbPositionStartValues.Value.ToString(CultureInfo.CurrentCulture) & "/120"
         End If
     End Sub

@@ -24,6 +24,7 @@ Public MustInherit Class ClsBilliardBallAbstract
 
     'and protocols its Position (Parameter t and reflexion-angle Alfa) into a ListBox
     Protected MyValueProtocol As ListBox
+    Protected MyIsProtocol As Boolean
 
     'form of the BilliardTable
     Protected MyA As Decimal
@@ -58,8 +59,8 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected UserEndposition As ClsMathpoint
 
     'Control ot Setting these Start Parameters
-    Protected MyStartPositionSet As Boolean
-    Protected MyStartAngleSet As Boolean
+    Protected MyIsStartParameterSet As Boolean
+    Protected MyIsStartAngleSet As Boolean
 
     WriteOnly Property PicDiagram As PictureBox Implements IBilliardball.PicDiagram
         Set(value As PictureBox)
@@ -133,6 +134,11 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
+    WriteOnly Property IsProtocol As Boolean Implements IBilliardball.IsProtocol
+        Set(value As Boolean)
+            MyIsProtocol = value
+        End Set
+    End Property
     WriteOnly Property Ballcolor As Brush Implements IBilliardball.BallColor
         Set(value As Brush)
             MyColor = value
@@ -145,21 +151,21 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
-    Property IsStartpositionSet As Boolean Implements IBilliardball.IsStartpositionSet
+    Property IsStartParameterSet As Boolean Implements IBilliardball.IsStartParameterSet
         Get
-            IsStartpositionSet = MyStartPositionSet
+            IsStartParameterSet = MyIsStartParameterSet
         End Get
         Set(value As Boolean)
-            MyStartPositionSet = value
+            MyIsStartParameterSet = value
         End Set
     End Property
 
     Property IsStartangleSet As Boolean Implements IBilliardball.IsStartangleSet
         Get
-            IsStartangleSet = MyStartAngleSet
+            IsStartangleSet = MyIsStartAngleSet
         End Get
         Set(value As Boolean)
-            MyStartAngleSet = value
+            MyIsStartAngleSet = value
         End Set
     End Property
 
@@ -173,13 +179,18 @@ Public MustInherit Class ClsBilliardBallAbstract
 
     Public MustOverride Sub IterationStep() Implements IBilliardball.IterationStep
 
-    Public MustOverride Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal Implements IBilliardball.SetAndDrawUserStartposition
+    Public MustOverride Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+        Implements IBilliardball.SetAndDrawUserStartposition
 
-    Public MustOverride Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal Implements IBilliardball.SetAndDrawUserEndposition
+    Public MustOverride Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+        Implements IBilliardball.SetAndDrawUserEndposition
 
-    Public MustOverride Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair Implements IBilliardball.GetNextValuePair
+    Public MustOverride Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair _
+        Implements IBilliardball.GetNextValuePair
 
-    Public MustOverride Sub DrawFirstUserStartposition() Implements IBilliardball.DrawFirstUserStartposition
+    Public MustOverride Sub DrawFirstUserStartposition() _
+        Implements IBilliardball.DrawFirstUserStartposition
 
-    Public MustOverride Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal Implements IBilliardball.CalculateAlfa
+    Public MustOverride Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal _
+        Implements IBilliardball.CalculateAlfa
 End Class

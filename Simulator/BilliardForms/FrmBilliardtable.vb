@@ -13,10 +13,12 @@ Public Class FrmBilliardtable
     Private IsFormLoaded As Boolean
     Private FC As ClsBilliardTableController
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
 
     Public Sub New()
-
+        LM = ClsLanguageManager.LM
         'This is necessary for the designer
         InitializeComponent()
 
@@ -24,33 +26,33 @@ Public Class FrmBilliardtable
 
     Private Sub InitializeLanguage()
 
-        Text = FrmMain.LM.GetString("Billiard")
-        BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
-        LblNumberOfSteps.Text = FrmMain.LM.GetString("NumberOfSteps")
-        LblBilliardTable.Text = FrmMain.LM.GetString("BilliardTable")
-        LblAlfa.Text = FrmMain.LM.GetString("Alfa")
-        BtnTakeOverStartParameter.Text = FrmMain.LM.GetString("TakeOver")
-        GrpStartParameter.Text = FrmMain.LM.GetString("StartParameter")
-        LblPhasePortrait.Text = FrmMain.LM.GetString("PhasePortrait") & ": t, alfa"
-        LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
-        LblBallColor.Text = FrmMain.LM.GetString("BallColor")
-        BtnNewBall.Text = FrmMain.LM.GetString("NewBall")
-        BtnStart.Text = FrmMain.LM.GetString("Start")
-        BtnReset.Text = FrmMain.LM.GetString("ResetIteration")
-        BtnNextStep.Text = FrmMain.LM.GetString("NextStep")
-        LblParameterc.Text = FrmMain.LM.GetString("ParameterC")
-        BtnDefault.Text = FrmMain.LM.GetString("DefaultUserData")
-        LblProtocol.Text = FrmMain.LM.GetString("Protocol")
+        Text = LM.GetString("Billiard")
+        BtnPhasePortrait.Text = LM.GetString("FillPhasePortrait")
+        LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
+        LblBilliardTable.Text = LM.GetString("BilliardTable")
+        LblAlfa.Text = LM.GetString("Alfa")
+        BtnTakeOverStartParameter.Text = LM.GetString("TakeOver")
+        GrpStartParameter.Text = LM.GetString("StartParameter")
+        LblPhasePortrait.Text = LM.GetString("PhasePortrait") & ": t, alfa"
+        LblSpeed.Text = LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+        LblBallColor.Text = LM.GetString("BallColor")
+        BtnNewBall.Text = LM.GetString("NewBall")
+        BtnStart.Text = LM.GetString("Start")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        BtnNextStep.Text = LM.GetString("NextStep")
+        LblParameterc.Text = LM.GetString("ParameterC")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
+        LblProtocol.Text = LM.GetString("Protocol")
 
         CboBallColor.Items.Clear()
 
         'the following order of adding the iteration type is relevant!
         'there is at the moment no better concept implemented to identify the type of Billiard
-        CboBallColor.Items.Add(FrmMain.LM.GetString("Red"))
-        CboBallColor.Items.Add(FrmMain.LM.GetString("Green"))
-        CboBallColor.Items.Add(FrmMain.LM.GetString("Blue"))
-        CboBallColor.Items.Add(FrmMain.LM.GetString("Black"))
-        CboBallColor.Items.Add(FrmMain.LM.GetString("Magenta"))
+        CboBallColor.Items.Add(LM.GetString("Red"))
+        CboBallColor.Items.Add(LM.GetString("Green"))
+        CboBallColor.Items.Add(LM.GetString("Blue"))
+        CboBallColor.Items.Add(LM.GetString("Black"))
+        CboBallColor.Items.Add(LM.GetString("Magenta"))
 
     End Sub
 
@@ -89,7 +91,7 @@ Public Class FrmBilliardtable
 
     Private Sub TrbSpeed_ValueChanged(sender As Object, e As EventArgs) Handles TrbSpeed.ValueChanged
         If IsFormLoaded Then
-            LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
+            LblSpeed.Text = LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
             FC.SetSpeed()
         End If
     End Sub

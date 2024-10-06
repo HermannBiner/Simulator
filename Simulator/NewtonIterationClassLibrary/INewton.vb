@@ -58,12 +58,6 @@ Public Interface INewton
     'IsShowBasin
     ReadOnly Property IsShowBasin As Boolean
 
-    'Iteration Control
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-
-    WriteOnly Property TxtNumberOfSteps As TextBox
-    WriteOnly Property TxtElapsedTime As TextBox
-
     'Draws the coordinatesystem
     Sub DrawCoordinateSystem()
 
@@ -74,7 +68,7 @@ Public Interface INewton
     'Prepare the Root-Colors
     Sub PrepareUnitRoots()
 
-    Function GenerateImage() As Task
+    Sub IterationStep(PixelPoint As Point)
 
     'Reset
     Sub ResetIteration()

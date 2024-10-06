@@ -15,6 +15,8 @@ Imports System.Globalization
 Public Class ClsOvalBilliardball
     Inherits ClsBilliardBallAbstract
 
+    Private LM As ClsLanguageManager
+
     'SECTOR INITIALIZATION
 
     Overrides Property Startparameter As Decimal
@@ -36,7 +38,7 @@ Public Class ClsOvalBilliardball
             UserStartposition.X = TempMathpoint.X
             UserStartposition.Y = TempMathpoint.Y
             DrawUserStartposition(True)
-            MyStartPositionSet = True
+            MyIsStartParameterSet = True
 
         End Set
     End Property
@@ -73,7 +75,7 @@ Public Class ClsOvalBilliardball
             UserEndposition.Y = Userposition.Y
             DrawUserEndPosition(True)
 
-            MyStartAngleSet = True
+            MyIsStartAngleSet = True
 
         End Set
     End Property
@@ -218,15 +220,15 @@ Public Class ClsOvalBilliardball
         Endpoint.Y = TempBallpoint.Y
 
         'The Ball moves between these Points
-        MoveOnOrbitPart(Startpoint, Endpoint)
+        MoveOnSegment(Startpoint, Endpoint)
 
         'The EndPoint is then the StartPoint of the following part of the Orbit
         T = NextT
         Startpoint.X = Endpoint.X
-            Startpoint.Y = Endpoint.Y
+        Startpoint.Y = Endpoint.Y
 
-            'in addition, we calculate the angle of the following movement
-            Phi = CalculateNextPhi(T, Phi)
+        'in addition, we calculate the angle of the following movement
+        Phi = CalculateNextPhi(T, Phi)
 
 
     End Sub
@@ -259,7 +261,7 @@ Public Class ClsOvalBilliardball
 
     'SECTOR BALL MOVEMENT
 
-    Private Sub MoveOnOrbitPart(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
+    Private Sub MoveOnSegment(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
 
         Dim Actualposition As New ClsMathpoint With {
             .X = Startposition.X,
@@ -303,20 +305,20 @@ Public Class ClsOvalBilliardball
 
     Private Function IsBallInOval(Ballposition As ClsMathpoint) As Boolean
 
-        Dim OK As Boolean
+        Dim IsOK As Boolean
         Dim m As Decimal = (MyA - MyB) / 2
 
         If Ballposition.X >= m Then
 
             'Check the Circle
-            OK = Math.Pow(Ballposition.X - m, 2) + Math.Pow(Ballposition.Y, 2) <= MyB * MyB
+            IsOK = Math.Pow(Ballposition.X - m, 2) + Math.Pow(Ballposition.Y, 2) <= MyB * MyB
         Else
 
             'Check the Ellipse
-            OK = Math.Pow((Ballposition.X - m) / MyA, 2) + Math.Pow(Ballposition.Y / MyB, 2) <= 1
+            IsOK = Math.Pow((Ballposition.X - m) / MyA, 2) + Math.Pow(Ballposition.Y / MyB, 2) <= 1
         End If
 
-        Return OK
+        Return IsOK
 
     End Function
 
@@ -436,7 +438,7 @@ Public Class ClsOvalBilliardball
         End If
 
         If Not IsIntersectionFound Then
-            Throw New ArgumentException(FrmMain.LM.GetString("NoIntersectionPoint") & ", t: " & t.ToString & ", phi: " & Phi.ToString)
+            Throw New ArgumentException(LM.GetString("NoIntersectionPoint") & ", t: " & t.ToString & ", phi: " & Phi.ToString)
 
             Return 0
 
@@ -483,16 +485,18 @@ Public Class ClsOvalBilliardball
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
+
+        Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
         If PhaseportraitGraphics IsNot Nothing Then
-            Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
             PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
-            If MyValueProtocol IsNot Nothing Then
-                MyValueProtocol.Items.Add(FrmMain.LM.GetString(
+            If MyIsProtocol And MyValueProtocol IsNot Nothing Then
+                MyValueProtocol.Items.Add(LM.GetString(
                                           DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
                                              MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
                 MyValueProtocol.Refresh()
             End If
         End If
+
 
         Return NextPhi
 

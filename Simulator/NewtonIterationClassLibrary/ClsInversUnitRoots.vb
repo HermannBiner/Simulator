@@ -47,12 +47,12 @@ Public Class ClsInversUnitRoots
         'Abs(1-z^n) small
         'if this condition is fullfilled then the startpoint converges to a root
 
-        Dim Stopped As Boolean
+        Dim IsConvergent As Boolean
         Dim W = Z.Power(MyN)
 
         'Is z near a unit root?
-        Stopped = (W.Add(New ClsComplexNumber(-1, 0)).AbsoluteValue < MyRadius)
-        Return Stopped
+        IsConvergent = (W.Add(New ClsComplexNumber(-1, 0)).AbsoluteValue < MyRadius)
+        Return IsConvergent
 
     End Function
 

@@ -5,6 +5,8 @@
 
 Public Class FrmTests
 
+    Private LM As ClsLanguageManager
+
     Const StepWide As Double = 0.001
 
     Private MyGraphics As ClsGraphicTool
@@ -12,6 +14,7 @@ Public Class FrmTests
     Private YInterval As ClsInterval
 
     Public Sub New()
+        LM = ClsLanguageManager.LM
 
         'This is necessary for the designer
         InitializeComponent()
@@ -20,8 +23,8 @@ Public Class FrmTests
 
     Private Sub InitializeLanguage()
 
-        BtnTest.Text = FrmMain.LM.GetString("Test")
-        Text = FrmMain.LM.GetString("Test")
+        BtnTest.Text = LM.GetString("Test")
+        Text = LM.GetString("Test")
 
     End Sub
 

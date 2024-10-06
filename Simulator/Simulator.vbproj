@@ -19,6 +19,14 @@
     <Copyright>Hermann Biner</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="Resources\Gear.ico" />
   </ItemGroup>
@@ -38,10 +46,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Documentation\Benutzerhandbuch.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Documentation\Dynamic Systems.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Documentation\Dynamische Systeme.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Technical Documentation.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Technische Dokumentation.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\User Manual.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Gear.ico">

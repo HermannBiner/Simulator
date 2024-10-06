@@ -6,17 +6,15 @@ Imports System.IO
 
 Public Class FrmMain
 
-    Public Shared LM As ClsLanguageManager
+    Private LM As ClsLanguageManager
 
     Public Sub New()
 
         'This is necessary for the designer
         InitializeComponent()
 
-        'Initialize Language - Standard Language is English
-        LM = New ClsLanguageManager With {
-            .Language = ClsLanguageManager.LanguageEnum.English
-        }
+        'Initialize Language - Standard Language Is English
+        LM = ClsLanguageManager.LM
 
         InitializeLanguage()
 
@@ -50,7 +48,7 @@ Public Class FrmMain
         MnuEnglish.Text = LM.GetString("MnuEnglish")
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
-        MnuNumericMethods.Text = FrmMain.LM.GetString("NumericMethods")
+        MnuNumericMethods.Text = LM.GetString("NumericMethods")
 
     End Sub
 
@@ -150,6 +148,6 @@ Public Class FrmMain
     End Sub
 
     Private Sub MnuTechnical_Click(sender As Object, e As EventArgs) Handles MnuTechnical.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
+        OpenDocument("Documentation\" & LM.GetString("TechDoc"))
     End Sub
 End Class

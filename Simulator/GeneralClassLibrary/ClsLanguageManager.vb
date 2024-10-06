@@ -14,6 +14,24 @@ Public Class ClsLanguageManager
 
     Private MyLanguage As LanguageEnum
     Private RM As ResourceManager
+    Private Shared MyLM As ClsLanguageManager
+
+    'The private constructor prohibits the direct instantiation
+    Private Sub New()
+        'Standard
+        MyLanguage = LanguageEnum.Deutsch
+        RM = New ResourceManager("Simulator.LabelsDE", GetType(LabelsEN).Assembly)
+    End Sub
+
+    ' Stellt die einzige Instanz bereit.
+    Public Shared ReadOnly Property LM As ClsLanguageManager
+        Get
+            If MyLM Is Nothing Then
+                MyLM = New ClsLanguageManager()
+            End If
+            Return MyLM
+        End Get
+    End Property
 
     Property Language As LanguageEnum
 
@@ -67,7 +85,7 @@ Public Class ClsLanguageManager
                 If ClsPosition = 0 And Text.Length > 3 Then
                     Text = Text.Substring(3)
                 Else
-                    Throw New FormatException(FrmMain.LM.GetString("ClassNamingViolation"))
+                    Throw New FormatException(LM.GetString("ClassNamingViolation"))
                 End If
 
             Else

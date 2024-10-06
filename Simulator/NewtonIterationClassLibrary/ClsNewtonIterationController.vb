@@ -4,6 +4,7 @@
 
 Imports System.Globalization
 Imports System.Reflection
+Imports Microsoft.VisualBasic.Devices
 
 Public Class ClsNewtonIterationController
 
@@ -11,10 +12,37 @@ Public Class ClsNewtonIterationController
 
     Private MyForm As FrmNewtonIteration
     Private DiagramAreaSelector As ClsDiagramAreaSelector
+    Private LM As ClsLanguageManager
+
+    Private IterationStatus As ClsDynamics.EnIterationStatus
+
+    'Line of examinated points in the complex plane
+    Private ExaminatedCorner As Integer
+
+    'Coordinates of the pixel with the startvalue
+    Private p As Integer
+    Private q As Integer
+    Private PixelPoint As Point
+
+    'Length of a branche of the spiral
+    'see Sub IterationLoop
+    Private L As Integer = 0
+
+    'Sig = 1 if n odd, = -1 else
+    Private Sig As Integer
+
+    'Parameter k = 1...L
+    Private k As Integer
+
+    'Number of iteration steps per pixelpoint
+    Private Steps As Integer
+    Private Watch As Stopwatch
 
     Public Sub New(Form As FrmNewtonIteration)
         MyForm = Form
+        LM = ClsLanguageManager.LM
         DiagramAreaSelector = New ClsDiagramAreaSelector
+        Watch = New Stopwatch
     End Sub
 
     Public Sub FillDynamicSystem()
@@ -35,7 +63,7 @@ Public Class ClsNewtonIterationController
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                PolynomName = FrmMain.LM.GetString(type.Name, True)
+                PolynomName = LM.GetString(type.Name, True)
                 MyForm.CboFunction.Items.Add(PolynomName)
             Next
 
@@ -60,7 +88,7 @@ Public Class ClsNewtonIterationController
 
             If types.Count > 0 Then
                 For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                    If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), INewton)
                     End If
                 Next
@@ -89,8 +117,6 @@ Public Class ClsNewtonIterationController
 
             DS.PicDiagram = .PicDiagram
             DS.ProcotolList = .LstProtocol
-            DS.TxtElapsedTime = .TxtTime
-            DS.TxtNumberOfSteps = .TxtSteps
 
             MyForm.CboN.SelectedIndex = 1
 
@@ -176,30 +202,40 @@ Public Class ClsNewtonIterationController
     Public Sub ResetIteration()
 
         With MyForm
-            .BtnStart.Text = FrmMain.LM.GetString("Start")
+            .BtnStart.Text = LM.GetString("Start")
             .BtnStart.Enabled = True
             .BtnReset.Enabled = True
         End With
+
+        MyForm.TxtSteps.Text = "0"
+        Steps = 0
+        MyForm.TxtTime.Text = "0"
+        L = 0
+        Watch.Reset()
+        ExaminatedCorner = 0
+
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
         DS.ResetIteration()
     End Sub
 
     Public Async Sub StartIteration()
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             'the iteration was stopped or reset
             'and should start from the beginning
             If IsUserDataOK() Then
                 ResetIteration()
-                MyForm.BtnStart.Text = FrmMain.LM.GetString("Continue")
+                MyForm.BtnStart.Text = LM.GetString("Continue")
                 DiagramAreaSelector.IsActivated = False
                 With DS
                     SetExponent()
-                    .IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
                     .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
                     .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
                     DiagramAreaSelector.UserXRange = .ActualXRange
                     DiagramAreaSelector.UserYRange = .ActualYRange
+                    .IsProtocol = MyForm.ChkProtocol.Checked
 
                     If MyForm.OptConjugate.Checked Then
                         .UseMixing = INewton.EnMixing.Conjugate
@@ -229,9 +265,9 @@ Public Class ClsNewtonIterationController
             End If
         End If
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready _
-                Or DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
-            DS.IterationStatus = ClsDynamics.EnIterationStatus.Running
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready _
+                Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+            IterationStatus = ClsDynamics.EnIterationStatus.Running
 
             With MyForm
                 .BtnStart.Enabled = False
@@ -239,36 +275,142 @@ Public Class ClsNewtonIterationController
                 .ChkProtocol.Enabled = False
                 .BtnDefault.Enabled = False
                 .BtnShowBasin.Enabled = False
+                .Cursor = Cursors.WaitCursor
             End With
 
-            Await DS.GenerateImage()
+            Await PerformIteration()
 
         End If
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             With MyForm
                 .BtnStart.Enabled = True
                 .BtnReset.Enabled = True
                 .ChkProtocol.Enabled = True
                 .BtnDefault.Enabled = True
                 .BtnShowBasin.Enabled = True
-                .BtnStart.Text = FrmMain.LM.GetString("Start")
+                .BtnStart.Text = LM.GetString("Start")
+                .Cursor = Cursors.Arrow
             End With
             DiagramAreaSelector.IsActivated = True
         End If
 
     End Sub
 
+    Public Async Function PerformIteration() As Task
+
+        'This algorithm goes through the CPlane in a spiral starting in the midpoint
+        'In case of Symmetry, only the lower halfplane is examinated
+
+        If ExaminatedCorner = 0 Then
+            p = CInt(MyForm.PicDiagram.Width / 2)
+            q = CInt(MyForm.PicDiagram.Height / 2)
+
+            PixelPoint = New Point
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            DS.IterationStep(PixelPoint)
+
+            Steps = 1
+            Watch.Start()
+
+        End If
+
+
+        Do
+            ExaminatedCorner += 1
+
+            IterationLoop()
+
+            If p >= MyForm.PicDiagram.Width Or q >= MyForm.PicDiagram.Height Then
+
+                IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+                Watch.Stop()
+                MyForm.PicDiagram.Refresh()
+
+            End If
+
+            If ExaminatedCorner Mod 100 = 0 Then
+                MyForm.TxtSteps.Text = Steps.ToString
+                MyForm.TxtTime.Text = Watch.Elapsed.ToString
+                Await Task.Delay(1)
+            End If
+
+        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+            Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+        DS.DrawRoots(True)
+
+    End Function
+
+    Private Sub IterationLoop()
+
+        If ExaminatedCorner Mod 2 = 0 Then
+            Sig = -1
+        Else
+            Sig = 1
+        End If
+
+        L += 1
+
+        k = 1
+        Do While k < L
+            p += Sig
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            DS.IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyForm.PicDiagram.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+        k = 1
+
+        Do While k < L
+            q += Sig
+
+            With PixelPoint
+                .X = p
+                .Y = q
+            End With
+
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            DS.IterationStep(PixelPoint)
+
+            If Steps Mod 10000 = 0 Then
+                MyForm.PicDiagram.Refresh()
+            End If
+
+            Steps += 1
+            k += 1
+        Loop
+
+    End Sub
     Public Sub StopIteration()
 
         'the iteration was running and is interrupted
-        DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
         'the iteration is stopoped by reset the iteration
         With MyForm
             .BtnStart.Enabled = True
             .BtnReset.Enabled = True
             .ChkProtocol.Enabled = True
             .BtnDefault.Enabled = True
+            .Cursor = Cursors.Arrow
         End With
     End Sub
 

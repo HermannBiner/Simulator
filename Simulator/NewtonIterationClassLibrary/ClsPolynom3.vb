@@ -44,21 +44,21 @@ Public Class ClsPolynom3C
     Public Overrides Function StopCondition(Z As ClsComplexNumber) As Boolean
 
         'left side of the stop condition
-        Dim Stopped As Boolean = False
+        Dim IsConvergent As Boolean = False
 
         'in all cases, we need the denominator
         Dim V As Double = Denominator(Z).Power2.AbsoluteValue
 
         'is z near 1 or -1 or c?
         If Z.Add(New ClsComplexNumber(1, 0)).AbsoluteValue < MyRadius Then
-            Stopped = True
+            IsConvergent = True
         ElseIf Z.Add(New ClsComplexNumber(-1, 0)).AbsoluteValue < MyRadius Then
-            Stopped = True
+            IsConvergent = True
         ElseIf Z.Add(New ClsComplexNumber(-MyC.X, -MyC.Y)).AbsoluteValue < MyRadius Then
-            Stopped = True
+            IsConvergent = True
         End If
 
-        Return Stopped Or (V = 0)
+        Return IsConvergent Or (V = 0)
 
     End Function
 

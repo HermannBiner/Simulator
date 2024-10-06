@@ -15,6 +15,7 @@ Imports System.Globalization
 Public Class ClsStadiumBilliardball
     Inherits ClsBilliardBallAbstract
 
+    Private LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -37,7 +38,7 @@ Public Class ClsStadiumBilliardball
             UserStartposition.Y = StartPointBall.Y
 
             DrawUserStartposition(True)
-            MyStartPositionSet = True
+            MyIsStartParameterSet = True
         End Set
     End Property
 
@@ -70,7 +71,7 @@ Public Class ClsStadiumBilliardball
             UserEndposition.X = Userposition.X
             UserEndposition.Y = Userposition.Y
             DrawUserEndposition(True)
-            MyStartAngleSet = True
+            MyIsStartAngleSet = True
 
         End Set
     End Property
@@ -163,6 +164,7 @@ Public Class ClsStadiumBilliardball
         'that is the Angle of the next moving-direction and the positive x-axis
         Dim DeltaX As Decimal = UserEndposition.X - UserStartposition.X
         Dim DeltaY As Decimal = UserEndposition.Y - UserStartposition.Y
+
         Dim phi = Mathhelper.CalculateAngleOfDirection(DeltaX, DeltaY)
 
         Return phi
@@ -202,7 +204,6 @@ Public Class ClsStadiumBilliardball
         'and the according EndPoint
         Dim Endpoint As New ClsMathpoint
 
-
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
         Dim TempStartpoint As ClsMathpoint = CalculateMathPointFromT(T)
 
@@ -216,16 +217,15 @@ Public Class ClsStadiumBilliardball
         Endpoint.Y = TempEndpoint.Y
 
         'The Ball moves between these Points
-        MoveOnOrbitPart(Startpoint, Endpoint)
+        MoveOnSegment(Startpoint, Endpoint)
 
         'The EndPoint is then the StartPoint of the following part of the Orbit
         T = NextT
         Startpoint.X = Endpoint.X
-            Startpoint.Y = Endpoint.Y
+        Startpoint.Y = Endpoint.Y
 
-            'in addition, we calculate the angle of the following movement
-            Phi = CalculateNextPhi(T, Phi)
-
+        'in addition, we calculate the angle of the following movement
+        Phi = CalculateNextPhi(T, Phi)
 
     End Sub
 
@@ -257,7 +257,7 @@ Public Class ClsStadiumBilliardball
 
     'SECTOR BALL MOVEMENT
 
-    Private Sub MoveOnOrbitPart(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
+    Private Sub MoveOnSegment(Startposition As ClsMathpoint, Endposition As ClsMathpoint)
 
         Dim ActualPosition As New ClsMathpoint With {
             .X = Startposition.X,
@@ -301,34 +301,34 @@ Public Class ClsStadiumBilliardball
 
     Private Function IsBallOnStadium(Position As ClsMathpoint) As Boolean
 
-        Dim OK As Boolean = False
+        Dim IsOK As Boolean = False
 
         'Is the Ball in the Rectangle?
         If -MyA <= Position.X And Position.X <= MyA Then
             If -MyB <= Position.Y And Position.Y <= MyB Then
-                OK = True
+                IsOK = True
             End If
         End If
 
         'Is the Ball in the left half-Circle
-        If Not OK Then
+        If Not IsOK Then
             If -MyA - MyB <= Position.Y And Position.X <= MyA Then
                 If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
-                    OK = True
+                    IsOK = True
                 End If
             End If
         End If
 
         'Is the Ball in the right half-Circle?
-        If Not OK Then
+        If Not IsOK Then
             If MyA <= Position.X And Position.X <= MyA + MyB Then
                 If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
-                    OK = True
+                    IsOK = True
                 End If
             End If
         End If
 
-        Return OK
+        Return IsOK
 
     End Function
 
@@ -447,7 +447,7 @@ Public Class ClsStadiumBilliardball
         'but smaller than the pixel-unit
 
         If Not IsIntersectionFound Then
-            Throw New ArgumentException(FrmMain.LM.GetString("NoIntersectionPoint"))
+            Throw New ArgumentException(LM.GetString("NoIntersectionPoint"))
         Else
             NextT = CalculateTFromMathPoint(Intersection)
         End If
@@ -473,13 +473,15 @@ Public Class ClsStadiumBilliardball
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
+
+        Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
+
         If PhaseportraitGraphics IsNot Nothing Then
-            Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
             PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
-            If MyValueProtocol IsNot Nothing Then
-                MyValueProtocol.Items.Add(FrmMain.LM.GetString(
-                                     DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
-                                     MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
+            If MyIsProtocol And MyValueProtocol IsNot Nothing Then
+                MyValueProtocol.Items.Add(LM.GetString(
+                                         DirectCast(MyColor, SolidBrush).Color.Name) & " t/alfa = " &
+                                         MyBase.T.ToString(CultureInfo.CurrentCulture) & "/" & Alfa.ToString(CultureInfo.CurrentCulture))
                 MyValueProtocol.Refresh()
             End If
         End If

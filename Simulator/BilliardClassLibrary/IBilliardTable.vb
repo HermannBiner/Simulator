@@ -10,11 +10,8 @@ Public Interface IBilliardTable
 
     ReadOnly Property MathInterval As ClsInterval
 
-    'Status Parameter
-    WriteOnly Property LblN As Label
-
     'The parameter defining the form of the Billiardtable
-    ReadOnly Property FormulaParameter As ClsGeneralParameter
+    ReadOnly Property DSParameter As ClsGeneralParameter
 
     'The definition of the Iteration Parameter
     ReadOnly Property TValueParameter As ClsGeneralParameter
@@ -32,9 +29,6 @@ Public Interface IBilliardTable
     ReadOnly Property A As Decimal
     ReadOnly Property B As Decimal
 
-    'IterationStatus
-    Property IterationStatus As ClsDynamics.EnIterationStatus
-
     'Reset all diagrams and clear all balls
     Sub ResetIteration()
 
@@ -43,9 +37,5 @@ Public Interface IBilliardTable
 
     'Drawing the Billiard Table
     Sub DrawBilliardtable()
-
-    Function IterationLoop(NumberOfSTeps As Integer) As Task
-
-    Sub PrepareBallsForPhaseportrait()
 
 End Interface

@@ -10,6 +10,8 @@
 Public MustInherit Class ClsNumericMethodAbstract
     Implements INumericMethod
 
+    Protected LM As ClsLanguageManager
+
     'Step Width for the approximation
     Protected MyH As Decimal
 
@@ -25,6 +27,9 @@ Public MustInherit Class ClsNumericMethodAbstract
     'and ActualParameter(1) is the Y-Position of the Pendulum
     Protected MyActualParameter As New ClsNTupel(2)
 
+    Public Sub New()
+        LM = ClsLanguageManager.LM
+    End Sub
     Property h As Decimal Implements INumericMethod.h
         Get
             h = MyH

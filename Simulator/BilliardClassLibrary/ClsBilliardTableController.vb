@@ -9,10 +9,13 @@ Public Class ClsBilliardTableController
 
     Private MyForm As FrmBilliardtable
 
+    Private LM As ClsLanguageManager
+
     Private DS As IBilliardTable
 
     'Tha active BilliardBall
     Private ActiveBilliardball As IBilliardball
+    Private MyBilliardballCollection As List(Of IBilliardball)
 
     'Properties of the Ball
     Private Ballcolor As Brush
@@ -20,8 +23,20 @@ Public Class ClsBilliardTableController
     'The Startposition of the Ball is set by the Mouse
     Private IsMousedown As Boolean = False
 
+    'Iteration Control
+
+    'Status of the Iteration
+    'Number of Steps
+    Private n As Integer
+
+    Private IterationStatus As ClsDynamics.EnIterationStatus
+
+    'When distributing BilliardBalls for the full PhasePortrait
+    Private NumberOfBilliardBalls As Integer
+
     Public Sub New(Form As FrmBilliardtable)
         MyForm = Form
+        LM = ClsLanguageManager.LM
     End Sub
 
     Public Sub FillDynamicSystem()
@@ -42,7 +57,7 @@ Public Class ClsBilliardTableController
                 'That effects that - if there is no Entry in the Resource files LabelsEN, LabelsDE -
                 'the name of the Class implementing an Interface is used as default
                 'suppressing the extension "Cls"
-                DSName = FrmMain.LM.GetString(type.Name, True)
+                DSName = LM.GetString(type.Name, True)
                 MyForm.CboBilliardTable.Items.Add(DSName)
             Next
 
@@ -66,7 +81,7 @@ Public Class ClsBilliardTableController
 
             If types.Count > 0 Then
                 For Each type In types
-                    If FrmMain.LM.GetString(type.Name, True) = SelectedName Then
+                    If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IBilliardTable)
                     End If
                 Next
@@ -87,13 +102,12 @@ Public Class ClsBilliardTableController
     Private Sub InitializeMe()
         With DS
             .PicDiagram = MyForm.PicDiagram
-            .LblN = MyForm.LblSteps
             .PhasePortrait = MyForm.PicPhasePortrait
             .ValueProtocol = MyForm.LstValueList
-            MyForm.TrbParameterC.Minimum = CInt(.FormulaParameter.Range.A * 100)
-            MyForm.TrbParameterC.Maximum = CInt(.FormulaParameter.Range.B * 100)
-            MyForm.TrbParameterC.Value = CInt(.FormulaParameter.Range.A + .FormulaParameter.Range.IntervalWidth * 0.5 * 100)
-            .C = .FormulaParameter.DefaultValue
+            MyForm.TrbParameterC.Minimum = CInt(.DSParameter.Range.A * 100)
+            MyForm.TrbParameterC.Maximum = CInt(.DSParameter.Range.B * 100)
+            MyForm.TrbParameterC.Value = CInt(.DSParameter.Range.A + .DSParameter.Range.IntervalWidth * 0.5 * 100)
+            .C = .DSParameter.DefaultValue
         End With
 
         'Setting Standard Values
@@ -110,7 +124,7 @@ Public Class ClsBilliardTableController
             .TxtT.Text = "0"
             .TxtAlfa.Text = "1"
             .TxtParameter.Text = DS.C.ToString
-            .LblSpeed.Text = FrmMain.LM.GetString("BallSpeed") & " " & .TrbSpeed.Value.ToString
+            .LblSpeed.Text = LM.GetString("BallSpeed") & " " & .TrbSpeed.Value.ToString
         End With
     End Sub
 
@@ -121,12 +135,16 @@ Public Class ClsBilliardTableController
             .PicPhasePortrait.Refresh()
             .LstValueList.Items.Clear()
 
-            .BtnStart.Text = FrmMain.LM.GetString("Start")
-            .BtnPhasePortrait.Text = FrmMain.LM.GetString("FillPhasePortrait")
+            .BtnStart.Text = LM.GetString("Start")
+            .BtnPhasePortrait.Text = LM.GetString("FillPhasePortrait")
 
             .BtnNewBall.Enabled = True
             .BtnNextStep.Enabled = True
         End With
+
+        n = 0
+        MyForm.LblSteps.Text = "0"
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
         'preparediagram
         DS.DrawBilliardtable()
@@ -183,6 +201,7 @@ Public Class ClsBilliardTableController
                 .BallColor = Ballcolor
                 .BallSpeed = MyForm.TrbSpeed.Value
                 .DrawFirstUserStartposition()
+                .IsProtocol = MyForm.ChkProtocol.Checked
             End With
 
             'All the other parameters are set by DS
@@ -199,40 +218,39 @@ Public Class ClsBilliardTableController
                 CreateNewBall()
             End If
 
-            If ActiveBilliardball.IsStartpositionSet Then
+            If ActiveBilliardball.IsStartParameterSet Then
                 CreateNewBall()
             End If
 
             'Parameter of the Start Point
             Dim t As Decimal = CDec(MyForm.TxtT.Text)
-                ActiveBilliardball.Startparameter = t
+            ActiveBilliardball.Startparameter = t
 
-                'Start Angle
-                Dim alfa As Decimal = CDec(MyForm.TxtAlfa.Text)
-                ActiveBilliardball.Startangle = alfa
-
-                DS.BilliardBallCollection.Add(ActiveBilliardball)
-            Else
-                'There are already Error messages generated
-            End If
+            'Start Angle
+            Dim alfa As Decimal = CDec(MyForm.TxtAlfa.Text)
+            ActiveBilliardball.Startangle = alfa
+            DS.BilliardBallCollection.Add(ActiveBilliardball)
+        Else
+            'There are already Error messages generated
+        End If
 
     End Sub
 
     Public Sub NextStep()
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsBilliardballExisting() Then
                 If IsUserDataOK() Then
-                    DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
                     'Message already generated
                 End If
             End If
         End If
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
 
-            DS.IterationLoop(1)
+            IterationLoop(1)
 
         End If
 
@@ -242,51 +260,154 @@ Public Class ClsBilliardTableController
 
     Public Async Sub StartIteration()
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsBilliardballExisting() Then
                 If IsUserDataOK() Then
                     With MyForm
-                        .BtnStart.Text = FrmMain.LM.GetString("Continue")
-                        .BtnStart.Enabled = False
+                        .BtnStart.Text = LM.GetString("Continue")
                         .BtnReset.Enabled = False
                         .BtnTakeOverStartParameter.Enabled = False
                         .BtnNewBall.Enabled = False
                         .BtnNextStep.Enabled = False
                         .BtnDefault.Enabled = False
                         .BtnPhasePortrait.Enabled = False
+                        .ChkProtocol.Enabled = False
                     End With
-                    DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
                     'Message already generated
+                    ResetIteration()
+                    SetDefaultUserData()
                 End If
             End If
         End If
 
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
-                    DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
-            DS.IterationStatus = ClsDynamics.EnIterationStatus.Running
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
+                    IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+            IterationStatus = ClsDynamics.EnIterationStatus.Running
             Application.DoEvents()
 
-            Await DS.IterationLoop(0)
+            Await IterationLoop(0)
 
         End If
     End Sub
 
+    Public Async Function IterationLoop(NumberOfSteps As Integer) As Task
+
+        Do
+            n += 1
+
+            If n Mod 5 = 0 Then
+                MyForm.LblSteps.Text = (NumberOfBilliardBalls * n).ToString(CultureInfo.CurrentCulture)
+            End If
+
+            'Each Ball is now iterated 1x
+            For Each Ball As IBilliardball In DS.BilliardBallCollection
+                Ball.IterationStep()
+            Next
+
+            Application.DoEvents()
+            Await Task.Delay(2)
+
+            If NumberOfSteps > 0 Then
+                If n >= NumberOfSteps Then
+                    IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+                End If
+            End If
+
+        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+    End Function
+
     Public Sub StopIteration()
-        DS.IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
         With MyForm
             .BtnStart.Enabled = True
             .BtnReset.Enabled = True
             .BtnTakeOverStartParameter.Enabled = True
             .BtnDefault.Enabled = True
             .BtnPhasePortrait.Enabled = True
+            .ChkProtocol.Enabled = True
         End With
     End Sub
 
-    Public Sub PrepareBallsForPhasePortrait()
+    Public Sub PrepareBallsForPhaseportrait()
+
         If IsUserDataOK() Then
             ResetIteration()
-            DS.PrepareBallsForPhaseportrait()
+
+            'that gives a nice phaseportrait
+            NumberOfBilliardBalls = 30
+
+            'Generate Balls with startposition (0,b)
+            'that is the zenith of the billardtable
+            'and different startangles
+
+            Dim i As Integer
+
+            'Startparameter
+            Dim t As Decimal
+            Dim Alfa As Decimal
+
+            Dim LocBilliardBall As IBilliardball
+            'First Billardball to prepare general parameters
+            LocBilliardBall = DS.GetBilliardBall()
+            'C = MyC
+
+            'the next start parameters are chosen that the phaseportrait gets a nice image
+            If DS.C < 1 Then
+                t = CDec(Math.PI / 2)
+            Else
+                t = 0
+            End If
+
+            Alfa = DS.AlfaValueParameter.DefaultValue
+
+            With LocBilliardBall
+                .BallColor = Brushes.Blue
+                .Startparameter = t
+                .IsStartParameterSet = True
+                .Startangle = Alfa
+                .IsStartangleSet = True
+                .BallSpeed = 1000
+                .IterationStep()
+                .IsProtocol = False
+            End With
+
+            For i = 0 To NumberOfBilliardBalls
+                LocBilliardBall = DS.GetBilliardBall()
+                Alfa += CDec(Math.PI / NumberOfBilliardBalls)
+                If Alfa < Math.PI Then
+                    With LocBilliardBall
+                        Select Case i Mod 5
+                            Case 1
+                                .BallColor = Brushes.Red
+                            Case 2
+                                .BallColor = Brushes.Green
+                            Case 3
+                                .BallColor = Brushes.Blue
+                            Case 4
+                                .BallColor = Brushes.Black
+                            Case Else
+                                .BallColor = Brushes.Magenta
+                        End Select
+
+                        .BallSpeed = 10000
+                        .PhasePortrait = MyForm.PicPhasePortrait
+                        'because of the performance, in thhis case
+                        'no value protocol is generated
+                        .ValueProtocol = Nothing
+                        .Startparameter = t
+                        .IsStartParameterSet = True
+                        .Startangle = Alfa
+                        .IsStartangleSet = True
+                        .BallSpeed = 1000
+                        .IterationStep()
+                    End With
+                    DS.BilliardBallCollection.Add(LocBilliardBall)
+                End If
+            Next
         End If
     End Sub
 
@@ -303,7 +424,7 @@ Public Class ClsBilliardTableController
 
     Private Function IsParameterOK() As Boolean
 
-        Dim CheckParameter = New ClsCheckUserData(MyForm.TxtParameter, DS.FormulaParameter.Range)
+        Dim CheckParameter = New ClsCheckUserData(MyForm.TxtParameter, DS.DSParameter.Range)
 
         Return CheckParameter.IsTxtValueAllowed
     End Function
@@ -311,9 +432,13 @@ Public Class ClsBilliardTableController
     Private Function IsBilliardballExisting() As Boolean
 
         If DS.BilliardBallCollection.Count > 0 Then
+            For Each Ball As IBilliardball In DS.BilliardBallCollection
+                Ball.IsProtocol = MyForm.ChkProtocol.Checked
+            Next
+            NumberOfBilliardBalls = DS.BilliardBallCollection.Count
             Return True
         Else
-            MessageBox.Show(FrmMain.LM.GetString("NoBallsOnTable"))
+            MessageBox.Show(LM.GetString("NoBallsOnTable"))
             Return False
         End If
 
@@ -322,10 +447,10 @@ Public Class ClsBilliardTableController
     'SECTOR SET USERSTARTPARAMETER
 
     Public Sub MouseDown(e As MouseEventArgs)
-        If DS.IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If ActiveBilliardball IsNot Nothing Then
 
-                If Not (ActiveBilliardball.IsStartpositionSet And ActiveBilliardball.IsStartangleSet) Then
+                If Not (ActiveBilliardball.IsStartParameterSet And ActiveBilliardball.IsStartangleSet) Then
 
                     MyForm.Cursor = Cursors.Hand
                     IsMousedown = True
@@ -348,7 +473,7 @@ Public Class ClsBilliardTableController
 
             If ActiveBilliardball IsNot Nothing Then
 
-                If Not ActiveBilliardball.IsStartpositionSet Then
+                If Not ActiveBilliardball.IsStartParameterSet Then
 
                     'The actual Position of the Mouse is hold by the Parameter t
                     ActiveBilliardball.SetAndDrawUserStartposition(Mouseposition, False)
@@ -373,7 +498,7 @@ Public Class ClsBilliardTableController
             Mouseposition.X = e.X + 2
             Mouseposition.Y = e.Y - 25
 
-            If Not ActiveBilliardball.IsStartpositionSet Then
+            If Not ActiveBilliardball.IsStartParameterSet Then
 
                 'This is the first Time that the MouseUp event happens
                 'and the Position of the Mouse sets the Start Position of the Ball
@@ -383,7 +508,7 @@ Public Class ClsBilliardTableController
 
                 't is as well transmitted to the Ball
                 ActiveBilliardball.Startparameter = t
-                ActiveBilliardball.IsStartpositionSet = True
+                ActiveBilliardball.IsStartParameterSet = True
 
             ElseIf Not ActiveBilliardball.IsStartangleSet Then
 
