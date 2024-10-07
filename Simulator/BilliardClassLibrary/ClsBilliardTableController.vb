@@ -236,7 +236,7 @@ Public Class ClsBilliardTableController
 
     End Sub
 
-    Public Sub NextStep()
+    Public Async Sub NextStep()
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsBilliardballExisting() Then
@@ -250,7 +250,7 @@ Public Class ClsBilliardTableController
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
 
-            IterationLoop(1)
+            Await IterationLoop(1)
 
         End If
 
