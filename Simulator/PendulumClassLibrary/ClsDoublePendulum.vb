@@ -506,8 +506,8 @@ Public Class ClsDoublePendulum
         Dim Temp As Decimal
 
         With x
-            'DeltaU = u2-u1
-            Dim DeltaU As Decimal = .Component(2) - .Component(0)
+            'DeltaU = u1-u2
+            Dim DeltaU As Decimal = .Component(0) - .Component(2)
 
             'L2*V2*V2 + L1*cos(DeltaU)*V1*V1
             Temp = CDec(MyCalculationConstants.Component(1) * Math.Pow(.Component(3), 2) +
@@ -542,7 +542,7 @@ Public Class ClsDoublePendulum
 
         With x
             'calculates next v2' = see math.doc.
-            Dim DeltaU As Decimal = .Component(2) - .Component(0)
+            Dim DeltaU As Decimal = .Component(0) - .Component(2)
 
             'L1*V1*V1 + Mu*L2*cos(DeltaU)*V2*V2
             Temp = CDec(MyCalculationConstants.Component(0) * Math.Pow(.Component(1), 2) +

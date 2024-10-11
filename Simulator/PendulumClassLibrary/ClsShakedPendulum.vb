@@ -18,10 +18,10 @@ Public Class ClsShakedPendulum
     Private MyD As Decimal
 
     'Mass of the horizontal pendulum - set after experiments
-    Const MSpring As Decimal = 10
+    Const MSpring As Decimal = 50
 
     'Mass m
-    Const m As Decimal = 1
+    Const m As Decimal = 5
 
     'Max Interval of the shaking pendulum
     Const MaxX As Decimal = CDec(0.95)
@@ -460,10 +460,10 @@ Public Class ClsShakedPendulum
 
         With x
 
-            Temp = CDec(Math.Pow(.Component(3), 2) * MyCalculationConstants.Component(0) * Math.Sin(.Component(2)))
-            Temp += g * CDec(Math.Sin(.Component(2) * Math.Cos(.Component(2))))
+            Temp = CDec(m * Math.Pow(.Component(3), 2) * MyCalculationConstants.Component(0) * Math.Sin(.Component(2)))
+            Temp += m * g * CDec(Math.Sin(.Component(2) * Math.Cos(.Component(2))))
             Temp -= MyD * .Component(0)
-            Temp /= m + MSpring - CDec(Math.Pow(Math.Cos(.Component(2)), 2))
+            Temp /= MSpring + CDec(m * Math.Pow(Math.Sin(.Component(2)), 2))
 
         End With
 
@@ -485,8 +485,8 @@ Public Class ClsShakedPendulum
 
             Temp = MyD * .Component(0) * CDec(Math.Cos(.Component(2)))
             Temp -= g * CDec(Math.Sin(.Component(2))) * (m + MSpring)
-            Temp -= CDec(Math.Pow(.Component(3), 2) * MyCalculationConstants.Component(0) * Math.Sin(.Component(2)) * Math.Cos(.Component(2)))
-            Temp /= MyCalculationConstants.Component(0) * (m + MSpring - CDec(Math.Pow(Math.Cos(.Component(2)), 2)))
+            Temp -= CDec(m * Math.Pow(.Component(3), 2) * MyCalculationConstants.Component(0) * Math.Sin(.Component(2)) * Math.Cos(.Component(2)))
+            Temp /= MyCalculationConstants.Component(0) * (MSpring + m * CDec(Math.Pow(Math.Sin(.Component(2)), 2)))
 
         End With
 

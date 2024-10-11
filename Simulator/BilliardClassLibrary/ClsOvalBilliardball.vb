@@ -198,18 +198,9 @@ Public Class ClsOvalBilliardball
 
     Public Overrides Sub IterationStep()
 
-        'Startpoint of the actual part of the Orbit
-        Dim Startpoint As New ClsMathpoint
-
-        'Parameter of the next Endpoint of the actual part of the Orbit
-        Dim NextT As Decimal
-
-        'and the according EndPoint
-        Dim Endpoint As New ClsMathpoint
-
-
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
         Dim TempBallpoint As ClsMathpoint = CalculateBallPositionFromT(T)
+
         Startpoint.X = TempBallpoint.X
         Startpoint.Y = TempBallpoint.Y
 
@@ -229,7 +220,6 @@ Public Class ClsOvalBilliardball
 
         'in addition, we calculate the angle of the following movement
         Phi = CalculateNextPhi(T, Phi)
-
 
     End Sub
 

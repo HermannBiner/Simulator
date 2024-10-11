@@ -183,7 +183,6 @@ Public Class ClsNewtonIterationController
                 .N = 3
             End If
         End With
-        SetDefaultUserData()
         ResetIteration()
     End Sub
 

@@ -62,6 +62,16 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected MyIsStartParameterSet As Boolean
     Protected MyIsStartAngleSet As Boolean
 
+    'Calculation Parameters
+    'Global, so we don't have to instanzialize it
+    'in the middle of the IterationStep and - Loop
+    'Startpoint of the actual part of the Orbit
+    Protected Startpoint As New ClsMathpoint
+    'Parameter of the next Endpoint of the actual part of the Orbit
+    Protected NextT As Decimal
+    'and the according EndPoint
+    Protected Endpoint As New ClsMathpoint
+
     WriteOnly Property PicDiagram As PictureBox Implements IBilliardball.PicDiagram
         Set(value As PictureBox)
             MyPicDiagram = value
@@ -171,6 +181,8 @@ Public MustInherit Class ClsBilliardBallAbstract
 
     Public Sub New()
         Mathhelper = New ClsMathhelperBilliard
+        Startpoint = New ClsMathpoint(0, 0)
+        Endpoint = New ClsMathpoint(0, 0)
     End Sub
 
     MustOverride Property Startparameter As Decimal Implements IBilliardball.Startparameter

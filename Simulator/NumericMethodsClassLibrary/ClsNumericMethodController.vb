@@ -265,12 +265,6 @@ Public Class ClsNumericMethodController
             .Cursor = Cursors.WaitCursor
         End With
 
-        'The loop controls as well the Iterationstatus
-        Await IterationLoop()
-    End Sub
-
-    Public Async Function IterationLoop() As Task
-
         'MyStartposition is already set by the user
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
@@ -311,7 +305,15 @@ Public Class ClsNumericMethodController
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
 
             IterationStatus = ClsDynamics.EnIterationStatus.Running
-            Do
+
+            'The loop controls as well the Iterationstatus
+            Await IterationLoop()
+        End If
+    End Sub
+
+    Public Async Function IterationLoop() As Task
+
+        Do
                 n += 1
 
                 TraceA.X = NextTraceA.X
@@ -333,19 +335,23 @@ Public Class ClsNumericMethodController
                 'copy the bitmap
                 ShiftedBmpDiagram = New Bitmap(BmpDiagram)
 
-                If n Mod NumberOfStepsUntilShift = 0 Then
+            If n Mod NumberOfStepsUntilShift = 0 Then
 
                     'Draw this copy right-shifted into the bitmap
                     BmpGraphics.Clear(Color.White)
-                    BmpGraphics.DrawImage(ShiftedBmpDiagram, XShift, 0)
+                BmpGraphics.DrawImage(ShiftedBmpDiagram, XShift, 0)
+                ShiftedBmpDiagram.Dispose()
 
-                    'Coordinate system x-axis
-                    BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDec(-0.9), 0), Color.Black, 1)
+                'Coordinate system x-axis
+                BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDec(-0.9), 0), Color.Black, 1)
+                    Try
+                        'update Picdiagram
+                        MyForm.PicDiagram.Refresh()
+                    Catch ex As Exception
+                        MessageBox.Show(ex.Message)
+                    End Try
 
-                    'update Picdiagram
-                    MyForm.PicDiagram.Refresh()
                 End If
-
 
                 DrawPicPendulums()
 
@@ -359,7 +365,6 @@ Public Class ClsNumericMethodController
 
             Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Or
                 IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        End If
 
     End Function
 

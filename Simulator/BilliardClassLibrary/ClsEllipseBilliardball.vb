@@ -198,13 +198,6 @@ Public Class ClsEllipseBilliardball
 
     Public Overrides Sub IterationStep()
 
-        'Startpoint of the actual part of the Orbit
-        Dim Startpoint As New ClsMathpoint
-        'Parameter of the next Endpoint of the actual part of the Orbit
-        Dim NextT As Decimal
-        'and the according EndPoint
-        Dim Endpoint As New ClsMathpoint
-
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
         Startpoint.X = CDec(MyA * Math.Cos(T))
         Startpoint.Y = CDec(MyB * Math.Sin(T))
