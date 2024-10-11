@@ -206,6 +206,7 @@ Public Class ClsCDiagramController
                     .BtnStartIteration.Enabled = False
                     .BtnReset.Enabled = False
                     .BtnDefault.Enabled = False
+                    .CboFunction.Enabled = False
                     ActualParameterRange = New ClsInterval(CDec(.TxtCMin.Text), CDec(.TxtCMax.Text))
                     ActualValueRange = New ClsInterval(CDec(.TxtVMin.Text), CDec(.TxtVMax.Text))
                 End With
@@ -228,6 +229,7 @@ Public Class ClsCDiagramController
             .BtnStartIteration.Enabled = True
             .BtnReset.Enabled = True
             .BtnDefault.Enabled = True
+            .CboFunction.Enabled = True
             .Cursor = Cursors.Arrow
             IterationStatus = ClsDynamics.EnIterationStatus.Stopped
             DiagramAreaSelector.IsActivated = True

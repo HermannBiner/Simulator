@@ -156,6 +156,7 @@ Public Class ClsHistogramController
                 .BtnStart.Enabled = False
                 .BtnReset.Enabled = False
                 .BtnDefault.Enabled = False
+                .CboFunction.Enabled = False
                 .Cursor = Cursors.WaitCursor
             End With
             Application.DoEvents()
@@ -176,6 +177,7 @@ Public Class ClsHistogramController
             .BtnStart.Enabled = True
             .BtnReset.Enabled = True
             .BtnDefault.Enabled = True
+            .CboFunction.Enabled = True
             .Cursor = Cursors.Arrow
         End With
     End Sub

@@ -178,6 +178,7 @@ Public Class ClsFeigenbaumController
                     .BtnReset.Enabled = False
                     .BtnReset.Enabled = False
                     .BtnDefault.Enabled = False
+                    .CboFunction.Enabled = False
                 End With
             Else
                 'Message already generated
@@ -197,6 +198,7 @@ Public Class ClsFeigenbaumController
             .BtnReset.Enabled = True
             .BtnReset.Enabled = True
             .BtnDefault.Enabled = True
+            .CboFunction.Enabled = True
             .Cursor = Cursors.Arrow
         End With
     End Sub

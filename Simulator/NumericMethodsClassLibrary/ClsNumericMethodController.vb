@@ -262,6 +262,7 @@ Public Class ClsNumericMethodController
             .BtnDefault.Enabled = False
             .ChkStretched.Enabled = False
             .TrbStepWidth.Enabled = False
+            .CboPendulum.Enabled = False
             .Cursor = Cursors.WaitCursor
         End With
 
@@ -376,6 +377,7 @@ Public Class ClsNumericMethodController
             .BtnDefault.Enabled = True
             .ChkStretched.Enabled = True
             .TrbStepWidth.Enabled = True
+            .CboPendulum.Enabled = True
             .Cursor = Cursors.Arrow
         End With
 

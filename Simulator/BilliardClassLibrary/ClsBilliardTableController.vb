@@ -272,6 +272,7 @@ Public Class ClsBilliardTableController
                         .BtnDefault.Enabled = False
                         .BtnPhasePortrait.Enabled = False
                         .ChkProtocol.Enabled = False
+                        .CboBilliardTable.Enabled = False
                     End With
                     IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
@@ -329,6 +330,7 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
             .BtnDefault.Enabled = True
             .BtnPhasePortrait.Enabled = True
             .ChkProtocol.Enabled = True
+            .CboBilliardTable.Enabled = True
         End With
     End Sub
 

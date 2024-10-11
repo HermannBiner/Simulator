@@ -245,6 +245,7 @@ Public Class ClsPendulumController
                 .BtnTakeOverStartParameter.Enabled = False
                 .TrbAdditionalParameter.Enabled = False
                 .ChkProtocol.Enabled = False
+                .CboPendulum.Enabled = False
                 .Cursor = Cursors.WaitCursor
             End With
 
@@ -309,6 +310,7 @@ Public Class ClsPendulumController
             .BtnTakeOverStartParameter.Enabled = True
             .TrbAdditionalParameter.Enabled = True
             .ChkProtocol.Enabled = True
+            .CboPendulum.Enabled = True
             .Cursor = Cursors.Arrow
         End With
     End Sub

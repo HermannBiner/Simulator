@@ -274,6 +274,7 @@ Public Class ClsNewtonIterationController
                 .ChkProtocol.Enabled = False
                 .BtnDefault.Enabled = False
                 .BtnShowBasin.Enabled = False
+                .CboFunction.Enabled = False
                 .Cursor = Cursors.WaitCursor
             End With
 
@@ -289,6 +290,7 @@ Public Class ClsNewtonIterationController
                 .BtnDefault.Enabled = True
                 .BtnShowBasin.Enabled = True
                 .BtnStart.Text = LM.GetString("Start")
+                .CboFunction.Enabled = True
                 .Cursor = Cursors.Arrow
             End With
             DiagramAreaSelector.IsActivated = True

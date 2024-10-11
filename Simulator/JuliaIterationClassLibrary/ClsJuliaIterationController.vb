@@ -345,6 +345,7 @@ Public Class ClsJuliaIterationController
                 .BtnReset.Enabled = False
                 .ChkProtocol.Enabled = False
                 .BtnDefault.Enabled = False
+                .CboFunction.Enabled = False
                 .Cursor = Cursors.WaitCursor
             End With
 
@@ -357,6 +358,7 @@ Public Class ClsJuliaIterationController
                 .BtnStart.Enabled = True
                 .BtnReset.Enabled = True
                 .BtnDefault.Enabled = True
+                .CboFunction.Enabled = True
                 .Cursor = Cursors.Arrow
             End With
             DiagramAreaSelector.IsActivated = True
