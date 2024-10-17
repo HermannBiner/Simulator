@@ -2,6 +2,7 @@
 
 'Status Checked
 
+Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.Reflection
 
@@ -187,6 +188,7 @@ Public Class ClsCDiagramController
 
     Public Sub ResetIteration()
 
+        SetControlsEnabled(True)
         BmpGraphics.Clear(Color.White)
         MyForm.PicDiagram.Refresh()
 
@@ -203,10 +205,6 @@ Public Class ClsCDiagramController
             If IsUserDataOK() Then
                 DiagramAreaSelector.IsActivated = False
                 With MyForm
-                    .BtnStartIteration.Enabled = False
-                    .BtnReset.Enabled = False
-                    .BtnDefault.Enabled = False
-                    .CboFunction.Enabled = False
                     ActualParameterRange = New ClsInterval(CDec(.TxtCMin.Text), CDec(.TxtCMax.Text))
                     ActualValueRange = New ClsInterval(CDec(.TxtVMin.Text), CDec(.TxtVMax.Text))
                 End With
@@ -221,19 +219,16 @@ Public Class ClsCDiagramController
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+            SetControlsEnabled(False)
             MyForm.Cursor = Cursors.WaitCursor
             Await PerformIteration()
         End If
 
-        With MyForm
-            .BtnStartIteration.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnDefault.Enabled = True
-            .CboFunction.Enabled = True
-            .Cursor = Cursors.Arrow
-            IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-            DiagramAreaSelector.IsActivated = True
-        End With
+        SetControlsEnabled(True)
+        MyForm.Cursor = Cursors.Arrow
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        DiagramAreaSelector.IsActivated = True
+
     End Sub
 
     Private Async Function PerformIteration() As Task
@@ -329,7 +324,22 @@ Public Class ClsCDiagramController
 
             Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed
         End With
-
     End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .TrbPositionStartValues.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .CboValueParameter.Enabled = IsEnabled
+            .TxtCMax.Enabled = IsEnabled
+            .TxtCMin.Enabled = IsEnabled
+            .TxtVMax.Enabled = IsEnabled
+            .TxtVMin.Enabled = IsEnabled
+        End With
+    End Sub
+
 End Class
 

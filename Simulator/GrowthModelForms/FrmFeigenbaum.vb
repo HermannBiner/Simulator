@@ -48,7 +48,6 @@ Public Class FrmFeigenbaum
         LblDeltaA.Text = LM.GetString("Delta") & " = "
         LblValueRange.Text = LM.GetString("ExaminatedValueRange")
         LblParameterRange.Text = LM.GetString("ExaminatedParameterRange")
-        BtnStartIteration.Text = LM.GetString("StartIteration")
         BtnReset.Text = LM.GetString("ResetIteration")
         BtnDefault.Text = LM.GetString("DefaultUserData")
 
@@ -98,7 +97,7 @@ Public Class FrmFeigenbaum
     End Sub
 
     'SECTOR ITERATION
-    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
+    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then
             FC.StartIteration()
         End If

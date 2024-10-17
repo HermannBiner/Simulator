@@ -45,8 +45,6 @@ Public Class FrmJulia
     Private Sub InitializeLanguage()
 
         Text = LM.GetString("JuliaMandelbrot")
-        BtnStart.Text = LM.GetString("Start")
-        BtnStop.Text = LM.GetString("Stop")
         BtnReset.Text = LM.GetString("ResetIteration")
         LblTime.Text = LM.GetString("Time")
         LblNumberOfSteps.Text = LM.GetString("Steps")

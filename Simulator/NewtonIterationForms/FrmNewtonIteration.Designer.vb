@@ -68,7 +68,7 @@ Partial Class FrmNewtonIteration
         ' PicDiagram
         ' 
         PicDiagram.Location = New Point(2, 13)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(1486, 1707)
         PicDiagram.TabIndex = 0
@@ -79,7 +79,7 @@ Partial Class FrmNewtonIteration
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"z^3-1", "z^4-1"})
         CboFunction.Location = New Point(1519, 13)
-        CboFunction.Margin = New Padding(4, 4, 4, 4)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
         CboFunction.Size = New Size(455, 40)
         CboFunction.TabIndex = 1
@@ -97,7 +97,7 @@ Partial Class FrmNewtonIteration
         ' TxtXMin
         ' 
         TxtXMin.Location = New Point(1614, 130)
-        TxtXMin.Margin = New Padding(4, 4, 4, 4)
+        TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
         TxtXMin.Size = New Size(494, 39)
         TxtXMin.TabIndex = 4
@@ -105,7 +105,7 @@ Partial Class FrmNewtonIteration
         ' TxtXMax
         ' 
         TxtXMax.Location = New Point(1614, 192)
-        TxtXMax.Margin = New Padding(4, 4, 4, 4)
+        TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
         TxtXMax.Size = New Size(494, 39)
         TxtXMax.TabIndex = 6
@@ -143,7 +143,7 @@ Partial Class FrmNewtonIteration
         ' TxtYMax
         ' 
         TxtYMax.Location = New Point(1614, 380)
-        TxtYMax.Margin = New Padding(4, 4, 4, 4)
+        TxtYMax.Margin = New Padding(4)
         TxtYMax.Name = "TxtYMax"
         TxtYMax.Size = New Size(494, 39)
         TxtYMax.TabIndex = 12
@@ -161,7 +161,7 @@ Partial Class FrmNewtonIteration
         ' TxtYMin
         ' 
         TxtYMin.Location = New Point(1614, 320)
-        TxtYMin.Margin = New Padding(4, 4, 4, 4)
+        TxtYMin.Margin = New Padding(4)
         TxtYMin.Name = "TxtYMin"
         TxtYMin.Size = New Size(494, 39)
         TxtYMin.TabIndex = 10
@@ -179,7 +179,7 @@ Partial Class FrmNewtonIteration
         ' BtnReset
         ' 
         BtnReset.Location = New Point(1510, 1647)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(594, 73)
         BtnReset.TabIndex = 21
@@ -189,7 +189,7 @@ Partial Class FrmNewtonIteration
         ' BtnStop
         ' 
         BtnStop.Location = New Point(1514, 898)
-        BtnStop.Margin = New Padding(4, 4, 4, 4)
+        BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(594, 73)
         BtnStop.TabIndex = 24
@@ -201,7 +201,7 @@ Partial Class FrmNewtonIteration
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
         LstProtocol.Location = New Point(1510, 1120)
-        LstProtocol.Margin = New Padding(4, 4, 4, 4)
+        LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
         LstProtocol.Size = New Size(595, 420)
         LstProtocol.TabIndex = 25
@@ -374,7 +374,7 @@ Partial Class FrmNewtonIteration
         ' BtnStart
         ' 
         BtnStart.Location = New Point(1514, 817)
-        BtnStart.Margin = New Padding(4, 4, 4, 4)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
         BtnStart.Size = New Size(594, 73)
         BtnStart.TabIndex = 20
@@ -403,6 +403,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' TxtSteps
         ' 
+        TxtSteps.Enabled = False
         TxtSteps.Location = New Point(1614, 751)
         TxtSteps.Margin = New Padding(4, 2, 4, 2)
         TxtSteps.Name = "TxtSteps"
@@ -411,6 +412,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' TxtTime
         ' 
+        TxtTime.Enabled = False
         TxtTime.Location = New Point(1876, 751)
         TxtTime.Margin = New Padding(4, 2, 4, 2)
         TxtTime.Name = "TxtTime"
@@ -420,7 +422,7 @@ Partial Class FrmNewtonIteration
         ' BtnShowBasin
         ' 
         BtnShowBasin.Location = New Point(1514, 979)
-        BtnShowBasin.Margin = New Padding(4, 4, 4, 4)
+        BtnShowBasin.Margin = New Padding(4)
         BtnShowBasin.Name = "BtnShowBasin"
         BtnShowBasin.Size = New Size(594, 73)
         BtnShowBasin.TabIndex = 42
@@ -430,7 +432,7 @@ Partial Class FrmNewtonIteration
         ' BtnDefault
         ' 
         BtnDefault.Location = New Point(1510, 1566)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(594, 73)
         BtnDefault.TabIndex = 43
@@ -475,7 +477,7 @@ Partial Class FrmNewtonIteration
         Controls.Add(CboFunction)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         Name = "FrmNewtonIteration"
         Text = "NewtonIteration"
         WindowState = FormWindowState.Maximized

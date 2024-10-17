@@ -174,11 +174,6 @@ Public Class ClsFeigenbaumController
                     BmpGraphics.MathYInterval = ActualValueRange
                     DiagramAreaSelector.UserXRange = ActualParameterRange
                     DiagramAreaSelector.UserYRange = ActualValueRange
-                    .BtnStartIteration.Enabled = False
-                    .BtnReset.Enabled = False
-                    .BtnReset.Enabled = False
-                    .BtnDefault.Enabled = False
-                    .CboFunction.Enabled = False
                 End With
             Else
                 'Message already generated
@@ -186,21 +181,16 @@ Public Class ClsFeigenbaumController
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+            SetControlsEnabled(False)
             MyForm.Cursor = Cursors.WaitCursor
             PerformIteration()
         End If
 
         DiagramAreaSelector.IsActivated = True
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        SetControlsEnabled(True)
+        MyForm.Cursor = Cursors.Arrow
 
-        With MyForm
-            .BtnStartIteration.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnDefault.Enabled = True
-            .CboFunction.Enabled = True
-            .Cursor = Cursors.Arrow
-        End With
     End Sub
 
     Private Sub PerformIteration()
@@ -307,6 +297,7 @@ Public Class ClsFeigenbaumController
 
     Public Sub ResetIteration()
 
+        SetControlsEnabled(True)
         BmpGraphics.Clear(Color.White)
         MyForm.PicDiagram.Refresh()
 
@@ -322,5 +313,20 @@ Public Class ClsFeigenbaumController
         Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed
 
     End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtAMax.Enabled = IsEnabled
+            .TxtAMin.Enabled = IsEnabled
+            .TxtXMax.Enabled = IsEnabled
+            .TxtXMin.Enabled = IsEnabled
+            .ChkColored.Enabled = IsEnabled
+            .ChkSplitPoints.Enabled = IsEnabled
+        End With
+    End Sub
 
 End Class

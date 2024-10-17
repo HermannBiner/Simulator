@@ -50,13 +50,11 @@ Public Class FrmPendulum
         BtnTakeOverStartParameter.Text = LM.GetString("TakeOver")
         GrpStartParameter.Text = LM.GetString("StartParameter")
         BtnReset.Text = LM.GetString("ResetIteration")
-        BtnStart.Text = LM.GetString("Start")
         LblStepWidth.Text = LM.GetString("StepWidth") & ": "
         LblTypeofPhaseportrait.Text = LM.GetString("TypeofPhaseportrait")
         BtnDefault.Text = LM.GetString("DefaultUserData")
-
+        BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
     End Sub
-
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         If IsFormLoaded Then
@@ -95,6 +93,11 @@ Public Class FrmPendulum
         End If
     End Sub
 
+    Private Sub BtnCreatePendulum_Click(sender As Object, e As EventArgs) Handles BtnCreatePendulum.Click
+        If IsFormLoaded Then
+            FC.CreateOrRemovePendulum()
+        End If
+    End Sub
 
     Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
         If IsFormLoaded Then
@@ -137,4 +140,5 @@ Public Class FrmPendulum
             FC.MouseUp()
         End If
     End Sub
+
 End Class

@@ -309,6 +309,10 @@
     <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
   </data>
+  <data name="CreatePendulum" xml:space="preserve">
+    <value>Pendel hinzufügen</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="Cristal" xml:space="preserve">
     <value>Kristall</value>
     <comment>Lbl</comment>
@@ -425,6 +429,10 @@
     <value>Blitz</value>
     <comment>Lbl</comment>
   </data>
+  <data name="FrequencyRatio" xml:space="preserve">
+    <value>Frequenzverhältnis</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="FunctionGraph" xml:space="preserve">
     <value>Funktionsgraph</value>
     <comment>Lbl</comment>
@@ -466,7 +474,7 @@
     <comment>Msg</comment>
   </data>
   <data name="InvalidParameters" xml:space="preserve">
-    <value>Einige PArameterwerte sind ungültig</value>
+    <value>Einige Parameterwerte sind ungültig</value>
     <comment>Msg</comment>
   </data>
   <data name="InvalidProtocolDigits" xml:space="preserve">
@@ -791,6 +799,10 @@
   </data>
   <data name="ReflexionAngle" xml:space="preserve">
     <value>Reflexionswinkel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RemovePendulum" xml:space="preserve">
+    <value>Pendel entfernen</value>
     <comment>Lbl</comment>
   </data>
   <data name="Reset" xml:space="preserve">

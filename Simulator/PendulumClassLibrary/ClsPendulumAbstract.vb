@@ -9,22 +9,25 @@ Public MustInherit Class ClsPendulumAbstract
 
     Protected LM As ClsLanguageManager
 
+    Protected MyIsMainDS As Boolean
+    Protected MyColor As Brush
+
     'The actual position of the Pendulum is drawn into this PictureBox
     'and shown by the Refresh-Method
     Protected MyPicDiagram As PictureBox
-    Protected PicGraphics As ClsGraphicTool
+    Protected MyPicGraphics As ClsGraphicTool
 
     'The permanent Track of the Pendulum is drawn into the BitMap
-    Protected BmpDiagram As Bitmap
-    Protected BmpGraphics As ClsGraphicTool
+    Protected MyBmpDiagram As Bitmap
+    Protected MyBmpGraphics As ClsGraphicTool
 
     'The Pendulum draws as well into the Phase Portrait
     Protected MyPicPhaseportrait As PictureBox
-    Protected PicPhaseportraitGraphics As ClsGraphicTool
+    Protected MyPicPhaseportraitGraphics As ClsGraphicTool
 
     'Permanent Track in the Phaseportrait
-    Protected BmpPhaseportrait As Bitmap
-    Protected BmpPhaseportraitGraphics As ClsGraphicTool
+    Protected MyBmpPhaseportrait As Bitmap
+    Protected MyBmpPhaseportraitGraphics As ClsGraphicTool
 
     'PhasePortrait
     Protected Enum TypeofPhaseportraitEnum
@@ -45,6 +48,10 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MyIsProtocol As Boolean
 
     Protected MathInterval As ClsInterval
+
+    'For Visibility, the MathInterval is a little bit shrinked
+    Protected ShrinkedInterval As ClsInterval
+    Protected Const ShrinkFactor As Decimal = CDec(0.95)
 
     Protected MyAdditionalParameter As ClsGeneralParameter
     Protected MyAdditionalParameterValue As Integer
@@ -95,7 +102,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected ReadOnly h2 As ClsNTupel
 
     'Global Constants
-    Protected Const StepWidthUnit As Decimal = CDec(0.0001)
+    Protected Const StepWidthUnit As Decimal = CDec(0.0005)
 
     'Gravitation acceleration
     Protected Const g As Decimal = CDec(9.81)
@@ -107,21 +114,55 @@ Public MustInherit Class ClsPendulumAbstract
         Set(value As PictureBox)
             MyPicDiagram = value
 
-            'MyPicDiagram should be a square
-            Dim Squareside As Integer = Math.Min(MyPicDiagram.Width, MyPicDiagram.Height)
-            MyPicDiagram.Width = Squareside
-            MyPicDiagram.Height = Squareside
+            If MyIsMainDS Then
+                'MyPicDiagram should be a square
+                Dim Squareside As Integer = Math.Min(MyPicDiagram.Width, MyPicDiagram.Height)
+                MyPicDiagram.Width = Squareside
+                MyPicDiagram.Height = Squareside
 
-            BmpDiagram = New Bitmap(Squareside, Squareside)
+                MyBmpDiagram = New Bitmap(Squareside, Squareside)
 
-            'The Bitmap MapPendulum is then shown as Image of PicPendulum
-            MyPicDiagram.Image = BmpDiagram
+                'The Bitmap MapPendulum is then shown as Image of PicPendulum
+                MyPicDiagram.Image = MyBmpDiagram
 
-            'Graphics
-            'The MathInterval is the same for X and Y
-            PicGraphics = New ClsGraphicTool(MyPicDiagram, MathInterval, MathInterval)
-            BmpGraphics = New ClsGraphicTool(BmpDiagram, MathInterval, MathInterval)
+                'Graphics
+                'The MathInterval is the same for X and Y
+                MyPicGraphics = New ClsGraphicTool(MyPicDiagram, MathInterval, MathInterval)
+                MyBmpGraphics = New ClsGraphicTool(MyBmpDiagram, MathInterval, MathInterval)
+            End If
+        End Set
+    End Property
 
+    WriteOnly Property PendulumColor As Brush Implements IPendulum.PendulumColor
+        Set(value As Brush)
+            MyColor = value
+        End Set
+    End Property
+
+    Property PicGraphics As ClsGraphicTool Implements IPendulum.PicGraphics
+        Get
+            PicGraphics = MyPicGraphics
+        End Get
+        Set(value As ClsGraphicTool)
+            MyPicGraphics = value
+        End Set
+    End Property
+
+    Property BmpDiagram As Bitmap Implements IPendulum.BmpDiagram
+        Get
+            BmpDiagram = MyBmpDiagram
+        End Get
+        Set(value As Bitmap)
+            MyBmpDiagram = BmpDiagram
+        End Set
+    End Property
+
+    Property BmpGraphics As ClsGraphicTool Implements IPendulum.BmpGraphics
+        Get
+            BmpGraphics = MyBmpGraphics
+        End Get
+        Set(value As ClsGraphicTool)
+            MyBmpGraphics = value
         End Set
     End Property
 
@@ -129,15 +170,44 @@ Public MustInherit Class ClsPendulumAbstract
         Set(value As PictureBox)
             MyPicPhaseportrait = value
 
-            'MyPicPhasePortrait should be a square
-            Dim Squareside As Integer = Math.Min(MyPicPhaseportrait.Width, MyPicPhaseportrait.Height)
-            MyPicPhaseportrait.Width = Squareside
-            MyPicPhaseportrait.Height = Squareside
-            PicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, MathInterval, MathInterval)
+            If MyIsMainDS Then
+                'MyPicPhasePortrait should be a square
+                Dim Squareside As Integer = Math.Min(MyPicPhaseportrait.Width, MyPicPhaseportrait.Height)
+                MyPicPhaseportrait.Width = Squareside
+                MyPicPhaseportrait.Height = Squareside
+                MyPicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, MathInterval, MathInterval)
 
-            BmpPhaseportrait = New Bitmap(Squareside, Squareside)
-            MyPicPhaseportrait.Image = BmpPhaseportrait
-            BmpPhaseportraitGraphics = New ClsGraphicTool(BmpPhaseportrait, MathInterval, MathInterval)
+                MyBmpPhaseportrait = New Bitmap(Squareside, Squareside)
+                MyPicPhaseportrait.Image = MyBmpPhaseportrait
+                MyBmpPhaseportraitGraphics = New ClsGraphicTool(MyBmpPhaseportrait, MathInterval, MathInterval)
+            End If
+        End Set
+    End Property
+
+    Property PicPhasePortraitGraphics As ClsGraphicTool Implements IPendulum.PicPhasePortraitGraphics
+        Get
+            PicPhasePortraitGraphics = MyPicPhaseportraitGraphics
+        End Get
+        Set(value As ClsGraphicTool)
+            MyPicPhaseportraitGraphics = value
+        End Set
+    End Property
+
+    Property BmpPhasePortrait As Bitmap Implements IPendulum.BmpPhasePortrait
+        Get
+            BmpPhasePortrait = MyBmpPhaseportrait
+        End Get
+        Set(value As Bitmap)
+            MyBmpPhaseportrait = value
+        End Set
+    End Property
+
+    Property BmpPhasePortraitGraphics As ClsGraphicTool Implements IPendulum.BmpPhasePortraitGraphics
+        Get
+            BmpPhasePortraitGraphics = MyBmpPhaseportraitGraphics
+        End Get
+        Set(value As ClsGraphicTool)
+            MyBmpPhaseportraitGraphics = value
         End Set
     End Property
 
@@ -150,8 +220,8 @@ Public MustInherit Class ClsPendulumAbstract
             'just to label the PhasePortrait Parameters
             SetPhasePortraitParameters()
 
-            PicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, UInterval, VInterval)
-            BmpPhaseportraitGraphics = New ClsGraphicTool(BmpPhaseportrait, UInterval, VInterval)
+            MyPicPhaseportraitGraphics = New ClsGraphicTool(MyPicPhaseportrait, UInterval, VInterval)
+            MyBmpPhaseportraitGraphics = New ClsGraphicTool(MyBmpPhaseportrait, UInterval, VInterval)
         End Set
     End Property
 
@@ -190,11 +260,21 @@ Public MustInherit Class ClsPendulumAbstract
         End Get
     End Property
 
-    WriteOnly Property AdditionalParameterValue As Integer Implements IPendulum.AdditionalParameterValue
+    Property AdditionalParameterValue As Integer Implements IPendulum.AdditionalParameterValue
+        Get
+            AdditionalParameterValue = MyAdditionalParameterValue
+        End Get
         Set(value As Integer)
             MyAdditionalParameterValue = value
-            SetAdditionalParameters()
-            PrepareDiagram()
+        End Set
+    End Property
+
+    Property IsMainDS As Boolean Implements IPendulum.IsMainDS
+        Get
+            IsMainDS = MyIsMainDS
+        End Get
+        Set(value As Boolean)
+            MyIsMainDS = value
         End Set
     End Property
 
@@ -287,7 +367,9 @@ Public MustInherit Class ClsPendulumAbstract
         'StepWidth of Runge Kutta
         Set(value As Integer)
             d = value * StepWidthUnit
-            MyLblStepWidth.Text = LM.GetString("StepWidth") & ": " & d.ToString
+            If MyIsMainDS Then
+                MyLblStepWidth.Text = LM.GetString("StepWidth") & ": " & d.ToString
+            End If
         End Set
     End Property
 
@@ -295,7 +377,12 @@ Public MustInherit Class ClsPendulumAbstract
 
         LM = ClsLanguageManager.LM
 
+        'Because PicDiagram and BmpDiagram are squares
+        'MathXInterval = MathYInterval =: MathInterval
+        'a square also
         MathInterval = New ClsInterval(-1, 1)
+        ShrinkedInterval = New ClsInterval(MathInterval.A * ShrinkFactor, MathInterval.B * ShrinkFactor)
+
         MathHelper = New ClsMathHelperPendulum
 
         'To perform the iteration
@@ -316,20 +403,22 @@ Public MustInherit Class ClsPendulumAbstract
 
     Public Sub ResetIteration() Implements IPendulum.ResetIteration
 
-        MyProtocol.Items.Clear()
+        If MyIsMainDS Then
+            MyProtocol.Items.Clear()
 
-        BmpGraphics.Clear(Color.White)
-        BmpPhaseportraitGraphics.Clear(Color.White)
+            MyBmpGraphics.Clear(Color.White)
+            MyBmpPhaseportraitGraphics.Clear(Color.White)
 
-        MyPicDiagram.Refresh()
-        MyPicPhaseportrait.Refresh()
+            MyPicDiagram.Refresh()
+            MyPicPhaseportrait.Refresh()
 
-        PrepareDiagram()
+            PrepareDiagram()
 
-        MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
+            MyIterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
-        MyIsStartParameter1Set = False
-        MyIsStartParameter2Set = False
+            MyIsStartParameter1Set = False
+            MyIsStartParameter2Set = False
+        End If
 
     End Sub
 
@@ -338,17 +427,20 @@ Public MustInherit Class ClsPendulumAbstract
     End Function
 
     Public Sub PrepareDiagram() Implements IPendulum.PrepareDiagram
-        DrawCoordinateSystem()
-        DrawPendulums()
+        If MyIsMainDS Then
+            DrawCoordinateSystem()
+            DrawPendulum()
+        End If
     End Sub
 
     Protected Sub ProtocolValues()
-
-        'For debugging e.g.
-        If MyIsProtocol Then
-            MyProtocol.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
-        u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
-                                     GetEnergy.ToString("N11"))
+        If MyIsMainDS Then
+            'For debugging e.g.
+            If MyIsProtocol Then
+                MyProtocol.Items.Add(u1.ToString("N11") & ", " & v1.ToString("N11") & ", " &
+            u2.ToString("N11") & ", " & v2.ToString("N11") & ", " &
+                                         GetEnergy.ToString("N11"))
+            End If
         End If
     End Sub
 
@@ -361,15 +453,17 @@ Public MustInherit Class ClsPendulumAbstract
 
     Public MustOverride Sub IterationStep(IsTestMode As Boolean) Implements IPendulum.IterationStep
 
-    Protected MustOverride Sub DrawPendulums()
+    Protected MustOverride Sub DrawPendulum()
     Protected MustOverride Sub SetPosition()
 
     Protected MustOverride Sub SetStartEnergyRange()
     Protected MustOverride Sub SetPhasePortraitParameters()
-    Protected MustOverride Sub SetAdditionalParameters()
+    Protected MustOverride Sub SetAdditionalParameters() Implements IPendulum.SetAdditionalParameters
     Protected MustOverride Function GetEnergy() As Decimal Implements IPendulum.GetEnergy
 
     Protected MustOverride Sub SetDefaultUserData() Implements IPendulum.SetDefaultUserData
     Protected MustOverride Sub DrawCoordinateSystem()
+
+    Public MustOverride Function GetCopy() As IPendulum Implements IPendulum.GetCopy
 
 End Class

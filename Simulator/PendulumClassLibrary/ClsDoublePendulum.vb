@@ -22,11 +22,13 @@ Public Class ClsDoublePendulum
     'Size of Pendulums
     Private ReadOnly PendulumSize As ClsNTupel
 
+    Private Origin As ClsMathpoint
+
     'SECTOR INITIALIZATION
 
     Public Sub New()
 
-        Y0 = 0
+        Origin = New ClsMathpoint(0, 0)
 
         MyLabelProtocol = LM.GetString("Parameterlist") & ": u1, v1, u2, v2, Etot"
 
@@ -35,12 +37,12 @@ Public Class ClsDoublePendulum
         'Inizialize all parameters
         'Tag is the Number of the Label in the Pendulum Form
         'L1
-        ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDec(0.1), CDec(0.85)),
+        ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDec(0.1), ShrinkedInterval.B),
                                                     ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.7))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L2
-        ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDec(0.1), CDec(0.85)),
+        ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDec(0.1), ShrinkedInterval.B),
                                                     ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.2))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
@@ -63,10 +65,6 @@ Public Class ClsDoublePendulum
         MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
                                                       LM.GetString("MassRatioM"), New ClsInterval(0, 4), ClsGeneralParameter.TypeOfParameterEnum.DS)
 
-        'Calculates mass ratio M = m2/m1
-        M = GetAddParameterValue(MyAdditionalParameterValue)
-        Mu = M / (1 + M)
-
         'Vectors
         'We have two constant parameters: L1 = .Component(0), L2 = Component(1)
         MyCalculationConstants = New ClsNTupel(1)
@@ -76,42 +74,48 @@ Public Class ClsDoublePendulum
 
         'StandardSize
         PendulumSize = New ClsNTupel(1)
-        SetPendulumSize()
 
     End Sub
 
+    Public Overrides Function GetCopy() As IPendulum
+        Return New ClsDoublePendulum
+    End Function
 
     'SECTOR CALCULATION AND DRAWING
 
     Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
 
+        'This is to adjust the value of TrbAdditionalParameter
         Dim Temp As Decimal = CDec(Math.Pow(2, AddParameter - 2))
-
         Return Temp
 
     End Function
 
     Protected Overrides Sub DrawCoordinateSystem()
         'x-Axis
-        BmpGraphics.DrawLine(New ClsMathpoint(-1, Y0), New ClsMathpoint(1, Y0), Color.Aquamarine, 1)
+        MyBmpGraphics.DrawLine(New ClsMathpoint(MathInterval.A, Y0),
+                             New ClsMathpoint(MathInterval.B, Y0), Color.Aquamarine, 1)
         'y-Axis
-        BmpGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
+        MyBmpGraphics.DrawLine(New ClsMathpoint(0, MathInterval.A),
+                             New ClsMathpoint(0, MathInterval.B), Color.Aquamarine, 1)
     End Sub
 
-    Protected Overrides Sub DrawPendulums()
+    Protected Overrides Sub DrawPendulum()
 
         With PicGraphics
 
-            'Clear Graphic
-            MyPicDiagram.Refresh()
+            If MyIsMainDS Then
+                'Clear Graphic
+                MyPicDiagram.Refresh()
+            End If
 
-            'First Pendulum
-            .DrawLine(New ClsMathpoint(0, 0), Position1, Color.Red, 2)
-            .FillCircle(Position1, PendulumSize.Component(0), Brushes.Red)
+            'Upper Pendulum
+            .DrawLine(Origin, Position1, Color.Blue, 2)
+            .FillCircle(Position1, PendulumSize.Component(0), Brushes.Blue)
 
-            'Second Pendulum
-            .DrawLine(Position1, Position2, Color.Green, 2)
-            .FillCircle(Position2, PendulumSize.Component(1), Brushes.Green)
+            'Lower Pendulum
+            .DrawLine(Position1, Position2, MyColor, 2)
+            .FillCircle(Position2, PendulumSize.Component(1), MyColor)
 
         End With
 
@@ -145,7 +149,7 @@ Public Class ClsDoublePendulum
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(CDec(-10), CDec(10))
             Case Else 'independent
-                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Red: Phi1, Phi1'. Green: Phi2, Phi2'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: Phi1, Phi1'. Red: Phi2, Phi2'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(CDec(-10), CDec(10))
         End Select
@@ -153,14 +157,19 @@ Public Class ClsDoublePendulum
     End Sub
 
     Protected Overrides Sub SetAdditionalParameters()
+
         M = GetAddParameterValue(MyAdditionalParameterValue)
 
         'Factor Mu in Differential Equations
         Mu = M / (1 + M)
         SetPendulumSize()
+
+        If MyIsMainDS Then
+            ResetIteration()
+            SetStartEnergyRange()
+        End If
+
         SetPosition()
-        ResetIteration()
-        SetStartEnergyRange()
     End Sub
 
     Protected Overrides Sub SetStartEnergyRange()
@@ -208,7 +217,7 @@ Public Class ClsDoublePendulum
             Dim L1 As Decimal = CDec(Math.Max(LocRange.A, Math.Min(Math.Sqrt(.X * .X + .Y * .Y), LocRange.B)))
 
             'L2 standard
-            Dim L2 As Decimal = CDec(Math.Min(MyCalculationConstants.Component(1), 0.95 - L1))
+            Dim L2 As Decimal = CDec(Math.Min(MyCalculationConstants.Component(1), ShrinkFactor - L1))
 
             'Phi1
             Dim Phi1 As Decimal = MathHelper.GetAngle(.X, .Y)
@@ -223,7 +232,7 @@ Public Class ClsDoublePendulum
             SetStartEnergyRange()
 
             'Draw pendulum
-            DrawPendulums()
+            DrawPendulum()
 
             'Runge Kutta
             u1 = Phi1
@@ -260,7 +269,7 @@ Public Class ClsDoublePendulum
             SetStartEnergyRange()
 
             'Draw pendulum
-            DrawPendulums()
+            DrawPendulum()
 
             'Runge Kutta Parameters
             u2 = Phi2
@@ -287,8 +296,10 @@ Public Class ClsDoublePendulum
             v2 = 0
         End With
 
-        SetStartEnergyRange()
-        SetPosition()
+        SetAdditionalParameters()
+        'This is to adjust the value of TrbAdditionalParameter
+
+        SetPendulumSize()
 
     End Sub
 
@@ -431,7 +442,7 @@ Public Class ClsDoublePendulum
         DrawTrack()
 
         'Draw actual Pendulumposition
-        DrawPendulums()
+        DrawPendulum()
 
     End Sub
 
@@ -439,26 +450,26 @@ Public Class ClsDoublePendulum
 
         'The track of Pendulum1 is always on a circle and not interesting
         'MyBitmapGraphics.DrawLine(OldPosition1, Position1, Color.Red, 1)
-        BmpGraphics.DrawLine(OldPosition2, Position2, Color.Green, 1)
-        MyPicDiagram.Invalidate()
+        MyBmpGraphics.DrawLine(OldPosition2, Position2, MyColor, 1)
 
     End Sub
 
     Private Sub DrawPhaseportrait()
+
         Select Case TypeofPhasePortrait
-            Case TypeofPhaseportraitEnum.TorusOrCylinder
-                MyPicPhaseportrait.Refresh()
-                PicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
-                BmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
-            Case TypeofPhaseportraitEnum.PoincareSection
-                If IsSignumChanged Then
-                    PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 2)
-                End If
-            Case Else
-                'Draw only into PicPhaseportrait
-                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
-                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
-        End Select
+                Case TypeofPhaseportraitEnum.TorusOrCylinder
+                    MyPicPhaseportrait.Refresh()
+                    MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Blue, 1)
+                    MyBmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), MyColor, 1)
+                Case TypeofPhaseportraitEnum.PoincareSection
+                    If IsSignumChanged Then
+                        MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 2)
+                    End If
+                Case Else
+                    'Draw only into PicPhaseportrait
+                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Blue, 1)
+                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 1)
+            End Select
 
     End Sub
 

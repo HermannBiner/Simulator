@@ -229,6 +229,8 @@ Public Class ClsJuliaIterationController
     End Sub
 
     Public Sub ResetIteration()
+
+        SetControlsEnabled(True)
         MyForm.BtnStart.Text = LM.GetString("Start")
 
         ExaminatedPoints = 0
@@ -317,8 +319,6 @@ Public Class ClsJuliaIterationController
             If IsUserDataOK() And IsCParameterOK() Then
 
                 DiagramAreaSelector.IsActivated = False
-                MyForm.BtnStart.Text = LM.GetString("Continue")
-
                 With DS
                     .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
                     .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
@@ -340,12 +340,9 @@ Public Class ClsJuliaIterationController
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready _
                 Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             IterationStatus = ClsDynamics.EnIterationStatus.Running
+            SetControlsEnabled(False)
             With MyForm
-                .BtnStart.Enabled = False
-                .BtnReset.Enabled = False
-                .ChkProtocol.Enabled = False
-                .BtnDefault.Enabled = False
-                .CboFunction.Enabled = False
+                .BtnStart.Text = LM.GetString("Continue")
                 .Cursor = Cursors.WaitCursor
             End With
 
@@ -353,12 +350,9 @@ Public Class ClsJuliaIterationController
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            SetControlsEnabled(True)
             With MyForm
                 .BtnStart.Text = LM.GetString("Start")
-                .BtnStart.Enabled = True
-                .BtnReset.Enabled = True
-                .BtnDefault.Enabled = True
-                .CboFunction.Enabled = True
                 .Cursor = Cursors.Arrow
             End With
             DiagramAreaSelector.IsActivated = True
@@ -469,13 +463,9 @@ Public Class ClsJuliaIterationController
         'the iteration was running and is interrupted
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
         'the iteration is stooped by reset the iteration
-        With MyForm
-            .BtnStart.Enabled = True
-            .BtnReset.Enabled = True
-            .ChkProtocol.Enabled = True
-            .BtnDefault.Enabled = True
-            .Cursor = Cursors.Arrow
-        End With
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+        MyForm.Cursor = Cursors.Arrow
     End Sub
 
     'CHECK USER RANGES AND SET X- AND Y- RANGE
@@ -502,4 +492,26 @@ Public Class ClsJuliaIterationController
 
     End Function
 
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .CboJuliaSamples.Enabled = IsEnabled
+            .CboN.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .OptSystem.Enabled = IsEnabled
+            .OptUser.Enabled = IsEnabled
+            .TrbBlue.Enabled = IsEnabled
+            .TrbGreen.Enabled = IsEnabled
+            .TrbRed.Enabled = IsEnabled
+            .TxtA.Enabled = IsEnabled
+            .TxtB.Enabled = IsEnabled
+            .TxtXMax.Enabled = IsEnabled
+            .TxtXMin.Enabled = IsEnabled
+            .TxtYMax.Enabled = IsEnabled
+            .TxtYMin.Enabled = IsEnabled
+        End With
+    End Sub
 End Class

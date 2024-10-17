@@ -6,9 +6,15 @@ Public Interface IPendulum
 
     'the pendulum needs the following references to draw its movement
     WriteOnly Property PicDiagram As PictureBox
+    Property PicGraphics As ClsGraphicTool
+    Property BmpDiagram As Bitmap
+    Property BmpGraphics As ClsGraphicTool
 
     'in addtion, the pendulum protocols its movement in a phase portrait
     WriteOnly Property PicPhaseportrait As PictureBox
+    Property PicPhasePortraitGraphics As ClsGraphicTool
+    Property BmpPhasePortrait As Bitmap
+    Property BmpPhasePortraitGraphics As ClsGraphicTool
 
     'the Type of PhasePortrait that is selected
     WriteOnly Property PhaseportraitIndex As Integer
@@ -20,6 +26,10 @@ Public Interface IPendulum
 
     WriteOnly Property IsProtocol As Boolean
 
+    Property IsMainDS As Boolean
+
+    WriteOnly Property PendulumColor As Brush
+
     'Label of the Parameterlist
     ReadOnly Property LabelProtocol As String
 
@@ -27,7 +37,7 @@ Public Interface IPendulum
     ReadOnly Property AdditionalParameter As ClsGeneralParameter
 
     'contains the value of the trackbar TrbAdditionalParameter
-    WriteOnly Property AdditionalParameterValue As Integer
+    Property AdditionalParameterValue As Integer
 
     'To label fields P1...P8 and set the Valueranges
     ReadOnly Property ValueParameterDefinition As List(Of ClsGeneralParameter)
@@ -62,8 +72,12 @@ Public Interface IPendulum
 
     Sub SetDefaultUserData()
 
+    Sub SetAdditionalParameters()
+
     Function GetEnergy() As Decimal
 
     Sub IterationStep(IsTestmode As Boolean)
+
+    Function GetCopy() As IPendulum
 
 End Interface

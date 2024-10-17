@@ -239,6 +239,8 @@ Public Class ClsIterationController
     Public Sub SetParameterA()
         DS.ParameterA = DS.DSParameter.Range.A + DS.DSParameter.Range.IntervalWidth * (MyForm.TrbParameterA.Value - 1) / 999
         MyForm.TxtParameterA.Text = DS.ParameterA.ToString
+        MyForm.TxtParameterA.Refresh()
+
         If MyForm.OptFunctionGraph.Checked Then
             DrawFunctionGraph()
         End If

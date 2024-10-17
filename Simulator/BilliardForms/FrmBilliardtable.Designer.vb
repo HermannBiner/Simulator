@@ -65,7 +65,7 @@ Partial Class FrmBilliardtable
         ' 
         PicDiagram.BackColor = Color.White
         PicDiagram.Location = New Point(0, 2)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(1300, 1493)
         PicDiagram.TabIndex = 3
@@ -84,7 +84,7 @@ Partial Class FrmBilliardtable
         ' BtnNextStep
         ' 
         BtnNextStep.Location = New Point(1309, 932)
-        BtnNextStep.Margin = New Padding(4, 4, 4, 4)
+        BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
         BtnNextStep.Size = New Size(394, 73)
         BtnNextStep.TabIndex = 11
@@ -94,7 +94,7 @@ Partial Class FrmBilliardtable
         ' BtnReset
         ' 
         BtnReset.Location = New Point(1307, 1414)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(394, 73)
         BtnReset.TabIndex = 12
@@ -104,7 +104,7 @@ Partial Class FrmBilliardtable
         ' BtnStart
         ' 
         BtnStart.Location = New Point(1307, 1084)
-        BtnStart.Margin = New Padding(4, 4, 4, 4)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
         BtnStart.Size = New Size(394, 73)
         BtnStart.TabIndex = 13
@@ -115,7 +115,7 @@ Partial Class FrmBilliardtable
         ' 
         PicPhasePortrait.BackColor = Color.White
         PicPhasePortrait.Location = New Point(1718, 49)
-        PicPhasePortrait.Margin = New Padding(4, 4, 4, 4)
+        PicPhasePortrait.Margin = New Padding(4)
         PicPhasePortrait.Name = "PicPhasePortrait"
         PicPhasePortrait.Size = New Size(929, 1067)
         PicPhasePortrait.TabIndex = 16
@@ -124,7 +124,7 @@ Partial Class FrmBilliardtable
         ' BtnNewBall
         ' 
         BtnNewBall.Location = New Point(1317, 380)
-        BtnNewBall.Margin = New Padding(4, 4, 4, 4)
+        BtnNewBall.Margin = New Padding(4)
         BtnNewBall.Name = "BtnNewBall"
         BtnNewBall.Size = New Size(394, 73)
         BtnNewBall.TabIndex = 17
@@ -137,7 +137,7 @@ Partial Class FrmBilliardtable
         CboBallColor.FormattingEnabled = True
         CboBallColor.Items.AddRange(New Object() {"Red", "Green", "Blue", "Black", "Magenta"})
         CboBallColor.Location = New Point(1317, 322)
-        CboBallColor.Margin = New Padding(4, 4, 4, 4)
+        CboBallColor.Margin = New Padding(4)
         CboBallColor.Name = "CboBallColor"
         CboBallColor.Size = New Size(316, 40)
         CboBallColor.TabIndex = 18
@@ -155,7 +155,7 @@ Partial Class FrmBilliardtable
         ' TrbSpeed
         ' 
         TrbSpeed.Location = New Point(1317, 828)
-        TrbSpeed.Margin = New Padding(4, 4, 4, 4)
+        TrbSpeed.Margin = New Padding(4)
         TrbSpeed.Maximum = 500
         TrbSpeed.Minimum = 1
         TrbSpeed.Name = "TrbSpeed"
@@ -200,9 +200,9 @@ Partial Class FrmBilliardtable
         GrpStartParameter.Controls.Add(LblAlfa)
         GrpStartParameter.Controls.Add(LblT)
         GrpStartParameter.Location = New Point(1317, 489)
-        GrpStartParameter.Margin = New Padding(4, 4, 4, 4)
+        GrpStartParameter.Margin = New Padding(4)
         GrpStartParameter.Name = "GrpStartParameter"
-        GrpStartParameter.Padding = New Padding(4, 4, 4, 4)
+        GrpStartParameter.Padding = New Padding(4)
         GrpStartParameter.Size = New Size(394, 269)
         GrpStartParameter.TabIndex = 24
         GrpStartParameter.TabStop = False
@@ -211,7 +211,7 @@ Partial Class FrmBilliardtable
         ' BtnTakeOverStartParameter
         ' 
         BtnTakeOverStartParameter.Location = New Point(17, 179)
-        BtnTakeOverStartParameter.Margin = New Padding(4, 4, 4, 4)
+        BtnTakeOverStartParameter.Margin = New Padding(4)
         BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
         BtnTakeOverStartParameter.Size = New Size(368, 73)
         BtnTakeOverStartParameter.TabIndex = 4
@@ -221,7 +221,7 @@ Partial Class FrmBilliardtable
         ' TxtAlfa
         ' 
         TxtAlfa.Location = New Point(91, 113)
-        TxtAlfa.Margin = New Padding(4, 4, 4, 4)
+        TxtAlfa.Margin = New Padding(4)
         TxtAlfa.Name = "TxtAlfa"
         TxtAlfa.Size = New Size(225, 39)
         TxtAlfa.TabIndex = 3
@@ -229,7 +229,7 @@ Partial Class FrmBilliardtable
         ' TxtT
         ' 
         TxtT.Location = New Point(91, 51)
-        TxtT.Margin = New Padding(4, 4, 4, 4)
+        TxtT.Margin = New Padding(4)
         TxtT.Name = "TxtT"
         TxtT.Size = New Size(225, 39)
         TxtT.TabIndex = 2
@@ -258,7 +258,7 @@ Partial Class FrmBilliardtable
         ' 
         LstValueList.FormattingEnabled = True
         LstValueList.Location = New Point(1718, 1190)
-        LstValueList.Margin = New Padding(4, 4, 4, 4)
+        LstValueList.Margin = New Padding(4)
         LstValueList.Name = "LstValueList"
         LstValueList.Size = New Size(925, 292)
         LstValueList.TabIndex = 25
@@ -278,7 +278,7 @@ Partial Class FrmBilliardtable
         CboBilliardTable.FormattingEnabled = True
         CboBilliardTable.Items.AddRange(New Object() {"Elliptic", "Stadium", "Oval"})
         CboBilliardTable.Location = New Point(1317, 49)
-        CboBilliardTable.Margin = New Padding(4, 4, 4, 4)
+        CboBilliardTable.Margin = New Padding(4)
         CboBilliardTable.Name = "CboBilliardTable"
         CboBilliardTable.Size = New Size(394, 40)
         CboBilliardTable.TabIndex = 27
@@ -306,7 +306,7 @@ Partial Class FrmBilliardtable
         ' BtnPhasePortrait
         ' 
         BtnPhasePortrait.Location = New Point(1307, 1252)
-        BtnPhasePortrait.Margin = New Padding(4, 4, 4, 4)
+        BtnPhasePortrait.Margin = New Padding(4)
         BtnPhasePortrait.Name = "BtnPhasePortrait"
         BtnPhasePortrait.Size = New Size(394, 73)
         BtnPhasePortrait.TabIndex = 30
@@ -316,7 +316,7 @@ Partial Class FrmBilliardtable
         ' BtnStop
         ' 
         BtnStop.Location = New Point(1307, 1165)
-        BtnStop.Margin = New Padding(4, 4, 4, 4)
+        BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(394, 73)
         BtnStop.TabIndex = 52
@@ -338,7 +338,7 @@ Partial Class FrmBilliardtable
         ' TxtParameter
         ' 
         TxtParameter.Location = New Point(1462, 109)
-        TxtParameter.Margin = New Padding(6, 6, 6, 6)
+        TxtParameter.Margin = New Padding(6)
         TxtParameter.Name = "TxtParameter"
         TxtParameter.Size = New Size(249, 39)
         TxtParameter.TabIndex = 54
@@ -346,7 +346,7 @@ Partial Class FrmBilliardtable
         ' BtnDefault
         ' 
         BtnDefault.Location = New Point(1307, 1333)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(394, 73)
         BtnDefault.TabIndex = 55
@@ -406,7 +406,7 @@ Partial Class FrmBilliardtable
         Controls.Add(LblParameterc)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         Name = "FrmBilliardtable"
         Text = "Billiard"
         WindowState = FormWindowState.Maximized

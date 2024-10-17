@@ -200,6 +200,7 @@ Public Class ClsNewtonIterationController
 
     Public Sub ResetIteration()
 
+        SetControlsEnabled(True)
         With MyForm
             .BtnStart.Text = LM.GetString("Start")
             .BtnStart.Enabled = True
@@ -225,7 +226,6 @@ Public Class ClsNewtonIterationController
             'and should start from the beginning
             If IsUserDataOK() Then
                 ResetIteration()
-                MyForm.BtnStart.Text = LM.GetString("Continue")
                 DiagramAreaSelector.IsActivated = False
                 With DS
                     SetExponent()
@@ -268,13 +268,9 @@ Public Class ClsNewtonIterationController
                 Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             IterationStatus = ClsDynamics.EnIterationStatus.Running
 
+            SetControlsEnabled(False)
             With MyForm
-                .BtnStart.Enabled = False
-                .BtnReset.Enabled = False
-                .ChkProtocol.Enabled = False
-                .BtnDefault.Enabled = False
-                .BtnShowBasin.Enabled = False
-                .CboFunction.Enabled = False
+                .BtnStart.Text = LM.GetString("Continue")
                 .Cursor = Cursors.WaitCursor
             End With
 
@@ -283,14 +279,9 @@ Public Class ClsNewtonIterationController
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            SetControlsEnabled(True)
             With MyForm
-                .BtnStart.Enabled = True
-                .BtnReset.Enabled = True
-                .ChkProtocol.Enabled = True
-                .BtnDefault.Enabled = True
-                .BtnShowBasin.Enabled = True
                 .BtnStart.Text = LM.GetString("Start")
-                .CboFunction.Enabled = True
                 .Cursor = Cursors.Arrow
             End With
             DiagramAreaSelector.IsActivated = True
@@ -406,13 +397,10 @@ Public Class ClsNewtonIterationController
         'the iteration was running and is interrupted
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
         'the iteration is stopoped by reset the iteration
-        With MyForm
-            .BtnStart.Enabled = True
-            .BtnReset.Enabled = True
-            .ChkProtocol.Enabled = True
-            .BtnDefault.Enabled = True
-            .Cursor = Cursors.Arrow
-        End With
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+        MyForm.Cursor = Cursors.Arrow
+
     End Sub
 
     'CHECK USER RANGES AND SET X- AND Y- RANGE
@@ -529,5 +517,28 @@ Public Class ClsNewtonIterationController
 
         Return rTemp
     End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .BtnShowBasin.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .CboN.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .OptBright.Enabled = IsEnabled
+            .OptConjugate.Enabled = IsEnabled
+            .OptNone.Enabled = IsEnabled
+            .OptRotate.Enabled = IsEnabled
+            .OptShaded.Enabled = IsEnabled
+            .TxtA.Enabled = IsEnabled
+            .TxtB.Enabled = IsEnabled
+            .TxtXMax.Enabled = IsEnabled
+            .TxtXMin.Enabled = IsEnabled
+            .TxtYMax.Enabled = IsEnabled
+            .TxtYMin.Enabled = IsEnabled
+        End With
+    End Sub
 
 End Class

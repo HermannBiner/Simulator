@@ -50,8 +50,6 @@ Public Class FrmHistogram
         Text = LM.GetString("Histogram")
         LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
         BtnReset.Text = LM.GetString("ResetIteration")
-        BtnStart.Text = LM.GetString("Start")
-        BtnStop.Text = LM.GetString("Stop")
         LblStartValue.Text = LM.GetString("StartValue") & " ="
         LblParameter.Text = LM.GetString("Parameter") & " = "
         BtnDefault.Text = LM.GetString("DefaultUserData")

@@ -228,6 +228,7 @@ Public Class ClsNumericMethodController
 
     Public Sub ResetIteration()
 
+        SetControlsEnabled(True)
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
         BmpGraphics.Clear(Color.White)
         MyForm.PicDiagram.Refresh()
@@ -256,15 +257,11 @@ Public Class ClsNumericMethodController
 
         'UserData are always OK
         With MyForm
-            .BtnStart.Enabled = False
             .BtnStart.Text = LM.GetString("Continue")
-            .BtnReset.Enabled = False
-            .BtnDefault.Enabled = False
-            .ChkStretched.Enabled = False
-            .TrbStepWidth.Enabled = False
-            .CboPendulum.Enabled = False
             .Cursor = Cursors.WaitCursor
         End With
+
+        SetControlsEnabled(False)
 
         'MyStartposition is already set by the user
 
@@ -371,16 +368,9 @@ Public Class ClsNumericMethodController
 
     Public Sub StopIteration()
 
-        With MyForm
-            .BtnStart.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnDefault.Enabled = True
-            .ChkStretched.Enabled = True
-            .TrbStepWidth.Enabled = True
-            .CboPendulum.Enabled = True
-            .Cursor = Cursors.Arrow
-        End With
-
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+        MyForm.Cursor = Cursors.Arrow
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
     End Sub
 
@@ -465,5 +455,15 @@ Public Class ClsNumericMethodController
 
         Return y
     End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboPendulum.Enabled = IsEnabled
+            .ChkStretched.Enabled = IsEnabled
+        End With
+    End Sub
 
 End Class

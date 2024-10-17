@@ -48,8 +48,6 @@ Public Class FrmNewtonIteration
         Text = LM.GetString("NewtonIteration")
         LblProtocol.Text = LM.GetString("ProtocolNewton")
         ChkProtocol.Text = LM.GetString("Protocol")
-        BtnStart.Text = LM.GetString("Start")
-        BtnStop.Text = LM.GetString("Stop")
         BtnShowBasin.Text = LM.GetString("ShowBasin")
         BtnReset.Text = LM.GetString("ResetIteration")
         LblTime.Text = LM.GetString("Time")

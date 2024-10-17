@@ -44,7 +44,6 @@ Public Class FrmSensitivity
         Text = LM.GetString("Sensitivity")
         LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
         BtnReset.Text = LM.GetString("ResetIteration")
-        BtnStartIteration.Text = LM.GetString("StartIteration")
         OptDifference.Text = LM.GetString("Difference12")
         OptSingleOrbit.Text = LM.GetString("SingleOrbits")
         LblxStretching.Text = LM.GetString("xStretching")
@@ -131,7 +130,7 @@ Public Class FrmSensitivity
 
 
     'SECTOR ITERATION
-    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStartIteration.Click
+    Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then
             FC.StartIteration()
         End If

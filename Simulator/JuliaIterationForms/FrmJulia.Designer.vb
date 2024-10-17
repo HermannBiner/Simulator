@@ -74,7 +74,7 @@ Partial Class FrmJulia
         ' PicDiagram
         ' 
         PicDiagram.Location = New Point(-2, 15)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(1486, 1707)
         PicDiagram.TabIndex = 1
@@ -82,6 +82,7 @@ Partial Class FrmJulia
         ' 
         ' TxtTime
         ' 
+        TxtTime.Enabled = False
         TxtTime.Location = New Point(1879, 1024)
         TxtTime.Margin = New Padding(4, 2, 4, 2)
         TxtTime.Name = "TxtTime"
@@ -90,6 +91,7 @@ Partial Class FrmJulia
         ' 
         ' TxtSteps
         ' 
+        TxtSteps.Enabled = False
         TxtSteps.Location = New Point(1599, 1024)
         TxtSteps.Margin = New Padding(4, 2, 4, 2)
         TxtSteps.Name = "TxtSteps"
@@ -157,7 +159,7 @@ Partial Class FrmJulia
         ' BtnStop
         ' 
         BtnStop.Location = New Point(1493, 1165)
-        BtnStop.Margin = New Padding(4, 4, 4, 4)
+        BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(594, 73)
         BtnStop.TabIndex = 54
@@ -167,7 +169,7 @@ Partial Class FrmJulia
         ' BtnStart
         ' 
         BtnStart.Location = New Point(1493, 1084)
-        BtnStart.Margin = New Padding(4, 4, 4, 4)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
         BtnStart.Size = New Size(594, 73)
         BtnStart.TabIndex = 53
@@ -187,7 +189,7 @@ Partial Class FrmJulia
         ' TxtYMax
         ' 
         TxtYMax.Location = New Point(1593, 435)
-        TxtYMax.Margin = New Padding(4, 4, 4, 4)
+        TxtYMax.Margin = New Padding(4)
         TxtYMax.Name = "TxtYMax"
         TxtYMax.Size = New Size(494, 39)
         TxtYMax.TabIndex = 48
@@ -205,7 +207,7 @@ Partial Class FrmJulia
         ' TxtYMin
         ' 
         TxtYMin.Location = New Point(1593, 380)
-        TxtYMin.Margin = New Padding(4, 4, 4, 4)
+        TxtYMin.Margin = New Padding(4)
         TxtYMin.Name = "TxtYMin"
         TxtYMin.Size = New Size(494, 39)
         TxtYMin.TabIndex = 46
@@ -233,7 +235,7 @@ Partial Class FrmJulia
         ' TxtXMax
         ' 
         TxtXMax.Location = New Point(1593, 273)
-        TxtXMax.Margin = New Padding(4, 4, 4, 4)
+        TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
         TxtXMax.Size = New Size(494, 39)
         TxtXMax.TabIndex = 42
@@ -251,7 +253,7 @@ Partial Class FrmJulia
         ' TxtXMin
         ' 
         TxtXMin.Location = New Point(1593, 224)
-        TxtXMin.Margin = New Padding(4, 4, 4, 4)
+        TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
         TxtXMin.Size = New Size(494, 39)
         TxtXMin.TabIndex = 40
@@ -271,7 +273,7 @@ Partial Class FrmJulia
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"JuliaSet", "MandelbrotSet"})
         CboFunction.Location = New Point(1499, 17)
-        CboFunction.Margin = New Padding(4, 4, 4, 4)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
         CboFunction.Size = New Size(455, 40)
         CboFunction.TabIndex = 38
@@ -279,7 +281,7 @@ Partial Class FrmJulia
         ' BtnReset
         ' 
         BtnReset.Location = New Point(1491, 1647)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(594, 73)
         BtnReset.TabIndex = 63
@@ -312,7 +314,7 @@ Partial Class FrmJulia
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
         LstProtocol.Location = New Point(1493, 1291)
-        LstProtocol.Margin = New Padding(4, 4, 4, 4)
+        LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
         LstProtocol.Size = New Size(589, 260)
         LstProtocol.TabIndex = 64
@@ -424,7 +426,7 @@ Partial Class FrmJulia
         ' BtnDefault
         ' 
         BtnDefault.Location = New Point(1493, 1566)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(594, 73)
         BtnDefault.TabIndex = 76
@@ -435,7 +437,7 @@ Partial Class FrmJulia
         ' 
         CboJuliaSamples.FormattingEnabled = True
         CboJuliaSamples.Location = New Point(1593, 156)
-        CboJuliaSamples.Margin = New Padding(4, 4, 4, 4)
+        CboJuliaSamples.Margin = New Padding(4)
         CboJuliaSamples.Name = "CboJuliaSamples"
         CboJuliaSamples.Size = New Size(494, 40)
         CboJuliaSamples.TabIndex = 77

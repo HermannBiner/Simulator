@@ -38,7 +38,7 @@ Partial Class FrmCDiagramBilliard
         LblCmin = New Label()
         LblParameterRange = New Label()
         BtnReset = New Button()
-        BtnStartIteration = New Button()
+        BtnStart = New Button()
         CboValueParameter = New ComboBox()
         LblStartValues = New Label()
         TrbPositionStartValues = New TrackBar()
@@ -51,7 +51,7 @@ Partial Class FrmCDiagramBilliard
         ' 
         PicDiagram.BackColor = Color.White
         PicDiagram.Location = New Point(13, 17)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(1486, 1707)
         PicDiagram.TabIndex = 3
@@ -82,7 +82,7 @@ Partial Class FrmCDiagramBilliard
         TxtVMax.AcceptsReturn = True
         TxtVMax.AcceptsTab = True
         TxtVMax.Location = New Point(1632, 576)
-        TxtVMax.Margin = New Padding(4, 4, 4, 4)
+        TxtVMax.Margin = New Padding(4)
         TxtVMax.Name = "TxtVMax"
         TxtVMax.Size = New Size(342, 39)
         TxtVMax.TabIndex = 55
@@ -102,7 +102,7 @@ Partial Class FrmCDiagramBilliard
         TxtVMin.AcceptsReturn = True
         TxtVMin.AcceptsTab = True
         TxtVMin.Location = New Point(1636, 510)
-        TxtVMin.Margin = New Padding(4, 4, 4, 4)
+        TxtVMin.Margin = New Padding(4)
         TxtVMin.Name = "TxtVMin"
         TxtVMin.Size = New Size(338, 39)
         TxtVMin.TabIndex = 54
@@ -132,7 +132,7 @@ Partial Class FrmCDiagramBilliard
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Elliptic Billiard", "Stadium Billiard", "Oval Billiard"})
         CboFunction.Location = New Point(1527, 17)
-        CboFunction.Margin = New Padding(4, 4, 4, 4)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
         CboFunction.Size = New Size(447, 40)
         CboFunction.TabIndex = 51
@@ -142,7 +142,7 @@ Partial Class FrmCDiagramBilliard
         TxtCMax.AcceptsReturn = True
         TxtCMax.AcceptsTab = True
         TxtCMax.Location = New Point(1632, 239)
-        TxtCMax.Margin = New Padding(4, 4, 4, 4)
+        TxtCMax.Margin = New Padding(4)
         TxtCMax.Name = "TxtCMax"
         TxtCMax.Size = New Size(342, 39)
         TxtCMax.TabIndex = 45
@@ -162,7 +162,7 @@ Partial Class FrmCDiagramBilliard
         TxtCMin.AcceptsReturn = True
         TxtCMin.AcceptsTab = True
         TxtCMin.Location = New Point(1636, 171)
-        TxtCMin.Margin = New Padding(4, 4, 4, 4)
+        TxtCMin.Margin = New Padding(4)
         TxtCMin.Name = "TxtCMin"
         TxtCMin.Size = New Size(338, 39)
         TxtCMin.TabIndex = 44
@@ -190,29 +190,29 @@ Partial Class FrmCDiagramBilliard
         ' BtnReset
         ' 
         BtnReset.Location = New Point(1521, 1651)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(453, 73)
         BtnReset.TabIndex = 47
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
-        ' BtnStartIteration
+        ' BtnStart
         ' 
-        BtnStartIteration.Location = New Point(1521, 885)
-        BtnStartIteration.Margin = New Padding(4, 4, 4, 4)
-        BtnStartIteration.Name = "BtnStartIteration"
-        BtnStartIteration.Size = New Size(453, 73)
-        BtnStartIteration.TabIndex = 46
-        BtnStartIteration.Text = "StartIteration"
-        BtnStartIteration.UseVisualStyleBackColor = True
+        BtnStart.Location = New Point(1521, 885)
+        BtnStart.Margin = New Padding(4)
+        BtnStart.Name = "BtnStart"
+        BtnStart.Size = New Size(453, 73)
+        BtnStart.TabIndex = 46
+        BtnStart.Text = "Start"
+        BtnStart.UseVisualStyleBackColor = True
         ' 
         ' CboValueParameter
         ' 
         CboValueParameter.FormattingEnabled = True
         CboValueParameter.Items.AddRange(New Object() {"ValueRange1", "ValueRange2"})
         CboValueParameter.Location = New Point(1527, 437)
-        CboValueParameter.Margin = New Padding(4, 4, 4, 4)
+        CboValueParameter.Margin = New Padding(4)
         CboValueParameter.Name = "CboValueParameter"
         CboValueParameter.Size = New Size(447, 40)
         CboValueParameter.TabIndex = 61
@@ -230,7 +230,7 @@ Partial Class FrmCDiagramBilliard
         ' TrbPositionStartValues
         ' 
         TrbPositionStartValues.Location = New Point(1527, 781)
-        TrbPositionStartValues.Margin = New Padding(4, 4, 4, 4)
+        TrbPositionStartValues.Margin = New Padding(4)
         TrbPositionStartValues.Maximum = 119
         TrbPositionStartValues.Minimum = 1
         TrbPositionStartValues.Name = "TrbPositionStartValues"
@@ -241,7 +241,7 @@ Partial Class FrmCDiagramBilliard
         ' BtnDefault
         ' 
         BtnDefault.Location = New Point(1521, 1570)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(453, 73)
         BtnDefault.TabIndex = 64
@@ -271,10 +271,10 @@ Partial Class FrmCDiagramBilliard
         Controls.Add(LblCmin)
         Controls.Add(LblParameterRange)
         Controls.Add(BtnReset)
-        Controls.Add(BtnStartIteration)
+        Controls.Add(BtnStart)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         Name = "FrmCDiagramBilliard"
         Text = "C-Diagram"
         WindowState = FormWindowState.Maximized
@@ -300,7 +300,7 @@ Partial Class FrmCDiagramBilliard
     Friend WithEvents LblCmin As Label
     Friend WithEvents LblParameterRange As Label
     Friend WithEvents BtnReset As Button
-    Friend WithEvents BtnStartIteration As Button
+    Friend WithEvents BtnStart As Button
     Friend WithEvents CboValueParameter As ComboBox
     Friend WithEvents LblStartValues As Label
     Friend WithEvents TrbPositionStartValues As TrackBar

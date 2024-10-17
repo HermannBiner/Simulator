@@ -146,6 +146,8 @@ Public Class ClsBilliardTableController
         MyForm.LblSteps.Text = "0"
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
+        SetControlsEnabled(True)
+
         'preparediagram
         DS.DrawBilliardtable()
 
@@ -263,17 +265,7 @@ Public Class ClsBilliardTableController
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsBilliardballExisting() Then
                 If IsUserDataOK() Then
-                    With MyForm
-                        .BtnStart.Text = LM.GetString("Continue")
-                        .BtnReset.Enabled = False
-                        .BtnTakeOverStartParameter.Enabled = False
-                        .BtnNewBall.Enabled = False
-                        .BtnNextStep.Enabled = False
-                        .BtnDefault.Enabled = False
-                        .BtnPhasePortrait.Enabled = False
-                        .ChkProtocol.Enabled = False
-                        .CboBilliardTable.Enabled = False
-                    End With
+                    SetControlsEnabled(False)
                     IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 Else
                     'Message already generated
@@ -286,6 +278,11 @@ Public Class ClsBilliardTableController
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
                     IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             IterationStatus = ClsDynamics.EnIterationStatus.Running
+            With MyForm
+                .BtnStart.Text = LM.GetString("Continue")
+                .Cursor = Cursors.WaitCursor
+            End With
+
             Application.DoEvents()
 
             Await IterationLoop(0)
@@ -323,15 +320,9 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     Public Sub StopIteration()
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
-        With MyForm
-            .BtnStart.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnTakeOverStartParameter.Enabled = True
-            .BtnDefault.Enabled = True
-            .BtnPhasePortrait.Enabled = True
-            .ChkProtocol.Enabled = True
-            .CboBilliardTable.Enabled = True
-        End With
+        MyForm.Cursor = Cursors.Arrow
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
     End Sub
 
     Public Sub PrepareBallsForPhaseportrait()
@@ -534,6 +525,25 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
         End If
 
+    End Sub
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnTakeOverStartParameter.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .BtnPhasePortrait.Enabled = IsEnabled
+            .BtnNewBall.Enabled = IsEnabled
+            .BtnNextStep.Enabled = IsEnabled
+            .TrbParameterC.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .CboBilliardTable.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .CboBallColor.Enabled = IsEnabled
+            .TxtAlfa.Enabled = IsEnabled
+            .TxtT.Enabled = IsEnabled
+        End With
     End Sub
 End Class
 

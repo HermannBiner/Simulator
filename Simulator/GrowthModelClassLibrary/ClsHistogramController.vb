@@ -153,12 +153,10 @@ Public Class ClsHistogramController
 
             With MyForm
                 .BtnStart.Text = LM.GetString("Continue")
-                .BtnStart.Enabled = False
-                .BtnReset.Enabled = False
-                .BtnDefault.Enabled = False
-                .CboFunction.Enabled = False
                 .Cursor = Cursors.WaitCursor
             End With
+            SetControlsEnabled(False)
+
             Application.DoEvents()
 
             'Iteration loop
@@ -172,14 +170,10 @@ Public Class ClsHistogramController
     Public Sub StopIteration()
         'the iteration is running and should be stopped
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+        MyForm.Cursor = Cursors.Arrow
 
-        With MyForm
-            .BtnStart.Enabled = True
-            .BtnReset.Enabled = True
-            .BtnDefault.Enabled = True
-            .CboFunction.Enabled = True
-            .Cursor = Cursors.Arrow
-        End With
     End Sub
 
     Private Function IterationLoop() As Task
@@ -228,6 +222,7 @@ Public Class ClsHistogramController
 
     Public Sub ResetIteration()
 
+        SetControlsEnabled(True)
         'PicDiagram cleared
         PicGraphics.Clear(Color.White)
 
@@ -250,4 +245,16 @@ Public Class ClsHistogramController
         Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
 
     End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .TxtStartValue.Enabled = IsEnabled
+        End With
+    End Sub
+
 End Class

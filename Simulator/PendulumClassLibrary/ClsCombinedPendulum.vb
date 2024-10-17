@@ -16,6 +16,8 @@ Public Class ClsCombinedPendulum
     'set as additional Parameter
     Private Omega As Decimal
 
+    Private Origin As ClsMathpoint
+
     'Length of unstressed Spring - l0 in math.doc.
     Const L0 As Decimal = CDec(0.5)
 
@@ -23,6 +25,8 @@ Public Class ClsCombinedPendulum
     Const Lmin As Decimal = CDec(0.05)
 
     Public Sub New()
+
+        Origin = New ClsMathpoint(0, 0)
 
         MyLabelProtocol = LM.GetString("Protocol") & ": u1, v1, u2, v2, Etot"
 
@@ -38,17 +42,12 @@ Public Class ClsCombinedPendulum
                                                       New ClsInterval(LowerLimitOmega, LowerLimitOmega + 10),
                                                       ClsGeneralParameter.TypeOfParameterEnum.DS)
 
-        Omega = GetAddParameterValue(MyAdditionalParameterValue)
-
-        'This is an optimal value that the movement of the pendulum has place in the diagram
-        Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
-
         MyValueParameterDefinition = New List(Of ClsGeneralParameter)
 
         'Inizialize all parameters
         'ID is the Number of the Label in the Pendulum Form
         'L
-        ValueParameter(0) = New ClsGeneralParameter(1, "L", New ClsInterval(Lmin, CDec(0.95)),
+        ValueParameter(0) = New ClsGeneralParameter(1, "L", New ClsInterval(Lmin, CDec(2 - Y0)),
                                                     ClsGeneralParameter.TypeOfParameterEnum.Variable, L0)
         MyValueParameterDefinition.Add(ValueParameter(0))
 
@@ -62,13 +61,16 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
+    Public Overrides Function GetCopy() As IPendulum
+        Return New ClsCombinedPendulum
+    End Function
 
     'SECTOR CALCULATION AND DRAWING
 
     Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
 
+        'This is to adjust the value of TrbAdditionalParameter
         Dim Temp As Decimal = AddParameter
-
         Return Temp
 
     End Function
@@ -86,27 +88,32 @@ Public Class ClsCombinedPendulum
         For i = 0 To NumberOfSteps
             t = MathHelper.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
             r = L0 + CDec(g * Math.Cos(t) / Math.Pow(Omega, 2))
-            BmpGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), Y0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
+            MyBmpGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), Y0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
         Next
 
         'x-Axis
-        BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(1, 0), Color.Aquamarine, 1)
+        MyBmpGraphics.DrawLine(New ClsMathpoint(MathInterval.A, 0),
+                             New ClsMathpoint(MathInterval.B, 0), Color.Aquamarine, 1)
         'y0-Line
-        BmpGraphics.DrawLine(New ClsMathpoint(-1, Y0), New ClsMathpoint(1, Y0), Color.Red, 1)
+        MyBmpGraphics.DrawLine(New ClsMathpoint(MathInterval.A, Y0),
+                             New ClsMathpoint(MathInterval.B, Y0), Color.Red, 1)
         'y-Axis
-        BmpGraphics.DrawLine(New ClsMathpoint(0, -1), New ClsMathpoint(0, 1), Color.Aquamarine, 1)
+        MyBmpGraphics.DrawLine(New ClsMathpoint(0, MathInterval.A),
+                             New ClsMathpoint(0, MathInterval.B), Color.Aquamarine, 1)
     End Sub
 
-    Protected Overrides Sub DrawPendulums()
+    Protected Overrides Sub DrawPendulum()
 
         With PicGraphics
 
-            'Clear Graphic
-            MyPicDiagram.Refresh()
+            If MyIsMainDS Then
+                'Clear Graphic
+                MyPicDiagram.Refresh()
+            End If
 
             'Pendulum
-            .DrawLine(New ClsMathpoint(0, Y0), Position1, Color.Green, 2)
-            .FillCircle(Position1, CDec(0.02), Brushes.Green)
+            .DrawLine(Origin, Position1, MyColor, 2)
+            .FillCircle(Position1, CDec(0.02), MyColor)
 
         End With
 
@@ -134,7 +141,7 @@ Public Class ClsCombinedPendulum
                 UInterval = New ClsInterval(Lmin, 1)
                 VInterval = New ClsInterval(-10, 10)
             Case Else 'independent
-                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Red: l, l'. Green: Phi, Phi'"
+                MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: l, l'. Red: Phi, Phi'"
                 UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
         End Select
@@ -145,9 +152,13 @@ Public Class ClsCombinedPendulum
 
         Omega = GetAddParameterValue(MyAdditionalParameterValue)
         Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
+        Origin = New ClsMathpoint(0, Y0)
 
-        ResetIteration()
-        SetStartEnergyRange()
+        If MyIsMainDS Then
+            ResetIteration()
+            SetStartEnergyRange()
+        End If
+
         SetPosition()
     End Sub
 
@@ -170,26 +181,18 @@ Public Class ClsCombinedPendulum
 
         With ActualPosition
 
+            .X = Math.Min(Math.Max(MathInterval.A * ShrinkFactor, .X), MathInterval.B * ShrinkFactor)
+            .Y = Math.Min(Math.Max(MathInterval.A * ShrinkFactor, .Y), MathInterval.B * ShrinkFactor)
             .Y = .Y - Y0
+
+            'L
+            Dim LocL = Math.Min(ValueParameter(0).Range.B, CDec(Math.Sqrt(.X * .X + .Y * .Y)))
+            MyCalculationVariables.Component(0) = LocL
 
             'Phi
             Dim Phi As Decimal = MathHelper.GetAngle(.X, .Y)
             Phi = MathHelper.AngleInMinusPiAndPi(Phi)
 
-            'Lmax must be adapted depending on Phi
-            MyValueParameterDefinition.Item(0) = New ClsGeneralParameter(1, "L",
-                          New ClsInterval(CDec(0.2), CDec(0.95 + Y0 * Math.Cos(Phi))),
-                          ClsGeneralParameter.TypeOfParameterEnum.Variable)
-
-            'L should be in [MyValueParameters.Item(0).Range.A, MyValueParameters.Item(0).Range.B]
-            Dim LocL As Decimal
-            LocL = CDec(Math.Sqrt(.X * .X + .Y * .Y))
-            LocL = Math.Max(MyValueParameterDefinition.Item(0).Range.A, LocL)
-            LocL = Math.Min(LocL, CDec(0.95 + Y0 * Math.Cos(Phi)))
-
-
-            'Set parameters
-            MyCalculationVariables.Component(0) = LocL
             MyCalculationVariables.Component(1) = Phi
 
             SetStartEnergyRange()
@@ -197,7 +200,7 @@ Public Class ClsCombinedPendulum
             SetPosition()
 
             'Draw pendulum
-            DrawPendulums()
+            DrawPendulum()
 
             'Runge Kutta
             u1 = LocL
@@ -236,6 +239,7 @@ Public Class ClsCombinedPendulum
 
         'Protocol Values to List
         ProtocolValues()
+
 
         'Set x1n
         With x
@@ -348,7 +352,8 @@ Public Class ClsCombinedPendulum
         DrawTrack()
 
         'Draw actual Pendulumposition
-        DrawPendulums()
+        'and refresh PicDiagram
+        DrawPendulum()
 
     End Sub
 
@@ -356,8 +361,7 @@ Public Class ClsCombinedPendulum
 
         'The track of Pendulum1 is always on a circle and not interesting
         'MyBitmapGraphics.DrawLine(OldPosition1, Position1, Color.Red, 1)
-        BmpGraphics.DrawLine(OldPosition1, Position1, Color.Green, 1)
-        MyPicDiagram.Invalidate()
+        MyBmpGraphics.DrawLine(OldPosition1, Position1, MyColor, 1)
 
     End Sub
 
@@ -365,16 +369,16 @@ Public Class ClsCombinedPendulum
         Select Case TypeofPhasePortrait
             Case TypeofPhaseportraitEnum.TorusOrCylinder
                 MyPicPhaseportrait.Refresh()
-                PicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Red, 1)
-                BmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), Brushes.Green, 1)
+                MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Blue, 1)
+                MyBmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), MyColor, 1)
             Case TypeofPhaseportraitEnum.PoincareSection
                 If IsSignumChanged Then
-                    PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Green, 2)
+                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), MyColor, 2)
                 End If
             Case Else
                 'Draw only into PicPhaseportrait
-                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Red, 1)
-                PicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), Brushes.Green, 1)
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Blue, 1)
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 1)
         End Select
 
     End Sub
@@ -408,7 +412,7 @@ Public Class ClsCombinedPendulum
         'Standardvalues
         With MyCalculationVariables
             'Length of Pendulum l
-            .Component(0) = ValueParameter(0).DefaultValue + Y0
+            .Component(0) = ValueParameter(0).DefaultValue
             u1 = .Component(0)
             v1 = 0
             'Angle of Pendulum Phi
@@ -417,11 +421,9 @@ Public Class ClsCombinedPendulum
             v2 = 0
         End With
 
-        Omega = GetAddParameterValue(MyAdditionalParameterValue)
-        Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
-
-        SetStartEnergyRange()
-        SetPosition()
+        'This will also set Omega, Y0, Origin
+        'and ResetIteration, SetStartEnergyRange, SetPosition
+        SetAdditionalParameters()
 
     End Sub
 
@@ -506,6 +508,5 @@ Public Class ClsCombinedPendulum
         Return Temp
 
     End Function
-
 
 End Class

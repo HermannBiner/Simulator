@@ -40,8 +40,6 @@ Public Class FrmNumericMethods
 
         Text = LM.GetString("SpringPendulum")
         BtnReset.Text = LM.GetString("ResetIteration")
-        BtnStart.Text = LM.GetString("Start")
-        BtnStop.Text = LM.GetString("Stop")
         LblNumMethod.Text = LM.GetString("NumericMethods")
         LblStepWidth.Text = LM.GetString("StepWidth") & " 0.02"
         LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")

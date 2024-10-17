@@ -37,12 +37,12 @@ Public Class FrmBilliardtable
         LblSpeed.Text = LM.GetString("BallSpeed") & " " & TrbSpeed.Value.ToString
         LblBallColor.Text = LM.GetString("BallColor")
         BtnNewBall.Text = LM.GetString("NewBall")
-        BtnStart.Text = LM.GetString("Start")
         BtnReset.Text = LM.GetString("ResetIteration")
         BtnNextStep.Text = LM.GetString("NextStep")
         LblParameterc.Text = LM.GetString("ParameterC")
         BtnDefault.Text = LM.GetString("DefaultUserData")
         LblProtocol.Text = LM.GetString("Protocol")
+        ChkProtocol.Text = LM.GetString("Protocol")
 
         CboBallColor.Items.Clear()
 
