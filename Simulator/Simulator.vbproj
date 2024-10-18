@@ -17,6 +17,7 @@
     <OptionInfer>On</OptionInfer>
     <Description>Simulation of Dynamical Systems</Description>
     <Copyright>Hermann Biner</Copyright>
+<ForceDesignerDpiUnaware>false</ForceDesignerDpiUnaware>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

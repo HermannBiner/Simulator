@@ -44,20 +44,19 @@ Partial Class FrmNumericMethods
         ' LstValueList
         ' 
         LstValueList.FormattingEnabled = True
-        LstValueList.ItemHeight = 15
-        LstValueList.Location = New Point(1247, 37)
-        LstValueList.Margin = New Padding(4, 3, 4, 3)
+        LstValueList.Location = New Point(2084, 61)
+        LstValueList.Margin = New Padding(7, 6, 7, 6)
         LstValueList.Name = "LstValueList"
-        LstValueList.Size = New Size(174, 514)
+        LstValueList.Size = New Size(265, 1151)
         LstValueList.TabIndex = 8
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BorderStyle = BorderStyle.FixedSingle
-        PicDiagram.Location = New Point(7, 8)
-        PicDiagram.Margin = New Padding(2)
+        PicDiagram.Location = New Point(13, 17)
+        PicDiagram.Margin = New Padding(4, 4, 4, 4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(989, 543)
+        PicDiagram.Size = New Size(1626, 1200)
         PicDiagram.TabIndex = 7
         PicDiagram.TabStop = False
         ' 
@@ -65,69 +64,69 @@ Partial Class FrmNumericMethods
         ' 
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"RealSpringPendulum", "EulerExplicit", "EulerImplicit", "MidpointImplicit", "RungeKutta4"})
-        CboPendulum.Location = New Point(1009, 38)
-        CboPendulum.Margin = New Padding(2)
+        CboPendulum.Location = New Point(1649, 61)
+        CboPendulum.Margin = New Padding(4, 4, 4, 4)
         CboPendulum.Name = "CboPendulum"
-        CboPendulum.Size = New Size(230, 23)
+        CboPendulum.Size = New Size(424, 39)
         CboPendulum.TabIndex = 29
         ' 
         ' LblNumMethod
         ' 
         LblNumMethod.AutoSize = True
-        LblNumMethod.Location = New Point(1009, 8)
-        LblNumMethod.Margin = New Padding(2, 0, 2, 0)
+        LblNumMethod.Location = New Point(1650, 17)
+        LblNumMethod.Margin = New Padding(4, 0, 4, 0)
         LblNumMethod.Name = "LblNumMethod"
-        LblNumMethod.Size = New Size(95, 15)
+        LblNumMethod.Size = New Size(182, 31)
         LblNumMethod.TabIndex = 28
-        LblNumMethod.Text = "NumericMerhod"
+        LblNumMethod.Text = "NumericMethod"
         ' 
         ' LblStepWidth
         ' 
         LblStepWidth.AutoSize = True
-        LblStepWidth.Location = New Point(1032, 76)
-        LblStepWidth.Margin = New Padding(2, 0, 2, 0)
+        LblStepWidth.Location = New Point(1650, 121)
+        LblStepWidth.Margin = New Padding(4, 0, 4, 0)
         LblStepWidth.Name = "LblStepWidth"
-        LblStepWidth.Size = New Size(62, 15)
+        LblStepWidth.Size = New Size(121, 31)
         LblStepWidth.TabIndex = 31
         LblStepWidth.Text = "StepWidth"
         ' 
         ' TrbStepWidth
         ' 
-        TrbStepWidth.Location = New Point(1009, 100)
-        TrbStepWidth.Margin = New Padding(2)
+        TrbStepWidth.Location = New Point(1650, 167)
+        TrbStepWidth.Margin = New Padding(4, 4, 4, 4)
         TrbStepWidth.Maximum = 15
         TrbStepWidth.Minimum = 1
         TrbStepWidth.Name = "TrbStepWidth"
-        TrbStepWidth.Size = New Size(228, 45)
+        TrbStepWidth.Size = New Size(423, 69)
         TrbStepWidth.TabIndex = 30
         TrbStepWidth.Value = 5
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1009, 517)
-        BtnReset.Margin = New Padding(4, 3, 4, 3)
+        BtnReset.Location = New Point(1646, 1173)
+        BtnReset.Margin = New Padding(7, 6, 7, 6)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(230, 34)
+        BtnReset.Size = New Size(427, 50)
         BtnReset.TabIndex = 34
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1009, 278)
-        BtnStop.Margin = New Padding(4, 3, 4, 3)
+        BtnStop.Location = New Point(1646, 430)
+        BtnStop.Margin = New Padding(7, 6, 7, 6)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(230, 34)
+        BtnStop.Size = New Size(427, 50)
         BtnStop.TabIndex = 33
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1009, 239)
-        BtnStart.Margin = New Padding(2)
+        BtnStart.Location = New Point(1646, 370)
+        BtnStart.Margin = New Padding(4, 4, 4, 4)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(230, 34)
+        BtnStart.Size = New Size(427, 50)
         BtnStart.TabIndex = 32
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -135,30 +134,30 @@ Partial Class FrmNumericMethods
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(1009, 199)
-        LblNumberOfSteps.Margin = New Padding(2, 0, 2, 0)
+        LblNumberOfSteps.Location = New Point(1650, 321)
+        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(99, 15)
+        LblNumberOfSteps.Size = New Size(190, 31)
         LblNumberOfSteps.TabIndex = 35
         LblNumberOfSteps.Text = "Number of Steps:"
         ' 
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1129, 199)
-        LblSteps.Margin = New Padding(2, 0, 2, 0)
+        LblSteps.Location = New Point(1873, 321)
+        LblSteps.Margin = New Padding(4, 0, 4, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(13, 15)
+        LblSteps.Size = New Size(26, 31)
         LblSteps.TabIndex = 36
         LblSteps.Text = "0"
         ' 
         ' ChkStretched
         ' 
         ChkStretched.AutoSize = True
-        ChkStretched.Location = New Point(1009, 163)
-        ChkStretched.Margin = New Padding(4, 3, 4, 3)
+        ChkStretched.Location = New Point(1650, 259)
+        ChkStretched.Margin = New Padding(7, 6, 7, 6)
         ChkStretched.Name = "ChkStretched"
-        ChkStretched.Size = New Size(107, 19)
+        ChkStretched.Size = New Size(197, 35)
         ChkStretched.TabIndex = 37
         ChkStretched.Text = "StretchedMode"
         ChkStretched.UseVisualStyleBackColor = True
@@ -166,28 +165,28 @@ Partial Class FrmNumericMethods
         ' LblDifference
         ' 
         LblDifference.AutoSize = True
-        LblDifference.Location = New Point(1243, 9)
-        LblDifference.Margin = New Padding(4, 0, 4, 0)
+        LblDifference.Location = New Point(2084, 24)
+        LblDifference.Margin = New Padding(7, 0, 7, 0)
         LblDifference.Name = "LblDifference"
-        LblDifference.Size = New Size(61, 15)
+        LblDifference.Size = New Size(118, 31)
         LblDifference.TabIndex = 38
         LblDifference.Text = "Difference"
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Location = New Point(1009, 477)
-        BtnDefault.Margin = New Padding(4, 3, 4, 3)
+        BtnDefault.Location = New Point(1649, 1111)
+        BtnDefault.Margin = New Padding(7, 6, 7, 6)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(230, 34)
+        BtnDefault.Size = New Size(427, 50)
         BtnDefault.TabIndex = 39
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmNumericMethods
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(13F, 31F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1434, 563)
+        ClientSize = New Size(2371, 1238)
         Controls.Add(BtnDefault)
         Controls.Add(LblDifference)
         Controls.Add(ChkStretched)
@@ -203,7 +202,7 @@ Partial Class FrmNumericMethods
         Controls.Add(LstValueList)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(2)
+        Margin = New Padding(4, 4, 4, 4)
         Name = "FrmNumericMethods"
         Text = "SpringPendulum"
         WindowState = FormWindowState.Maximized

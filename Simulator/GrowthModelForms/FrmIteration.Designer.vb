@@ -68,20 +68,20 @@ Partial Class FrmIteration
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(17, 83)
+        PicDiagram.Location = New Point(17, 80)
         PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1263, 1451)
+        PicDiagram.Size = New Size(1300, 1300)
         PicDiagram.TabIndex = 0
         PicDiagram.TabStop = False
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnReset.Location = New Point(1655, 1455)
+        BtnReset.Font = New Font("Segoe UI", 11.5F)
+        BtnReset.Location = New Point(1668, 1330)
         BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(579, 73)
+        BtnReset.Size = New Size(580, 50)
         BtnReset.TabIndex = 17
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -89,80 +89,78 @@ Partial Class FrmIteration
         ' LblParameter
         ' 
         LblParameter.AutoSize = True
-        LblParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblParameter.Location = New Point(1740, 196)
+        LblParameter.Font = New Font("Segoe UI", 11.5F)
+        LblParameter.Location = New Point(1768, 190)
         LblParameter.Margin = New Padding(4, 0, 4, 0)
         LblParameter.Name = "LblParameter"
-        LblParameter.Size = New Size(43, 26)
+        LblParameter.Size = New Size(48, 31)
         LblParameter.TabIndex = 5
         LblParameter.Text = "a ="
         ' 
         ' LblStartValue
         ' 
         LblStartValue.AutoSize = True
-        LblStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblStartValue.Location = New Point(1668, 254)
+        LblStartValue.Font = New Font("Segoe UI", 11.5F)
+        LblStartValue.Location = New Point(1689, 246)
         LblStartValue.Margin = New Padding(4, 0, 4, 0)
         LblStartValue.Name = "LblStartValue"
-        LblStartValue.Size = New Size(139, 26)
+        LblStartValue.Size = New Size(144, 31)
         LblStartValue.TabIndex = 7
         LblStartValue.Text = "StartValue = "
         ' 
         ' BtnNextStep
         ' 
-        BtnNextStep.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnNextStep.Location = New Point(13, 53)
+        BtnNextStep.Font = New Font("Segoe UI", 11.5F)
+        BtnNextStep.Location = New Point(13, 51)
         BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(266, 73)
+        BtnNextStep.Size = New Size(266, 50)
         BtnNextStep.TabIndex = 3
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
         ' 
         ' BtnNext10Steps
         ' 
-        BtnNext10Steps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnNext10Steps.Location = New Point(308, 53)
+        BtnNext10Steps.Font = New Font("Segoe UI", 11.5F)
+        BtnNext10Steps.Location = New Point(306, 51)
         BtnNext10Steps.Margin = New Padding(4)
         BtnNext10Steps.Name = "BtnNext10Steps"
-        BtnNext10Steps.Size = New Size(266, 73)
+        BtnNext10Steps.Size = New Size(266, 50)
         BtnNext10Steps.TabIndex = 4
         BtnNext10Steps.Text = "Next10Steps"
         BtnNext10Steps.UseVisualStyleBackColor = True
         ' 
         ' LstValueList
         ' 
-        LstValueList.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LstValueList.Font = New Font("Segoe UI", 11.5F)
         LstValueList.FormattingEnabled = True
-        LstValueList.ItemHeight = 25
-        LstValueList.Location = New Point(1296, 83)
+        LstValueList.Location = New Point(1333, 80)
         LstValueList.Margin = New Padding(4)
         LstValueList.Name = "LstValueList"
         LstValueList.ScrollAlwaysVisible = True
-        LstValueList.Size = New Size(244, 1429)
+        LstValueList.Size = New Size(244, 1306)
         LstValueList.TabIndex = 14
         ' 
         ' LstProtocol
         ' 
-        LstProtocol.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LstProtocol.Font = New Font("Segoe UI", 11.5F)
         LstProtocol.FormattingEnabled = True
-        LstProtocol.ItemHeight = 25
-        LstProtocol.Location = New Point(1551, 83)
+        LstProtocol.Location = New Point(1585, 80)
         LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
         LstProtocol.ScrollAlwaysVisible = True
-        LstProtocol.Size = New Size(75, 1429)
+        LstProtocol.Size = New Size(64, 1306)
         LstProtocol.TabIndex = 15
         ' 
         ' GrpStep
         ' 
         GrpStep.Controls.Add(BtnNextStep)
         GrpStep.Controls.Add(BtnNext10Steps)
-        GrpStep.Location = New Point(1644, 1052)
+        GrpStep.Location = New Point(1665, 1019)
         GrpStep.Margin = New Padding(4)
         GrpStep.Name = "GrpStep"
         GrpStep.Padding = New Padding(4)
-        GrpStep.Size = New Size(590, 156)
+        GrpStep.Size = New Size(590, 127)
         GrpStep.TabIndex = 17
         GrpStep.TabStop = False
         GrpStep.Text = "Iteration"
@@ -170,11 +168,11 @@ Partial Class FrmIteration
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblNumberOfSteps.Location = New Point(1645, 998)
+        LblNumberOfSteps.Font = New Font("Segoe UI", 11.5F)
+        LblNumberOfSteps.Location = New Point(1668, 945)
         LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(169, 26)
+        LblNumberOfSteps.Size = New Size(177, 31)
         LblNumberOfSteps.TabIndex = 7
         LblNumberOfSteps.Text = "NumberOfSteps"
         ' 
@@ -183,42 +181,42 @@ Partial Class FrmIteration
         GrpTargetValue.Controls.Add(BtnTransitiveStartValue)
         GrpTargetValue.Controls.Add(TxtTargetValue)
         GrpTargetValue.Controls.Add(LblTargetValue)
-        GrpTargetValue.Location = New Point(1636, 762)
+        GrpTargetValue.Location = New Point(1657, 738)
         GrpTargetValue.Margin = New Padding(4)
         GrpTargetValue.Name = "GrpTargetValue"
         GrpTargetValue.Padding = New Padding(4)
-        GrpTargetValue.Size = New Size(598, 211)
+        GrpTargetValue.Size = New Size(598, 182)
         GrpTargetValue.TabIndex = 11
         GrpTargetValue.TabStop = False
         GrpTargetValue.Text = "Transitivity"
         ' 
         ' BtnTransitiveStartValue
         ' 
-        BtnTransitiveStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnTransitiveStartValue.Location = New Point(17, 117)
+        BtnTransitiveStartValue.Font = New Font("Segoe UI", 11.5F)
+        BtnTransitiveStartValue.Location = New Point(17, 113)
         BtnTransitiveStartValue.Margin = New Padding(4)
         BtnTransitiveStartValue.Name = "BtnTransitiveStartValue"
-        BtnTransitiveStartValue.Size = New Size(563, 73)
+        BtnTransitiveStartValue.Size = New Size(563, 50)
         BtnTransitiveStartValue.TabIndex = 13
         BtnTransitiveStartValue.Text = "StartvalueForTargetvalue"
         BtnTransitiveStartValue.UseVisualStyleBackColor = True
         ' 
         ' TxtTargetValue
         ' 
-        TxtTargetValue.Location = New Point(167, 49)
+        TxtTargetValue.Location = New Point(171, 51)
         TxtTargetValue.Margin = New Padding(4)
         TxtTargetValue.Name = "TxtTargetValue"
-        TxtTargetValue.Size = New Size(411, 39)
+        TxtTargetValue.Size = New Size(411, 38)
         TxtTargetValue.TabIndex = 12
         ' 
         ' LblTargetValue
         ' 
         LblTargetValue.AutoSize = True
-        LblTargetValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblTargetValue.Location = New Point(9, 60)
+        LblTargetValue.Font = New Font("Segoe UI", 11.5F)
+        LblTargetValue.Location = New Point(9, 58)
         LblTargetValue.Margin = New Padding(4, 0, 4, 0)
         LblTargetValue.Name = "LblTargetValue"
-        LblTargetValue.Size = New Size(154, 26)
+        LblTargetValue.Size = New Size(160, 31)
         LblTargetValue.TabIndex = 17
         LblTargetValue.Text = "TargetValue = "
         ' 
@@ -226,68 +224,68 @@ Partial Class FrmIteration
         ' 
         GrpProtocol.Controls.Add(BtnProtocolStartvalue)
         GrpProtocol.Controls.Add(TxtTargetProtocol)
-        GrpProtocol.Location = New Point(1644, 538)
+        GrpProtocol.Location = New Point(1665, 521)
         GrpProtocol.Margin = New Padding(4)
         GrpProtocol.Name = "GrpProtocol"
         GrpProtocol.Padding = New Padding(4)
-        GrpProtocol.Size = New Size(590, 215)
+        GrpProtocol.Size = New Size(590, 186)
         GrpProtocol.TabIndex = 9
         GrpProtocol.TabStop = False
         GrpProtocol.Text = "TargetProtocol"
         ' 
         ' BtnProtocolStartvalue
         ' 
-        BtnProtocolStartvalue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnProtocolStartvalue.Location = New Point(13, 111)
+        BtnProtocolStartvalue.Font = New Font("Segoe UI", 11.5F)
+        BtnProtocolStartvalue.Location = New Point(13, 108)
         BtnProtocolStartvalue.Margin = New Padding(4)
         BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
-        BtnProtocolStartvalue.Size = New Size(566, 73)
+        BtnProtocolStartvalue.Size = New Size(565, 50)
         BtnProtocolStartvalue.TabIndex = 8
         BtnProtocolStartvalue.Text = "StartvalueForProtocol"
         BtnProtocolStartvalue.UseVisualStyleBackColor = True
         ' 
         ' TxtTargetProtocol
         ' 
-        TxtTargetProtocol.Location = New Point(17, 53)
+        TxtTargetProtocol.Location = New Point(13, 62)
         TxtTargetProtocol.Margin = New Padding(4)
         TxtTargetProtocol.Name = "TxtTargetProtocol"
-        TxtTargetProtocol.Size = New Size(561, 39)
+        TxtTargetProtocol.Size = New Size(561, 38)
         TxtTargetProtocol.TabIndex = 10
         ' 
         ' TxtParameterA
         ' 
-        TxtParameterA.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TxtParameterA.Location = New Point(1790, 190)
+        TxtParameterA.Font = New Font("Segoe UI", 11.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameterA.Location = New Point(1824, 190)
         TxtParameterA.Margin = New Padding(4)
         TxtParameterA.Name = "TxtParameterA"
-        TxtParameterA.Size = New Size(424, 39)
+        TxtParameterA.Size = New Size(419, 38)
         TxtParameterA.TabIndex = 2
         ' 
         ' TxtStartValue
         ' 
-        TxtStartValue.Location = New Point(1794, 245)
+        TxtStartValue.Location = New Point(1824, 243)
         TxtStartValue.Margin = New Padding(4)
         TxtStartValue.Name = "TxtStartValue"
-        TxtStartValue.Size = New Size(422, 39)
+        TxtStartValue.Size = New Size(419, 38)
         TxtStartValue.TabIndex = 4
         ' 
         ' CboFunction
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        CboFunction.Location = New Point(17, 19)
+        CboFunction.Location = New Point(17, 18)
         CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(535, 40)
+        CboFunction.Size = New Size(535, 39)
         CboFunction.TabIndex = 1
         ' 
         ' LblIterationDepth
         ' 
         LblIterationDepth.AutoSize = True
-        LblIterationDepth.Location = New Point(563, 26)
+        LblIterationDepth.Location = New Point(563, 25)
         LblIterationDepth.Margin = New Padding(4, 0, 4, 0)
         LblIterationDepth.Name = "LblIterationDepth"
-        LblIterationDepth.Size = New Size(169, 32)
+        LblIterationDepth.Size = New Size(163, 31)
         LblIterationDepth.TabIndex = 23
         LblIterationDepth.Text = "IterationDepth"
         ' 
@@ -295,39 +293,39 @@ Partial Class FrmIteration
         ' 
         CboIterationDepth.FormattingEnabled = True
         CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboIterationDepth.Location = New Point(724, 19)
+        CboIterationDepth.Location = New Point(724, 18)
         CboIterationDepth.Margin = New Padding(4)
         CboIterationDepth.Name = "CboIterationDepth"
-        CboIterationDepth.Size = New Size(91, 40)
+        CboIterationDepth.Size = New Size(91, 39)
         CboIterationDepth.TabIndex = 3
         ' 
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1813, 994)
+        LblSteps.Location = New Point(1843, 945)
         LblSteps.Margin = New Padding(4, 0, 4, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(27, 32)
+        LblSteps.Size = New Size(26, 31)
         LblSteps.TabIndex = 26
         LblSteps.Text = "0"
         ' 
         ' LblXValues
         ' 
         LblXValues.AutoSize = True
-        LblXValues.Location = New Point(1317, 32)
+        LblXValues.Location = New Point(1333, 35)
         LblXValues.Margin = New Padding(4, 0, 4, 0)
         LblXValues.Name = "LblXValues"
-        LblXValues.Size = New Size(96, 32)
+        LblXValues.Size = New Size(93, 31)
         LblXValues.TabIndex = 27
         LblXValues.Text = "XValues"
         ' 
         ' LblLog
         ' 
         LblLog.AutoSize = True
-        LblLog.Location = New Point(1527, 36)
+        LblLog.Location = New Point(1585, 35)
         LblLog.Margin = New Padding(4, 0, 4, 0)
         LblLog.Name = "LblLog"
-        LblLog.Size = New Size(53, 32)
+        LblLog.Size = New Size(52, 31)
         LblLog.TabIndex = 28
         LblLog.Text = "Log"
         ' 
@@ -338,11 +336,11 @@ Partial Class FrmIteration
         GrpPresentation.Controls.Add(LblxStretching)
         GrpPresentation.Controls.Add(OptTimeAxis)
         GrpPresentation.Controls.Add(OptFunctionGraph)
-        GrpPresentation.Location = New Point(1644, 324)
+        GrpPresentation.Location = New Point(1665, 314)
         GrpPresentation.Margin = New Padding(4)
         GrpPresentation.Name = "GrpPresentation"
         GrpPresentation.Padding = New Padding(4)
-        GrpPresentation.Size = New Size(590, 205)
+        GrpPresentation.Size = New Size(590, 199)
         GrpPresentation.TabIndex = 34
         GrpPresentation.TabStop = False
         GrpPresentation.Text = "Presentation"
@@ -350,38 +348,38 @@ Partial Class FrmIteration
         ' LblStretching
         ' 
         LblStretching.AutoSize = True
-        LblStretching.Location = New Point(303, 139)
+        LblStretching.Location = New Point(303, 135)
         LblStretching.Margin = New Padding(4, 0, 4, 0)
         LblStretching.Name = "LblStretching"
-        LblStretching.Size = New Size(159, 32)
+        LblStretching.Size = New Size(153, 31)
         LblStretching.TabIndex = 4
         LblStretching.Text = "DinStretching"
         ' 
         ' TxtXStretching
         ' 
-        TxtXStretching.Location = New Point(440, 128)
+        TxtXStretching.Location = New Point(464, 126)
         TxtXStretching.Margin = New Padding(4)
         TxtXStretching.Name = "TxtXStretching"
-        TxtXStretching.Size = New Size(130, 39)
+        TxtXStretching.Size = New Size(106, 38)
         TxtXStretching.TabIndex = 3
         ' 
         ' LblxStretching
         ' 
         LblxStretching.AutoSize = True
-        LblxStretching.Location = New Point(303, 58)
+        LblxStretching.Location = New Point(303, 56)
         LblxStretching.Margin = New Padding(4, 0, 4, 0)
         LblxStretching.Name = "LblxStretching"
-        LblxStretching.Size = New Size(133, 32)
+        LblxStretching.Size = New Size(129, 31)
         LblxStretching.TabIndex = 2
         LblxStretching.Text = "xStretching"
         ' 
         ' OptTimeAxis
         ' 
         OptTimeAxis.AutoSize = True
-        OptTimeAxis.Location = New Point(26, 130)
+        OptTimeAxis.Location = New Point(26, 126)
         OptTimeAxis.Margin = New Padding(4)
         OptTimeAxis.Name = "OptTimeAxis"
-        OptTimeAxis.Size = New Size(140, 36)
+        OptTimeAxis.Size = New Size(131, 35)
         OptTimeAxis.TabIndex = 1
         OptTimeAxis.Text = "TimeAxis"
         OptTimeAxis.UseVisualStyleBackColor = True
@@ -390,10 +388,10 @@ Partial Class FrmIteration
         ' 
         OptFunctionGraph.AutoSize = True
         OptFunctionGraph.Checked = True
-        OptFunctionGraph.Location = New Point(26, 53)
+        OptFunctionGraph.Location = New Point(26, 51)
         OptFunctionGraph.Margin = New Padding(4)
         OptFunctionGraph.Name = "OptFunctionGraph"
-        OptFunctionGraph.Size = New Size(202, 36)
+        OptFunctionGraph.Size = New Size(190, 35)
         OptFunctionGraph.TabIndex = 0
         OptFunctionGraph.TabStop = True
         OptFunctionGraph.Text = "FunctionGraph"
@@ -401,42 +399,42 @@ Partial Class FrmIteration
         ' 
         ' TrbParameterA
         ' 
-        TrbParameterA.Location = New Point(1675, 83)
+        TrbParameterA.Location = New Point(1696, 80)
         TrbParameterA.Margin = New Padding(6)
         TrbParameterA.Maximum = 1000
         TrbParameterA.Minimum = 1
         TrbParameterA.Name = "TrbParameterA"
-        TrbParameterA.Size = New Size(541, 90)
+        TrbParameterA.Size = New Size(541, 69)
         TrbParameterA.TabIndex = 35
         TrbParameterA.Value = 500
         ' 
         ' LblParameterA
         ' 
         LblParameterA.AutoSize = True
-        LblParameterA.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblParameterA.Location = New Point(1664, 41)
+        LblParameterA.Font = New Font("Segoe UI", 11.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LblParameterA.Location = New Point(1685, 40)
         LblParameterA.Margin = New Padding(4, 0, 4, 0)
         LblParameterA.Name = "LblParameterA"
-        LblParameterA.Size = New Size(132, 26)
+        LblParameterA.Size = New Size(136, 31)
         LblParameterA.TabIndex = 36
         LblParameterA.Text = "Parameter a"
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnDefault.Location = New Point(1653, 1367)
+        BtnDefault.Font = New Font("Segoe UI", 11.5F)
+        BtnDefault.Location = New Point(1666, 1272)
         BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(581, 73)
+        BtnDefault.Size = New Size(580, 50)
         BtnDefault.TabIndex = 37
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmIteration
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(13F, 31F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2258, 1545)
+        ClientSize = New Size(2278, 1394)
         Controls.Add(BtnDefault)
         Controls.Add(LblParameterA)
         Controls.Add(TrbParameterA)

@@ -41,70 +41,71 @@ Partial Class FrmHistogram
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(4, 4)
-        PicDiagram.Margin = New Padding(4)
+        PicDiagram.Location = New Point(4, 5)
+        PicDiagram.Margin = New Padding(4, 5, 4, 5)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1486, 1707)
+        PicDiagram.Size = New Size(1300, 1300)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
         ' TxtParameter
         ' 
-        TxtParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TxtParameter.Location = New Point(1668, 90)
-        TxtParameter.Margin = New Padding(4)
+        TxtParameter.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameter.Location = New Point(1495, 89)
+        TxtParameter.Margin = New Padding(4, 5, 4, 5)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(270, 32)
+        TxtParameter.Size = New Size(290, 42)
         TxtParameter.TabIndex = 10
         ' 
         ' LblParameter
         ' 
         LblParameter.AutoSize = True
-        LblParameter.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblParameter.Location = New Point(1514, 94)
+        LblParameter.Font = New Font("Segoe UI", 11F)
+        LblParameter.Location = New Point(1329, 81)
         LblParameter.Margin = New Padding(4, 0, 4, 0)
         LblParameter.Name = "LblParameter"
-        LblParameter.Size = New Size(139, 26)
+        LblParameter.Size = New Size(164, 36)
         LblParameter.TabIndex = 11
         LblParameter.Text = "Parameter = "
         ' 
         ' TxtStartValue
         ' 
-        TxtStartValue.Location = New Point(1668, 156)
-        TxtStartValue.Margin = New Padding(4)
+        TxtStartValue.Font = New Font("Segoe UI", 11F)
+        TxtStartValue.Location = New Point(1495, 156)
+        TxtStartValue.Margin = New Padding(4, 5, 4, 5)
         TxtStartValue.Name = "TxtStartValue"
-        TxtStartValue.Size = New Size(270, 39)
+        TxtStartValue.Size = New Size(290, 42)
         TxtStartValue.TabIndex = 12
         ' 
         ' LblStartValue
         ' 
         LblStartValue.AutoSize = True
-        LblStartValue.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblStartValue.Location = New Point(1514, 164)
+        LblStartValue.Font = New Font("Segoe UI", 11F)
+        LblStartValue.Location = New Point(1332, 156)
         LblStartValue.Margin = New Padding(4, 0, 4, 0)
         LblStartValue.Name = "LblStartValue"
-        LblStartValue.Size = New Size(133, 26)
+        LblStartValue.Size = New Size(155, 36)
         LblStartValue.TabIndex = 13
         LblStartValue.Text = "StartValue ="
         ' 
         ' BtnStart
         ' 
-        BtnStart.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnStart.Location = New Point(1514, 316)
-        BtnStart.Margin = New Padding(4)
+        BtnStart.Font = New Font("Segoe UI", 11F)
+        BtnStart.Location = New Point(1332, 304)
+        BtnStart.Margin = New Padding(4, 5, 4, 5)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(427, 73)
+        BtnStart.Size = New Size(453, 50)
         BtnStart.TabIndex = 18
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnReset.Location = New Point(1514, 1632)
-        BtnReset.Margin = New Padding(4)
+        BtnReset.Font = New Font("Segoe UI", 11.5F)
+        BtnReset.Location = New Point(1312, 1247)
+        BtnReset.Margin = New Padding(4, 5, 4, 5)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(427, 73)
+        BtnReset.Size = New Size(458, 58)
         BtnReset.TabIndex = 19
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -112,61 +113,63 @@ Partial Class FrmHistogram
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1703, 245)
+        LblSteps.Font = New Font("Segoe UI", 11.0F)
+        LblSteps.Location = New Point(1536, 234)
         LblSteps.Margin = New Padding(4, 0, 4, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(27, 32)
+        LblSteps.Size = New Size(29, 36)
         LblSteps.TabIndex = 28
         LblSteps.Text = "0"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblNumberOfSteps.Location = New Point(1514, 245)
+        LblNumberOfSteps.Font = New Font("Segoe UI", 11.0F)
+        LblNumberOfSteps.Location = New Point(1332, 234)
         LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(169, 26)
+        LblNumberOfSteps.Size = New Size(199, 36)
         LblNumberOfSteps.TabIndex = 27
         LblNumberOfSteps.Text = "NumberOfSteps"
         ' 
         ' CboFunction
         ' 
+        CboFunction.Font = New Font("Segoe UI", 11.0F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        CboFunction.Location = New Point(1521, 4)
-        CboFunction.Margin = New Padding(4)
+        CboFunction.Location = New Point(1329, 5)
+        CboFunction.Margin = New Padding(4, 5, 4, 5)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(416, 40)
+        CboFunction.Size = New Size(456, 44)
         CboFunction.TabIndex = 29
         ' 
         ' BtnStop
         ' 
-        BtnStop.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnStop.Location = New Point(1514, 418)
-        BtnStop.Margin = New Padding(4)
+        BtnStop.Font = New Font("Segoe UI", 11.0F)
+        BtnStop.Location = New Point(1332, 364)
+        BtnStop.Margin = New Padding(4, 5, 4, 5)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(427, 73)
+        BtnStop.Size = New Size(453, 50)
         BtnStop.TabIndex = 30
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnDefault.Location = New Point(1514, 1551)
-        BtnDefault.Margin = New Padding(4)
+        BtnDefault.Font = New Font("Segoe UI", 11.0F)
+        BtnDefault.Location = New Point(1312, 1187)
+        BtnDefault.Margin = New Padding(4, 5, 4, 5)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(427, 73)
+        BtnDefault.Size = New Size(458, 50)
         BtnDefault.TabIndex = 31
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmHistogram
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(14.0F, 36.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1970, 1728)
+        ClientSize = New Size(1807, 1315)
         Controls.Add(BtnDefault)
         Controls.Add(BtnStop)
         Controls.Add(CboFunction)
@@ -180,7 +183,7 @@ Partial Class FrmHistogram
         Controls.Add(LblParameter)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4)
+        Margin = New Padding(4, 5, 4, 5)
         Name = "FrmHistogram"
         RightToLeftLayout = True
         Text = "Histogram"

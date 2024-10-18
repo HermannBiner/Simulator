@@ -48,10 +48,10 @@ Partial Class FrmTwoDimensions
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(-1, 5)
-        PicDiagram.Margin = New Padding(2)
+        PicDiagram.Location = New Point(-2, 10)
+        PicDiagram.Margin = New Padding(4, 4, 4, 4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(800, 800)
+        PicDiagram.Size = New Size(1300, 1300)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
@@ -61,11 +61,11 @@ Partial Class FrmTwoDimensions
         GrpStartpoint.Controls.Add(TxtX)
         GrpStartpoint.Controls.Add(LblY)
         GrpStartpoint.Controls.Add(LblX)
-        GrpStartpoint.Location = New Point(814, 111)
-        GrpStartpoint.Margin = New Padding(2)
+        GrpStartpoint.Location = New Point(1309, 229)
+        GrpStartpoint.Margin = New Padding(4, 4, 4, 4)
         GrpStartpoint.Name = "GrpStartpoint"
-        GrpStartpoint.Padding = New Padding(2)
-        GrpStartpoint.Size = New Size(230, 99)
+        GrpStartpoint.Padding = New Padding(4, 4, 4, 4)
+        GrpStartpoint.Size = New Size(427, 205)
         GrpStartpoint.TabIndex = 1
         GrpStartpoint.TabStop = False
         GrpStartpoint.Text = "CoordinatesStartpoint"
@@ -74,68 +74,68 @@ Partial Class FrmTwoDimensions
         ' 
         TxtY.AcceptsReturn = True
         TxtY.AcceptsTab = True
-        TxtY.Location = New Point(49, 58)
-        TxtY.Margin = New Padding(2)
+        TxtY.Location = New Point(91, 120)
+        TxtY.Margin = New Padding(4, 4, 4, 4)
         TxtY.Name = "TxtY"
-        TxtY.Size = New Size(163, 23)
+        TxtY.Size = New Size(299, 38)
         TxtY.TabIndex = 3
         ' 
         ' TxtX
         ' 
         TxtX.AcceptsReturn = True
         TxtX.AcceptsTab = True
-        TxtX.Location = New Point(49, 31)
-        TxtX.Margin = New Padding(2)
+        TxtX.Location = New Point(91, 64)
+        TxtX.Margin = New Padding(4, 4, 4, 4)
         TxtX.Name = "TxtX"
-        TxtX.Size = New Size(163, 23)
+        TxtX.Size = New Size(299, 38)
         TxtX.TabIndex = 2
         ' 
         ' LblY
         ' 
         LblY.AutoSize = True
-        LblY.Location = New Point(15, 60)
-        LblY.Margin = New Padding(2, 0, 2, 0)
+        LblY.Location = New Point(28, 124)
+        LblY.Margin = New Padding(4, 0, 4, 0)
         LblY.Name = "LblY"
-        LblY.Size = New Size(24, 15)
+        LblY.Size = New Size(47, 31)
         LblY.TabIndex = 5
         LblY.Text = "y ="
         ' 
         ' LblX
         ' 
         LblX.AutoSize = True
-        LblX.Location = New Point(15, 36)
-        LblX.Margin = New Padding(2, 0, 2, 0)
+        LblX.Location = New Point(28, 74)
+        LblX.Margin = New Padding(4, 0, 4, 0)
         LblX.Name = "LblX"
-        LblX.Size = New Size(24, 15)
+        LblX.Size = New Size(47, 31)
         LblX.TabIndex = 4
         LblX.Text = "x ="
         ' 
         ' BtnNext10
         ' 
-        BtnNext10.Location = New Point(814, 353)
-        BtnNext10.Margin = New Padding(2)
+        BtnNext10.Location = New Point(1309, 709)
+        BtnNext10.Margin = New Padding(4, 4, 4, 4)
         BtnNext10.Name = "BtnNext10"
-        BtnNext10.Size = New Size(230, 34)
+        BtnNext10.Size = New Size(427, 50)
         BtnNext10.TabIndex = 9
         BtnNext10.Text = "Next10Steps"
         BtnNext10.UseVisualStyleBackColor = True
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(814, 772)
-        BtnReset.Margin = New Padding(2)
+        BtnReset.Location = New Point(1306, 1260)
+        BtnReset.Margin = New Padding(4, 4, 4, 4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(230, 34)
+        BtnReset.Size = New Size(427, 50)
         BtnReset.TabIndex = 10
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnNextStep
         ' 
-        BtnNextStep.Location = New Point(814, 315)
-        BtnNextStep.Margin = New Padding(2)
+        BtnNextStep.Location = New Point(1309, 651)
+        BtnNextStep.Margin = New Padding(4, 4, 4, 4)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(230, 34)
+        BtnNextStep.Size = New Size(427, 50)
         BtnNextStep.TabIndex = 8
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
@@ -143,11 +143,11 @@ Partial Class FrmTwoDimensions
         ' GrpExperiment
         ' 
         GrpExperiment.Controls.Add(CboExperiment)
-        GrpExperiment.Location = New Point(810, 224)
-        GrpExperiment.Margin = New Padding(2)
+        GrpExperiment.Location = New Point(1301, 463)
+        GrpExperiment.Margin = New Padding(4, 4, 4, 4)
         GrpExperiment.Name = "GrpExperiment"
-        GrpExperiment.Padding = New Padding(2)
-        GrpExperiment.Size = New Size(230, 77)
+        GrpExperiment.Padding = New Padding(4, 4, 4, 4)
+        GrpExperiment.Size = New Size(427, 159)
         GrpExperiment.TabIndex = 6
         GrpExperiment.TabStop = False
         GrpExperiment.Text = "ExperimentNo"
@@ -156,21 +156,21 @@ Partial Class FrmTwoDimensions
         ' 
         CboExperiment.FormattingEnabled = True
         CboExperiment.Items.AddRange(New Object() {"Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"})
-        CboExperiment.Location = New Point(12, 31)
-        CboExperiment.Margin = New Padding(2)
+        CboExperiment.Location = New Point(22, 64)
+        CboExperiment.Margin = New Padding(4, 4, 4, 4)
         CboExperiment.Name = "CboExperiment"
-        CboExperiment.Size = New Size(200, 23)
+        CboExperiment.Size = New Size(368, 39)
         CboExperiment.TabIndex = 7
         ' 
         ' GrpParameter
         ' 
         GrpParameter.Controls.Add(TxtParameter)
         GrpParameter.Controls.Add(LblParameter)
-        GrpParameter.Location = New Point(814, 45)
-        GrpParameter.Margin = New Padding(2)
+        GrpParameter.Location = New Point(1309, 93)
+        GrpParameter.Margin = New Padding(4, 4, 4, 4)
         GrpParameter.Name = "GrpParameter"
-        GrpParameter.Padding = New Padding(2)
-        GrpParameter.Size = New Size(230, 61)
+        GrpParameter.Padding = New Padding(4, 4, 4, 4)
+        GrpParameter.Size = New Size(427, 126)
         GrpParameter.TabIndex = 4
         GrpParameter.TabStop = False
         GrpParameter.Text = "Parameter"
@@ -179,19 +179,19 @@ Partial Class FrmTwoDimensions
         ' 
         TxtParameter.AcceptsReturn = True
         TxtParameter.AcceptsTab = True
-        TxtParameter.Location = New Point(47, 20)
-        TxtParameter.Margin = New Padding(2)
+        TxtParameter.Location = New Point(87, 41)
+        TxtParameter.Margin = New Padding(4, 4, 4, 4)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(179, 23)
+        TxtParameter.Size = New Size(329, 38)
         TxtParameter.TabIndex = 5
         ' 
         ' LblParameter
         ' 
         LblParameter.AutoSize = True
-        LblParameter.Location = New Point(12, 25)
-        LblParameter.Margin = New Padding(2, 0, 2, 0)
+        LblParameter.Location = New Point(22, 52)
+        LblParameter.Margin = New Padding(4, 0, 4, 0)
         LblParameter.Name = "LblParameter"
-        LblParameter.Size = New Size(24, 15)
+        LblParameter.Size = New Size(48, 31)
         LblParameter.TabIndex = 0
         LblParameter.Text = "a ="
         ' 
@@ -199,27 +199,27 @@ Partial Class FrmTwoDimensions
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic growth", "Parabola"})
-        CboFunction.Location = New Point(814, 5)
-        CboFunction.Margin = New Padding(2)
+        CboFunction.Location = New Point(1309, 10)
+        CboFunction.Margin = New Padding(4, 4, 4, 4)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(230, 23)
+        CboFunction.Size = New Size(424, 39)
         CboFunction.TabIndex = 11
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Location = New Point(814, 734)
-        BtnDefault.Margin = New Padding(2)
+        BtnDefault.Location = New Point(1306, 1202)
+        BtnDefault.Margin = New Padding(4, 4, 4, 4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(230, 34)
+        BtnDefault.Size = New Size(427, 50)
         BtnDefault.TabIndex = 12
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmTwoDimensions
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(13F, 31F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1059, 811)
+        ClientSize = New Size(1753, 1676)
         Controls.Add(BtnDefault)
         Controls.Add(CboFunction)
         Controls.Add(GrpParameter)
@@ -230,7 +230,7 @@ Partial Class FrmTwoDimensions
         Controls.Add(GrpStartpoint)
         Controls.Add(PicDiagram)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(2)
+        Margin = New Padding(4, 4, 4, 4)
         Name = "FrmTwoDimensions"
         Text = "TwoDimensions"
         WindowState = FormWindowState.Maximized
