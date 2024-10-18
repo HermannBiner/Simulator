@@ -126,8 +126,10 @@ Public Class ClsIterationController
     End Sub
 
     Private Sub InitializeMe()
-        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, DS.ValueParameter.Range, DS.ValueParameter.Range)
         PicDiagramSize = Math.Min(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+        MyForm.PicDiagram.Height = PicDiagramSize
+        MyForm.PicDiagram.Width = PicDiagramSize
+        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, DS.ValueParameter.Range, DS.ValueParameter.Range)
         BmpDiagram = New Bitmap(PicDiagramSize, PicDiagramSize)
         MyForm.PicDiagram.Image = BmpDiagram
         BmpGraphics = New ClsGraphicTool(BmpDiagram, DS.ValueParameter.Range, DS.ValueParameter.Range)
@@ -226,13 +228,15 @@ Public Class ClsIterationController
         'counter
         Dim m As Integer
 
+        X.X = DS.ValueParameter.Range.A
+
         'X and XPlus are increased stepwise and the line betweens these points is drawn
-        For m = 0 To PicDiagramSize - 2
-            X.X = DS.ValueParameter.Range.A + (m * deltaX)
+        For m = 0 To PicDiagramSize + 2
             X.Y = DS.FN(X.X)
             Xplus.X = X.X + deltaX
             Xplus.Y = DS.FN(Xplus.X)
             PicGraphics.DrawLine(X, Xplus, Color.Blue, 1)
+            X.X = Xplus.X
         Next
     End Sub
 

@@ -17,7 +17,10 @@
     <OptionInfer>On</OptionInfer>
     <Description>Simulation of Dynamical Systems</Description>
     <Copyright>Hermann Biner</Copyright>
-<ForceDesignerDpiUnaware>false</ForceDesignerDpiUnaware>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <ForceDesignerDpiUnaware>false</ForceDesignerDpiUnaware>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
