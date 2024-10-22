@@ -310,7 +310,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="CreatePendulum" xml:space="preserve">
-    <value>Pendel hinzufügen</value>
+    <value>Schattenpendel</value>
     <comment>Lbl</comment>
   </data>
   <data name="Cristal" xml:space="preserve">

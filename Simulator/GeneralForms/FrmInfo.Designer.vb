@@ -34,70 +34,72 @@ Partial Class FrmInfo
         ' LblPersonalData
         ' 
         LblPersonalData.AutoSize = True
-        LblPersonalData.Font = New Font("Microsoft Sans Serif", 11.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblPersonalData.Location = New Point(9, 101)
-        LblPersonalData.Margin = New Padding(2, 0, 2, 0)
+        LblPersonalData.Font = New Font("Microsoft Sans Serif", 9F)
+        LblPersonalData.Location = New Point(19, 103)
+        LblPersonalData.Margin = New Padding(4, 0, 4, 0)
         LblPersonalData.Name = "LblPersonalData"
-        LblPersonalData.Size = New Size(258, 18)
+        LblPersonalData.Size = New Size(213, 15)
         LblPersonalData.TabIndex = 0
         LblPersonalData.Text = "Author: Dr.math.ETHZ Hermann Biner"
         ' 
         ' LblFeedback
         ' 
         LblFeedback.AutoSize = True
-        LblFeedback.Font = New Font("Microsoft Sans Serif", 11.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblFeedback.Location = New Point(9, 37)
-        LblFeedback.Margin = New Padding(2, 0, 2, 0)
+        LblFeedback.Font = New Font("Microsoft Sans Serif", 9F)
+        LblFeedback.Location = New Point(19, 41)
+        LblFeedback.Margin = New Padding(4, 0, 4, 0)
         LblFeedback.Name = "LblFeedback"
-        LblFeedback.Size = New Size(73, 18)
+        LblFeedback.Size = New Size(61, 15)
         LblFeedback.TabIndex = 1
         LblFeedback.Text = "Feedback"
         ' 
         ' LblMail
         ' 
         LblMail.AutoSize = True
-        LblMail.Font = New Font("Microsoft Sans Serif", 11.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblMail.Location = New Point(10, 68)
-        LblMail.Margin = New Padding(2, 0, 2, 0)
+        LblMail.Font = New Font("Microsoft Sans Serif", 9F)
+        LblMail.Location = New Point(19, 72)
+        LblMail.Margin = New Padding(4, 0, 4, 0)
         LblMail.Name = "LblMail"
-        LblMail.Size = New Size(53, 18)
+        LblMail.Size = New Size(45, 15)
         LblMail.TabIndex = 2
         LblMail.Text = "MailTo"
         ' 
         ' LblVersion
         ' 
         LblVersion.AutoSize = True
-        LblVersion.Font = New Font("Microsoft Sans Serif", 11.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LblVersion.Location = New Point(9, 7)
-        LblVersion.Margin = New Padding(2, 0, 2, 0)
+        LblVersion.Font = New Font("Microsoft Sans Serif", 9F)
+        LblVersion.Location = New Point(19, 14)
+        LblVersion.Margin = New Padding(4, 0, 4, 0)
         LblVersion.Name = "LblVersion"
-        LblVersion.Size = New Size(116, 18)
+        LblVersion.Size = New Size(96, 15)
         LblVersion.TabIndex = 3
         LblVersion.Text = "ProgramVersion"
         ' 
         ' PicZermatt
         ' 
         PicZermatt.Image = CType(resources.GetObject("PicZermatt.Image"), Image)
-        PicZermatt.Location = New Point(446, 7)
-        PicZermatt.Margin = New Padding(2, 2, 2, 2)
+        PicZermatt.Location = New Point(294, 13)
+        PicZermatt.Margin = New Padding(4)
         PicZermatt.Name = "PicZermatt"
-        PicZermatt.Size = New Size(461, 311)
+        PicZermatt.Size = New Size(283, 198)
         PicZermatt.SizeMode = PictureBoxSizeMode.StretchImage
         PicZermatt.TabIndex = 4
         PicZermatt.TabStop = False
         ' 
         ' FrmInfo
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(922, 325)
+        ClientSize = New Size(586, 215)
         Controls.Add(PicZermatt)
         Controls.Add(LblVersion)
         Controls.Add(LblMail)
         Controls.Add(LblFeedback)
         Controls.Add(LblPersonalData)
+        Font = New Font("Microsoft Sans Serif", 11F)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(2, 2, 2, 2)
+        Margin = New Padding(4)
         Name = "FrmInfo"
         Text = "AboutSimulator"
         CType(PicZermatt, ComponentModel.ISupportInitialize).EndInit()

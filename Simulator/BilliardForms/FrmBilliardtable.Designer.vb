@@ -64,49 +64,48 @@ Partial Class FrmBilliardtable
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(13, 13)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(6, 5)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1300, 1299)
+        PicDiagram.Size = New Size(570, 570)
         PicDiagram.TabIndex = 3
         PicDiagram.TabStop = False
         ' 
         ' LblParameterc
         ' 
         LblParameterc.AutoSize = True
-        LblParameterc.Location = New Point(1328, 123)
-        LblParameterc.Margin = New Padding(4, 0, 4, 0)
+        LblParameterc.Font = New Font("Microsoft Sans Serif", 9F)
+        LblParameterc.Location = New Point(579, 54)
         LblParameterc.Name = "LblParameterc"
-        LblParameterc.Size = New Size(155, 36)
+        LblParameterc.Size = New Size(76, 15)
         LblParameterc.TabIndex = 9
         LblParameterc.Text = "Parameter C"
         ' 
         ' BtnNextStep
         ' 
-        BtnNextStep.Location = New Point(1329, 854)
-        BtnNextStep.Margin = New Padding(4, 5, 4, 5)
+        BtnNextStep.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnNextStep.Location = New Point(579, 400)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(425, 60)
+        BtnNextStep.Size = New Size(200, 25)
         BtnNextStep.TabIndex = 11
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1329, 1255)
-        BtnReset.Margin = New Padding(4, 5, 4, 5)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnReset.Location = New Point(579, 549)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(425, 60)
+        BtnReset.Size = New Size(196, 25)
         BtnReset.TabIndex = 12
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1328, 975)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnStart.Location = New Point(579, 457)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(425, 60)
+        BtnStart.Size = New Size(93, 26)
         BtnStart.TabIndex = 13
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -114,20 +113,18 @@ Partial Class FrmBilliardtable
         ' PicPhasePortrait
         ' 
         PicPhasePortrait.BackColor = Color.White
-        PicPhasePortrait.Location = New Point(1779, 56)
-        PicPhasePortrait.Margin = New Padding(4, 5, 4, 5)
+        PicPhasePortrait.Location = New Point(788, 23)
         PicPhasePortrait.Name = "PicPhasePortrait"
-        PicPhasePortrait.Size = New Size(900, 900)
+        PicPhasePortrait.Size = New Size(300, 300)
         PicPhasePortrait.TabIndex = 16
         PicPhasePortrait.TabStop = False
         ' 
         ' BtnNewBall
         ' 
-        BtnNewBall.Font = New Font("Segoe UI", 11F)
-        BtnNewBall.Location = New Point(1328, 375)
-        BtnNewBall.Margin = New Padding(4, 5, 4, 5)
+        BtnNewBall.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnNewBall.Location = New Point(580, 169)
         BtnNewBall.Name = "BtnNewBall"
-        BtnNewBall.Size = New Size(428, 60)
+        BtnNewBall.Size = New Size(199, 25)
         BtnNewBall.TabIndex = 17
         BtnNewBall.Text = "NewBall"
         BtnNewBall.UseVisualStyleBackColor = True
@@ -135,61 +132,58 @@ Partial Class FrmBilliardtable
         ' CboBallColor
         ' 
         CboBallColor.BackColor = SystemColors.Window
+        CboBallColor.Font = New Font("Microsoft Sans Serif", 9F)
         CboBallColor.FormattingEnabled = True
         CboBallColor.Items.AddRange(New Object() {"Red", "Green", "Blue", "Black", "Magenta"})
-        CboBallColor.Location = New Point(1332, 318)
-        CboBallColor.Margin = New Padding(4, 5, 4, 5)
+        CboBallColor.Location = New Point(582, 142)
         CboBallColor.Name = "CboBallColor"
-        CboBallColor.Size = New Size(340, 44)
+        CboBallColor.Size = New Size(152, 23)
         CboBallColor.TabIndex = 18
         ' 
         ' LblBallColor
         ' 
         LblBallColor.AutoSize = True
-        LblBallColor.Location = New Point(1329, 275)
-        LblBallColor.Margin = New Padding(4, 0, 4, 0)
+        LblBallColor.Font = New Font("Microsoft Sans Serif", 9F)
+        LblBallColor.Location = New Point(580, 125)
         LblBallColor.Name = "LblBallColor"
-        LblBallColor.Size = New Size(116, 36)
+        LblBallColor.Size = New Size(57, 15)
         LblBallColor.TabIndex = 19
         LblBallColor.Text = "BallColor"
         ' 
         ' TrbSpeed
         ' 
-        TrbSpeed.Location = New Point(1326, 753)
-        TrbSpeed.Margin = New Padding(4, 5, 4, 5)
+        TrbSpeed.Location = New Point(580, 352)
         TrbSpeed.Maximum = 500
         TrbSpeed.Minimum = 1
         TrbSpeed.Name = "TrbSpeed"
-        TrbSpeed.Size = New Size(424, 80)
+        TrbSpeed.Size = New Size(203, 45)
         TrbSpeed.TabIndex = 20
         TrbSpeed.Value = 50
         ' 
         ' LblSpeed
         ' 
         LblSpeed.AutoSize = True
-        LblSpeed.Location = New Point(1329, 711)
-        LblSpeed.Margin = New Padding(4, 0, 4, 0)
+        LblSpeed.Font = New Font("Microsoft Sans Serif", 9F)
+        LblSpeed.Location = New Point(580, 330)
         LblSpeed.Name = "LblSpeed"
-        LblSpeed.Size = New Size(127, 36)
+        LblSpeed.Size = New Size(64, 15)
         LblSpeed.TabIndex = 21
         LblSpeed.Text = "BallSpeed"
         ' 
         ' LblColor
         ' 
         LblColor.BackColor = Color.Red
-        LblColor.Location = New Point(1680, 318)
-        LblColor.Margin = New Padding(4, 0, 4, 0)
+        LblColor.Location = New Point(740, 142)
         LblColor.Name = "LblColor"
-        LblColor.Size = New Size(71, 44)
+        LblColor.Size = New Size(37, 22)
         LblColor.TabIndex = 22
         ' 
         ' LblPhasePortrait
         ' 
         LblPhasePortrait.AutoSize = True
-        LblPhasePortrait.Location = New Point(1779, 9)
-        LblPhasePortrait.Margin = New Padding(4, 0, 4, 0)
+        LblPhasePortrait.Location = New Point(787, 5)
         LblPhasePortrait.Name = "LblPhasePortrait"
-        LblPhasePortrait.Size = New Size(167, 36)
+        LblPhasePortrait.Size = New Size(81, 15)
         LblPhasePortrait.TabIndex = 23
         LblPhasePortrait.Text = "PhasePortrait"
         ' 
@@ -200,128 +194,122 @@ Partial Class FrmBilliardtable
         GrpStartParameter.Controls.Add(TxtT)
         GrpStartParameter.Controls.Add(LblAlfa)
         GrpStartParameter.Controls.Add(LblT)
-        GrpStartParameter.Location = New Point(1332, 454)
-        GrpStartParameter.Margin = New Padding(4, 5, 4, 5)
+        GrpStartParameter.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpStartParameter.Location = New Point(580, 202)
         GrpStartParameter.Name = "GrpStartParameter"
-        GrpStartParameter.Padding = New Padding(4, 5, 4, 5)
-        GrpStartParameter.Size = New Size(424, 252)
+        GrpStartParameter.Size = New Size(203, 125)
         GrpStartParameter.TabIndex = 24
         GrpStartParameter.TabStop = False
         GrpStartParameter.Text = "StartParameter"
         ' 
         ' BtnTakeOverStartParameter
         ' 
-        BtnTakeOverStartParameter.Location = New Point(14, 180)
-        BtnTakeOverStartParameter.Margin = New Padding(4, 5, 4, 5)
+        BtnTakeOverStartParameter.Location = New Point(0, 87)
         BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
-        BtnTakeOverStartParameter.Size = New Size(396, 60)
+        BtnTakeOverStartParameter.Size = New Size(196, 25)
         BtnTakeOverStartParameter.TabIndex = 4
         BtnTakeOverStartParameter.Text = "TakeOver"
         BtnTakeOverStartParameter.UseVisualStyleBackColor = True
         ' 
         ' TxtAlfa
         ' 
-        TxtAlfa.Location = New Point(98, 128)
-        TxtAlfa.Margin = New Padding(4, 5, 4, 5)
+        TxtAlfa.Location = New Point(50, 54)
         TxtAlfa.Name = "TxtAlfa"
-        TxtAlfa.Size = New Size(242, 42)
+        TxtAlfa.Size = New Size(147, 21)
         TxtAlfa.TabIndex = 3
         ' 
         ' TxtT
         ' 
-        TxtT.Location = New Point(98, 64)
-        TxtT.Margin = New Padding(4, 5, 4, 5)
+        TxtT.Location = New Point(50, 25)
         TxtT.Name = "TxtT"
-        TxtT.Size = New Size(242, 42)
+        TxtT.Size = New Size(147, 21)
         TxtT.TabIndex = 2
         ' 
         ' LblAlfa
         ' 
         LblAlfa.AutoSize = True
-        LblAlfa.Location = New Point(14, 132)
-        LblAlfa.Margin = New Padding(4, 0, 4, 0)
+        LblAlfa.Location = New Point(12, 55)
         LblAlfa.Name = "LblAlfa"
-        LblAlfa.Size = New Size(59, 36)
+        LblAlfa.Size = New Size(27, 15)
         LblAlfa.TabIndex = 1
         LblAlfa.Text = "Alfa"
         ' 
         ' LblT
         ' 
         LblT.AutoSize = True
-        LblT.Location = New Point(14, 70)
-        LblT.Margin = New Padding(4, 0, 4, 0)
+        LblT.Font = New Font("Microsoft Sans Serif", 9F)
+        LblT.Location = New Point(25, 28)
         LblT.Name = "LblT"
-        LblT.Size = New Size(24, 36)
+        LblT.Size = New Size(10, 15)
         LblT.TabIndex = 0
         LblT.Text = "t"
         ' 
         ' LstValueList
         ' 
+        LstValueList.Font = New Font("Microsoft Sans Serif", 9F)
         LstValueList.FormattingEnabled = True
-        LstValueList.ItemHeight = 36
-        LstValueList.Location = New Point(1779, 1013)
-        LstValueList.Margin = New Padding(4, 5, 4, 5)
+        LstValueList.ItemHeight = 15
+        LstValueList.Location = New Point(789, 352)
         LstValueList.Name = "LstValueList"
-        LstValueList.Size = New Size(900, 292)
+        LstValueList.Size = New Size(299, 214)
         LstValueList.TabIndex = 25
         ' 
         ' LblBilliardTable
         ' 
         LblBilliardTable.AutoSize = True
-        LblBilliardTable.Font = New Font("Segoe UI", 11F)
-        LblBilliardTable.Location = New Point(1328, 13)
-        LblBilliardTable.Margin = New Padding(4, 0, 4, 0)
+        LblBilliardTable.Font = New Font("Microsoft Sans Serif", 9F)
+        LblBilliardTable.Location = New Point(581, 5)
         LblBilliardTable.Name = "LblBilliardTable"
-        LblBilliardTable.Size = New Size(150, 36)
+        LblBilliardTable.Size = New Size(76, 15)
         LblBilliardTable.TabIndex = 26
         LblBilliardTable.Text = "BilliardTable"
         ' 
         ' CboBilliardTable
         ' 
+        CboBilliardTable.Font = New Font("Microsoft Sans Serif", 9F)
         CboBilliardTable.FormattingEnabled = True
         CboBilliardTable.Items.AddRange(New Object() {"Elliptic", "Stadium", "Oval"})
-        CboBilliardTable.Location = New Point(1332, 53)
-        CboBilliardTable.Margin = New Padding(4, 5, 4, 5)
+        CboBilliardTable.Location = New Point(581, 23)
         CboBilliardTable.Name = "CboBilliardTable"
-        CboBilliardTable.Size = New Size(424, 44)
+        CboBilliardTable.Size = New Size(202, 23)
         CboBilliardTable.TabIndex = 27
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(1332, 919)
-        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9F)
+        LblNumberOfSteps.Location = New Point(579, 436)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(199, 36)
+        LblNumberOfSteps.Size = New Size(95, 15)
         LblNumberOfSteps.TabIndex = 28
         LblNumberOfSteps.Text = "NumberOfSteps"
         ' 
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1556, 919)
-        LblSteps.Margin = New Padding(4, 0, 4, 0)
+        LblSteps.Font = New Font("Microsoft Sans Serif", 9F)
+        LblSteps.Location = New Point(675, 436)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(29, 36)
+        LblSteps.Size = New Size(14, 15)
         LblSteps.TabIndex = 29
         LblSteps.Text = "0"
         ' 
         ' BtnPhasePortrait
         ' 
-        BtnPhasePortrait.Location = New Point(1328, 1115)
-        BtnPhasePortrait.Margin = New Padding(4, 5, 4, 5)
+        BtnPhasePortrait.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnPhasePortrait.Location = New Point(581, 489)
         BtnPhasePortrait.Name = "BtnPhasePortrait"
-        BtnPhasePortrait.Size = New Size(425, 60)
+        BtnPhasePortrait.Size = New Size(194, 26)
         BtnPhasePortrait.TabIndex = 30
         BtnPhasePortrait.Text = "FillPhasePortrait"
         BtnPhasePortrait.UseVisualStyleBackColor = True
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1326, 1045)
-        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnStop.Location = New Point(679, 457)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(425, 60)
+        BtnStop.Size = New Size(93, 26)
         BtnStop.TabIndex = 52
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
@@ -329,29 +317,30 @@ Partial Class FrmBilliardtable
         ' TrbParameterC
         ' 
         TrbParameterC.LargeChange = 10
-        TrbParameterC.Location = New Point(1332, 183)
-        TrbParameterC.Margin = New Padding(4, 2, 4, 2)
+        TrbParameterC.Location = New Point(579, 80)
+        TrbParameterC.Margin = New Padding(3, 2, 3, 2)
         TrbParameterC.Maximum = 300
         TrbParameterC.Minimum = 30
         TrbParameterC.Name = "TrbParameterC"
-        TrbParameterC.Size = New Size(418, 80)
+        TrbParameterC.Size = New Size(198, 45)
         TrbParameterC.TabIndex = 53
         TrbParameterC.Value = 80
         ' 
         ' TxtParameter
         ' 
-        TxtParameter.Location = New Point(1499, 117)
-        TxtParameter.Margin = New Padding(6, 7, 6, 7)
+        TxtParameter.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtParameter.Location = New Point(659, 54)
+        TxtParameter.Margin = New Padding(5)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(254, 42)
+        TxtParameter.Size = New Size(121, 21)
         TxtParameter.TabIndex = 54
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Location = New Point(1329, 1185)
-        BtnDefault.Margin = New Padding(4, 5, 4, 5)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnDefault.Location = New Point(579, 519)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(425, 60)
+        BtnDefault.Size = New Size(196, 25)
         BtnDefault.TabIndex = 55
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -359,29 +348,29 @@ Partial Class FrmBilliardtable
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1779, 965)
-        LblProtocol.Margin = New Padding(4, 0, 4, 0)
+        LblProtocol.Font = New Font("Microsoft Sans Serif", 9F)
+        LblProtocol.Location = New Point(789, 329)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(111, 36)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 56
         LblProtocol.Text = "Procotol"
         ' 
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Location = New Point(2536, 963)
-        ChkProtocol.Margin = New Padding(4, 2, 4, 2)
+        ChkProtocol.Location = New Point(1016, 327)
+        ChkProtocol.Margin = New Padding(3, 2, 3, 2)
         ChkProtocol.Name = "ChkProtocol"
-        ChkProtocol.Size = New Size(137, 40)
+        ChkProtocol.Size = New Size(71, 19)
         ChkProtocol.TabIndex = 67
         ChkProtocol.Text = "Protocol"
         ChkProtocol.UseVisualStyleBackColor = True
         ' 
         ' FrmBilliardtable
         ' 
-        AutoScaleDimensions = New SizeF(14F, 36F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2706, 1335)
+        ClientSize = New Size(1095, 584)
         Controls.Add(ChkProtocol)
         Controls.Add(LblProtocol)
         Controls.Add(BtnDefault)
@@ -408,9 +397,8 @@ Partial Class FrmBilliardtable
         Controls.Add(BtnNextStep)
         Controls.Add(LblParameterc)
         Controls.Add(PicDiagram)
-        Font = New Font("Segoe UI", 11F)
+        Font = New Font("Microsoft Sans Serif", 9F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 5, 4, 5)
         Name = "FrmBilliardtable"
         Text = "Billiard"
         WindowState = FormWindowState.Maximized

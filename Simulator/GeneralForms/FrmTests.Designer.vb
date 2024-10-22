@@ -33,10 +33,10 @@ Partial Class FrmTests
         ' 
         ' BtnTest
         ' 
-        BtnTest.Location = New Point(1343, 5)
+        BtnTest.Location = New Point(631, 5)
         BtnTest.Margin = New Padding(4, 5, 4, 5)
         BtnTest.Name = "BtnTest"
-        BtnTest.Size = New Size(334, 83)
+        BtnTest.Size = New Size(273, 52)
         BtnTest.TabIndex = 2
         BtnTest.Text = "Start"
         BtnTest.UseVisualStyleBackColor = True
@@ -45,19 +45,19 @@ Partial Class FrmTests
         ' 
         PicDiagram.BackColor = Color.White
         PicDiagram.BorderStyle = BorderStyle.FixedSingle
-        PicDiagram.Location = New Point(17, 5)
+        PicDiagram.Location = New Point(4, 5)
         PicDiagram.Margin = New Padding(4, 5, 4, 5)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1298, 1474)
+        PicDiagram.Size = New Size(591, 621)
         PicDiagram.TabIndex = 4
         PicDiagram.TabStop = False
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1343, 128)
+        BtnStop.Location = New Point(631, 70)
         BtnStop.Margin = New Padding(6, 8, 6, 8)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(334, 83)
+        BtnStop.Size = New Size(273, 51)
         BtnStop.TabIndex = 5
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
@@ -65,34 +65,36 @@ Partial Class FrmTests
         ' LstValues
         ' 
         LstValues.FormattingEnabled = True
-        LstValues.Location = New Point(1343, 387)
+        LstValues.ItemHeight = 18
+        LstValues.Location = New Point(631, 206)
         LstValues.Margin = New Padding(6, 8, 6, 8)
         LstValues.Name = "LstValues"
-        LstValues.Size = New Size(680, 1092)
+        LstValues.Size = New Size(273, 418)
         LstValues.TabIndex = 6
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(1343, 256)
+        BtnReset.Location = New Point(631, 137)
         BtnReset.Margin = New Padding(6, 8, 6, 8)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(334, 83)
+        BtnReset.Size = New Size(273, 53)
         BtnReset.TabIndex = 7
         BtnReset.Text = "Reset"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' FrmTests
         ' 
-        AutoScaleDimensions = New SizeF(13F, 32F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.Control
         BackgroundImageLayout = ImageLayout.None
-        ClientSize = New Size(2067, 1551)
+        ClientSize = New Size(925, 640)
         Controls.Add(BtnReset)
         Controls.Add(LstValues)
         Controls.Add(BtnStop)
         Controls.Add(PicDiagram)
         Controls.Add(BtnTest)
+        Font = New Font("Microsoft Sans Serif", 11.1428576F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4, 5, 4, 5)
         Name = "FrmTests"

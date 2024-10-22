@@ -28,12 +28,12 @@ Partial Class FrmTwoDimensions
         TxtY = New TextBox()
         TxtX = New TextBox()
         LblY = New Label()
+        GrpExperiment = New GroupBox()
+        CboExperiment = New ComboBox()
         LblX = New Label()
         BtnNext10 = New Button()
         BtnReset = New Button()
         BtnNextStep = New Button()
-        GrpExperiment = New GroupBox()
-        CboExperiment = New ComboBox()
         GrpParameter = New GroupBox()
         TxtParameter = New TextBox()
         LblParameter = New Label()
@@ -48,10 +48,10 @@ Partial Class FrmTwoDimensions
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(-2, 10)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Location = New Point(6, 6)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1300, 1300)
+        PicDiagram.Size = New Size(600, 600)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
@@ -61,11 +61,12 @@ Partial Class FrmTwoDimensions
         GrpStartpoint.Controls.Add(TxtX)
         GrpStartpoint.Controls.Add(LblY)
         GrpStartpoint.Controls.Add(LblX)
-        GrpStartpoint.Location = New Point(1309, 229)
-        GrpStartpoint.Margin = New Padding(4, 4, 4, 4)
+        GrpStartpoint.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpStartpoint.Location = New Point(614, 104)
+        GrpStartpoint.Margin = New Padding(4)
         GrpStartpoint.Name = "GrpStartpoint"
-        GrpStartpoint.Padding = New Padding(4, 4, 4, 4)
-        GrpStartpoint.Size = New Size(427, 205)
+        GrpStartpoint.Padding = New Padding(4)
+        GrpStartpoint.Size = New Size(254, 88)
         GrpStartpoint.TabIndex = 1
         GrpStartpoint.TabStop = False
         GrpStartpoint.Text = "CoordinatesStartpoint"
@@ -74,80 +75,41 @@ Partial Class FrmTwoDimensions
         ' 
         TxtY.AcceptsReturn = True
         TxtY.AcceptsTab = True
-        TxtY.Location = New Point(91, 120)
-        TxtY.Margin = New Padding(4, 4, 4, 4)
+        TxtY.Location = New Point(53, 51)
+        TxtY.Margin = New Padding(4)
         TxtY.Name = "TxtY"
-        TxtY.Size = New Size(299, 38)
+        TxtY.Size = New Size(193, 21)
         TxtY.TabIndex = 3
         ' 
         ' TxtX
         ' 
         TxtX.AcceptsReturn = True
         TxtX.AcceptsTab = True
-        TxtX.Location = New Point(91, 64)
-        TxtX.Margin = New Padding(4, 4, 4, 4)
+        TxtX.Location = New Point(53, 22)
+        TxtX.Margin = New Padding(4)
         TxtX.Name = "TxtX"
-        TxtX.Size = New Size(299, 38)
+        TxtX.Size = New Size(193, 21)
         TxtX.TabIndex = 2
         ' 
         ' LblY
         ' 
         LblY.AutoSize = True
-        LblY.Location = New Point(28, 124)
+        LblY.Location = New Point(23, 57)
         LblY.Margin = New Padding(4, 0, 4, 0)
         LblY.Name = "LblY"
-        LblY.Size = New Size(47, 31)
+        LblY.Size = New Size(22, 15)
         LblY.TabIndex = 5
         LblY.Text = "y ="
-        ' 
-        ' LblX
-        ' 
-        LblX.AutoSize = True
-        LblX.Location = New Point(28, 74)
-        LblX.Margin = New Padding(4, 0, 4, 0)
-        LblX.Name = "LblX"
-        LblX.Size = New Size(47, 31)
-        LblX.TabIndex = 4
-        LblX.Text = "x ="
-        ' 
-        ' BtnNext10
-        ' 
-        BtnNext10.Location = New Point(1309, 709)
-        BtnNext10.Margin = New Padding(4, 4, 4, 4)
-        BtnNext10.Name = "BtnNext10"
-        BtnNext10.Size = New Size(427, 50)
-        BtnNext10.TabIndex = 9
-        BtnNext10.Text = "Next10Steps"
-        BtnNext10.UseVisualStyleBackColor = True
-        ' 
-        ' BtnReset
-        ' 
-        BtnReset.Location = New Point(1306, 1260)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
-        BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(427, 50)
-        BtnReset.TabIndex = 10
-        BtnReset.Text = "ResetIteration"
-        BtnReset.UseVisualStyleBackColor = True
-        ' 
-        ' BtnNextStep
-        ' 
-        BtnNextStep.Location = New Point(1309, 651)
-        BtnNextStep.Margin = New Padding(4, 4, 4, 4)
-        BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(427, 50)
-        BtnNextStep.TabIndex = 8
-        BtnNextStep.Text = "NextStep"
-        BtnNextStep.UseVisualStyleBackColor = True
         ' 
         ' GrpExperiment
         ' 
         GrpExperiment.Controls.Add(CboExperiment)
-        GrpExperiment.Location = New Point(1301, 463)
-        GrpExperiment.Margin = New Padding(4, 4, 4, 4)
+        GrpExperiment.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpExperiment.Location = New Point(614, 200)
+        GrpExperiment.Margin = New Padding(4)
         GrpExperiment.Name = "GrpExperiment"
-        GrpExperiment.Padding = New Padding(4, 4, 4, 4)
-        GrpExperiment.Size = New Size(427, 159)
+        GrpExperiment.Padding = New Padding(4)
+        GrpExperiment.Size = New Size(254, 63)
         GrpExperiment.TabIndex = 6
         GrpExperiment.TabStop = False
         GrpExperiment.Text = "ExperimentNo"
@@ -156,21 +118,65 @@ Partial Class FrmTwoDimensions
         ' 
         CboExperiment.FormattingEnabled = True
         CboExperiment.Items.AddRange(New Object() {"Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"})
-        CboExperiment.Location = New Point(22, 64)
-        CboExperiment.Margin = New Padding(4, 4, 4, 4)
+        CboExperiment.Location = New Point(8, 22)
+        CboExperiment.Margin = New Padding(4)
         CboExperiment.Name = "CboExperiment"
-        CboExperiment.Size = New Size(368, 39)
+        CboExperiment.Size = New Size(238, 23)
         CboExperiment.TabIndex = 7
+        ' 
+        ' LblX
+        ' 
+        LblX.AutoSize = True
+        LblX.Location = New Point(21, 28)
+        LblX.Margin = New Padding(4, 0, 4, 0)
+        LblX.Name = "LblX"
+        LblX.Size = New Size(23, 15)
+        LblX.TabIndex = 4
+        LblX.Text = "x ="
+        ' 
+        ' BtnNext10
+        ' 
+        BtnNext10.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnNext10.Location = New Point(612, 309)
+        BtnNext10.Margin = New Padding(4)
+        BtnNext10.Name = "BtnNext10"
+        BtnNext10.Size = New Size(256, 30)
+        BtnNext10.TabIndex = 9
+        BtnNext10.Text = "Next10Steps"
+        BtnNext10.UseVisualStyleBackColor = True
+        ' 
+        ' BtnReset
+        ' 
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnReset.Location = New Point(614, 575)
+        BtnReset.Margin = New Padding(4)
+        BtnReset.Name = "BtnReset"
+        BtnReset.Size = New Size(254, 30)
+        BtnReset.TabIndex = 10
+        BtnReset.Text = "ResetIteration"
+        BtnReset.UseVisualStyleBackColor = True
+        ' 
+        ' BtnNextStep
+        ' 
+        BtnNextStep.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnNextStep.Location = New Point(614, 271)
+        BtnNextStep.Margin = New Padding(4)
+        BtnNextStep.Name = "BtnNextStep"
+        BtnNextStep.Size = New Size(254, 30)
+        BtnNextStep.TabIndex = 8
+        BtnNextStep.Text = "NextStep"
+        BtnNextStep.UseVisualStyleBackColor = True
         ' 
         ' GrpParameter
         ' 
         GrpParameter.Controls.Add(TxtParameter)
         GrpParameter.Controls.Add(LblParameter)
-        GrpParameter.Location = New Point(1309, 93)
-        GrpParameter.Margin = New Padding(4, 4, 4, 4)
+        GrpParameter.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpParameter.Location = New Point(614, 37)
+        GrpParameter.Margin = New Padding(4)
         GrpParameter.Name = "GrpParameter"
-        GrpParameter.Padding = New Padding(4, 4, 4, 4)
-        GrpParameter.Size = New Size(427, 126)
+        GrpParameter.Padding = New Padding(4)
+        GrpParameter.Size = New Size(254, 59)
         GrpParameter.TabIndex = 4
         GrpParameter.TabStop = False
         GrpParameter.Text = "Parameter"
@@ -179,47 +185,49 @@ Partial Class FrmTwoDimensions
         ' 
         TxtParameter.AcceptsReturn = True
         TxtParameter.AcceptsTab = True
-        TxtParameter.Location = New Point(87, 41)
-        TxtParameter.Margin = New Padding(4, 4, 4, 4)
+        TxtParameter.Location = New Point(53, 24)
+        TxtParameter.Margin = New Padding(4)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(329, 38)
+        TxtParameter.Size = New Size(193, 21)
         TxtParameter.TabIndex = 5
         ' 
         ' LblParameter
         ' 
         LblParameter.AutoSize = True
-        LblParameter.Location = New Point(22, 52)
+        LblParameter.Location = New Point(21, 27)
         LblParameter.Margin = New Padding(4, 0, 4, 0)
         LblParameter.Name = "LblParameter"
-        LblParameter.Size = New Size(48, 31)
+        LblParameter.Size = New Size(24, 15)
         LblParameter.TabIndex = 0
         LblParameter.Text = "a ="
         ' 
         ' CboFunction
         ' 
+        CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic growth", "Parabola"})
-        CboFunction.Location = New Point(1309, 10)
-        CboFunction.Margin = New Padding(4, 4, 4, 4)
+        CboFunction.Location = New Point(614, 6)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(424, 39)
+        CboFunction.Size = New Size(254, 23)
         CboFunction.TabIndex = 11
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Location = New Point(1306, 1202)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnDefault.Location = New Point(614, 537)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(427, 50)
+        BtnDefault.Size = New Size(254, 30)
         BtnDefault.TabIndex = 12
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmTwoDimensions
         ' 
-        AutoScaleDimensions = New SizeF(13F, 31F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1753, 1676)
+        ClientSize = New Size(878, 615)
         Controls.Add(BtnDefault)
         Controls.Add(CboFunction)
         Controls.Add(GrpParameter)
@@ -229,8 +237,9 @@ Partial Class FrmTwoDimensions
         Controls.Add(BtnNext10)
         Controls.Add(GrpStartpoint)
         Controls.Add(PicDiagram)
+        Font = New Font("Microsoft Sans Serif", 11.1428576F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         Name = "FrmTwoDimensions"
         Text = "TwoDimensions"
         WindowState = FormWindowState.Maximized

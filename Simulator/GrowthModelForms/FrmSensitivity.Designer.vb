@@ -56,19 +56,18 @@ Partial Class FrmSensitivity
         ' 
         CboIterationDepth.FormattingEnabled = True
         CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboIterationDepth.Location = New Point(726, 13)
-        CboIterationDepth.Margin = New Padding(4)
+        CboIterationDepth.Location = New Point(333, 4)
         CboIterationDepth.Name = "CboIterationDepth"
-        CboIterationDepth.Size = New Size(91, 39)
+        CboIterationDepth.Size = New Size(45, 23)
         CboIterationDepth.TabIndex = 27
         ' 
         ' LblIterationDepth
         ' 
         LblIterationDepth.AutoSize = True
-        LblIterationDepth.Location = New Point(561, 18)
-        LblIterationDepth.Margin = New Padding(4, 0, 4, 0)
+        LblIterationDepth.Font = New Font("Microsoft Sans Serif", 9F)
+        LblIterationDepth.Location = New Point(243, 7)
         LblIterationDepth.Name = "LblIterationDepth"
-        LblIterationDepth.Size = New Size(163, 31)
+        LblIterationDepth.Size = New Size(84, 15)
         LblIterationDepth.TabIndex = 29
         LblIterationDepth.Text = "IterationDepth"
         ' 
@@ -76,119 +75,111 @@ Partial Class FrmSensitivity
         ' 
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        CboFunction.Location = New Point(17, 13)
-        CboFunction.Margin = New Padding(4)
+        CboFunction.Location = New Point(3, 5)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(286, 39)
+        CboFunction.Size = New Size(142, 23)
         CboFunction.TabIndex = 25
         ' 
         ' TxtParameter
         ' 
-        TxtParameter.Font = New Font("Segoe UI", 11.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TxtParameter.Location = New Point(366, 13)
-        TxtParameter.Margin = New Padding(4)
+        TxtParameter.Font = New Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TxtParameter.Location = New Point(180, 4)
         TxtParameter.Name = "TxtParameter"
-        TxtParameter.Size = New Size(184, 38)
+        TxtParameter.Size = New Size(57, 21)
         TxtParameter.TabIndex = 26
         ' 
         ' LblParameter
         ' 
         LblParameter.AutoSize = True
-        LblParameter.Font = New Font("Segoe UI", 11.5F)
-        LblParameter.Location = New Point(314, 18)
-        LblParameter.Margin = New Padding(4, 0, 4, 0)
+        LblParameter.Font = New Font("Microsoft Sans Serif", 9F)
+        LblParameter.Location = New Point(150, 8)
         LblParameter.Name = "LblParameter"
-        LblParameter.Size = New Size(48, 31)
+        LblParameter.Size = New Size(24, 15)
         LblParameter.TabIndex = 28
         LblParameter.Text = "a ="
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(13, 60)
-        PicDiagram.Margin = New Padding(4)
+        PicDiagram.Location = New Point(3, 33)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1300, 1300)
+        PicDiagram.Size = New Size(500, 500)
         PicDiagram.TabIndex = 24
         PicDiagram.TabStop = False
         ' 
         ' LblValueList1
         ' 
         LblValueList1.AutoSize = True
-        LblValueList1.Location = New Point(1330, 29)
-        LblValueList1.Margin = New Padding(4, 0, 4, 0)
+        LblValueList1.Font = New Font("Microsoft Sans Serif", 9F)
+        LblValueList1.Location = New Point(509, 12)
         LblValueList1.Name = "LblValueList1"
-        LblValueList1.Size = New Size(116, 31)
+        LblValueList1.Size = New Size(64, 15)
         LblValueList1.TabIndex = 31
         LblValueList1.Text = "ValueList1"
         ' 
         ' LstValueList1
         ' 
-        LstValueList1.Font = New Font("Segoe UI", 11.5F)
+        LstValueList1.Font = New Font("Microsoft Sans Serif", 9F)
         LstValueList1.FormattingEnabled = True
-        LstValueList1.Location = New Point(1330, 64)
-        LstValueList1.Margin = New Padding(4)
+        LstValueList1.ItemHeight = 15
+        LstValueList1.Location = New Point(509, 33)
         LstValueList1.Name = "LstValueList1"
         LstValueList1.ScrollAlwaysVisible = True
-        LstValueList1.Size = New Size(275, 1306)
+        LstValueList1.Size = New Size(80, 499)
         LstValueList1.TabIndex = 30
         ' 
         ' LblValueList2
         ' 
         LblValueList2.AutoSize = True
-        LblValueList2.Location = New Point(1623, 29)
-        LblValueList2.Margin = New Padding(4, 0, 4, 0)
+        LblValueList2.Font = New Font("Microsoft Sans Serif", 9F)
+        LblValueList2.Location = New Point(595, 12)
         LblValueList2.Name = "LblValueList2"
-        LblValueList2.Size = New Size(116, 31)
+        LblValueList2.Size = New Size(64, 15)
         LblValueList2.TabIndex = 33
         LblValueList2.Text = "ValueList2"
         ' 
         ' LstValueList2
         ' 
-        LstValueList2.Font = New Font("Segoe UI", 11.5F)
+        LstValueList2.Font = New Font("Microsoft Sans Serif", 9F)
         LstValueList2.FormattingEnabled = True
-        LstValueList2.Location = New Point(1623, 64)
-        LstValueList2.Margin = New Padding(4)
+        LstValueList2.ItemHeight = 15
+        LstValueList2.Location = New Point(595, 34)
         LstValueList2.Name = "LstValueList2"
         LstValueList2.ScrollAlwaysVisible = True
-        LstValueList2.Size = New Size(275, 1306)
+        LstValueList2.Size = New Size(80, 499)
         LstValueList2.TabIndex = 32
         ' 
         ' TxtStartValue1
         ' 
-        TxtStartValue1.Location = New Point(2048, 68)
-        TxtStartValue1.Margin = New Padding(4)
+        TxtStartValue1.Location = New Point(766, 8)
         TxtStartValue1.Name = "TxtStartValue1"
-        TxtStartValue1.Size = New Size(461, 38)
+        TxtStartValue1.Size = New Size(258, 21)
         TxtStartValue1.TabIndex = 34
         ' 
         ' LblStartValue1
         ' 
         LblStartValue1.AutoSize = True
-        LblStartValue1.Font = New Font("Segoe UI", 11.5F)
-        LblStartValue1.Location = New Point(1912, 68)
-        LblStartValue1.Margin = New Padding(4, 0, 4, 0)
+        LblStartValue1.Font = New Font("Microsoft Sans Serif", 9F)
+        LblStartValue1.Location = New Point(690, 12)
         LblStartValue1.Name = "LblStartValue1"
-        LblStartValue1.Size = New Size(128, 31)
+        LblStartValue1.Size = New Size(70, 15)
         LblStartValue1.TabIndex = 35
         LblStartValue1.Text = "StartValue1"
         ' 
         ' TxtStartValue2
         ' 
-        TxtStartValue2.Location = New Point(2048, 126)
-        TxtStartValue2.Margin = New Padding(4)
+        TxtStartValue2.Location = New Point(766, 35)
         TxtStartValue2.Name = "TxtStartValue2"
-        TxtStartValue2.Size = New Size(461, 38)
+        TxtStartValue2.Size = New Size(260, 21)
         TxtStartValue2.TabIndex = 36
         ' 
         ' LblStartValue2
         ' 
         LblStartValue2.AutoSize = True
-        LblStartValue2.Font = New Font("Segoe UI", 11.5F)
-        LblStartValue2.Location = New Point(1912, 133)
-        LblStartValue2.Margin = New Padding(4, 0, 4, 0)
+        LblStartValue2.Font = New Font("Microsoft Sans Serif", 9F)
+        LblStartValue2.Location = New Point(690, 34)
         LblStartValue2.Name = "LblStartValue2"
-        LblStartValue2.Size = New Size(128, 31)
+        LblStartValue2.Size = New Size(70, 15)
         LblStartValue2.TabIndex = 37
         LblStartValue2.Text = "StartValue2"
         ' 
@@ -199,11 +190,9 @@ Partial Class FrmSensitivity
         GrpPresentation.Controls.Add(LblxStretching)
         GrpPresentation.Controls.Add(OptSingleOrbit)
         GrpPresentation.Controls.Add(OptDifference)
-        GrpPresentation.Location = New Point(1912, 191)
-        GrpPresentation.Margin = New Padding(4)
+        GrpPresentation.Location = New Point(690, 62)
         GrpPresentation.Name = "GrpPresentation"
-        GrpPresentation.Padding = New Padding(4)
-        GrpPresentation.Size = New Size(602, 199)
+        GrpPresentation.Size = New Size(336, 88)
         GrpPresentation.TabIndex = 38
         GrpPresentation.TabStop = False
         GrpPresentation.Text = "Presentation"
@@ -211,38 +200,34 @@ Partial Class FrmSensitivity
         ' LblStretching
         ' 
         LblStretching.AutoSize = True
-        LblStretching.Location = New Point(303, 135)
-        LblStretching.Margin = New Padding(4, 0, 4, 0)
+        LblStretching.Location = New Point(140, 49)
         LblStretching.Name = "LblStretching"
-        LblStretching.Size = New Size(153, 31)
+        LblStretching.Size = New Size(81, 15)
         LblStretching.TabIndex = 4
         LblStretching.Text = "DinStretching"
         ' 
         ' TxtxStretching
         ' 
-        TxtxStretching.Location = New Point(464, 132)
-        TxtxStretching.Margin = New Padding(4)
+        TxtxStretching.Location = New Point(227, 45)
         TxtxStretching.Name = "TxtxStretching"
-        TxtxStretching.Size = New Size(112, 38)
+        TxtxStretching.Size = New Size(63, 21)
         TxtxStretching.TabIndex = 3
         ' 
         ' LblxStretching
         ' 
         LblxStretching.AutoSize = True
-        LblxStretching.Location = New Point(303, 56)
-        LblxStretching.Margin = New Padding(4, 0, 4, 0)
+        LblxStretching.Location = New Point(140, 22)
         LblxStretching.Name = "LblxStretching"
-        LblxStretching.Size = New Size(129, 31)
+        LblxStretching.Size = New Size(68, 15)
         LblxStretching.TabIndex = 2
         LblxStretching.Text = "xStretching"
         ' 
         ' OptSingleOrbit
         ' 
         OptSingleOrbit.AutoSize = True
-        OptSingleOrbit.Location = New Point(26, 126)
-        OptSingleOrbit.Margin = New Padding(4)
+        OptSingleOrbit.Location = New Point(20, 45)
         OptSingleOrbit.Name = "OptSingleOrbit"
-        OptSingleOrbit.Size = New Size(165, 35)
+        OptSingleOrbit.Size = New Size(92, 19)
         OptSingleOrbit.TabIndex = 1
         OptSingleOrbit.Text = "SingleOrbits"
         OptSingleOrbit.UseVisualStyleBackColor = True
@@ -251,10 +236,9 @@ Partial Class FrmSensitivity
         ' 
         OptDifference.AutoSize = True
         OptDifference.Checked = True
-        OptDifference.Location = New Point(26, 51)
-        OptDifference.Margin = New Padding(4)
+        OptDifference.Location = New Point(20, 20)
         OptDifference.Name = "OptDifference"
-        OptDifference.Size = New Size(167, 35)
+        OptDifference.Size = New Size(95, 19)
         OptDifference.TabIndex = 0
         OptDifference.TabStop = True
         OptDifference.Text = "Difference12"
@@ -262,22 +246,20 @@ Partial Class FrmSensitivity
         ' 
         ' BtnStart
         ' 
-        BtnStart.Font = New Font("Segoe UI", 11.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        BtnStart.Location = New Point(1910, 471)
-        BtnStart.Margin = New Padding(4)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        BtnStart.Location = New Point(690, 189)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(594, 50)
+        BtnStart.Size = New Size(336, 30)
         BtnStart.TabIndex = 39
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Segoe UI", 11.5F)
-        BtnReset.Location = New Point(1910, 1310)
-        BtnReset.Margin = New Padding(4)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnReset.Location = New Point(690, 507)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(594, 50)
+        BtnReset.Size = New Size(336, 25)
         BtnReset.TabIndex = 40
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -285,40 +267,37 @@ Partial Class FrmSensitivity
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(2100, 420)
-        LblSteps.Margin = New Padding(4, 0, 4, 0)
+        LblSteps.Location = New Point(791, 162)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(26, 31)
+        LblSteps.Size = New Size(14, 15)
         LblSteps.TabIndex = 42
         LblSteps.Text = "0"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Font = New Font("Segoe UI", 11.5F)
-        LblNumberOfSteps.Location = New Point(1912, 420)
-        LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9F)
+        LblNumberOfSteps.Location = New Point(690, 162)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(177, 31)
+        LblNumberOfSteps.Size = New Size(95, 15)
         LblNumberOfSteps.TabIndex = 41
         LblNumberOfSteps.Text = "NumberOfSteps"
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Segoe UI", 11.5F)
-        BtnDefault.Location = New Point(1910, 1252)
-        BtnDefault.Margin = New Padding(4)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnDefault.Location = New Point(690, 476)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(594, 50)
+        BtnDefault.Size = New Size(336, 25)
         BtnDefault.TabIndex = 43
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmSensitivity
         ' 
-        AutoScaleDimensions = New SizeF(13F, 31F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2523, 1377)
+        ClientSize = New Size(1036, 545)
         Controls.Add(BtnDefault)
         Controls.Add(LblSteps)
         Controls.Add(LblNumberOfSteps)
@@ -339,10 +318,10 @@ Partial Class FrmSensitivity
         Controls.Add(TxtParameter)
         Controls.Add(LblParameter)
         Controls.Add(PicDiagram)
+        Font = New Font("Microsoft Sans Serif", 9F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4)
         Name = "FrmSensitivity"
-        Text = "Sensitivity"
+        Text = "StartValue1"
         WindowState = FormWindowState.Maximized
         CType(PicDiagram, ComponentModel.ISupportInitialize).EndInit()
         GrpPresentation.ResumeLayout(False)

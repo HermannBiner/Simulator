@@ -48,31 +48,31 @@ Partial Class FrmFeigenbaum
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(14, 10)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(1, 5)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1400, 1510)
+        PicDiagram.Size = New Size(580, 580)
         PicDiagram.TabIndex = 2
         PicDiagram.TabStop = False
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Segoe UI", 11F)
-        BtnReset.Location = New Point(1430, 1462)
-        BtnReset.Margin = New Padding(4, 5, 4, 5)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnReset.Location = New Point(586, 555)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(460, 58)
+        BtnReset.Size = New Size(276, 30)
         BtnReset.TabIndex = 4
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Font = New Font("Segoe UI", 11F)
-        BtnStart.Location = New Point(1426, 762)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnStart.Location = New Point(589, 293)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(460, 58)
+        BtnStart.Size = New Size(276, 30)
         BtnStart.TabIndex = 3
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -80,22 +80,22 @@ Partial Class FrmFeigenbaum
         ' LblParameterRange
         ' 
         LblParameterRange.AutoSize = True
-        LblParameterRange.Font = New Font("Segoe UI", 11F)
-        LblParameterRange.Location = New Point(1432, 82)
+        LblParameterRange.Font = New Font("Microsoft Sans Serif", 9F)
+        LblParameterRange.Location = New Point(589, 36)
         LblParameterRange.Margin = New Padding(4, 0, 4, 0)
         LblParameterRange.Name = "LblParameterRange"
-        LblParameterRange.Size = New Size(337, 36)
+        LblParameterRange.Size = New Size(168, 15)
         LblParameterRange.TabIndex = 11
         LblParameterRange.Text = "ExaminatedParameterRange"
         ' 
         ' LblAmin
         ' 
         LblAmin.AutoSize = True
-        LblAmin.Font = New Font("Segoe UI", 11F)
-        LblAmin.Location = New Point(1432, 152)
+        LblAmin.Font = New Font("Microsoft Sans Serif", 9F)
+        LblAmin.Location = New Point(589, 60)
         LblAmin.Margin = New Padding(4, 0, 4, 0)
         LblAmin.Name = "LblAmin"
-        LblAmin.Size = New Size(97, 36)
+        LblAmin.Size = New Size(45, 15)
         LblAmin.TabIndex = 12
         LblAmin.Text = "aMin ="
         ' 
@@ -103,65 +103,65 @@ Partial Class FrmFeigenbaum
         ' 
         TxtAMin.AcceptsReturn = True
         TxtAMin.AcceptsTab = True
-        TxtAMin.Font = New Font("Segoe UI", 11F)
-        TxtAMin.Location = New Point(1542, 141)
-        TxtAMin.Margin = New Padding(4, 5, 4, 5)
+        TxtAMin.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtAMin.Location = New Point(636, 57)
+        TxtAMin.Margin = New Padding(4)
         TxtAMin.Name = "TxtAMin"
-        TxtAMin.Size = New Size(354, 42)
+        TxtAMin.Size = New Size(229, 21)
         TxtAMin.TabIndex = 1
         ' 
         ' TxtAMax
         ' 
         TxtAMax.AcceptsReturn = True
         TxtAMax.AcceptsTab = True
-        TxtAMax.Font = New Font("Segoe UI", 11F)
-        TxtAMax.Location = New Point(1542, 216)
-        TxtAMax.Margin = New Padding(4, 5, 4, 5)
+        TxtAMax.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtAMax.Location = New Point(636, 84)
+        TxtAMax.Margin = New Padding(4)
         TxtAMax.Name = "TxtAMax"
-        TxtAMax.Size = New Size(354, 42)
+        TxtAMax.Size = New Size(229, 21)
         TxtAMax.TabIndex = 2
         ' 
         ' LblAmax
         ' 
         LblAmax.AutoSize = True
-        LblAmax.Font = New Font("Segoe UI", 11F)
-        LblAmax.Location = New Point(1430, 216)
+        LblAmax.Font = New Font("Microsoft Sans Serif", 9F)
+        LblAmax.Location = New Point(586, 87)
         LblAmax.Margin = New Padding(4, 0, 4, 0)
         LblAmax.Name = "LblAmax"
-        LblAmax.Size = New Size(101, 36)
+        LblAmax.Size = New Size(48, 15)
         LblAmax.TabIndex = 14
         LblAmax.Text = "aMax ="
         ' 
         ' CboFunction
         ' 
-        CboFunction.Font = New Font("Segoe UI", 11F)
+        CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
-        CboFunction.Location = New Point(1440, 15)
-        CboFunction.Margin = New Padding(4, 5, 4, 5)
+        CboFunction.Location = New Point(589, 5)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(460, 44)
+        CboFunction.Size = New Size(276, 23)
         CboFunction.TabIndex = 30
         ' 
         ' TxtXMax
         ' 
         TxtXMax.AcceptsReturn = True
         TxtXMax.AcceptsTab = True
-        TxtXMax.Font = New Font("Segoe UI", 11F)
-        TxtXMax.Location = New Point(1538, 469)
-        TxtXMax.Margin = New Padding(4, 5, 4, 5)
+        TxtXMax.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtXMax.Location = New Point(636, 186)
+        TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
-        TxtXMax.Size = New Size(358, 42)
+        TxtXMax.Size = New Size(229, 21)
         TxtXMax.TabIndex = 36
         ' 
         ' LblXmax
         ' 
         LblXmax.AutoSize = True
-        LblXmax.Font = New Font("Segoe UI", 11F)
-        LblXmax.Location = New Point(1428, 469)
+        LblXmax.Font = New Font("Microsoft Sans Serif", 9F)
+        LblXmax.Location = New Point(589, 186)
         LblXmax.Margin = New Padding(4, 0, 4, 0)
         LblXmax.Name = "LblXmax"
-        LblXmax.Size = New Size(102, 36)
+        LblXmax.Size = New Size(49, 15)
         LblXmax.TabIndex = 39
         LblXmax.Text = "Xmax ="
         ' 
@@ -169,54 +169,54 @@ Partial Class FrmFeigenbaum
         ' 
         TxtXMin.AcceptsReturn = True
         TxtXMin.AcceptsTab = True
-        TxtXMin.Font = New Font("Segoe UI", 11F)
-        TxtXMin.Location = New Point(1538, 392)
-        TxtXMin.Margin = New Padding(4, 5, 4, 5)
+        TxtXMin.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtXMin.Location = New Point(636, 159)
+        TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
-        TxtXMin.Size = New Size(358, 42)
+        TxtXMin.Size = New Size(229, 21)
         TxtXMin.TabIndex = 35
         ' 
         ' LblXmin
         ' 
         LblXmin.AutoSize = True
-        LblXmin.Font = New Font("Segoe UI", 11F)
-        LblXmin.Location = New Point(1426, 395)
+        LblXmin.Font = New Font("Microsoft Sans Serif", 9F)
+        LblXmin.Location = New Point(586, 162)
         LblXmin.Margin = New Padding(4, 0, 4, 0)
         LblXmin.Name = "LblXmin"
-        LblXmin.Size = New Size(98, 36)
+        LblXmin.Size = New Size(46, 15)
         LblXmin.TabIndex = 38
         LblXmin.Text = "Xmin ="
         ' 
         ' LblValueRange
         ' 
         LblValueRange.AutoSize = True
-        LblValueRange.Font = New Font("Segoe UI", 11F)
-        LblValueRange.Location = New Point(1426, 338)
+        LblValueRange.Font = New Font("Microsoft Sans Serif", 9F)
+        LblValueRange.Location = New Point(586, 138)
         LblValueRange.Margin = New Padding(4, 0, 4, 0)
         LblValueRange.Name = "LblValueRange"
-        LblValueRange.Size = New Size(282, 36)
+        LblValueRange.Size = New Size(141, 15)
         LblValueRange.TabIndex = 37
         LblValueRange.Text = "ExaminatedValueRange"
         ' 
         ' LblDeltaA
         ' 
         LblDeltaA.AutoSize = True
-        LblDeltaA.Font = New Font("Segoe UI", 11F)
-        LblDeltaA.Location = New Point(1432, 279)
+        LblDeltaA.Font = New Font("Microsoft Sans Serif", 9F)
+        LblDeltaA.Location = New Point(586, 116)
         LblDeltaA.Margin = New Padding(4, 0, 4, 0)
         LblDeltaA.Name = "LblDeltaA"
-        LblDeltaA.Size = New Size(107, 36)
+        LblDeltaA.Size = New Size(49, 15)
         LblDeltaA.TabIndex = 41
         LblDeltaA.Text = "Delta = "
         ' 
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
-        LblDeltaX.Font = New Font("Segoe UI", 11F)
-        LblDeltaX.Location = New Point(1426, 550)
+        LblDeltaX.Font = New Font("Microsoft Sans Serif", 9F)
+        LblDeltaX.Location = New Point(589, 211)
         LblDeltaX.Margin = New Padding(4, 0, 4, 0)
         LblDeltaX.Name = "LblDeltaX"
-        LblDeltaX.Size = New Size(107, 36)
+        LblDeltaX.Size = New Size(49, 15)
         LblDeltaX.TabIndex = 43
         LblDeltaX.Text = "Delta = "
         ' 
@@ -225,11 +225,11 @@ Partial Class FrmFeigenbaum
         ChkSplitPoints.AutoSize = True
         ChkSplitPoints.Checked = True
         ChkSplitPoints.CheckState = CheckState.Checked
-        ChkSplitPoints.Font = New Font("Segoe UI", 11F)
-        ChkSplitPoints.Location = New Point(1432, 625)
-        ChkSplitPoints.Margin = New Padding(4, 5, 4, 5)
+        ChkSplitPoints.Font = New Font("Microsoft Sans Serif", 9F)
+        ChkSplitPoints.Location = New Point(589, 239)
+        ChkSplitPoints.Margin = New Padding(4)
         ChkSplitPoints.Name = "ChkSplitPoints"
-        ChkSplitPoints.Size = New Size(224, 40)
+        ChkSplitPoints.Size = New Size(115, 19)
         ChkSplitPoints.TabIndex = 44
         ChkSplitPoints.Text = "ShowSplitPoints"
         ChkSplitPoints.UseVisualStyleBackColor = True
@@ -237,31 +237,31 @@ Partial Class FrmFeigenbaum
         ' ChkColored
         ' 
         ChkColored.AutoSize = True
-        ChkColored.Font = New Font("Segoe UI", 11F)
-        ChkColored.Location = New Point(1430, 692)
-        ChkColored.Margin = New Padding(4, 5, 4, 5)
+        ChkColored.Font = New Font("Microsoft Sans Serif", 9F)
+        ChkColored.Location = New Point(589, 266)
+        ChkColored.Margin = New Padding(4)
         ChkColored.Name = "ChkColored"
-        ChkColored.Size = New Size(227, 40)
+        ChkColored.Size = New Size(117, 19)
         ChkColored.TabIndex = 46
         ChkColored.Text = "ColoredDiagram"
         ChkColored.UseVisualStyleBackColor = True
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Segoe UI", 11F)
-        BtnDefault.Location = New Point(1430, 1384)
-        BtnDefault.Margin = New Padding(4, 5, 4, 5)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnDefault.Location = New Point(586, 517)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(460, 58)
+        BtnDefault.Size = New Size(276, 30)
         BtnDefault.TabIndex = 47
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' FrmFeigenbaum
         ' 
-        AutoScaleDimensions = New SizeF(14F, 36F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1924, 1535)
+        ClientSize = New Size(876, 593)
         Controls.Add(BtnDefault)
         Controls.Add(ChkColored)
         Controls.Add(ChkSplitPoints)
@@ -281,9 +281,10 @@ Partial Class FrmFeigenbaum
         Controls.Add(BtnReset)
         Controls.Add(BtnStart)
         Controls.Add(PicDiagram)
+        Font = New Font("Microsoft Sans Serif", 11.1428576F)
         ForeColor = SystemColors.ControlText
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 5, 4, 5)
+        Margin = New Padding(4)
         Name = "FrmFeigenbaum"
         Text = "FeigenbaumDiagram"
         WindowState = FormWindowState.Maximized

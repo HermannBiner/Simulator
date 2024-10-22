@@ -41,7 +41,6 @@ Public Class FrmPendulum
     Private Sub InitializeLanguage()
 
         Text = LM.GetString("Pendulum")
-        LblPendulum.Text = LM.GetString("Pendulum")
 
         'LblSteps contains the  #Steps
         LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")

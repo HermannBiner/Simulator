@@ -24,7 +24,6 @@ Partial Class FrmPendulum
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPendulum))
         CboPendulum = New ComboBox()
-        LblPendulum = New Label()
         LstProtocol = New ListBox()
         GrpStartParameter = New GroupBox()
         TxtP6 = New TextBox()
@@ -69,34 +68,24 @@ Partial Class FrmPendulum
         ' 
         ' CboPendulum
         ' 
-        CboPendulum.Font = New Font("Segoe UI", 11F)
+        CboPendulum.Font = New Font("Microsoft Sans Serif", 9.0F)
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
-        CboPendulum.Location = New Point(1336, 53)
-        CboPendulum.Margin = New Padding(4, 5, 4, 5)
+        CboPendulum.Location = New Point(618, 3)
+        CboPendulum.Margin = New Padding(4)
         CboPendulum.Name = "CboPendulum"
-        CboPendulum.Size = New Size(448, 44)
+        CboPendulum.Size = New Size(205, 23)
         CboPendulum.TabIndex = 38
-        ' 
-        ' LblPendulum
-        ' 
-        LblPendulum.AutoSize = True
-        LblPendulum.Font = New Font("Segoe UI", 11F)
-        LblPendulum.Location = New Point(1332, 13)
-        LblPendulum.Margin = New Padding(4, 0, 4, 0)
-        LblPendulum.Name = "LblPendulum"
-        LblPendulum.Size = New Size(131, 36)
-        LblPendulum.TabIndex = 37
-        LblPendulum.Text = "Pendulum"
         ' 
         ' LstProtocol
         ' 
+        LstProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
         LstProtocol.FormattingEnabled = True
-        LstProtocol.ItemHeight = 36
-        LstProtocol.Location = New Point(1802, 1021)
-        LstProtocol.Margin = New Padding(4, 5, 4, 5)
+        LstProtocol.ItemHeight = 15
+        LstProtocol.Location = New Point(835, 369)
+        LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(900, 292)
+        LstProtocol.Size = New Size(319, 199)
         LstProtocol.TabIndex = 36
         ' 
         ' GrpStartParameter
@@ -114,81 +103,81 @@ Partial Class FrmPendulum
         GrpStartParameter.Controls.Add(TxtP1)
         GrpStartParameter.Controls.Add(LblP2)
         GrpStartParameter.Controls.Add(LblP1)
-        GrpStartParameter.Font = New Font("Segoe UI", 11F)
-        GrpStartParameter.Location = New Point(1336, 245)
-        GrpStartParameter.Margin = New Padding(4, 5, 4, 5)
+        GrpStartParameter.Font = New Font("Microsoft Sans Serif", 9.0F)
+        GrpStartParameter.Location = New Point(610, 93)
+        GrpStartParameter.Margin = New Padding(4)
         GrpStartParameter.Name = "GrpStartParameter"
-        GrpStartParameter.Padding = New Padding(4, 5, 4, 5)
-        GrpStartParameter.Size = New Size(456, 475)
+        GrpStartParameter.Padding = New Padding(4)
+        GrpStartParameter.Size = New Size(213, 239)
         GrpStartParameter.TabIndex = 35
         GrpStartParameter.TabStop = False
         GrpStartParameter.Text = "StartParameter"
         ' 
         ' TxtP6
         ' 
-        TxtP6.Location = New Point(98, 324)
-        TxtP6.Margin = New Padding(4, 5, 4, 5)
+        TxtP6.Location = New Point(38, 167)
+        TxtP6.Margin = New Padding(4)
         TxtP6.Name = "TxtP6"
-        TxtP6.Size = New Size(322, 42)
+        TxtP6.Size = New Size(158, 21)
         TxtP6.TabIndex = 12
         TxtP6.Visible = False
         ' 
         ' LblP6
         ' 
         LblP6.AutoSize = True
-        LblP6.Location = New Point(14, 327)
+        LblP6.Location = New Point(8, 170)
         LblP6.Margin = New Padding(4, 0, 4, 0)
         LblP6.Name = "LblP6"
-        LblP6.Size = New Size(44, 36)
+        LblP6.Size = New Size(22, 15)
         LblP6.TabIndex = 11
         LblP6.Text = "P6"
         LblP6.Visible = False
         ' 
         ' TxtP5
         ' 
-        TxtP5.Location = New Point(98, 271)
-        TxtP5.Margin = New Padding(4, 5, 4, 5)
+        TxtP5.Location = New Point(38, 138)
+        TxtP5.Margin = New Padding(4)
         TxtP5.Name = "TxtP5"
-        TxtP5.Size = New Size(322, 42)
+        TxtP5.Size = New Size(158, 21)
         TxtP5.TabIndex = 10
         TxtP5.Visible = False
         ' 
         ' LblP5
         ' 
         LblP5.AutoSize = True
-        LblP5.Location = New Point(14, 274)
+        LblP5.Location = New Point(8, 141)
         LblP5.Margin = New Padding(4, 0, 4, 0)
         LblP5.Name = "LblP5"
-        LblP5.Size = New Size(44, 36)
+        LblP5.Size = New Size(22, 15)
         LblP5.TabIndex = 9
         LblP5.Text = "P5"
         LblP5.Visible = False
         ' 
         ' TxtP4
         ' 
-        TxtP4.Location = New Point(98, 217)
-        TxtP4.Margin = New Padding(4, 5, 4, 5)
+        TxtP4.Location = New Point(38, 109)
+        TxtP4.Margin = New Padding(4)
         TxtP4.Name = "TxtP4"
-        TxtP4.Size = New Size(322, 42)
+        TxtP4.Size = New Size(158, 21)
         TxtP4.TabIndex = 8
         TxtP4.Visible = False
         ' 
         ' TxtP3
         ' 
-        TxtP3.Location = New Point(98, 164)
-        TxtP3.Margin = New Padding(4, 5, 4, 5)
+        TxtP3.Location = New Point(38, 80)
+        TxtP3.Margin = New Padding(4)
         TxtP3.Name = "TxtP3"
-        TxtP3.Size = New Size(322, 42)
+        TxtP3.Size = New Size(158, 21)
         TxtP3.TabIndex = 7
         TxtP3.Visible = False
         ' 
         ' LblP4
         ' 
         LblP4.AutoSize = True
-        LblP4.Location = New Point(14, 221)
+        LblP4.Location = New Point(8, 112)
         LblP4.Margin = New Padding(4, 0, 4, 0)
         LblP4.Name = "LblP4"
-        LblP4.Size = New Size(44, 36)
+        LblP4.Size = New Size(22, 15)
         LblP4.TabIndex = 6
         LblP4.Text = "P4"
         LblP4.Visible = False
@@ -196,49 +185,49 @@ Partial Class FrmPendulum
         ' LblP3
         ' 
         LblP3.AutoSize = True
-        LblP3.Location = New Point(14, 172)
+        LblP3.Location = New Point(8, 83)
         LblP3.Margin = New Padding(4, 0, 4, 0)
         LblP3.Name = "LblP3"
-        LblP3.Size = New Size(44, 36)
+        LblP3.Size = New Size(22, 15)
         LblP3.TabIndex = 5
         LblP3.Text = "P3"
         LblP3.Visible = False
         ' 
         ' BtnTakeOverStartParameter
         ' 
-        BtnTakeOverStartParameter.Location = New Point(14, 388)
-        BtnTakeOverStartParameter.Margin = New Padding(4, 5, 4, 5)
+        BtnTakeOverStartParameter.Location = New Point(8, 196)
+        BtnTakeOverStartParameter.Margin = New Padding(4)
         BtnTakeOverStartParameter.Name = "BtnTakeOverStartParameter"
-        BtnTakeOverStartParameter.Size = New Size(406, 58)
+        BtnTakeOverStartParameter.Size = New Size(188, 30)
         BtnTakeOverStartParameter.TabIndex = 4
         BtnTakeOverStartParameter.Text = "TakeOver"
         BtnTakeOverStartParameter.UseVisualStyleBackColor = True
         ' 
         ' TxtP2
         ' 
-        TxtP2.Location = New Point(98, 110)
-        TxtP2.Margin = New Padding(4, 5, 4, 5)
+        TxtP2.Location = New Point(38, 51)
+        TxtP2.Margin = New Padding(4)
         TxtP2.Name = "TxtP2"
-        TxtP2.Size = New Size(322, 42)
+        TxtP2.Size = New Size(158, 21)
         TxtP2.TabIndex = 3
         TxtP2.Visible = False
         ' 
         ' TxtP1
         ' 
-        TxtP1.Location = New Point(98, 57)
-        TxtP1.Margin = New Padding(4, 5, 4, 5)
+        TxtP1.Location = New Point(38, 22)
+        TxtP1.Margin = New Padding(4)
         TxtP1.Name = "TxtP1"
-        TxtP1.Size = New Size(322, 42)
+        TxtP1.Size = New Size(158, 21)
         TxtP1.TabIndex = 2
         TxtP1.Visible = False
         ' 
         ' LblP2
         ' 
         LblP2.AutoSize = True
-        LblP2.Location = New Point(14, 114)
+        LblP2.Location = New Point(8, 54)
         LblP2.Margin = New Padding(4, 0, 4, 0)
         LblP2.Name = "LblP2"
-        LblP2.Size = New Size(44, 36)
+        LblP2.Size = New Size(22, 15)
         LblP2.TabIndex = 1
         LblP2.Text = "P2"
         LblP2.Visible = False
@@ -246,10 +235,10 @@ Partial Class FrmPendulum
         ' LblP1
         ' 
         LblP1.AutoSize = True
-        LblP1.Location = New Point(14, 60)
+        LblP1.Location = New Point(8, 22)
         LblP1.Margin = New Padding(4, 0, 4, 0)
         LblP1.Name = "LblP1"
-        LblP1.Size = New Size(44, 36)
+        LblP1.Size = New Size(22, 15)
         LblP1.TabIndex = 0
         LblP1.Text = "P1"
         LblP1.Visible = False
@@ -257,10 +246,11 @@ Partial Class FrmPendulum
         ' LblPhasePortrait
         ' 
         LblPhasePortrait.AutoSize = True
-        LblPhasePortrait.Location = New Point(1802, 13)
+        LblPhasePortrait.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblPhasePortrait.Location = New Point(835, 3)
         LblPhasePortrait.Margin = New Padding(4, 0, 4, 0)
         LblPhasePortrait.Name = "LblPhasePortrait"
-        LblPhasePortrait.Size = New Size(173, 37)
+        LblPhasePortrait.Size = New Size(81, 15)
         LblPhasePortrait.TabIndex = 34
         LblPhasePortrait.Text = "PhasePortrait"
         LblPhasePortrait.TextAlign = ContentAlignment.MiddleCenter
@@ -268,82 +258,86 @@ Partial Class FrmPendulum
         ' LblAdditionalParameter
         ' 
         LblAdditionalParameter.AutoSize = True
-        LblAdditionalParameter.Font = New Font("Segoe UI", 11F)
-        LblAdditionalParameter.Location = New Point(1336, 103)
+        LblAdditionalParameter.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblAdditionalParameter.Location = New Point(616, 31)
         LblAdditionalParameter.Margin = New Padding(4, 0, 4, 0)
         LblAdditionalParameter.Name = "LblAdditionalParameter"
-        LblAdditionalParameter.Size = New Size(249, 36)
+        LblAdditionalParameter.Size = New Size(119, 15)
         LblAdditionalParameter.TabIndex = 33
         LblAdditionalParameter.Text = "AdditionalParameter"
         ' 
         ' TrbAdditionalParameter
         ' 
         TrbAdditionalParameter.LargeChange = 1
-        TrbAdditionalParameter.Location = New Point(1336, 155)
-        TrbAdditionalParameter.Margin = New Padding(4, 5, 4, 5)
+        TrbAdditionalParameter.Location = New Point(610, 52)
+        TrbAdditionalParameter.Margin = New Padding(4)
         TrbAdditionalParameter.Maximum = 20
         TrbAdditionalParameter.Minimum = 1
         TrbAdditionalParameter.Name = "TrbAdditionalParameter"
-        TrbAdditionalParameter.Size = New Size(456, 80)
+        TrbAdditionalParameter.Size = New Size(213, 45)
         TrbAdditionalParameter.TabIndex = 32
         TrbAdditionalParameter.Value = 10
         ' 
         ' PicPhasePortrait
         ' 
         PicPhasePortrait.BackColor = Color.White
-        PicPhasePortrait.Location = New Point(1802, 53)
-        PicPhasePortrait.Margin = New Padding(4, 5, 4, 5)
+        PicPhasePortrait.Location = New Point(834, 22)
+        PicPhasePortrait.Margin = New Padding(4)
         PicPhasePortrait.Name = "PicPhasePortrait"
-        PicPhasePortrait.Size = New Size(900, 900)
+        PicPhasePortrait.Size = New Size(320, 320)
         PicPhasePortrait.TabIndex = 31
         PicPhasePortrait.TabStop = False
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(14, 13)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(3, 3)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1300, 1300)
+        PicDiagram.Size = New Size(600, 600)
         PicDiagram.TabIndex = 28
         PicDiagram.TabStop = False
         ' 
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Location = New Point(1534, 1091)
+        LblSteps.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblSteps.Location = New Point(715, 491)
         LblSteps.Margin = New Padding(4, 0, 4, 0)
         LblSteps.Name = "LblSteps"
-        LblSteps.Size = New Size(32, 37)
+        LblSteps.Size = New Size(14, 15)
         LblSteps.TabIndex = 43
         LblSteps.Text = "0"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Location = New Point(1324, 1089)
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblNumberOfSteps.Location = New Point(610, 491)
         LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(221, 37)
+        LblNumberOfSteps.Size = New Size(102, 15)
         LblNumberOfSteps.TabIndex = 42
         LblNumberOfSteps.Text = "Number of Steps:"
         ' 
         ' BtnReset
         ' 
-        BtnReset.Location = New Point(14, 1328)
-        BtnReset.Margin = New Padding(6, 10, 6, 10)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnReset.Location = New Point(610, 577)
+        BtnReset.Margin = New Padding(6, 8, 6, 8)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(648, 58)
+        BtnReset.Size = New Size(213, 30)
         BtnReset.TabIndex = 41
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Location = New Point(1324, 1170)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnStart.Location = New Point(610, 510)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(460, 58)
+        BtnStart.Size = New Size(105, 30)
         BtnStart.TabIndex = 39
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -351,81 +345,87 @@ Partial Class FrmPendulum
         ' LblStepWidth
         ' 
         LblStepWidth.AutoSize = True
-        LblStepWidth.Location = New Point(1336, 725)
+        LblStepWidth.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblStepWidth.Location = New Point(610, 336)
         LblStepWidth.Margin = New Padding(4, 0, 4, 0)
         LblStepWidth.Name = "LblStepWidth"
-        LblStepWidth.Size = New Size(141, 37)
+        LblStepWidth.Size = New Size(63, 15)
         LblStepWidth.TabIndex = 45
         LblStepWidth.Text = "StepWidth"
         ' 
         ' TrbStepWidth
         ' 
-        TrbStepWidth.Location = New Point(1336, 778)
-        TrbStepWidth.Margin = New Padding(4, 5, 4, 5)
+        TrbStepWidth.Location = New Point(610, 358)
+        TrbStepWidth.Margin = New Padding(4)
         TrbStepWidth.Maximum = 20
         TrbStepWidth.Minimum = 1
         TrbStepWidth.Name = "TrbStepWidth"
-        TrbStepWidth.Size = New Size(452, 80)
+        TrbStepWidth.Size = New Size(213, 45)
         TrbStepWidth.TabIndex = 44
         TrbStepWidth.Value = 10
         ' 
         ' PicEnergy
         ' 
         PicEnergy.BackColor = Color.White
-        PicEnergy.Location = New Point(1802, 1328)
-        PicEnergy.Margin = New Padding(4, 5, 4, 5)
+        PicEnergy.Location = New Point(834, 577)
+        PicEnergy.Margin = New Padding(4)
         PicEnergy.Name = "PicEnergy"
-        PicEnergy.Size = New Size(900, 38)
+        PicEnergy.Size = New Size(320, 27)
         PicEnergy.TabIndex = 47
         PicEnergy.TabStop = False
         ' 
         ' CboTypeofPhaseportrait
         ' 
+        CboTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9.0F)
         CboTypeofPhaseportrait.FormattingEnabled = True
         CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
-        CboTypeofPhaseportrait.Location = New Point(1332, 910)
-        CboTypeofPhaseportrait.Margin = New Padding(6, 10, 6, 10)
+        CboTypeofPhaseportrait.Location = New Point(610, 429)
+        CboTypeofPhaseportrait.Margin = New Padding(6, 8, 6, 8)
         CboTypeofPhaseportrait.Name = "CboTypeofPhaseportrait"
-        CboTypeofPhaseportrait.Size = New Size(460, 44)
+        CboTypeofPhaseportrait.Size = New Size(213, 23)
         CboTypeofPhaseportrait.TabIndex = 48
         ' 
         ' LblTypeofPhaseportrait
         ' 
         LblTypeofPhaseportrait.AutoSize = True
-        LblTypeofPhaseportrait.Location = New Point(1336, 863)
+        LblTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblTypeofPhaseportrait.Location = New Point(618, 407)
         LblTypeofPhaseportrait.Margin = New Padding(4, 0, 4, 0)
         LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
-        LblTypeofPhaseportrait.Size = New Size(255, 37)
+        LblTypeofPhaseportrait.Size = New Size(116, 15)
         LblTypeofPhaseportrait.TabIndex = 49
         LblTypeofPhaseportrait.Text = "TypeofPhaseportrait"
         ' 
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Location = New Point(1802, 969)
+        LblProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblProtocol.Location = New Point(840, 346)
         LblProtocol.Margin = New Padding(4, 0, 4, 0)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(117, 37)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 50
         LblProtocol.Text = "Protocol"
         LblProtocol.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' BtnStop
         ' 
-        BtnStop.Location = New Point(1324, 1255)
-        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnStop.Location = New Point(718, 510)
+        BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(460, 58)
+        BtnStop.Size = New Size(105, 30)
         BtnStop.TabIndex = 51
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Location = New Point(674, 1328)
-        BtnDefault.Margin = New Padding(6, 10, 6, 10)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnDefault.Location = New Point(610, 543)
+        BtnDefault.Margin = New Padding(6, 8, 6, 8)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(612, 58)
+        BtnDefault.Size = New Size(213, 30)
         BtnDefault.TabIndex = 52
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -433,29 +433,31 @@ Partial Class FrmPendulum
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Location = New Point(2559, 969)
+        ChkProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
+        ChkProtocol.Location = New Point(1076, 345)
         ChkProtocol.Margin = New Padding(4, 2, 4, 2)
         ChkProtocol.Name = "ChkProtocol"
-        ChkProtocol.Size = New Size(143, 41)
+        ChkProtocol.Size = New Size(71, 19)
         ChkProtocol.TabIndex = 67
         ChkProtocol.Text = "Protocol"
         ChkProtocol.UseVisualStyleBackColor = True
         ' 
         ' BtnCreatePendulum
         ' 
-        BtnCreatePendulum.Location = New Point(1332, 969)
-        BtnCreatePendulum.Margin = New Padding(4, 5, 4, 5)
+        BtnCreatePendulum.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnCreatePendulum.Location = New Point(610, 457)
+        BtnCreatePendulum.Margin = New Padding(4)
         BtnCreatePendulum.Name = "BtnCreatePendulum"
-        BtnCreatePendulum.Size = New Size(460, 58)
+        BtnCreatePendulum.Size = New Size(213, 30)
         BtnCreatePendulum.TabIndex = 68
         BtnCreatePendulum.Text = "CreatePendulum"
         BtnCreatePendulum.UseVisualStyleBackColor = True
         ' 
         ' FrmPendulum
         ' 
-        AutoScaleDimensions = New SizeF(14F, 36F)
+        AutoScaleDimensions = New SizeF(9.0F, 18.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(2726, 1396)
+        ClientSize = New Size(1163, 612)
         Controls.Add(BtnCreatePendulum)
         Controls.Add(ChkProtocol)
         Controls.Add(BtnDefault)
@@ -471,7 +473,6 @@ Partial Class FrmPendulum
         Controls.Add(BtnReset)
         Controls.Add(BtnStart)
         Controls.Add(CboPendulum)
-        Controls.Add(LblPendulum)
         Controls.Add(LstProtocol)
         Controls.Add(GrpStartParameter)
         Controls.Add(LblPhasePortrait)
@@ -479,8 +480,9 @@ Partial Class FrmPendulum
         Controls.Add(TrbAdditionalParameter)
         Controls.Add(PicPhasePortrait)
         Controls.Add(PicDiagram)
+        Font = New Font("Microsoft Sans Serif", 11.1428576F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(6, 10, 6, 10)
+        Margin = New Padding(6, 8, 6, 8)
         Name = "FrmPendulum"
         Text = "Pendulum"
         WindowState = FormWindowState.Maximized
@@ -497,7 +499,6 @@ Partial Class FrmPendulum
     End Sub
 
     Friend WithEvents CboPendulum As ComboBox
-    Friend WithEvents LblPendulum As Label
     Friend WithEvents LstProtocol As ListBox
     Friend WithEvents GrpStartParameter As GroupBox
     Friend WithEvents TxtP5 As TextBox

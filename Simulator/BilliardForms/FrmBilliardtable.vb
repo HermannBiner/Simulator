@@ -21,6 +21,7 @@ Public Class FrmBilliardtable
         LM = ClsLanguageManager.LM
         'This is necessary for the designer
         InitializeComponent()
+        AutoScaleMode = AutoScaleMode.Dpi
 
     End Sub
 
@@ -177,5 +178,9 @@ Public Class FrmBilliardtable
             FC.ResetIteration()
             FC.SetDefaultUserData()
         End If
+    End Sub
+
+    Private Sub TrbSpeed_Scroll(sender As Object, e As EventArgs) Handles TrbSpeed.Scroll
+
     End Sub
 End Class

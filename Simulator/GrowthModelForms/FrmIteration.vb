@@ -182,4 +182,7 @@ Public Class FrmIteration
         End If
     End Sub
 
+    Private Sub GrpProtocol_Enter(sender As Object, e As EventArgs) Handles GrpProtocol.Enter
+
+    End Sub
 End Class

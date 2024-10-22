@@ -73,115 +73,115 @@ Partial Class FrmJulia
         ' 
         ' PicDiagram
         ' 
-        PicDiagram.Location = New Point(-2, 17)
-        PicDiagram.Margin = New Padding(4, 5, 4, 5)
+        PicDiagram.Location = New Point(4, 6)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
-        PicDiagram.Size = New Size(1300, 1300)
+        PicDiagram.Size = New Size(680, 680)
         PicDiagram.TabIndex = 1
         PicDiagram.TabStop = False
         ' 
         ' TxtTime
         ' 
         TxtTime.Enabled = False
-        TxtTime.Font = New Font("Segoe UI", 11F)
-        TxtTime.Location = New Point(1718, 1003)
+        TxtTime.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtTime.Location = New Point(943, 464)
         TxtTime.Margin = New Padding(4, 2, 4, 2)
         TxtTime.Name = "TxtTime"
-        TxtTime.Size = New Size(218, 42)
+        TxtTime.Size = New Size(185, 21)
         TxtTime.TabIndex = 62
         ' 
         ' TxtSteps
         ' 
         TxtSteps.Enabled = False
-        TxtSteps.Font = New Font("Segoe UI", 11F)
-        TxtSteps.Location = New Point(1417, 1003)
+        TxtSteps.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtSteps.Location = New Point(748, 461)
         TxtSteps.Margin = New Padding(4, 2, 4, 2)
         TxtSteps.Name = "TxtSteps"
-        TxtSteps.Size = New Size(190, 42)
+        TxtSteps.Size = New Size(144, 21)
         TxtSteps.TabIndex = 61
         ' 
         ' LblTime
         ' 
         LblTime.AutoSize = True
-        LblTime.Font = New Font("Segoe UI", 11F)
-        LblTime.Location = New Point(1625, 1010)
+        LblTime.Font = New Font("Microsoft Sans Serif", 9F)
+        LblTime.Location = New Point(900, 464)
         LblTime.Margin = New Padding(4, 0, 4, 0)
         LblTime.Name = "LblTime"
-        LblTime.Size = New Size(71, 36)
+        LblTime.Size = New Size(35, 15)
         LblTime.TabIndex = 60
         LblTime.Text = "Time"
         ' 
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Font = New Font("Segoe UI", 11F)
-        LblNumberOfSteps.Location = New Point(1317, 1010)
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9F)
+        LblNumberOfSteps.Location = New Point(698, 464)
         LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
-        LblNumberOfSteps.Size = New Size(77, 36)
+        LblNumberOfSteps.Size = New Size(38, 15)
         LblNumberOfSteps.TabIndex = 59
         LblNumberOfSteps.Text = "Steps"
         ' 
         ' LblI
         ' 
         LblI.AutoSize = True
-        LblI.Font = New Font("Segoe UI", 11F)
-        LblI.Location = New Point(1624, 81)
+        LblI.Font = New Font("Microsoft Sans Serif", 9F)
+        LblI.Location = New Point(889, 36)
         LblI.Margin = New Padding(4, 0, 4, 0)
         LblI.Name = "LblI"
-        LblI.Size = New Size(46, 36)
+        LblI.Size = New Size(20, 15)
         LblI.TabIndex = 58
         LblI.Text = "+ i"
         ' 
         ' LblC
         ' 
         LblC.AutoSize = True
-        LblC.Font = New Font("Segoe UI", 11F)
-        LblC.Location = New Point(1312, 78)
+        LblC.Font = New Font("Segoe UI", 9F)
+        LblC.Location = New Point(696, 36)
         LblC.Margin = New Padding(4, 0, 4, 0)
         LblC.Name = "LblC"
-        LblC.Size = New Size(52, 36)
+        LblC.Size = New Size(24, 15)
         LblC.TabIndex = 57
         LblC.Text = "c ="
         ' 
         ' TxtA
         ' 
-        TxtA.Font = New Font("Segoe UI", 11F)
-        TxtA.Location = New Point(1386, 78)
+        TxtA.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtA.Location = New Point(730, 33)
         TxtA.Margin = New Padding(4, 2, 4, 2)
         TxtA.Name = "TxtA"
-        TxtA.Size = New Size(230, 42)
+        TxtA.Size = New Size(151, 21)
         TxtA.TabIndex = 56
         TxtA.Text = "0"
         ' 
         ' TxtB
         ' 
-        TxtB.Font = New Font("Segoe UI", 11F)
-        TxtB.Location = New Point(1678, 78)
+        TxtB.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtB.Location = New Point(917, 33)
         TxtB.Margin = New Padding(4, 2, 4, 2)
         TxtB.Name = "TxtB"
-        TxtB.Size = New Size(258, 42)
+        TxtB.Size = New Size(211, 21)
         TxtB.TabIndex = 55
         TxtB.Text = "0"
         ' 
         ' BtnStop
         ' 
-        BtnStop.Font = New Font("Segoe UI", 11F)
-        BtnStop.Location = New Point(1307, 1130)
-        BtnStop.Margin = New Padding(4, 5, 4, 5)
+        BtnStop.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnStop.Location = New Point(928, 488)
+        BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(633, 58)
+        BtnStop.Size = New Size(200, 30)
         BtnStop.TabIndex = 54
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
         ' 
         ' BtnStart
         ' 
-        BtnStart.Font = New Font("Segoe UI", 11F)
-        BtnStart.Location = New Point(1306, 1063)
-        BtnStart.Margin = New Padding(4, 5, 4, 5)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnStart.Location = New Point(696, 488)
+        BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(632, 58)
+        BtnStart.Size = New Size(200, 30)
         BtnStart.TabIndex = 53
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -189,123 +189,123 @@ Partial Class FrmJulia
         ' LblDeltaY
         ' 
         LblDeltaY.AutoSize = True
-        LblDeltaY.Font = New Font("Segoe UI", 11F)
-        LblDeltaY.Location = New Point(1300, 477)
+        LblDeltaY.Font = New Font("Microsoft Sans Serif", 9F)
+        LblDeltaY.Location = New Point(696, 226)
         LblDeltaY.Margin = New Padding(4, 0, 4, 0)
         LblDeltaY.Name = "LblDeltaY"
-        LblDeltaY.Size = New Size(89, 36)
+        LblDeltaY.Size = New Size(43, 15)
         LblDeltaY.TabIndex = 49
         LblDeltaY.Text = "DeltaY"
         ' 
         ' TxtYMax
         ' 
-        TxtYMax.Font = New Font("Segoe UI", 11F)
-        TxtYMax.Location = New Point(1407, 420)
-        TxtYMax.Margin = New Padding(4, 5, 4, 5)
+        TxtYMax.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtYMax.Location = New Point(750, 197)
+        TxtYMax.Margin = New Padding(4)
         TxtYMax.Name = "TxtYMax"
-        TxtYMax.Size = New Size(532, 42)
+        TxtYMax.Size = New Size(378, 21)
         TxtYMax.TabIndex = 48
         ' 
         ' LblYMax
         ' 
         LblYMax.AutoSize = True
-        LblYMax.Font = New Font("Segoe UI", 11F)
-        LblYMax.Location = New Point(1301, 423)
+        LblYMax.Font = New Font("Microsoft Sans Serif", 9F)
+        LblYMax.Location = New Point(699, 200)
         LblYMax.Margin = New Padding(4, 0, 4, 0)
         LblYMax.Name = "LblYMax"
-        LblYMax.Size = New Size(77, 36)
+        LblYMax.Size = New Size(38, 15)
         LblYMax.TabIndex = 47
         LblYMax.Text = "YMax"
         ' 
         ' TxtYMin
         ' 
-        TxtYMin.Font = New Font("Segoe UI", 11F)
-        TxtYMin.Location = New Point(1408, 368)
-        TxtYMin.Margin = New Padding(4, 5, 4, 5)
+        TxtYMin.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtYMin.Location = New Point(750, 168)
+        TxtYMin.Margin = New Padding(4)
         TxtYMin.Name = "TxtYMin"
-        TxtYMin.Size = New Size(532, 42)
+        TxtYMin.Size = New Size(378, 21)
         TxtYMin.TabIndex = 46
         ' 
         ' LblYMin
         ' 
         LblYMin.AutoSize = True
-        LblYMin.Font = New Font("Segoe UI", 11F)
-        LblYMin.Location = New Point(1301, 375)
+        LblYMin.Font = New Font("Microsoft Sans Serif", 9F)
+        LblYMin.Location = New Point(699, 174)
         LblYMin.Margin = New Padding(4, 0, 4, 0)
         LblYMin.Name = "LblYMin"
-        LblYMin.Size = New Size(73, 36)
+        LblYMin.Size = New Size(35, 15)
         LblYMin.TabIndex = 45
         LblYMin.Text = "YMin"
         ' 
         ' LblDeltaX
         ' 
         LblDeltaX.AutoSize = True
-        LblDeltaX.Font = New Font("Segoe UI", 11F)
-        LblDeltaX.Location = New Point(1301, 319)
+        LblDeltaX.Font = New Font("Microsoft Sans Serif", 9F)
+        LblDeltaX.Location = New Point(696, 150)
         LblDeltaX.Margin = New Padding(4, 0, 4, 0)
         LblDeltaX.Name = "LblDeltaX"
-        LblDeltaX.Size = New Size(90, 36)
+        LblDeltaX.Size = New Size(44, 15)
         LblDeltaX.TabIndex = 43
         LblDeltaX.Text = "DeltaX"
         ' 
         ' TxtXMax
         ' 
-        TxtXMax.Font = New Font("Segoe UI", 11F)
-        TxtXMax.Location = New Point(1408, 247)
-        TxtXMax.Margin = New Padding(4, 5, 4, 5)
+        TxtXMax.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtXMax.Location = New Point(750, 120)
+        TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
-        TxtXMax.Size = New Size(532, 42)
+        TxtXMax.Size = New Size(378, 21)
         TxtXMax.TabIndex = 42
         ' 
         ' LblXMax
         ' 
         LblXMax.AutoSize = True
-        LblXMax.Font = New Font("Segoe UI", 11F)
-        LblXMax.Location = New Point(1301, 258)
+        LblXMax.Font = New Font("Microsoft Sans Serif", 9F)
+        LblXMax.Location = New Point(698, 123)
         LblXMax.Margin = New Padding(4, 0, 4, 0)
         LblXMax.Name = "LblXMax"
-        LblXMax.Size = New Size(78, 36)
+        LblXMax.Size = New Size(39, 15)
         LblXMax.TabIndex = 41
         LblXMax.Text = "XMax"
         ' 
         ' TxtXMin
         ' 
-        TxtXMin.Font = New Font("Segoe UI", 11F)
-        TxtXMin.Location = New Point(1407, 193)
-        TxtXMin.Margin = New Padding(4, 5, 4, 5)
+        TxtXMin.Font = New Font("Microsoft Sans Serif", 9F)
+        TxtXMin.Location = New Point(750, 91)
+        TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
-        TxtXMin.Size = New Size(533, 42)
+        TxtXMin.Size = New Size(378, 21)
         TxtXMin.TabIndex = 40
         ' 
         ' LblXMin
         ' 
         LblXMin.AutoSize = True
-        LblXMin.Font = New Font("Segoe UI", 11F)
-        LblXMin.Location = New Point(1301, 200)
+        LblXMin.Font = New Font("Microsoft Sans Serif", 9F)
+        LblXMin.Location = New Point(698, 91)
         LblXMin.Margin = New Padding(4, 0, 4, 0)
         LblXMin.Name = "LblXMin"
-        LblXMin.Size = New Size(74, 36)
+        LblXMin.Size = New Size(36, 15)
         LblXMin.TabIndex = 39
         LblXMin.Text = "XMin"
         ' 
         ' CboFunction
         ' 
-        CboFunction.Font = New Font("Segoe UI", 11F)
+        CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"JuliaSet", "MandelbrotSet"})
-        CboFunction.Location = New Point(1306, 14)
-        CboFunction.Margin = New Padding(4, 5, 4, 5)
+        CboFunction.Location = New Point(692, 6)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
-        CboFunction.Size = New Size(489, 44)
+        CboFunction.Size = New Size(347, 23)
         CboFunction.TabIndex = 38
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Segoe UI", 11F)
-        BtnReset.Location = New Point(13, 1342)
-        BtnReset.Margin = New Padding(4, 5, 4, 5)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnReset.Location = New Point(692, 656)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(615, 58)
+        BtnReset.Size = New Size(436, 30)
         BtnReset.TabIndex = 63
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -313,11 +313,11 @@ Partial Class FrmJulia
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Font = New Font("Segoe UI", 11F)
-        ChkProtocol.Location = New Point(1799, 1206)
+        ChkProtocol.Font = New Font("Microsoft Sans Serif", 9F)
+        ChkProtocol.Location = New Point(1057, 521)
         ChkProtocol.Margin = New Padding(4, 2, 4, 2)
         ChkProtocol.Name = "ChkProtocol"
-        ChkProtocol.Size = New Size(137, 40)
+        ChkProtocol.Size = New Size(71, 19)
         ChkProtocol.TabIndex = 66
         ChkProtocol.Text = "Protocol"
         ChkProtocol.UseVisualStyleBackColor = True
@@ -325,92 +325,92 @@ Partial Class FrmJulia
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Font = New Font("Segoe UI", 11F)
-        LblProtocol.Location = New Point(1307, 1206)
+        LblProtocol.Font = New Font("Microsoft Sans Serif", 9F)
+        LblProtocol.Location = New Point(698, 522)
         LblProtocol.Margin = New Padding(4, 0, 4, 0)
         LblProtocol.Name = "LblProtocol"
-        LblProtocol.Size = New Size(111, 36)
+        LblProtocol.Size = New Size(52, 15)
         LblProtocol.TabIndex = 65
         LblProtocol.Text = "Protocol"
         ' 
         ' LstProtocol
         ' 
-        LstProtocol.Font = New Font("Segoe UI", 11F)
+        LstProtocol.Font = New Font("Microsoft Sans Serif", 9F)
         LstProtocol.FormattingEnabled = True
         LstProtocol.HorizontalScrollbar = True
-        LstProtocol.ItemHeight = 36
-        LstProtocol.Location = New Point(1312, 1253)
-        LstProtocol.Margin = New Padding(4, 5, 4, 5)
+        LstProtocol.ItemHeight = 15
+        LstProtocol.Location = New Point(696, 541)
+        LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(624, 148)
+        LstProtocol.Size = New Size(432, 79)
         LstProtocol.TabIndex = 64
         ' 
         ' LblPower
         ' 
         LblPower.AutoSize = True
-        LblPower.Font = New Font("Segoe UI", 11F)
-        LblPower.Location = New Point(1804, 17)
+        LblPower.Font = New Font("Microsoft Sans Serif", 9F)
+        LblPower.Location = New Point(1047, 9)
         LblPower.Margin = New Padding(4, 0, 4, 0)
         LblPower.Name = "LblPower"
-        LblPower.Size = New Size(55, 36)
+        LblPower.Size = New Size(24, 15)
         LblPower.TabIndex = 68
         LblPower.Text = "n ="
         ' 
         ' CboN
         ' 
-        CboN.Font = New Font("Segoe UI", 11F)
+        CboN.Font = New Font("Microsoft Sans Serif", 9F)
         CboN.FormattingEnabled = True
         CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboN.Location = New Point(1866, 14)
+        CboN.Location = New Point(1076, 6)
         CboN.Margin = New Padding(4, 2, 4, 2)
         CboN.Name = "CboN"
-        CboN.Size = New Size(74, 44)
+        CboN.Size = New Size(52, 23)
         CboN.TabIndex = 67
         ' 
         ' TrbRed
         ' 
         TrbRed.BackColor = SystemColors.Control
-        TrbRed.Location = New Point(1312, 674)
+        TrbRed.Location = New Point(699, 312)
         TrbRed.Margin = New Padding(4, 2, 4, 2)
         TrbRed.Name = "TrbRed"
-        TrbRed.Size = New Size(438, 80)
+        TrbRed.Size = New Size(310, 45)
         TrbRed.TabIndex = 69
         ' 
         ' TrbGreen
         ' 
         TrbGreen.BackColor = SystemColors.Control
-        TrbGreen.Location = New Point(1312, 788)
+        TrbGreen.Location = New Point(699, 361)
         TrbGreen.Margin = New Padding(4, 2, 4, 2)
         TrbGreen.Name = "TrbGreen"
-        TrbGreen.Size = New Size(438, 80)
+        TrbGreen.Size = New Size(310, 45)
         TrbGreen.TabIndex = 70
         TrbGreen.Value = 10
         ' 
         ' TrbBlue
         ' 
         TrbBlue.BackColor = SystemColors.Control
-        TrbBlue.Location = New Point(1312, 900)
+        TrbBlue.Location = New Point(699, 412)
         TrbBlue.Margin = New Padding(4, 2, 4, 2)
         TrbBlue.Name = "TrbBlue"
-        TrbBlue.Size = New Size(438, 80)
+        TrbBlue.Size = New Size(310, 45)
         TrbBlue.TabIndex = 71
         TrbBlue.Value = 2
         ' 
         ' PicBright
         ' 
-        PicBright.Location = New Point(1790, 674)
+        PicBright.Location = New Point(1022, 315)
         PicBright.Margin = New Padding(4, 2, 4, 2)
         PicBright.Name = "PicBright"
-        PicBright.Size = New Size(148, 144)
+        PicBright.Size = New Size(106, 70)
         PicBright.TabIndex = 72
         PicBright.TabStop = False
         ' 
         ' PicDark
         ' 
-        PicDark.Location = New Point(1790, 834)
+        PicDark.Location = New Point(1022, 390)
         PicDark.Margin = New Padding(4, 2, 4, 2)
         PicDark.Name = "PicDark"
-        PicDark.Size = New Size(148, 146)
+        PicDark.Size = New Size(106, 70)
         PicDark.TabIndex = 73
         PicDark.TabStop = False
         ' 
@@ -418,12 +418,12 @@ Partial Class FrmJulia
         ' 
         GrpColors.Controls.Add(OptSystem)
         GrpColors.Controls.Add(OptUser)
-        GrpColors.Font = New Font("Segoe UI", 11F)
-        GrpColors.Location = New Point(1304, 527)
+        GrpColors.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpColors.Location = New Point(698, 254)
         GrpColors.Margin = New Padding(4, 2, 4, 2)
         GrpColors.Name = "GrpColors"
         GrpColors.Padding = New Padding(4, 2, 4, 2)
-        GrpColors.Size = New Size(632, 124)
+        GrpColors.Size = New Size(430, 54)
         GrpColors.TabIndex = 74
         GrpColors.TabStop = False
         GrpColors.Text = "Colors"
@@ -432,10 +432,10 @@ Partial Class FrmJulia
         ' 
         OptSystem.AutoSize = True
         OptSystem.Checked = True
-        OptSystem.Location = New Point(100, 65)
+        OptSystem.Location = New Point(62, 18)
         OptSystem.Margin = New Padding(4, 2, 4, 2)
         OptSystem.Name = "OptSystem"
-        OptSystem.Size = New Size(122, 40)
+        OptSystem.Size = New Size(65, 19)
         OptSystem.TabIndex = 75
         OptSystem.TabStop = True
         OptSystem.Text = "System"
@@ -444,51 +444,51 @@ Partial Class FrmJulia
         ' OptUser
         ' 
         OptUser.AutoSize = True
-        OptUser.Location = New Point(340, 65)
+        OptUser.Location = New Point(173, 18)
         OptUser.Margin = New Padding(4, 2, 4, 2)
         OptUser.Name = "OptUser"
-        OptUser.Size = New Size(182, 40)
+        OptUser.Size = New Size(94, 19)
         OptUser.TabIndex = 76
         OptUser.Text = "UserDefined"
         OptUser.UseVisualStyleBackColor = True
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Segoe UI", 11F)
-        BtnDefault.Location = New Point(637, 1342)
-        BtnDefault.Margin = New Padding(4, 5, 4, 5)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
+        BtnDefault.Location = New Point(692, 623)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(621, 58)
+        BtnDefault.Size = New Size(436, 30)
         BtnDefault.TabIndex = 76
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
         ' CboJuliaSamples
         ' 
-        CboJuliaSamples.Font = New Font("Segoe UI", 11F)
+        CboJuliaSamples.Font = New Font("Microsoft Sans Serif", 9F)
         CboJuliaSamples.FormattingEnabled = True
-        CboJuliaSamples.Location = New Point(1453, 139)
-        CboJuliaSamples.Margin = New Padding(4, 5, 4, 5)
+        CboJuliaSamples.Location = New Point(750, 60)
+        CboJuliaSamples.Margin = New Padding(4)
         CboJuliaSamples.Name = "CboJuliaSamples"
-        CboJuliaSamples.Size = New Size(485, 44)
+        CboJuliaSamples.Size = New Size(378, 23)
         CboJuliaSamples.TabIndex = 77
         ' 
         ' LblJuliaSets
         ' 
         LblJuliaSets.AutoSize = True
-        LblJuliaSets.Font = New Font("Segoe UI", 11F)
-        LblJuliaSets.Location = New Point(1312, 142)
+        LblJuliaSets.Font = New Font("Microsoft Sans Serif", 9F)
+        LblJuliaSets.Location = New Point(692, 65)
         LblJuliaSets.Margin = New Padding(4, 0, 4, 0)
         LblJuliaSets.Name = "LblJuliaSets"
-        LblJuliaSets.Size = New Size(110, 36)
+        LblJuliaSets.Size = New Size(56, 15)
         LblJuliaSets.TabIndex = 78
         LblJuliaSets.Text = "Samples"
         ' 
         ' FrmJulia
         ' 
-        AutoScaleDimensions = New SizeF(14F, 36F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1961, 1414)
+        ClientSize = New Size(1144, 690)
         Controls.Add(LblJuliaSets)
         Controls.Add(CboJuliaSamples)
         Controls.Add(BtnDefault)
@@ -526,6 +526,7 @@ Partial Class FrmJulia
         Controls.Add(LblXMin)
         Controls.Add(CboFunction)
         Controls.Add(PicDiagram)
+        Font = New Font("Microsoft Sans Serif", 11.1428576F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4, 2, 4, 2)
         Name = "FrmJulia"
