@@ -28,9 +28,9 @@ Partial Class FrmTwoDimensions
         TxtY = New TextBox()
         TxtX = New TextBox()
         LblY = New Label()
+        LblX = New Label()
         GrpExperiment = New GroupBox()
         CboExperiment = New ComboBox()
-        LblX = New Label()
         BtnNext10 = New Button()
         BtnReset = New Button()
         BtnNextStep = New Button()
@@ -101,6 +101,16 @@ Partial Class FrmTwoDimensions
         LblY.TabIndex = 5
         LblY.Text = "y ="
         ' 
+        ' LblX
+        ' 
+        LblX.AutoSize = True
+        LblX.Location = New Point(21, 28)
+        LblX.Margin = New Padding(4, 0, 4, 0)
+        LblX.Name = "LblX"
+        LblX.Size = New Size(23, 15)
+        LblX.TabIndex = 4
+        LblX.Text = "x ="
+        ' 
         ' GrpExperiment
         ' 
         GrpExperiment.Controls.Add(CboExperiment)
@@ -123,16 +133,6 @@ Partial Class FrmTwoDimensions
         CboExperiment.Name = "CboExperiment"
         CboExperiment.Size = New Size(238, 23)
         CboExperiment.TabIndex = 7
-        ' 
-        ' LblX
-        ' 
-        LblX.AutoSize = True
-        LblX.Location = New Point(21, 28)
-        LblX.Margin = New Padding(4, 0, 4, 0)
-        LblX.Name = "LblX"
-        LblX.Size = New Size(23, 15)
-        LblX.TabIndex = 4
-        LblX.Text = "x ="
         ' 
         ' BtnNext10
         ' 

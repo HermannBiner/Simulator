@@ -69,7 +69,7 @@ Partial Class FrmIteration
         ' 
         PicDiagram.BackColor = Color.White
         PicDiagram.Location = New Point(12, 38)
-        PicDiagram.Margin = New Padding(4, 4, 4, 4)
+        PicDiagram.Margin = New Padding(4)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(530, 530)
         PicDiagram.TabIndex = 0
@@ -79,7 +79,7 @@ Partial Class FrmIteration
         ' 
         BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
         BtnReset.Location = New Point(715, 538)
-        BtnReset.Margin = New Padding(4, 4, 4, 4)
+        BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(267, 30)
         BtnReset.TabIndex = 17
@@ -112,7 +112,7 @@ Partial Class FrmIteration
         ' 
         BtnNextStep.Font = New Font("Microsoft Sans Serif", 9F)
         BtnNextStep.Location = New Point(6, 22)
-        BtnNextStep.Margin = New Padding(4, 4, 4, 4)
+        BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
         BtnNextStep.Size = New Size(255, 30)
         BtnNextStep.TabIndex = 3
@@ -123,7 +123,7 @@ Partial Class FrmIteration
         ' 
         BtnNext10Steps.Font = New Font("Microsoft Sans Serif", 9F)
         BtnNext10Steps.Location = New Point(8, 60)
-        BtnNext10Steps.Margin = New Padding(4, 4, 4, 4)
+        BtnNext10Steps.Margin = New Padding(4)
         BtnNext10Steps.Name = "BtnNext10Steps"
         BtnNext10Steps.Size = New Size(255, 30)
         BtnNext10Steps.TabIndex = 4
@@ -136,7 +136,7 @@ Partial Class FrmIteration
         LstValueList.FormattingEnabled = True
         LstValueList.ItemHeight = 15
         LstValueList.Location = New Point(549, 38)
-        LstValueList.Margin = New Padding(4, 4, 4, 4)
+        LstValueList.Margin = New Padding(4)
         LstValueList.Name = "LstValueList"
         LstValueList.ScrollAlwaysVisible = True
         LstValueList.Size = New Size(95, 529)
@@ -148,7 +148,7 @@ Partial Class FrmIteration
         LstProtocol.FormattingEnabled = True
         LstProtocol.ItemHeight = 15
         LstProtocol.Location = New Point(652, 38)
-        LstProtocol.Margin = New Padding(4, 4, 4, 4)
+        LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
         LstProtocol.ScrollAlwaysVisible = True
         LstProtocol.Size = New Size(55, 529)
@@ -160,9 +160,9 @@ Partial Class FrmIteration
         GrpStep.Controls.Add(BtnNext10Steps)
         GrpStep.Font = New Font("Microsoft Sans Serif", 9F)
         GrpStep.Location = New Point(715, 382)
-        GrpStep.Margin = New Padding(4, 4, 4, 4)
+        GrpStep.Margin = New Padding(4)
         GrpStep.Name = "GrpStep"
-        GrpStep.Padding = New Padding(4, 4, 4, 4)
+        GrpStep.Padding = New Padding(4)
         GrpStep.Size = New Size(267, 100)
         GrpStep.TabIndex = 17
         GrpStep.TabStop = False
@@ -186,9 +186,9 @@ Partial Class FrmIteration
         GrpTargetValue.Controls.Add(LblTargetValue)
         GrpTargetValue.Font = New Font("Microsoft Sans Serif", 9F)
         GrpTargetValue.Location = New Point(714, 288)
-        GrpTargetValue.Margin = New Padding(4, 4, 4, 4)
+        GrpTargetValue.Margin = New Padding(4)
         GrpTargetValue.Name = "GrpTargetValue"
-        GrpTargetValue.Padding = New Padding(4, 4, 4, 4)
+        GrpTargetValue.Padding = New Padding(4)
         GrpTargetValue.Size = New Size(267, 85)
         GrpTargetValue.TabIndex = 11
         GrpTargetValue.TabStop = False
@@ -198,7 +198,7 @@ Partial Class FrmIteration
         ' 
         BtnTransitiveStartValue.Font = New Font("Microsoft Sans Serif", 9F)
         BtnTransitiveStartValue.Location = New Point(8, 44)
-        BtnTransitiveStartValue.Margin = New Padding(4, 4, 4, 4)
+        BtnTransitiveStartValue.Margin = New Padding(4)
         BtnTransitiveStartValue.Name = "BtnTransitiveStartValue"
         BtnTransitiveStartValue.Size = New Size(255, 30)
         BtnTransitiveStartValue.TabIndex = 13
@@ -209,7 +209,7 @@ Partial Class FrmIteration
         ' 
         TxtTargetValue.Font = New Font("Microsoft Sans Serif", 9F)
         TxtTargetValue.Location = New Point(102, 19)
-        TxtTargetValue.Margin = New Padding(4, 4, 4, 4)
+        TxtTargetValue.Margin = New Padding(4)
         TxtTargetValue.Name = "TxtTargetValue"
         TxtTargetValue.Size = New Size(162, 21)
         TxtTargetValue.TabIndex = 12
@@ -231,9 +231,9 @@ Partial Class FrmIteration
         GrpProtocol.Controls.Add(TxtTargetProtocol)
         GrpProtocol.Font = New Font("Microsoft Sans Serif", 9F)
         GrpProtocol.Location = New Point(715, 187)
-        GrpProtocol.Margin = New Padding(4, 4, 4, 4)
+        GrpProtocol.Margin = New Padding(4)
         GrpProtocol.Name = "GrpProtocol"
-        GrpProtocol.Padding = New Padding(4, 4, 4, 4)
+        GrpProtocol.Padding = New Padding(4)
         GrpProtocol.Size = New Size(267, 94)
         GrpProtocol.TabIndex = 9
         GrpProtocol.TabStop = False
@@ -243,7 +243,7 @@ Partial Class FrmIteration
         ' 
         BtnProtocolStartvalue.Font = New Font("Microsoft Sans Serif", 9F)
         BtnProtocolStartvalue.Location = New Point(8, 50)
-        BtnProtocolStartvalue.Margin = New Padding(4, 4, 4, 4)
+        BtnProtocolStartvalue.Margin = New Padding(4)
         BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
         BtnProtocolStartvalue.Size = New Size(255, 30)
         BtnProtocolStartvalue.TabIndex = 8
@@ -253,7 +253,7 @@ Partial Class FrmIteration
         ' TxtTargetProtocol
         ' 
         TxtTargetProtocol.Location = New Point(8, 26)
-        TxtTargetProtocol.Margin = New Padding(4, 4, 4, 4)
+        TxtTargetProtocol.Margin = New Padding(4)
         TxtTargetProtocol.Name = "TxtTargetProtocol"
         TxtTargetProtocol.Size = New Size(255, 21)
         TxtTargetProtocol.TabIndex = 10
@@ -262,7 +262,7 @@ Partial Class FrmIteration
         ' 
         TxtParameterA.Font = New Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TxtParameterA.Location = New Point(798, 55)
-        TxtParameterA.Margin = New Padding(4, 4, 4, 4)
+        TxtParameterA.Margin = New Padding(4)
         TxtParameterA.Name = "TxtParameterA"
         TxtParameterA.Size = New Size(183, 21)
         TxtParameterA.TabIndex = 2
@@ -271,7 +271,7 @@ Partial Class FrmIteration
         ' 
         TxtStartValue.Font = New Font("Microsoft Sans Serif", 9F)
         TxtStartValue.Location = New Point(798, 79)
-        TxtStartValue.Margin = New Padding(4, 4, 4, 4)
+        TxtStartValue.Margin = New Padding(4)
         TxtStartValue.Name = "TxtStartValue"
         TxtStartValue.Size = New Size(183, 21)
         TxtStartValue.TabIndex = 4
@@ -282,7 +282,7 @@ Partial Class FrmIteration
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
         CboFunction.Location = New Point(12, 10)
-        CboFunction.Margin = New Padding(4, 4, 4, 4)
+        CboFunction.Margin = New Padding(4)
         CboFunction.Name = "CboFunction"
         CboFunction.Size = New Size(259, 23)
         CboFunction.TabIndex = 1
@@ -304,7 +304,7 @@ Partial Class FrmIteration
         CboIterationDepth.FormattingEnabled = True
         CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8"})
         CboIterationDepth.Location = New Point(370, 6)
-        CboIterationDepth.Margin = New Padding(4, 4, 4, 4)
+        CboIterationDepth.Margin = New Padding(4)
         CboIterationDepth.Name = "CboIterationDepth"
         CboIterationDepth.Size = New Size(43, 23)
         CboIterationDepth.TabIndex = 3
@@ -351,9 +351,9 @@ Partial Class FrmIteration
         GrpPresentation.Controls.Add(OptFunctionGraph)
         GrpPresentation.Font = New Font("Microsoft Sans Serif", 9F)
         GrpPresentation.Location = New Point(715, 108)
-        GrpPresentation.Margin = New Padding(4, 4, 4, 4)
+        GrpPresentation.Margin = New Padding(4)
         GrpPresentation.Name = "GrpPresentation"
-        GrpPresentation.Padding = New Padding(4, 4, 4, 4)
+        GrpPresentation.Padding = New Padding(4)
         GrpPresentation.Size = New Size(267, 71)
         GrpPresentation.TabIndex = 34
         GrpPresentation.TabStop = False
@@ -372,7 +372,7 @@ Partial Class FrmIteration
         ' TxtXStretching
         ' 
         TxtXStretching.Location = New Point(210, 41)
-        TxtXStretching.Margin = New Padding(4, 4, 4, 4)
+        TxtXStretching.Margin = New Padding(4)
         TxtXStretching.Name = "TxtXStretching"
         TxtXStretching.Size = New Size(50, 21)
         TxtXStretching.TabIndex = 3
@@ -391,7 +391,7 @@ Partial Class FrmIteration
         ' 
         OptTimeAxis.AutoSize = True
         OptTimeAxis.Location = New Point(8, 49)
-        OptTimeAxis.Margin = New Padding(4, 4, 4, 4)
+        OptTimeAxis.Margin = New Padding(4)
         OptTimeAxis.Name = "OptTimeAxis"
         OptTimeAxis.Size = New Size(75, 19)
         OptTimeAxis.TabIndex = 1
@@ -403,9 +403,9 @@ Partial Class FrmIteration
         OptFunctionGraph.AutoSize = True
         OptFunctionGraph.Checked = True
         OptFunctionGraph.Location = New Point(8, 22)
-        OptFunctionGraph.Margin = New Padding(4, 4, 4, 4)
+        OptFunctionGraph.Margin = New Padding(4)
         OptFunctionGraph.Name = "OptFunctionGraph"
-        OptFunctionGraph.Size = New Size(105, 19)
+        OptFunctionGraph.Size = New Size(106, 19)
         OptFunctionGraph.TabIndex = 0
         OptFunctionGraph.TabStop = True
         OptFunctionGraph.Text = "FunctionGraph"
@@ -414,7 +414,7 @@ Partial Class FrmIteration
         ' TrbParameterA
         ' 
         TrbParameterA.Location = New Point(798, 10)
-        TrbParameterA.Margin = New Padding(6, 6, 6, 6)
+        TrbParameterA.Margin = New Padding(6)
         TrbParameterA.Maximum = 1000
         TrbParameterA.Minimum = 1
         TrbParameterA.Name = "TrbParameterA"
@@ -437,7 +437,7 @@ Partial Class FrmIteration
         ' 
         BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
         BtnDefault.Location = New Point(714, 504)
-        BtnDefault.Margin = New Padding(4, 4, 4, 4)
+        BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(267, 30)
         BtnDefault.TabIndex = 37
@@ -473,7 +473,7 @@ Partial Class FrmIteration
         Controls.Add(PicDiagram)
         Font = New Font("Microsoft Sans Serif", 11.14F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         Name = "FrmIteration"
         Text = "GrowthModels"
         WindowState = FormWindowState.Maximized

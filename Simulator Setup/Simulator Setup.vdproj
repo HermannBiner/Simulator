@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0404D9412DAE48559ABD1F4BBE60AF08"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0FC8E826579B4F119EA98A57CB5128BC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,12 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_396290AC87C5485A9E6B16F6DF90CF93"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3A3A3240984144908E7F830264C70334"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -188,6 +188,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0404D9412DAE48559ABD1F4BBE60AF08"
+            {
+            "SourcePath" = "8:..\\Simulator\\Resources\\Simulator.ico"
+            "TargetName" = "8:Simulator.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0FC8E826579B4F119EA98A57CB5128BC"
             {
             "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Simulator.exe"
@@ -232,26 +252,6 @@
             {
             "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Simulator.deps.json"
             "TargetName" = "8:Simulator.deps.json"
-            "Tag" = "8:"
-            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A3A3240984144908E7F830264C70334"
-            {
-            "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Gear.ico"
-            "TargetName" = "8:Gear.ico"
             "Tag" = "8:"
             "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
             "Condition" = "8:"
@@ -436,7 +436,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Simulator"
         "ProductCode" = "8:{25407A7F-7BCF-4754-B1C7-BB0BB98E469D}"
-        "PackageCode" = "8:{39D0B8EE-FD49-4BD0-8D3A-79CFD8A680DA}"
+        "PackageCode" = "8:{2BF7E05D-2A04-4D0F-9978-891C6E606B66}"
         "UpgradeCode" = "8:{AD878246-7B81-40B7-9D1D-1510F0F758A1}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -453,7 +453,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Simulator for Dynamic Systems"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_3A3A3240984144908E7F830264C70334"
+        "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -567,7 +567,7 @@
             "Target" = "8:_0FC8E826579B4F119EA98A57CB5128BC"
             "Folder" = "8:_C3BDB77CAD7F4522BEBF7B16CF3FAA23"
             "WorkingFolder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
-            "Icon" = "8:_3A3A3240984144908E7F830264C70334"
+            "Icon" = "8:_0404D9412DAE48559ABD1F4BBE60AF08"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C17AAE07C30C4DC38F8923FB9866A1C2"
@@ -581,7 +581,7 @@
             "Target" = "8:_0FC8E826579B4F119EA98A57CB5128BC"
             "Folder" = "8:_D0C49EFCB79D47EEBD73B62E4C8C6524"
             "WorkingFolder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
-            "Icon" = "8:_3A3A3240984144908E7F830264C70334"
+            "Icon" = "8:_0404D9412DAE48559ABD1F4BBE60AF08"
             "Feature" = "8:"
             }
         }

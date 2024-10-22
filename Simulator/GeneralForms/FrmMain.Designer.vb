@@ -58,7 +58,7 @@ Partial Class FrmMain
         MnuMain.Location = New Point(0, 0)
         MnuMain.Name = "MnuMain"
         MnuMain.Padding = New Padding(11, 2, 0, 2)
-        MnuMain.Size = New Size(1444, 24)
+        MnuMain.Size = New Size(1284, 24)
         MnuMain.TabIndex = 0
         MnuMain.Text = "Main"
         ' 
@@ -73,13 +73,13 @@ Partial Class FrmMain
         ' MnuEnglish
         ' 
         MnuEnglish.Name = "MnuEnglish"
-        MnuEnglish.Size = New Size(180, 22)
+        MnuEnglish.Size = New Size(121, 22)
         MnuEnglish.Text = "Englisch"
         ' 
         ' MnuGerman
         ' 
         MnuGerman.Name = "MnuGerman"
-        MnuGerman.Size = New Size(180, 22)
+        MnuGerman.Size = New Size(121, 22)
         MnuGerman.Text = "German"
         ' 
         ' MnuBilliard
@@ -224,7 +224,7 @@ Partial Class FrmMain
         ' 
         AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1444, 881)
+        ClientSize = New Size(1284, 781)
         Controls.Add(MnuMain)
         Font = New Font("Microsoft Sans Serif", 11F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)

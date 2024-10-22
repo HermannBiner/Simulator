@@ -8,7 +8,7 @@
     <MyType>WindowsForms</MyType>
     <AssemblyName>Simulator</AssemblyName>
     <RootNamespace>Simulator</RootNamespace>
-    <ApplicationIcon>Resources\Gear.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Simulator.ico</ApplicationIcon>
     <OptionStrict>On</OptionStrict>
     <Title>Simulator</Title>
     <Version>6.0.0</Version>
@@ -21,6 +21,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+    <PackageIcon>Simulator.ico</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -34,7 +35,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Gear.ico" />
+    <Content Include="Resources\Simulator.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -82,6 +83,10 @@
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="Resources\Simulator.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

@@ -68,7 +68,7 @@ Partial Class FrmPendulum
         ' 
         ' CboPendulum
         ' 
-        CboPendulum.Font = New Font("Microsoft Sans Serif", 9.0F)
+        CboPendulum.Font = New Font("Microsoft Sans Serif", 9F)
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
         CboPendulum.Location = New Point(618, 3)
@@ -79,7 +79,7 @@ Partial Class FrmPendulum
         ' 
         ' LstProtocol
         ' 
-        LstProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LstProtocol.Font = New Font("Microsoft Sans Serif", 9F)
         LstProtocol.FormattingEnabled = True
         LstProtocol.ItemHeight = 15
         LstProtocol.Location = New Point(835, 369)
@@ -103,7 +103,7 @@ Partial Class FrmPendulum
         GrpStartParameter.Controls.Add(TxtP1)
         GrpStartParameter.Controls.Add(LblP2)
         GrpStartParameter.Controls.Add(LblP1)
-        GrpStartParameter.Font = New Font("Microsoft Sans Serif", 9.0F)
+        GrpStartParameter.Font = New Font("Microsoft Sans Serif", 9F)
         GrpStartParameter.Location = New Point(610, 93)
         GrpStartParameter.Margin = New Padding(4)
         GrpStartParameter.Name = "GrpStartParameter"
@@ -246,7 +246,7 @@ Partial Class FrmPendulum
         ' LblPhasePortrait
         ' 
         LblPhasePortrait.AutoSize = True
-        LblPhasePortrait.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblPhasePortrait.Font = New Font("Microsoft Sans Serif", 9F)
         LblPhasePortrait.Location = New Point(835, 3)
         LblPhasePortrait.Margin = New Padding(4, 0, 4, 0)
         LblPhasePortrait.Name = "LblPhasePortrait"
@@ -258,7 +258,7 @@ Partial Class FrmPendulum
         ' LblAdditionalParameter
         ' 
         LblAdditionalParameter.AutoSize = True
-        LblAdditionalParameter.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblAdditionalParameter.Font = New Font("Microsoft Sans Serif", 9F)
         LblAdditionalParameter.Location = New Point(616, 31)
         LblAdditionalParameter.Margin = New Padding(4, 0, 4, 0)
         LblAdditionalParameter.Name = "LblAdditionalParameter"
@@ -301,7 +301,7 @@ Partial Class FrmPendulum
         ' LblSteps
         ' 
         LblSteps.AutoSize = True
-        LblSteps.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblSteps.Font = New Font("Microsoft Sans Serif", 9F)
         LblSteps.Location = New Point(715, 491)
         LblSteps.Margin = New Padding(4, 0, 4, 0)
         LblSteps.Name = "LblSteps"
@@ -312,7 +312,7 @@ Partial Class FrmPendulum
         ' LblNumberOfSteps
         ' 
         LblNumberOfSteps.AutoSize = True
-        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblNumberOfSteps.Font = New Font("Microsoft Sans Serif", 9F)
         LblNumberOfSteps.Location = New Point(610, 491)
         LblNumberOfSteps.Margin = New Padding(4, 0, 4, 0)
         LblNumberOfSteps.Name = "LblNumberOfSteps"
@@ -322,7 +322,7 @@ Partial Class FrmPendulum
         ' 
         ' BtnReset
         ' 
-        BtnReset.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
         BtnReset.Location = New Point(610, 577)
         BtnReset.Margin = New Padding(6, 8, 6, 8)
         BtnReset.Name = "BtnReset"
@@ -333,7 +333,7 @@ Partial Class FrmPendulum
         ' 
         ' BtnStart
         ' 
-        BtnStart.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
         BtnStart.Location = New Point(610, 510)
         BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
@@ -345,7 +345,7 @@ Partial Class FrmPendulum
         ' LblStepWidth
         ' 
         LblStepWidth.AutoSize = True
-        LblStepWidth.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblStepWidth.Font = New Font("Microsoft Sans Serif", 9F)
         LblStepWidth.Location = New Point(610, 336)
         LblStepWidth.Margin = New Padding(4, 0, 4, 0)
         LblStepWidth.Name = "LblStepWidth"
@@ -376,7 +376,7 @@ Partial Class FrmPendulum
         ' 
         ' CboTypeofPhaseportrait
         ' 
-        CboTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9.0F)
+        CboTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9F)
         CboTypeofPhaseportrait.FormattingEnabled = True
         CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
         CboTypeofPhaseportrait.Location = New Point(610, 429)
@@ -388,7 +388,7 @@ Partial Class FrmPendulum
         ' LblTypeofPhaseportrait
         ' 
         LblTypeofPhaseportrait.AutoSize = True
-        LblTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9F)
         LblTypeofPhaseportrait.Location = New Point(618, 407)
         LblTypeofPhaseportrait.Margin = New Padding(4, 0, 4, 0)
         LblTypeofPhaseportrait.Name = "LblTypeofPhaseportrait"
@@ -399,7 +399,7 @@ Partial Class FrmPendulum
         ' LblProtocol
         ' 
         LblProtocol.AutoSize = True
-        LblProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
+        LblProtocol.Font = New Font("Microsoft Sans Serif", 9F)
         LblProtocol.Location = New Point(840, 346)
         LblProtocol.Margin = New Padding(4, 0, 4, 0)
         LblProtocol.Name = "LblProtocol"
@@ -410,7 +410,7 @@ Partial Class FrmPendulum
         ' 
         ' BtnStop
         ' 
-        BtnStop.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnStop.Font = New Font("Microsoft Sans Serif", 9F)
         BtnStop.Location = New Point(718, 510)
         BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
@@ -421,7 +421,7 @@ Partial Class FrmPendulum
         ' 
         ' BtnDefault
         ' 
-        BtnDefault.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
         BtnDefault.Location = New Point(610, 543)
         BtnDefault.Margin = New Padding(6, 8, 6, 8)
         BtnDefault.Name = "BtnDefault"
@@ -433,7 +433,7 @@ Partial Class FrmPendulum
         ' ChkProtocol
         ' 
         ChkProtocol.AutoSize = True
-        ChkProtocol.Font = New Font("Microsoft Sans Serif", 9.0F)
+        ChkProtocol.Font = New Font("Microsoft Sans Serif", 9F)
         ChkProtocol.Location = New Point(1076, 345)
         ChkProtocol.Margin = New Padding(4, 2, 4, 2)
         ChkProtocol.Name = "ChkProtocol"
@@ -444,7 +444,7 @@ Partial Class FrmPendulum
         ' 
         ' BtnCreatePendulum
         ' 
-        BtnCreatePendulum.Font = New Font("Microsoft Sans Serif", 9.0F)
+        BtnCreatePendulum.Font = New Font("Microsoft Sans Serif", 9F)
         BtnCreatePendulum.Location = New Point(610, 457)
         BtnCreatePendulum.Margin = New Padding(4)
         BtnCreatePendulum.Name = "BtnCreatePendulum"
@@ -455,7 +455,7 @@ Partial Class FrmPendulum
         ' 
         ' FrmPendulum
         ' 
-        AutoScaleDimensions = New SizeF(9.0F, 18.0F)
+        AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1163, 612)
         Controls.Add(BtnCreatePendulum)
