@@ -57,7 +57,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A2248AA4B4B341D18E27D4DF03D96455"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C6EEB66EC1F345E9BA018137A780E7F4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D714EA64EB70471DA3E6B13686574127"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -308,10 +320,50 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2248AA4B4B341D18E27D4DF03D96455"
+            {
+            "SourcePath" = "8:..\\..\\..\\Dokumente\\Versionshinweise.pdf"
+            "TargetName" = "8:Versionshinweise.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6EEB66EC1F345E9BA018137A780E7F4"
             {
             "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Documentation\\Dynamische Systeme.pdf"
             "TargetName" = "8:Dynamische Systeme.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D714EA64EB70471DA3E6B13686574127"
+            {
+            "SourcePath" = "8:..\\..\\..\\Dokumente\\Release Notes.pdf"
+            "TargetName" = "8:Release Notes.pdf"
             "Tag" = "8:"
             "Folder" = "8:_717B73147A434136A0C3A49147908102"
             "Condition" = "8:"
