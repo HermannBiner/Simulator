@@ -110,7 +110,7 @@ Public Class FrmMain
         InitializeLanguage()
     End Sub
 
-    Sub OpenDocument(DocumentName As String)
+    Public Sub OpenDocument(DocumentName As String)
 
         'This is the path to the actual exe directory of the Simulator
         Dim currentDirectory As String = Environment.CurrentDirectory

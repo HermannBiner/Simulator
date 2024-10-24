@@ -801,6 +801,14 @@
     <value>Reflexionswinkel</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ReleaseNotes" xml:space="preserve">
+    <value>Versionshinweise</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ReleaseNotesDoc" xml:space="preserve">
+    <value>Versionshinweise.pdf</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="RemovePendulum" xml:space="preserve">
     <value>Pendel entfernen</value>
     <comment>Lbl</comment>

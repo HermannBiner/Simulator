@@ -28,6 +28,7 @@ Partial Class FrmInfo
         LblMail = New Label()
         LblVersion = New Label()
         PicZermatt = New PictureBox()
+        BtnReleaseNotes = New Button()
         CType(PicZermatt, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -81,16 +82,27 @@ Partial Class FrmInfo
         PicZermatt.Location = New Point(294, 13)
         PicZermatt.Margin = New Padding(4)
         PicZermatt.Name = "PicZermatt"
-        PicZermatt.Size = New Size(283, 198)
+        PicZermatt.Size = New Size(500, 400)
         PicZermatt.SizeMode = PictureBoxSizeMode.StretchImage
         PicZermatt.TabIndex = 4
         PicZermatt.TabStop = False
+        ' 
+        ' BtnReleaseNotes
+        ' 
+        BtnReleaseNotes.Font = New Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Pixel)
+        BtnReleaseNotes.Location = New Point(19, 380)
+        BtnReleaseNotes.Name = "BtnReleaseNotes"
+        BtnReleaseNotes.Size = New Size(247, 30)
+        BtnReleaseNotes.TabIndex = 5
+        BtnReleaseNotes.Text = "ReleaseNotes"
+        BtnReleaseNotes.UseVisualStyleBackColor = True
         ' 
         ' FrmInfo
         ' 
         AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(586, 215)
+        ClientSize = New Size(806, 422)
+        Controls.Add(BtnReleaseNotes)
         Controls.Add(PicZermatt)
         Controls.Add(LblVersion)
         Controls.Add(LblMail)
@@ -113,4 +125,5 @@ Partial Class FrmInfo
     Friend WithEvents LblMail As Label
     Friend WithEvents LblVersion As Label
     Friend WithEvents PicZermatt As PictureBox
+    Friend WithEvents BtnReleaseNotes As Button
 End Class

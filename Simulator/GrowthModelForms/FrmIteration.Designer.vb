@@ -81,7 +81,7 @@ Partial Class FrmIteration
         BtnReset.Location = New Point(715, 538)
         BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(267, 30)
+        BtnReset.Size = New Size(340, 30)
         BtnReset.TabIndex = 17
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -114,7 +114,7 @@ Partial Class FrmIteration
         BtnNextStep.Location = New Point(6, 22)
         BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(255, 30)
+        BtnNextStep.Size = New Size(334, 30)
         BtnNextStep.TabIndex = 3
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
@@ -125,7 +125,7 @@ Partial Class FrmIteration
         BtnNext10Steps.Location = New Point(8, 60)
         BtnNext10Steps.Margin = New Padding(4)
         BtnNext10Steps.Name = "BtnNext10Steps"
-        BtnNext10Steps.Size = New Size(255, 30)
+        BtnNext10Steps.Size = New Size(332, 30)
         BtnNext10Steps.TabIndex = 4
         BtnNext10Steps.Text = "Next10Steps"
         BtnNext10Steps.UseVisualStyleBackColor = True
@@ -163,7 +163,7 @@ Partial Class FrmIteration
         GrpStep.Margin = New Padding(4)
         GrpStep.Name = "GrpStep"
         GrpStep.Padding = New Padding(4)
-        GrpStep.Size = New Size(267, 100)
+        GrpStep.Size = New Size(348, 100)
         GrpStep.TabIndex = 17
         GrpStep.TabStop = False
         GrpStep.Text = "Iteration"
@@ -189,7 +189,7 @@ Partial Class FrmIteration
         GrpTargetValue.Margin = New Padding(4)
         GrpTargetValue.Name = "GrpTargetValue"
         GrpTargetValue.Padding = New Padding(4)
-        GrpTargetValue.Size = New Size(267, 85)
+        GrpTargetValue.Size = New Size(349, 85)
         GrpTargetValue.TabIndex = 11
         GrpTargetValue.TabStop = False
         GrpTargetValue.Text = "Transitivity"
@@ -200,7 +200,7 @@ Partial Class FrmIteration
         BtnTransitiveStartValue.Location = New Point(8, 44)
         BtnTransitiveStartValue.Margin = New Padding(4)
         BtnTransitiveStartValue.Name = "BtnTransitiveStartValue"
-        BtnTransitiveStartValue.Size = New Size(255, 30)
+        BtnTransitiveStartValue.Size = New Size(333, 30)
         BtnTransitiveStartValue.TabIndex = 13
         BtnTransitiveStartValue.Text = "StartvalueForTargetvalue"
         BtnTransitiveStartValue.UseVisualStyleBackColor = True
@@ -211,7 +211,7 @@ Partial Class FrmIteration
         TxtTargetValue.Location = New Point(102, 19)
         TxtTargetValue.Margin = New Padding(4)
         TxtTargetValue.Name = "TxtTargetValue"
-        TxtTargetValue.Size = New Size(162, 21)
+        TxtTargetValue.Size = New Size(239, 21)
         TxtTargetValue.TabIndex = 12
         ' 
         ' LblTargetValue
@@ -234,7 +234,7 @@ Partial Class FrmIteration
         GrpProtocol.Margin = New Padding(4)
         GrpProtocol.Name = "GrpProtocol"
         GrpProtocol.Padding = New Padding(4)
-        GrpProtocol.Size = New Size(267, 94)
+        GrpProtocol.Size = New Size(348, 94)
         GrpProtocol.TabIndex = 9
         GrpProtocol.TabStop = False
         GrpProtocol.Text = "TargetProtocol"
@@ -245,7 +245,7 @@ Partial Class FrmIteration
         BtnProtocolStartvalue.Location = New Point(8, 50)
         BtnProtocolStartvalue.Margin = New Padding(4)
         BtnProtocolStartvalue.Name = "BtnProtocolStartvalue"
-        BtnProtocolStartvalue.Size = New Size(255, 30)
+        BtnProtocolStartvalue.Size = New Size(332, 30)
         BtnProtocolStartvalue.TabIndex = 8
         BtnProtocolStartvalue.Text = "StartvalueForProtocol"
         BtnProtocolStartvalue.UseVisualStyleBackColor = True
@@ -255,7 +255,7 @@ Partial Class FrmIteration
         TxtTargetProtocol.Location = New Point(8, 26)
         TxtTargetProtocol.Margin = New Padding(4)
         TxtTargetProtocol.Name = "TxtTargetProtocol"
-        TxtTargetProtocol.Size = New Size(255, 21)
+        TxtTargetProtocol.Size = New Size(332, 21)
         TxtTargetProtocol.TabIndex = 10
         ' 
         ' TxtParameterA
@@ -264,7 +264,7 @@ Partial Class FrmIteration
         TxtParameterA.Location = New Point(798, 55)
         TxtParameterA.Margin = New Padding(4)
         TxtParameterA.Name = "TxtParameterA"
-        TxtParameterA.Size = New Size(183, 21)
+        TxtParameterA.Size = New Size(257, 21)
         TxtParameterA.TabIndex = 2
         ' 
         ' TxtStartValue
@@ -273,7 +273,7 @@ Partial Class FrmIteration
         TxtStartValue.Location = New Point(798, 79)
         TxtStartValue.Margin = New Padding(4)
         TxtStartValue.Name = "TxtStartValue"
-        TxtStartValue.Size = New Size(183, 21)
+        TxtStartValue.Size = New Size(257, 21)
         TxtStartValue.TabIndex = 4
         ' 
         ' CboFunction
@@ -354,7 +354,7 @@ Partial Class FrmIteration
         GrpPresentation.Margin = New Padding(4)
         GrpPresentation.Name = "GrpPresentation"
         GrpPresentation.Padding = New Padding(4)
-        GrpPresentation.Size = New Size(267, 71)
+        GrpPresentation.Size = New Size(348, 71)
         GrpPresentation.TabIndex = 34
         GrpPresentation.TabStop = False
         GrpPresentation.Text = "Presentation"
@@ -362,7 +362,7 @@ Partial Class FrmIteration
         ' LblStretching
         ' 
         LblStretching.AutoSize = True
-        LblStretching.Location = New Point(123, 47)
+        LblStretching.Location = New Point(180, 45)
         LblStretching.Margin = New Padding(4, 0, 4, 0)
         LblStretching.Name = "LblStretching"
         LblStretching.Size = New Size(81, 15)
@@ -371,16 +371,16 @@ Partial Class FrmIteration
         ' 
         ' TxtXStretching
         ' 
-        TxtXStretching.Location = New Point(210, 41)
+        TxtXStretching.Location = New Point(269, 42)
         TxtXStretching.Margin = New Padding(4)
         TxtXStretching.Name = "TxtXStretching"
-        TxtXStretching.Size = New Size(50, 21)
+        TxtXStretching.Size = New Size(71, 21)
         TxtXStretching.TabIndex = 3
         ' 
         ' LblxStretching
         ' 
         LblxStretching.AutoSize = True
-        LblxStretching.Location = New Point(122, 18)
+        LblxStretching.Location = New Point(180, 22)
         LblxStretching.Margin = New Padding(4, 0, 4, 0)
         LblxStretching.Name = "LblxStretching"
         LblxStretching.Size = New Size(68, 15)
@@ -418,7 +418,7 @@ Partial Class FrmIteration
         TrbParameterA.Maximum = 1000
         TrbParameterA.Minimum = 1
         TrbParameterA.Name = "TrbParameterA"
-        TrbParameterA.Size = New Size(183, 45)
+        TrbParameterA.Size = New Size(265, 45)
         TrbParameterA.TabIndex = 35
         TrbParameterA.Value = 500
         ' 
@@ -439,7 +439,7 @@ Partial Class FrmIteration
         BtnDefault.Location = New Point(714, 504)
         BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(267, 30)
+        BtnDefault.Size = New Size(341, 30)
         BtnDefault.TabIndex = 37
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -448,7 +448,7 @@ Partial Class FrmIteration
         ' 
         AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(993, 576)
+        ClientSize = New Size(1076, 576)
         Controls.Add(BtnDefault)
         Controls.Add(LblParameterA)
         Controls.Add(TrbParameterA)
