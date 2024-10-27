@@ -7,6 +7,6 @@ in the folder Simulator/Documentation.
 There is also the technical documentation
 and the user manual in G/E.
 If you just need the MSI installer for the Simulator
-see Simulator/Setup/Release.
+see Simulator Setup/Release/Simulator Setup.msi
 The code is public and feedbacks are welcome to
 h.biner@bluewin.ch.
