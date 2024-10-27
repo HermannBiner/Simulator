@@ -3,6 +3,10 @@ like growth models, billiard, coupled pendulums,
 iterations in the complex plane.
 The mathematics behind is documented in German
 and English. See "Dynamische Systeme" or "Dynamic Systems"
-in the folder Simulator/Documentation
+in the folder Simulator/Documentation. 
+There is also the technical documentation
+and the user manual in G/E.
+If you just need the MSI installer for the Simulator
+see Simulator/Setup/Release.
 The code is public and feedbacks are welcome to
 h.biner@bluewin.ch.
