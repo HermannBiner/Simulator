@@ -3,6 +3,6 @@ like growth models, billiard, coupled pendulums,
 iterations in the complex plane.
 The mathematics behind is documented in German
 and English. See "Dynamische Systeme" or "Dynamic Systems"
-in the main folders.
+in the folder Simulator/Documentation
 The code is public and feedbacks are welcome to
 h.biner@bluewin.ch.
