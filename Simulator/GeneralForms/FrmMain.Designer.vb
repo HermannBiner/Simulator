@@ -36,6 +36,7 @@ Partial Class FrmMain
         MnuHistogram = New ToolStripMenuItem()
         MnuTwoDimensions = New ToolStripMenuItem()
         MnuFeigenbaum = New ToolStripMenuItem()
+        MnuPopulationDensity = New ToolStripMenuItem()
         MnuComplexIteration = New ToolStripMenuItem()
         MnuNewton = New ToolStripMenuItem()
         MnuJuliaSet = New ToolStripMenuItem()
@@ -48,6 +49,7 @@ Partial Class FrmMain
         MnuMathematics = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
+        MnuMandelbrotMap = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
@@ -104,7 +106,7 @@ Partial Class FrmMain
         ' 
         ' MnuGrowthModels
         ' 
-        MnuGrowthModels.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum})
+        MnuGrowthModels.DropDownItems.AddRange(New ToolStripItem() {MnuIteration, MnuSensitivity, MnuHistogram, MnuTwoDimensions, MnuFeigenbaum, MnuPopulationDensity})
         MnuGrowthModels.Font = New Font("Microsoft Sans Serif", 9F)
         MnuGrowthModels.Name = "MnuGrowthModels"
         MnuGrowthModels.Size = New Size(99, 20)
@@ -113,36 +115,42 @@ Partial Class FrmMain
         ' MnuIteration
         ' 
         MnuIteration.Name = "MnuIteration"
-        MnuIteration.Size = New Size(163, 22)
+        MnuIteration.Size = New Size(173, 22)
         MnuIteration.Text = "Iteration"
         ' 
         ' MnuSensitivity
         ' 
         MnuSensitivity.Name = "MnuSensitivity"
-        MnuSensitivity.Size = New Size(163, 22)
+        MnuSensitivity.Size = New Size(173, 22)
         MnuSensitivity.Text = "Sensitivity"
         ' 
         ' MnuHistogram
         ' 
         MnuHistogram.Name = "MnuHistogram"
-        MnuHistogram.Size = New Size(163, 22)
+        MnuHistogram.Size = New Size(173, 22)
         MnuHistogram.Text = "Histogram"
         ' 
         ' MnuTwoDimensions
         ' 
         MnuTwoDimensions.Name = "MnuTwoDimensions"
-        MnuTwoDimensions.Size = New Size(163, 22)
+        MnuTwoDimensions.Size = New Size(173, 22)
         MnuTwoDimensions.Text = "TwoDimensions"
         ' 
         ' MnuFeigenbaum
         ' 
         MnuFeigenbaum.Name = "MnuFeigenbaum"
-        MnuFeigenbaum.Size = New Size(163, 22)
+        MnuFeigenbaum.Size = New Size(173, 22)
         MnuFeigenbaum.Text = "Feigenbaum"
+        ' 
+        ' MnuPopulationDensity
+        ' 
+        MnuPopulationDensity.Name = "MnuPopulationDensity"
+        MnuPopulationDensity.Size = New Size(173, 22)
+        MnuPopulationDensity.Text = "PopulationDensity"
         ' 
         ' MnuComplexIteration
         ' 
-        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet})
+        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet, MnuMandelbrotMap})
         MnuComplexIteration.Font = New Font("Microsoft Sans Serif", 9F)
         MnuComplexIteration.Name = "MnuComplexIteration"
         MnuComplexIteration.Size = New Size(112, 20)
@@ -151,13 +159,13 @@ Partial Class FrmMain
         ' MnuNewton
         ' 
         MnuNewton.Name = "MnuNewton"
-        MnuNewton.Size = New Size(118, 22)
+        MnuNewton.Size = New Size(180, 22)
         MnuNewton.Text = "Newton"
         ' 
         ' MnuJuliaSet
         ' 
         MnuJuliaSet.Name = "MnuJuliaSet"
-        MnuJuliaSet.Size = New Size(118, 22)
+        MnuJuliaSet.Size = New Size(180, 22)
         MnuJuliaSet.Text = "JuliaSet"
         ' 
         ' MnuMechanics
@@ -220,13 +228,19 @@ Partial Class FrmMain
         MnuTest.Text = "Test"
         MnuTest.Visible = False
         ' 
+        ' MnuMandelbrotMap
+        ' 
+        MnuMandelbrotMap.Name = "MnuMandelbrotMap"
+        MnuMandelbrotMap.Size = New Size(180, 22)
+        MnuMandelbrotMap.Text = "MandelbrotMap"
+        ' 
         ' FrmMain
         ' 
         AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1284, 781)
         Controls.Add(MnuMain)
-        Font = New Font("Microsoft Sans Serif", 11F)
+        Font = New Font("Microsoft Sans Serif", 11.14F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MnuMain
         Margin = New Padding(4, 3, 4, 3)
@@ -265,4 +279,6 @@ Partial Class FrmMain
     Friend WithEvents MnuBilliardTable As ToolStripMenuItem
     Friend WithEvents MnuCDiagram As ToolStripMenuItem
     Friend WithEvents MnuTechnical As ToolStripMenuItem
+    Friend WithEvents MnuPopulationDensity As ToolStripMenuItem
+    Friend WithEvents MnuMandelbrotMap As ToolStripMenuItem
 End Class

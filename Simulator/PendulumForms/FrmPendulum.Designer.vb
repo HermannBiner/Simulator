@@ -259,7 +259,7 @@ Partial Class FrmPendulum
         ' 
         LblAdditionalParameter.AutoSize = True
         LblAdditionalParameter.Font = New Font("Microsoft Sans Serif", 9F)
-        LblAdditionalParameter.Location = New Point(616, 31)
+        LblAdditionalParameter.Location = New Point(616, 28)
         LblAdditionalParameter.Margin = New Padding(4, 0, 4, 0)
         LblAdditionalParameter.Name = "LblAdditionalParameter"
         LblAdditionalParameter.Size = New Size(119, 15)
@@ -269,7 +269,7 @@ Partial Class FrmPendulum
         ' TrbAdditionalParameter
         ' 
         TrbAdditionalParameter.LargeChange = 1
-        TrbAdditionalParameter.Location = New Point(610, 52)
+        TrbAdditionalParameter.Location = New Point(610, 46)
         TrbAdditionalParameter.Margin = New Padding(4)
         TrbAdditionalParameter.Maximum = 20
         TrbAdditionalParameter.Minimum = 1

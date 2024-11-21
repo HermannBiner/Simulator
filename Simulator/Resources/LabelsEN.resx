@@ -749,6 +749,10 @@
     <value>Poincaré Section</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Population" xml:space="preserve">
+    <value>Population</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="PositionStartValue2" xml:space="preserve">
     <value>Position Start Value 2: </value>
     <comment>Lbl</comment>
@@ -810,7 +814,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="RemovePendulum" xml:space="preserve">
-    <value>Remove Penduluim</value>
+    <value>Remove Shadow Penduluim</value>
     <comment>Lbl</comment>
   </data>
   <data name="Reset" xml:space="preserve">
@@ -1052,5 +1056,13 @@
   <data name="Y-RangeNotAllowed1" xml:space="preserve">
     <value>This Y-Range is not allowed! It must be part of the interval</value>
     <comment>Msg</comment>
+  </data>
+  <data name="PopulationDensity" xml:space="preserve">
+    <value>Population Density</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MandelbrotMap" xml:space="preserve">
+    <value>Mandelbrot Map</value>
+    <comment>Lbl</comment>
   </data>
 </root>

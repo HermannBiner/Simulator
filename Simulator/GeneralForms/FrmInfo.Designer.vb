@@ -108,7 +108,7 @@ Partial Class FrmInfo
         Controls.Add(LblMail)
         Controls.Add(LblFeedback)
         Controls.Add(LblPersonalData)
-        Font = New Font("Microsoft Sans Serif", 11F)
+        Font = New Font("Microsoft Sans Serif", 11.14F)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4)

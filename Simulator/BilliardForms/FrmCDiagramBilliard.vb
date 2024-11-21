@@ -10,7 +10,6 @@ Imports System.Globalization
 
 Public Class FrmCDiagramBilliard
 
-
     Private IsFormLoaded As Boolean
     Private FC As ClsCDiagramController
 

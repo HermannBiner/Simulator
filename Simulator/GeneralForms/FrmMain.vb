@@ -49,7 +49,8 @@ Public Class FrmMain
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
         MnuNumericMethods.Text = LM.GetString("NumericMethods")
-
+        MnuPopulationDensity.Text = LM.GetString("PopulationDensity")
+        MnuMandelbrotMap.Text = LM.GetString("MandelbrotMap")
     End Sub
 
     Private Sub MnuIteration_Click(sender As Object, e As EventArgs) Handles MnuIteration.Click
@@ -149,5 +150,13 @@ Public Class FrmMain
 
     Private Sub MnuTechnical_Click(sender As Object, e As EventArgs) Handles MnuTechnical.Click
         OpenDocument("Documentation\" & LM.GetString("TechDoc"))
+    End Sub
+
+    Private Sub MnuPopulationDensity_Click(sender As Object, e As EventArgs) Handles MnuPopulationDensity.Click
+        FrmPopulation.Show()
+    End Sub
+
+    Private Sub MnuMandelbrotMap_Click(sender As Object, e As EventArgs) Handles MnuMandelbrotMap.Click
+        FrmMandelbrotMap.Show()
     End Sub
 End Class

@@ -51,7 +51,6 @@ Public Class ClsJuliaPN
         End Get
     End Property
 
-
     Public Overrides Sub IterationStep(Startpoint As Point)
 
         'Transform the PixelPoint to a Complex Number

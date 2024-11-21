@@ -119,19 +119,19 @@ Public Class FrmBilliardtable
 
     'SECTOR SET STARTPOSITION AND POSITION OF THE FIRST HIT
 
-    Private Sub PicBilliardTable_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
+    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
         If IsFormLoaded Then
             FC.MouseDown(e)
         End If
     End Sub
 
-    Private Sub PicBilliardTable_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
+    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
         If IsFormLoaded Then
             FC.MouseUp(e)
         End If
     End Sub
 
-    Private Sub PicBilliardTable_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
+    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
         If IsFormLoaded Then
             FC.MouseMoving(e)
         End If
@@ -180,7 +180,4 @@ Public Class FrmBilliardtable
         End If
     End Sub
 
-    Private Sub TrbSpeed_Scroll(sender As Object, e As EventArgs) Handles TrbSpeed.Scroll
-
-    End Sub
 End Class

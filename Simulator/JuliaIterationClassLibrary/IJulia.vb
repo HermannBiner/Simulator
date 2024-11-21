@@ -6,7 +6,7 @@
 
 Public Interface IJulia
 
-    WriteOnly Property PicDiagram As PictureBox
+    Property PicDiagram As PictureBox
 
     'Value Parameter Definition for the x-Values
     ReadOnly Property XValueParameter As ClsGeneralParameter

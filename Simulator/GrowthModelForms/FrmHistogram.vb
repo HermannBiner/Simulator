@@ -83,7 +83,7 @@ Public Class FrmHistogram
         End If
     End Sub
 
-    Private Sub TxtStartWert_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue.LostFocus
+    Private Sub TxtStartValue_LostFocus(sender As Object, e As EventArgs) Handles TxtStartValue.LostFocus
         If IsFormLoaded Then
             'If this value changes, the Iteration has to be reset
             FC.ResetIteration()

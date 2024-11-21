@@ -4,7 +4,6 @@
 
 Imports System.Globalization
 Imports System.Reflection
-Imports Simulator.ClsDynamics
 
 Public Class ClsJuliaIterationController
 
@@ -347,6 +346,7 @@ Public Class ClsJuliaIterationController
             End With
 
             Await PerformIteration()
+
         End If
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
@@ -359,8 +359,7 @@ Public Class ClsJuliaIterationController
         End If
     End Sub
 
-
-    Public Async Function PerformIteration() As Task
+    Private Async Function PerformIteration() As Task
 
         'This algorithm goes through the CPlane in a spiral starting in the midpoint
         If ExaminatedPoints = 0 Then
@@ -381,12 +380,10 @@ Public Class ClsJuliaIterationController
 
         End If
 
-
         Do
             ExaminatedPoints += 1
 
             IterationLoop()
-
 
             If p >= MyForm.PicDiagram.Width Or q >= MyForm.PicDiagram.Height Then
 

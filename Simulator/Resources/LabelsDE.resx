@@ -749,6 +749,10 @@
     <value>Poincaré Schnitt</value>
     <comment>Lbl</comment>
   </data>
+  <data name="Population" xml:space="preserve">
+    <value>Population</value>
+    <comment>Lbl</comment>
+  </data>
   <data name="PositionStartValue2" xml:space="preserve">
     <value>Position Startwert 2: </value>
     <comment>Lbl</comment>
@@ -810,7 +814,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="RemovePendulum" xml:space="preserve">
-    <value>Pendel entfernen</value>
+    <value>Schattenpendel entfernen</value>
     <comment>Lbl</comment>
   </data>
   <data name="Reset" xml:space="preserve">
@@ -1052,5 +1056,13 @@
   <data name="Y-RangeNotAllowed" xml:space="preserve">
     <value>Dieser Y-Bereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
+  </data>
+  <data name="PopulationDensity" xml:space="preserve">
+    <value>Bevölkerungsdichte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MandelbrotMap" xml:space="preserve">
+    <value>Mandelbrot Karte</value>
+    <comment>Lbl</comment>
   </data>
 </root>

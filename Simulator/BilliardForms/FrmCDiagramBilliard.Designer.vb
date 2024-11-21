@@ -291,7 +291,7 @@ Partial Class FrmCDiagramBilliard
         Controls.Add(BtnReset)
         Controls.Add(BtnStart)
         Controls.Add(PicDiagram)
-        Font = New Font("Microsoft Sans Serif", 11F)
+        Font = New Font("Microsoft Sans Serif", 11.14F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(4, 2, 4, 2)
         Name = "FrmCDiagramBilliard"

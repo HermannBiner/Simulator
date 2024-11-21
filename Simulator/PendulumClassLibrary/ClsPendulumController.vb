@@ -315,8 +315,9 @@ Public Class ClsPendulumController
         End If
 
         If ShadowDS IsNot Nothing Then
-            MyForm.BtnCreatePendulum.Text = LM.GetString("RemovePendulum")
+            MyForm.BtnCreatePendulum.Enabled = False
         Else
+            MyForm.BtnCreatePendulum.Enabled = True
             MyForm.BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
         End If
 

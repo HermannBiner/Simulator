@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_45A3641F20C34EC59824F99DDFF9913A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5C7039569CD041659EE17F8EC634CF37"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -286,6 +292,26 @@
             "TargetName" = "8:Dynamic Systems.pdf"
             "Tag" = "8:"
             "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45A3641F20C34EC59824F99DDFF9913A"
+            {
+            "SourcePath" = "8:Release\\Simulator Setup.msi"
+            "TargetName" = "8:Simulator Setup.msi"
+            "Tag" = "8:"
+            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"

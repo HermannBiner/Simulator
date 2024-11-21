@@ -55,7 +55,10 @@ Public MustInherit Class ClsJuliaAbstract
 
     'SECTOR INTERFACE
 
-    WriteOnly Property PicDiagram As PictureBox Implements IJulia.PicDiagram
+    Property PicDiagram As PictureBox Implements IJulia.PicDiagram
+        Get
+            PicDiagram = MyPicDiagram
+        End Get
         Set(value As PictureBox)
             MyPicDiagram = value
             PicGraphics = New ClsGraphicTool(MyPicDiagram, MyActualXRange, MyActualYRange)
