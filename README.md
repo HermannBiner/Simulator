@@ -11,7 +11,8 @@ and the user manual in G/E.
 If you just need the MSI installer for the Simulator
 see the Release Tab on the right side. Because the
 setup-file is not downloaded often, there will 
-a security warning show up. You can ignore it.
+a security warning show up. You can ignore it, the
+setup-file is signed with the MS signtool.
 
 The code is public and feedbacks are welcome to
 h.biner@bluewin.ch.
