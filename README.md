@@ -1,6 +1,6 @@
 The Simulator allows to study dynamical systems
 like growth models, billiard, coupled pendulums,
-iterations in the complex plane.
+iterations in the complex plane, celestial mechanics.
 
 The mathematics behind is documented in German
 and English. See "Dynamische Systeme" or "Dynamic Systems"
