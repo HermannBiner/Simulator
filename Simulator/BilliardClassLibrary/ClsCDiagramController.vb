@@ -2,21 +2,20 @@
 
 'Status Checked
 
-Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.Reflection
 
 Public Class ClsCDiagramController
 
-    Private MyForm As FrmCDiagramBilliard
+    Private ReadOnly MyForm As FrmCDiagramBilliard
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'The dynamic System
     Private DS As IBilliardTable
     Private ActualBilliardBall As IBilliardball
 
-    Private DiagramAreaSelector As ClsDiagramAreaSelector
+    Private ReadOnly DiagramAreaSelector As ClsDiagramAreaSelector
 
     'Graphics
     Private MyBmpDiagram As Bitmap
@@ -36,10 +35,12 @@ Public Class ClsCDiagramController
 
     'Iteration Parameters
     'Startpoint
-    Private ActualPair As ClsValuePair
-    Private NextPair As ClsValuePair
+    Private ActualPair As ClsDecValuePair
+    Private NextPair As ClsDecValuePair
     Private CyclePoint As ClsMathpoint
     Private LengthOfCycle As Integer
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmCDiagramBilliard)
         MyForm = Form
@@ -95,6 +96,7 @@ Public Class ClsCDiagramController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IBilliardTable)
+                        Exit For
                     End If
                 Next
             End If
@@ -196,6 +198,21 @@ Public Class ClsCDiagramController
 
     End Sub
 
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .TrbPositionStartValues.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .CboValueParameter.Enabled = IsEnabled
+            .TxtCMax.Enabled = IsEnabled
+            .TxtCMin.Enabled = IsEnabled
+            .TxtVMax.Enabled = IsEnabled
+            .TxtVMin.Enabled = IsEnabled
+        End With
+    End Sub
+
     'SECTOR ITERATION
 
     Public Async Sub StartIteration()
@@ -254,7 +271,7 @@ Public Class ClsCDiagramController
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
             'Initialize
-            ActualPair = New ClsValuePair(0, 0)
+            ActualPair = New ClsDecValuePair(0, 0)
             CyclePoint = New ClsMathpoint(0, 0)
 
             'enough, but not bigger than the y-axis allows
@@ -314,7 +331,7 @@ Public Class ClsCDiagramController
 
     End Sub
 
-    'CHECK USER RANGES AND SET PARAMETER AND VALUE INTERVAL
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -325,21 +342,6 @@ Public Class ClsCDiagramController
             Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed
         End With
     End Function
-
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .TrbPositionStartValues.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .CboValueParameter.Enabled = IsEnabled
-            .TxtCMax.Enabled = IsEnabled
-            .TxtCMin.Enabled = IsEnabled
-            .TxtVMax.Enabled = IsEnabled
-            .TxtVMin.Enabled = IsEnabled
-        End With
-    End Sub
 
 End Class
 

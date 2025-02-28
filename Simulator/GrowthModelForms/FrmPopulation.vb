@@ -9,7 +9,7 @@ Public Class FrmPopulation
     Private IsFormLoaded As Boolean
     Private FC As ClsPopulationController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 

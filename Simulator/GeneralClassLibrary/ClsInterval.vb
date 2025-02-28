@@ -4,11 +4,14 @@
 
 Public Class ClsInterval
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'left and right interval border
     Private ReadOnly MyA As Decimal
     Private ReadOnly MyB As Decimal
+
+    Private MyDblA As Double
+    Private MyDblB As Double
 
     Public Sub New(a As Decimal, b As Decimal)
         LM = ClsLanguageManager.LM
@@ -24,8 +27,12 @@ Public Class ClsInterval
 
     End Sub
 
-    Public Sub New(MyInterval As ClsInterval)
+    Public Sub New(DblA As Double, DblB As Double)
+        LM = ClsLanguageManager.LM
+    End Sub
 
+    Public Sub New(MyInterval As ClsInterval)
+        LM = ClsLanguageManager.LM
         'Alternatively, an existing interval is transmitted
 
         MyA = MyInterval.A
@@ -45,9 +52,27 @@ Public Class ClsInterval
         End Get
     End Property
 
+    Public ReadOnly Property DblA As Double
+        Get
+            DblA = MyDblA
+        End Get
+    End Property
+
+    Public ReadOnly Property DblB As Double
+        Get
+            DblB = MyDblB
+        End Get
+    End Property
+
     Public ReadOnly Property IntervalWidth As Decimal
         Get
             Return MyB - MyA
+        End Get
+    End Property
+
+    Public ReadOnly Property DblIntervalWidth As Double
+        Get
+            Return MyDblB - MyDblA
         End Get
     End Property
 
@@ -62,8 +87,8 @@ Public Class ClsInterval
             Dim DecNumber As Decimal = DirectCast(Number, Decimal)
             Return DecNumber >= MyA And DecNumber <= MyB
         ElseIf TypeOf Number Is Double Then
-            Dim DecNumber As Double = DirectCast(Number, Double)
-            Return DecNumber >= MyA And DecNumber <= MyB
+            Dim DblNumber As Double = DirectCast(Number, Double)
+            Return DblNumber >= MyDblA And DblNumber <= MyDblB
         Else
             MessageBox.Show(LM.GetString("OnlyDecAndIntAndDbl"))
             Return False

@@ -10,9 +10,9 @@ Public Class ClsIterationController
 
     'The dynamic System
     Private DS As IIteration
-    Private MyForm As FrmIteration
+    Private ReadOnly MyForm As FrmIteration
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Graphics
     Private PicGraphics As ClsGraphicTool
@@ -21,7 +21,7 @@ Public Class ClsIterationController
     Private PicDiagramSize As Integer
 
     'Math Helper
-    Private MathHelper As New ClsMathhelperUnimodal
+    Private ReadOnly MathHelper As New ClsMathhelperUnimodal
 
     'Actual value of the iteration
     Private X As Decimal
@@ -56,6 +56,8 @@ Public Class ClsIterationController
     End Enum
 
     Private Presentation As PresentationEnum
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmIteration)
         MyForm = Form
@@ -109,6 +111,7 @@ Public Class ClsIterationController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -139,6 +142,24 @@ Public Class ClsIterationController
         MyForm.OptFunctionGraph.Checked = True
         SetPresentation()
 
+    End Sub
+
+    Public Sub ResetIteration()
+        With MyForm
+            'clear display
+            PicGraphics.Clear(Color.White)
+            .LstValueList.Items.Clear()
+            .LstProtocol.Items.Clear()
+
+            'Reset Number of steps
+            .LblSteps.Text = "0"
+            n = 0
+
+            'Clear Statusparameter
+            IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+            PrepareDiagram()
+        End With
     End Sub
 
     Public Sub SetDefaultUserData()
@@ -267,6 +288,8 @@ Public Class ClsIterationController
         End If
     End Sub
 
+    'SECTOR SET STARTPARAMETER
+
     Public Sub CalculateStartvalueForProtocol()
 
         If IsUserDataOK() Then
@@ -287,6 +310,9 @@ Public Class ClsIterationController
             DS.Power = 1
 
             Dim TargetProtocol As String = MyForm.TxtTargetProtocol.Text
+            If Len(TargetProtocol) > 44 Then
+                MessageBox.Show(LM.GetString("ProtocolTooLong"))
+            End If
 
             'Calculates a startvalue that produces a given protocol in case of chaotic behaviour
             If MathHelper.CheckFormatDualzahl(TargetProtocol) Then 'Checks the format of the target protocol
@@ -331,6 +357,8 @@ Public Class ClsIterationController
         End If
 
     End Sub
+
+    'SECTOR ITERATION
 
     Public Sub StartIteration(EndOfLoop As Integer)
 
@@ -485,23 +513,7 @@ Public Class ClsIterationController
         End With
     End Sub
 
-    Public Sub ResetIteration()
-        With MyForm
-            'clear display
-            PicGraphics.Clear(Color.White)
-            .LstValueList.Items.Clear()
-            .LstProtocol.Items.Clear()
-
-            'Reset Number of steps
-            .LblSteps.Text = "0"
-            n = 0
-
-            'Clear Statusparameter
-            IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-            PrepareDiagram()
-        End With
-    End Sub
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
         With MyForm

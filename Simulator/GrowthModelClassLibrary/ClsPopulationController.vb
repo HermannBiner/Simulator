@@ -9,9 +9,9 @@ Public Class ClsPopulationController
 
     'The dynamic System
     Private DS As IIteration
-    Private MyForm As FrmPopulation
+    Private ReadOnly MyForm As FrmPopulation
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Graphics
     Private PicGraphics As ClsGraphicTool
@@ -26,11 +26,13 @@ Public Class ClsPopulationController
     Private Const D As Integer = 1
 
     'Variables for the ShowPopulation Algorithm: See math. doc.
-    Private Individuum As ClsMathpoint
-    Private RandomGenerator As Random
+    Private ReadOnly Individuum As ClsMathpoint
+    Private ReadOnly RandomGenerator As Random
     Private NumberOfIndividuums As Integer
+
     'Radius of the Circle with Individuums
     Private R As Decimal
+
     'Polar coordinates of an individuum
     Private Rho As Decimal
     Private Alfa As Decimal
@@ -43,6 +45,7 @@ Public Class ClsPopulationController
     'Iterationstatus
     Private IterationStatus As ClsDynamics.EnIterationStatus
 
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmPopulation)
         MyForm = Form
@@ -98,6 +101,7 @@ Public Class ClsPopulationController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -187,15 +191,17 @@ Public Class ClsPopulationController
         End With
     End Sub
 
-    Private Function IsUserDataOK() As Boolean
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
         With MyForm
-            'Checks all manual inputs of the user
-            Dim CheckParameter = New ClsCheckUserData(.TxtParameterA, DS.DSParameter.Range)
-            Dim CheckStartValue = New ClsCheckUserData(.TxtStartValue, DS.ValueParameter.Range)
-
-            Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtParameterA.Enabled = IsEnabled
+            .TxtStartValue.Enabled = IsEnabled
+            .TrbParameterA.Enabled = IsEnabled
         End With
-    End Function
+    End Sub
 
     Private Sub PrepareDiagram()
         'Show size of the Startpopulation
@@ -362,15 +368,16 @@ Public Class ClsPopulationController
         MyForm.Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+    'SECTOR CHECK USERDATA
+
+    Private Function IsUserDataOK() As Boolean
         With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .TxtParameterA.Enabled = IsEnabled
-            .TxtStartValue.Enabled = IsEnabled
-            .TrbParameterA.Enabled = IsEnabled
+            'Checks all manual inputs of the user
+            Dim CheckParameter = New ClsCheckUserData(.TxtParameterA, DS.DSParameter.Range)
+            Dim CheckStartValue = New ClsCheckUserData(.TxtStartValue, DS.ValueParameter.Range)
+
+            Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
         End With
-    End Sub
+    End Function
+
 End Class

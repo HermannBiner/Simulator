@@ -10,9 +10,9 @@ Public Class ClsTwoDimensionsController
 
     'The dynamic System
     Private DS As IIteration
-    Private MyForm As FrmTwoDimensions
+    Private ReadOnly MyForm As FrmTwoDimensions
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'The Graphic Helper for PicDiagram
     Private PicGraphics As ClsGraphicTool
@@ -20,7 +20,7 @@ Public Class ClsTwoDimensionsController
     Private BmpGraphics As ClsGraphicTool
 
     'Actual values of the iteration
-    Private IterationPoint As ClsMathpoint
+    Private ReadOnly IterationPoint As ClsMathpoint
 
     'IterationDepth: 5 is optimal, due to eXperiments
     Private Const Standardpower As Integer = 5
@@ -32,6 +32,8 @@ Public Class ClsTwoDimensionsController
 
     'Iteration Status
     Private IterationStatus As ClsDynamics.EnIterationStatus
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmTwoDimensions)
         MyForm = Form
@@ -86,6 +88,7 @@ Public Class ClsTwoDimensionsController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -165,6 +168,36 @@ Public Class ClsTwoDimensionsController
 
     End Sub
 
+    Public Sub SetBrush()
+
+        'To show the effect of different experiments,
+        'there are 5 possible startpoints in different colors
+        Select Case MyForm.CboExperiment.SelectedIndex
+            Case 0
+                MyBrush = CType(Brushes.Black, SolidBrush)
+            Case 1
+                MyBrush = CType(Brushes.Green, SolidBrush)
+            Case 2
+                MyBrush = CType(Brushes.Blue, SolidBrush)
+            Case 3
+                MyBrush = CType(Brushes.Magenta, SolidBrush)
+            Case Else
+                MyBrush = CType(Brushes.Red, SolidBrush)
+        End Select
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+
+    End Sub
+
+    Public Sub ResetIteration()
+
+        'Clear Display
+        PicGraphics.Clear(Color.White)
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        MyForm.PicDiagram.Refresh()
+    End Sub
+
+    'SECTOR ITERATION
+
     Public Sub StartIteration(EndOfLoop As Integer)
 
         'New Iteration
@@ -225,33 +258,7 @@ Public Class ClsTwoDimensionsController
         End With
     End Sub
 
-    Public Sub SetBrush()
-
-        'To show the effect of different experiments,
-        'there are 5 possible startpoints in different colors
-        Select Case MyForm.CboExperiment.SelectedIndex
-            Case 0
-                MyBrush = CType(Brushes.Black, SolidBrush)
-            Case 1
-                MyBrush = CType(Brushes.Green, SolidBrush)
-            Case 2
-                MyBrush = CType(Brushes.Blue, SolidBrush)
-            Case 3
-                MyBrush = CType(Brushes.Magenta, SolidBrush)
-            Case Else
-                MyBrush = CType(Brushes.Red, SolidBrush)
-        End Select
-        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
-
-    End Sub
-
-    Public Sub ResetIteration()
-
-        'Clear Display
-        PicGraphics.Clear(Color.White)
-        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        MyForm.PicDiagram.Refresh()
-    End Sub
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 

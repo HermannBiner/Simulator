@@ -20,7 +20,7 @@ Public Class FrmTwoDimensions
     Private IsFormLoaded As Boolean
     Private FC As ClsTwoDimensionsController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 

@@ -49,13 +49,10 @@ Public Class ClsGraphicTool
     'the Graphic object of the .NET library
     Private ReadOnly Graphs As Graphics
 
-    'The rectangle representing a selection of the Bitmap or PictureBox
-    Private Selection As Rectangle
-
     Private MyMathXInterval As ClsInterval
     Private MyMathYInterval As ClsInterval
-    Private MyPixelXInterval As ClsInterval
-    Private MyPixelYInterval As ClsInterval
+    Private ReadOnly MyPixelXInterval As ClsInterval
+    Private ReadOnly MyPixelYInterval As ClsInterval
 
     'the upper right corner point of the PictureBox / Bitmap
     'it defines the size of the PictureBox / Bitmap
@@ -71,7 +68,6 @@ Public Class ClsGraphicTool
 
         'Because of better visibility in the User-Window,
         'the maximal ImageRange and DiagramSize are reduced by -1
-        Selection = New Rectangle(1, MyPicDiagram.Height - 1, MyPicDiagram.Width - 1, MyPicDiagram.Height - 1)
         DiagramCornerpoint = New Point(MyPicDiagram.Width - 1, MyPicDiagram.Height - 1)
 
         MyMathXInterval = MathXInterval
@@ -88,7 +84,6 @@ Public Class ClsGraphicTool
         Graphs = Graphics.FromImage(MyBitmap)
 
         'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
-        Selection = New Rectangle(1, MyBitmap.Height - 1, MyBitmap.Width - 1, MyBitmap.Height - 1)
         DiagramCornerpoint = New Point(MyBitmap.Width - 1, MyBitmap.Height - 1)
 
         MyMathXInterval = MathXInterval
@@ -105,7 +100,6 @@ Public Class ClsGraphicTool
         Graphs = Graphics.FromImage(MyImage)
 
         'Because of better visibility, the maximal ImageRange and DiagramSize are reduced by -1
-        Selection = New Rectangle(1, MyImage.Height - 1, MyImage.Width - 1, MyImage.Height - 1)
         DiagramCornerpoint = New Point(MyImage.Width - 1, MyImage.Height - 1)
 
         MyMathXInterval = MathXInterval

@@ -3,7 +3,6 @@
 'Status Checked
 
 Imports System.Reflection
-Imports Simulator.ClsDynamics
 
 Public Class ClsPendulumController
 
@@ -17,9 +16,9 @@ Public Class ClsPendulumController
     'and ShadowDS is only generated, if the MainDS Parameters are all set
     Private ShadowDS As IPendulum
 
-    Private MyForm As FrmPendulum
+    Private ReadOnly MyForm As FrmPendulum
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Iteration Status
     Private IterationStatus As ClsDynamics.EnIterationStatus
@@ -31,12 +30,14 @@ Public Class ClsPendulumController
     Private IsMouseDown As Boolean
 
     'MyEnergy
-    Private PicEnergyGraphics As Graphics
+    Private ReadOnly PicEnergyGraphics As Graphics
     Private StartEnergy As Decimal
 
     Private Const EnergyTolerance As Decimal = CDec(0.1)
 
     Private Const DeltaShadowDS As Decimal = CDec(0.005)
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmPendulum)
         MyForm = Form
@@ -87,6 +88,7 @@ Public Class ClsPendulumController
                     If LM.GetString(type.Name, True) = SelectedName Then
                         TypeOfMainDS = type
                         MainDS = CType(Activator.CreateInstance(type), IPendulum)
+                        Exit For
                     End If
                 Next
             End If
@@ -151,6 +153,30 @@ Public Class ClsPendulumController
 
     End Sub
 
+    Public Sub ResetIteration()
+
+        'Clear Diagram and Bitmap and all Iteration Parameters in DS
+        MainDS.ResetIteration()
+        MyForm.BtnStart.Text = LM.GetString("Start")
+        MyForm.BtnTakeOverStartParameter.Enabled = True
+        MyForm.TrbAdditionalParameter.Enabled = True
+        MyForm.BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
+
+        If ShadowDS IsNot Nothing Then
+            RemoveShadowDS()
+        End If
+
+        MyForm.PicEnergy.Refresh()
+
+        N = 0
+        MyForm.LblSteps.Text = "0"
+        StartEnergy = 0
+
+        SetControlsEnabled(True)
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+    End Sub
+
     Public Sub SetDefaultUserData()
 
         With MainDS
@@ -207,50 +233,27 @@ Public Class ClsPendulumController
         End If
     End Sub
 
-    Public Sub TakeOverStartParameter()
-        If IsUserDataOK() Then
-
-            Dim i As Integer
-            Dim ConstantsDimension As Integer
-            Dim LocVector As ClsNTupel
-
-            'Delete ShadowDS
-            If ShadowDS IsNot Nothing Then
-                ShadowDS = Nothing
-            End If
-
-            With MainDS
-                If .CalculationConstants IsNot Nothing Then
-                    LocVector = New ClsNTupel(.CalculationConstants.Dimension)
-
-                    ConstantsDimension = .CalculationConstants.Dimension
-                    'Constants
-                    For i = 0 To .CalculationConstants.Dimension
-                        LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
-                    Next
-                    .CalculationConstants = LocVector
-                Else
-                    ConstantsDimension = -1
-                End If
-
-                LocVector = New ClsNTupel(.CalculationVariables.Dimension)
-
-                'Variables
-                For i = 0 To .CalculationVariables.Dimension
-                    LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
-                Next
-                .CalculationVariables = LocVector
-                .IsStartparameter1Set = True
-                .IsStartparameter2Set = True
-
-                .PrepareDiagram()
-
-            End With
-
-        Else
-            MessageBox.Show(LM.GetString("InvalidParameters"))
-        End If
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnTakeOverStartParameter.Enabled = IsEnabled
+            .BtnCreatePendulum.Enabled = IsEnabled
+            .TrbAdditionalParameter.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .CboPendulum.Enabled = IsEnabled
+            .CboTypeofPhaseportrait.Enabled = IsEnabled
+            .TxtP1.Enabled = IsEnabled
+            .TxtP2.Enabled = IsEnabled
+            .TxtP3.Enabled = IsEnabled
+            .TxtP4.Enabled = IsEnabled
+            .TxtP5.Enabled = IsEnabled
+            .TxtP6.Enabled = IsEnabled
+        End With
     End Sub
+
+    'SECTOR CREATE NEW OBJECT
 
     Public Sub CreateOrRemovePendulum()
 
@@ -328,6 +331,8 @@ Public Class ClsPendulumController
             ShadowDS = Nothing
         End If
     End Sub
+
+    'SECTOR ITERATION
 
     Public Async Sub StartIteration()
 
@@ -410,7 +415,7 @@ Public Class ClsPendulumController
 
                 MyForm.LblSteps.Text = N.ToString
 
-                Await Task.Delay(2)
+                Await Task.Delay(1)
             End If
 
         Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
@@ -428,29 +433,8 @@ Public Class ClsPendulumController
 
     End Sub
 
-    Public Sub ResetIteration()
 
-        'Clear Diagram and Bitmap and all Iteration Parameters in DS
-        MainDS.ResetIteration()
-        MyForm.BtnStart.Text = LM.GetString("Start")
-        MyForm.BtnTakeOverStartParameter.Enabled = True
-        MyForm.TrbAdditionalParameter.Enabled = True
-        MyForm.BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
-
-        If ShadowDS IsNot Nothing Then
-            RemoveShadowDS()
-        End If
-
-        N = 0
-        MyForm.LblSteps.Text = "0"
-        StartEnergy = 0
-
-        SetControlsEnabled(True)
-        IterationStatus = EnIterationStatus.Stopped
-
-    End Sub
-
-    'SECTOR CHECKS
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -487,7 +471,7 @@ Public Class ClsPendulumController
 
     End Function
 
-    'SECTOR SET STARTPOSITION
+    'SECTOR SET STARTPARAMETER
 
     Public Sub MouseDown(e As MouseEventArgs)
 
@@ -498,14 +482,14 @@ Public Class ClsPendulumController
                 IsMouseDown = True
 
                 'Now, Moving the Mouse moves the active Pendulum
-                MouseMoving(e)
+                MouseMove(e)
 
             End If
         End If
 
     End Sub
 
-    Public Sub MouseMoving(e As MouseEventArgs)
+    Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
             'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
@@ -578,25 +562,49 @@ Public Class ClsPendulumController
 
         End If
     End Sub
+    Public Sub TakeOverStartParameter()
+        If IsUserDataOK() Then
 
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnTakeOverStartParameter.Enabled = IsEnabled
-            .BtnCreatePendulum.Enabled = IsEnabled
-            .TrbAdditionalParameter.Enabled = IsEnabled
-            .ChkProtocol.Enabled = IsEnabled
-            .CboPendulum.Enabled = IsEnabled
-            .CboTypeofPhaseportrait.Enabled = IsEnabled
-            .TxtP1.Enabled = IsEnabled
-            .TxtP2.Enabled = IsEnabled
-            .TxtP3.Enabled = IsEnabled
-            .TxtP4.Enabled = IsEnabled
-            .TxtP5.Enabled = IsEnabled
-            .TxtP6.Enabled = IsEnabled
-        End With
+            Dim i As Integer
+            Dim ConstantsDimension As Integer
+            Dim LocVector As ClsNTupel
+
+            'Delete ShadowDS
+            If ShadowDS IsNot Nothing Then
+                ShadowDS = Nothing
+            End If
+
+            With MainDS
+                If .CalculationConstants IsNot Nothing Then
+                    LocVector = New ClsNTupel(.CalculationConstants.Dimension)
+
+                    ConstantsDimension = .CalculationConstants.Dimension
+                    'Constants
+                    For i = 0 To .CalculationConstants.Dimension
+                        LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
+                    Next
+                    .CalculationConstants = LocVector
+                Else
+                    ConstantsDimension = -1
+                End If
+
+                LocVector = New ClsNTupel(.CalculationVariables.Dimension)
+
+                'Variables
+                For i = 0 To .CalculationVariables.Dimension
+                    LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
+                Next
+                .CalculationVariables = LocVector
+                .IsStartparameter1Set = True
+                .IsStartparameter2Set = True
+
+                .PrepareDiagram()
+
+            End With
+
+        Else
+            MessageBox.Show(LM.GetString("InvalidParameters"))
+        End If
     End Sub
 
 End Class

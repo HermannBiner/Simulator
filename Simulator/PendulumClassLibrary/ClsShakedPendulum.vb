@@ -9,7 +9,7 @@
 Public Class ClsShakedPendulum
     Inherits ClsPendulumAbstract
 
-    Private ValueParameter(3) As ClsGeneralParameter
+    Private ReadOnly ValueParameter(3) As ClsGeneralParameter
 
     'Time
     Private t As Decimal
@@ -17,7 +17,7 @@ Public Class ClsShakedPendulum
     'Frequency of the shaker
     Private Omega As Decimal
 
-    Private Origin As ClsMathpoint
+    Private ReadOnly Origin As ClsMathpoint
 
     'SECTOR INITIALIZATION
 
@@ -217,8 +217,8 @@ Public Class ClsShakedPendulum
             Dim L As Decimal = CDec(Math.Max(0.1, Math.Min(0.98 - MyCalculationConstants.Component(0),
                                                            Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY))))
 
-            Dim Phi As Decimal = MathHelper.GetAngle(DeltaX, DeltaY)
-            MyCalculationVariables.Component(1) = MathHelper.AngleInMinusPiAndPi(Phi)
+            Dim Phi As Decimal = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
+            MyCalculationVariables.Component(1) = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi)
 
             'Abs(x + L*sin(Phi)) should be maximal shrinkfactor to be visible
             'for symmetry reasons, we look at abs(phi) and abs(x)
@@ -385,7 +385,7 @@ Public Class ClsShakedPendulum
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
 
-        u2 = MathHelper.AngleInMinusPiAndPi(u2)
+        u2 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u2)
 
         'New Values to MyVariables
         'for Poincare Section
@@ -468,17 +468,17 @@ Public Class ClsShakedPendulum
 
     End Function
 
-    Private Function F2(x As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Decimal
 
         'calculates next u2' = v2 = x.component(3)
-        Return x.Component(3)
+        Return LocX.Component(3)
     End Function
 
-    Private Function G2(x As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = CDec(MyCalculationConstants.Component(0) * Math.Pow(Omega, 2) / MyCalculationConstants.Component(1))
             Temp *= CDec(Math.Cos(Omega * t) * Math.Cos(.Component(2)))
@@ -490,12 +490,12 @@ Public Class ClsShakedPendulum
 
     End Function
 
-    Private Function G2Test(x As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(0))
 

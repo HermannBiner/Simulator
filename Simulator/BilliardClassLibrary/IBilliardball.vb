@@ -60,7 +60,7 @@ Public Interface IBilliardball
 
     'This is the main Function to get the next Iteration Point
     'especially used in the C-Diagram
-    Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
+    Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair
 
     'Alfa is the hit angle: that is the angle between the ball orbit
     'and the tangent on the billiard table in the hit point

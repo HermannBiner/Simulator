@@ -4,7 +4,7 @@
 
 Public Class ClsMathHelperPendulum
 
-    Public Function GetAngle(X As Decimal, Y As Decimal) As Decimal
+    Public Shared Function GetAngle(X As Decimal, Y As Decimal) As Decimal
 
         'Calculation of the Angle between the negative Y-axis and the Pendulum-Axis
         Dim Phi As Decimal
@@ -34,7 +34,7 @@ Public Class ClsMathHelperPendulum
     End Function
 
 
-    Public Function AngleInMinusPiAndPi(Angle As Decimal) As Decimal
+    Public Shared Function AngleInMinusPiAndPi(Angle As Decimal) As Decimal
 
         'makes sure that an angle is in the interval [-pi, pi[
 

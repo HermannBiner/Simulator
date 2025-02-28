@@ -1,7 +1,8 @@
 ﻿'This Form is the User Interface for all Investigations of different Pendulums
 'like Double Pendulum, Combined Pendulum or Shake Pendulum
 'it is based on the interfaces IPendulum
-'that are implemented by the according classes ClsDoublePendulum, ClsCombinedPendulum etc.
+'that are implemented by ClsPendulumAbstract
+'the according classes ClsDoublePendulum, ClsCombinedPendulum etc. heritates from this class
 'see mathematical documentation
 'if other Pendulums are programmed, the according classes have just to implement this interfaces
 
@@ -12,7 +13,7 @@ Public Class FrmPendulum
     Private IsFormLoaded As Boolean
     Private FC As ClsPendulumController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -86,7 +87,7 @@ Public Class FrmPendulum
         End If
     End Sub
 
-    Private Sub TrbStepWide_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
+    Private Sub TrbStepWidth_Scroll(sender As Object, e As EventArgs) Handles TrbStepWidth.Scroll
         If IsFormLoaded Then
             FC.SetStepWidth()
         End If
@@ -119,8 +120,7 @@ Public Class FrmPendulum
         End If
     End Sub
 
-
-    'SECTOR SET STARTPOSITION
+    'SECTOR SET STARTPARAMETER
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
         If IsFormLoaded Then
@@ -130,7 +130,7 @@ Public Class FrmPendulum
 
     Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
         If IsFormLoaded Then
-            FC.MouseMoving(e)
+            FC.MouseMove(e)
         End If
     End Sub
 

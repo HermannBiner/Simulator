@@ -13,7 +13,7 @@ Public Class FrmBilliardtable
     Private IsFormLoaded As Boolean
     Private FC As ClsBilliardTableController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -45,16 +45,6 @@ Public Class FrmBilliardtable
         LblProtocol.Text = LM.GetString("Protocol")
         ChkProtocol.Text = LM.GetString("Protocol")
 
-        CboBallColor.Items.Clear()
-
-        'the following order of adding the iteration type is relevant!
-        'there is at the moment no better concept implemented to identify the type of Billiard
-        CboBallColor.Items.Add(LM.GetString("Red"))
-        CboBallColor.Items.Add(LM.GetString("Green"))
-        CboBallColor.Items.Add(LM.GetString("Blue"))
-        CboBallColor.Items.Add(LM.GetString("Black"))
-        CboBallColor.Items.Add(LM.GetString("Magenta"))
-
     End Sub
 
     Private Sub FrmBilliardTable_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -75,6 +65,13 @@ Public Class FrmBilliardtable
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         If IsFormLoaded Then
             FC.ResetIteration()
+        End If
+    End Sub
+
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            FC.ResetIteration()
+            FC.SetDefaultUserData()
         End If
     End Sub
 
@@ -110,14 +107,15 @@ Public Class FrmBilliardtable
         End If
     End Sub
 
-    'SECTOR GENERATE A NEW BALL
+    'SECTOR CREATE NEW OBJECT
+
     Private Sub BtnNewBall_Click(sender As Object, e As EventArgs) Handles BtnNewBall.Click
         If IsFormLoaded Then
             FC.CreateNewBall()
         End If
     End Sub
 
-    'SECTOR SET STARTPOSITION AND POSITION OF THE FIRST HIT
+    'SECTOR SET STARTPARAMETER
 
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
         If IsFormLoaded Then
@@ -133,13 +131,20 @@ Public Class FrmBilliardtable
 
     Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
         If IsFormLoaded Then
-            FC.MouseMoving(e)
+            FC.MouseMove(e)
         End If
     End Sub
 
     Private Sub BtnTakeOverStartParameter_Click(sender As Object, e As EventArgs) Handles BtnTakeOverStartParameter.Click
         If IsFormLoaded Then
             FC.TakeOverStartParameter()
+        End If
+    End Sub
+
+    Private Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
+
+        If IsFormLoaded Then
+            FC.PrepareBallsForPhaseportrait()
         End If
     End Sub
 
@@ -163,20 +168,6 @@ Public Class FrmBilliardtable
 
         If IsFormLoaded Then
             FC.StopIteration()
-        End If
-    End Sub
-
-    Private Sub BtnPhasePortrait_Click(sender As Object, e As EventArgs) Handles BtnPhasePortrait.Click
-
-        If IsFormLoaded Then
-            FC.PrepareBallsForPhasePortrait()
-        End If
-    End Sub
-
-    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
-        If IsFormLoaded Then
-            FC.ResetIteration()
-            FC.SetDefaultUserData()
         End If
     End Sub
 

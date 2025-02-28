@@ -15,7 +15,7 @@ Imports System.Globalization
 Public Class ClsOvalBilliardball
     Inherits ClsBilliardBallAbstract
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -223,7 +223,7 @@ Public Class ClsOvalBilliardball
 
     End Sub
 
-    Public Overrides Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
+    Public Overrides Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair
 
         T = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y
@@ -243,7 +243,7 @@ Public Class ClsOvalBilliardball
 
         alfa = CalculateAlfa(NextT, Phi)
 
-        Dim NextPoint As New ClsValuePair(NextT, alfa)
+        Dim NextPoint As New ClsDecValuePair(NextT, alfa)
 
         Return NextPoint
 

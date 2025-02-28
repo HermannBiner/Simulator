@@ -10,12 +10,12 @@ Public Class ClsHistogramController
     'The dynamic System
     Private DS As IIteration
 
-    Private MyForm As FrmHistogram
+    Private ReadOnly MyForm As FrmHistogram
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'The Graphic Helper for PicDiagram
-    Private PicGraphics As ClsGraphicTool
+    Private ReadOnly PicGraphics As ClsGraphicTool
 
     'Status Parameters
     'Number of Iteration Steps
@@ -29,12 +29,14 @@ Public Class ClsHistogramController
     'NumberOfHits is an array if those intervals
     Private NumberOfHits() As Integer
 
+    'SECTOR INITIALIZATION
+
     Public Sub New(Form As FrmHistogram)
         MyForm = Form
         LM = ClsLanguageManager.LM
 
-        Dim XRange As ClsInterval = New ClsInterval(0, MyForm.PicDiagram.Width)
-        Dim YRange As ClsInterval = New ClsInterval(0, MyForm.PicDiagram.Height)
+        Dim XRange As New ClsInterval(0, MyForm.PicDiagram.Width)
+        Dim YRange As New ClsInterval(0, MyForm.PicDiagram.Height)
         PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, XRange, YRange)
 
         'the array of small intervals is defined (pixel-size)
@@ -89,6 +91,7 @@ Public Class ClsHistogramController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -115,6 +118,22 @@ Public Class ClsHistogramController
 
     End Sub
 
+    Public Sub ResetIteration()
+
+        SetControlsEnabled(True)
+        'PicDiagram cleared
+        PicGraphics.Clear(Color.White)
+
+        'Status Parameters Cleared
+        MyForm.LblSteps.Text = "0"
+        n = 0
+
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+        ReDim NumberOfHits(MyForm.PicDiagram.Width)
+        MyForm.BtnStart.Text = LM.GetString("Start")
+
+    End Sub
+
     'This routine sets the user data to the default
     'the trigger is, that the DS has changed
     Public Sub SetDefaultUserData()
@@ -123,6 +142,20 @@ Public Class ClsHistogramController
         MyForm.TxtStartValue.Text = DS.ValueParameter.DefaultValue.ToString(CultureInfo.CurrentCulture)
 
     End Sub
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .TxtStartValue.Enabled = IsEnabled
+        End With
+    End Sub
+
+
+    'SECTOR ITERATION
 
     Public Async Sub StartIteration()
 
@@ -220,21 +253,7 @@ Public Class ClsHistogramController
 
     End Function
 
-    Public Sub ResetIteration()
-
-        SetControlsEnabled(True)
-        'PicDiagram cleared
-        PicGraphics.Clear(Color.White)
-
-        'Status Parameters Cleared
-        MyForm.LblSteps.Text = "0"
-        n = 0
-
-        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        ReDim NumberOfHits(MyForm.PicDiagram.Width)
-        MyForm.BtnStart.Text = LM.GetString("Start")
-
-    End Sub
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -245,16 +264,5 @@ Public Class ClsHistogramController
         Return CheckParameter.IsTxtValueAllowed And CheckStartValue.IsTxtValueAllowed
 
     End Function
-
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .TxtParameter.Enabled = IsEnabled
-            .TxtStartValue.Enabled = IsEnabled
-        End With
-    End Sub
 
 End Class

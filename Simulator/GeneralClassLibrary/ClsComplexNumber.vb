@@ -53,7 +53,7 @@ Public Class ClsComplexNumber
     'Calculates the argument (i.e. the angle phi) of the complex number
     ReadOnly Property Argument As Double
         Get
-            Argument = MathHelper.GetArgument(MyX, MyY)
+            Argument = ClsMathHelperComplex.GetArgument(MyX, MyY)
         End Get
     End Property
 

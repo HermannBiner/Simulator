@@ -9,7 +9,7 @@ Imports System.Globalization
 
 Public Class ClsCheckUserData
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Contains the value that should be in an interval
     Private MyTxtX As TextBox

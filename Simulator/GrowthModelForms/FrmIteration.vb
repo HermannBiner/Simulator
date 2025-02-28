@@ -23,7 +23,7 @@ Public Class FrmIteration
     Private IsFormLoaded As Boolean
     Private FC As ClsIterationController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 
@@ -142,8 +142,8 @@ Public Class FrmIteration
         End If
     End Sub
 
-
-    'SECTOR STARTVALUE FOR PROTOCOL
+    'SECTOR SET STARTPARAMETER
+    'STARTVALUE FOR PROTOCOL
 
     Private Sub BtnProtocolStartvalue_Click(sender As Object, e As EventArgs) Handles BtnProtocolStartvalue.Click
 
@@ -153,7 +153,7 @@ Public Class FrmIteration
 
     End Sub
 
-    'SECTOR ADAPTED STARTVALUE FOR THE TARGETVALUE
+    'ADAPTED STARTVALUE FOR THE TARGETVALUE
 
     Private Sub BtnTransitiveStartValue_Click(sender As Object, e As EventArgs) Handles BtnTransitiveStartValue.Click
 

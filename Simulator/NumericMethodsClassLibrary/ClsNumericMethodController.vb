@@ -13,12 +13,12 @@ Public Class ClsNumericMethodController
     'the y-coordinate is a numeric approach depending on the chosen method
     Private DSB As INumericMethod
 
-    Private MyForm As FrmNumericMethods
+    Private ReadOnly MyForm As FrmNumericMethod
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Mathematical Interval in y-direction
-    Private MathInterval As ClsInterval
+    Private ReadOnly MathInterval As ClsInterval
 
     'Draws into the picturebox
     'this is drawing the actual status of the pendulums
@@ -37,7 +37,7 @@ Public Class ClsNumericMethodController
     'we need "NumberOfStepsUntilShift"
     Private BmpDiagram As Bitmap
     Private ShiftedBmpDiagram As Bitmap
-    Private XShift As Integer = 1
+    Private ReadOnly XShift As Integer = 1
     Private NumberOfStepsUntilShift As Integer = 1
 
     'Draws persistently into the bitmap
@@ -72,7 +72,9 @@ Public Class ClsNumericMethodController
     'Setting UsereStartPosition
     Private IsMouseDown As Boolean = False
 
-    Public Sub New(Form As FrmNumericMethods)
+    'SECTOR INITIALIZATION
+
+    Public Sub New(Form As FrmNumericMethod)
         MyForm = Form
         LM = ClsLanguageManager.LM
         MathInterval = New ClsInterval(-1, 1)
@@ -122,6 +124,7 @@ Public Class ClsNumericMethodController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DSB = CType(Activator.CreateInstance(type), INumericMethod)
+                        Exit For
                     End If
                 Next
             End If
@@ -221,9 +224,6 @@ Public Class ClsNumericMethodController
         DSB.h = StepWidthB
         DSB.NumberOfApproxSteps = NumberOfApproxStepsB
 
-        'Set Stepwidth
-        MyForm.LblStepWidth.Text = LM.GetString("StepWidth") & " " & StepWidthB.ToString("0.0000")
-
     End Sub
 
     Public Sub ResetIteration()
@@ -252,6 +252,19 @@ Public Class ClsNumericMethodController
         MyForm.PicDiagram.Refresh()
 
     End Sub
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboPendulum.Enabled = IsEnabled
+            .ChkStretched.Enabled = IsEnabled
+        End With
+    End Sub
+
+
+    'SECTOR ITERATION
 
     Public Async Sub StartIteration()
 
@@ -374,8 +387,6 @@ Public Class ClsNumericMethodController
         IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
     End Sub
 
-    'SECTOR DRAWINGS
-
     Private Sub DrawPicPendulums()
 
         MyForm.PicDiagram.Refresh()
@@ -393,7 +404,7 @@ Public Class ClsNumericMethodController
 
     End Sub
 
-    'SECTOR SET USERSTARTPOSITION
+    'SECTOR SET STARTPARAMETER
 
     Public Sub MouseDown(e As MouseEventArgs)
 
@@ -404,13 +415,13 @@ Public Class ClsNumericMethodController
                 IsMouseDown = True
 
                 'Now, Moving the Mouse moves the pendulum as well
-                MouseMoving(e)
+                MouseMove(e)
 
             End If
         End If
     End Sub
 
-    Public Sub MouseMoving(e As MouseEventArgs)
+    Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
             'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
@@ -455,15 +466,5 @@ Public Class ClsNumericMethodController
 
         Return y
     End Function
-
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .CboPendulum.Enabled = IsEnabled
-            .ChkStretched.Enabled = IsEnabled
-        End With
-    End Sub
 
 End Class

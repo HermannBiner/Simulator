@@ -10,9 +10,9 @@ Public Class ClsNewtonIterationController
 
     Private DS As INewton
 
-    Private MyForm As FrmNewtonIteration
-    Private DiagramAreaSelector As ClsDiagramAreaSelector
-    Private LM As ClsLanguageManager
+    Private ReadOnly MyForm As FrmNewtonIteration
+    Private ReadOnly DiagramAreaSelector As ClsDiagramAreaSelector
+    Private ReadOnly LM As ClsLanguageManager
 
     Private IterationStatus As ClsDynamics.EnIterationStatus
 
@@ -36,7 +36,9 @@ Public Class ClsNewtonIterationController
 
     'Number of iteration steps per pixelpoint
     Private Steps As Integer
-    Private Watch As Stopwatch
+    Private ReadOnly Watch As Stopwatch
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmNewtonIteration)
         MyForm = Form
@@ -90,6 +92,7 @@ Public Class ClsNewtonIterationController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), INewton)
+                        Exit For
                     End If
                 Next
             End If
@@ -219,6 +222,31 @@ Public Class ClsNewtonIterationController
         DS.ResetIteration()
     End Sub
 
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .BtnShowBasin.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .CboN.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .OptBright.Enabled = IsEnabled
+            .OptConjugate.Enabled = IsEnabled
+            .OptNone.Enabled = IsEnabled
+            .OptRotate.Enabled = IsEnabled
+            .OptShaded.Enabled = IsEnabled
+            .TxtA.Enabled = IsEnabled
+            .TxtB.Enabled = IsEnabled
+            .TxtXMax.Enabled = IsEnabled
+            .TxtXMin.Enabled = IsEnabled
+            .TxtYMax.Enabled = IsEnabled
+            .TxtYMin.Enabled = IsEnabled
+        End With
+    End Sub
+
+    'SECTOR ITERATION
+
     Public Async Sub StartIteration()
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
@@ -328,7 +356,7 @@ Public Class ClsNewtonIterationController
 
             If ExaminatedCorner Mod 100 = 0 Then
                 MyForm.TxtSteps.Text = Steps.ToString
-                MyForm.TxtTime.Text = Watch.Elapsed.ToString
+                MyForm.TxtTime.Text = (Watch.ElapsedMilliseconds / 1000).ToString("F2")
                 Await Task.Delay(1)
             End If
 
@@ -402,32 +430,6 @@ Public Class ClsNewtonIterationController
         MyForm.Cursor = Cursors.Arrow
 
     End Sub
-
-    'CHECK USER RANGES AND SET X- AND Y- RANGE
-
-    Private Function IsUserDataOK() As Boolean
-
-        With MyForm
-            Dim CheckXUserData As New ClsCheckUserData(.TxtXMin, .TxtXMax, DS.XValueParameter.Range)
-            Dim CheckYUserData As New ClsCheckUserData(.TxtYMin, .TxtYMax, DS.YValueParameter.Range)
-
-            Return CheckXUserData.IsIntervalAllowed And CheckYUserData.IsIntervalAllowed
-        End With
-
-    End Function
-
-    'Checks the Parameter C
-    Private Function IsCParameterOK() As Boolean
-
-        With MyForm
-            'The parameter c has to be in the same area as the z-Values
-            Dim CheckParameterA As New ClsCheckUserData(.TxtA, DS.XValueParameter.Range)
-            Dim CheckParameterB As New ClsCheckUserData(.TxtB, DS.YValueParameter.Range)
-
-            Return CheckParameterA.IsTxtValueAllowed And CheckParameterB.IsTxtValueAllowed
-        End With
-
-    End Function
 
     Public Sub ShowBasin()
         'Shows the approximated basin(1)
@@ -518,27 +520,29 @@ Public Class ClsNewtonIterationController
         Return rTemp
     End Function
 
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+    'SECTOR CHECK USERDATA
+
+    Private Function IsUserDataOK() As Boolean
+
         With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .BtnShowBasin.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .CboN.Enabled = IsEnabled
-            .ChkProtocol.Enabled = IsEnabled
-            .OptBright.Enabled = IsEnabled
-            .OptConjugate.Enabled = IsEnabled
-            .OptNone.Enabled = IsEnabled
-            .OptRotate.Enabled = IsEnabled
-            .OptShaded.Enabled = IsEnabled
-            .TxtA.Enabled = IsEnabled
-            .TxtB.Enabled = IsEnabled
-            .TxtXMax.Enabled = IsEnabled
-            .TxtXMin.Enabled = IsEnabled
-            .TxtYMax.Enabled = IsEnabled
-            .TxtYMin.Enabled = IsEnabled
+            Dim CheckXUserData As New ClsCheckUserData(.TxtXMin, .TxtXMax, DS.XValueParameter.Range)
+            Dim CheckYUserData As New ClsCheckUserData(.TxtYMin, .TxtYMax, DS.YValueParameter.Range)
+
+            Return CheckXUserData.IsIntervalAllowed And CheckYUserData.IsIntervalAllowed
         End With
-    End Sub
+
+    End Function
+
+    Private Function IsCParameterOK() As Boolean
+
+        With MyForm
+            'The parameter c has to be in the same area as the z-Values
+            Dim CheckParameterA As New ClsCheckUserData(.TxtA, DS.XValueParameter.Range)
+            Dim CheckParameterB As New ClsCheckUserData(.TxtB, DS.YValueParameter.Range)
+
+            Return CheckParameterA.IsTxtValueAllowed And CheckParameterB.IsTxtValueAllowed
+        End With
+
+    End Function
 
 End Class

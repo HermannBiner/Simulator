@@ -1,7 +1,5 @@
 ﻿'This is the abstract class for all kind of Billiardtables
 
-Imports System.Globalization
-
 Public MustInherit Class ClsBilliardTableAbstract
     Implements IBilliardTable
 

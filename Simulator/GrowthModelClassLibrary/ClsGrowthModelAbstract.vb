@@ -5,7 +5,7 @@
 Public MustInherit Class ClsGrowthModelAbstract
     Implements IIteration
 
-    Protected LM As ClsLanguageManager
+    Protected ReadOnly LM As ClsLanguageManager
 
     'This is the steering parameter for the iteration
     '"a" in the mathematical documentation 

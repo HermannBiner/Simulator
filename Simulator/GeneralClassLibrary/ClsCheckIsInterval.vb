@@ -4,7 +4,7 @@
 
 Public Class ClsCheckIsInterval
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Textbox containing the left interval border
     Private ReadOnly MyTextboxA As TextBox

@@ -13,7 +13,7 @@ Public Class FrmCDiagramBilliard
     Private IsFormLoaded As Boolean
     Private FC As ClsCDiagramController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -55,6 +55,14 @@ Public Class FrmCDiagramBilliard
         If IsFormLoaded Then
             FC.ResetIteration()
         End If
+    End Sub
+
+    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
+        If IsFormLoaded Then
+            FC.ResetIteration()
+            FC.SetDefaultUserData()
+        End If
+
     End Sub
 
     Private Sub CboFunktion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
@@ -110,11 +118,4 @@ Public Class FrmCDiagramBilliard
         End If
     End Sub
 
-    Private Sub BtnDefault_Click(sender As Object, e As EventArgs) Handles BtnDefault.Click
-        If IsFormLoaded Then
-            FC.ResetIteration()
-            FC.SetDefaultUserData()
-        End If
-
-    End Sub
 End Class

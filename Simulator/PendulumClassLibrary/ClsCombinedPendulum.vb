@@ -10,7 +10,7 @@
 Public Class ClsCombinedPendulum
     Inherits ClsPendulumAbstract
 
-    Private ValueParameter(1) As ClsGeneralParameter
+    Private ReadOnly ValueParameter(1) As ClsGeneralParameter
 
     'Frequency of the Spring Pendulum alone
     'set as additional Parameter
@@ -86,7 +86,7 @@ Public Class ClsCombinedPendulum
         Dim NumberOfSteps As Integer = 500
 
         For i = 0 To NumberOfSteps
-            t = MathHelper.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
+            t = ClsMathHelperPendulum.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
             r = L0 + CDec(g * Math.Cos(t) / Math.Pow(Omega, 2))
             MyBmpGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), Y0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
         Next
@@ -190,8 +190,8 @@ Public Class ClsCombinedPendulum
             MyCalculationVariables.Component(0) = LocL
 
             'Phi
-            Dim Phi As Decimal = MathHelper.GetAngle(.X, .Y)
-            Phi = MathHelper.AngleInMinusPiAndPi(Phi)
+            Dim Phi As Decimal = ClsMathHelperPendulum.GetAngle(.X, .Y)
+            Phi = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi)
 
             MyCalculationVariables.Component(1) = Phi
 
@@ -239,7 +239,6 @@ Public Class ClsCombinedPendulum
 
         'Protocol Values to List
         ProtocolValues()
-
 
         'Set x1n
         With x
@@ -329,7 +328,7 @@ Public Class ClsCombinedPendulum
             v1 = -v1
         End If
 
-        u2 = MathHelper.AngleInMinusPiAndPi(u2)
+        u2 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u2)
 
         'New Values to MyVariables
         With MyCalculationVariables
@@ -427,19 +426,19 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Private Function F1(x As ClsNTupel) As Decimal
+    Private Function F1(LocX As ClsNTupel) As Decimal
 
         'calculates next u1' = v1 = x.component(1)
-        Return x.Component(1)
+        Return LocX.Component(1)
 
     End Function
 
-    Private Function G1(x As ClsNTupel) As Decimal
+    Private Function G1(LocX As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
 
-        With x
+        With LocX
             Try
                 Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
                 Temp += CDec(-Math.Pow(Omega, 2) * (.Component(0) - L0) + g * Math.Cos(.Component(2)))
@@ -454,17 +453,17 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function F2(x As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Decimal
 
         'calculates next u2' = v2 = x.component(3)
-        Return x.Component(3)
+        Return LocX.Component(3)
     End Function
 
-    Private Function G2(x As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
-        With x
+        With LocX
             'see math.doc: (-2*v2*v1-g*sinu2)/u1
             'and: u1 = l > 0
             Try
@@ -479,12 +478,12 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function G1Test(x As ClsNTupel) As Decimal
+    Private Function G1Test(LocX As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = -g * CDec(Math.Sin(.Component(0))) / L0
 
@@ -494,12 +493,12 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function G2Test(x As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Spring Pendulum
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = - .Component(2) * CDec(Math.Pow(Omega, 2))
 

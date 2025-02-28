@@ -31,7 +31,7 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected MyB As Decimal
 
     'The class for general mathematical Calculations
-    Protected Mathhelper As ClsMathhelperBilliard
+    Protected Mathhelper As ClsMathHelperAngles
 
     'Parameter that defines the actual hit point
     'see mathematical documentation
@@ -180,7 +180,7 @@ Public MustInherit Class ClsBilliardBallAbstract
     End Property
 
     Public Sub New()
-        Mathhelper = New ClsMathhelperBilliard
+        Mathhelper = New ClsMathHelperAngles
         Startpoint = New ClsMathpoint(0, 0)
         Endpoint = New ClsMathpoint(0, 0)
     End Sub
@@ -197,7 +197,7 @@ Public MustInherit Class ClsBilliardBallAbstract
     Public MustOverride Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
         Implements IBilliardball.SetAndDrawUserEndposition
 
-    Public MustOverride Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair _
+    Public MustOverride Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair _
         Implements IBilliardball.GetNextValuePair
 
     Public MustOverride Sub DrawFirstUserStartposition() _

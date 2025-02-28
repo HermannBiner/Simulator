@@ -5,7 +5,7 @@
 
 Public Class FrmTests
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Const StepWide As Double = 0.001
 

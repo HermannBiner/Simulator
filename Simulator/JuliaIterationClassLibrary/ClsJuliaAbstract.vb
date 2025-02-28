@@ -6,7 +6,7 @@
 Public MustInherit Class ClsJuliaAbstract
     Implements IJulia
 
-    Protected LM As ClsLanguageManager
+    Protected ReadOnly LM As ClsLanguageManager
 
     'Drawing PicCPlane
     Protected MyPicDiagram As PictureBox

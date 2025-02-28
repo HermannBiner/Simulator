@@ -9,17 +9,17 @@ Public Class ClsFeigenbaumController
 
     'The dynamic System
     Private DS As IIteration
-    Private MyForm As FrmFeigenbaum
-    Private DiagramAreaSelector As ClsDiagramAreaSelector
+    Private ReadOnly MyForm As FrmFeigenbaum
+    Private ReadOnly DiagramAreaSelector As ClsDiagramAreaSelector
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'PicDiagram and Bitmasp
-    Private BmpDiagram As Bitmap
+    Private ReadOnly BmpDiagram As Bitmap
 
     'The Graphic Helper for the Graphics
     Private BmpGraphics As ClsGraphicTool
-    Private MyIsColored As Boolean
+    Private ReadOnly MyIsColored As Boolean
 
     'User Selection
     Private ActualParameterRange As ClsInterval
@@ -36,6 +36,8 @@ Public Class ClsFeigenbaumController
 
     'Iterationsteps
     Private n As Integer
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmFeigenbaum)
         LM = ClsLanguageManager.LM
@@ -92,6 +94,7 @@ Public Class ClsFeigenbaumController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -129,6 +132,16 @@ Public Class ClsFeigenbaumController
 
     End Sub
 
+    Public Sub ResetIteration()
+
+        SetControlsEnabled(True)
+        BmpGraphics.Clear(Color.White)
+        MyForm.PicDiagram.Refresh()
+
+        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+    End Sub
+
     Public Sub SetDefaultUserData()
 
         ActualParameterRange = DS.DSParameter.Range
@@ -159,6 +172,46 @@ Public Class ClsFeigenbaumController
             End If
         End With
     End Sub
+
+    Private Function SetColor(n As Integer) As Brush
+
+        'It's possible actually to use two colors for the image
+        'The reader can add more colors by programming
+
+        Dim MyBrush As Brush
+
+        If MyForm.ChkColored.Checked Then
+            Select Case n Mod 2
+                Case 0
+                    MyBrush = Brushes.Blue
+                Case Else
+                    MyBrush = Brushes.Green
+            End Select
+        Else
+            MyBrush = Brushes.Blue
+        End If
+
+        Return MyBrush
+
+    End Function
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtAMax.Enabled = IsEnabled
+            .TxtAMin.Enabled = IsEnabled
+            .TxtXMax.Enabled = IsEnabled
+            .TxtXMin.Enabled = IsEnabled
+            .ChkColored.Enabled = IsEnabled
+            .ChkSplitPoints.Enabled = IsEnabled
+        End With
+    End Sub
+
+
+    'SECTOR ITERATION
 
     Public Sub StartIteration()
 
@@ -254,28 +307,6 @@ Public Class ClsFeigenbaumController
 
     End Sub
 
-    Private Function SetColor(n As Integer) As Brush
-
-        'It's possible actually to use two colors for the image
-        'The reader can add more colors by programming
-
-        Dim MyBrush As Brush
-
-        If MyForm.ChkColored.Checked Then
-            Select Case n Mod 2
-                Case 0
-                    MyBrush = Brushes.Blue
-                Case Else
-                    MyBrush = Brushes.Green
-            End Select
-        Else
-            MyBrush = Brushes.Blue
-        End If
-
-        Return MyBrush
-
-    End Function
-
     Private Sub DrawSplitPoints()
 
         'the first split points are marked by vertical lines
@@ -295,15 +326,7 @@ Public Class ClsFeigenbaumController
 
     End Sub
 
-    Public Sub ResetIteration()
-
-        SetControlsEnabled(True)
-        BmpGraphics.Clear(Color.White)
-        MyForm.PicDiagram.Refresh()
-
-        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-    End Sub
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -313,20 +336,5 @@ Public Class ClsFeigenbaumController
         Return CheckParameterRange.IsIntervalAllowed And CheckValueRange.IsIntervalAllowed
 
     End Function
-
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .TxtAMax.Enabled = IsEnabled
-            .TxtAMin.Enabled = IsEnabled
-            .TxtXMax.Enabled = IsEnabled
-            .TxtXMin.Enabled = IsEnabled
-            .ChkColored.Enabled = IsEnabled
-            .ChkSplitPoints.Enabled = IsEnabled
-        End With
-    End Sub
 
 End Class

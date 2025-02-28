@@ -8,7 +8,7 @@
 Public MustInherit Class ClsNewtonAbstract
     Implements INewton
 
-    Protected LM As ClsLanguageManager
+    Protected ReadOnly LM As ClsLanguageManager
 
     'the radius where Zi is regarded as belonging to a root
     Protected MyRadius As Double

@@ -8,10 +8,9 @@
 Public Class ClsUnitRoot
     Inherits ClsComplexNumber
 
-    Private MyRedPart As Double
-    Private MyGreenPart As Double
-    Private MyBluePart As Double
-    Private Distance As Integer
+    Private ReadOnly MyRedPart As Double
+    Private ReadOnly MyGreenPart As Double
+    Private ReadOnly MyBluePart As Double
 
     Public Sub New(Z As ClsComplexNumber, Index As Integer)
 

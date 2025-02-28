@@ -9,8 +9,8 @@
 Public Class ClsGeneralParameter
 
     'To identify the parameter
-    Private MyID As Integer
-    Private MyName As String
+    Private ReadOnly MyID As Integer
+    Private ReadOnly MyName As String
 
     'The definition interval of the parameter
     Private MyRange As ClsInterval

@@ -6,7 +6,7 @@ Imports System.IO
 
 Public Class FrmMain
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Public Sub New()
 
@@ -22,6 +22,12 @@ Public Class FrmMain
 
     Private Sub InitializeLanguage()
 
+        For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
+            If Not frm Is Me Then ' FrmMain ist die Hauptform
+                frm.Close()
+            End If
+        Next
+
         MnuMain.Text = LM.GetString("MnuMain")
         MnuLanguage.Text = LM.GetString("MnuLanguage")
         MnuGrowthModels.Text = LM.GetString("MnuGrowthModels")
@@ -32,7 +38,7 @@ Public Class FrmMain
         MnuFeigenbaum.Text = LM.GetString("MnuFeigenbaum")
         MnuMechanics.Text = LM.GetString("MnuMechanics")
         MnuBilliard.Text = LM.GetString("MnuBilliard")
-        MnuBilliardTable.Text = LM.GetString("BilliardTable")
+        MnuBilliardTable.Text = LM.GetString("MnuBilliardTable")
         MnuPendulum.Text = LM.GetString("MnuPendulum")
         MnuCDiagram.Text = LM.GetString("MnuCDiagram")
         MnuComplexIteration.Text = LM.GetString("MnuKomplexIteration")
@@ -48,9 +54,12 @@ Public Class FrmMain
         MnuEnglish.Text = LM.GetString("MnuEnglish")
         MnuGerman.Text = LM.GetString("MnuGerman")
         Text = LM.GetString("Simulator")
-        MnuNumericMethods.Text = LM.GetString("NumericMethods")
-        MnuPopulationDensity.Text = LM.GetString("PopulationDensity")
-        MnuMandelbrotMap.Text = LM.GetString("MandelbrotMap")
+        MnuNumericMethods.Text = LM.GetString("MnuNumericMethods")
+        MnuPopulationDensity.Text = LM.GetString("MnuPopulationDensity")
+        MnuMandelbrotMap.Text = LM.GetString("MnuMandelbrotMap")
+        MnuUniverse.Text = LM.GetString("MnuUniverse")
+        MnuMathDocPart1.Text = LM.GetString("Part1")
+        MnuMathDocPart2.Text = LM.GetString("Part2")
     End Sub
 
     Private Sub MnuIteration_Click(sender As Object, e As EventArgs) Handles MnuIteration.Click
@@ -75,10 +84,6 @@ Public Class FrmMain
 
     Private Sub MnuTest_Click(sender As Object, e As EventArgs) Handles MnuTest.Click
         FrmTests.Show()
-    End Sub
-
-    Private Sub MnuMathematics_Click(sender As Object, e As EventArgs) Handles MnuMathematics.Click
-        OpenDocument("Documentation\" & LM.GetString("MathDoc"))
     End Sub
 
     Private Sub MnuManual_Click(sender As Object, e As EventArgs) Handles MnuManual.Click
@@ -137,7 +142,7 @@ Public Class FrmMain
     End Sub
 
     Private Sub MnuNumericMethods_Click(sender As Object, e As EventArgs) Handles MnuNumericMethods.Click
-        FrmNumericMethods.Show()
+        FrmNumericMethod.Show()
     End Sub
 
     Private Sub MnuNewton_Click(sender As Object, e As EventArgs) Handles MnuNewton.Click
@@ -158,5 +163,17 @@ Public Class FrmMain
 
     Private Sub MnuMandelbrotMap_Click(sender As Object, e As EventArgs) Handles MnuMandelbrotMap.Click
         FrmMandelbrotMap.Show()
+    End Sub
+
+    Private Sub MnuUniverse_Click(sender As Object, e As EventArgs) Handles MnuUniverse.Click
+        FrmUniverse.Show()
+    End Sub
+
+    Private Sub MnuMathDocPart1_Click(sender As Object, e As EventArgs) Handles MnuMathDocPart1.Click
+        OpenDocument("Documentation\" & LM.GetString("MathDocPart1"))
+    End Sub
+
+    Private Sub MnuMathDocPart2_Click(sender As Object, e As EventArgs) Handles MnuMathDocPart2.Click
+        OpenDocument("Documentation\" & LM.GetString("MathDocPart2"))
     End Sub
 End Class

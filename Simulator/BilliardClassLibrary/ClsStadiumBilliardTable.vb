@@ -45,13 +45,13 @@ Public Class ClsStadiumBilliardTable
             .DrawCoordinateSystem(New ClsMathpoint(0, 0), Color.Black, 1)
 
             'Draw the rectangle in the middle of the stadium
-            .DrawLine(New ClsMathpoint(-MyA, -b), New ClsMathpoint(MyA, -b), Color.Blue, 1)
-            .DrawLine(New ClsMathpoint(-MyA, b), New ClsMathpoint(MyA, b), Color.Blue, 1)
+            .DrawLine(New ClsMathpoint(-MyA, -B), New ClsMathpoint(MyA, -B), Color.Blue, 1)
+            .DrawLine(New ClsMathpoint(-MyA, B), New ClsMathpoint(MyA, B), Color.Blue, 1)
 
             'Draw the half-circles including their midpoints
-            .DrawCircleArc(New ClsMathpoint(-MyA, 0), b, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(New ClsMathpoint(-MyA, 0), B, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
             .DrawPoint(New ClsMathpoint(-MyA, 0), Brushes.Blue, 2)
-            .DrawCircleArc(New ClsMathpoint(MyA, 0), b, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(New ClsMathpoint(MyA, 0), B, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
             .DrawPoint(New ClsMathpoint(MyA, 0), Brushes.Blue, 2)
         End With
         MyPicDiagram.Refresh()
@@ -78,7 +78,7 @@ Public Class ClsStadiumBilliardTable
                 .ValueProtocol = MyValueProtocol
             End If
             .A = MyA
-            .B = b
+            .B = B
             .IsStartangleSet = False
             .IsStartParameterSet = False
         End With

@@ -220,7 +220,7 @@ Public Class ClsStadiumBilliardball
 
     End Sub
 
-    Public Overrides Function GetNextValuePair(ActualPoint As ClsValuePair) As ClsValuePair
+    Public Overrides Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair
 
         T = ActualPoint.X
         Dim alfa As Decimal = ActualPoint.Y
@@ -240,7 +240,7 @@ Public Class ClsStadiumBilliardball
 
         alfa = CalculateAlfa(NextT, Phi)
 
-        Dim NextPoint As New ClsValuePair(NextT, alfa)
+        Dim NextPoint As New ClsDecValuePair(NextT, alfa)
 
         Return NextPoint
 

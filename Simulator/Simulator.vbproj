@@ -11,7 +11,7 @@
     <ApplicationIcon>Resources\Simulator.ico</ApplicationIcon>
     <OptionStrict>On</OptionStrict>
     <Title>Simulator</Title>
-    <Version>6.2.0</Version>
+    <Version>7.0.0</Version>
     <Product>Simulator</Product>
     <Authors>Hermann Biner</Authors>
     <OptionInfer>On</OptionInfer>
@@ -26,12 +26,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -56,10 +56,16 @@
     <None Update="Documentation\Benutzerhandbuch.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Documentation\Dynamic Systems.pdf">
+    <None Update="Documentation\Dynamic Systems Part 1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Documentation\Dynamische Systeme.pdf">
+    <None Update="Documentation\Dynamic Systems Part 2.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Dynamische Systeme Teil 1.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Dynamische Systeme Teil 2.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Documentation\Release Notes.pdf">
@@ -97,6 +103,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Documentation\" />
     <Folder Include="My Project\NewFolder\" />
   </ItemGroup>
 

@@ -5,7 +5,7 @@
 
 Public Class ClsMathhelperUnimodal
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Public Sub New()
         LM = ClsLanguageManager.LM

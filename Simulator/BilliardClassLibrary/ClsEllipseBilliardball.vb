@@ -15,7 +15,7 @@ Imports System.Globalization
 Public Class ClsEllipseBilliardball
     Inherits ClsBilliardBallAbstract
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Public Sub New()
         LM = ClsLanguageManager.LM
@@ -220,7 +220,7 @@ Public Class ClsEllipseBilliardball
 
     End Sub
 
-    Public Overrides Function GetNextValuePair(ActualPair As ClsValuePair) As ClsValuePair
+    Public Overrides Function GetNextValuePair(ActualPair As ClsDecValuePair) As ClsDecValuePair
 
         T = ActualPair.X
         Dim alfa As Decimal = ActualPair.Y
@@ -240,7 +240,7 @@ Public Class ClsEllipseBilliardball
 
         alfa = CalculateAlfa(NextT, Phi)
 
-        Dim NextPoint As New ClsValuePair(NextT, alfa)
+        Dim NextPoint As New ClsDecValuePair(NextT, alfa)
         Return NextPoint
 
     End Function

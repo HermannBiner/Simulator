@@ -7,7 +7,7 @@
 Public MustInherit Class ClsPendulumAbstract
     Implements IPendulum
 
-    Protected LM As ClsLanguageManager
+    Protected ReadOnly LM As ClsLanguageManager
 
     Protected MyIsMainDS As Boolean
     Protected MyColor As Brush
@@ -366,7 +366,7 @@ Public MustInherit Class ClsPendulumAbstract
 
         'StepWidth of Runge Kutta
         Set(value As Integer)
-            d = value * StepWidthUnit
+            d = value *StepWidthUnit
             If MyIsMainDS Then
                 MyLblStepWidth.Text = LM.GetString("StepWidth") & ": " & d.ToString
             End If
@@ -459,6 +459,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MustOverride Sub SetStartEnergyRange()
     Protected MustOverride Sub SetPhasePortraitParameters()
     Protected MustOverride Sub SetAdditionalParameters() Implements IPendulum.SetAdditionalParameters
+
     Protected MustOverride Function GetEnergy() As Decimal Implements IPendulum.GetEnergy
 
     Protected MustOverride Sub SetDefaultUserData() Implements IPendulum.SetDefaultUserData

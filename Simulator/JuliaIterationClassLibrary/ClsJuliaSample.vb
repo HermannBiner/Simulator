@@ -4,9 +4,9 @@
 
 Public Class ClsJuliaSample
 
-    Private MyName As String
+    Private ReadOnly MyName As String
 
-    Private MyC As ClsComplexNumber
+    Private ReadOnly MyC As ClsComplexNumber
 
     Public Sub New(Name As String, C As ClsComplexNumber)
         MyName = Name

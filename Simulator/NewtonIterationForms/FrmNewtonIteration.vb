@@ -88,26 +88,6 @@ Public Class FrmNewtonIteration
         End If
     End Sub
 
-    'SECTOR ITERATION
-
-    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        If IsFormLoaded Then
-            FC.StartIteration()
-        End If
-    End Sub
-
-    Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
-        If IsFormLoaded Then
-            FC.StopIteration()
-        End If
-    End Sub
-
-    Private Sub BtnShowBasin_Click(sender As Object, e As EventArgs) Handles BtnShowBasin.Click
-        If IsFormLoaded Then
-            FC.ShowBasin()
-        End If
-    End Sub
-
     Private Sub TxtA_TextChanged(sender As Object, e As EventArgs) Handles TxtA.TextChanged
         If IsFormLoaded Then
             FC.SetDefaultUserData()
@@ -149,7 +129,7 @@ Public Class FrmNewtonIteration
     Private Sub OptNone_CheckedChanged(sender As Object, e As EventArgs) Handles OptNone.CheckedChanged
         If IsFormLoaded Then
             If OptNone.Checked Then
-                FC.SetOptions
+                FC.SetOptions()
             End If
         End If
     End Sub
@@ -167,6 +147,27 @@ Public Class FrmNewtonIteration
             If OptConjugate.Checked Then
                 FC.SetOptions()
             End If
+        End If
+    End Sub
+
+
+    'SECTOR ITERATION
+
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        If IsFormLoaded Then
+            FC.StartIteration()
+        End If
+    End Sub
+
+    Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
+        If IsFormLoaded Then
+            FC.StopIteration()
+        End If
+    End Sub
+
+    Private Sub BtnShowBasin_Click(sender As Object, e As EventArgs) Handles BtnShowBasin.Click
+        If IsFormLoaded Then
+            FC.ShowBasin()
         End If
     End Sub
 

@@ -9,9 +9,9 @@ Public Class ClsSensitivityController
 
     'The dynamic System
     Private DS As IIteration
-    Private MyForm As FrmSensitivity
+    Private ReadOnly MyForm As FrmSensitivity
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Graphics
     Private PicGraphics As ClsGraphicTool
@@ -25,6 +25,8 @@ Public Class ClsSensitivityController
     Private x2 As Decimal
 
     Private Const XStretchingDefault As Integer = 2
+
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmSensitivity)
         MyForm = Form
@@ -79,6 +81,7 @@ Public Class ClsSensitivityController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IIteration)
+                        Exit For
                     End If
                 Next
             End If
@@ -104,6 +107,21 @@ Public Class ClsSensitivityController
 
     End Sub
 
+    Public Sub ResetIteration()
+
+        SetControlsEnabled(True)
+        With MyForm
+            'clear display
+            .LstValueList1.Items.Clear()
+            .LstValueList2.Items.Clear()
+            PicGraphics.Clear(Color.White)
+
+            'Reset Number of steps
+            .LblSteps.Text = "0"
+        End With
+        n = 0
+    End Sub
+
     Public Sub SetDefaultUserData()
 
         With MyForm
@@ -115,6 +133,23 @@ Public Class ClsSensitivityController
         End With
 
     End Sub
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .CboFunction.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .CboIterationDepth.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .TxtStartValue1.Enabled = IsEnabled
+            .TxtStartValue2.Enabled = IsEnabled
+            .TxtxStretching.Enabled = IsEnabled
+        End With
+    End Sub
+
+    'SECTOR ITERATION
 
     Public Sub StartIteration()
         'This starts the whole iteration
@@ -235,20 +270,7 @@ Public Class ClsSensitivityController
 
     End Sub
 
-    Public Sub ResetIteration()
-
-        SetControlsEnabled(True)
-        With MyForm
-            'clear display
-            .LstValueList1.Items.Clear()
-            .LstValueList2.Items.Clear()
-            PicGraphics.Clear(Color.White)
-
-            'Reset Number of steps
-            .LblSteps.Text = "0"
-        End With
-        n = 0
-    End Sub
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -265,18 +287,4 @@ Public Class ClsSensitivityController
 
     End Function
 
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .CboFunction.Enabled = IsEnabled
-            .TxtParameter.Enabled = IsEnabled
-            .CboIterationDepth.Enabled = IsEnabled
-            .TxtParameter.Enabled = IsEnabled
-            .TxtStartValue1.Enabled = IsEnabled
-            .TxtStartValue2.Enabled = IsEnabled
-            .TxtxStretching.Enabled = IsEnabled
-        End With
-    End Sub
 End Class

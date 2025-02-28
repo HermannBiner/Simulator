@@ -8,10 +8,11 @@
 
 'Status Checked
 
+
 Public Class ClsDoublePendulum
     Inherits ClsPendulumAbstract
 
-    Private ValueParameter(3) As ClsGeneralParameter
+    Private ReadOnly ValueParameter(3) As ClsGeneralParameter
 
     'Mass ratio M: m2 = MyM*m1
     Private M As Decimal
@@ -22,7 +23,7 @@ Public Class ClsDoublePendulum
     'Size of Pendulums
     Private ReadOnly PendulumSize As ClsNTupel
 
-    Private Origin As ClsMathpoint
+    Private ReadOnly Origin As ClsMathpoint
 
     'SECTOR INITIALIZATION
 
@@ -220,12 +221,12 @@ Public Class ClsDoublePendulum
             Dim L2 As Decimal = CDec(Math.Min(MyCalculationConstants.Component(1), ShrinkFactor - L1))
 
             'Phi1
-            Dim Phi1 As Decimal = MathHelper.GetAngle(.X, .Y)
+            Dim Phi1 As Decimal = ClsMathHelperPendulum.GetAngle(.X, .Y)
 
             'Set parameters
             MyCalculationConstants.Component(0) = L1
             MyCalculationConstants.Component(1) = L2
-            MyCalculationVariables.Component(0) = MathHelper.AngleInMinusPiAndPi(Phi1)
+            MyCalculationVariables.Component(0) = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi1)
 
             SetPosition()
 
@@ -258,11 +259,11 @@ Public Class ClsDoublePendulum
             LocRange = New ClsInterval(MyValueParameterDefinition.Item(1).Range.A, MyValueParameterDefinition.Item(1).Range.B)
             Dim L2 As Decimal = CDec(Math.Max(LocRange.A, (Math.Min(Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY),
                                                                     0.95 - MyCalculationConstants.Component(0)))))
-            Dim Phi2 As Decimal = MathHelper.GetAngle(DeltaX, DeltaY)
+            Dim Phi2 As Decimal = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
 
             'Set parameters
             MyCalculationConstants.Component(1) = L2
-            MyCalculationVariables.Component(1) = MathHelper.AngleInMinusPiAndPi(Phi2)
+            MyCalculationVariables.Component(1) = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi2)
 
             SetPosition()
 
@@ -418,8 +419,8 @@ Public Class ClsDoublePendulum
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
 
-        u1 = MathHelper.AngleInMinusPiAndPi(u1)
-        u2 = MathHelper.AngleInMinusPiAndPi(u2)
+        u1 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u1)
+        u2 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u2)
 
         'New Values to MyVariables
         With MyCalculationVariables
@@ -455,21 +456,20 @@ Public Class ClsDoublePendulum
     End Sub
 
     Private Sub DrawPhaseportrait()
-
         Select Case TypeofPhasePortrait
-                Case TypeofPhaseportraitEnum.TorusOrCylinder
-                    MyPicPhaseportrait.Refresh()
-                    MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Blue, 1)
-                    MyBmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), MyColor, 1)
-                Case TypeofPhaseportraitEnum.PoincareSection
-                    If IsSignumChanged Then
-                        MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 2)
-                    End If
-                Case Else
-                    'Draw only into PicPhaseportrait
-                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Blue, 1)
-                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 1)
-            End Select
+            Case TypeofPhaseportraitEnum.TorusOrCylinder
+                MyPicPhaseportrait.Refresh()
+                MyPicPhaseportraitGraphics.DrawLine(New ClsMathpoint(u1, u2), New ClsMathpoint(u1 + v1 / 10, u2 + v2 / 10), Color.Blue, 1)
+                MyBmpPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, u2), MyColor, 1)
+            Case TypeofPhaseportraitEnum.PoincareSection
+                If IsSignumChanged Then
+                    MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 2)
+                End If
+            Case Else
+                'Draw only into PicPhaseportrait
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u1, v1), Brushes.Blue, 1)
+                MyPicPhaseportraitGraphics.DrawPoint(New ClsMathpoint(u2, v2), MyColor, 1)
+        End Select
 
     End Sub
 
@@ -505,18 +505,18 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function F1(x As ClsNTupel) As Decimal
+    Private Function F1(LocX As ClsNTupel) As Decimal
 
         'calculates next u1' = v1 = x.component(1)
-        Return x.Component(1)
+        Return LocX.Component(1)
 
     End Function
 
-    Private Function G1(x As ClsNTupel) As Decimal
+    Private Function G1(LocX As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
-        With x
+        With LocX
             'DeltaU = u1-u2
             Dim DeltaU As Decimal = .Component(0) - .Component(2)
 
@@ -541,17 +541,17 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function F2(x As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Decimal
 
         'calculates next u2' = v2 = x.component(3)
-        Return x.Component(3)
+        Return LocX.Component(3)
     End Function
 
-    Private Function G2(x As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Decimal
 
         Dim Temp As Decimal
 
-        With x
+        With LocX
             'calculates next v2' = see math.doc.
             Dim DeltaU As Decimal = .Component(0) - .Component(2)
 
@@ -576,12 +576,12 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function G1Test(x As ClsNTupel) As Decimal
+    Private Function G1Test(LocX As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = -g * CDec(Math.Sin(.Component(0)) / MyCalculationConstants.Component(0))
 
@@ -591,12 +591,12 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function G2Test(x As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Decimal
 
         'This function corresponds to a simple Thread Pendulum
         Dim Temp As Decimal
 
-        With x
+        With LocX
 
             Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
 

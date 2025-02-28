@@ -4,7 +4,7 @@
 
 Public Class ClsCheckIsNumeric
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Private MyTextbox As TextBox
     Private MyNumericValue As Decimal

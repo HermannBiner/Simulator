@@ -27,6 +27,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_231A88AA9BEB45B0A543FF3FBBEBBCB3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2A65EEA488AC4BDDBA770E42651CE77A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2C9532ADE1DA466CAE69077474CCA700"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,25 +51,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_45916201056D4C70A2FBB8488A9D1775"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5C7039569CD041659EE17F8EC634CF37"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8252D7D252304EC983BBF648C02EF9CB"
+        "MsmKey" = "8:_61D2E0D72F5F412DA66FF4BE9D9005BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_900DE3737DFF4907B064FD457D3AF62D"
+        "MsmKey" = "8:_940708FDF2454497860777A35A310E00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,13 +75,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C6EEB66EC1F345E9BA018137A780E7F4"
+        "MsmKey" = "8:_D714EA64EB70471DA3E6B13686574127"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D714EA64EB70471DA3E6B13686574127"
+        "MsmKey" = "8:_DAAA9FE81A48420DAF15E5A6544BF5FD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -246,6 +252,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_231A88AA9BEB45B0A543FF3FBBEBBCB3"
+            {
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Dynamische Systeme Teil 2.pdf"
+            "TargetName" = "8:Dynamische Systeme Teil 2.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A65EEA488AC4BDDBA770E42651CE77A"
+            {
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Dynamic Systems Part 1.pdf"
+            "TargetName" = "8:Dynamic Systems Part 1.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2C9532ADE1DA466CAE69077474CCA700"
             {
             "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Documentation\\Technical Documentation.pdf"
@@ -286,26 +332,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45916201056D4C70A2FBB8488A9D1775"
-            {
-            "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Documentation\\Dynamic Systems.pdf"
-            "TargetName" = "8:Dynamic Systems.pdf"
-            "Tag" = "8:"
-            "Folder" = "8:_717B73147A434136A0C3A49147908102"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C7039569CD041659EE17F8EC634CF37"
             {
             "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Documentation\\User Manual.pdf"
@@ -326,12 +352,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8252D7D252304EC983BBF648C02EF9CB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_61D2E0D72F5F412DA66FF4BE9D9005BB"
             {
-            "SourcePath" = "8:Release\\Simulator Setup.msi"
-            "TargetName" = "8:Simulator Setup.msi"
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Dynamic Systems Part 2.pdf"
+            "TargetName" = "8:Dynamic Systems Part 2.pdf"
             "Tag" = "8:"
-            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -346,12 +372,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_900DE3737DFF4907B064FD457D3AF62D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_940708FDF2454497860777A35A310E00"
             {
-            "SourcePath" = "8:Release\\setup.exe"
-            "TargetName" = "8:setup.exe"
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Dynamische Systeme Teil 1.pdf"
+            "TargetName" = "8:Dynamische Systeme Teil 1.pdf"
             "Tag" = "8:"
-            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -370,26 +396,6 @@
             {
             "SourcePath" = "8:..\\..\\..\\Dokumente\\Versionshinweise.pdf"
             "TargetName" = "8:Versionshinweise.pdf"
-            "Tag" = "8:"
-            "Folder" = "8:_717B73147A434136A0C3A49147908102"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6EEB66EC1F345E9BA018137A780E7F4"
-            {
-            "SourcePath" = "8:..\\..\\..\\Publish\\net8.0-windows\\Documentation\\Dynamische Systeme.pdf"
-            "TargetName" = "8:Dynamische Systeme.pdf"
             "Tag" = "8:"
             "Folder" = "8:_717B73147A434136A0C3A49147908102"
             "Condition" = "8:"
@@ -534,7 +540,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Simulator"
         "ProductCode" = "8:{25407A7F-7BCF-4754-B1C7-BB0BB98E469D}"
-        "PackageCode" = "8:{28EA2064-953A-4A15-AB30-00F42FCDCE35}"
+        "PackageCode" = "8:{A1F56224-0530-4E44-B37D-6B6942D62508}"
         "UpgradeCode" = "8:{AD878246-7B81-40B7-9D1D-1510F0F758A1}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -1081,6 +1087,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DAAA9FE81A48420DAF15E5A6544BF5FD"
+            {
+            "SourcePath" = "8:..\\Simulator\\obj\\Release\\net8.0-windows\\Simulator.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_64CDB4273E3E4EDC9F74AC9238E91279"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{050D0F52-5865-4EF7-BDE9-3792116D1512}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
         }
     }
 }

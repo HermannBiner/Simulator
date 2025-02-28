@@ -4,7 +4,7 @@
 
 Public Class FrmInfo
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Public Sub New()
 

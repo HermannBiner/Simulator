@@ -15,7 +15,7 @@ Public Class FrmFeigenbaum
 
     Private IsFormLoaded As Boolean
     Private FC As ClsFeigenbaumController
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
     Public Sub New()

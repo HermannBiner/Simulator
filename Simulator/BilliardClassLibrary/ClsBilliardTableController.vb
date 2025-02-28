@@ -34,6 +34,8 @@ Public Class ClsBilliardTableController
     'When distributing BilliardBalls for the full PhasePortrait
     Private NumberOfBilliardBalls As Integer
 
+    'SECTOR INITIALIZATION
+
     Public Sub New(Form As FrmBilliardtable)
         MyForm = Form
         LM = ClsLanguageManager.LM
@@ -83,6 +85,7 @@ Public Class ClsBilliardTableController
                 For Each type In types
                     If LM.GetString(type.Name, True) = SelectedName Then
                         DS = CType(Activator.CreateInstance(type), IBilliardTable)
+                        Exit For
                     End If
                 Next
             End If
@@ -100,6 +103,7 @@ Public Class ClsBilliardTableController
     End Sub
 
     Private Sub InitializeMe()
+
         With DS
             .PicDiagram = MyForm.PicDiagram
             .PhasePortrait = MyForm.PicPhasePortrait
@@ -110,9 +114,19 @@ Public Class ClsBilliardTableController
             .C = .DSParameter.DefaultValue
         End With
 
+        With MyForm.CboBallColor
+            .Items.Clear()
+
+            .Items.Add(LM.GetString("Red"))
+            .Items.Add(LM.GetString("Green"))
+            .Items.Add(LM.GetString("Blue"))
+            .Items.Add(LM.GetString("Black"))
+            .Items.Add(LM.GetString("Magenta"))
+        End With
+
         'Setting Standard Values
         MyForm.CboBallColor.SelectedIndex = 0
-        Ballcolor = Brushes.Red
+        SetColor()
 
         MyForm.TrbSpeed.Value = 10
         MyForm.LblSpeed.Text = "10"
@@ -174,19 +188,19 @@ Public Class ClsBilliardTableController
     End Sub
 
     Public Sub SetColor()
-        'Is this needed??
+
         'The generated Balls can have different colors to be distinguished
-        Select Case MyForm.CboBallColor.SelectedIndex
-            Case 0
+        Select Case MyForm.CboBallColor.SelectedItem.ToString
+            Case LM.GetString("Red")
                 MyForm.LblColor.BackColor = Color.Red
                 Ballcolor = Brushes.Red
-            Case 1
+            Case LM.GetString("Green")
                 MyForm.LblColor.BackColor = Color.Green
                 Ballcolor = Brushes.Green
-            Case 2
+            Case LM.GetString("Blue")
                 MyForm.LblColor.BackColor = Color.Blue
                 Ballcolor = Brushes.Blue
-            Case 3
+            Case LM.GetString("Black")
                 MyForm.LblColor.BackColor = Color.Black
                 Ballcolor = Brushes.Black
             Case Else
@@ -194,6 +208,27 @@ Public Class ClsBilliardTableController
                 Ballcolor = Brushes.Magenta
         End Select
     End Sub
+
+    Private Sub SetControlsEnabled(IsEnabled As Boolean)
+        With MyForm
+            .BtnStart.Enabled = IsEnabled
+            .BtnReset.Enabled = IsEnabled
+            .BtnTakeOverStartParameter.Enabled = IsEnabled
+            .BtnDefault.Enabled = IsEnabled
+            .BtnPhasePortrait.Enabled = IsEnabled
+            .BtnNewBall.Enabled = IsEnabled
+            .BtnNextStep.Enabled = IsEnabled
+            .TrbParameterC.Enabled = IsEnabled
+            .ChkProtocol.Enabled = IsEnabled
+            .CboBilliardTable.Enabled = IsEnabled
+            .TxtParameter.Enabled = IsEnabled
+            .CboBallColor.Enabled = IsEnabled
+            .TxtAlfa.Enabled = IsEnabled
+            .TxtT.Enabled = IsEnabled
+        End With
+    End Sub
+
+    'SECTOR CREATE NEW OBJECT
 
     Public Sub CreateNewBall()
         If IsUserDataOK() Then
@@ -209,8 +244,6 @@ Public Class ClsBilliardTableController
             'All the other parameters are set by DS
         End If
     End Sub
-
-    'SECTOR ITERATION
 
     Public Sub TakeOverStartParameter()
 
@@ -236,93 +269,6 @@ Public Class ClsBilliardTableController
             'There are already Error messages generated
         End If
 
-    End Sub
-
-    Public Async Sub NextStep()
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
-            If IsBilliardballExisting() Then
-                If IsUserDataOK() Then
-                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
-                Else
-                    'Message already generated
-                End If
-            End If
-        End If
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
-
-            Await IterationLoop(1)
-
-        End If
-
-        'The iterationstatus is set to stopped by ResetIteration
-
-    End Sub
-
-    Public Async Sub StartIteration()
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
-            If IsBilliardballExisting() Then
-                If IsUserDataOK() Then
-                    SetControlsEnabled(False)
-                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
-                Else
-                    'Message already generated
-                    ResetIteration()
-                    SetDefaultUserData()
-                End If
-            End If
-        End If
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
-                    IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
-            IterationStatus = ClsDynamics.EnIterationStatus.Running
-            With MyForm
-                .BtnStart.Text = LM.GetString("Continue")
-                .Cursor = Cursors.WaitCursor
-            End With
-
-            Application.DoEvents()
-
-            Await IterationLoop(0)
-
-        End If
-    End Sub
-
-    Public Async Function IterationLoop(NumberOfSteps As Integer) As Task
-
-        Do
-            n += 1
-
-            If n Mod 5 = 0 Then
-                MyForm.LblSteps.Text = (NumberOfBilliardBalls * n).ToString(CultureInfo.CurrentCulture)
-            End If
-
-            'Each Ball is now iterated 1x
-            For Each Ball As IBilliardball In DS.BilliardBallCollection
-                Ball.IterationStep()
-            Next
-
-            Application.DoEvents()
-            Await Task.Delay(2)
-
-            If NumberOfSteps > 0 Then
-                If n >= NumberOfSteps Then
-                    IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-                End If
-            End If
-
-        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
-Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-    End Function
-
-    Public Sub StopIteration()
-        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
-        MyForm.Cursor = Cursors.Arrow
-        MyForm.BtnStart.Enabled = True
-        MyForm.BtnReset.Enabled = True
     End Sub
 
     Public Sub PrepareBallsForPhaseportrait()
@@ -404,7 +350,96 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
         End If
     End Sub
 
-    'SECTOR CHECKS
+    'SECTOR ITERATION
+
+    Public Async Sub NextStep()
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            If IsBilliardballExisting() Then
+                If IsUserDataOK() Then
+                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                Else
+                    'Message already generated
+                End If
+            End If
+        End If
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
+
+            Await IterationLoop(1)
+
+        End If
+
+        'The iterationstatus is set to stopped by ResetIteration
+
+    End Sub
+
+    Public Async Sub StartIteration()
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+            If IsBilliardballExisting() Then
+                If IsUserDataOK() Then
+                    SetControlsEnabled(False)
+                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                Else
+                    'Message already generated
+                    ResetIteration()
+                    SetDefaultUserData()
+                End If
+            End If
+        End If
+
+        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or
+                    IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
+            IterationStatus = ClsDynamics.EnIterationStatus.Running
+            With MyForm
+                .BtnStart.Text = LM.GetString("Continue")
+                .Cursor = Cursors.WaitCursor
+            End With
+
+            Application.DoEvents()
+
+            Await IterationLoop(0)
+
+        End If
+    End Sub
+
+    Public Async Function IterationLoop(NumberOfSteps As Integer) As Task
+
+        Do
+            n += 1
+
+            If n Mod 5 = 0 Then
+                MyForm.LblSteps.Text = (NumberOfBilliardBalls * n).ToString(CultureInfo.CurrentCulture)
+            End If
+
+            'Each Ball is now iterated 1x
+            For Each Ball As IBilliardball In DS.BilliardBallCollection
+                Ball.IterationStep()
+            Next
+
+            Application.DoEvents()
+            Await Task.Delay(1)
+
+            If NumberOfSteps > 0 Then
+                If n >= NumberOfSteps Then
+                    IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+                End If
+            End If
+
+        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
+            Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
+
+    End Function
+
+    Public Sub StopIteration()
+        IterationStatus = ClsDynamics.EnIterationStatus.Interrupted
+        MyForm.Cursor = Cursors.Arrow
+        MyForm.BtnStart.Enabled = True
+        MyForm.BtnReset.Enabled = True
+    End Sub
+
+    'SECTOR CHECK USERDATA
 
     Private Function IsUserDataOK() As Boolean
 
@@ -437,7 +472,7 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Function
 
-    'SECTOR SET USERSTARTPARAMETER
+    'SECTOR SET STARTPARAMETER
 
     Public Sub MouseDown(e As MouseEventArgs)
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
@@ -449,14 +484,14 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
                     IsMousedown = True
 
                     'Now, Moving the Mouse moves the Ball as well
-                    MouseMoving(e)
+                    MouseMove(e)
 
                 End If
             End If
         End If
     End Sub
 
-    Public Sub MouseMoving(e As MouseEventArgs)
+    Public Sub MouseMove(e As MouseEventArgs)
         If IsMousedown Then
             'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
             Dim Mouseposition As New Point With {
@@ -527,23 +562,5 @@ Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
 
-    Private Sub SetControlsEnabled(IsEnabled As Boolean)
-        With MyForm
-            .BtnStart.Enabled = IsEnabled
-            .BtnReset.Enabled = IsEnabled
-            .BtnTakeOverStartParameter.Enabled = IsEnabled
-            .BtnDefault.Enabled = IsEnabled
-            .BtnPhasePortrait.Enabled = IsEnabled
-            .BtnNewBall.Enabled = IsEnabled
-            .BtnNextStep.Enabled = IsEnabled
-            .TrbParameterC.Enabled = IsEnabled
-            .ChkProtocol.Enabled = IsEnabled
-            .CboBilliardTable.Enabled = IsEnabled
-            .TxtParameter.Enabled = IsEnabled
-            .CboBallColor.Enabled = IsEnabled
-            .TxtAlfa.Enabled = IsEnabled
-            .TxtT.Enabled = IsEnabled
-        End With
-    End Sub
 End Class
 

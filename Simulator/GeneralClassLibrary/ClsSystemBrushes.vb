@@ -5,7 +5,7 @@
 
 Public Class ClsSystemBrushes
 
-    Private MyMaxSteps As Integer
+    Private ReadOnly MyMaxSteps As Integer
 
     Public Sub New(MaxSteps As Integer)
         MyMaxSteps = MaxSteps

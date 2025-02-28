@@ -10,7 +10,7 @@ Public Class ClsMathHelperComplex
     'The result is in [0,2*pi[
     'It is used to get the Argument of a Complex Number
     'The Argument of (0/0) is 0
-    Function GetArgument(X As Double, Y As Double) As Double
+    Shared Function GetArgument(X As Double, Y As Double) As Double
 
         Dim Arg As Double
 

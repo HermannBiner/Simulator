@@ -12,7 +12,7 @@ Public Class FrmMandelbrotMap
     Private IsFormLoaded As Boolean
     Private FC As ClsMandelbrotMapController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -50,7 +50,8 @@ Public Class FrmMandelbrotMap
         End If
     End Sub
 
-    'SECTOR MOUSE EVENTS
+    'SECTOR SET STARTPARAMETER
+
     Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicMandelbrot.MouseDown
         If IsFormLoaded Then
             FC.MouseDown(e)
@@ -65,7 +66,7 @@ Public Class FrmMandelbrotMap
 
     Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicMandelbrot.MouseMove
         If IsFormLoaded Then
-            FC.MouseMoving(e)
+            FC.MouseMove(e)
         End If
     End Sub
 

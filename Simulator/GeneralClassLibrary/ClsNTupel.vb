@@ -4,8 +4,8 @@
 'Status Checked
 
 Public Class ClsNTupel
-    Private MyComponents As Decimal()
-    Private MyDimension As Integer
+    Private ReadOnly MyComponents As Decimal()
+    Private ReadOnly MyDimension As Integer
 
     Public Sub New(N As Integer)
         MyDimension = N

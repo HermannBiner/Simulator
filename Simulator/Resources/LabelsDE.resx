@@ -153,7 +153,7 @@
     <value>Billard</value>
     <comment>Lbl</comment>
   </data>
-  <data name="BilliardTable" xml:space="preserve">
+  <data name="MnuBilliardTable" xml:space="preserve">
     <value>Billardtisch</value>
     <comment>Lbl</comment>
   </data>
@@ -527,14 +527,14 @@
   </data>
   <data name="Manual" xml:space="preserve">
     <value>Benutzerhandbuch.pdf</value>
-    <comment>Doc</comment>
+    <comment>Lbl</comment>
   </data>
   <data name="MassRatioM" xml:space="preserve">
     <value>Massenverhältnis M</value>
     <comment>Lbl</comment>
   </data>
-  <data name="MathDoc" xml:space="preserve">
-    <value>Dynamische Systeme.pdf</value>
+  <data name="MathDocPart1" xml:space="preserve">
+    <value>Dynamische Systeme Teil 1.pdf</value>
     <comment>Doc</comment>
   </data>
   <data name="MissingImplementation" xml:space="preserve">
@@ -705,7 +705,7 @@
     <value>Numerisches Verfahren</value>
     <comment>Lbl</comment>
   </data>
-  <data name="NumericMethods" xml:space="preserve">
+  <data name="MnuNumericMethods" xml:space="preserve">
     <value>Numerische Methoden</value>
     <comment>Lbl</comment>
   </data>
@@ -1010,7 +1010,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="TypeofPhaseportrait" xml:space="preserve">
-    <value>Type Phasenportrait</value>
+    <value>Typ Phasenportrait</value>
     <comment>Lbl</comment>
   </data>
   <data name="UnimodalFunctions" xml:space="preserve">
@@ -1057,12 +1057,272 @@
     <value>Dieser Y-Bereich ist nicht erlaubt. Er muss Teil sein von:</value>
     <comment>Msg</comment>
   </data>
-  <data name="PopulationDensity" xml:space="preserve">
+  <data name="MnuPopulationDensity" xml:space="preserve">
     <value>Bevölkerungsdichte</value>
     <comment>Lbl</comment>
   </data>
-  <data name="MandelbrotMap" xml:space="preserve">
+  <data name="MnuMandelbrotMap" xml:space="preserve">
     <value>Mandelbrot Karte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MnuUniverse" xml:space="preserve">
+    <value>Universum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NewStar" xml:space="preserve">
+    <value>Neuer Stern</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Mass" xml:space="preserve">
+    <value>Masse</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StarColor" xml:space="preserve">
+    <value>Sternfarbe</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Vorgabe</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Torque" xml:space="preserve">
+    <value>Gesamtdrehmoment</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Constellation" xml:space="preserve">
+    <value>Konstellation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Yellow" xml:space="preserve">
+    <value>Gelb</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Gold" xml:space="preserve">
+    <value>Gold</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Brown" xml:space="preserve">
+    <value>Braun</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Tomato" xml:space="preserve">
+    <value>Tomate</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Orange" xml:space="preserve">
+    <value>Orange</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DarkGreen" xml:space="preserve">
+    <value>Dunkelgrün</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AE" xml:space="preserve">
+    <value>AE</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SetPerihel" xml:space="preserve">
+    <value>Setze Perihel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SetVelocity" xml:space="preserve">
+    <value>Setze Geschwindigkeit</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Angular Momentum" xml:space="preserve">
+    <value>Gesamtdrehimpuls</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Pulse" xml:space="preserve">
+    <value>Gesamtimpuls</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="PositionMomentum" xml:space="preserve">
+    <value>Ort- Impulsdiagramm</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ConservationLaws" xml:space="preserve">
+    <value>Überwache Erhaltungssätze</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TakeOverConstellation" xml:space="preserve">
+    <value>Setze Konstellation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="OurPlanetSystem" xml:space="preserve">
+    <value>Unser Planetensystem</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>Sonne</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Mercury" xml:space="preserve">
+    <value>Merkur</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Venus" xml:space="preserve">
+    <value>Venus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Earth" xml:space="preserve">
+    <value>Erde</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Mars" xml:space="preserve">
+    <value>Mars</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Jupiter" xml:space="preserve">
+    <value>Jupiter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Saturn" xml:space="preserve">
+    <value>Saturn</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Uranus" xml:space="preserve">
+    <value>Uranus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Neptune" xml:space="preserve">
+    <value>Neptun</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClearUniverse" xml:space="preserve">
+    <value>Universum leeren</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ClsNewtonUniverse" xml:space="preserve">
+    <value>Newton Universum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="3SymmetricBodies" xml:space="preserve">
+    <value>3 symmetrische Sterne</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MissingColor" xml:space="preserve">
+    <value>Fehlende Farbe</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="MissingDefaultStar" xml:space="preserve">
+    <value>Default-Stern nicht gefunden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NoStarsInTheUniverse" xml:space="preserve">
+    <value>Keine Sterne im Universum</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="SkyBlue" xml:space="preserve">
+    <value>Hellblau</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AdjustUniverse" xml:space="preserve">
+    <value>Universum ausrichten</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="LightGray" xml:space="preserve">
+    <value>Hellgrau</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="GreenYellow" xml:space="preserve">
+    <value>Gelbgrün</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Snow" xml:space="preserve">
+    <value>Schneeweiss</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AquaMarine" xml:space="preserve">
+    <value>Wasserblau</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Velocity" xml:space="preserve">
+    <value>Geschwindigkeit</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Perihel" xml:space="preserve">
+    <value>Perihel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Argument" xml:space="preserve">
+    <value>Argument</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Recommended" xml:space="preserve">
+    <value>Empfohlen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="4SymmetricBodies" xml:space="preserve">
+    <value>4 symmetrische Sterne</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="3SymmetricBodiesDisturbed" xml:space="preserve">
+    <value>3 symmetrische Sterne gestört</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="4SymmetricBodiesDisturbed" xml:space="preserve">
+    <value>4 symmetrische Sterne gestört</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="6SymmetricBodies" xml:space="preserve">
+    <value>6 symmetrische Sterne</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="6SymmetricBodiesDisturbed" xml:space="preserve">
+    <value>6 symmetrische Stene gestört</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="InnerPlanets" xml:space="preserve">
+    <value>Innere Planeten</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="InnerPlanetsDisturbed" xml:space="preserve">
+    <value>Innere Planeten gestört</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="OurPlanetSystemDisturbed" xml:space="preserve">
+    <value>Unser Planetensystem gestört</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Collisions" xml:space="preserve">
+    <value>Kollisionen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ProtocolTooLong" xml:space="preserve">
+    <value>Wenn das Zielprotokoll länger als 44 bit ist, kann das Resultat auf Grund von beschränkter Rechengenauigkeit nicht mehr garantiert werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="MathDocPart2" xml:space="preserve">
+    <value>Dynamische Systeme Teil 2.pdf</value>
+    <comment>Doc</comment>
+  </data>
+  <data name="ClsNormedUniverse" xml:space="preserve">
+    <value>Normiertes Universum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Part1" xml:space="preserve">
+    <value>Teil 1</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Part2" xml:space="preserve">
+    <value>Teil 2</value>
     <comment>Lbl</comment>
   </data>
 </root>

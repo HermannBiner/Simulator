@@ -10,7 +10,7 @@
 Public MustInherit Class ClsNumericMethodAbstract
     Implements INumericMethod
 
-    Protected LM As ClsLanguageManager
+    Protected ReadOnly LM As ClsLanguageManager
 
     'Step Width for the approximation
     Protected MyH As Decimal

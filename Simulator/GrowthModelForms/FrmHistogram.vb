@@ -16,7 +16,7 @@ Public Class FrmHistogram
 
     'Loading Control
     Private IsFormLoaded As Boolean
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'Histogram Controller
     Private FC As ClsHistogramController
@@ -90,7 +90,7 @@ Public Class FrmHistogram
         End If
     End Sub
 
-    'SECTOR HISTOGRAM
+    'SECTOR ITERATION
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then

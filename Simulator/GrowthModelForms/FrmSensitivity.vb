@@ -16,7 +16,7 @@ Public Class FrmSensitivity
     Private IsFormLoaded As Boolean
     Private FC As ClsSensitivityController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
 

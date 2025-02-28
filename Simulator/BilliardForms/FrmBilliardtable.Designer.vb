@@ -184,10 +184,10 @@ Partial Class FrmBilliardtable
         ' LblColor
         ' 
         LblColor.BackColor = Color.Red
-        LblColor.Location = New Point(778, 139)
+        LblColor.Location = New Point(778, 142)
         LblColor.Margin = New Padding(4, 0, 4, 0)
         LblColor.Name = "LblColor"
-        LblColor.Size = New Size(48, 26)
+        LblColor.Size = New Size(48, 23)
         LblColor.TabIndex = 22
         ' 
         ' LblPhasePortrait

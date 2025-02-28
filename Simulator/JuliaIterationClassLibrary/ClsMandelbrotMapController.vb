@@ -5,10 +5,10 @@
 Public Class ClsMandelbrotMapController
 
     'Global variables
-    Private MyForm As FrmMandelbrotMap
+    Private ReadOnly MyForm As FrmMandelbrotMap
     Private PicMandelbrotGraphics As ClsGraphicTool
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     Private DSJulia As IJulia
     Private DSMandelbrot As IJulia
@@ -37,7 +37,7 @@ Public Class ClsMandelbrotMapController
 
     Private Property IterationStatus As ClsDynamics.EnIterationStatus
 
-    'SECTOR INITIALIZE
+    'SECTOR INITIALIZATION
 
     Public Sub New(Form As FrmMandelbrotMap)
         MyForm = Form
@@ -52,7 +52,6 @@ Public Class ClsMandelbrotMapController
         SetDefaultUserData()
 
     End Sub
-
 
     Private Sub InitializeMe()
 
@@ -221,7 +220,8 @@ Public Class ClsMandelbrotMapController
 
     End Sub
 
-    'SECTOR MOUSE EVENTS
+    'SECTOR SET STARTPARAMETER
+
     Public Sub MouseDown(e As MouseEventArgs)
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
@@ -230,11 +230,11 @@ Public Class ClsMandelbrotMapController
             IsMouseDown = True
 
             'Now, Moving the Mouse moves the pendulum as well
-            MouseMoving(e)
+            MouseMove(e)
         End If
     End Sub
 
-    Public Sub MouseMoving(e As MouseEventArgs)
+    Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
             'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
@@ -270,7 +270,8 @@ Public Class ClsMandelbrotMapController
         End If
     End Sub
 
-    'SECTOR CHECKS
+    'SECTOR CHECK USERDATA
+
     Private Function IsCParameterOK() As Boolean
         With MyForm
             'The parameter c has to be in the same area as the z-Values

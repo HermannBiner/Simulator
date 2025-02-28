@@ -13,9 +13,9 @@ Public Class FrmJulia
 
     'Private global variables
     Private IsFormLoaded As Boolean
-    Private FC As ClsJuliaIterationController
+    Private FC As ClsJuliaController
 
-    Private LM As ClsLanguageManager
+    Private ReadOnly LM As ClsLanguageManager
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -29,7 +29,7 @@ Public Class FrmJulia
 
         'Generate objects
         IsFormLoaded = False
-        FC = New ClsJuliaIterationController(Me)
+        FC = New ClsJuliaController(Me)
 
         'Initialize Language
         InitializeLanguage()
@@ -74,20 +74,6 @@ Public Class FrmJulia
     Private Sub CboFunction_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboFunction.SelectedIndexChanged
         If IsFormLoaded Then
             FC.SetDS()
-        End If
-    End Sub
-
-    'SECTOR ITERATION
-
-    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        If IsFormLoaded Then
-            FC.StartIteration()
-        End If
-    End Sub
-
-    Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
-        If IsFormLoaded Then
-            FC.StopIteration()
         End If
     End Sub
 
@@ -162,6 +148,20 @@ Public Class FrmJulia
     Private Sub CboSamples_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboJuliaSamples.SelectedIndexChanged
         If IsFormLoaded Then
             FC.SetSample()
+        End If
+    End Sub
+
+    'SECTOR ITERATION
+
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        If IsFormLoaded Then
+            FC.StartIteration()
+        End If
+    End Sub
+
+    Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
+        If IsFormLoaded Then
+            FC.StopIteration()
         End If
     End Sub
 
