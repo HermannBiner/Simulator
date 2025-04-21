@@ -60,6 +60,10 @@ Public Class FrmMain
         MnuUniverse.Text = LM.GetString("MnuUniverse")
         MnuMathDocPart1.Text = LM.GetString("Part1")
         MnuMathDocPart2.Text = LM.GetString("Part2")
+        MnuGeometry.Text = LM.GetString("MnuGeometry")
+        MnuStrangeAttractors.Text = LM.GetString("MnuStrangeAttractors")
+        MnuFractals.Text = LM.GetString("MnuFractals")
+        MnuHopfBifurcation.Text = LM.GetString("HopfBifurcation")
     End Sub
 
     Private Sub MnuIteration_Click(sender As Object, e As EventArgs) Handles MnuIteration.Click
@@ -175,5 +179,17 @@ Public Class FrmMain
 
     Private Sub MnuMathDocPart2_Click(sender As Object, e As EventArgs) Handles MnuMathDocPart2.Click
         OpenDocument("Documentation\" & LM.GetString("MathDocPart2"))
+    End Sub
+
+    Private Sub MnuStrangeAttractors_Click(sender As Object, e As EventArgs) Handles MnuStrangeAttractors.Click
+        FrmStrangeAttractor.Show()
+    End Sub
+
+    Private Sub MnuFractals_Click(sender As Object, e As EventArgs) Handles MnuFractals.Click
+        MessageBox.Show(LM.GetString("NotImplemented"))
+    End Sub
+
+    Private Sub MnuHopfBifurcation_Click(sender As Object, e As EventArgs) Handles MnuHopfBifurcation.Click
+        FrmHopfBifurcation.Show()
     End Sub
 End Class

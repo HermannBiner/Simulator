@@ -21,15 +21,15 @@ Public Interface IUniverse
 
     'Parameter Definitions
     'these parameters are allowed when creatingnew stars in the universe
-    ReadOnly Property PositionParameterDefinition As ClsGeneralParameter
-    ReadOnly Property VelocityParameterDefinition As ClsGeneralParameter
-    ReadOnly Property MassParameterDefinition As ClsGeneralParameter
+    ReadOnly Property PositionParameter As ClsGeneralParameter
+    ReadOnly Property VelocityParameter As ClsGeneralParameter
+    ReadOnly Property MassParameter As ClsGeneralParameter
 
     'this is the set of all predefined constellations of the universe
-    ReadOnly Property Constellations As List(Of ClsConstellation)
+    ReadOnly Property Constellations As List(Of ClsStarConstellation)
 
     'the constellation that is active in the universe
-    Property ActiveConstellation As ClsConstellation
+    Property ActiveConstellation As ClsStarConstellation
 
     'this is the Collection of stars that are active in the universe
     Property ActiveStarCollection As List(Of IStar)

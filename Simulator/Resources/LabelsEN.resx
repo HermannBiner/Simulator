@@ -1325,4 +1325,108 @@
     <value>Part 2</value>
     <comment>Lbl</comment>
   </data>
+  <data name="StrangeAttractor" xml:space="preserve">
+    <value>Strange Attractor</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MnuGeometry" xml:space="preserve">
+    <value>Geometry</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MnuStrangeAttractors" xml:space="preserve">
+    <value>Strange Attractors</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartPoint" xml:space="preserve">
+    <value>Startpoint</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View Angle</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartPointCoordinates" xml:space="preserve">
+    <value>Startpoint Coordinates</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartConstellations" xml:space="preserve">
+    <value>Start Constellations</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Classic" xml:space="preserve">
+    <value>Classic</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Standard</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Chaotic" xml:space="preserve">
+    <value>Chaotic</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Pair" xml:space="preserve">
+    <value>Pair</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>Top left</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>Top right</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DownMiddle" xml:space="preserve">
+    <value>Bottom middle</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TakeOverPointSet" xml:space="preserve">
+    <value>Take over Startpointset</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartpointSets" xml:space="preserve">
+    <value>Startpoint Sets</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="HopfBifurcation" xml:space="preserve">
+    <value>Hopf Bifurcation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Coordinate" xml:space="preserve">
+    <value>Coordinate</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Projection" xml:space="preserve">
+    <value>Projection</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Netflix3Body" xml:space="preserve">
+    <value>Netflix 3 Body Problem</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Function" xml:space="preserve">
+    <value>Function</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DoublePair" xml:space="preserve">
+    <value>Double Pair</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Cube" xml:space="preserve">
+    <value>Cube</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Square</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Hexagon" xml:space="preserve">
+    <value>Hexagon</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Triangle" xml:space="preserve">
+    <value>Triangle</value>
+    <comment>Lbl</comment>
+  </data>
 </root>

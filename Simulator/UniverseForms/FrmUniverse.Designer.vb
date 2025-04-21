@@ -52,8 +52,8 @@ Partial Class FrmUniverse
         TxtVX = New TextBox()
         LblVelocity = New Label()
         TxtX = New TextBox()
-        LblConstellation = New Label()
-        CboConstellation = New ComboBox()
+        LblConstellations = New Label()
+        CboConstellations = New ComboBox()
         TrbStepWidth = New TrackBar()
         LblPulse = New Label()
         PicPulse = New PictureBox()
@@ -353,7 +353,6 @@ Partial Class FrmUniverse
         TxtY.Location = New Point(724, 390)
         TxtY.Margin = New Padding(4)
         TxtY.Name = "TxtY"
-        TxtY.RightToLeft = RightToLeft.Yes
         TxtY.Size = New Size(93, 21)
         TxtY.TabIndex = 95
         TxtY.Text = "000.0000"
@@ -376,7 +375,6 @@ Partial Class FrmUniverse
         TxtVX.Location = New Point(621, 439)
         TxtVX.Margin = New Padding(4)
         TxtVX.Name = "TxtVX"
-        TxtVX.RightToLeft = RightToLeft.Yes
         TxtVX.Size = New Size(95, 21)
         TxtVX.TabIndex = 79
         TxtVX.Text = "000.0000"
@@ -399,32 +397,31 @@ Partial Class FrmUniverse
         TxtX.Location = New Point(621, 390)
         TxtX.Margin = New Padding(4)
         TxtX.Name = "TxtX"
-        TxtX.RightToLeft = RightToLeft.Yes
         TxtX.Size = New Size(95, 21)
         TxtX.TabIndex = 75
         TxtX.Text = "000.0000"
         ' 
-        ' LblConstellation
+        ' LblConstellations
         ' 
-        LblConstellation.AutoSize = True
-        LblConstellation.Font = New Font("Microsoft Sans Serif", 9F)
-        LblConstellation.Location = New Point(618, 54)
-        LblConstellation.Margin = New Padding(4, 0, 4, 0)
-        LblConstellation.Name = "LblConstellation"
-        LblConstellation.Size = New Size(78, 15)
-        LblConstellation.TabIndex = 71
-        LblConstellation.Text = "Constellation"
+        LblConstellations.AutoSize = True
+        LblConstellations.Font = New Font("Microsoft Sans Serif", 9F)
+        LblConstellations.Location = New Point(618, 54)
+        LblConstellations.Margin = New Padding(4, 0, 4, 0)
+        LblConstellations.Name = "LblConstellations"
+        LblConstellations.Size = New Size(78, 15)
+        LblConstellations.TabIndex = 71
+        LblConstellations.Text = "Constellation"
         ' 
-        ' CboConstellation
+        ' CboConstellations
         ' 
-        CboConstellation.Font = New Font("Microsoft Sans Serif", 9F)
-        CboConstellation.FormattingEnabled = True
-        CboConstellation.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
-        CboConstellation.Location = New Point(621, 76)
-        CboConstellation.Margin = New Padding(4)
-        CboConstellation.Name = "CboConstellation"
-        CboConstellation.Size = New Size(199, 23)
-        CboConstellation.TabIndex = 70
+        CboConstellations.Font = New Font("Microsoft Sans Serif", 9F)
+        CboConstellations.FormattingEnabled = True
+        CboConstellations.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
+        CboConstellations.Location = New Point(621, 76)
+        CboConstellations.Margin = New Padding(4)
+        CboConstellations.Name = "CboConstellations"
+        CboConstellations.Size = New Size(199, 23)
+        CboConstellations.TabIndex = 70
         ' 
         ' TrbStepWidth
         ' 
@@ -566,7 +563,6 @@ Partial Class FrmUniverse
         TxtVY.Location = New Point(724, 439)
         TxtVY.Margin = New Padding(4)
         TxtVY.Name = "TxtVY"
-        TxtVY.RightToLeft = RightToLeft.Yes
         TxtVY.Size = New Size(95, 21)
         TxtVY.TabIndex = 85
         TxtVY.Text = "000.0000"
@@ -595,8 +591,8 @@ Partial Class FrmUniverse
         Controls.Add(PicPulse)
         Controls.Add(LblStepWidth)
         Controls.Add(TrbStepWidth)
-        Controls.Add(LblConstellation)
-        Controls.Add(CboConstellation)
+        Controls.Add(LblConstellations)
+        Controls.Add(CboConstellations)
         Controls.Add(GrpNewStar)
         Controls.Add(LblUniverse)
         Controls.Add(LblAngularMomentum)
@@ -656,8 +652,8 @@ Partial Class FrmUniverse
     Friend WithEvents LblVelocity As Label
     Friend WithEvents TxtX As TextBox
     Friend WithEvents LblPerihel As Label
-    Friend WithEvents LblConstellation As Label
-    Friend WithEvents CboConstellation As ComboBox
+    Friend WithEvents LblConstellations As Label
+    Friend WithEvents CboConstellations As ComboBox
     Friend WithEvents LblKg As Label
     Friend WithEvents TxtMass As TextBox
     Friend WithEvents LblAE As Label

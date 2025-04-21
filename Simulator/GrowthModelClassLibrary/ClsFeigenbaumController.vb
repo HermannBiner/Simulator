@@ -10,6 +10,7 @@ Public Class ClsFeigenbaumController
     'The dynamic System
     Private DS As IIteration
     Private ReadOnly MyForm As FrmFeigenbaum
+
     Private ReadOnly DiagramAreaSelector As ClsDiagramAreaSelector
 
     Private ReadOnly LM As ClsLanguageManager

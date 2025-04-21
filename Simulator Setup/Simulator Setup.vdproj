@@ -63,19 +63,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8C815C9AE1E7476787B01C89DCAC3E01"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_940708FDF2454497860777A35A310E00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2248AA4B4B341D18E27D4DF03D96455"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D714EA64EB70471DA3E6B13686574127"
+        "MsmKey" = "8:_A2B6B1A2B66548CF81BCD3100DE7649B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -372,6 +372,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8C815C9AE1E7476787B01C89DCAC3E01"
+            {
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Release Notes.pdf"
+            "TargetName" = "8:Release Notes.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_717B73147A434136A0C3A49147908102"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_940708FDF2454497860777A35A310E00"
             {
             "SourcePath" = "8:..\\Simulator\\Documentation\\Dynamische Systeme Teil 1.pdf"
@@ -392,30 +412,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2248AA4B4B341D18E27D4DF03D96455"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2B6B1A2B66548CF81BCD3100DE7649B"
             {
-            "SourcePath" = "8:..\\..\\..\\Dokumente\\Versionshinweise.pdf"
+            "SourcePath" = "8:..\\Simulator\\Documentation\\Versionshinweise.pdf"
             "TargetName" = "8:Versionshinweise.pdf"
-            "Tag" = "8:"
-            "Folder" = "8:_717B73147A434136A0C3A49147908102"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D714EA64EB70471DA3E6B13686574127"
-            {
-            "SourcePath" = "8:..\\..\\..\\Dokumente\\Release Notes.pdf"
-            "TargetName" = "8:Release Notes.pdf"
             "Tag" = "8:"
             "Folder" = "8:_717B73147A434136A0C3A49147908102"
             "Condition" = "8:"

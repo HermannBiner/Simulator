@@ -39,8 +39,8 @@ Public Class FrmTests
 
     Private Sub SetDefaulValues()
 
-        XInterval = New ClsInterval(CDec(-1.3), CDec(0.7))
-        YInterval = New ClsInterval(CDec(-1), CDec(1))
+        XInterval = New ClsInterval(CDec(-0.2), CDec(1.2))
+        YInterval = New ClsInterval(CDec(-0.2), CDec(1.2))
         MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
 
     End Sub
@@ -64,27 +64,24 @@ Public Class FrmTests
         DrawCoordinateSystem()
 
 
-        Dim phi As Decimal = 0
-        Dim Cardioide As New ClsMathpoint
-        Dim Circle As New ClsMathpoint
+        Dim u As Decimal = 0
+        Dim Sinus As New ClsMathpoint
 
         Do
-            With Cardioide
-                .X = CDec(Math.Cos(phi) / 2 - Math.Cos(2 * phi) / 4)
-                .Y = CDec(Math.Sin(phi) / 2 - Math.Sin(2 * phi) / 4)
+
+            With Sinus
+                .X = CDec(u)
+                .Y = CDec(Math.Pow(Math.Sin(u * Math.PI / 2), 2))
             End With
-            MyGraphics.DrawPoint(Cardioide, Brushes.Blue, 1)
+            MyGraphics.DrawPoint(Sinus, Brushes.Blue, 1)
 
-            With Circle
-                .X = CDec(-1 + Math.Cos(phi) / 4)
-                .Y = CDec(Math.Sin(phi) / 4)
-            End With
-            MyGraphics.DrawPoint(Circle, Brushes.Green, 1)
-
-            phi += CDec(0.001)
+            u += CDec(0.001)
 
 
-        Loop Until phi > CDec(Math.pi * 2)
+        Loop Until u > CDec(1)
+
+        MyGraphics.DrawLine(New ClsMathpoint(0, 1), New ClsMathpoint(1, 1), Color.Black, 1)
+        MyGraphics.DrawLine(New ClsMathpoint(1, 0), New ClsMathpoint(1, 1), Color.Black, 1)
 
 
     End Sub

@@ -39,10 +39,14 @@ Partial Class FrmTwoDimensions
         LblParameter = New Label()
         CboFunction = New ComboBox()
         BtnDefault = New Button()
+        GrpFunction = New GroupBox()
+        OptSensitivity = New RadioButton()
+        OptTransitivity = New RadioButton()
         CType(PicDiagram, ComponentModel.ISupportInitialize).BeginInit()
         GrpStartpoint.SuspendLayout()
         GrpExperiment.SuspendLayout()
         GrpParameter.SuspendLayout()
+        GrpFunction.SuspendLayout()
         SuspendLayout()
         ' 
         ' PicDiagram
@@ -62,7 +66,7 @@ Partial Class FrmTwoDimensions
         GrpStartpoint.Controls.Add(LblY)
         GrpStartpoint.Controls.Add(LblX)
         GrpStartpoint.Font = New Font("Microsoft Sans Serif", 9F)
-        GrpStartpoint.Location = New Point(614, 104)
+        GrpStartpoint.Location = New Point(614, 173)
         GrpStartpoint.Margin = New Padding(4)
         GrpStartpoint.Name = "GrpStartpoint"
         GrpStartpoint.Padding = New Padding(4)
@@ -115,7 +119,7 @@ Partial Class FrmTwoDimensions
         ' 
         GrpExperiment.Controls.Add(CboExperiment)
         GrpExperiment.Font = New Font("Microsoft Sans Serif", 9F)
-        GrpExperiment.Location = New Point(614, 200)
+        GrpExperiment.Location = New Point(614, 269)
         GrpExperiment.Margin = New Padding(4)
         GrpExperiment.Name = "GrpExperiment"
         GrpExperiment.Padding = New Padding(4)
@@ -137,10 +141,10 @@ Partial Class FrmTwoDimensions
         ' BtnNext10
         ' 
         BtnNext10.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnNext10.Location = New Point(612, 309)
+        BtnNext10.Location = New Point(614, 499)
         BtnNext10.Margin = New Padding(4)
         BtnNext10.Name = "BtnNext10"
-        BtnNext10.Size = New Size(256, 30)
+        BtnNext10.Size = New Size(254, 30)
         BtnNext10.TabIndex = 9
         BtnNext10.Text = "Next10Steps"
         BtnNext10.UseVisualStyleBackColor = True
@@ -159,7 +163,7 @@ Partial Class FrmTwoDimensions
         ' BtnNextStep
         ' 
         BtnNextStep.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnNextStep.Location = New Point(614, 271)
+        BtnNextStep.Location = New Point(614, 461)
         BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
         BtnNextStep.Size = New Size(254, 30)
@@ -223,11 +227,45 @@ Partial Class FrmTwoDimensions
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
         ' 
+        ' GrpFunction
+        ' 
+        GrpFunction.Controls.Add(OptTransitivity)
+        GrpFunction.Controls.Add(OptSensitivity)
+        GrpFunction.Font = New Font("Microsoft Sans Serif", 9F)
+        GrpFunction.Location = New Point(614, 103)
+        GrpFunction.Name = "GrpFunction"
+        GrpFunction.Size = New Size(254, 63)
+        GrpFunction.TabIndex = 13
+        GrpFunction.TabStop = False
+        GrpFunction.Text = "Function"
+        ' 
+        ' OptSensitivity
+        ' 
+        OptSensitivity.AutoSize = True
+        OptSensitivity.Checked = True
+        OptSensitivity.Location = New Point(13, 25)
+        OptSensitivity.Name = "OptSensitivity"
+        OptSensitivity.Size = New Size(78, 19)
+        OptSensitivity.TabIndex = 0
+        OptSensitivity.Text = "Sensitivity"
+        OptSensitivity.UseVisualStyleBackColor = True
+        ' 
+        ' OptTransitivity
+        ' 
+        OptTransitivity.AutoSize = True
+        OptTransitivity.Location = New Point(117, 25)
+        OptTransitivity.Name = "OptTransitivity"
+        OptTransitivity.Size = New Size(81, 19)
+        OptTransitivity.TabIndex = 1
+        OptTransitivity.Text = "Transitivity"
+        OptTransitivity.UseVisualStyleBackColor = True
+        ' 
         ' FrmTwoDimensions
         ' 
         AutoScaleDimensions = New SizeF(9F, 18F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(878, 615)
+        Controls.Add(GrpFunction)
         Controls.Add(BtnDefault)
         Controls.Add(CboFunction)
         Controls.Add(GrpParameter)
@@ -249,6 +287,8 @@ Partial Class FrmTwoDimensions
         GrpExperiment.ResumeLayout(False)
         GrpParameter.ResumeLayout(False)
         GrpParameter.PerformLayout()
+        GrpFunction.ResumeLayout(False)
+        GrpFunction.PerformLayout()
         ResumeLayout(False)
 
     End Sub
@@ -269,4 +309,7 @@ Partial Class FrmTwoDimensions
     Friend WithEvents LblParameter As Label
     Friend WithEvents CboFunction As ComboBox
     Friend WithEvents BtnDefault As Button
+    Friend WithEvents GrpFunction As GroupBox
+    Friend WithEvents OptSensitivity As RadioButton
+    Friend WithEvents OptTransitivity As RadioButton
 End Class

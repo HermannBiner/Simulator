@@ -566,7 +566,7 @@
     <comment>Mnu</comment>
   </data>
   <data name="MnuFractals" xml:space="preserve">
-    <value>&amp;Fraktale</value>
+    <value>&amp;Fraktale Mengen</value>
     <comment>Mnu</comment>
   </data>
   <data name="MnuGerman" xml:space="preserve">
@@ -1323,6 +1323,110 @@
   </data>
   <data name="Part2" xml:space="preserve">
     <value>Teil 2</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StrangeAttractor" xml:space="preserve">
+    <value>Seltsamer Attraktor</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MnuGeometry" xml:space="preserve">
+    <value>Geometrie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MnuStrangeAttractors" xml:space="preserve">
+    <value>Seltsame Attraktoren</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartPoint" xml:space="preserve">
+    <value>Startpunkt</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Sichtwinkel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartPointCoordinates" xml:space="preserve">
+    <value>Startpunt Koordinaten</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartConstellatrions" xml:space="preserve">
+    <value>Start Konstellationen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Classic" xml:space="preserve">
+    <value>Klassisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Standard</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Chaotic" xml:space="preserve">
+    <value>Chaotisch</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Pair" xml:space="preserve">
+    <value>Paar</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>Oben Links</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>Oben rechts</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DownMiddle" xml:space="preserve">
+    <value>Unten Mitte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="TakeOverPointSet" xml:space="preserve">
+    <value>Übernehme Startpunktmenge</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartpointSets" xml:space="preserve">
+    <value>Startpunkt Mengen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="HopfBifurcation" xml:space="preserve">
+    <value>Hopf Bifurkation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Coordinate" xml:space="preserve">
+    <value>Koordinate</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Projection" xml:space="preserve">
+    <value>Projektion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Netflix3Body" xml:space="preserve">
+    <value>Netflix Dreikörperproblem</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Function" xml:space="preserve">
+    <value>Funktion</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="DoublePair" xml:space="preserve">
+    <value>Doppelpaar</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Cube" xml:space="preserve">
+    <value>Kubus</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Quadrat</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Hexagon" xml:space="preserve">
+    <value>Sechseck</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Triangle" xml:space="preserve">
+    <value>Dreieck</value>
     <comment>Lbl</comment>
   </data>
 </root>

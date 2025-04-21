@@ -160,12 +160,12 @@ Public Class ClsUniverseController
         'like our planet system with our sun 
         DS.CreateConstellations()
 
-        MyForm.CboConstellation.Items.Clear()
+        MyForm.CboConstellations.Items.Clear()
 
-        For Each Constellation As ClsConstellation In DS.Constellations
-            MyForm.CboConstellation.Items.Add(Constellation.Name)
+        For Each Constellation As ClsStarConstellation In DS.Constellations
+            MyForm.CboConstellations.Items.Add(Constellation.Name)
         Next
-        MyForm.CboConstellation.SelectedIndex = 0
+        MyForm.CboConstellations.SelectedIndex = 0
 
         'each constellation has a set of stars or planets
         FillDefaultStars()
@@ -180,9 +180,9 @@ Public Class ClsUniverseController
         'Fill CboDefaultStar with all stars of the Constellation
         MyForm.CboDefaultStar.Items.Clear()
 
-        Dim Name As String = MyForm.CboConstellation.SelectedItem.ToString
+        Dim Name As String = MyForm.CboConstellations.SelectedItem.ToString
 
-        For Each Constellation As ClsConstellation In DS.Constellations
+        For Each Constellation As ClsStarConstellation In DS.Constellations
             If Constellation.Name = Name Then
                 DS.ActiveConstellation = Constellation
                 DS.VFactor = Constellation.VFactor
@@ -300,9 +300,14 @@ Public Class ClsUniverseController
 
         EnableClearArea()
         EnableNewStarArea(True)
-        MyForm.BtnStart.Enabled = False
-        MyForm.BtnTakeOverConstellation.Enabled = True
-
+        With MyForm
+            .CboUniverse.Enabled = True
+            .CboConstellations.Enabled = True
+            .CboDefaultStar.Enabled = True
+            .BtnStart.Enabled = False
+            .BtnTakeOverConstellation.Enabled = True
+            .BtnNewStar.Enabled = True
+        End With
     End Sub
 
     Public Function GetColor(ColorName As String) As Brush
@@ -409,7 +414,7 @@ Public Class ClsUniverseController
             End With
 
             'but it should be in the allowed range
-            With DS.VelocityParameterDefinition.Range
+            With DS.VelocityParameter.Range
                 NewVelocity.X = CDec(Math.Min(.B, Math.Max(.A, NewVelocity.X)))
                 NewVelocity.Y = CDec(Math.Min(.B, Math.Max(.A, NewVelocity.Y)))
             End With
@@ -444,7 +449,12 @@ Public Class ClsUniverseController
             .BtnClearUniverse.Enabled = IsEnabled
             .BtnStop.Enabled = False
             .BtnTakeOverConstellation.Enabled = False
+            .CboUniverse.Enabled = False
+            .CboDefaultStar.Enabled = False
+            .CboStarColor.Enabled = False
+            .CboConstellations.Enabled = False
             .ChkZoom.Enabled = IsEnabled
+            .BtnNewStar.Enabled = False
         End With
     End Sub
 
@@ -455,6 +465,8 @@ Public Class ClsUniverseController
             .BtnNewStar.Enabled = True
             .BtnStart.Enabled = IsEnabled
             .BtnSave.Enabled = Not IsEnabled
+            .CboDefaultStar.Enabled = IsEnabled
+            .CboStarColor.Enabled = IsEnabled
         End With
     End Sub
 
@@ -466,6 +478,8 @@ Public Class ClsUniverseController
             .BtnClearUniverse.Enabled = True
             .BtnStop.Enabled = False
             .BtnTakeOverConstellation.Enabled = False
+            .CboUniverse.Enabled = False
+            .CboConstellations.Enabled = False
             .ChkZoom.Enabled = True
         End With
     End Sub
@@ -515,7 +529,6 @@ Public Class ClsUniverseController
         'Buttons
         EnableStartArea()
         EnableClearArea()
-        MyForm.BtnNewStar.Enabled = True
         SetTrbFromStepWidth(DS.ActiveConstellation.ProposedStepWidth)
     End Sub
 
@@ -595,8 +608,9 @@ Public Class ClsUniverseController
 
             DS.ActiveStarCollection.Add(NewStar)
 
-            EnableNewStarArea(True)
             EnableClearArea()
+            EnableNewStarArea(True)
+
             SetTrbFromStepWidth(CDec(NewStar.ProposedStepWidth))
             NewStar = Nothing
         Else
@@ -653,12 +667,12 @@ Public Class ClsUniverseController
                     StartEnergy = Math.Abs(StartEnergy * 100)
                     StartAngularMomentum = Math.Abs(StartAngularMomentum)
                     SetStepWidthFromTrb()
+                    Watch.Start()
                 Else
                     'Message already generated
                     ResetIteration()
                     SetAllStarsDefaultUserData()
                 End If
-                Watch.Start()
             Else
                 MsgBox(LM.GetString("NoStarsInTheUniverse"))
             End If
@@ -675,7 +689,8 @@ Public Class ClsUniverseController
             MyForm.BtnStart.Enabled = False
             EnableResetArea(False)
             MyForm.BtnStop.Enabled = True
-
+            MyForm.CboUniverse.Enabled = False
+            MyForm.CboConstellations.Enabled = False
             Application.DoEvents()
 
             Await IterationLoop()
@@ -814,11 +829,11 @@ Public Class ClsUniverseController
 
     Private Function IsUserDataOK() As Boolean
 
-        Dim CheckPositionX = New ClsCheckUserData(MyForm.TxtX, DS.PositionParameterDefinition.Range)
-        Dim CheckPositionY = New ClsCheckUserData(MyForm.TxtY, DS.PositionParameterDefinition.Range)
-        Dim CheckMass = New ClsCheckUserData(MyForm.TxtMass, DS.MassParameterDefinition.Range)
-        Dim CheckVelocityX = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameterDefinition.Range)
-        Dim CheckVelocityY = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameterDefinition.Range)
+        Dim CheckPositionX = New ClsCheckUserData(MyForm.TxtX, DS.PositionParameter.Range)
+        Dim CheckPositionY = New ClsCheckUserData(MyForm.TxtY, DS.PositionParameter.Range)
+        Dim CheckMass = New ClsCheckUserData(MyForm.TxtMass, DS.MassParameter.Range)
+        Dim CheckVelocityX = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameter.Range)
+        Dim CheckVelocityY = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameter.Range)
 
         Return CheckPositionX.IsTxtValueAllowed And CheckPositionY.IsTxtValueAllowed And
             CheckVelocityX.IsTxtValueAllowed And CheckVelocityY.IsTxtValueAllowed And

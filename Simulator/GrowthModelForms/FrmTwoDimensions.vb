@@ -56,6 +56,9 @@ Public Class FrmTwoDimensions
         BtnNext10.Text = LM.GetString("Next10Steps")
         GrpStartpoint.Text = LM.GetString("CoordinatesStartpoint")
         BtnDefault.Text = LM.GetString("DefaultUserData")
+        GrpFunction.Text = LM.GetString("Function")
+        OptSensitivity.Text = LM.GetString("Sensitivity")
+        OptTransitivity.Text = LM.GetString("Transitivity")
 
     End Sub
 
@@ -84,6 +87,31 @@ Public Class FrmTwoDimensions
         End If
     End Sub
 
+    'SECTOR SET STARTPARAMETER
+
+    Private Sub PicDiagram_MouseDown(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseDown
+        If IsFormLoaded Then
+            FC.MouseDown(e)
+        End If
+
+    End Sub
+
+    Private Sub PicDiagram_MouseUp(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseUp
+
+        If IsFormLoaded Then
+            FC.MouseUp(e)
+        End If
+
+    End Sub
+
+    Private Sub PicDiagram_MouseMove(sender As Object, e As MouseEventArgs) Handles PicDiagram.MouseMove
+
+        If IsFormLoaded Then
+            FC.MouseMove(e)
+        End If
+
+    End Sub
+
     'SECTOR ITERATION
 
     Private Sub BtnNextStep_Click(sender As Object, e As EventArgs) Handles BtnNextStep.Click
@@ -100,4 +128,15 @@ Public Class FrmTwoDimensions
         End If
     End Sub
 
+    Private Sub OptSensitivity_CheckedChanged(sender As Object, e As EventArgs) Handles OptSensitivity.CheckedChanged
+        If IsFormLoaded Then
+            FC.SetFunction
+        End If
+    End Sub
+
+    Private Sub OptTransitivity_CheckedChanged(sender As Object, e As EventArgs) Handles OptTransitivity.CheckedChanged
+        If IsFormLoaded Then
+            FC.SetFunction
+        End If
+    End Sub
 End Class

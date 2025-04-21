@@ -7,41 +7,43 @@
 Public Class ClsNewtonUniverse
     Inherits ClsUniverseAbstract
 
-    Private OurPlanetSystem As ClsConstellation
-    Private OurPlanetSystemDisturbed As ClsConstellation
-    Private InnerPlanets As ClsConstellation
-    Private InnerPlanetsDisturbed As ClsConstellation
-    Private ThreeSymmetricBodies As ClsConstellation
-    Private ThreeSymmetricBodiesDisturbed As ClsConstellation
-    Private FourSymmetricBodies As ClsConstellation
-    Private FourSymmetricBodiesDisturbed As ClsConstellation
-    Private SixSymmetricBodies As ClsConstellation
-    Private SixSymmetricBodiesDisturbed As ClsConstellation
+    Private OurPlanetSystem As ClsStarConstellation
+    Private OurPlanetSystemDisturbed As ClsStarConstellation
+    Private InnerPlanets As ClsStarConstellation
+    Private InnerPlanetsDisturbed As ClsStarConstellation
+    Private ThreeSymmetricBodies As ClsStarConstellation
+    Private ThreeSymmetricBodiesDisturbed As ClsStarConstellation
+    Private FourSymmetricBodies As ClsStarConstellation
+    Private FourSymmetricBodiesDisturbed As ClsStarConstellation
+    Private SixSymmetricBodies As ClsStarConstellation
+    Private SixSymmetricBodiesDisturbed As ClsStarConstellation
+    Private Netflix3Body As ClsStarConstellation
 
     Public Sub New()
         'Here are the defninitions of all ranges of the star-parameters
 
         Mathinterval = New ClsInterval(-32, 32)
 
-        MyPositionParameterDefinition = New ClsGeneralParameter(1, "Position",
+        MyPositionParameter = New ClsGeneralParameter(1, "Position",
                   New ClsInterval(-32, 32), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-        MyVelocityParameterDefinition = New ClsGeneralParameter(2, "Velocity",
+        MyVelocityParameter = New ClsGeneralParameter(2, "Velocity",
                   New ClsInterval(-1, 1), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-        MyMassParameterDefinition = New ClsGeneralParameter(3, "Mass",
+        MyMassParameter = New ClsGeneralParameter(3, "Mass",
                   New ClsInterval(CDec(0.05), CDec(500000)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyMaxZoom = 25
 
-        OurPlanetSystem = New ClsConstellation
-        OurPlanetSystemDisturbed = New ClsConstellation
-        InnerPlanets = New ClsConstellation
-        InnerPlanetsDisturbed = New ClsConstellation
-        ThreeSymmetricBodies = New ClsConstellation
-        ThreeSymmetricBodiesDisturbed = New ClsConstellation
-        FourSymmetricBodies = New ClsConstellation
-        FourSymmetricBodiesDisturbed = New ClsConstellation
-        SixSymmetricBodies = New ClsConstellation
-        SixSymmetricBodiesDisturbed = New ClsConstellation
+        OurPlanetSystem = New ClsStarConstellation
+        OurPlanetSystemDisturbed = New ClsStarConstellation
+        InnerPlanets = New ClsStarConstellation
+        InnerPlanetsDisturbed = New ClsStarConstellation
+        ThreeSymmetricBodies = New ClsStarConstellation
+        ThreeSymmetricBodiesDisturbed = New ClsStarConstellation
+        FourSymmetricBodies = New ClsStarConstellation
+        FourSymmetricBodiesDisturbed = New ClsStarConstellation
+        SixSymmetricBodies = New ClsStarConstellation
+        SixSymmetricBodiesDisturbed = New ClsStarConstellation
+        Netflix3Body = New ClsStarConstellation
 
     End Sub
 
@@ -139,6 +141,13 @@ Public Class ClsNewtonUniverse
         SixSymmetricBodiesDisturbed.VFactor = 1000
         Fill6SymmetricBodies(True)
         MyConstellations.Add(SixSymmetricBodiesDisturbed)
+
+        'Netflix 3 body
+        Netflix3Body.Name = LM.GetString("Netflix3Body")
+        Netflix3Body.ProposedStepWidth = CDec(1)
+        Netflix3Body.VFactor = 1000
+        FillNetflix3Body()
+        MyConstellations.Add(Netflix3Body)
 
     End Sub
 
@@ -796,6 +805,107 @@ Public Class ClsNewtonUniverse
 
     End Sub
 
+    Private Sub FillNetflix3Body()
+
+        Dim Sun1 As New ClsNewtonStar
+
+        'Sun1
+        With Sun1
+            .PicDiagram = MyPicDiagram
+            .PicGraphics = MyPicGraphics
+            .BmpDiagram = MyBmpDiagram
+            .BmpGraphics = MyBmpGraphics
+            .PicPhasePortrait = MyPicPhasePortrait
+            .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
+            .Name = LM.GetString("Sun") & " 1"
+            .StarColor = Brushes.Gold
+            .OriginalMass = 333000
+            .Size = 5
+            .Perihel = 15
+            .ArgumentPerihel = 0
+            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .SetDefaultParameterByPerihelData()
+            .SetDefaultUserData()
+            .Universe = Me
+            .ProposedStepWidth = CDec(1)
+        End With
+        Netflix3Body.AddStar(Sun1)
+
+
+        Dim Sun2 As New ClsNewtonStar
+
+        'Sun2
+        With Sun2
+            .PicDiagram = MyPicDiagram
+            .PicGraphics = MyPicGraphics
+            .BmpDiagram = MyBmpDiagram
+            .BmpGraphics = MyBmpGraphics
+            .PicPhasePortrait = MyPicPhasePortrait
+            .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
+            .Name = LM.GetString("Sun") & " 2"
+            .StarColor = Brushes.Gold
+            .OriginalMass = 333000
+            .Size = 5
+            .Perihel = 15
+            .ArgumentPerihel = CDec(2 * Math.PI / 3)
+            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .SetDefaultParameterByPerihelData()
+            .SetDefaultUserData()
+            .Universe = Me
+            .ProposedStepWidth = CDec(1)
+        End With
+        Netflix3Body.AddStar(Sun2)
+
+
+        Dim Sun3 As New ClsNewtonStar
+
+        'Sun3
+        With Sun3
+            .PicDiagram = MyPicDiagram
+            .PicGraphics = MyPicGraphics
+            .BmpDiagram = MyBmpDiagram
+            .BmpGraphics = MyBmpGraphics
+            .PicPhasePortrait = MyPicPhasePortrait
+            .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
+            .Name = LM.GetString("Sun") & " 3"
+            .OriginalMass = 333000
+            .Size = 5
+            .ArgumentPerihel = CDec(4 * Math.PI / 3)
+            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .StarColor = Brushes.Gold
+            .Perihel = 15
+            .SetDefaultParameterByPerihelData()
+            .SetDefaultUserData()
+            .Universe = Me
+            .ProposedStepWidth = CDec(1)
+        End With
+        Netflix3Body.AddStar(Sun3)
+
+        Dim Planet As New ClsNewtonStar
+
+        'Planet
+        With Planet
+            .PicDiagram = MyPicDiagram
+            .PicGraphics = MyPicGraphics
+            .BmpDiagram = MyBmpDiagram
+            .BmpGraphics = MyBmpGraphics
+            .PicPhasePortrait = MyPicPhasePortrait
+            .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
+            .Name = LM.GetString("Planet")
+            .OriginalMass = 1
+            .Size = 4
+            .ArgumentPerihel = CDec(2 * Math.PI / 3)
+            .PerihelVelocity = CDec(0.01 * .Tau)
+            .StarColor = Brushes.LightBlue
+            .Perihel = 13
+            .SetDefaultParameterByPerihelData()
+            .SetDefaultUserData()
+            .Universe = Me
+            .ProposedStepWidth = CDec(1)
+        End With
+        Netflix3Body.AddStar(Planet)
+
+    End Sub
     Protected Overrides Function GetNewStar(Name As String) As IStar
 
         Dim NewStar As New ClsNewtonStar

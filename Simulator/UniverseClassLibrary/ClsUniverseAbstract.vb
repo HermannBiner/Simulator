@@ -35,13 +35,13 @@ Public MustInherit Class ClsUniverseAbstract
 
     'Ranges and ParameterDefinitions
     Protected MathInterval As ClsInterval
-    Protected MyPositionParameterDefinition As ClsGeneralParameter
-    Protected MyVelocityParameterDefinition As ClsGeneralParameter
-    Protected MyMassParameterDefinition As ClsGeneralParameter
+    Protected MyPositionParameter As ClsGeneralParameter
+    Protected MyVelocityParameter As ClsGeneralParameter
+    Protected MyMassParameter As ClsGeneralParameter
 
     'all constellations of the universe
-    Protected MyConstellations As List(Of ClsConstellation)
-    Protected MyActiveConstellation As ClsConstellation
+    Protected MyConstellations As List(Of ClsStarConstellation)
+    Protected MyActiveConstellation As ClsStarConstellation
 
     'all stars that are active in the universe
     Protected MyActiveStarCollection As List(Of IStar)
@@ -84,39 +84,39 @@ Public MustInherit Class ClsUniverseAbstract
         End Get
     End Property
 
-    ReadOnly Property PositionParameterDefinition As ClsGeneralParameter _
-        Implements IUniverse.PositionParameterDefinition
+    ReadOnly Property PositionParameter As ClsGeneralParameter _
+        Implements IUniverse.PositionParameter
         Get
-            PositionParameterDefinition = MyPositionParameterDefinition
+            PositionParameter = MyPositionParameter
         End Get
     End Property
 
-    ReadOnly Property VelocityParameterDefinition As ClsGeneralParameter _
-        Implements IUniverse.VelocityParameterDefinition
+    ReadOnly Property VelocityParameter As ClsGeneralParameter _
+        Implements IUniverse.VelocityParameter
         Get
-            VelocityParameterDefinition = MyVelocityParameterDefinition
+            VelocityParameter = MyVelocityParameter
         End Get
     End Property
 
-    ReadOnly Property MassParameterDefinition As ClsGeneralParameter _
-        Implements IUniverse.MassParameterDefinition
+    ReadOnly Property MassParameter As ClsGeneralParameter _
+        Implements IUniverse.MassParameter
         Get
-            MassParameterDefinition = MyMassParameterDefinition
+            MassParameter = MyMassParameter
         End Get
     End Property
 
-    ReadOnly Property Constellations As List(Of ClsConstellation) _
+    ReadOnly Property Constellations As List(Of ClsStarConstellation) _
         Implements IUniverse.Constellations
         Get
             Constellations = MyConstellations
         End Get
     End Property
 
-    Property ActiveConstellation As ClsConstellation Implements IUniverse.ActiveConstellation
+    Property ActiveConstellation As ClsStarConstellation Implements IUniverse.ActiveConstellation
         Get
             ActiveConstellation = MyActiveConstellation
         End Get
-        Set(value As ClsConstellation)
+        Set(value As ClsStarConstellation)
             MyActiveConstellation = value
         End Set
     End Property
@@ -167,7 +167,7 @@ Public MustInherit Class ClsUniverseAbstract
 
         LM = ClsLanguageManager.LM
         MyDiagramZoom = 1 'Default
-        MyConstellations = New List(Of ClsConstellation)
+        MyConstellations = New List(Of ClsStarConstellation)
         MyActiveStarCollection = New List(Of IStar)
         MyGlobalCentreOfGravity = New ClsVector
     End Sub

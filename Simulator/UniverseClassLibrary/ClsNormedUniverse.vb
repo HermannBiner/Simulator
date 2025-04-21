@@ -9,12 +9,12 @@
 Public Class ClsNormedUniverse
     Inherits ClsUniverseAbstract
 
-    Private IA1 As ClsConstellation
-    Private IA2 As ClsConstellation
-    Private IA3 As ClsConstellation
-    Private IB1 As ClsConstellation
-    Private IB2 As ClsConstellation
-    Private IIC1 As ClsConstellation
+    Private IA1 As ClsStarConstellation
+    Private IA2 As ClsStarConstellation
+    Private IA3 As ClsStarConstellation
+    Private IB1 As ClsStarConstellation
+    Private IB2 As ClsStarConstellation
+    Private IIC1 As ClsStarConstellation
     Private ParameterTupel As ClsVector
 
     Public Sub New()
@@ -22,21 +22,21 @@ Public Class ClsNormedUniverse
         ParameterTupel = New ClsVector
 
         MathInterval = New ClsInterval(-2, 2)
-        MyPositionParameterDefinition = New ClsGeneralParameter(1, "Position",
+        MyPositionParameter = New ClsGeneralParameter(1, "Position",
                     New ClsInterval(-2, 2), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-        MyVelocityParameterDefinition = New ClsGeneralParameter(2, "Velocity",
+        MyVelocityParameter = New ClsGeneralParameter(2, "Velocity",
                     New ClsInterval(-1, 1), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-        MyMassParameterDefinition = New ClsGeneralParameter(3, "Mass",
+        MyMassParameter = New ClsGeneralParameter(3, "Mass",
                     New ClsInterval(CDec(0.5), CDec(2)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyMaxZoom = CDec(1.5)
 
-        IA1 = New ClsConstellation
-        IA2 = New ClsConstellation
-        IA3 = New ClsConstellation
-        IB1 = New ClsConstellation
-        IB2 = New ClsConstellation
-        IIC1 = New ClsConstellation
+        IA1 = New ClsStarConstellation
+        IA2 = New ClsStarConstellation
+        IA3 = New ClsStarConstellation
+        IB1 = New ClsStarConstellation
+        IB2 = New ClsStarConstellation
+        IIC1 = New ClsStarConstellation
 
     End Sub
 
@@ -107,7 +107,7 @@ Public Class ClsNormedUniverse
         End With
     End Sub
 
-    Private Sub FillConstellation(LocConstellation As ClsConstellation)
+    Private Sub FillConstellation(LocConstellation As ClsStarConstellation)
 
         Dim Star1 As New ClsNormedStar
         With Star1

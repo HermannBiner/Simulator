@@ -2,7 +2,6 @@
 
 'Status Checked
 
-Imports System.Runtime.CompilerServices
 
 Public Class ClsNewtonStar
     Inherits ClsStarAbstract

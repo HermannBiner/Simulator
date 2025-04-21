@@ -58,7 +58,7 @@ Partial Class FrmFeigenbaum
         ' BtnReset
         ' 
         BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnReset.Location = New Point(586, 555)
+        BtnReset.Location = New Point(589, 555)
         BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
         BtnReset.Size = New Size(276, 30)
@@ -69,7 +69,7 @@ Partial Class FrmFeigenbaum
         ' BtnStart
         ' 
         BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnStart.Location = New Point(589, 293)
+        BtnStart.Location = New Point(589, 479)
         BtnStart.Margin = New Padding(4)
         BtnStart.Name = "BtnStart"
         BtnStart.Size = New Size(276, 30)
@@ -148,7 +148,7 @@ Partial Class FrmFeigenbaum
         TxtXMax.AcceptsReturn = True
         TxtXMax.AcceptsTab = True
         TxtXMax.Font = New Font("Microsoft Sans Serif", 9F)
-        TxtXMax.Location = New Point(636, 186)
+        TxtXMax.Location = New Point(636, 203)
         TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
         TxtXMax.Size = New Size(229, 21)
@@ -158,7 +158,7 @@ Partial Class FrmFeigenbaum
         ' 
         LblXmax.AutoSize = True
         LblXmax.Font = New Font("Microsoft Sans Serif", 9F)
-        LblXmax.Location = New Point(589, 186)
+        LblXmax.Location = New Point(589, 203)
         LblXmax.Margin = New Padding(4, 0, 4, 0)
         LblXmax.Name = "LblXmax"
         LblXmax.Size = New Size(49, 15)
@@ -170,7 +170,7 @@ Partial Class FrmFeigenbaum
         TxtXMin.AcceptsReturn = True
         TxtXMin.AcceptsTab = True
         TxtXMin.Font = New Font("Microsoft Sans Serif", 9F)
-        TxtXMin.Location = New Point(636, 159)
+        TxtXMin.Location = New Point(636, 176)
         TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
         TxtXMin.Size = New Size(229, 21)
@@ -180,7 +180,7 @@ Partial Class FrmFeigenbaum
         ' 
         LblXmin.AutoSize = True
         LblXmin.Font = New Font("Microsoft Sans Serif", 9F)
-        LblXmin.Location = New Point(586, 162)
+        LblXmin.Location = New Point(586, 179)
         LblXmin.Margin = New Padding(4, 0, 4, 0)
         LblXmin.Name = "LblXmin"
         LblXmin.Size = New Size(46, 15)
@@ -191,7 +191,7 @@ Partial Class FrmFeigenbaum
         ' 
         LblValueRange.AutoSize = True
         LblValueRange.Font = New Font("Microsoft Sans Serif", 9F)
-        LblValueRange.Location = New Point(586, 138)
+        LblValueRange.Location = New Point(586, 155)
         LblValueRange.Margin = New Padding(4, 0, 4, 0)
         LblValueRange.Name = "LblValueRange"
         LblValueRange.Size = New Size(141, 15)
@@ -213,7 +213,7 @@ Partial Class FrmFeigenbaum
         ' 
         LblDeltaX.AutoSize = True
         LblDeltaX.Font = New Font("Microsoft Sans Serif", 9F)
-        LblDeltaX.Location = New Point(589, 211)
+        LblDeltaX.Location = New Point(589, 228)
         LblDeltaX.Margin = New Padding(4, 0, 4, 0)
         LblDeltaX.Name = "LblDeltaX"
         LblDeltaX.Size = New Size(49, 15)
@@ -226,7 +226,7 @@ Partial Class FrmFeigenbaum
         ChkSplitPoints.Checked = True
         ChkSplitPoints.CheckState = CheckState.Checked
         ChkSplitPoints.Font = New Font("Microsoft Sans Serif", 9F)
-        ChkSplitPoints.Location = New Point(589, 239)
+        ChkSplitPoints.Location = New Point(589, 273)
         ChkSplitPoints.Margin = New Padding(4)
         ChkSplitPoints.Name = "ChkSplitPoints"
         ChkSplitPoints.Size = New Size(115, 19)
@@ -238,7 +238,7 @@ Partial Class FrmFeigenbaum
         ' 
         ChkColored.AutoSize = True
         ChkColored.Font = New Font("Microsoft Sans Serif", 9F)
-        ChkColored.Location = New Point(589, 266)
+        ChkColored.Location = New Point(589, 300)
         ChkColored.Margin = New Padding(4)
         ChkColored.Name = "ChkColored"
         ChkColored.Size = New Size(117, 19)
@@ -249,7 +249,7 @@ Partial Class FrmFeigenbaum
         ' BtnDefault
         ' 
         BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnDefault.Location = New Point(586, 517)
+        BtnDefault.Location = New Point(589, 517)
         BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
         BtnDefault.Size = New Size(276, 30)

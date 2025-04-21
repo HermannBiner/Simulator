@@ -66,7 +66,7 @@ Public Class FrmUniverse
         LblDefault.Text = LM.GetString("Default")
         LblUniverse.Text = LM.GetString("Universe")
         BtnTakeOverConstellation.Text = LM.GetString("TakeOverConstellation")
-        LblConstellation.Text = LM.GetString("Constellation")
+        LblConstellations.Text = LM.GetString("Constellation")
         LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
         LblPulse.Text = LM.GetString("Pulse")
         LblAngularMomentum.Text = LM.GetString("Angular Momentum")
@@ -143,7 +143,7 @@ Public Class FrmUniverse
         End If
     End Sub
 
-    Private Sub CboConstellation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboConstellation.SelectedIndexChanged
+    Private Sub CboConstellation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboConstellations.SelectedIndexChanged
         If IsFormLoaded Then
             FC.FillDefaultStars()
         End If
