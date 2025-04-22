@@ -187,6 +187,7 @@ Public Class ClsNewtonIterationController
             End If
         End With
         ResetIteration()
+        SetDefaultUserData()
     End Sub
 
     Public Sub SetOptions()
@@ -256,7 +257,13 @@ Public Class ClsNewtonIterationController
                 ResetIteration()
                 DiagramAreaSelector.IsActivated = False
                 With DS
-                    SetExponent()
+                    With DS
+                        If .IsUseN Then
+                            .N = CInt(MyForm.CboN.SelectedItem)
+                        Else
+                            .N = 3
+                        End If
+                    End With
                     IterationStatus = ClsDynamics.EnIterationStatus.Ready
                     .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
                     .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))

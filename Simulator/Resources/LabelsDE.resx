@@ -1429,4 +1429,20 @@
     <value>Dreieck</value>
     <comment>Lbl</comment>
   </data>
+  <data name="MnuBifurcation" xml:space="preserve">
+    <value>Bifurkation</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="Mnu3DAttractors" xml:space="preserve">
+    <value>3D Attraktoren</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuLSystems" xml:space="preserve">
+    <value>L-Systeme</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="MnuIFSystems" xml:space="preserve">
+    <value>IF-Systeme</value>
+    <comment>Mnu</comment>
+  </data>
 </root>

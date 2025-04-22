@@ -5,7 +5,7 @@
 
 'Status Tested
 
-Public Class FrmHopfBifurcation
+Public Class FrmBifurcation
 
 
     Private IsFormLoaded As Boolean
@@ -36,7 +36,7 @@ Public Class FrmHopfBifurcation
 
     Private Sub InitializeLanguage()
 
-        Text = LM.GetString("HopfBifurcation")
+        Text = LM.GetString("Bifurcation")
         LblDeltaX.Text = LM.GetString("Delta") & " = "
         LblDeltaA.Text = LM.GetString("Delta") & " = "
         LblValueRange.Text = LM.GetString("ExaminatedValueRange")

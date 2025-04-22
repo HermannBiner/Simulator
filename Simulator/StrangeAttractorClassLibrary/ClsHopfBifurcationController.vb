@@ -9,7 +9,7 @@ Public Class ClsHopfBifurcationController
 
     'The dynamic System
     Private DS As IStrangeAttractor
-    Private ReadOnly MyForm As FrmHopfBifurcation
+    Private ReadOnly MyForm As FrmBifurcation
 
     Private ReadOnly DiagramAreaSelector As ClsDiagramAreaSelector
 
@@ -45,7 +45,7 @@ Public Class ClsHopfBifurcationController
 
     'SECTOR INITIALIZATION
 
-    Public Sub New(Form As FrmHopfBifurcation)
+    Public Sub New(Form As FrmBifurcation)
         LM = ClsLanguageManager.LM
 
         MyForm = Form
