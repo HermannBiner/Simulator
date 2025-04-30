@@ -2,6 +2,7 @@
 
 'Status Checked
 
+Imports System.Formats
 Imports System.Globalization
 Imports System.Reflection
 
@@ -122,19 +123,27 @@ Public Class ClsUniverseController
 
         End If
 
+        'DS is the Universe
+        With DS
+            .PicDiagram = MyForm.PicDiagram
+            .PicPhaseportrait = MyForm.PicPhasePortrait
+        End With
+
+        'a constellation is a set of stars or a system of planets
+        'like our planet system with our sun 
+        DS.CreateConstellations()
+
         'Setting the standard parameters
         InitializeMe()
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
-        'DS is the Universe
-        With DS
-            .PicDiagram = MyForm.PicDiagram
-            .PicPhaseportrait = MyForm.PicPhasePortrait
-
-        End With
+        'after a resize, PicDiagram changes its size
+        'and the size of the BmpDiagram has to be set again
+        'the BmpGraphics is the same as PicGraphics
+        DS.PicDiagram = MyForm.PicDiagram
 
         'Filling the available colors for stars
         With MyForm.CboStarColor
@@ -155,10 +164,6 @@ Public Class ClsUniverseController
 
         'Setting Standard Values
         MyForm.CboStarColor.SelectedIndex = 0
-
-        'a constellation is a set of stars or a system of planets
-        'like our planet system with our sun 
-        DS.CreateConstellations()
 
         MyForm.CboConstellations.Items.Clear()
 
@@ -259,7 +264,9 @@ Public Class ClsUniverseController
             IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
             .BtnStart.Text = LM.GetString("Start")
-            EnableStartArea()
+
+            MyForm.BtnNewStar.Enabled = False
+            MyForm.BtnSave.Enabled = False
             EnableResetArea(True)
 
             .PicEnergy.Refresh()
@@ -281,6 +288,10 @@ Public Class ClsUniverseController
         If DS.ActiveStarCollection IsNot Nothing Then
             For Each aStar As IStar In DS.ActiveStarCollection
                 aStar.SetDefaultUserData()
+                aStar.PicDiagram = DS.PicDiagram
+                aStar.PicGraphics = DS.PicGraphics
+                aStar.BmpDiagram = DS.BmpDiagram
+                aStar.BmpGraphics = DS.BmpGraphics
             Next
         End If
         DS.RedrawUniverse(NewStar, IsDiagramZoom)
@@ -454,7 +465,7 @@ Public Class ClsUniverseController
             .CboStarColor.Enabled = False
             .CboConstellations.Enabled = False
             .ChkZoom.Enabled = IsEnabled
-            .BtnNewStar.Enabled = False
+            '.BtnNewStar.Enabled = False
         End With
     End Sub
 
@@ -553,7 +564,10 @@ Public Class ClsUniverseController
 
             'The NewStar is activated
             GetNewStar()
-
+            NewStar.PicDiagram = DS.PicDiagram
+            NewStar.PicGraphics = DS.PicGraphics
+            NewStar.BmpDiagram = DS.BmpDiagram
+            NewStar.BmpGraphics = DS.BmpGraphics
             DS.RedrawUniverse(NewStar, IsDiagramZoom)
             EnableNewStarArea(False)
             EnableResetArea(False)

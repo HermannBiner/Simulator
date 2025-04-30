@@ -97,6 +97,8 @@ Public Class ClsStrangeAttractorController
 
         End If
 
+        DS.CreateStartPointSets()
+
         'Setting the standard parameters
         InitializeMe()
 
@@ -106,8 +108,7 @@ Public Class ClsStrangeAttractorController
 
     End Sub
 
-    Private Sub InitializeMe()
-        DS.CreateStartPointSets()
+    Public Sub InitializeMe()
 
         MyForm.CboStartpointSets.Items.Clear()
 

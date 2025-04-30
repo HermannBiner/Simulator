@@ -21,6 +21,7 @@ Public Class FrmTwoDimensions
     Private FC As ClsTwoDimensionsController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
 
@@ -39,6 +40,32 @@ Public Class FrmTwoDimensions
 
         'Fill DS-List into CboFunction
         FC.FillDynamicSystem()
+    End Sub
+    Private Sub FrmTwoDimensions_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer.Panel1.Width, SplitContainer.Panel1.Height), 10)
+                PicDiagram.Width = DiagramSize
+                PicDiagram.Height = DiagramSize
+                SplitContainer.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer.SplitterDistance - DiagramSize
+                PicDiagram.Top = CboFunction.Top
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmTwoDimensions_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -130,13 +157,27 @@ Public Class FrmTwoDimensions
 
     Private Sub OptSensitivity_CheckedChanged(sender As Object, e As EventArgs) Handles OptSensitivity.CheckedChanged
         If IsFormLoaded Then
-            FC.SetFunction
+            FC.SetFunction()
         End If
     End Sub
 
     Private Sub OptTransitivity_CheckedChanged(sender As Object, e As EventArgs) Handles OptTransitivity.CheckedChanged
         If IsFormLoaded Then
-            FC.SetFunction
+            FC.SetFunction()
+        End If
+    End Sub
+
+    Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmTwoDimensions_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
         End If
     End Sub
 End Class

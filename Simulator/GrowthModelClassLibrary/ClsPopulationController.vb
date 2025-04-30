@@ -118,7 +118,7 @@ Public Class ClsPopulationController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
         PicDiagramSize = Math.Min(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
         MyForm.PicDiagram.Height = PicDiagramSize
         MyForm.PicDiagram.Width = PicDiagramSize

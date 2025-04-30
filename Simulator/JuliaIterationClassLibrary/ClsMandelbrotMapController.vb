@@ -23,7 +23,7 @@ Public Class ClsMandelbrotMapController
 
     'Length of a branche of the spiral
     'see Sub IterationLoop
-    Private L As Integer = 0
+    Private L As Integer
 
     'Sig = 1 if n odd, = -1 else
     Private Sig As Integer
@@ -53,7 +53,11 @@ Public Class ClsMandelbrotMapController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
+
+        ExaminatedPoints = 0
+        L = 0
+        k = 0
 
         'Prepare MandelbrotSet
         With DSMandelbrot
@@ -98,6 +102,7 @@ Public Class ClsMandelbrotMapController
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
         ExaminatedPoints = 0
         L = 0
+        k = 0
 
         DSJulia.ResetIteration()
         Startiteration(DSJulia)
@@ -163,7 +168,8 @@ Public Class ClsMandelbrotMapController
 
             IterationLoop(MyDS)
 
-            If p >= MyForm.PicMandelbrot.Width Or q >= MyForm.PicMandelbrot.Height Then
+            If p >= MyDS.PicDiagram.Width Or q >= MyDS.PicDiagram.Height Then
+                'If p >= MyForm.PicMandelbrot.Width Or q >= MyForm.PicMandelbrot.Height Then
 
                 IterationStatus = ClsDynamics.EnIterationStatus.Stopped
                 MyDS.PicDiagram.Refresh()

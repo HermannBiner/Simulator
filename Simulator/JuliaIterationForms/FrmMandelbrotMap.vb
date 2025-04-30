@@ -13,6 +13,7 @@ Public Class FrmMandelbrotMap
     Private FC As ClsMandelbrotMapController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -30,6 +31,33 @@ Public Class FrmMandelbrotMap
 
         'Initialize Language
         InitializeLanguage()
+    End Sub
+
+    Private Sub FrmStrangeAttractor_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer.Panel2.Width, SplitContainer.Panel2.Height), 10)
+                PicJulia.Width = DiagramSize - 50
+                PicJulia.Height = DiagramSize - 50
+                PicJulia.Left = 2
+                PicJulia.Top = 40
+                SplitContainer.SplitterDistance = PicMandelbrot.Width
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.SetDefaultUserData()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmMandelbrotMap_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -70,4 +98,17 @@ Public Class FrmMandelbrotMap
         End If
     End Sub
 
+    Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmMandelbrotMab_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 800)
+            Me.Height = Math.Max(Me.Height, 800)
+            'AdjustLayout()
+        End If
+    End Sub
 End Class

@@ -22,8 +22,8 @@ Public Class FrmIteration
 
     Private IsFormLoaded As Boolean
     Private FC As ClsIterationController
-
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
 
@@ -40,6 +40,37 @@ Public Class FrmIteration
         'Initialize Language
         InitializeLanguage()
         FC.FillDynamicSystem()
+    End Sub
+    Private Sub FrmIteration_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim Diagramsize As Integer = Math.Max(Math.Min(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height), 10)
+                PicDiagram.Width = Math.Max(2, Diagramsize - 30)
+                PicDiagram.Height = Math.Max(2, Diagramsize - 30)
+                SplitContainer1.SplitterDistance = Diagramsize
+                PicDiagram.Left = SplitContainer1.SplitterDistance - Diagramsize
+                PicDiagram.Top = CboFunction.Top + CboFunction.Height + 5
+                SplitContainer2.SplitterDistance = Math.Max(SplitContainer2.Panel1.MinimumSize.Width, LstValueList.Width + LstProtocol.Width + 30)
+                LstValueList.Top = PicDiagram.Top
+                LstValueList.Height = Diagramsize - 10
+                LstProtocol.Top = PicDiagram.Top
+                LstProtocol.Height = Diagramsize - 10
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmIteration_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -138,7 +169,7 @@ Public Class FrmIteration
 
     Private Sub CboIterationDepth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboIterationDepth.SelectedIndexChanged
         If IsFormLoaded Then
-            FC.SetExponent
+            FC.SetExponent()
         End If
     End Sub
 
@@ -182,4 +213,17 @@ Public Class FrmIteration
         End If
     End Sub
 
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmIteration_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
+        End If
+    End Sub
 End Class

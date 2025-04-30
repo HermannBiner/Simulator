@@ -107,7 +107,7 @@ Public Class ClsNewtonIterationController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         With MyForm
             .CboN.Visible = DS.IsUseN

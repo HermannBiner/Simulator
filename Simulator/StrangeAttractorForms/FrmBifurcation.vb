@@ -9,8 +9,9 @@ Public Class FrmBifurcation
 
 
     Private IsFormLoaded As Boolean
-    Private FC As ClsHopfBifurcationController
+    Private FC As ClsBifurcationController
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -19,9 +20,9 @@ Public Class FrmBifurcation
         LM = ClsLanguageManager.LM
     End Sub
 
-    Private Sub FrmHopfBifurcation_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub FrmBifurcation_Load(sender As Object, e As EventArgs) Handles Me.Load
         IsFormLoaded = False
-        FC = New ClsHopfBifurcationController(Me)
+        FC = New ClsBifurcationController(Me)
 
         'Initialize Language
         InitializeLanguage()
@@ -29,7 +30,34 @@ Public Class FrmBifurcation
         FC.FillDynamicSystem()
     End Sub
 
-    Private Sub FrmHopfBifurcation_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub FrmBifurcation_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer.Panel1.Width, SplitContainer.Panel1.Height), 10)
+                PicDiagram.Width = DiagramSize
+                PicDiagram.Height = DiagramSize
+                SplitContainer.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer.SplitterDistance - DiagramSize
+                PicDiagram.Top = CboSystem.Top
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
+    End Sub
+
+    Private Sub FrmBifurcation_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FC.SetDS()
         IsFormLoaded = True
     End Sub
@@ -99,19 +127,33 @@ Public Class FrmBifurcation
 
     Private Sub OptX_CheckedChanged(sender As Object, e As EventArgs) Handles OptX.CheckedChanged
         If IsFormLoaded Then
-            FC.SetActualValueRange
+            FC.SetActualValueRange()
         End If
     End Sub
 
     Private Sub OptY_CheckedChanged(sender As Object, e As EventArgs) Handles OptY.CheckedChanged
         If IsFormLoaded Then
-            FC.SetActualValueRange
+            FC.SetActualValueRange()
         End If
     End Sub
 
     Private Sub OptZ_CheckedChanged(sender As Object, e As EventArgs) Handles OptZ.CheckedChanged
         If IsFormLoaded Then
-            FC.SetActualValueRange
+            FC.SetActualValueRange()
+        End If
+    End Sub
+
+    Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmBifurcation_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
         End If
     End Sub
 End Class

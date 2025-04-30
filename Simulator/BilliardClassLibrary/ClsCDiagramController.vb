@@ -123,7 +123,7 @@ Public Class ClsCDiagramController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         FillValueParameters()
 

@@ -14,6 +14,7 @@ Public Class FrmCDiagramBilliard
     Private FC As ClsCDiagramController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
     Public Sub New()
@@ -30,6 +31,32 @@ Public Class FrmCDiagramBilliard
         'Initialize Language
         InitializeLanguage()
         FC.FillDynamicSystem()
+    End Sub
+    Private Sub FrmCDiagram_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer.Panel1.Width, SplitContainer.Panel1.Height), 10)
+                PicDiagram.Width = DiagramSize
+                PicDiagram.Height = DiagramSize
+                SplitContainer.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer.SplitterDistance - DiagramSize
+                PicDiagram.Top = CboFunction.Top
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmCDiagram_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -118,4 +145,17 @@ Public Class FrmCDiagramBilliard
         End If
     End Sub
 
+    Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmCDiagramBilliard_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
+        End If
+    End Sub
 End Class

@@ -171,7 +171,7 @@ Public Class ClsNormedUniverse
             .PicPhasePortrait = MyPicPhasePortrait
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Star") & " 2"
-            .StarColor = Brushes.Red
+            .StarColor = Brushes.GreenYellow
             .OriginalMass = 1
             .Size = 2
             'Position

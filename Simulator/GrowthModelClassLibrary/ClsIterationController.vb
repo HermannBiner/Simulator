@@ -128,15 +128,13 @@ Public Class ClsIterationController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
+
         PicDiagramSize = Math.Min(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
-        MyForm.PicDiagram.Height = PicDiagramSize
-        MyForm.PicDiagram.Width = PicDiagramSize
         PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, DS.ValueParameter.Range, DS.ValueParameter.Range)
         BmpDiagram = New Bitmap(PicDiagramSize, PicDiagramSize)
         MyForm.PicDiagram.Image = BmpDiagram
         BmpGraphics = New ClsGraphicTool(BmpDiagram, DS.ValueParameter.Range, DS.ValueParameter.Range)
-
         MyForm.CboIterationDepth.SelectedIndex = 0
         SignProtocol = Math.Sign(DS.ChaoticParameterValue)
         MyForm.OptFunctionGraph.Checked = True

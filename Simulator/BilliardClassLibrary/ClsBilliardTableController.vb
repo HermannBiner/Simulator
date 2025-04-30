@@ -102,7 +102,7 @@ Public Class ClsBilliardTableController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         With DS
             .PicDiagram = MyForm.PicDiagram

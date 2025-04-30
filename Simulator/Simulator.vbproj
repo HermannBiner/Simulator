@@ -11,7 +11,7 @@
     <ApplicationIcon>Resources\Simulator.ico</ApplicationIcon>
     <OptionStrict>On</OptionStrict>
     <Title>Simulator</Title>
-    <Version>7.1.0</Version>
+    <Version>7.2</Version>
     <Product>Simulator</Product>
     <Authors>Hermann Biner</Authors>
     <OptionInfer>On</OptionInfer>
@@ -104,6 +104,8 @@
 
   <ItemGroup>
     <Folder Include="My Project\NewFolder\" />
+    <Folder Include="FractalClassLibrary\" />
+    <Folder Include="FractalForms\" />
   </ItemGroup>
 
 </Project>

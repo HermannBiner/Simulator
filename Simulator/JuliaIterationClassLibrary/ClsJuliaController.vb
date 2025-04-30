@@ -130,7 +130,7 @@ Public Class ClsJuliaController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         'The following order is important
         'because changing .N

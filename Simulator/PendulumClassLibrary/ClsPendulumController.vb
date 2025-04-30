@@ -102,7 +102,7 @@ Public Class ClsPendulumController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
         With MainDS
             .IsMainDS = True
             .PendulumColor = Brushes.Red

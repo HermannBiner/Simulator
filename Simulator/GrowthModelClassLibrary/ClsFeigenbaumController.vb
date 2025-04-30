@@ -16,7 +16,7 @@ Public Class ClsFeigenbaumController
     Private ReadOnly LM As ClsLanguageManager
 
     'PicDiagram and Bitmasp
-    Private ReadOnly BmpDiagram As Bitmap
+    Private MyBmpDiagram As Bitmap
 
     'The Graphic Helper for the Graphics
     Private BmpGraphics As ClsGraphicTool
@@ -45,9 +45,6 @@ Public Class ClsFeigenbaumController
 
         MyForm = Form
         DiagramAreaSelector = New ClsDiagramAreaSelector
-
-        BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
-        MyForm.PicDiagram.Image = BmpDiagram
 
     End Sub
 
@@ -112,7 +109,7 @@ Public Class ClsFeigenbaumController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         DS.Power = 1
 
@@ -129,7 +126,9 @@ Public Class ClsFeigenbaumController
             .TxtYMax = MyForm.TxtXMax
         End With
 
-        BmpGraphics = New ClsGraphicTool(BmpDiagram, ActualParameterRange, ActualValueRange)
+        MyBmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+        MyForm.PicDiagram.Image = MyBmpDiagram
+        BmpGraphics = New ClsGraphicTool(MyBmpDiagram, ActualParameterRange, ActualValueRange)
 
     End Sub
 
@@ -152,7 +151,12 @@ Public Class ClsFeigenbaumController
         'or the iterator has changed
         'the ranges are reset to the standard
         With MyForm
-            .TxtAMin.Text = ActualParameterRange.A.ToString(CultureInfo.CurrentCulture)
+            If ActualParameterRange.A >= 0 Then
+                .TxtAMin.Text = (ActualParameterRange.A + ActualParameterRange.IntervalWidth / 2).ToString(CultureInfo.CurrentCulture)
+            Else
+                .TxtAMin.Text = ActualParameterRange.A.ToString(CultureInfo.CurrentCulture)
+            End If
+
             .TxtAMax.Text = ActualParameterRange.B.ToString(CultureInfo.CurrentCulture)
 
             .TxtXMin.Text = ActualValueRange.A.ToString(CultureInfo.CurrentCulture)

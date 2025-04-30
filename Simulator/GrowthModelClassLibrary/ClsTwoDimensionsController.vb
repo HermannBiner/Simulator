@@ -127,7 +127,7 @@ Public Class ClsTwoDimensionsController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         'Iteration Depth
         DS.Power = Standardpower

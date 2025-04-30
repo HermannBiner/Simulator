@@ -6,6 +6,8 @@
 Public Class FrmTests
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsFormLoaded As Boolean
+    Private IsAdjusting As Boolean
 
     Const StepWide As Double = 0.001
 
@@ -21,19 +23,47 @@ Public Class FrmTests
 
     End Sub
 
-    Private Sub InitializeLanguage()
-
-        BtnTest.Text = LM.GetString("Test")
-        Text = LM.GetString("Test")
-
-    End Sub
 
     Private Sub FrmTests_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        IsFormLoaded = False
 
         'Initialize Language
         InitializeLanguage()
 
         SetDefaulValues()
+
+    End Sub
+
+    Private Sub FrmTests_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            'we have to make sure that the diagram is square
+            Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer.Panel1.Width, SplitContainer.Panel1.Height), 10)
+            PicDiagram.Width = DiagramSize
+            PicDiagram.Height = DiagramSize
+            PicDiagram.Left = (SplitContainer.Panel1.Width - PicDiagram.Width) \ 2
+            PicDiagram.Top = BtnTest.Top
+            SplitContainer.SplitterDistance = DiagramSize
+            IsAdjusting = False
+        End If
+    End Sub
+
+    Private Sub FrmTests_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        IsFormLoaded = True
+    End Sub
+
+    Private Sub InitializeLanguage()
+
+        BtnTest.Text = LM.GetString("Test")
+        Text = LM.GetString("Test")
 
     End Sub
 
@@ -59,42 +89,57 @@ Public Class FrmTests
     End Sub
 
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
-
-        Clear()
-        DrawCoordinateSystem()
-
-
-        Dim u As Decimal = 0
-        Dim Sinus As New ClsMathpoint
-
-        Do
-
-            With Sinus
-                .X = CDec(u)
-                .Y = CDec(Math.Pow(Math.Sin(u * Math.PI / 2), 2))
-            End With
-            MyGraphics.DrawPoint(Sinus, Brushes.Blue, 1)
-
-            u += CDec(0.001)
+        If IsFormLoaded Then
+            Clear()
+            DrawCoordinateSystem()
 
 
-        Loop Until u > CDec(1)
+            Dim u As Decimal = 0
+            Dim Sinus As New ClsMathpoint
 
-        MyGraphics.DrawLine(New ClsMathpoint(0, 1), New ClsMathpoint(1, 1), Color.Black, 1)
-        MyGraphics.DrawLine(New ClsMathpoint(1, 0), New ClsMathpoint(1, 1), Color.Black, 1)
+            Do
+
+                With Sinus
+                    .X = CDec(u)
+                    .Y = CDec(Math.Pow(Math.Sin(u * Math.PI / 2), 2))
+                End With
+                MyGraphics.DrawPoint(Sinus, Brushes.Blue, 1)
+
+                u += CDec(0.001)
 
 
+            Loop Until u > CDec(1)
+
+            MyGraphics.DrawLine(New ClsMathpoint(0, 1), New ClsMathpoint(1, 1), Color.Black, 1)
+            MyGraphics.DrawLine(New ClsMathpoint(1, 0), New ClsMathpoint(1, 1), Color.Black, 1)
+
+        End If
     End Sub
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click
+        If IsFormLoaded Then
 
-
+        End If
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        If IsFormLoaded Then
+            Clear()
+            DrawCoordinateSystem()
+        End If
+    End Sub
 
-        Clear()
-        DrawCoordinateSystem()
+    Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
 
+    Private Sub FrmTests_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
+        End If
     End Sub
 End Class

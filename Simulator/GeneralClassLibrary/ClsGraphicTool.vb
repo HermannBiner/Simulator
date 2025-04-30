@@ -68,12 +68,12 @@ Public Class ClsGraphicTool
 
         'Because of better visibility in the User-Window,
         'the maximal ImageRange and DiagramSize are reduced by -1
-        DiagramCornerpoint = New Point(MyPicDiagram.Width - 1, MyPicDiagram.Height - 1)
+        DiagramCornerpoint = New Point(Math.Max(1, MyPicDiagram.Width - 1), Math.Max(1, MyPicDiagram.Height - 1))
 
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
-        MyPixelXInterval = New ClsInterval(0, MyPicDiagram.Width)
-        MyPixelYInterval = New ClsInterval(0, MyPicDiagram.Height - 1)
+        MyPixelXInterval = New ClsInterval(0, Math.Max(1, MyPicDiagram.Width))
+        MyPixelYInterval = New ClsInterval(0, Math.Max(1, MyPicDiagram.Height - 1))
 
     End Sub
 
@@ -89,7 +89,7 @@ Public Class ClsGraphicTool
         MyMathXInterval = MathXInterval
         MyMathYInterval = MathYInterval
         MyPixelXInterval = New ClsInterval(0, MyBitmap.Width)
-        MyPixelYInterval = New ClsInterval(0, MyBitmap.Height - 1)
+        MyPixelYInterval = New ClsInterval(0, Math.Max(1, MyBitmap.Height - 1))
 
     End Sub
 

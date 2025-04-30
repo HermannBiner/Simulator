@@ -15,7 +15,7 @@ Public Class ClsHistogramController
     Private ReadOnly LM As ClsLanguageManager
 
     'The Graphic Helper for PicDiagram
-    Private ReadOnly PicGraphics As ClsGraphicTool
+    Private PicGraphics As ClsGraphicTool
 
     'Status Parameters
     'Number of Iteration Steps
@@ -34,13 +34,6 @@ Public Class ClsHistogramController
     Public Sub New(Form As FrmHistogram)
         MyForm = Form
         LM = ClsLanguageManager.LM
-
-        Dim XRange As New ClsInterval(0, MyForm.PicDiagram.Width)
-        Dim YRange As New ClsInterval(0, MyForm.PicDiagram.Height)
-        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, XRange, YRange)
-
-        'the array of small intervals is defined (pixel-size)
-        ReDim NumberOfHits(MyForm.PicDiagram.Width)
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
     End Sub
@@ -112,8 +105,14 @@ Public Class ClsHistogramController
 
     'This routine sets the DS parameters to a default
     'the trigger is, that the DS has changed
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
+        Dim XRange As New ClsInterval(0, MyForm.PicDiagram.Width)
+        Dim YRange As New ClsInterval(0, MyForm.PicDiagram.Height)
+        PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, XRange, YRange)
+
+        'the array of small intervals is defined (pixel-size)
+        ReDim NumberOfHits(MyForm.PicDiagram.Width)
         DS.Power = 1
 
     End Sub

@@ -17,6 +17,7 @@ Public Class FrmSensitivity
     Private FC As ClsSensitivityController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
 
@@ -32,6 +33,37 @@ Public Class FrmSensitivity
         'Initialize Language
         InitializeLanguage()
         FC.FillDynamicSystem()
+    End Sub
+    Private Sub FrmSensitivity_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height), 10)
+                PicDiagram.Width = Math.Max(2, DiagramSize - 30)
+                PicDiagram.Height = Math.Max(2, DiagramSize - 30)
+                SplitContainer1.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer1.SplitterDistance - DiagramSize
+                PicDiagram.Top = CboFunction.Top + CboFunction.Height + 5
+                SplitContainer2.SplitterDistance = Math.Max(SplitContainer2.Panel1.MinimumSize.Width, LstValueList1.Width + LstValueList2.Width + 30)
+                LstValueList1.Top = PicDiagram.Top
+                LstValueList1.Height = DiagramSize - 10
+                LstValueList2.Top = PicDiagram.Top
+                LstValueList2.Height = DiagramSize - 10
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmSensitivity_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -133,6 +165,20 @@ Public Class FrmSensitivity
     Private Sub BtnStartIteration_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         If IsFormLoaded Then
             FC.StartIteration()
+        End If
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmSensitivity_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
         End If
     End Sub
 End Class

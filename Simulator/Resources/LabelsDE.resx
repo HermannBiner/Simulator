@@ -1445,4 +1445,8 @@
     <value>IF-Systeme</value>
     <comment>Mnu</comment>
   </data>
+  <data name="PopulationDensity" xml:space="preserve">
+    <value>Bevölkerungsdichte</value>
+    <comment>Lbl</comment>
+  </data>
 </root>

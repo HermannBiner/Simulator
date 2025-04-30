@@ -14,6 +14,7 @@ Public Class FrmBilliardtable
     Private FC As ClsBilliardTableController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
 
@@ -23,6 +24,51 @@ Public Class FrmBilliardtable
         InitializeComponent()
         AutoScaleMode = AutoScaleMode.Dpi
 
+    End Sub
+
+
+    Private Sub FrmBilliardTable_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        IsFormLoaded = False
+        FC = New ClsBilliardTableController(Me)
+
+        'Initialize Language
+        InitializeLanguage()
+        FC.FillDynamicSystem()
+    End Sub
+
+    Private Sub FrmBilliardTable_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height), 10)
+                PicDiagram.Width = DiagramSize
+                PicDiagram.Height = DiagramSize
+                SplitContainer1.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer1.SplitterDistance - DiagramSize
+                PicDiagram.Top = 5
+                SplitContainer2.SplitterDistance = Math.Max(SplitContainer2.Panel1.MinimumSize.Width, CboBilliardTable.Width + 15)
+
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
+    End Sub
+
+    Private Sub FrmBilliardtable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FC.SetDS()
+        IsFormLoaded = True
     End Sub
 
     Private Sub InitializeLanguage()
@@ -45,21 +91,6 @@ Public Class FrmBilliardtable
         LblProtocol.Text = LM.GetString("Protocol")
         ChkProtocol.Text = LM.GetString("Protocol")
 
-    End Sub
-
-    Private Sub FrmBilliardTable_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        IsFormLoaded = False
-        FC = New ClsBilliardTableController(Me)
-
-        'Initialize Language
-        InitializeLanguage()
-        FC.FillDynamicSystem()
-    End Sub
-
-    Private Sub FrmBilliardtable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        FC.SetDS()
-        IsFormLoaded = True
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
@@ -168,6 +199,20 @@ Public Class FrmBilliardtable
 
         If IsFormLoaded Then
             FC.StopIteration()
+        End If
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmBilliardTable_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
         End If
     End Sub
 

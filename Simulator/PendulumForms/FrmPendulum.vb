@@ -14,6 +14,7 @@ Public Class FrmPendulum
     Private FC As ClsPendulumController
 
     Private ReadOnly LM As ClsLanguageManager
+    Private IsAdjusting As Boolean
 
     'SECTOR INITIALIZATION
 
@@ -32,6 +33,35 @@ Public Class FrmPendulum
         'Initialize Language
         InitializeLanguage()
         FC.FillDynamicSystem()
+    End Sub
+
+    Private Sub FrmPendulum_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        AdjustLayout()
+    End Sub
+
+    Private Sub AdjustLayout()
+        'to avoid a loop
+        If IsAdjusting Then
+            Exit Sub
+        Else
+            IsAdjusting = True
+            If WindowState <> FormWindowState.Minimized Then
+                'we have to make sure that the diagram is square
+                Dim DiagramSize As Integer = Math.Max(Math.Min(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height), 10)
+                PicDiagram.Width = DiagramSize
+                PicDiagram.Height = DiagramSize
+                SplitContainer1.SplitterDistance = DiagramSize
+                PicDiagram.Left = SplitContainer1.SplitterDistance - DiagramSize
+                PicDiagram.Top = 5
+                SplitContainer2.SplitterDistance = Math.Max(SplitContainer2.Panel1.MinimumSize.Width, CboPendulum.Width + 20)
+
+                If IsFormLoaded Then
+                    FC.InitializeMe()
+                    FC.ResetIteration()
+                End If
+            End If
+            IsAdjusting = False
+        End If
     End Sub
 
     Private Sub FrmPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -140,4 +170,17 @@ Public Class FrmPendulum
         End If
     End Sub
 
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmPendulum_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            Me.Width = Math.Max(Me.Width, 600)
+            Me.Height = Math.Max(Me.Height, 600)
+            AdjustLayout()
+        End If
+    End Sub
 End Class

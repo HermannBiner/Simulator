@@ -5,7 +5,7 @@
 Imports System.Globalization
 Imports System.Reflection
 
-Public Class ClsHopfBifurcationController
+Public Class ClsBifurcationController
 
     'The dynamic System
     Private DS As IStrangeAttractor
@@ -16,7 +16,7 @@ Public Class ClsHopfBifurcationController
     Private ReadOnly LM As ClsLanguageManager
 
     'PicDiagram and Bitmasp
-    Private ReadOnly BmpDiagram As Bitmap
+    Private BmpDiagram As Bitmap
 
     'The Graphic Helper for the Graphics
     Private BmpGraphics As ClsGraphicTool
@@ -35,7 +35,7 @@ Public Class ClsHopfBifurcationController
     Private x As Decimal
 
     'Iteration Parameters
-    Private Const RunTimeUntilCycle As Integer = 10000
+    Private Const RunTimeUntilCycle As Integer = 5000
     Private LengthOfCycle As Integer
     Private CyclePoint As ClsMathpoint
 
@@ -50,9 +50,6 @@ Public Class ClsHopfBifurcationController
 
         MyForm = Form
         DiagramAreaSelector = New ClsDiagramAreaSelector
-
-        BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
-        MyForm.PicDiagram.Image = BmpDiagram
 
         IterationPointSet = New ClsPointSet
 
@@ -116,6 +113,7 @@ Public Class ClsHopfBifurcationController
 
         End If
 
+
         InitializeMe()
 
         'The parameter and startvalue are depending on the type of iteration
@@ -149,6 +147,8 @@ Public Class ClsHopfBifurcationController
             .TxtYMax = MyForm.TxtXMax
         End With
 
+        BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+        MyForm.PicDiagram.Image = BmpDiagram
         BmpGraphics = New ClsGraphicTool(BmpDiagram, ActualParameterRange, ActualValueRange)
 
     End Sub
@@ -290,7 +290,7 @@ Public Class ClsHopfBifurcationController
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
 
             'enough but not bigger than the y-axis allows
-            LengthOfCycle = CInt(MyForm.PicDiagram.Height)
+            LengthOfCycle = CInt(MyForm.PicDiagram.Height / 10)
 
         End If
 

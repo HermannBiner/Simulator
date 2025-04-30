@@ -225,7 +225,7 @@ Public Class ClsNewtonUniverse
             .ArgumentPerihel = CDec(4 * Math.PI / 3)
             .PerihelVelocity = CDec(0.002389 * .Tau)
             If IsDisturbed Then
-                .StarColor = Brushes.Red
+                .StarColor = Brushes.GreenYellow
                 .Perihel = CDec(14.999999)
             Else
                 .StarColor = Brushes.Gold
@@ -346,8 +346,8 @@ Public Class ClsNewtonUniverse
             .ArgumentPerihel = CDec(3 * Math.PI / 2)
             .PerihelVelocity = CDec(0.003185)
             If IsDisturbed Then
-                .StarColor = Brushes.Red
-                .Perihel = CDec(19.9999999 * .Tau)
+                .StarColor = Brushes.GreenYellow
+                .Perihel = CDec(19.99999 * .Tau)
             Else
                 .StarColor = Brushes.Gold
                 .Perihel = CDec(20)
@@ -523,7 +523,7 @@ Public Class ClsNewtonUniverse
             .ArgumentPerihel = CDec(5 * Math.PI / 3)
             .PerihelVelocity = CDec(0.003185 * .Tau)
             If IsDisturbed Then
-                .StarColor = Brushes.Red
+                .StarColor = Brushes.GreenYellow
                 .Perihel = CDec(14.999999)
             Else
                 .StarColor = Brushes.Gold
@@ -687,7 +687,7 @@ Public Class ClsNewtonUniverse
             .PicPhasePortrait = MyPicPhasePortrait
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Jupiter")
-            .StarColor = Brushes.Magenta
+            .StarColor = Brushes.GreenYellow
             .OriginalMass = CDec(317.8)
             .Size = 3
             .Perihel = CDec(4.9501)
@@ -711,7 +711,7 @@ Public Class ClsNewtonUniverse
             .PicPhasePortrait = MyPicPhasePortrait
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Jupiter")
-            .StarColor = Brushes.Magenta
+            .StarColor = Brushes.GreenYellow
             .OriginalMass = CDec(33000)
             .Size = 4
             .Perihel = CDec(5)
@@ -787,7 +787,7 @@ Public Class ClsNewtonUniverse
             .PicPhasePortrait = MyPicPhasePortrait
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Neptune")
-            .StarColor = Brushes.GreenYellow
+            .StarColor = Brushes.Cyan
             .OriginalMass = CDec(16.8)
             .Size = 3
             .Perihel = CDec(29.7667)

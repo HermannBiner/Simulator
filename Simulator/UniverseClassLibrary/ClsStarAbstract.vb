@@ -77,8 +77,6 @@ Public MustInherit Class ClsStarAbstract
     Protected ActualMathPointPosition As ClsMathpoint
     Protected NewMathPointPosition As ClsMathpoint
 
-
-
     Public Sub New()
         MyOriginalStartPosition = New ClsVector
         MyUserStartPosition = New ClsVector

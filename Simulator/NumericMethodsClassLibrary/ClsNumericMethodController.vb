@@ -143,7 +143,7 @@ Public Class ClsNumericMethodController
     End Sub
 
     'PendulumA is just a real Spring Pendulum
-    Private Sub InitializeDS()
+    Public Sub InitializeDS()
 
         PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, MathInterval, MathInterval)
         BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
@@ -223,6 +223,8 @@ Public Class ClsNumericMethodController
 
         DSB.h = StepWidthB
         DSB.NumberOfApproxSteps = NumberOfApproxStepsB
+
+        MyForm.LblStepWidth.Text = LM.GetString("StepWidth") & ": " & LocStepWidth.ToString
 
     End Sub
 

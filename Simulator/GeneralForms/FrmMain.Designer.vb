@@ -48,6 +48,9 @@ Partial Class FrmMain
         Mnu3DAttractors = New ToolStripMenuItem()
         MnuStrangeAttractors = New ToolStripMenuItem()
         MnuBifurcation = New ToolStripMenuItem()
+        MnuFractals = New ToolStripMenuItem()
+        MnuLSystems = New ToolStripMenuItem()
+        MnuIFSystems = New ToolStripMenuItem()
         MnuDocumentation = New ToolStripMenuItem()
         MnuManual = New ToolStripMenuItem()
         MnuTechnical = New ToolStripMenuItem()
@@ -56,9 +59,6 @@ Partial Class FrmMain
         MnuMathDocPart2 = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
-        MnuFractals = New ToolStripMenuItem()
-        MnuLSystems = New ToolStripMenuItem()
-        MnuIFSystems = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
@@ -219,14 +219,33 @@ Partial Class FrmMain
         ' MnuStrangeAttractors
         ' 
         MnuStrangeAttractors.Name = "MnuStrangeAttractors"
-        MnuStrangeAttractors.Size = New Size(180, 22)
+        MnuStrangeAttractors.Size = New Size(166, 22)
         MnuStrangeAttractors.Text = "StrangeAttractors"
         ' 
         ' MnuBifurcation
         ' 
         MnuBifurcation.Name = "MnuBifurcation"
-        MnuBifurcation.Size = New Size(180, 22)
+        MnuBifurcation.Size = New Size(166, 22)
         MnuBifurcation.Text = "Bifurcation"
+        ' 
+        ' MnuFractals
+        ' 
+        MnuFractals.DropDownItems.AddRange(New ToolStripItem() {MnuLSystems, MnuIFSystems})
+        MnuFractals.Name = "MnuFractals"
+        MnuFractals.Size = New Size(59, 20)
+        MnuFractals.Text = "Fractals"
+        ' 
+        ' MnuLSystems
+        ' 
+        MnuLSystems.Name = "MnuLSystems"
+        MnuLSystems.Size = New Size(126, 22)
+        MnuLSystems.Text = "LSystems"
+        ' 
+        ' MnuIFSystems
+        ' 
+        MnuIFSystems.Name = "MnuIFSystems"
+        MnuIFSystems.Size = New Size(126, 22)
+        MnuIFSystems.Text = "IFSystems"
         ' 
         ' MnuDocumentation
         ' 
@@ -239,20 +258,20 @@ Partial Class FrmMain
         ' MnuManual
         ' 
         MnuManual.Name = "MnuManual"
-        MnuManual.Size = New Size(180, 22)
+        MnuManual.Size = New Size(149, 22)
         MnuManual.Text = "Manual"
         ' 
         ' MnuTechnical
         ' 
         MnuTechnical.Name = "MnuTechnical"
-        MnuTechnical.Size = New Size(180, 22)
+        MnuTechnical.Size = New Size(149, 22)
         MnuTechnical.Text = "TechnicalDoc"
         ' 
         ' MnuMathematics
         ' 
         MnuMathematics.DropDownItems.AddRange(New ToolStripItem() {MnuMathDocPart1, MnuMathDocPart2})
         MnuMathematics.Name = "MnuMathematics"
-        MnuMathematics.Size = New Size(180, 22)
+        MnuMathematics.Size = New Size(149, 22)
         MnuMathematics.Text = "Mathematics"
         ' 
         ' MnuMathDocPart1
@@ -270,7 +289,7 @@ Partial Class FrmMain
         ' MnuInfo
         ' 
         MnuInfo.Name = "MnuInfo"
-        MnuInfo.Size = New Size(180, 22)
+        MnuInfo.Size = New Size(149, 22)
         MnuInfo.Text = "Info"
         ' 
         ' MnuTest
@@ -280,25 +299,6 @@ Partial Class FrmMain
         MnuTest.Size = New Size(42, 20)
         MnuTest.Text = "Test"
         MnuTest.Visible = False
-        ' 
-        ' MnuFractals
-        ' 
-        MnuFractals.DropDownItems.AddRange(New ToolStripItem() {MnuLSystems, MnuIFSystems})
-        MnuFractals.Name = "MnuFractals"
-        MnuFractals.Size = New Size(59, 20)
-        MnuFractals.Text = "Fractals"
-        ' 
-        ' MnuLSystems
-        ' 
-        MnuLSystems.Name = "MnuLSystems"
-        MnuLSystems.Size = New Size(180, 22)
-        MnuLSystems.Text = "LSystems"
-        ' 
-        ' MnuIFSystems
-        ' 
-        MnuIFSystems.Name = "MnuIFSystems"
-        MnuIFSystems.Size = New Size(180, 22)
-        MnuIFSystems.Text = "IFSystems"
         ' 
         ' FrmMain
         ' 

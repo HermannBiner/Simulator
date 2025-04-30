@@ -128,12 +128,12 @@ Public Class ClsLorenz
         MyStartPointSets.Add(UpperRight)
 
         'DownMiddle
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-1), CDec(-1), CDec(19), Brushes.Red))
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-0.7), CDec(-0.7), CDec(19.5), Brushes.Yellow))
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-0.3), CDec(-0.3), CDec(20), Brushes.Pink))
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(0.3), CDec(0.3), CDec(20), Brushes.Blue))
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(0.7), CDec(0.7), CDec(19.5), Brushes.Green))
-        DownMiddle.AddPoint(New ClsIterationPoint(CDec(1), CDec(1), CDec(19), Brushes.Cyan))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-1), CDec(-1), CDec(0.5), Brushes.Red))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-0.7), CDec(-0.7), CDec(1), Brushes.Yellow))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(-0.3), CDec(-0.3), CDec(0.8), Brushes.Pink))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(0.3), CDec(0.3), CDec(0.8), Brushes.Blue))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(0.7), CDec(0.7), CDec(1), Brushes.Green))
+        DownMiddle.AddPoint(New ClsIterationPoint(CDec(1), CDec(1), CDec(0.5), Brushes.Cyan))
         DownMiddle.ProposedStepWidth = CDec(0.001)
         MyStartPointSets.Add(DownMiddle)
 

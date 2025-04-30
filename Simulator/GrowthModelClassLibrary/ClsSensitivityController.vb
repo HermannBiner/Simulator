@@ -98,7 +98,7 @@ Public Class ClsSensitivityController
 
     End Sub
 
-    Private Sub InitializeMe()
+    Public Sub InitializeMe()
 
         MyForm.CboIterationDepth.SelectedIndex = 0
         DS.Power = CInt(MyForm.CboIterationDepth.SelectedItem)
