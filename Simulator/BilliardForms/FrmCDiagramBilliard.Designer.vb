@@ -84,15 +84,15 @@ Partial Class FrmCDiagramBilliard
         SplitContainer.Panel2.Controls.Add(LblParameterRange)
         SplitContainer.Panel2.Controls.Add(BtnReset)
         SplitContainer.Panel2.Controls.Add(BtnStart)
-        SplitContainer.Size = New Size(885, 594)
-        SplitContainer.SplitterDistance = 586
+        SplitContainer.Size = New Size(891, 594)
+        SplitContainer.SplitterDistance = 588
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
         ' PicDiagram
         ' 
         PicDiagram.BackColor = Color.White
-        PicDiagram.Location = New Point(4, 3)
+        PicDiagram.Location = New Point(4, 8)
         PicDiagram.Margin = New Padding(4, 2, 4, 2)
         PicDiagram.Name = "PicDiagram"
         PicDiagram.Size = New Size(580, 580)
@@ -312,9 +312,10 @@ Partial Class FrmCDiagramBilliard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(885, 594)
+        ClientSize = New Size(891, 594)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(350, 515)
         Name = "FrmCDiagramBilliard"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "C-Diagram"

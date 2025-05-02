@@ -98,8 +98,8 @@ Partial Class FrmStrangeAttractor
         SplitContainer.Panel2.Controls.Add(LblStartpointSets)
         SplitContainer.Panel2.Controls.Add(LblStrangeAttractor)
         SplitContainer.Panel2.Controls.Add(CboStrangeAttractor)
-        SplitContainer.Size = New Size(851, 612)
-        SplitContainer.SplitterDistance = 605
+        SplitContainer.Size = New Size(860, 612)
+        SplitContainer.SplitterDistance = 612
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -459,9 +459,10 @@ Partial Class FrmStrangeAttractor
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(851, 612)
+        ClientSize = New Size(860, 612)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(309, 651)
         Name = "FrmStrangeAttractor"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "StrangeAttractor"

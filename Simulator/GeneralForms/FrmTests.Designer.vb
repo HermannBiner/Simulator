@@ -53,7 +53,7 @@ Partial Class FrmTests
         SplitContainer.Panel2.Controls.Add(LstValues)
         SplitContainer.Panel2.Controls.Add(BtnStop)
         SplitContainer.Panel2.Controls.Add(BtnTest)
-        SplitContainer.Size = New Size(778, 487)
+        SplitContainer.Size = New Size(780, 492)
         SplitContainer.SplitterDistance = 488
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
@@ -117,9 +117,10 @@ Partial Class FrmTests
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(778, 487)
+        ClientSize = New Size(780, 492)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(357, 143)
         Name = "FrmTests"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Test"

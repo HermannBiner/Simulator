@@ -81,8 +81,8 @@ Partial Class FrmSensitivity
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
-        SplitContainer1.Size = New Size(1212, 594)
-        SplitContainer1.SplitterDistance = 654
+        SplitContainer1.Size = New Size(1211, 592)
+        SplitContainer1.SplitterDistance = 656
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -173,8 +173,8 @@ Partial Class FrmSensitivity
         SplitContainer2.Panel2.Controls.Add(LblStartValue2)
         SplitContainer2.Panel2.Controls.Add(TxtStartValue1)
         SplitContainer2.Panel2.Controls.Add(LblStartValue1)
-        SplitContainer2.Size = New Size(552, 594)
-        SplitContainer2.SplitterDistance = 218
+        SplitContainer2.Size = New Size(549, 592)
+        SplitContainer2.SplitterDistance = 216
         SplitContainer2.TabIndex = 0
         ' 
         ' LblValueList2
@@ -391,9 +391,10 @@ Partial Class FrmSensitivity
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1212, 594)
+        ClientSize = New Size(1211, 592)
         Controls.Add(SplitContainer1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(610, 378)
         Name = "FrmSensitivity"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Sensitivity"

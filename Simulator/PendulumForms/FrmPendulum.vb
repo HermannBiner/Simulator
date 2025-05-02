@@ -36,7 +36,21 @@ Public Class FrmPendulum
     End Sub
 
     Private Sub FrmPendulum_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        AdjustLayout()
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
+    End Sub
+
+    Private Sub FrmPendulum_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If IsFormLoaded Then
+            AdjustLayout()
+        End If
     End Sub
 
     Private Sub AdjustLayout()
@@ -170,17 +184,4 @@ Public Class FrmPendulum
         End If
     End Sub
 
-    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-        If IsFormLoaded Then
-            AdjustLayout()
-        End If
-    End Sub
-
-    Private Sub FrmPendulum_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        If IsFormLoaded Then
-            Me.Width = Math.Max(Me.Width, 600)
-            Me.Height = Math.Max(Me.Height, 600)
-            AdjustLayout()
-        End If
-    End Sub
 End Class

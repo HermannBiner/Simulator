@@ -102,8 +102,8 @@ Partial Class FrmUniverse
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
-        SplitContainer1.Size = New Size(1168, 611)
-        SplitContainer1.SplitterDistance = 602
+        SplitContainer1.Size = New Size(1176, 611)
+        SplitContainer1.SplitterDistance = 608
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -154,7 +154,7 @@ Partial Class FrmUniverse
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(BtnDefault)
         SplitContainer2.Panel2.Controls.Add(BtnReset)
-        SplitContainer2.Size = New Size(560, 611)
+        SplitContainer2.Size = New Size(562, 611)
         SplitContainer2.SplitterDistance = 224
         SplitContainer2.TabIndex = 0
         ' 
@@ -648,9 +648,10 @@ Partial Class FrmUniverse
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1168, 611)
+        ClientSize = New Size(1176, 611)
         Controls.Add(SplitContainer1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(617, 650)
         Name = "FrmUniverse"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Universe"

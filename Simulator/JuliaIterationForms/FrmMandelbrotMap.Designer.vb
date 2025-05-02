@@ -58,7 +58,7 @@ Partial Class FrmMandelbrotMap
         SplitContainer.Panel2.Controls.Add(LblC)
         SplitContainer.Panel2.Controls.Add(TxtA)
         SplitContainer.Panel2.Controls.Add(TxtB)
-        SplitContainer.Size = New Size(1182, 611)
+        SplitContainer.Size = New Size(1187, 608)
         SplitContainer.SplitterDistance = 608
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
@@ -140,9 +140,10 @@ Partial Class FrmMandelbrotMap
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1182, 611)
+        ClientSize = New Size(1187, 608)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(1203, 647)
         Name = "FrmMandelbrotMap"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "MandelbrotMap"

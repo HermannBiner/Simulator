@@ -106,8 +106,6 @@ Public Class FrmMandelbrotMap
 
     Private Sub FrmMandelbrotMab_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If IsFormLoaded Then
-            Me.Width = Math.Max(Me.Width, 800)
-            Me.Height = Math.Max(Me.Height, 800)
             'AdjustLayout()
         End If
     End Sub

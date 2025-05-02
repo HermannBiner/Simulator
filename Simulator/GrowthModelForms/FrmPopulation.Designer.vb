@@ -80,8 +80,8 @@ Partial Class FrmPopulation
         SplitContainer.Panel2.Controls.Add(LblStartValue)
         SplitContainer.Panel2.Controls.Add(LblParameter)
         SplitContainer.Panel2.Controls.Add(CboFunction)
-        SplitContainer.Size = New Size(884, 591)
-        SplitContainer.SplitterDistance = 589
+        SplitContainer.Size = New Size(884, 589)
+        SplitContainer.SplitterDistance = 590
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -276,9 +276,10 @@ Partial Class FrmPopulation
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(884, 591)
+        ClientSize = New Size(884, 589)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(353, 420)
         Name = "FrmPopulation"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "PopulationDensity"

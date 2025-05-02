@@ -114,8 +114,8 @@ Partial Class FrmNewtonIteration
         SplitContainer.Panel2.Controls.Add(TxtXMin)
         SplitContainer.Panel2.Controls.Add(LblXMin)
         SplitContainer.Panel2.Controls.Add(CboFunction)
-        SplitContainer.Size = New Size(990, 607)
-        SplitContainer.SplitterDistance = 605
+        SplitContainer.Size = New Size(979, 607)
+        SplitContainer.SplitterDistance = 607
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -134,7 +134,7 @@ Partial Class FrmNewtonIteration
         BtnDefault.Location = New Point(19, 537)
         BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(349, 30)
+        BtnDefault.Size = New Size(343, 30)
         BtnDefault.TabIndex = 70
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -145,7 +145,7 @@ Partial Class FrmNewtonIteration
         BtnShowBasin.Location = New Point(16, 385)
         BtnShowBasin.Margin = New Padding(4)
         BtnShowBasin.Name = "BtnShowBasin"
-        BtnShowBasin.Size = New Size(351, 30)
+        BtnShowBasin.Size = New Size(346, 30)
         BtnShowBasin.TabIndex = 69
         BtnShowBasin.Text = "ShowBasin"
         BtnShowBasin.UseVisualStyleBackColor = True
@@ -159,7 +159,7 @@ Partial Class FrmNewtonIteration
         GrpColor.Margin = New Padding(4, 2, 4, 2)
         GrpColor.Name = "GrpColor"
         GrpColor.Padding = New Padding(4, 2, 4, 2)
-        GrpColor.Size = New Size(150, 84)
+        GrpColor.Size = New Size(145, 84)
         GrpColor.TabIndex = 68
         GrpColor.TabStop = False
         GrpColor.Text = "Color"
@@ -257,7 +257,7 @@ Partial Class FrmNewtonIteration
         TxtTime.Location = New Point(228, 320)
         TxtTime.Margin = New Padding(4, 2, 4, 2)
         TxtTime.Name = "TxtTime"
-        TxtTime.Size = New Size(139, 21)
+        TxtTime.Size = New Size(134, 21)
         TxtTime.TabIndex = 65
         ' 
         ' TxtSteps
@@ -312,13 +312,13 @@ Partial Class FrmNewtonIteration
         LstProtocol.Location = New Point(18, 438)
         LstProtocol.Margin = New Padding(4)
         LstProtocol.Name = "LstProtocol"
-        LstProtocol.Size = New Size(349, 94)
+        LstProtocol.Size = New Size(344, 94)
         LstProtocol.TabIndex = 60
         ' 
         ' BtnStop
         ' 
         BtnStop.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnStop.Location = New Point(197, 347)
+        BtnStop.Location = New Point(192, 347)
         BtnStop.Margin = New Padding(4)
         BtnStop.Name = "BtnStop"
         BtnStop.Size = New Size(170, 30)
@@ -343,7 +343,7 @@ Partial Class FrmNewtonIteration
         BtnReset.Location = New Point(18, 573)
         BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(349, 30)
+        BtnReset.Size = New Size(344, 30)
         BtnReset.TabIndex = 58
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -397,7 +397,7 @@ Partial Class FrmNewtonIteration
         TxtB.Location = New Point(217, 34)
         TxtB.Margin = New Padding(4, 2, 4, 2)
         TxtB.Name = "TxtB"
-        TxtB.Size = New Size(150, 21)
+        TxtB.Size = New Size(145, 21)
         TxtB.TabIndex = 52
         TxtB.Text = "1"
         ' 
@@ -406,7 +406,7 @@ Partial Class FrmNewtonIteration
         CboN.Font = New Font("Microsoft Sans Serif", 9F)
         CboN.FormattingEnabled = True
         CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        CboN.Location = New Point(319, 4)
+        CboN.Location = New Point(314, 4)
         CboN.Margin = New Padding(4, 2, 4, 2)
         CboN.Name = "CboN"
         CboN.Size = New Size(48, 23)
@@ -429,7 +429,7 @@ Partial Class FrmNewtonIteration
         TxtYMax.Location = New Point(53, 172)
         TxtYMax.Margin = New Padding(4)
         TxtYMax.Name = "TxtYMax"
-        TxtYMax.Size = New Size(314, 21)
+        TxtYMax.Size = New Size(309, 21)
         TxtYMax.TabIndex = 49
         ' 
         ' LblYMax
@@ -449,7 +449,7 @@ Partial Class FrmNewtonIteration
         TxtYMin.Location = New Point(53, 143)
         TxtYMin.Margin = New Padding(4)
         TxtYMin.Name = "TxtYMin"
-        TxtYMin.Size = New Size(314, 21)
+        TxtYMin.Size = New Size(309, 21)
         TxtYMin.TabIndex = 47
         ' 
         ' LblYMin
@@ -480,7 +480,7 @@ Partial Class FrmNewtonIteration
         TxtXMax.Location = New Point(54, 90)
         TxtXMax.Margin = New Padding(4)
         TxtXMax.Name = "TxtXMax"
-        TxtXMax.Size = New Size(313, 21)
+        TxtXMax.Size = New Size(308, 21)
         TxtXMax.TabIndex = 44
         ' 
         ' LblXMax
@@ -500,7 +500,7 @@ Partial Class FrmNewtonIteration
         TxtXMin.Location = New Point(53, 61)
         TxtXMin.Margin = New Padding(4)
         TxtXMin.Name = "TxtXMin"
-        TxtXMin.Size = New Size(314, 21)
+        TxtXMin.Size = New Size(309, 21)
         TxtXMin.TabIndex = 42
         ' 
         ' LblXMin
@@ -529,9 +529,10 @@ Partial Class FrmNewtonIteration
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(990, 607)
+        ClientSize = New Size(979, 607)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(423, 646)
         Name = "FrmNewtonIteration"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "NewtonIteration"

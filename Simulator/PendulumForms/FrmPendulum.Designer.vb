@@ -90,7 +90,7 @@ Partial Class FrmPendulum
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
-        SplitContainer1.Size = New Size(1181, 612)
+        SplitContainer1.Size = New Size(1180, 612)
         SplitContainer1.SplitterDistance = 607
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
@@ -137,8 +137,8 @@ Partial Class FrmPendulum
         SplitContainer2.Panel2.Controls.Add(LstProtocol)
         SplitContainer2.Panel2.Controls.Add(LblPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
-        SplitContainer2.Size = New Size(568, 612)
-        SplitContainer2.SplitterDistance = 234
+        SplitContainer2.Size = New Size(567, 612)
+        SplitContainer2.SplitterDistance = 233
         SplitContainer2.TabIndex = 0
         ' 
         ' BtnCreatePendulum
@@ -522,9 +522,10 @@ Partial Class FrmPendulum
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1181, 612)
+        ClientSize = New Size(1180, 612)
         Controls.Add(SplitContainer1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(603, 651)
         Name = "FrmPendulum"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Pendulum"

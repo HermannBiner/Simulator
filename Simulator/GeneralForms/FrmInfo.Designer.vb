@@ -57,7 +57,7 @@ Partial Class FrmInfo
         ' 
         SplitContainer.Panel2.BackColor = SystemColors.ControlLight
         SplitContainer.Panel2.Controls.Add(PicZermatt)
-        SplitContainer.Size = New Size(779, 408)
+        SplitContainer.Size = New Size(784, 417)
         SplitContainer.SplitterDistance = 256
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
@@ -131,9 +131,10 @@ Partial Class FrmInfo
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(779, 408)
+        ClientSize = New Size(784, 417)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(282, 183)
         Name = "FrmInfo"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "AboutSimulator"

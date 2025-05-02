@@ -83,8 +83,8 @@ Partial Class FrmBifurcation
         SplitContainer.Panel2.Controls.Add(BtnDefault)
         SplitContainer.Panel2.Controls.Add(BtnReset)
         SplitContainer.Panel2.Controls.Add(BtnStart)
-        SplitContainer.Size = New Size(876, 593)
-        SplitContainer.SplitterDistance = 585
+        SplitContainer.Size = New Size(864, 589)
+        SplitContainer.SplitterDistance = 588
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -323,9 +323,10 @@ Partial Class FrmBifurcation
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(876, 593)
+        ClientSize = New Size(864, 589)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(344, 446)
         Name = "FrmBifurcation"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Bifurcation"

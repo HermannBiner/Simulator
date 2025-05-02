@@ -92,8 +92,8 @@ Partial Class FrmIteration
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
-        SplitContainer1.Size = New Size(1076, 576)
-        SplitContainer1.SplitterDistance = 537
+        SplitContainer1.Size = New Size(1069, 576)
+        SplitContainer1.SplitterDistance = 539
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -169,8 +169,8 @@ Partial Class FrmIteration
         SplitContainer2.Panel2.Controls.Add(LblStartValue)
         SplitContainer2.Panel2.Controls.Add(LblParameter)
         SplitContainer2.Panel2.Controls.Add(BtnReset)
-        SplitContainer2.Size = New Size(533, 576)
-        SplitContainer2.SplitterDistance = 176
+        SplitContainer2.Size = New Size(524, 576)
+        SplitContainer2.SplitterDistance = 173
         SplitContainer2.TabIndex = 0
         ' 
         ' LblLog
@@ -513,9 +513,10 @@ Partial Class FrmIteration
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1076, 576)
+        ClientSize = New Size(1069, 576)
         Controls.Add(SplitContainer1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(615, 615)
         Name = "FrmIteration"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "GrowthModels"

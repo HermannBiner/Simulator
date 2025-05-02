@@ -76,8 +76,8 @@ Partial Class FrmTwoDimensions
         SplitContainer.Panel2.Controls.Add(BtnNext10)
         SplitContainer.Panel2.Controls.Add(GrpStartpoint)
         SplitContainer.Panel2.Controls.Add(CboFunction)
-        SplitContainer.Size = New Size(878, 615)
-        SplitContainer.SplitterDistance = 607
+        SplitContainer.Size = New Size(879, 615)
+        SplitContainer.SplitterDistance = 608
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -128,10 +128,10 @@ Partial Class FrmTwoDimensions
         ' BtnDefault
         ' 
         BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnDefault.Location = New Point(7, 538)
+        BtnDefault.Location = New Point(15, 411)
         BtnDefault.Margin = New Padding(4)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(254, 30)
+        BtnDefault.Size = New Size(238, 30)
         BtnDefault.TabIndex = 20
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -196,10 +196,10 @@ Partial Class FrmTwoDimensions
         ' BtnNextStep
         ' 
         BtnNextStep.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnNextStep.Location = New Point(7, 462)
+        BtnNextStep.Location = New Point(15, 335)
         BtnNextStep.Margin = New Padding(4)
         BtnNextStep.Name = "BtnNextStep"
-        BtnNextStep.Size = New Size(254, 30)
+        BtnNextStep.Size = New Size(238, 30)
         BtnNextStep.TabIndex = 17
         BtnNextStep.Text = "NextStep"
         BtnNextStep.UseVisualStyleBackColor = True
@@ -207,10 +207,10 @@ Partial Class FrmTwoDimensions
         ' BtnReset
         ' 
         BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnReset.Location = New Point(7, 576)
+        BtnReset.Location = New Point(15, 449)
         BtnReset.Margin = New Padding(4)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(254, 30)
+        BtnReset.Size = New Size(238, 30)
         BtnReset.TabIndex = 19
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -218,10 +218,10 @@ Partial Class FrmTwoDimensions
         ' BtnNext10
         ' 
         BtnNext10.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnNext10.Location = New Point(7, 500)
+        BtnNext10.Location = New Point(15, 373)
         BtnNext10.Margin = New Padding(4)
         BtnNext10.Name = "BtnNext10"
-        BtnNext10.Size = New Size(254, 30)
+        BtnNext10.Size = New Size(238, 30)
         BtnNext10.TabIndex = 18
         BtnNext10.Text = "Next10Steps"
         BtnNext10.UseVisualStyleBackColor = True
@@ -297,9 +297,10 @@ Partial Class FrmTwoDimensions
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(878, 615)
+        ClientSize = New Size(879, 615)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(330, 654)
         Name = "FrmTwoDimensions"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "TwoDimensions"

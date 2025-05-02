@@ -11,7 +11,7 @@
     <ApplicationIcon>Resources\Simulator.ico</ApplicationIcon>
     <OptionStrict>On</OptionStrict>
     <Title>Simulator</Title>
-    <Version>7.2</Version>
+    <Version>8.0</Version>
     <Product>Simulator</Product>
     <Authors>Hermann Biner</Authors>
     <OptionInfer>On</OptionInfer>
@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Data\LSystems.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Documentation\Benutzerhandbuch.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -105,7 +108,7 @@
   <ItemGroup>
     <Folder Include="My Project\NewFolder\" />
     <Folder Include="FractalClassLibrary\" />
-    <Folder Include="FractalForms\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

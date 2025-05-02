@@ -67,8 +67,8 @@ Partial Class FrmHistogram
         SplitContainer.Panel2.Controls.Add(LblStartValue)
         SplitContainer.Panel2.Controls.Add(TxtParameter)
         SplitContainer.Panel2.Controls.Add(LblParameter)
-        SplitContainer.Size = New Size(883, 591)
-        SplitContainer.SplitterDistance = 584
+        SplitContainer.Size = New Size(883, 586)
+        SplitContainer.SplitterDistance = 582
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -203,9 +203,10 @@ Partial Class FrmHistogram
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(883, 591)
+        ClientSize = New Size(883, 586)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(356, 331)
         Name = "FrmHistogram"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "Histogram"

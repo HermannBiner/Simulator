@@ -125,8 +125,8 @@ Partial Class FrmJulia
         SplitContainer.Panel2.Controls.Add(TxtXMin)
         SplitContainer.Panel2.Controls.Add(LblXMin)
         SplitContainer.Panel2.Controls.Add(CboFunction)
-        SplitContainer.Size = New Size(1144, 690)
-        SplitContainer.SplitterDistance = 689
+        SplitContainer.Size = New Size(1138, 690)
+        SplitContainer.SplitterDistance = 688
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -547,9 +547,10 @@ Partial Class FrmJulia
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1144, 690)
+        ClientSize = New Size(1138, 690)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(511, 729)
         Name = "FrmJulia"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "JuliaSet"

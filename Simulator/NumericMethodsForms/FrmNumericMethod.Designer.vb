@@ -65,8 +65,8 @@ Partial Class FrmNumericMethod
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
-        SplitContainer1.Size = New Size(1144, 614)
-        SplitContainer1.SplitterDistance = 690
+        SplitContainer1.Size = New Size(1143, 614)
+        SplitContainer1.SplitterDistance = 687
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -104,8 +104,8 @@ Partial Class FrmNumericMethod
         SplitContainer2.Panel2.Controls.Add(TrbStepWidth)
         SplitContainer2.Panel2.Controls.Add(CboPendulum)
         SplitContainer2.Panel2.Controls.Add(LblNumMethod)
-        SplitContainer2.Size = New Size(448, 614)
-        SplitContainer2.SplitterDistance = 187
+        SplitContainer2.Size = New Size(450, 614)
+        SplitContainer2.SplitterDistance = 186
         SplitContainer2.TabIndex = 0
         ' 
         ' LblDifference
@@ -133,10 +133,10 @@ Partial Class FrmNumericMethod
         ' BtnDefault
         ' 
         BtnDefault.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnDefault.Location = New Point(4, 252)
+        BtnDefault.Location = New Point(9, 252)
         BtnDefault.Margin = New Padding(9, 5, 9, 5)
         BtnDefault.Name = "BtnDefault"
-        BtnDefault.Size = New Size(248, 30)
+        BtnDefault.Size = New Size(243, 30)
         BtnDefault.TabIndex = 61
         BtnDefault.Text = "DefaultUserData"
         BtnDefault.UseVisualStyleBackColor = True
@@ -178,10 +178,10 @@ Partial Class FrmNumericMethod
         ' BtnReset
         ' 
         BtnReset.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnReset.Location = New Point(5, 292)
+        BtnReset.Location = New Point(9, 292)
         BtnReset.Margin = New Padding(9, 5, 9, 5)
         BtnReset.Name = "BtnReset"
-        BtnReset.Size = New Size(247, 30)
+        BtnReset.Size = New Size(243, 30)
         BtnReset.TabIndex = 57
         BtnReset.Text = "ResetIteration"
         BtnReset.UseVisualStyleBackColor = True
@@ -189,10 +189,10 @@ Partial Class FrmNumericMethod
         ' BtnStop
         ' 
         BtnStop.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnStop.Location = New Point(4, 212)
+        BtnStop.Location = New Point(9, 212)
         BtnStop.Margin = New Padding(9, 5, 9, 5)
         BtnStop.Name = "BtnStop"
-        BtnStop.Size = New Size(248, 30)
+        BtnStop.Size = New Size(243, 30)
         BtnStop.TabIndex = 56
         BtnStop.Text = "Stop"
         BtnStop.UseVisualStyleBackColor = True
@@ -200,10 +200,10 @@ Partial Class FrmNumericMethod
         ' BtnStart
         ' 
         BtnStart.Font = New Font("Microsoft Sans Serif", 9F)
-        BtnStart.Location = New Point(5, 172)
+        BtnStart.Location = New Point(9, 172)
         BtnStart.Margin = New Padding(4, 5, 4, 5)
         BtnStart.Name = "BtnStart"
-        BtnStart.Size = New Size(247, 30)
+        BtnStart.Size = New Size(243, 30)
         BtnStart.TabIndex = 55
         BtnStart.Text = "Start"
         BtnStart.UseVisualStyleBackColor = True
@@ -221,12 +221,12 @@ Partial Class FrmNumericMethod
         ' 
         ' TrbStepWidth
         ' 
-        TrbStepWidth.Location = New Point(5, 72)
+        TrbStepWidth.Location = New Point(9, 72)
         TrbStepWidth.Margin = New Padding(4, 5, 4, 5)
         TrbStepWidth.Maximum = 15
         TrbStepWidth.Minimum = 1
         TrbStepWidth.Name = "TrbStepWidth"
-        TrbStepWidth.Size = New Size(247, 45)
+        TrbStepWidth.Size = New Size(243, 45)
         TrbStepWidth.TabIndex = 53
         TrbStepWidth.Value = 5
         ' 
@@ -256,9 +256,10 @@ Partial Class FrmNumericMethod
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1144, 614)
+        ClientSize = New Size(1143, 614)
         Controls.Add(SplitContainer1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MinimumSize = New Size(508, 450)
         Name = "FrmNumericMethod"
         StartPosition = FormStartPosition.WindowsDefaultBounds
         Text = "NumericMethod"

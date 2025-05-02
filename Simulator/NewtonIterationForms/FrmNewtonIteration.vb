@@ -207,8 +207,6 @@ Public Class FrmNewtonIteration
 
     Private Sub FrmNewtonIteration_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If IsFormLoaded Then
-            Me.Width = Math.Max(Me.Width, 600)
-            Me.Height = Math.Max(Me.Height, 600)
             AdjustLayout()
         End If
     End Sub
