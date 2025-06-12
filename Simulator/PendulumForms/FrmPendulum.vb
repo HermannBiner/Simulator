@@ -35,10 +35,32 @@ Public Class FrmPendulum
         FC.FillDynamicSystem()
     End Sub
 
+    Private Sub FrmPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FC.SetDS()
+        IsFormLoaded = True
+    End Sub
+
+    Private Sub InitializeLanguage()
+
+        Text = LM.GetString("Pendulum")
+
+        'LblSteps contains the  #Steps
+        LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
+
+        'LblAdditionParameter, LblP1 ... LblP5 is set by the Active Pendulum
+        BtnTakeOverStartParameter.Text = LM.GetString("TakeOver")
+        GrpStartParameter.Text = LM.GetString("StartParameter")
+        BtnReset.Text = LM.GetString("ResetIteration")
+        LblStepWidth.Text = LM.GetString("StepWidth") & ": "
+        LblTypeofPhaseportrait.Text = LM.GetString("TypeofPhaseportrait")
+        BtnDefault.Text = LM.GetString("DefaultUserData")
+        BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
+    End Sub
+
+    'LAYOUT
+
     Private Sub FrmPendulum_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        If IsFormLoaded Then
-            AdjustLayout()
-        End If
+        AdjustLayout()
     End Sub
 
     Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
@@ -76,28 +98,6 @@ Public Class FrmPendulum
             End If
             IsAdjusting = False
         End If
-    End Sub
-
-    Private Sub FrmPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        FC.SetDS()
-        IsFormLoaded = True
-    End Sub
-
-    Private Sub InitializeLanguage()
-
-        Text = LM.GetString("Pendulum")
-
-        'LblSteps contains the  #Steps
-        LblNumberOfSteps.Text = LM.GetString("NumberOfSteps")
-
-        'LblAdditionParameter, LblP1 ... LblP5 is set by the Active Pendulum
-        BtnTakeOverStartParameter.Text = LM.GetString("TakeOver")
-        GrpStartParameter.Text = LM.GetString("StartParameter")
-        BtnReset.Text = LM.GetString("ResetIteration")
-        LblStepWidth.Text = LM.GetString("StepWidth") & ": "
-        LblTypeofPhaseportrait.Text = LM.GetString("TypeofPhaseportrait")
-        BtnDefault.Text = LM.GetString("DefaultUserData")
-        BtnCreatePendulum.Text = LM.GetString("CreatePendulum")
     End Sub
 
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click

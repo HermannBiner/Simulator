@@ -99,7 +99,7 @@ Partial Class FrmStrangeAttractor
         SplitContainer.Panel2.Controls.Add(LblStrangeAttractor)
         SplitContainer.Panel2.Controls.Add(CboStrangeAttractor)
         SplitContainer.Size = New Size(860, 612)
-        SplitContainer.SplitterDistance = 612
+        SplitContainer.SplitterDistance = 610
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -413,6 +413,7 @@ Partial Class FrmStrangeAttractor
         ' 
         ' CboStartpointSets
         ' 
+        CboStartpointSets.DropDownStyle = ComboBoxStyle.DropDownList
         CboStartpointSets.Font = New Font("Microsoft Sans Serif", 9F)
         CboStartpointSets.FormattingEnabled = True
         CboStartpointSets.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
@@ -446,6 +447,7 @@ Partial Class FrmStrangeAttractor
         ' 
         ' CboStrangeAttractor
         ' 
+        CboStrangeAttractor.DropDownStyle = ComboBoxStyle.DropDownList
         CboStrangeAttractor.Font = New Font("Microsoft Sans Serif", 9F)
         CboStrangeAttractor.FormattingEnabled = True
         CboStrangeAttractor.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})

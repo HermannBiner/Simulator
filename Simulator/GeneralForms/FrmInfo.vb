@@ -67,6 +67,8 @@ Public Class FrmInfo
         FrmMain.OpenDocument("Documentation\" & LM.GetString("ReleaseNotesDoc"))
     End Sub
 
+    'LAYOUT
+
     Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
 
         If IsFormLoaded Then

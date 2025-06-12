@@ -50,7 +50,6 @@ Partial Class FrmMain
         MnuBifurcation = New ToolStripMenuItem()
         MnuFractals = New ToolStripMenuItem()
         MnuLSystems = New ToolStripMenuItem()
-        MnuIFSystems = New ToolStripMenuItem()
         MnuDocumentation = New ToolStripMenuItem()
         MnuManual = New ToolStripMenuItem()
         MnuTechnical = New ToolStripMenuItem()
@@ -59,6 +58,7 @@ Partial Class FrmMain
         MnuMathDocPart2 = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
+        MnuSingleNewton = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
@@ -159,7 +159,7 @@ Partial Class FrmMain
         ' 
         ' MnuComplexIteration
         ' 
-        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuJuliaSet, MnuMandelbrotMap})
+        MnuComplexIteration.DropDownItems.AddRange(New ToolStripItem() {MnuNewton, MnuSingleNewton, MnuJuliaSet, MnuMandelbrotMap})
         MnuComplexIteration.Font = New Font("Microsoft Sans Serif", 9F)
         MnuComplexIteration.Name = "MnuComplexIteration"
         MnuComplexIteration.Size = New Size(112, 20)
@@ -230,7 +230,7 @@ Partial Class FrmMain
         ' 
         ' MnuFractals
         ' 
-        MnuFractals.DropDownItems.AddRange(New ToolStripItem() {MnuLSystems, MnuIFSystems})
+        MnuFractals.DropDownItems.AddRange(New ToolStripItem() {MnuLSystems})
         MnuFractals.Name = "MnuFractals"
         MnuFractals.Size = New Size(59, 20)
         MnuFractals.Text = "Fractals"
@@ -238,14 +238,8 @@ Partial Class FrmMain
         ' MnuLSystems
         ' 
         MnuLSystems.Name = "MnuLSystems"
-        MnuLSystems.Size = New Size(126, 22)
+        MnuLSystems.Size = New Size(123, 22)
         MnuLSystems.Text = "LSystems"
-        ' 
-        ' MnuIFSystems
-        ' 
-        MnuIFSystems.Name = "MnuIFSystems"
-        MnuIFSystems.Size = New Size(126, 22)
-        MnuIFSystems.Text = "IFSystems"
         ' 
         ' MnuDocumentation
         ' 
@@ -299,6 +293,12 @@ Partial Class FrmMain
         MnuTest.Size = New Size(42, 20)
         MnuTest.Text = "Test"
         MnuTest.Visible = False
+        ' 
+        ' MnuSingleNewton
+        ' 
+        MnuSingleNewton.Name = "MnuSingleNewton"
+        MnuSingleNewton.Size = New Size(162, 22)
+        MnuSingleNewton.Text = "SingleNewton"
         ' 
         ' FrmMain
         ' 
@@ -355,5 +355,5 @@ Partial Class FrmMain
     Friend WithEvents MnuBifurcation As ToolStripMenuItem
     Friend WithEvents MnuFractals As ToolStripMenuItem
     Friend WithEvents MnuLSystems As ToolStripMenuItem
-    Friend WithEvents MnuIFSystems As ToolStripMenuItem
+    Friend WithEvents MnuSingleNewton As ToolStripMenuItem
 End Class

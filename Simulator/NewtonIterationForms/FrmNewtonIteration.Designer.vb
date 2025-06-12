@@ -115,7 +115,7 @@ Partial Class FrmNewtonIteration
         SplitContainer.Panel2.Controls.Add(LblXMin)
         SplitContainer.Panel2.Controls.Add(CboFunction)
         SplitContainer.Size = New Size(979, 607)
-        SplitContainer.SplitterDistance = 607
+        SplitContainer.SplitterDistance = 605
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -403,6 +403,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' CboN
         ' 
+        CboN.DropDownStyle = ComboBoxStyle.DropDownList
         CboN.Font = New Font("Microsoft Sans Serif", 9F)
         CboN.FormattingEnabled = True
         CboN.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
@@ -516,6 +517,7 @@ Partial Class FrmNewtonIteration
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"z^3-1", "z^4-1"})

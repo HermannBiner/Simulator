@@ -23,12 +23,24 @@ Public Class ClsInterval
         Else
             MyA = a
             MyB = b
+            MyDblA = CDbl(a)
+            MyDblB = CDbl(b)
         End If
 
     End Sub
 
     Public Sub New(DblA As Double, DblB As Double)
         LM = ClsLanguageManager.LM
+        'The interval borders A and B are committed
+
+        If DblA >= DblB Then
+            Throw New ArgumentException(LM.GetString("LeftSmallerRight"))
+        Else
+            MyA = CDec(DblA)
+            MyB = CDec(DblB)
+            MyDblA = DblA
+            MyDblB = DblB
+        End If
     End Sub
 
     Public Sub New(MyInterval As ClsInterval)

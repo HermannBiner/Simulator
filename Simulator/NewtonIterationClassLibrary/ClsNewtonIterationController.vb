@@ -4,7 +4,7 @@
 
 Imports System.Globalization
 Imports System.Reflection
-Imports Microsoft.VisualBasic.Devices
+
 
 Public Class ClsNewtonIterationController
 

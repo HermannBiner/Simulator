@@ -177,31 +177,31 @@ Public Class ClsGraphicTool
     Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, Color As Color, Wide As Integer)
 
         'Draws a line between the points A and B, given in mathematical coordinates
-        If MyMathXInterval.IsNumberInInterval(A.X) And
-            MyMathYInterval.IsNumberInInterval(A.Y) And
-            MyMathXInterval.IsNumberInInterval(B.X) And
-            MyMathYInterval.IsNumberInInterval(B.Y) Then
 
-            Using Pen As New Pen(Color, Wide)
+        Using Pen As New Pen(Color, Wide)
                 Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
             End Using
-        End If
 
     End Sub
 
     Public Sub DrawLine(A As ClsMathpoint, B As ClsMathpoint, Brush As Brush, Wide As Integer)
 
         'Draws a line between the points A and B, given in mathematical coordinates
-        If MyMathXInterval.IsNumberInInterval(A.X) And
-         MyMathYInterval.IsNumberInInterval(A.Y) And
-         MyMathXInterval.IsNumberInInterval(B.X) And
-         MyMathYInterval.IsNumberInInterval(B.Y) Then
 
-            Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
                 Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
             End Using
-        End If
 
+    End Sub
+
+    Public Sub DrawLine(A As ClsComplexNumber, B As ClsComplexNumber, Brush As Brush, Wide As Integer)
+
+        'Draws a line between the points A and B, given in mathematical coordinates
+
+        Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
+                Graphs.DrawLine(Pen, MathpointToPixel(New ClsMathpoint(CDec(A.X), CDec(A.Y))),
+                                MathpointToPixel(New ClsMathpoint(CDec(B.X), CDec(B.Y))))
+            End Using
 
     End Sub
 
@@ -244,6 +244,19 @@ Public Class ClsGraphicTool
             'Draws a point in pixel coordinates filled with Brush, Wide = 1 is about one pixel
 
             FillCircle(PixelPoint, Wide, Brush)
+        End If
+
+    End Sub
+
+    Public Sub DrawPoint(Z As ClsComplexNumber, Brush As Brush, Wide As Integer)
+
+        If MyMathXInterval.IsNumberInInterval(Z.X) And
+            MyMathYInterval.IsNumberInInterval(Z.Y) Then
+            'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
+
+            Dim MathPoint As New ClsMathpoint(CDec(Z.X), CDec(Z.Y))
+            Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+            FillCircle(MathPoint, Size, Brush)
         End If
 
     End Sub

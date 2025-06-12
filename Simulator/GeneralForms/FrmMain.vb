@@ -66,7 +66,7 @@ Public Class FrmMain
         MnuBifurcation.Text = LM.GetString("MnuBifurcation")
         Mnu3DAttractors.Text = LM.GetString("Mnu3DAttractors")
         MnuLSystems.Text = LM.GetString("MnuLSystems")
-        MnuIFSystems.Text = LM.GetString("MnuIFSystems")
+        MnuSingleNewton.Text = LM.GetString("MnuSingleNewton")
     End Sub
 
     Private Sub MnuIteration_Click(sender As Object, e As EventArgs) Handles MnuIteration.Click
@@ -192,11 +192,11 @@ Public Class FrmMain
         FrmBifurcation.Show()
     End Sub
 
-    Private Sub MnuIFSystems_Click(sender As Object, e As EventArgs) Handles MnuIFSystems.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
+    Private Sub MnuLSystems_Click(sender As Object, e As EventArgs) Handles MnuLSystems.Click
+        FrmLSystems.Show()
     End Sub
 
-    Private Sub MnuLSystems_Click(sender As Object, e As EventArgs) Handles MnuLSystems.Click
-        MessageBox.Show(LM.GetString("NotImplemented"))
+    Private Sub MnuSingleNewton_Click(sender As Object, e As EventArgs) Handles MnuSingleNewton.Click
+        FrmSingleNewtonIteration.Show()
     End Sub
 End Class

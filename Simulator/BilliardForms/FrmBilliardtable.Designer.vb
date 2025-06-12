@@ -86,7 +86,7 @@ Partial Class FrmBilliardTable
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1170, 614)
-        SplitContainer1.SplitterDistance = 608
+        SplitContainer1.SplitterDistance = 606
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -136,7 +136,7 @@ Partial Class FrmBilliardTable
         SplitContainer2.Panel2.Controls.Add(LstValueList)
         SplitContainer2.Panel2.Controls.Add(LblPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
-        SplitContainer2.Size = New Size(556, 614)
+        SplitContainer2.Size = New Size(558, 614)
         SplitContainer2.SplitterDistance = 222
         SplitContainer2.TabIndex = 0
         ' 
@@ -218,6 +218,7 @@ Partial Class FrmBilliardTable
         ' 
         ' CboBilliardTable
         ' 
+        CboBilliardTable.DropDownStyle = ComboBoxStyle.DropDownList
         CboBilliardTable.Font = New Font("Microsoft Sans Serif", 9F)
         CboBilliardTable.FormattingEnabled = True
         CboBilliardTable.Items.AddRange(New Object() {"Elliptic", "Stadium", "Oval"})
@@ -347,6 +348,7 @@ Partial Class FrmBilliardTable
         ' CboBallColor
         ' 
         CboBallColor.BackColor = SystemColors.Window
+        CboBallColor.DropDownStyle = ComboBoxStyle.DropDownList
         CboBallColor.Font = New Font("Microsoft Sans Serif", 9F)
         CboBallColor.FormattingEnabled = True
         CboBallColor.Items.AddRange(New Object() {"Red", "Green", "Blue", "Black", "Magenta"})

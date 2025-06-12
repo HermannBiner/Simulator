@@ -232,6 +232,8 @@ Public Class FrmUniverse
         End If
     End Sub
 
+    'LAYOUT
+
     Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
         If IsFormLoaded Then
             AdjustLayout()

@@ -85,7 +85,7 @@ Partial Class FrmCDiagramBilliard
         SplitContainer.Panel2.Controls.Add(BtnReset)
         SplitContainer.Panel2.Controls.Add(BtnStart)
         SplitContainer.Size = New Size(891, 594)
-        SplitContainer.SplitterDistance = 588
+        SplitContainer.SplitterDistance = 586
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -134,6 +134,7 @@ Partial Class FrmCDiagramBilliard
         ' 
         ' CboValueParameter
         ' 
+        CboValueParameter.DropDownStyle = ComboBoxStyle.DropDownList
         CboValueParameter.Font = New Font("Microsoft Sans Serif", 9F)
         CboValueParameter.FormattingEnabled = True
         CboValueParameter.Items.AddRange(New Object() {"ValueRange1", "ValueRange2"})
@@ -222,6 +223,7 @@ Partial Class FrmCDiagramBilliard
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Elliptic Billiard", "Stadium Billiard", "Oval Billiard"})

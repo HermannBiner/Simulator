@@ -40,7 +40,6 @@ Public Class FrmNewtonIteration
     End Sub
     Private Sub FrmNewtonIteration_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         AdjustLayout()
-
     End Sub
 
     Private Sub AdjustLayout()
@@ -198,6 +197,8 @@ Public Class FrmNewtonIteration
             FC.ShowBasin()
         End If
     End Sub
+
+    'LAYOUT
 
     Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
         If IsFormLoaded Then

@@ -66,7 +66,7 @@ Partial Class FrmNumericMethod
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1143, 614)
-        SplitContainer1.SplitterDistance = 687
+        SplitContainer1.SplitterDistance = 685
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -104,7 +104,7 @@ Partial Class FrmNumericMethod
         SplitContainer2.Panel2.Controls.Add(TrbStepWidth)
         SplitContainer2.Panel2.Controls.Add(CboPendulum)
         SplitContainer2.Panel2.Controls.Add(LblNumMethod)
-        SplitContainer2.Size = New Size(450, 614)
+        SplitContainer2.Size = New Size(452, 614)
         SplitContainer2.SplitterDistance = 186
         SplitContainer2.TabIndex = 0
         ' 
@@ -232,6 +232,7 @@ Partial Class FrmNumericMethod
         ' 
         ' CboPendulum
         ' 
+        CboPendulum.DropDownStyle = ComboBoxStyle.DropDownList
         CboPendulum.Font = New Font("Microsoft Sans Serif", 9F)
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"RealSpringPendulum", "EulerExplicit", "EulerImplicit", "MidpointImplicit", "RungeKutta4"})

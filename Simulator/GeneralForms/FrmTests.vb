@@ -30,7 +30,6 @@ Public Class FrmTests
 
         'Initialize Language
         InitializeLanguage()
-
         SetDefaulValues()
 
     End Sub
@@ -128,6 +127,8 @@ Public Class FrmTests
             DrawCoordinateSystem()
         End If
     End Sub
+
+    'LAYOUT
 
     Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
         If IsFormLoaded Then

@@ -81,7 +81,7 @@ Partial Class FrmPopulation
         SplitContainer.Panel2.Controls.Add(LblParameter)
         SplitContainer.Panel2.Controls.Add(CboFunction)
         SplitContainer.Size = New Size(884, 589)
-        SplitContainer.SplitterDistance = 590
+        SplitContainer.SplitterDistance = 588
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -263,6 +263,7 @@ Partial Class FrmPopulation
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})

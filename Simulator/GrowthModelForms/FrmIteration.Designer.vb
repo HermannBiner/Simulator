@@ -93,7 +93,7 @@ Partial Class FrmIteration
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1069, 576)
-        SplitContainer1.SplitterDistance = 539
+        SplitContainer1.SplitterDistance = 537
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -109,6 +109,7 @@ Partial Class FrmIteration
         ' 
         ' CboIterationDepth
         ' 
+        CboIterationDepth.DropDownStyle = ComboBoxStyle.DropDownList
         CboIterationDepth.Font = New Font("Microsoft Sans Serif", 9F)
         CboIterationDepth.FormattingEnabled = True
         CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8"})
@@ -131,6 +132,7 @@ Partial Class FrmIteration
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
@@ -169,7 +171,7 @@ Partial Class FrmIteration
         SplitContainer2.Panel2.Controls.Add(LblStartValue)
         SplitContainer2.Panel2.Controls.Add(LblParameter)
         SplitContainer2.Panel2.Controls.Add(BtnReset)
-        SplitContainer2.Size = New Size(524, 576)
+        SplitContainer2.Size = New Size(526, 576)
         SplitContainer2.SplitterDistance = 173
         SplitContainer2.TabIndex = 0
         ' 

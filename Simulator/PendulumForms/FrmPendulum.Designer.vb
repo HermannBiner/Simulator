@@ -91,7 +91,7 @@ Partial Class FrmPendulum
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1180, 612)
-        SplitContainer1.SplitterDistance = 607
+        SplitContainer1.SplitterDistance = 605
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -137,7 +137,7 @@ Partial Class FrmPendulum
         SplitContainer2.Panel2.Controls.Add(LstProtocol)
         SplitContainer2.Panel2.Controls.Add(LblPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
-        SplitContainer2.Size = New Size(567, 612)
+        SplitContainer2.Size = New Size(569, 612)
         SplitContainer2.SplitterDistance = 233
         SplitContainer2.TabIndex = 0
         ' 
@@ -187,6 +187,7 @@ Partial Class FrmPendulum
         ' 
         ' CboTypeofPhaseportrait
         ' 
+        CboTypeofPhaseportrait.DropDownStyle = ComboBoxStyle.DropDownList
         CboTypeofPhaseportrait.Font = New Font("Microsoft Sans Serif", 9F)
         CboTypeofPhaseportrait.FormattingEnabled = True
         CboTypeofPhaseportrait.Items.AddRange(New Object() {"Independent", "PoincareSection"})
@@ -264,6 +265,7 @@ Partial Class FrmPendulum
         ' 
         ' CboPendulum
         ' 
+        CboPendulum.DropDownStyle = ComboBoxStyle.DropDownList
         CboPendulum.Font = New Font("Microsoft Sans Serif", 9F)
         CboPendulum.FormattingEnabled = True
         CboPendulum.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})

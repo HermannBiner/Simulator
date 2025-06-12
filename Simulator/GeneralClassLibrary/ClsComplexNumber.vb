@@ -179,4 +179,9 @@ Public Class ClsComplexNumber
 
     End Function
 
+    Public Sub Equal(W As ClsComplexNumber)
+        MyX = W.X
+        MyY = W.Y
+    End Sub
+
 End Class

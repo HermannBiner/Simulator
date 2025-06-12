@@ -22,7 +22,7 @@ Public Class FrmNumericMethod
         LM = ClsLanguageManager.LM
     End Sub
 
-    Private Sub FrmSpringPendulum_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub FrmNumericMethod_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         IsFormLoaded = False
         FC = New ClsNumericMethodController(Me)
@@ -32,7 +32,7 @@ Public Class FrmNumericMethod
         FC.FillDynamicSystem()
     End Sub
 
-    Private Sub FrmStrangeAttractor_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+    Private Sub FrmNumericMethod_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         AdjustLayout()
     End Sub
 
@@ -56,7 +56,7 @@ Public Class FrmNumericMethod
                 LstValueList.Height = DiagramSize - LstValueList.Top - 5
 
                 If IsFormLoaded Then
-                    FC.InitializeDS()
+                    FC.InitializeMe()
                     FC.ResetIteration()
                 End If
             End If
@@ -64,7 +64,7 @@ Public Class FrmNumericMethod
         End If
     End Sub
 
-    Private Sub FrmSpringPendulum_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub FrmNumericMethod_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FC.SetDS()
         IsFormLoaded = True
     End Sub
@@ -154,6 +154,8 @@ Public Class FrmNumericMethod
             FC.StopIteration()
         End If
     End Sub
+
+    'LAYOUT
 
     Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
         If IsFormLoaded Then

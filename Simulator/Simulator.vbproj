@@ -107,7 +107,6 @@
 
   <ItemGroup>
     <Folder Include="My Project\NewFolder\" />
-    <Folder Include="FractalClassLibrary\" />
     <Folder Include="Data\" />
   </ItemGroup>
 

@@ -1449,4 +1449,248 @@
     <value>Bevölkerungsdichte</value>
     <comment>Lbl</comment>
   </data>
+  <data name="LSystems" xml:space="preserve">
+    <value>L-Systeme</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Regeln</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SystemParameters" xml:space="preserve">
+    <value>Systemparameter</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AddRule" xml:space="preserve">
+    <value>Neue Regel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AddSystem" xml:space="preserve">
+    <value>Neues System</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="CheckSyntax" xml:space="preserve">
+    <value>CheckSyntax</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Budding" xml:space="preserve">
+    <value>Knospen</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AngleLeft" xml:space="preserve">
+    <value>Winkel links</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="AngleRight" xml:space="preserve">
+    <value>Winkel rechts</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Axiom" xml:space="preserve">
+    <value>Axiom</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ScaleFactor" xml:space="preserve">
+    <value>Skalierfaktor</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Quelle</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Ziel</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="OriginalFileMissing" xml:space="preserve">
+    <value>Das Originalfile wurde nicht gefunden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="GetDefaultSystems" xml:space="preserve">
+    <value>Hole Standard-Systeme</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SystemCannotBeDeleted" xml:space="preserve">
+    <value>Ein original L-System kann nicht gelöscht werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="LastSystemNotDeleted" xml:space="preserve">
+    <value>Das letzte System kann nicht gelöscht werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NameMissing" xml:space="preserve">
+    <value>Es muss ein Name angegeben werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="AxiomMissing" xml:space="preserve">
+    <value>Es muss ein Axiom angegeben werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="ScaleFactorIn0to1" xml:space="preserve">
+    <value>Der Skalierfaktor muss in [0,1] sein.</value>
+    <comment>msg</comment>
+  </data>
+  <data name="AngleMissing" xml:space="preserve">
+    <value>Die Winkel müssen erfasst werden.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="AngleIn0to360" xml:space="preserve">
+    <value>Die Winkel müssen in [0, 360] liegen.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="DeleteLSystem" xml:space="preserve">
+    <value>Wollen Sie das L-System wirklich unwiederruflich löschen?</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="SaveRule" xml:space="preserve">
+    <value>Regel speichern</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="SaveSystem" xml:space="preserve">
+    <value>System speichern</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NoRulesExisting" xml:space="preserve">
+    <value>Keine Regeln vorhanden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="RuleAlreadyExists" xml:space="preserve">
+    <value>Diese Regel existiert bereits</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NameAlreadyUsed" xml:space="preserve">
+    <value>Dieser Name existiert bereits</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="AxiomContainsIllegalCharacters" xml:space="preserve">
+    <value>Das Axiom enthält unzulässige Zeichen</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="SourceContainsIllegalCharacters" xml:space="preserve">
+    <value>Source enthält unzulässige Zeichen</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="TargetContainsIllegalCharacters" xml:space="preserve">
+    <value>Target enthält unzulässige Zeichen</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NoRuleForChar" xml:space="preserve">
+    <value>Es gibt keine Regel für: </value>
+    <comment>Msg</comment>
+  </data>
+  <data name="BracketsMissing()" xml:space="preserve">
+    <value>Fehlende ( oder ) Klammer</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="BracketsMissing[]" xml:space="preserve">
+    <value>Fehlende [ oder ] Klammer</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="ColorCodeInvalid" xml:space="preserve">
+    <value>Ungültiger Farbcode in (...)</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="StartPosition" xml:space="preserve">
+    <value>Startposition</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartLength" xml:space="preserve">
+    <value>Startlänge</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Scaling" xml:space="preserve">
+    <value>Skalierung</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ByIteration" xml:space="preserve">
+    <value>Pro Iteration</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="ByBranch" xml:space="preserve">
+    <value>Pro Zweig</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>Unten links</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BottomHalfLeft" xml:space="preserve">
+    <value>Unten halblinks</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="BottomCentre" xml:space="preserve">
+    <value>Unten Mitte</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Centre" xml:space="preserve">
+    <value>Zentrum</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="StartLengthMissing" xml:space="preserve">
+    <value>Keine gültige Startlänge</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="InvalidStartLength" xml:space="preserve">
+    <value>Die Startlänge muss in [0,13] liegen.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="GetOriginalSystem" xml:space="preserve">
+    <value>Wollen Sie die Standard-Systeme holen? Ihre Systeme werden überschrieben! Vorher wird eine *.bak Sicherung angelegt.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="LSystemsXX.json" xml:space="preserve">
+    <value>LSystemsDE.json</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="MissingBracketInColorDefinition" xml:space="preserve">
+    <value>Fehlende Klammer in Farbdefinition</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="RestoreCopy" xml:space="preserve">
+    <value>Hole Sicherheitskopie</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NextGeneration" xml:space="preserve">
+    <value>Nächste Generation</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="NoBackupFile" xml:space="preserve">
+    <value>Keine Sicherheitskopie vorhanden</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="MnuSingleNewton" xml:space="preserve">
+    <value>Newton punktweise iteriert</value>
+    <comment>Mnu</comment>
+  </data>
+  <data name="SingleNewtonIteration" xml:space="preserve">
+    <value>Newton punktweise iteriert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Extended" xml:space="preserve">
+    <value>Erweitert</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+    <comment>Lbl</comment>
+  </data>
+  <data name="Tree" xml:space="preserve">
+    <value>Baum</value>
+    <comment>Lbl</comment>
+  </data>
 </root>

@@ -12,6 +12,13 @@ Public Class ClsDynamics
         Ready
     End Enum
 
+    'Status of Editmode (e.g. in LSystems)
+    Public Enum EnEditMode
+        None
+        Edit
+        Add
+    End Enum
+
     'To copy an object inclusive properties
     Public Sub CopyProperties(Source As Object, Target As Object)
         Dim SourceType As Type = Source.GetType()

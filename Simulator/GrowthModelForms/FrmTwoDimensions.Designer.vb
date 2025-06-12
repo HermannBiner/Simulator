@@ -77,7 +77,7 @@ Partial Class FrmTwoDimensions
         SplitContainer.Panel2.Controls.Add(GrpStartpoint)
         SplitContainer.Panel2.Controls.Add(CboFunction)
         SplitContainer.Size = New Size(879, 615)
-        SplitContainer.SplitterDistance = 608
+        SplitContainer.SplitterDistance = 606
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -185,6 +185,7 @@ Partial Class FrmTwoDimensions
         ' 
         ' CboExperiment
         ' 
+        CboExperiment.DropDownStyle = ComboBoxStyle.DropDownList
         CboExperiment.FormattingEnabled = True
         CboExperiment.Items.AddRange(New Object() {"Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"})
         CboExperiment.Location = New Point(8, 22)
@@ -284,6 +285,7 @@ Partial Class FrmTwoDimensions
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic growth", "Parabola"})

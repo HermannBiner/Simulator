@@ -103,7 +103,7 @@ Partial Class FrmUniverse
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1176, 611)
-        SplitContainer1.SplitterDistance = 608
+        SplitContainer1.SplitterDistance = 606
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -154,7 +154,7 @@ Partial Class FrmUniverse
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(BtnDefault)
         SplitContainer2.Panel2.Controls.Add(BtnReset)
-        SplitContainer2.Size = New Size(562, 611)
+        SplitContainer2.Size = New Size(564, 611)
         SplitContainer2.SplitterDistance = 224
         SplitContainer2.TabIndex = 0
         ' 
@@ -214,6 +214,7 @@ Partial Class FrmUniverse
         ' 
         ' CboConstellations
         ' 
+        CboConstellations.DropDownStyle = ComboBoxStyle.DropDownList
         CboConstellations.Font = New Font("Microsoft Sans Serif", 9F)
         CboConstellations.FormattingEnabled = True
         CboConstellations.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})
@@ -360,6 +361,7 @@ Partial Class FrmUniverse
         ' CboDefaultStar
         ' 
         CboDefaultStar.BackColor = SystemColors.Window
+        CboDefaultStar.DropDownStyle = ComboBoxStyle.DropDownList
         CboDefaultStar.Font = New Font("Microsoft Sans Serif", 9F)
         CboDefaultStar.FormattingEnabled = True
         CboDefaultStar.Location = New Point(7, 35)
@@ -445,6 +447,7 @@ Partial Class FrmUniverse
         ' 
         ' CboUniverse
         ' 
+        CboUniverse.DropDownStyle = ComboBoxStyle.DropDownList
         CboUniverse.Font = New Font("Microsoft Sans Serif", 9F)
         CboUniverse.FormattingEnabled = True
         CboUniverse.Items.AddRange(New Object() {"DoublePendulum", "CombiPendulum", "ShakePendulum"})

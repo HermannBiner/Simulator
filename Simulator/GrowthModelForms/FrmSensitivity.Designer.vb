@@ -82,12 +82,13 @@ Partial Class FrmSensitivity
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1211, 592)
-        SplitContainer1.SplitterDistance = 656
+        SplitContainer1.SplitterDistance = 654
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
         ' CboIterationDepth
         ' 
+        CboIterationDepth.DropDownStyle = ComboBoxStyle.DropDownList
         CboIterationDepth.FormattingEnabled = True
         CboIterationDepth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         CboIterationDepth.Location = New Point(399, 6)
@@ -109,6 +110,7 @@ Partial Class FrmSensitivity
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})
@@ -173,7 +175,7 @@ Partial Class FrmSensitivity
         SplitContainer2.Panel2.Controls.Add(LblStartValue2)
         SplitContainer2.Panel2.Controls.Add(TxtStartValue1)
         SplitContainer2.Panel2.Controls.Add(LblStartValue1)
-        SplitContainer2.Size = New Size(549, 592)
+        SplitContainer2.Size = New Size(551, 592)
         SplitContainer2.SplitterDistance = 216
         SplitContainer2.TabIndex = 0
         ' 

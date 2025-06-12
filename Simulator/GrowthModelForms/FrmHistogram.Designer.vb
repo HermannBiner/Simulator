@@ -68,7 +68,7 @@ Partial Class FrmHistogram
         SplitContainer.Panel2.Controls.Add(TxtParameter)
         SplitContainer.Panel2.Controls.Add(LblParameter)
         SplitContainer.Size = New Size(883, 586)
-        SplitContainer.SplitterDistance = 582
+        SplitContainer.SplitterDistance = 580
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -106,6 +106,7 @@ Partial Class FrmHistogram
         ' 
         ' CboFunction
         ' 
+        CboFunction.DropDownStyle = ComboBoxStyle.DropDownList
         CboFunction.Font = New Font("Microsoft Sans Serif", 9F)
         CboFunction.FormattingEnabled = True
         CboFunction.Items.AddRange(New Object() {"Tentmap", "Logistic Growth", "Parabola"})

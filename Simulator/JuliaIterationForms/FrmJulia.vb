@@ -193,6 +193,8 @@ Public Class FrmJulia
         End If
     End Sub
 
+    'LAYOUT
+
     Private Sub SplitContainer_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer.SplitterMoved
         If IsFormLoaded Then
             AdjustLayout()

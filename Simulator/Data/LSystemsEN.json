@@ -1,0 +1,227 @@
+[
+  {
+    "ID": 1,
+    "Name": "Dragon curve",
+    "Type": 2,
+    "Axiom": "FX",
+    "ScaleFactor": 0.74,
+    "AngleLeft": 90,
+    "AngleRight": 90,
+    "Color": 19,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 3,
+    "Scaling": 0,
+    "StartPositionX": 7,
+    "StartPositionY": 7,
+    "Rules": {
+      "X": "(2)X\u002BYF\u002B",
+      "Y": "(20)-FX-Y"
+    }
+  },
+  {
+    "ID": 2,
+    "Name": "Hilbert curve",
+    "Type": 0,
+    "Axiom": "A",
+    "ScaleFactor": 0.5,
+    "AngleLeft": 90,
+    "AngleRight": 90,
+    "Color": 12,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 11,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 1,
+    "Rules": {
+      "A": "(12)\u002BBF-AFA-FB\u002B",
+      "B": "(5)-AF\u002BBFB\u002BFA-"
+    }
+  },
+  {
+    "ID": 3,
+    "Name": "Sierpinski triangle",
+    "Type": 0,
+    "Axiom": "F\u002BG\u002BG--",
+    "ScaleFactor": 0.5,
+    "AngleLeft": 120,
+    "AngleRight": 120,
+    "Color": 19,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 11,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 2,
+    "Rules": {
+      "F": "(19)F\u002BG-F-G\u002BF",
+      "G": "(7)GG"
+    }
+  },
+  {
+    "ID": 4,
+    "Name": "Inverse Snowflake",
+    "Type": 0,
+    "Axiom": "F\u002B\u002BF\u002B\u002BF\u002B\u002B",
+    "ScaleFactor": 0.33333,
+    "AngleLeft": 60,
+    "AngleRight": 60,
+    "Color": 2,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 11,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 2,
+    "Rules": {
+      "F": "(3)F\u002BF--(16)F\u002BF"
+    }
+  },
+  {
+    "ID": 5,
+    "Name": "Snowflake",
+    "Type": 0,
+    "Axiom": "F\u002B\u002BF\u002B\u002BF\u002B\u002B",
+    "ScaleFactor": 0.33333,
+    "AngleLeft": 60,
+    "AngleRight": 60,
+    "Color": 20,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 10,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 3.5,
+    "Rules": {
+      "F": "(3)F-F\u002B\u002B(16)F-F"
+    }
+  },
+  {
+    "ID": 6,
+    "Name": "Sierpinski curve",
+    "Type": 0,
+    "Axiom": "F\u002B\u002BF\u002B\u002BF\u002B\u002B",
+    "ScaleFactor": 0.25,
+    "AngleLeft": 60,
+    "AngleRight": 60,
+    "Color": 1,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 10,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 3.5,
+    "Rules": {
+      "F": "(1)F-(2)F\u002B(12)F\u002B(17)F-(25)F"
+    }
+  },
+  {
+    "ID": 7,
+    "Name": "Peano curve",
+    "Type": 0,
+    "Axiom": "X",
+    "ScaleFactor": 0.333,
+    "AngleLeft": 90,
+    "AngleRight": 90,
+    "Color": 10,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 11,
+    "Scaling": 0,
+    "StartPositionX": 1,
+    "StartPositionY": 1,
+    "Rules": {
+      "X": "(6)XFYFX\u002BF\u002BYFXFY-F-XFYFX",
+      "Y": "(15)YFXFY-F-XFYFX\u002BF\u002BYFXFY"
+    }
+  },
+  {
+    "ID": 8,
+    "Name": "Tree",
+    "Type": 1,
+    "Axiom": "\u002B\u002B\u002BF",
+    "ScaleFactor": 0.5,
+    "AngleLeft": 25,
+    "AngleRight": 23,
+    "Color": 1,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": true,
+    "StartLength": 3,
+    "Scaling": 1,
+    "StartPositionX": 5,
+    "StartPositionY": 1,
+    "Rules": {
+      "F": "(1)F\u002B(12)[\u002BF-F-(2)F]-(12)[-F\u002B(13)F\u002B(7)F]"
+    }
+  },
+  {
+    "ID": 9,
+    "Name": "Plant",
+    "Type": 1,
+    "Axiom": "\u002B\u002B\u002BF",
+    "ScaleFactor": 0.5,
+    "AngleLeft": 25,
+    "AngleRight": 35,
+    "Color": 12,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": true,
+    "StartLength": 4,
+    "Scaling": 1,
+    "StartPositionX": 2,
+    "StartPositionY": 1,
+    "Rules": {
+      "F": "F[--F\u002BF\u002B(10)F][\u002BF-F-(3)F]"
+    }
+  },
+  {
+    "ID": 10,
+    "Name": "Fern",
+    "Type": 1,
+    "Axiom": "\u002B\u002B\u002BX",
+    "ScaleFactor": 0.8,
+    "AngleLeft": 20,
+    "AngleRight": 25,
+    "Color": 12,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": false,
+    "StartLength": 1,
+    "Scaling": 1,
+    "StartPositionX": 4,
+    "StartPositionY": 1,
+    "Rules": {
+      "F": "F",
+      "X": "F-[(12)[X]\u002BX]\u002BF[\u002B(11)FX(10)]-F"
+    }
+  },
+  {
+    "ID": 11,
+    "Name": "Bunch",
+    "Type": 1,
+    "Axiom": "\u002B\u002B\u002BF",
+    "ScaleFactor": 0.7,
+    "AngleLeft": 25,
+    "AngleRight": 25,
+    "Color": 13,
+    "IsExtended": false,
+    "IsColorFixed": false,
+    "IsBudding": true,
+    "StartLength": 2.2,
+    "Scaling": 1,
+    "StartPositionX": 6,
+    "StartPositionY": 1,
+    "Rules": {
+      "F": "F\u002B[(13)F-F][F\u002BF(24)]-[(13)F\u002BF][F-F(24)]"
+    }
+  }
+]

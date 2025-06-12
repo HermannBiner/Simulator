@@ -123,7 +123,7 @@ Public Class ClsNewtonUniverse
 
         '4 symmetric bodies disturbed
         FourSymmetricBodiesDisturbed.Name = LM.GetString("4SymmetricBodiesDisturbed")
-        FourSymmetricBodiesDisturbed.ProposedStepWidth = CDec(4)
+        FourSymmetricBodiesDisturbed.ProposedStepWidth = CDec(7)
         FourSymmetricBodiesDisturbed.VFactor = 1000
         Fill4SymmetricBodies(True)
         MyConstellations.Add(FourSymmetricBodiesDisturbed)

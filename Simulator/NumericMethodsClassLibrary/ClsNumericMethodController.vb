@@ -133,7 +133,7 @@ Public Class ClsNumericMethodController
 
         DSA = New ClsRealSpringPendulum
 
-        InitializeDS()
+        InitializeMe()
 
         SetDefaultUserData()
 
@@ -143,7 +143,7 @@ Public Class ClsNumericMethodController
     End Sub
 
     'PendulumA is just a real Spring Pendulum
-    Public Sub InitializeDS()
+    Public Sub InitializeMe()
 
         PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, MathInterval, MathInterval)
         BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
