@@ -57,8 +57,8 @@ Partial Class FrmInfo
         ' 
         SplitContainer.Panel2.BackColor = SystemColors.ControlLight
         SplitContainer.Panel2.Controls.Add(PicZermatt)
-        SplitContainer.Size = New Size(784, 417)
-        SplitContainer.SplitterDistance = 256
+        SplitContainer.Size = New Size(827, 417)
+        SplitContainer.SplitterDistance = 309
         SplitContainer.SplitterWidth = 6
         SplitContainer.TabIndex = 0
         ' 
@@ -67,7 +67,7 @@ Partial Class FrmInfo
         BtnReleaseNotes.Font = New Font("Microsoft Sans Serif", 9F)
         BtnReleaseNotes.Location = New Point(3, 99)
         BtnReleaseNotes.Name = "BtnReleaseNotes"
-        BtnReleaseNotes.Size = New Size(250, 30)
+        BtnReleaseNotes.Size = New Size(303, 30)
         BtnReleaseNotes.TabIndex = 10
         BtnReleaseNotes.Text = "ReleaseNotes"
         BtnReleaseNotes.UseVisualStyleBackColor = True
@@ -131,7 +131,7 @@ Partial Class FrmInfo
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(784, 417)
+        ClientSize = New Size(827, 417)
         Controls.Add(SplitContainer)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MinimumSize = New Size(282, 183)
