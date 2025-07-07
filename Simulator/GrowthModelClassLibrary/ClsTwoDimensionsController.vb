@@ -383,6 +383,7 @@ Public Class ClsTwoDimensionsController
         'in all cases: NExtStep, Next10, Start
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
             If IsUserDataOK() Then
+                SetBrush()
                 'PrepareDiagram()
                 DS.ParameterA = CDec(MyForm.TxtParameter.Text)
                 IterationPoint.X = CDec(MyForm.TxtX.Text)

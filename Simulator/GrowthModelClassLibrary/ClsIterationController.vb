@@ -253,6 +253,13 @@ Public Class ClsIterationController
         For m = 0 To PicDiagramSize + 2
             X.Y = DS.FN(X.X)
             Xplus.X = X.X + deltaX
+            If Xplus.X <= DS.ValueParameter.Range.B Then
+                Xplus.Y = DS.FN(Xplus.X)
+            Else
+                'If Xplus.X is out of the range, it is set to the end of the range
+                Xplus.X = DS.ValueParameter.Range.B
+                Xplus.Y = DS.FN(Xplus.X)
+            End If
             Xplus.Y = DS.FN(Xplus.X)
             PicGraphics.DrawLine(X, Xplus, Color.Blue, 1)
             X.X = Xplus.X

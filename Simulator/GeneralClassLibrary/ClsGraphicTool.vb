@@ -179,8 +179,8 @@ Public Class ClsGraphicTool
         'Draws a line between the points A and B, given in mathematical coordinates
 
         Using Pen As New Pen(Color, Wide)
-                Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
-            End Using
+            Graphs.DrawLine(Pen, MathpointToPixel(A), MathpointToPixel(B))
+        End Using
 
     End Sub
 
@@ -632,13 +632,18 @@ Public Class ClsGraphicTool
         'Transformation of a MathPoint in mathematial coordinates 
         'into a Point in Pixel-Coordinates
         '+1 because we had a -1 in the inverse transformation
-
-        Dim Pixelpoint = New Point With {
+        Try
+            Dim Pixelpoint = New Point With {
             .X = 1 + CInt((Mathpoint.X - MyMathXInterval.A) * DiagramCornerpoint.X / MyMathXInterval.IntervalWidth),
             .Y = 1 + CInt((MyMathYInterval.B - Mathpoint.Y) * DiagramCornerpoint.Y / MyMathYInterval.IntervalWidth)
         }
 
-        Return Pixelpoint
+            Return Pixelpoint
+        Catch
+            MessageBox.Show("Error in MathpointToPixel: " & Mathpoint.X.ToString & "/ " & Mathpoint.Y.ToString)
+            Stop
+        End Try
+
 
     End Function
 
