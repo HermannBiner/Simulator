@@ -206,13 +206,13 @@ Public Class ClsTwoDimensionsController
                 Case 0
                     MyBrush = CType(Brushes.Black, SolidBrush)
                 Case 1
-                    MyBrush = CType(Brushes.Green, SolidBrush)
-                Case 2
                     MyBrush = CType(Brushes.Blue, SolidBrush)
-                Case 3
+                Case 2
                     MyBrush = CType(Brushes.Magenta, SolidBrush)
-                Case Else
+                Case 3
                     MyBrush = CType(Brushes.Red, SolidBrush)
+                Case Else
+                    MyBrush = CType(Brushes.YellowGreen, SolidBrush)
             End Select
         Else
             MyBrush = CType(Brushes.Blue, SolidBrush)

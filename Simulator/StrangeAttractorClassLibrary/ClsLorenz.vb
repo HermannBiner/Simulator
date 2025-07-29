@@ -102,7 +102,7 @@ Public Class ClsLorenz
         DoublePair.AddPoint(New ClsIterationPoint(CDec(0.01), CDec(0.01), CDec(0.1), Brushes.Blue))
         DoublePair.AddPoint(New ClsIterationPoint(CDec(-0.01), CDec(-0.01), CDec(0.1), Brushes.Red))
         DoublePair.AddPoint(New ClsIterationPoint(CDec(-0.01), CDec(0.01), CDec(0.1), Brushes.Green))
-        DoublePair.AddPoint(New ClsIterationPoint(CDec(0.01), CDec(-0.01), CDec(0.1), Brushes.OrangeRed))
+        DoublePair.AddPoint(New ClsIterationPoint(CDec(0.01), CDec(-0.01), CDec(0.1), Brushes.Yellow))
 
         DoublePair.ProposedStepWidth = CDec(0.001)
         MyStartPointSets.Add(DoublePair)

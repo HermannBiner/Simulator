@@ -271,6 +271,7 @@ Public Class ClsLTurtle
                 i += 1
                 If i Mod 5000 = 0 Then
                     Await Task.Delay(1)
+                    Application.DoEvents()
                 End If
 
                 'If a StopRequest was made, exit the loop
