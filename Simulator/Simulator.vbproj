@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <StartupObject>Simulator.My.MyApplication</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
@@ -22,16 +22,25 @@
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     <PackageIcon>Simulator.ico</PackageIcon>
+    <NuGetAudit>False</NuGetAudit>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <RemoveIntegerChecks>True</RemoveIntegerChecks>
+    <DefineDebug>False</DefineDebug>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>C:\Users\hbine\OneDrive\Dokumente\Chaos\Publish</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <RemoveIntegerChecks>True</RemoveIntegerChecks>
+    <DefineDebug>True</DefineDebug>
   </PropertyGroup>
 
   <ItemGroup>

@@ -76,7 +76,7 @@ Public Class ClsNormedUniverse
         IA1.ProposedStepWidth = CDec(0.01)
         IA1.VFactor = 100
         IA2.Name = "IA2"
-        IA2.ProposedStepWidth = CDec(0.01)
+        IA2.ProposedStepWidth = CDec(0.03)
         IA2.VFactor = 100
         IA3.Name = "IA3"
         IA3.ProposedStepWidth = CDec(0.01)
