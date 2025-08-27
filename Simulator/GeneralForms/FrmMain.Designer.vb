@@ -39,6 +39,7 @@ Partial Class FrmMain
         MnuPopulationDensity = New ToolStripMenuItem()
         MnuComplexIteration = New ToolStripMenuItem()
         MnuNewton = New ToolStripMenuItem()
+        MnuSingleNewton = New ToolStripMenuItem()
         MnuJuliaSet = New ToolStripMenuItem()
         MnuMandelbrotMap = New ToolStripMenuItem()
         MnuMechanics = New ToolStripMenuItem()
@@ -58,7 +59,6 @@ Partial Class FrmMain
         MnuMathDocPart2 = New ToolStripMenuItem()
         MnuInfo = New ToolStripMenuItem()
         MnuTest = New ToolStripMenuItem()
-        MnuSingleNewton = New ToolStripMenuItem()
         MnuMain.SuspendLayout()
         SuspendLayout()
         ' 
@@ -170,6 +170,12 @@ Partial Class FrmMain
         MnuNewton.Name = "MnuNewton"
         MnuNewton.Size = New Size(162, 22)
         MnuNewton.Text = "Newton"
+        ' 
+        ' MnuSingleNewton
+        ' 
+        MnuSingleNewton.Name = "MnuSingleNewton"
+        MnuSingleNewton.Size = New Size(162, 22)
+        MnuSingleNewton.Text = "SingleNewton"
         ' 
         ' MnuJuliaSet
         ' 
@@ -293,12 +299,6 @@ Partial Class FrmMain
         MnuTest.Size = New Size(42, 20)
         MnuTest.Text = "Test"
         MnuTest.Visible = False
-        ' 
-        ' MnuSingleNewton
-        ' 
-        MnuSingleNewton.Name = "MnuSingleNewton"
-        MnuSingleNewton.Size = New Size(162, 22)
-        MnuSingleNewton.Text = "SingleNewton"
         ' 
         ' FrmMain
         ' 

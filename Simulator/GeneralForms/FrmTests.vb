@@ -68,8 +68,8 @@ Public Class FrmTests
 
     Private Sub SetDefaulValues()
 
-        XInterval = New ClsInterval(CDec(-0.2), CDec(1.2))
-        YInterval = New ClsInterval(CDec(-0.2), CDec(1.2))
+        XInterval = New ClsInterval(CDec(-4), CDec(4))
+        YInterval = New ClsInterval(CDec(-4), CDec(4))
         MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
 
     End Sub
@@ -94,23 +94,20 @@ Public Class FrmTests
 
 
             Dim u As Decimal = 0
-            Dim Sinus As New ClsMathpoint
+            Dim Gamma As New ClsMathpoint
 
             Do
 
-                With Sinus
-                    .X = CDec(u)
-                    .Y = CDec(Math.Pow(Math.Sin(u * Math.PI / 2), 2))
+                With Gamma
+                    .X = CDec(Math.Pow(Math.Cos(u), 3))
+                    .Y = CDec(Math.Sin(u))
                 End With
-                MyGraphics.DrawPoint(Sinus, Brushes.Blue, 1)
+                MyGraphics.DrawPoint(Gamma, Brushes.Blue, 1)
 
                 u += CDec(0.001)
 
 
-            Loop Until u > CDec(1)
-
-            MyGraphics.DrawLine(New ClsMathpoint(0, 1), New ClsMathpoint(1, 1), Color.Black, 1)
-            MyGraphics.DrawLine(New ClsMathpoint(1, 0), New ClsMathpoint(1, 1), Color.Black, 1)
+            Loop Until u > CDec(2 * Math.pi)
 
         End If
     End Sub
