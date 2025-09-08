@@ -95,12 +95,13 @@ Public Class FrmTests
 
             Dim u As Decimal = 0
             Dim Gamma As New ClsMathpoint
+            Dim p As Integer = 5
 
             Do
 
                 With Gamma
-                    .X = CDec(Math.Pow(Math.Cos(u), 3))
-                    .Y = CDec(Math.Sin(u))
+                    .X = CDec((2 + Math.Sin(u)) * Math.Cos(p * u))
+                    .Y = CDec((2 + Math.Sin(u)) * Math.Sin(p * u))
                 End With
                 MyGraphics.DrawPoint(Gamma, Brushes.Blue, 1)
 
