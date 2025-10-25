@@ -343,10 +343,10 @@ Public Class ClsNumericMethodController
 
                 'Draw the line of movement into the bitmap
                 BmpGraphics.DrawLine(TraceA, NextTraceA, Color.Green, 1)
-                BmpGraphics.DrawLine(TraceB, NextTraceB, Color.Red, 1)
+            BmpGraphics.DrawLine(TraceB, NextTraceB, Color.Red, 1)
 
-                'copy the bitmap
-                ShiftedBmpDiagram = New Bitmap(BmpDiagram)
+            'copy the bitmap
+            ShiftedBmpDiagram = New Bitmap(BmpDiagram)
 
             If n Mod NumberOfStepsUntilShift = 0 Then
 

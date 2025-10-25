@@ -1693,4 +1693,8 @@
     <value>Tree</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ClsRealThreadàPendulum" xml:space="preserve">
+    <value>Real Thread Pendulum</value>
+    <comment>Cls</comment>
+  </data>
 </root>

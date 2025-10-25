@@ -1693,4 +1693,8 @@
     <value>Baum</value>
     <comment>Lbl</comment>
   </data>
+  <data name="ClsRealThreadPendulum" xml:space="preserve">
+    <value>Reales Fadenpendel</value>
+    <comment>Cls</comment>
+  </data>
 </root>
