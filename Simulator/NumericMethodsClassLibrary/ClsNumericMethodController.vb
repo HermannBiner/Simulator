@@ -366,9 +366,9 @@ Public Class ClsNumericMethodController
 
                 End If
 
-                DrawPicPendulums()
+            DrawPicPendulums()
 
-                MyForm.LstValueList.Items.Add(n.ToString("00000") & ": " & (TraceA.Y - TraceB.Y).ToString("0.##########"))
+            MyForm.LstValueList.Items.Add(n.ToString("00000") & ": " & (TraceA.Y - TraceB.Y).ToString("0.##########"))
 
                 If n Mod 50 = 0 Then
                     MyForm.LblSteps.Text = n.ToString
