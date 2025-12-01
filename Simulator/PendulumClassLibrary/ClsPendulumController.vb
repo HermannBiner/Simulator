@@ -33,7 +33,7 @@ Public Class ClsPendulumController
     Private ReadOnly PicEnergyGraphics As Graphics
     Private StartEnergy As Decimal
 
-    Private Const EnergyTolerance As Decimal = CDec(0.1)
+    Private Const EnergyTolerance As Decimal = CDec(0.01)
 
     Private Const DeltaShadowDS As Decimal = CDec(0.005)
 
