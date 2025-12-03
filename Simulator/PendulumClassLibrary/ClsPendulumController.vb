@@ -224,6 +224,9 @@ Public Class ClsPendulumController
     Public Sub SetTypeOfPhasePortrait()
         MainDS.PhaseportraitIndex = MyForm.CboTypeofPhaseportrait.SelectedIndex
         MyForm.LblPhasePortrait.Text = MainDS.LabelPhasePortrait
+        If ShadowDS IsNot Nothing Then
+            ShadowDS.PhaseportraitIndex = MyForm.CboTypeofPhaseportrait.SelectedIndex
+        End If
     End Sub
 
     Public Sub SetStepWidth()
@@ -283,7 +286,7 @@ Public Class ClsPendulumController
                 .IsProtocol = False
                 .StepWidth = MyForm.TrbStepWidth.Value
                 .AdditionalParameterValue = MainDS.AdditionalParameterValue
-
+                .PhaseportraitIndex = MainDS.PhaseportraitIndex
                 'Takeover Parameters from MainDS
                 Dim i As Integer
                 Dim ConstantsDimension As Integer

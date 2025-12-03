@@ -17,7 +17,7 @@ Public Interface IPendulum
     Property BmpPhasePortraitGraphics As ClsGraphicTool
 
     'the Type of PhasePortrait that is selected
-    WriteOnly Property PhaseportraitIndex As Integer
+    Property PhaseportraitIndex As Integer
 
     'label the Phaseportrait
     ReadOnly Property LabelPhasePortrait As String

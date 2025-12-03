@@ -138,7 +138,7 @@ Public Class ClsCombinedPendulum
                 VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi = 0, l, l'"
-                UInterval = New ClsInterval(Lmin, 1)
+                UInterval = New ClsInterval(Lmin, 2)
                 VInterval = New ClsInterval(-10, 10)
             Case Else 'independent
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: l, l'. Red: Phi, Phi'"

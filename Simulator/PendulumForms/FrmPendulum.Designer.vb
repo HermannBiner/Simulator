@@ -91,7 +91,7 @@ Partial Class FrmPendulum
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1180, 612)
-        SplitContainer1.SplitterDistance = 605
+        SplitContainer1.SplitterDistance = 603
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -137,7 +137,7 @@ Partial Class FrmPendulum
         SplitContainer2.Panel2.Controls.Add(LstProtocol)
         SplitContainer2.Panel2.Controls.Add(LblPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
-        SplitContainer2.Size = New Size(569, 612)
+        SplitContainer2.Size = New Size(571, 612)
         SplitContainer2.SplitterDistance = 233
         SplitContainer2.TabIndex = 0
         ' 
@@ -480,7 +480,7 @@ Partial Class FrmPendulum
         ' PicEnergy
         ' 
         PicEnergy.BackColor = Color.White
-        PicEnergy.Location = New Point(0, 580)
+        PicEnergy.Location = New Point(0, 578)
         PicEnergy.Margin = New Padding(4)
         PicEnergy.Name = "PicEnergy"
         PicEnergy.Size = New Size(320, 27)

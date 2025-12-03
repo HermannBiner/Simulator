@@ -211,7 +211,10 @@ Public MustInherit Class ClsPendulumAbstract
         End Set
     End Property
 
-    WriteOnly Property PhaseportraitIndex As Integer Implements IPendulum.PhaseportraitIndex
+    Property PhaseportraitIndex As Integer Implements IPendulum.PhaseportraitIndex
+        Get
+            PhaseportraitIndex = CInt(TypeofPhasePortrait)
+        End Get
         Set(value As Integer)
 
             Dim PhaPorTypes As Array = [Enum].GetValues(GetType(TypeofPhaseportraitEnum))
