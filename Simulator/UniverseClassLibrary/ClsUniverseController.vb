@@ -154,10 +154,10 @@ Public Class ClsUniverseController
             .Items.Add(LM.GetString("Yellow")) 'Standard for Venus
             .Items.Add(LM.GetString("SkyBlue")) 'Standard for the Earth
             .Items.Add(LM.GetString("Red")) 'Standard for Mars
-            .Items.Add(LM.GetString("Magenta")) 'Standard for Jupiter
+            .Items.Add(LM.GetString("GreenYellow")) 'Standard for Jupiter
             .Items.Add(LM.GetString("Tomato")) 'Standard for Saturn
             .Items.Add(LM.GetString("Orange")) 'Standard for Uranus
-            .Items.Add(LM.GetString("GreenYellow")) 'Standard for Neptun
+            .Items.Add(LM.GetString("Cyan")) 'Standard for Neptun
             .Items.Add(LM.GetString("AquaMarine")) 'Reserve
             .Items.Add(LM.GetString("Snow")) 'Reserve
         End With
@@ -239,7 +239,7 @@ Public Class ClsUniverseController
                 If .CboStarColor.Items.Contains(ColorName) Then
                     .CboStarColor.SelectedItem = ColorName
                 Else
-                    Throw New MissingMemberException(LM.GetString("MissingColor"))
+                    Throw New MissingMemberException(LM.GetString("MissingColor " & ColorName))
                 End If
                 'the positions of all existing stars are relative to the centre of gravity
                 'for the new star, its coordinates have to be adapted as well

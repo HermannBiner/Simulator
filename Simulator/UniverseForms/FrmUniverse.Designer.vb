@@ -103,7 +103,7 @@ Partial Class FrmUniverse
         ' 
         SplitContainer1.Panel2.Controls.Add(SplitContainer2)
         SplitContainer1.Size = New Size(1176, 611)
-        SplitContainer1.SplitterDistance = 606
+        SplitContainer1.SplitterDistance = 604
         SplitContainer1.SplitterWidth = 6
         SplitContainer1.TabIndex = 0
         ' 
@@ -154,7 +154,7 @@ Partial Class FrmUniverse
         SplitContainer2.Panel2.Controls.Add(PicPhasePortrait)
         SplitContainer2.Panel2.Controls.Add(BtnDefault)
         SplitContainer2.Panel2.Controls.Add(BtnReset)
-        SplitContainer2.Size = New Size(564, 611)
+        SplitContainer2.Size = New Size(566, 611)
         SplitContainer2.SplitterDistance = 224
         SplitContainer2.TabIndex = 0
         ' 
@@ -427,7 +427,7 @@ Partial Class FrmUniverse
         CboStarColor.BackColor = SystemColors.Window
         CboStarColor.Font = New Font("Microsoft Sans Serif", 9F)
         CboStarColor.FormattingEnabled = True
-        CboStarColor.Items.AddRange(New Object() {"Yellow", "Gold", "Red", "Brown", "Orange", "Tomato", "Green", "Blue", "Black", "Magenta", "Chocolate"})
+        CboStarColor.Items.AddRange(New Object() {"Yellow", "Gold", "Red", "Brown", "Orange", "Tomato", "Green", "Blue", "Black", "Magenta", "Chocolate", "Cyan"})
         CboStarColor.Location = New Point(7, 116)
         CboStarColor.Margin = New Padding(4)
         CboStarColor.Name = "CboStarColor"

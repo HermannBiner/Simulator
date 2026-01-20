@@ -151,7 +151,7 @@ Public Class ClsNumericMethodController
         BmpGraphics = New ClsGraphicTool(BmpDiagram, MathInterval, MathInterval)
 
         MyForm.ChkStretched.Checked = False
-        DrawPicPendulums()
+        'DrawPicPendulums() - already done in SetDefaultUserData
     End Sub
 
     Public Sub SetDefaultUserData()
@@ -317,6 +317,7 @@ Public Class ClsNumericMethodController
 
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
 
+
             IterationStatus = ClsDynamics.EnIterationStatus.Running
 
             'The loop controls as well the Iterationstatus
@@ -454,6 +455,19 @@ Public Class ClsNumericMethodController
             Dim Mouseposition As Point
             Mouseposition.X = e.X + 2
             Mouseposition.Y = e.Y - 25
+
+            'If the position is has changed,
+            'the time paramameter and the velocity are set to zero
+            'because the pendulum starts from this new position
+            With DSA
+                .ActualParameter(0) = 0
+                .ActualParameter(2) = 0
+            End With
+
+            With DSB
+                .ActualParameter(0) = 0
+                .ActualParameter(2) = 0
+            End With
 
             'The Mouse gets its normal behaviour again
             MyForm.Cursor = Cursors.Arrow
