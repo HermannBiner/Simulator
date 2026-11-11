@@ -1697,4 +1697,8 @@
     <value>Real Thread Pendulum</value>
     <comment>Cls</comment>
   </data>
+  <data name="Satellite" xml:space="preserve">
+    <value>Satellite</value>
+    <comment>Lbl</comment>
+  </data>
 </root>

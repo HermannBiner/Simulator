@@ -1697,4 +1697,8 @@
     <value>Reales Fadenpendel</value>
     <comment>Cls</comment>
   </data>
+  <data name="Satellite" xml:space="preserve">
+    <value>Satellit</value>
+    <comment>Lbl</comment>
+  </data>
 </root>

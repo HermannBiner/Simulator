@@ -79,6 +79,9 @@ Public Class ClsNewtonStar
         'we have first to calculate the Energy E
         'to get the parameters p and epsilon of the orbit formula
         'see math. doc.
+
+        Dim Debug As String = MyName
+
         If MyTotalMassOfOtherStars > 0 And MyUserStartPosition.Abs > 0 Then
 
             Dim L As Double

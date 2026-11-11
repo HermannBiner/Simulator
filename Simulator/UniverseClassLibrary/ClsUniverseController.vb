@@ -160,6 +160,8 @@ Public Class ClsUniverseController
             .Items.Add(LM.GetString("Cyan")) 'Standard for Neptun
             .Items.Add(LM.GetString("AquaMarine")) 'Reserve
             .Items.Add(LM.GetString("Snow")) 'Reserve
+            .Items.Add(LM.GetString("Magenta")) 'Reserve
+            .Items.Add(LM.GetString("LightBlue")) 'Reserve
         End With
 
         'Setting Standard Values
@@ -376,7 +378,7 @@ Public Class ClsUniverseController
 
     Public Sub UpdateTextFields(aStar As IStar)
         With MyForm
-            .TxtMass.Text = aStar.UserMass.ToString("0.0000")
+            .TxtMass.Text = aStar.UserMass.ToString("0.0000000000")
             .TxtX.Text = aStar.UserStartPosition.X.ToString("0.0000")
             .TxtY.Text = aStar.UserStartPosition.Y.ToString("0.0000")
             .TxtVX.Text = aStar.UserStartVelocity.X.ToString("0.0000")
@@ -568,6 +570,21 @@ Public Class ClsUniverseController
             NewStar.PicGraphics = DS.PicGraphics
             NewStar.BmpDiagram = DS.BmpDiagram
             NewStar.BmpGraphics = DS.BmpGraphics
+
+            '''TotalMassofOtherStars has to be set for each star
+            ''Dim LocTotalmassOfOtherStars As Decimal
+            '''Sum fo the already existing stars
+            ''For Each aStar As IStar In DS.ActiveStarCollection
+            ''    LocTotalmassOfOtherStars += aStar.UserMass
+            ''Next
+            '''That is the Otherstarsmass for the new star
+            ''NewStar.TotalMassOfOtherStars = LocTotalmassOfOtherStars
+            '''Now, all existing stars are adapted
+            ''For Each aStar As IStar In DS.ActiveStarCollection
+            ''    aStar.TotalMassOfOtherStars = Math.Max(0, LocTotalmassOfOtherStars - aStar.UserMass + NewStar.UserMass)
+            ''Next
+
+            ''NewStar.TotalMassOfOtherStars = LocTotalmassOfOtherStars
             DS.RedrawUniverse(NewStar, IsDiagramZoom)
             EnableNewStarArea(False)
             EnableResetArea(False)

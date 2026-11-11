@@ -15,6 +15,7 @@ Public Class ClsNormedUniverse
     Private IB1 As ClsStarConstellation
     Private IB2 As ClsStarConstellation
     Private IIC1 As ClsStarConstellation
+    Private Satellite As ClsStarConstellation
     Private ParameterTupel As ClsVector
 
     Public Sub New()
@@ -27,7 +28,7 @@ Public Class ClsNormedUniverse
         MyVelocityParameter = New ClsGeneralParameter(2, "Velocity",
                     New ClsInterval(-1, 1), ClsGeneralParameter.TypeOfParameterEnum.Variable)
         MyMassParameter = New ClsGeneralParameter(3, "Mass",
-                    New ClsInterval(CDec(0.5), CDec(2)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+                    New ClsInterval(CDec(0.00001), CDec(2)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyMaxZoom = CDec(1.5)
 
@@ -37,6 +38,7 @@ Public Class ClsNormedUniverse
         IB1 = New ClsStarConstellation
         IB2 = New ClsStarConstellation
         IIC1 = New ClsStarConstellation
+        Satellite = New ClsStarConstellation
 
     End Sub
 
@@ -90,6 +92,9 @@ Public Class ClsNormedUniverse
         IIC1.Name = "IIC1"
         IIC1.ProposedStepWidth = CDec(0.01)
         IIC1.VFactor = 100
+        Satellite.Name = LM.GetString("Satellite")
+        Satellite.ProposedStepWidth = CDec(0.02)
+        Satellite.VFactor = 100
 
         FillConstellation(IA1)
         FillConstellation(IA2)
@@ -97,6 +102,7 @@ Public Class ClsNormedUniverse
         FillConstellation(IB1)
         FillConstellation(IB2)
         FillConstellation(IIC1)
+        FillConstellation(Satellite)
         With MyConstellations
             .Add(IA1)
             .Add(IA2)
@@ -104,6 +110,7 @@ Public Class ClsNormedUniverse
             .Add(IB1)
             .Add(IB2)
             .Add(IIC1)
+            .Add(Satellite)
         End With
     End Sub
 
@@ -149,10 +156,15 @@ Public Class ClsNormedUniverse
                     ParameterTupel.X = CDec(0.4059155671 * .Tau)
                     ParameterTupel.Y = CDec(0.230163126 * .Tau)
                     IB2.AddStar(Star1)
-                Case Else 'IIC1
+                Case LocConstellation Is IIC1
                     ParameterTupel.X = CDec(0.2827020949 * .Tau)
                     ParameterTupel.Y = CDec(0.3272089716 * .Tau)
                     IIC1.AddStar(Star1)
+                Case Else
+                    'Restricted Three-Body: Star 1
+                    ParameterTupel.X = 0
+                    ParameterTupel.Y = CDec(0.8 * .Tau)
+                    Satellite.AddStar(Star1)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
             .UserStartVelocity.Equal(ParameterTupel)
@@ -202,10 +214,17 @@ Public Class ClsNormedUniverse
                     ParameterTupel.X = CDec(0.4059155671 * .Tau)
                     ParameterTupel.Y = CDec(0.230163126 * .Tau)
                     IB2.AddStar(Star2)
-                Case Else 'IB156
+                Case LocConstellation Is IIC1
                     ParameterTupel.X = CDec(0.2827020949 * .Tau)
                     ParameterTupel.Y = CDec(0.3272089716 * .Tau)
                     IIC1.AddStar(Star2)
+                Case Else
+                    'Restricted Three-Body: Star 2
+                    .ActualPosition.X = CDec(0.5)
+                    .OriginalMass = 2
+                    ParameterTupel.X = 0
+                    ParameterTupel.Y = CDec(-0.4 * .Tau)
+                    Satellite.AddStar(Star2)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
             .UserStartVelocity.Equal(ParameterTupel)
@@ -255,10 +274,24 @@ Public Class ClsNormedUniverse
                     ParameterTupel.X = CDec(-2 * 0.4059155671 * .Tau)
                     ParameterTupel.Y = CDec(-2 * 0.230163126 * .Tau)
                     IB2.AddStar(Star3)
-                Case Else 'IB156
+                Case LocConstellation Is IIC1
                     ParameterTupel.X = CDec(-2 * 0.2827020949 * .Tau)
                     ParameterTupel.Y = CDec(-2 * 0.3272089716 * .Tau)
                     IIC1.AddStar(Star3)
+                Case Else
+                    'Restricted Three-Body: Satellite
+                    .Name = LM.GetString("Satellite")
+                    'Position
+                    ParameterTupel.X = CDec(-0.8)
+                    ParameterTupel.Y = 0
+                    .OriginalStartPosition.Equal(ParameterTupel)
+                    .UserStartPosition.Equal(ParameterTupel)
+                    .ActualPosition.Equal(ParameterTupel)
+                    .OriginalMass = CDec(0.0001)
+                    'Velocity
+                    ParameterTupel.X = CDec(0 * .Tau)
+                    ParameterTupel.Y = CDec(0.1 * .Tau)
+                    Satellite.AddStar(Star3)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
             .UserStartVelocity.Equal(ParameterTupel)
@@ -272,7 +305,7 @@ Public Class ClsNormedUniverse
 
     Protected Overrides Function GetNewStar(Name As String) As IStar
 
-        Dim NewStar As New ClsNewtonStar
+        Dim NewStar As New ClsNormedStar
 
         For Each aStar As IStar In MyActiveConstellation.Stars
             If aStar.Name = Name Then

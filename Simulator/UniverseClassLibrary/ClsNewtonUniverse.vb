@@ -144,7 +144,7 @@ Public Class ClsNewtonUniverse
 
         'Netflix 3 body
         Netflix3Body.Name = LM.GetString("Netflix3Body")
-        Netflix3Body.ProposedStepWidth = CDec(1)
+        Netflix3Body.ProposedStepWidth = CDec(1.5)
         Netflix3Body.VFactor = 1000
         FillNetflix3Body()
         MyConstellations.Add(Netflix3Body)
@@ -712,7 +712,7 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Jupiter")
             .StarColor = Brushes.GreenYellow
-            .OriginalMass = CDec(33000)
+            .OriginalMass = CDec(31800)
             .Size = 4
             .Perihel = CDec(5)
             .ArgumentPerihel = CDec(0.7)

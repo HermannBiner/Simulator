@@ -298,7 +298,6 @@ Partial Class FrmMain
         MnuTest.Name = "MnuTest"
         MnuTest.Size = New Size(42, 20)
         MnuTest.Text = "Test"
-        MnuTest.Visible = False
         ' 
         ' FrmMain
         ' 

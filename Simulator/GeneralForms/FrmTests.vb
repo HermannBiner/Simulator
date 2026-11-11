@@ -71,9 +71,15 @@ Public Class FrmTests
         'Sin/Cos
         'XInterval = New ClsInterval(CDec(-2), CDec(2))
         'YInterval = New ClsInterval(CDec(-1), CDec(1))
+
         'Parabola
-        XInterval = New ClsInterval(CDec(0), CDec(2))
-        YInterval = New ClsInterval(CDec(0), CDec(6))
+        'XInterval = New ClsInterval(CDec(0), CDec(2))
+        'YInterval = New ClsInterval(CDec(0), CDec(6))
+
+        'Epicycle
+        XInterval = New ClsInterval(CDec(-1.5), CDec(1.5))
+        YInterval = New ClsInterval(CDec(-1.5), CDec(1.5))
+
         MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
 
     End Sub
@@ -96,10 +102,73 @@ Public Class FrmTests
             Clear()
             DrawCoordinateSystem()
 
-            DrawDirectionField()
+            ApproxEllipseByEpicycle()
 
 
         End If
+    End Sub
+
+    Private Sub DrawEpicycle()
+
+        Dim rMain As Decimal = CDec(0.8)
+        Dim rEpi As Decimal = CDec(0.2)
+        Dim Omega As Decimal = CDec(11)
+
+        Dim t As Decimal = 0
+        Const dt As Decimal = CDec(0.001)
+
+        Dim Orbit As New ClsMathpoint
+
+        Do
+            With Orbit
+                .X = CDec(rMain * Math.Cos(t) + rEpi * Math.Cos(Omega * t))
+                .Y = CDec(rMain * Math.Sin(t) + rEpi * Math.Sin(Omega * t))
+
+                MyGraphics.DrawPoint(Orbit, Brushes.Blue, 1)
+
+                t += dt
+            End With
+
+        Loop Until t >= CDec(2 * Math.PI)
+
+
+        MyGraphics.DrawCircle(New ClsMathpoint(0, 0), rMain, Brushes.Red, 1)
+        MyGraphics.DrawCircle(New ClsMathpoint(rMain, 0), rEpi, Brushes.Blue, 1)
+
+    End Sub
+
+    Private Sub ApproxEllipseByEpicycle()
+
+        Dim a As Decimal = CDec(1)
+        Dim b As Decimal = CDec(0.8)
+
+        Dim t As Decimal = 0
+        Const dt As Decimal = CDec(0.001)
+
+        Dim Orbit As New ClsMathpoint
+
+        'DrawEllipse
+        Do
+            With Orbit
+                .X = CDec(a * Math.Cos(t))
+                .Y = CDec(b * Math.Sin(t))
+                MyGraphics.DrawPoint(Orbit, Brushes.Green, 1)
+                t += dt
+            End With
+        Loop Until t >= CDec(2 * Math.PI)
+
+        t = 0
+
+        'DrawEpicycle
+        Do
+            With Orbit
+                .X = CDec((a + b) * Math.Cos(t) / 2 + (a - b) * Math.Cos(3 * t) / 2)
+                .Y = CDec((a + b) * Math.Sin(t) / 2 + (a - b) * Math.Sin(3 * t) / 2)
+                MyGraphics.DrawPoint(Orbit, Brushes.Red, 1)
+                t += dt
+            End With
+        Loop Until t >= CDec(2 * Math.PI)
+
     End Sub
 
     Private Sub DrawCurve()

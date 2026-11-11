@@ -280,7 +280,7 @@ Public MustInherit Class ClsStarAbstract
         NewMathPointPosition.X = NewPosition.X * MyUniverse.DiagramZoom
         NewMathPointPosition.Y = NewPosition.Y * MyUniverse.DiagramZoom
 
-        MyBmpGraphics.DrawLine(NewMathPointPosition, ActualMathPointPosition, MyStarColor, 1)
+        MyBmpGraphics.DrawLine(NewMathPointPosition, ActualMathPointPosition, MyStarColor, 2)
 
     End Sub
 
