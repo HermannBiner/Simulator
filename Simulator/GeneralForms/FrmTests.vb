@@ -14,6 +14,8 @@ Public Class FrmTests
     Private MyGraphics As ClsGraphicTool
     Private XInterval As ClsInterval
     Private YInterval As ClsInterval
+    Private z As ClsComplexNumber
+    Private z1 As ClsComplexNumber
 
     Public Sub New()
         LM = ClsLanguageManager.LM
@@ -98,14 +100,19 @@ Public Class FrmTests
     End Sub
 
     Private Sub BtnTest_Click(sender As Object, e As EventArgs) Handles BtnTest.Click
-        If IsFormLoaded Then
-            Clear()
-            DrawCoordinateSystem()
+        'If IsFormLoaded Then
+        '    Clear()
+        '    DrawCoordinateSystem()
 
-            ApproxEllipseByEpicycle()
+        '    ApproxEllipseByEpicycle()
 
 
-        End If
+        'End If
+
+        z = New ClsComplexNumber(1, 1)
+
+        z1 = z.Power(2)
+
     End Sub
 
     Private Sub DrawEpicycle()
