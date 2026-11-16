@@ -1139,7 +1139,7 @@
   </data>
   <data name="Angular Momentum" xml:space="preserve">
     <value>Total ang. Momentum</value>
-    <comment>Lnl</comment>
+    <comment>Lbl</comment>
   </data>
   <data name="Pulse" xml:space="preserve">
     <value>Total Pulse</value>
