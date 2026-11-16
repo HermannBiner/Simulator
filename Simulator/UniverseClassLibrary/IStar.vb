@@ -94,7 +94,16 @@ Public Interface IStar
 
     'Calculates the next position and velocity
     'using the Runge-Kutta-4 method
-    Sub IterationStep(IsPhasePortrait As Boolean)
+    'the step is performed for all stars together by the universe:
+    'BeginIterationStep, then for the stages 0..3 CalculateStage
+    '(and PrepareStage for the stages 1..3), finally FinishIterationStep
+    Sub BeginIterationStep()
+    Sub CalculateStage(Stage As Integer)
+    Sub PrepareStage(Stage As Integer)
+    Sub FinishIterationStep(IsPhasePortrait As Boolean)
+
+    'Position of the star in the actual stage of the Runge-Kutta step
+    ReadOnly Property StagePosition As ClsVector
 
     'Sets the actual position after a iterationstep
     'this has to be at the same time for all stars

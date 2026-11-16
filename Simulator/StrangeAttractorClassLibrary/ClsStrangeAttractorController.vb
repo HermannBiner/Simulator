@@ -322,10 +322,10 @@ Public Class ClsStrangeAttractorController
 
     Public Sub MouseMove(e As MouseEventArgs)
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            'e is the position of the hotspot of the cursor: the angles follow the pointer exactly
             Dim Mouseposition As New Point With {
-            .X = e.X + 2,
-            .Y = e.Y - 25
+            .X = e.X,
+            .Y = e.Y
         }
 
             Dim PlanePoint = New ClsMathpoint

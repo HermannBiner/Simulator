@@ -474,7 +474,8 @@ Public Class ClsIterationController
             'transmit the actual iteration value to the LstValueList
             UpdateListboxes(X)
 
-            If TargetValue > 0 Then
+            'the same condition as for the target line: also negative targets (e.g. parabola)
+            If TargetValue <> 0 Then
                 If Math.Abs(X - TargetValue) < TargetValuePrecision Then
                     u = DS.ValueParameter.Range.B + 1
                 End If

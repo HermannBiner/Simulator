@@ -189,9 +189,14 @@ Public MustInherit Class ClsJuliaAbstract
             MyProtocolList.Items.Clear()
         End If
 
+        'the bounds of the protocol start again for the next picture
+        ResetProtocolBounds()
+
         MyPicDiagram.Refresh()
 
     End Sub
+
+    Protected MustOverride Sub ResetProtocolBounds()
 
     Public MustOverride Sub IterationStep(PicelPoint As Point) Implements IJulia.IterationStep
 

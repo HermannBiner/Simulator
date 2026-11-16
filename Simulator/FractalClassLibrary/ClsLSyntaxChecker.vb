@@ -48,13 +48,14 @@ Public Class ClsLSyntaxChecker
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("NameMissing"))
             Else
-                If MySystemEditMode = ClsDynamics.EnEditMode.Add Then
-                    'Check if the name is already used
-                    Dim LSystem As ClsLSystem = MyLSystemCollection.Find(Function(x) x.Name = .TxtName.Text)
-                    If LSystem IsNot Nothing Then
-                        IsOK = False
-                        ErrorMessage.AppendLine(LM.GetString("NameAlreadyUsed"))
-                    End If
+                'Check if the name is already used by another system
+                '(for a new system as well as when a system is renamed)
+                'a new system has the ID 0, an edited system keeps its ID
+                Dim LSystem As ClsLSystem = MyLSystemCollection.Find(
+                    Function(x) x.Name = .TxtName.Text AndAlso x.ID <> MyActualSystem.ID)
+                If LSystem IsNot Nothing Then
+                    IsOK = False
+                    ErrorMessage.AppendLine(LM.GetString("NameAlreadyUsed"))
                 End If
             End If
 
@@ -91,10 +92,20 @@ Public Class ClsLSyntaxChecker
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("StartLengthMissing"))
             Else
-                If CDec(.TxtScaleFactor.Text) <= 0 Or CDec(.TxtScaleFactor.Text) > 13 Then
+                If CDec(.TxtStartLength.Text) <= 0 Or CDec(.TxtStartLength.Text) > 13 Then
                     IsOK = False
                     ErrorMessage.AppendLine(LM.GetString("InvalidStartLength"))
                 End If
+            End If
+
+            'Check if the start position is in [0,13] x [0,13]
+            If Not IsNumeric(.TxtX.Text) Or Not IsNumeric(.TxtY.Text) Then
+                IsOK = False
+                ErrorMessage.AppendLine(LM.GetString("StartPositionIn0to13"))
+            ElseIf CDec(.TxtX.Text) < 0 Or CDec(.TxtX.Text) > 13 Or
+                CDec(.TxtY.Text) < 0 Or CDec(.TxtY.Text) > 13 Then
+                IsOK = False
+                ErrorMessage.AppendLine(LM.GetString("StartPositionIn0to13"))
             End If
 
             'Check if the angle is a number in [0, 360[
@@ -175,8 +186,9 @@ Public Class ClsLSyntaxChecker
         Next
 
         For Each C As Char In AllTargetChars
+            'F, f, G and g only move the turtle: they need no rule
             If C <> "+" And C <> "-" And C <> "(" And C <> ")" And C <> "[" And C <> "]" And UCase(C) <> "F" _
-                And Not IsNumeric(C) Then
+                And UCase(C) <> "G" And Not IsNumeric(C) Then
                 'Check if the character is in the source
                 If Not AllSourceCharsString.Contains(C) Then
                     IsOK = False

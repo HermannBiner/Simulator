@@ -80,6 +80,9 @@ Public Interface IUniverse
     'Only the Diagrams are cleared
     Sub ClearDiagrams()
 
+    'One Runge-Kutta step for all stars together
+    Sub IterationStep(IsPhasePortrait As Boolean)
+
     Function StepWidthToTrbValue(locStepWidth As Decimal) As Integer
 
     Function TrbValueToStepWidth(locTrbValue As Integer) As Decimal

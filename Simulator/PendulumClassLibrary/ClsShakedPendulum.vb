@@ -497,7 +497,7 @@ Public Class ClsShakedPendulum
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(0))
+            Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
 
         End With
 

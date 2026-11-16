@@ -47,6 +47,11 @@ Public Class ClsMandelbrot
         End Set
     End Property
 
+    Protected Overrides Sub ResetProtocolBounds()
+        UpperBoundSteps = 0
+        LowerBoundSteps = MaxSteps
+    End Sub
+
     Protected Overrides ReadOnly Property IsMandelbrot As Boolean
         Get
             IsMandelbrot = True

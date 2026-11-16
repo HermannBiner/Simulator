@@ -182,9 +182,10 @@ Public Class ClsNewtonStar
     Protected Overrides Function G1(LocZ As ClsNTupel) As Decimal
         LocSum = 0
         'Go through all other stars
+        'the own position is the stage position LocZ, the other stars are at their stage position as well
         For Each aStar As IStar In MyUniverse.ActiveStarCollection
             If aStar IsNot Me Then
-                LocSum += aStar.UserMass * (aStar.ActualPosition.X - MyActualPosition.X) / (Math.Max(0.001, Math.Pow(Distance(aStar.ActualPosition, MyActualPosition), 3)))
+                LocSum += aStar.UserMass * (aStar.StagePosition.X - LocZ.Component(0)) / (Math.Max(0.001, Math.Pow(Distance(aStar.StagePosition, LocZ), 3)))
             End If
         Next
         Return CDec(LocSum * GravConst)
@@ -198,17 +199,19 @@ Public Class ClsNewtonStar
     Protected Overrides Function G2(LocZ As ClsNTupel) As Decimal
         LocSum = 0
         'Go through all other stars
+        'the own position is the stage position LocZ, the other stars are at their stage position as well
         For Each aStar As IStar In MyUniverse.ActiveStarCollection
             If aStar IsNot Me Then
-                LocSum += aStar.UserMass * (aStar.ActualPosition.Y - MyActualPosition.Y) / (Math.Max(0.001, Math.Pow(Distance(aStar.ActualPosition, MyActualPosition), 3)))
+                LocSum += aStar.UserMass * (aStar.StagePosition.Y - LocZ.Component(2)) / (Math.Max(0.001, Math.Pow(Distance(aStar.StagePosition, LocZ), 3)))
             End If
         Next
         Return CDec(LocSum * GravConst)
     End Function
 
-    Private Function Distance(Position1 As ClsVector, Position2 As ClsVector) As Decimal
+    Private Function Distance(Position1 As ClsVector, LocZ As ClsNTupel) As Decimal
         'This is Rij in the math.doc.
-        Return CDec(Math.Sqrt(Math.Pow(Position1.X - Position2.X, 2) + Math.Pow(Position1.Y - Position2.Y, 2)))
+        'LocZ.Component(0) and LocZ.Component(2) are the coordinates of the own stage position
+        Return CDec(Math.Sqrt(Math.Pow(Position1.X - LocZ.Component(0), 2) + Math.Pow(Position1.Y - LocZ.Component(2), 2)))
     End Function
 
 End Class

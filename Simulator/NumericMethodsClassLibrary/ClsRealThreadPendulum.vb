@@ -44,7 +44,7 @@ Public Class ClsRealThreadPendulum
                 l.Component(2) = MyH * (-CDec(Math.Sin(u + k.Component(1) / 2)))
 
                 k.Component(3) = MyH * (v + l.Component(2))
-                l.Component(3) = MyH * (-CDec(Math.Sin(u + k.Component(2) / 2)))
+                l.Component(3) = MyH * (-CDec(Math.Sin(u + k.Component(2))))
 
                 .Component(1) = u + (k.Component(0) + 2 * k.Component(1) + 2 * k.Component(2) + k.Component(3)) / 6
                 .Component(2) = v + (l.Component(0) + 2 * l.Component(1) + 2 * l.Component(2) + l.Component(3)) / 6

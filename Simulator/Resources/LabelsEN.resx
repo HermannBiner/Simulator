@@ -1053,7 +1053,7 @@
     <value>x-Values</value>
     <comment>Lbl</comment>
   </data>
-  <data name="Y-RangeNotAllowed1" xml:space="preserve">
+  <data name="Y-RangeNotAllowed" xml:space="preserve">
     <value>This Y-Range is not allowed! It must be part of the interval</value>
     <comment>Msg</comment>
   </data>
@@ -1141,7 +1141,7 @@
     <value>Total ang. Momentum</value>
     <comment>Lnl</comment>
   </data>
-  <data name="Pulee" xml:space="preserve">
+  <data name="Pulse" xml:space="preserve">
     <value>Total Pulse</value>
     <comment>Lbl</comment>
   </data>
@@ -1693,12 +1693,24 @@
     <value>Tree</value>
     <comment>Lbl</comment>
   </data>
-  <data name="ClsRealThreadàPendulum" xml:space="preserve">
+  <data name="ClsRealThreadPendulum" xml:space="preserve">
     <value>Real Thread Pendulum</value>
     <comment>Cls</comment>
   </data>
   <data name="Satellite" xml:space="preserve">
     <value>Satellite</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="SourceOneCharacter" xml:space="preserve">
+    <value>The source of a rule has to be exactly one character.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="StartPositionIn0to13" xml:space="preserve">
+    <value>The start position has to be in [0,13] x [0,13].</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NumericOverflow" xml:space="preserve">
+    <value>Numeric overflow: the pendulum became numerically unstable and the iteration was stopped. Please reset and choose a smaller step width.</value>
+    <comment>Msg</comment>
   </data>
 </root>

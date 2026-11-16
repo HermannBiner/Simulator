@@ -175,6 +175,10 @@ Public Class ClsLSystemsController
     Public Sub RestoreCopy()
         If File.Exists(UserLSystemFile & ".bak") Then
             File.Copy(UserLSystemFile & ".bak", UserLSystemFile, True)
+
+            'the restored systems are shown at once
+            LoadFileToLSystemCollection(0)
+            SetLSystem()
         Else
             MessageBox.Show(LM.GetString("NoBackupFile"), LM.GetString("Error"),
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -322,7 +326,12 @@ Public Class ClsLSystemsController
             For Each Rule In ActualSystem.Rules
                 .CboRules.Items.Add(Rule.Key & "->" & Rule.Value)
             Next
-            .CboRules.SelectedIndex = 0
+            If .CboRules.Items.Count > 0 Then
+                .CboRules.SelectedIndex = 0
+            Else
+                .TxtSource.Text = ""
+                .TxtTarget.Text = ""
+            End If
         End With
         ShowRuleDetails()
     End Sub
@@ -456,6 +465,11 @@ Public Class ClsLSystemsController
 
         SystemEditMode = ClsDynamics.EnEditMode.Edit
         RuleEditMode = ClsDynamics.EnEditMode.Edit
+
+        'the system is edited as a copy
+        'it replaces the stored system only by SaveSystem, Cancel keeps the stored system
+        ActualSystem = ActualSystem.Copy()
+
         SetButtonsToEditMode()
 
         EnableSystemParameters(True)
@@ -496,7 +510,16 @@ Public Class ClsLSystemsController
     Public Sub SaveSystem()
 
         If SystemEditMode = ClsDynamics.EnEditMode.Add Or SystemEditMode = ClsDynamics.EnEditMode.Edit Then
-            'Check the Syntax
+
+            'First, the values in the form are checked
+            'because they are converted to numbers below
+            LSyntaxChecker.ActualSystem = ActualSystem
+            LSyntaxChecker.LSystemCollection = LSystemCollection
+            LSyntaxChecker.SystemEditMode = SystemEditMode
+            If Not LSyntaxChecker.ParameterValuesAreAllowed() Then
+                'Syntax Error Messages are allready generated
+                Exit Sub
+            End If
 
             With ActualSystem
                 .Name = MyForm.TxtName.Text
@@ -534,10 +557,23 @@ Public Class ClsLSystemsController
 
                 'Rules are already added
 
+                Dim SystemIndex As Integer
+
                 If ActualSystem.ID = 0 Then
                     'the system is new generated and not part of LSystemCollection
                     ActualSystem.ID = GetLSystemID()
                     LSystemCollection.Add(ActualSystem)
+                    SystemIndex = LSystemCollection.Count - 1
+                Else
+                    'the edited copy replaces the stored system
+                    Dim ID As Integer = ActualSystem.ID
+                    SystemIndex = LSystemCollection.FindIndex(Function(x) x.ID = ID)
+                    If SystemIndex >= 0 Then
+                        LSystemCollection(SystemIndex) = ActualSystem
+                    Else
+                        LSystemCollection.Add(ActualSystem)
+                        SystemIndex = LSystemCollection.Count - 1
+                    End If
                 End If
 
                 EnableSystemParameters(False)
@@ -545,14 +581,6 @@ Public Class ClsLSystemsController
                 WriteLSystemToFile()
 
                 MyForm.CboSystem.Enabled = True
-
-                Dim SystemIndex As Integer
-
-                If SystemEditMode = ClsDynamics.EnEditMode.Add Then
-                    SystemIndex = LSystemCollection.Count - 1
-                Else
-                    SystemIndex = LSystemCollection.FindIndex(Function(x) x.Name = ActualSystem.Name)
-                End If
 
                 If SystemIndex > LSystemCollection.Count - 1 Then
                     SystemIndex = 0
@@ -581,6 +609,15 @@ Public Class ClsLSystemsController
     End Sub
 
     Public Sub SaveRule()
+
+        'The source of a rule is exactly one character
+        'the expander replaces single characters only
+        If MyForm.TxtSource.Text.Length <> 1 Then
+            MessageBox.Show(LM.GetString("SourceOneCharacter"), LM.GetString("Error"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         If RuleEditMode = ClsDynamics.EnEditMode.Add Then
             'The Key must be unique
             If ActualSystem.Rules.ContainsKey(MyForm.TxtSource.Text) Then
@@ -592,13 +629,15 @@ Public Class ClsLSystemsController
             ShowActualRules()
         Else
             If RuleEditMode = ClsDynamics.EnEditMode.Edit And MyForm.CboRules.Items.Count > 0 Then
-                ActualSystem.Rules.Remove(MyForm.CboRules.Text.Split("->")(0))
+                Dim OldSource As String = MyForm.CboRules.Text.Split("->")(0)
                 'The Key must be unique
-                If ActualSystem.Rules.ContainsKey(MyForm.TxtSource.Text) Then
+                'it is checked before the old rule is removed, so the old rule stays in case of an error
+                If MyForm.TxtSource.Text <> OldSource And ActualSystem.Rules.ContainsKey(MyForm.TxtSource.Text) Then
                     MessageBox.Show(LM.GetString("RuleAlreadyExists"), LM.GetString("Error"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return
                 End If
+                ActualSystem.Rules.Remove(OldSource)
                 ActualSystem.Rules.Add(MyForm.TxtSource.Text, MyForm.TxtTarget.Text)
                 ShowActualRules()
             End If
@@ -606,14 +645,13 @@ Public Class ClsLSystemsController
     End Sub
 
     Public Sub DeleteRule()
-        'The selected rule is deleted from the list
-        Dim Rule As String = MyForm.CboRules.SelectedItem.ToString()
-        Dim Source As String = Rule.Split("->")(0)
-        Dim Target As String = Rule.Split("->")(1)
-        Dim LSystem As ClsLSystem = LSystemCollection.Find(Function(x) x.Name = MyForm.CboSystem.Text)
-        If LSystem IsNot Nothing Then
-            LSystem.Rules.Remove(Source)
-            ShowActualSystem()
+        'The selected rule is deleted from the edited system (a copy or a new system)
+        'the stored system is changed only by SaveSystem
+        If MyForm.CboRules.SelectedItem IsNot Nothing Then
+            Dim Rule As String = MyForm.CboRules.SelectedItem.ToString()
+            Dim Source As String = Rule.Split("->")(0)
+            ActualSystem.Rules.Remove(Source)
+            ShowActualRules()
         End If
     End Sub
 
@@ -623,7 +661,12 @@ Public Class ClsLSystemsController
         RuleEditMode = ClsDynamics.EnEditMode.None
         SetButtonsToEditMode()
         EnableSystemParameters(False)
+        EnableRuleParameters(False)
         MyForm.CboSystem.Enabled = True
+
+        'the selected (stored) system is shown again
+        'the edited copy or the new system is discarded
+        SetLSystem()
 
     End Sub
 

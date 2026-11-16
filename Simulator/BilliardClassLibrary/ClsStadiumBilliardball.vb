@@ -301,19 +301,19 @@ Public Class ClsStadiumBilliardball
             End If
         End If
 
-        'Is the Ball in the left half-Circle
+        'Is the Ball in the left half-Circle around (-a, 0)?
         If Not IsOK Then
-            If -MyA - MyB <= Position.Y And Position.X <= MyA Then
-                If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
+            If -MyA - MyB <= Position.X And Position.X <= -MyA Then
+                If (Position.X + MyA) * (Position.X + MyA) + Position.Y * Position.Y <= MyB * MyB Then
                     IsOK = True
                 End If
             End If
         End If
 
-        'Is the Ball in the right half-Circle?
+        'Is the Ball in the right half-Circle around (a, 0)?
         If Not IsOK Then
             If MyA <= Position.X And Position.X <= MyA + MyB Then
-                If Position.X * Position.X + Position.Y * Position.Y <= MyB * MyB Then
+                If (Position.X - MyA) * (Position.X - MyA) + Position.Y * Position.Y <= MyB * MyB Then
                     IsOK = True
                 End If
             End If

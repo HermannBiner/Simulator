@@ -406,10 +406,13 @@ Public Class ClsUniverseController
     End Sub
 
     Public Sub SetTrbFromVelocity(aStar As IStar)
+        'inverse of the factor 1 + 0.1 * value in SetVelocityFromTrb:
+        'the original velocity gives the value 0
         If aStar.OriginalStartVelocity.Abs > 0 Then
-            MyForm.TrbVelocity.Value = CInt(2 * aStar.UserStartVelocity.Abs / aStar.OriginalStartVelocity.Abs - 10)
+            Dim Value As Integer = CInt(10 * (aStar.UserStartVelocity.Abs / aStar.OriginalStartVelocity.Abs - 1))
+            MyForm.TrbVelocity.Value = Math.Max(MyForm.TrbVelocity.Minimum, Math.Min(MyForm.TrbVelocity.Maximum, Value))
         Else
-            MyForm.TrbVelocity.Value = -10
+            MyForm.TrbVelocity.Value = 0
         End If
     End Sub
 
@@ -606,10 +609,10 @@ Public Class ClsUniverseController
 
     Public Sub MouseMove(e As MouseEventArgs)
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            'e is the position of the hotspot of the cursor: no adjustment needed
             Dim Mouseposition As New Point With {
-            .X = e.X + 2,
-            .Y = e.Y - 25
+            .X = e.X,
+            .Y = e.Y
         }
 
             If NewStar IsNot Nothing Then
@@ -734,10 +737,8 @@ Public Class ClsUniverseController
         Do
             N += 1
 
-            'Each Ball is now iterated 1x
-            For Each aStar As IStar In DS.ActiveStarCollection
-                aStar.IterationStep(MyForm.ChkPhasePortrait.Checked)
-            Next
+            'All stars are iterated 1x together
+            DS.IterationStep(MyForm.ChkPhasePortrait.Checked)
 
             ActualEnergy = 0
             ActualAngularMomentum = 0
@@ -864,7 +865,7 @@ Public Class ClsUniverseController
         Dim CheckPositionY = New ClsCheckUserData(MyForm.TxtY, DS.PositionParameter.Range)
         Dim CheckMass = New ClsCheckUserData(MyForm.TxtMass, DS.MassParameter.Range)
         Dim CheckVelocityX = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameter.Range)
-        Dim CheckVelocityY = New ClsCheckUserData(MyForm.TxtVX, DS.VelocityParameter.Range)
+        Dim CheckVelocityY = New ClsCheckUserData(MyForm.TxtVY, DS.VelocityParameter.Range)
 
         Return CheckPositionX.IsTxtValueAllowed And CheckPositionY.IsTxtValueAllowed And
             CheckVelocityX.IsTxtValueAllowed And CheckVelocityY.IsTxtValueAllowed And

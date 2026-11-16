@@ -99,8 +99,9 @@ Public Class ClsOvalBilliardball
         'this startposition is still at the mouseposition (and not on the border of the Ellipse)
         UserStartposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
-        'Parameter of this Startpoint
-        T = Mathhelper.CalculateAngleOfDirection(UserStartposition.X, UserStartposition.Y)
+        'Parameter of this Startpoint: the border point in the direction of the mouse
+        'seen from the center of the oval (not from (0, 0))
+        T = CalculateTFromBallPosition(UserStartposition)
 
         'Now, the Startposition is set on the border of the Oval
         Dim StartpointBall As ClsMathpoint = CalculateBallPositionFromT(T)
@@ -158,9 +159,10 @@ Public Class ClsOvalBilliardball
         'is just equal to the Mouseposition in Pixels
         UserEndposition = MyBmpGraphics.PixelToMathpoint(Mouseposition)
 
-        'TempPhi is a provisional angle between the UserEndPosition and the x-axis
-        Dim TempPhi As Decimal = Mathhelper.CalculateAngleOfDirection(UserEndposition.X, UserEndposition.Y)
-        Dim Ballpoint As ClsMathpoint = CalculateBallPositionFromT(TempPhi)
+        'TempT is the parameter of the border point in the direction of the mouse
+        'seen from the center of the oval (not from (0, 0))
+        Dim TempT As Decimal = CalculateTFromBallPosition(UserEndposition)
+        Dim Ballpoint As ClsMathpoint = CalculateBallPositionFromT(TempT)
         UserEndposition.X = Ballpoint.X
         UserEndposition.Y = Ballpoint.Y
 

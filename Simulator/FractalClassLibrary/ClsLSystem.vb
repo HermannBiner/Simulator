@@ -177,4 +177,14 @@ Public Class ClsLSystem
             MyRules = value
         End Set
     End Property
+
+    'Returns a copy of the system with its own rules
+    'the system is edited as a copy, so Cancel keeps the stored system
+    Public Function Copy() As ClsLSystem
+        Dim Result = CType(MemberwiseClone(), ClsLSystem)
+        If MyRules IsNot Nothing Then
+            Result.Rules = New Dictionary(Of String, String)(MyRules)
+        End If
+        Return Result
+    End Function
 End Class

@@ -117,14 +117,14 @@ Public Class FrmNewtonIteration
 
     Private Sub TxtA_TextChanged(sender As Object, e As EventArgs) Handles TxtA.TextChanged
         If IsFormLoaded Then
-            FC.SetDefaultUserData()
+            'c and the ranges keep the entered values
             FC.ResetIteration()
         End If
     End Sub
 
     Private Sub TxtB_TextChanged(sender As Object, e As EventArgs) Handles TxtB.TextChanged
         If IsFormLoaded Then
-            FC.SetDefaultUserData()
+            'c and the ranges keep the entered values
             FC.ResetIteration()
         End If
     End Sub

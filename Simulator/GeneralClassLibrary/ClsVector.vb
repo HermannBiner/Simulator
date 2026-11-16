@@ -97,7 +97,7 @@ Public Class ClsVector
     Public Function Cross(aVector As ClsVector) As ClsVector
         Dim LocCross = New ClsVector
         With aVector
-            LocCross.X = MyY * .Z - MyZ * .X
+            LocCross.X = MyY * .Z - MyZ * .Y
             LocCross.Y = MyZ * .X - MyX * .Z
             LocCross.Z = MyX * .Y - MyY * .X
         End With
@@ -106,8 +106,9 @@ Public Class ClsVector
 
     Public Sub TurnInXYPlane(phi As Decimal)
         'Turns the vector projected to the x-y plane
-        MyX = CDec(MyX * Math.Cos(phi) - MyY * Math.Sin(phi))
-        MyY = CDec(MyX * Math.Sin(phi) + MyY * Math.Cos(phi))
+        Dim OldX As Decimal = MyX
+        MyX = CDec(OldX * Math.Cos(phi) - MyY * Math.Sin(phi))
+        MyY = CDec(OldX * Math.Sin(phi) + MyY * Math.Cos(phi))
         'MyZ is not changed
     End Sub
 

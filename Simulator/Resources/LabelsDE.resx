@@ -202,7 +202,7 @@
     <comment>Cls</comment>
   </data>
   <data name="ClsEllipseBilliardTable" xml:space="preserve">
-    <value>Elliptischer Billiardtisch</value>
+    <value>Elliptischer Billardtisch</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsForwardEuler" xml:space="preserve">
@@ -238,7 +238,7 @@
     <comment>Cls</comment>
   </data>
   <data name="ClsOvalBilliardTable" xml:space="preserve">
-    <value>Ovaler Billiardtisch</value>
+    <value>Ovaler Billardtisch</value>
     <comment>Lbl</comment>
   </data>
   <data name="ClsParabola" xml:space="preserve">
@@ -782,7 +782,7 @@
     <comment>Lbl</comment>
   </data>
   <data name="ProtocolNewton" xml:space="preserve">
-    <value>Prokotoll Startpunkt, Endpunkt</value>
+    <value>Protokoll Startpunkt, Endpunkt</value>
     <comment>Lbl</comment>
   </data>
   <data name="QuadraticFunction" xml:space="preserve">
@@ -1346,10 +1346,10 @@
     <comment>Lbl</comment>
   </data>
   <data name="StartPointCoordinates" xml:space="preserve">
-    <value>Startpunt Koordinaten</value>
+    <value>Startpunkt Koordinaten</value>
     <comment>Lbl</comment>
   </data>
-  <data name="StartConstellatrions" xml:space="preserve">
+  <data name="StartConstellations" xml:space="preserve">
     <value>Start Konstellationen</value>
     <comment>Lbl</comment>
   </data>
@@ -1700,5 +1700,17 @@
   <data name="Satellite" xml:space="preserve">
     <value>Satellit</value>
     <comment>Lbl</comment>
+  </data>
+  <data name="SourceOneCharacter" xml:space="preserve">
+    <value>Die Quelle einer Regel muss genau ein Zeichen sein.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="StartPositionIn0to13" xml:space="preserve">
+    <value>Die Startposition muss in [0,13] x [0,13] liegen.</value>
+    <comment>Msg</comment>
+  </data>
+  <data name="NumericOverflow" xml:space="preserve">
+    <value>Numerischer Überlauf: Das Pendel ist numerisch instabil geworden, die Iteration wurde angehalten. Bitte zurücksetzen und eine kleinere Schrittweite wählen.</value>
+    <comment>Msg</comment>
   </data>
 </root>

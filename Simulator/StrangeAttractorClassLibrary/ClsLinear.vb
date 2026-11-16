@@ -40,6 +40,10 @@ Public Class ClsLinear
         MyZValueParameter = New ClsGeneralParameter(3, "Z", New ClsInterval(0, 10), ClsGeneralParameter.TypeOfParameterEnum.Variable, 1)
 
 
+        'Default step width: the bifurcation diagram uses it
+        '0.005 is the proposed step width of the start point sets
+        MyStepWidth = CDec(0.005)
+
         MyMathInterval = New ClsInterval(-10, 10)
 
         'PointSets
@@ -103,14 +107,17 @@ Public Class ClsLinear
     Public Overrides Sub IterationStep()
 
         With MyActualMathPoint
-            'the repeated multiplication with a factor lamda 
+            'the repeated multiplication with a factor lamda
             'let grow .X, .Y nd .Z very fast
-            'therefore, that is sopped if the values are out of the range   
+            'therefore, that is sopped if the values are out of the range
+
+            'Y is calculated with the old X
+            Dim OldX As Decimal = .X
 
             .X = Math.Max(-DSParameter.Range.IntervalWidth * 2,
-                          Math.Min(DSParameter.Range.IntervalWidth * 2, Alfa * .X - Beta * .Y))
+                          Math.Min(DSParameter.Range.IntervalWidth * 2, Alfa * OldX - Beta * .Y))
             .Y = Math.Max(-DSParameter.Range.IntervalWidth * 2,
-                          Math.Min(DSParameter.Range.IntervalWidth * 2, Beta * .X + Delta * .Y))
+                          Math.Min(DSParameter.Range.IntervalWidth * 2, Beta * OldX + Delta * .Y))
             .Z = Math.Max(-DSParameter.Range.IntervalWidth * 2,
                           Math.Min(DSParameter.Range.IntervalWidth * 2, Lambda * .Z))
         End With

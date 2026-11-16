@@ -204,6 +204,9 @@ Public Class ClsLTurtle
         MyWorkingStatus = EnWorkingStatus.Reset
         i = 0
         MyGeneration = 0
+
+        'the stack of an interrupted generation is cleared
+        MyStack.Clear()
     End Sub
 
     Public Async Function DrawNextGeneration(Itinerary As String) As Task
@@ -227,46 +230,45 @@ Public Class ClsLTurtle
                 Dim ch As Char = Itinerary(i)
 
                 'Check for color change
-                If Not MyIsColorFixed Then
-                    If ch = "("c Then
-                        'set color
+                If ch = "("c And Not MyIsColorFixed Then
+                    'set color
+                    i += 1
+                    Dim numStr As String = ""
+                    While i < Itinerary.Length AndAlso Char.IsDigit(Itinerary(i))
+                        numStr &= Itinerary(i)
                         i += 1
-                        Dim numStr As String = ""
-                        While i < Itinerary.Length AndAlso Char.IsDigit(Itinerary(i))
-                            numStr &= Itinerary(i)
-                            i += 1
-                        End While
-                        If numStr.Length = 0 Then
-                            'Fehler
-                            Throw New Exception("InvalidColorDefinition")
-                        End If
-                        MyTurtleStatus.Color = MyColors.GetColor(CInt(numStr))
-                        ch = Itinerary(i)
-                        If ch <> ")"c Then
-                            'Fehler
-                            Throw New Exception("MissingBracketInColorDefinition")
-                        End If
-                        i += 1
-                        ch = Itinerary(i)
+                    End While
+                    If numStr.Length = 0 Then
+                        'Fehler
+                        Throw New Exception("InvalidColorDefinition")
                     End If
+                    If i >= Itinerary.Length OrElse Itinerary(i) <> ")"c Then
+                        'Fehler
+                        Throw New Exception("MissingBracketInColorDefinition")
+                    End If
+                    MyTurtleStatus.Color = MyColors.GetColor(CInt(numStr))
+
+                    'i is on ")": the next character (e.g. a further color code
+                    'or the end of the itinerary) is handled in the next loop
+                Else
+                    Select Case ch
+                        Case "+"c : MyTurtleStatus.Angle += MyAngleLeft
+                        Case "-"c : MyTurtleStatus.Angle -= MyAngleRight
+                        Case "F"c : Move(True)
+                        Case "G"c : Move(True)
+                        Case "f"c : Move(False)
+                        Case "g"c : Move(False)
+                        Case "["c : SaveTurtleStatus()
+                            If MyScaling = ClsLSystemsController.EnScaling.ByBranch Then
+                                MyTurtleStatus.StepLength *= MyScaleFactor
+                            End If
+                        Case "]"c
+                            If MyIsBudding Then
+                                PicGraphics.DrawPoint(MyTurtleStatus.Position, MyTurtleStatus.Color, 3)
+                            End If
+                            RestoreTurtleStatus()
+                    End Select
                 End If
-                Select Case ch
-                    Case "+"c : MyTurtleStatus.Angle += MyAngleLeft
-                    Case "-"c : MyTurtleStatus.Angle -= MyAngleRight
-                    Case "F"c : Move(True)
-                    Case "G"c : Move(True)
-                    Case "f"c : Move(False)
-                    Case "g"c : Move(False)
-                    Case "["c : SaveTurtleStatus()
-                        If MyScaling = ClsLSystemsController.EnScaling.ByBranch Then
-                            MyTurtleStatus.StepLength *= MyScaleFactor
-                        End If
-                    Case "]"c
-                        If MyIsBudding Then
-                            PicGraphics.DrawPoint(MyTurtleStatus.Position, MyTurtleStatus.Color, 3)
-                        End If
-                        RestoreTurtleStatus()
-                End Select
 
                 i += 1
                 If i Mod 5000 = 0 Then

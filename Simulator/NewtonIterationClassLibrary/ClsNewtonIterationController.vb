@@ -254,17 +254,12 @@ Public Class ClsNewtonIterationController
             'the iteration was stopped or reset
             'and should start from the beginning
             If IsUserDataOK() Then
-                ResetIteration()
-                DiagramAreaSelector.IsActivated = False
                 With DS
-                    With DS
-                        If .IsUseN Then
-                            .N = CInt(MyForm.CboN.SelectedItem)
-                        Else
-                            .N = 3
-                        End If
-                    End With
-                    IterationStatus = ClsDynamics.EnIterationStatus.Ready
+                    If .IsUseN Then
+                        .N = CInt(MyForm.CboN.SelectedItem)
+                    Else
+                        .N = 3
+                    End If
                     .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
                     .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
                     DiagramAreaSelector.UserXRange = .ActualXRange
@@ -294,6 +289,11 @@ Public Class ClsNewtonIterationController
                     End If
 
                 End With
+
+                'ResetIteration prepares the roots: therefore it is called after n, the ranges and c are set
+                ResetIteration()
+                DiagramAreaSelector.IsActivated = False
+                IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
                 'Message already generated
             End If

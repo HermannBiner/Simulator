@@ -155,17 +155,23 @@ Public MustInherit Class ClsGrowthModelAbstract
         Dim sign As Integer = Math.Sign(TentmapDecimalStartvalue)
 
         'Because we will add an adjusting dualstring at the end of the TentmapDualStartvalue
-        'its number of digits has to be at minimum 20
-        TentmapDualStartvalue = Mathhelper.FixNumberOfDigitsInDualNumber(TentmapDualStartvalue, 20)
+        'its number of digits has to be exactly StartDigits = 20
+        'so the orbit reaches the target after 20 steps of F
+        '(4 steps of the two-dimensional iteration with power 5)
+        Const StartDigits As Integer = 20
+        TentmapDualStartvalue = Mathhelper.FixNumberOfDigitsInDualNumber(TentmapDualStartvalue, StartDigits).Substring(0, StartDigits)
 
         'For the further calculation, we need the conjugated target value as well as dual string
-        Dim TentmapDualTargetvalue As String =
-            Mathhelper.DecimalNumberToDualString(TentmapDecimalTargetvalue)
+        'it is filled up to StartDigits digits, otherwise the "1" appended below
+        'would move a short target far away (0.5 = 0.1 dual would become 0.111 dual)
+        Dim TentmapDualTargetvalue As String = Mathhelper.FixNumberOfDigitsInDualNumber(
+            Mathhelper.DecimalNumberToDualString(TentmapDecimalTargetvalue), StartDigits)
 
         'Now, the target value is adapted - see mathematical documentation
-        Dim NumerOfOnesInTentmapStartvalue As Integer =
-            Mathhelper.NumberOfOnesInaDualNumber(TentmapDualStartvalue)
-        If NumerOfOnesInTentmapStartvalue Mod 2 = 1 Then
+        'After k steps of the tentmap, the remaining digits are complemented
+        'if and only if the k-th digit is 1
+        'therefore, the target is complemented if the last digit of the start value is 1
+        If TentmapDualStartvalue.EndsWith("1") Then
             TentmapDualTargetvalue = Mathhelper.ComplementDualString(TentmapDualTargetvalue)
         End If
 

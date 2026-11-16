@@ -389,11 +389,19 @@ Public Class ClsPendulumController
         Do
             N += 1
 
-            MainDS.IterationStep(IsTestmode)
+            Try
+                MainDS.IterationStep(IsTestmode)
 
-            If ShadowDS IsNot Nothing Then
-                ShadowDS.IterationStep(IsTestmode)
-            End If
+                If ShadowDS IsNot Nothing Then
+                    ShadowDS.IterationStep(IsTestmode)
+                End If
+            Catch ex As ArithmeticException
+                'the pendulum became numerically unstable
+                StopIteration()
+                MyForm.Cursor = Cursors.Arrow
+                MessageBox.Show(LM.GetString("NumericOverflow"))
+                Exit Do
+            End Try
 
 
             'Controlling the Energy Range
@@ -495,9 +503,9 @@ Public Class ClsPendulumController
     Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            'e is the position of the hotspot of the cursor: no adjustment needed
             Dim Mouseposition As New Point With {
-            .X = e.X + 2,
+            .X = e.X,
             .Y = e.Y
         }
 

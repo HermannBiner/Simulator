@@ -157,21 +157,20 @@ Public Class ClsDiagramAreaSelector
 
                 'The selection is OK
 
-                'Now, we adjust the interval of p in pixel coordinates. p moves between pMin and pMax
-                Dim pMin As Integer = Math.Min(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
-                Dim pMax As Integer = Math.Max(UserSelectionStartpoint.X, UserSelectionEndpoint.X)
-
-                'as well, in direction of the y-axis we have to adjust the relevant interval. That is q in Pixelcoordinates.
-                Dim qMin As Integer = Math.Min(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
-                Dim qMax As Integer = Math.Max(MyPicDiagram.Height - UserSelectionStartpoint.Y, MyPicDiagram.Height - UserSelectionEndpoint.Y)
+                'The corners are converted with the same transformation as the picture was drawn with
+                '(see ClsGraphicTool.PixelToMathpoint), so the selected range is the drawn rectangle
+                Dim x1 As Decimal = PixelToX(UserSelectionStartpoint.X)
+                Dim x2 As Decimal = PixelToX(UserSelectionEndpoint.X)
+                Dim y1 As Decimal = PixelToY(UserSelectionStartpoint.Y)
+                Dim y2 As Decimal = PixelToY(UserSelectionEndpoint.Y)
 
                 'convert the selection to the mathematical coordinate x
-                MyTxtXMin.Text = Math.Max(PixelToX(pMin), MyXRange.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtXMax.Text = Math.Min(PixelToX(pMax), MyXRange.B).ToString(CultureInfo.CurrentCulture)
+                MyTxtXMin.Text = Math.Max(Math.Min(x1, x2), MyXRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtXMax.Text = Math.Min(Math.Max(x1, x2), MyXRange.B).ToString(CultureInfo.CurrentCulture)
 
                 'convert the selection to the mathematical coordinate y
-                MyTxtYMin.Text = Math.Max(PixelToY(qMin), MyYRange.A).ToString(CultureInfo.CurrentCulture)
-                MyTxtYMax.Text = Math.Min(PixelToY(qMax), MyYRange.B).ToString(CultureInfo.CurrentCulture)
+                MyTxtYMin.Text = Math.Max(Math.Min(y1, y2), MyYRange.A).ToString(CultureInfo.CurrentCulture)
+                MyTxtYMax.Text = Math.Min(Math.Max(y1, y2), MyYRange.B).ToString(CultureInfo.CurrentCulture)
 
             End If
         End If
@@ -180,17 +179,16 @@ Public Class ClsDiagramAreaSelector
 
     Private Function PixelToX(p As Integer) As Decimal
 
-        'calculates the x-parametervalue according to p in x-axis direction
-        Dim x As Decimal = MyUserXRange.A + ((p - 1) * MyUserXRange.IntervalWidth / MyPicDiagram.Width)
+        'calculates the x-value of the pixel coordinate p, as ClsGraphicTool.PixelToMathpoint
+        Dim x As Decimal = MyUserXRange.A + ((p - 1) * MyUserXRange.IntervalWidth / Math.Max(1, MyPicDiagram.Width - 1))
         Return x
 
     End Function
 
     Private Function PixelToY(q As Integer) As Decimal
 
-        'calculates the y-value that belongs to a q-pixel coordinate in y-axis direction
-        Dim y As Decimal = CDec(MyUserYRange.A + (q * MyUserYRange.IntervalWidth / (MyPicDiagram.Height * 0.99)))
-
+        'calculates the y-value of the pixel coordinate q (counted from the top), as ClsGraphicTool.PixelToMathpoint
+        Dim y As Decimal = MyUserYRange.B - ((q - 1) * MyUserYRange.IntervalWidth / Math.Max(1, MyPicDiagram.Height - 1))
         Return y
 
     End Function

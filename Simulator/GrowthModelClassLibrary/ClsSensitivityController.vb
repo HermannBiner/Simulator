@@ -212,7 +212,7 @@ Public Class ClsSensitivityController
             P2.X = p * XStretching
             P2.Y = x2
             NextP2.X = (p + 1) * XStretching
-            NextP2.Y = DS.FN(x1)
+            NextP2.Y = DS.FN(x2)
 
             'Increase number of steps
             n += 1

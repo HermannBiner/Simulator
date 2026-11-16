@@ -265,23 +265,22 @@ Public Class ClsTwoDimensionsController
 
     Public Sub MouseMove(e As MouseEventArgs)
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
-            Dim Mouseposition As New Point With {
-            .X = e.X - 2,
-            .Y = e.Y - 7
-        }
-            'Transformation from Mouse- to math. coordinates
-            Dim MathMousePosition As New ClsMathpoint(PixelqToMathX(Mouseposition.X), PixelqToMathY(Mouseposition.Y))
+            'e is the position of the hotspot of the cursor
+            'Transformation from Mouse- to math. coordinates, as the diagram is drawn
+            Dim MathMousePosition As ClsMathpoint = PicGraphics.PixelToMathpoint(e.Location)
 
-            'Left bottom corner of the corresponding cell
+            'Left bottom corner of the corresponding cell of the raster
+            'the raster starts at the left / bottom border of the range
             'k: Number of DeltaX to the cell
             Dim k As Integer
-            'x coordinate
-            k = CInt(Fix(MathMousePosition.X / DeltaX))
-            MathMousePosition.X = k * DeltaX
-            'y coordinate
-            k = CInt(Fix(MathMousePosition.Y / DeltaX))
-            MathMousePosition.Y = k * DeltaX
+            With DS.ValueParameter.Range
+                'x coordinate
+                k = CInt(Math.Floor((MathMousePosition.X - .A) / DeltaX))
+                MathMousePosition.X = .A + k * DeltaX
+                'y coordinate
+                k = CInt(Math.Floor((MathMousePosition.Y - .A) / DeltaX))
+                MathMousePosition.Y = .A + k * DeltaX
+            End With
 
             If Not IsStartCellMarked Then
                 MarkCell(MathMousePosition, Brushes.Blue, False)
@@ -350,20 +349,6 @@ Public Class ClsTwoDimensionsController
 
     End Sub
 
-    Private Function PixelqToMathX(p As Integer) As Decimal
-
-        Dim x As Decimal = DS.ValueParameter.Range.A + (p * DS.ValueParameter.Range.IntervalWidth / Diagramsize)
-
-        Return x
-    End Function
-
-    Private Function PixelqToMathY(q As Integer) As Decimal
-
-        Dim y As Decimal = DS.ValueParameter.Range.B - (q * DS.ValueParameter.Range.IntervalWidth / Diagramsize)
-
-        Return y
-    End Function
-
     Private Sub MarkCell(LeftBottomCorner As ClsMathpoint, locBrush As Brush, IsDefinitive As Boolean)
         Dim RightUpperCorner = New ClsMathpoint(LeftBottomCorner.X + DeltaX, LeftBottomCorner.Y + DeltaX)
 
@@ -398,6 +383,8 @@ Public Class ClsTwoDimensionsController
         'in all cases: NExtStep, Next10, Start
         If IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             If IsUserDataOK() Then
+                'the parameter a is read for every new experiment
+                DS.ParameterA = CDec(MyForm.TxtParameter.Text)
                 IterationPoint.X = CDec(MyForm.TxtX.Text)
                 IterationPoint.Y = CDec(MyForm.TxtY.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
@@ -438,7 +425,8 @@ Public Class ClsTwoDimensionsController
         'Mark the startpoint
         Dim Startpoint As New ClsMathpoint(IterationPoint.X, IterationPoint.Y)
         PicGraphics.DrawPoint(Startpoint, MyBrush, 2)
-        PicGraphics.DrawCircle(Startpoint, 5, MyBrush.Color, 1)
+        'the circle has a radius of 5 pixels (Rastersize), that is DeltaX in math. units
+        PicGraphics.DrawCircle(Startpoint, DeltaX, MyBrush.Color, 1)
 
         'the next steps of the iteration are performed
         Dim i As Integer

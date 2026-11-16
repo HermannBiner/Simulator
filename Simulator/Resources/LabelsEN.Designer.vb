@@ -1626,7 +1626,7 @@ Namespace My.Resources
         '''</summary>
         Friend Shared ReadOnly Property Y_RangeNotAllowed1() As String
             Get
-                Return ResourceManager.GetString("Y-RangeNotAllowed1", resourceCulture)
+                Return ResourceManager.GetString("Y-RangeNotAllowed", resourceCulture)
             End Get
         End Property
     End Class

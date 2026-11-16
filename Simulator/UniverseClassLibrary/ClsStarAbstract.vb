@@ -41,6 +41,9 @@ Public MustInherit Class ClsStarAbstract
     'Calculated during the movement
     Protected NewPosition As ClsVector
 
+    'Position in the actual stage of the Runge Kutta step
+    Protected MyStagePosition As ClsVector
+
     'Velocities
     Protected MyOriginalStartVelocity As ClsVector
     Protected MyUserStartVelocity As ClsVector
@@ -87,6 +90,7 @@ Public MustInherit Class ClsStarAbstract
         ActualPulse = New ClsVector
         MathHelper = New ClsMathHelperAngles
         NewPosition = New ClsVector
+        MyStagePosition = New ClsVector
 
         z = New ClsNTupel(3)
         k1 = New ClsNTupel(3)
@@ -329,88 +333,77 @@ Public MustInherit Class ClsStarAbstract
         End If
     End Sub
 
-    Public Sub IterationStep(IsPhasePortrait As Boolean) Implements IStar.IterationStep
+    'SECTOR RUNGE KUTTA
+    'One Runge Kutta step is performed for all stars together (see ClsUniverseAbstract.IterationStep):
+    'in each of the four stages, the accelerations are calculated
+    'with the stage positions of all stars
 
-        'Performs one iteration step
-        'and does all drawings
-        'all startparameters are already set
-        'that is Position1 and Position2
-        'and Runge Kutta u1, v1, u2, v2
+    Public Sub BeginIterationStep() Implements IStar.BeginIterationStep
 
-        'See math. doc. for the Details of this Implementation
-
-        'Calculate the new position
         'u1, u2, v1, v2 are already set
         'when starting the iteration
-
         MyActualVelocity.X = v1
         MyActualVelocity.Y = v2
 
-        'the new actual position is set for all stars
-        'to the new position
-        'at the same time when all of them have finished
-        'the iterationstep
-
         'Set z1n, n is the nth iterationstep
-        With z
-            .Component(0) = u1
-            .Component(1) = v1
-            .Component(2) = u2
-            .Component(3) = v2
-        End With
+        SetStage(u1, v1, u2, v2)
 
-        'First Runge Kutta Step
+    End Sub
+
+    Public Sub CalculateStage(Stage As Integer) Implements IStar.CalculateStage
+
         'k1: belongs to u1' and F1
         'k2: belongs to u2' and F2
         'h1: belongs to v1' abd G1
         'h2: belongs to v2' and G2
-        'k,h.component(i): step i-1 in Runge Kutta
-        k1.Component(0) = F1(z) ' z.Component(1)
-        k2.Component(0) = F2(z) ' z.Component(3)
-        h1.Component(0) = G1(z)
-        h2.Component(0) = G2(z)
+        'k,h.component(i): step i in Runge Kutta (0..3)
+        k1.Component(Stage) = F1(z) ' z.Component(1)
+        k2.Component(Stage) = F2(z) ' z.Component(3)
+        h1.Component(Stage) = G1(z)
+        h2.Component(Stage) = G2(z)
 
-        'Set z2n
+    End Sub
+
+    Public Sub PrepareStage(Stage As Integer) Implements IStar.PrepareStage
+
+        'Sets z for the stage 1, 2 or 3 with the slopes of the previous stage
+        'Stage 1 and 2: half step, stage 3: full step
+        Dim Factor As Decimal = If(Stage = 3, MyActualStepWidth, MyActualStepWidth / 2)
+
+        SetStage(u1 + Factor * k1.Component(Stage - 1),
+                 v1 + Factor * h1.Component(Stage - 1),
+                 u2 + Factor * k2.Component(Stage - 1),
+                 v2 + Factor * h2.Component(Stage - 1))
+
+    End Sub
+
+    Private Sub SetStage(Stageu1 As Decimal, Stagev1 As Decimal, Stageu2 As Decimal, Stagev2 As Decimal)
         With z
-            .Component(0) = u1 + MyActualStepWidth * k1.Component(0) / 2
-            .Component(1) = v1 + MyActualStepWidth * h1.Component(0) / 2
-            .Component(2) = u2 + MyActualStepWidth * k2.Component(0) / 2
-            .Component(3) = v2 + MyActualStepWidth * h2.Component(0) / 2
+            .Component(0) = Stageu1
+            .Component(1) = Stagev1
+            .Component(2) = Stageu2
+            .Component(3) = Stagev2
         End With
 
-        'Second Runge Kutta Step
-        k1.Component(1) = F1(z) ' z.Component(1)
-        k2.Component(1) = F2(z) ' z.Component(3)
-        h1.Component(1) = G1(z)
-        h2.Component(1) = G2(z)
+        'the other stars use this position in the same stage
+        MyStagePosition.X = Stageu1
+        MyStagePosition.Y = Stageu2
+    End Sub
 
-        'Set x3n
-        With z
-            .Component(0) = u1 + MyActualStepWidth * k1.Component(1) / 2
-            .Component(1) = v1 + MyActualStepWidth * h1.Component(1) / 2
-            .Component(2) = u2 + MyActualStepWidth * k2.Component(1) / 2
-            .Component(3) = v2 + MyActualStepWidth * h2.Component(1) / 2
-        End With
+    ReadOnly Property StagePosition As ClsVector Implements IStar.StagePosition
+        Get
+            StagePosition = MyStagePosition
+        End Get
+    End Property
 
-        'Third Runge Kutta Step
-        k1.Component(2) = F1(z) ' z.Component(1)
-        k2.Component(2) = F2(z) ' z.Component(3)
-        h1.Component(2) = G1(z)
-        h2.Component(2) = G2(z)
+    Public Sub FinishIterationStep(IsPhasePortrait As Boolean) Implements IStar.FinishIterationStep
 
-        'Set x4n
-        With z
-            .Component(0) = u1 + MyActualStepWidth * k1.Component(2)
-            .Component(1) = v1 + MyActualStepWidth * h1.Component(2)
-            .Component(2) = u2 + MyActualStepWidth * k2.Component(2)
-            .Component(3) = v2 + MyActualStepWidth * h2.Component(2)
-        End With
+        'See math. doc. for the Details of this Implementation
 
-        'Fourth Runge Kutta Step
-        k1.Component(3) = F1(z) ' z.Component(1)
-        k2.Component(3) = F2(z) ' z.Component(3)
-        h1.Component(3) = G1(z)
-        h2.Component(3) = G2(z)
+        'the new actual position is set for all stars
+        'to the new position
+        'at the same time when all of them have finished
+        'the iterationstep (MoveActualPosition)
 
         'Update u1, v1, u2, v2
         u1 += MyActualStepWidth * (k1.Component(0) + 2 * k1.Component(1) + 2 * k1.Component(2) + k1.Component(3)) / 6

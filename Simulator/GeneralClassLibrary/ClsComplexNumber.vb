@@ -149,16 +149,16 @@ Public Class ClsComplexNumber
         Dim k As Integer
         Dim Result As New ClsComplexNumber
 
-        Select Case n
-            Case < 0
-                Result = u.Invers
-                n = -n
-            Case 0
-                Result.X = 0
-                Result.Y = 0
-            Case Else
-                Result = u
-        End Select
+        If n < 0 Then
+            u = u.Invers
+            n = -n
+        End If
+
+        If n = 0 Then
+            Return New ClsComplexNumber(1, 0)
+        End If
+
+        Result = u
 
         If n > 0 Then
             Do While k < n - 1

@@ -49,6 +49,8 @@ Public Class ClsInterval
 
         MyA = MyInterval.A
         MyB = MyInterval.B
+        MyDblA = MyInterval.DblA
+        MyDblB = MyInterval.DblB
 
     End Sub
 

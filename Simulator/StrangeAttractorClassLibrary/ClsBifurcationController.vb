@@ -300,6 +300,9 @@ Public Class ClsBifurcationController
         DS.DSParameterValue = ActualParameterRange.A + (ActualParameterRange.IntervalWidth * p / MyForm.PicDiagram.Width)
         CyclePoint.X = DS.DSParameterValue
 
+        'the parameters of the iteration depend on the DSParameter (e.g. the matrix of the linear map)
+        DS.SetIterationParameters()
+
         For Each aPoint In IterationPointSet.Points
 
             'Initialize Iteration

@@ -427,10 +427,10 @@ Public Class ClsNumericMethodController
     Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            'e is the position of the hotspot of the cursor: no adjustment needed
             Dim Mouseposition As New Point With {
-            .X = e.X + 2,
-            .Y = e.Y - 25
+            .X = e.X,
+            .Y = e.Y
         }
 
             If Mouseposition.X >= 100 Then
@@ -453,8 +453,8 @@ Public Class ClsNumericMethodController
             'The Position of the Mouse sets the Position of the pendulum
             'e: Mouseposition is relative to PicDiagram
             Dim Mouseposition As Point
-            Mouseposition.X = e.X + 2
-            Mouseposition.Y = e.Y - 25
+            Mouseposition.X = e.X
+            Mouseposition.Y = e.Y
 
             'If the position is has changed,
             'the time paramameter and the velocity are set to zero

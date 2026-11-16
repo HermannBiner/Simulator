@@ -439,13 +439,9 @@ Public Class ClsCombinedPendulum
 
 
         With LocX
-            Try
-                Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
-                Temp += CDec(-Math.Pow(Omega, 2) * (.Component(0) - L0) + g * Math.Cos(.Component(2)))
-            Catch ex As Exception
-                MessageBox.Show("Overflow 0: " & .Component(0).ToString & ", 2: " & .Component(2).ToString & ", 3: " & .Component(3).ToString)
-            End Try
-
+            'an overflow is not caught here: it propagates to the controller, which stops the iteration
+            Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
+            Temp += CDec(-Math.Pow(Omega, 2) * (.Component(0) - L0) + g * Math.Cos(.Component(2)))
 
         End With
 
@@ -466,11 +462,8 @@ Public Class ClsCombinedPendulum
         With LocX
             'see math.doc: (-2*v2*v1-g*sinu2)/u1
             'and: u1 = l > 0
-            Try
-                Temp = (-2 * .Component(3) * .Component(1) - g * CDec(Math.Sin(.Component(2)))) / .Component(0)
-            Catch ex As Exception
-                MessageBox.Show("Overflow 0: " & .Component(0).ToString & ", 1: " & .Component(1).ToString & ", 2: " & .Component(2).ToString & ", 3: " & .Component(3).ToString)
-            End Try
+            'an overflow is not caught here: it propagates to the controller, which stops the iteration
+            Temp = (-2 * .Component(3) * .Component(1) - g * CDec(Math.Sin(.Component(2)))) / .Component(0)
 
         End With
 
@@ -480,12 +473,12 @@ Public Class ClsCombinedPendulum
 
     Private Function G1Test(LocX As ClsNTupel) As Decimal
 
-        'This function corresponds to a simple Thread Pendulum
+        'This function corresponds to a simple Spring Pendulum (u1 = length)
         Dim Temp As Decimal
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(0))) / L0
+            Temp = -(.Component(0) - L0) * CDec(Math.Pow(Omega, 2))
 
         End With
 
@@ -495,12 +488,12 @@ Public Class ClsCombinedPendulum
 
     Private Function G2Test(LocX As ClsNTupel) As Decimal
 
-        'This function corresponds to a simple Spring Pendulum
+        'This function corresponds to a simple Thread Pendulum of length L0 (u2 = angle)
         Dim Temp As Decimal
 
         With LocX
 
-            Temp = - .Component(2) * CDec(Math.Pow(Omega, 2))
+            Temp = -g * CDec(Math.Sin(.Component(2))) / L0
 
         End With
 

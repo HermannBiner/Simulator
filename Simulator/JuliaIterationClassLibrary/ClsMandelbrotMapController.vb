@@ -13,29 +13,21 @@ Public Class ClsMandelbrotMapController
     Private DSJulia As IJulia
     Private DSMandelbrot As IJulia
 
-    'Number of examinated points in the complex plane
-    Private ExaminatedPoints As Integer
+    'Every picture has its own spiral (see DrawPicture)
+    'The Mandelbrot set is drawn first, then the Julia set
 
-    'Coordinates of the pixel with the startvalue
-    Private p As Integer
-    Private q As Integer
-    Private PixelPoint As Point
+    'Increases with every new drawing; an older drawing that is still running stops
+    Private Generation As Integer
 
-    'Length of a branche of the spiral
-    'see Sub IterationLoop
-    Private L As Integer
+    'True while a picture is drawn
+    Private IsRunning As Boolean
 
-    'Sig = 1 if n odd, = -1 else
-    Private Sig As Integer
-
-    'Parameter k = 1...L
-    Private k As Integer
+    'True if the Mandelbrot set is completely drawn
+    Private IsMandelbrotDrawn As Boolean
 
     'Mouse Event
     Private IsMouseDown As Boolean
     Private MouseMathPoint As ClsMathpoint
-
-    Private Property IterationStatus As ClsDynamics.EnIterationStatus
 
     'SECTOR INITIALIZATION
 
@@ -55,9 +47,10 @@ Public Class ClsMandelbrotMapController
 
     Public Sub InitializeMe()
 
-        ExaminatedPoints = 0
-        L = 0
-        k = 0
+        'a running drawing stops
+        Generation += 1
+        IsRunning = False
+        IsMandelbrotDrawn = False
 
         'Prepare MandelbrotSet
         With DSMandelbrot
@@ -72,10 +65,6 @@ Public Class ClsMandelbrotMapController
         End With
 
         MouseMathPoint = New ClsMathpoint(0, 0)
-
-        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        DSMandelbrot.ResetIteration()
-        Startiteration(DSMandelbrot)
 
         'Prepare JuliaSet
         With DSJulia
@@ -99,138 +88,87 @@ Public Class ClsMandelbrotMapController
             .TxtB.Text = CDec(0.043).ToString
         End With
 
-        IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        ExaminatedPoints = 0
-        L = 0
-        k = 0
-
-        DSJulia.ResetIteration()
-        Startiteration(DSJulia)
+        DrawPictures()
 
     End Sub
 
     'SECTOR ITERATION
 
-    Public Async Sub Startiteration(MyDS As IJulia)
+    Private Async Sub DrawPictures()
 
-        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        'a drawing that is still running stops
+        Generation += 1
+        Dim MyGeneration As Integer = Generation
 
-            'the iteration was stopped or reset
-            'and should start from the beginning
-            If IsCParameterOK() Then
-
-                With MyDS
-                    .C = New ClsComplexNumber(CDbl(MyForm.TxtA.Text), CDbl(MyForm.TxtB.Text))
-                End With
-
-                MyDS.ResetIteration()
-
-                IterationStatus = ClsDynamics.EnIterationStatus.Ready
-            Else
-                'Message already generated
-            End If
-        End If
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Ready Then
-            IterationStatus = ClsDynamics.EnIterationStatus.Running
-            MyForm.Cursor = Cursors.WaitCursor
-
-            Await PerformIteration(MyDS)
-
-            IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-        End If
-
-        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If Not IsCParameterOK() Then
+            'Message already generated
+            IsRunning = False
             MyForm.Cursor = Cursors.Arrow
+            Exit Sub
         End If
+
+        Dim C As New ClsComplexNumber(CDbl(MyForm.TxtA.Text), CDbl(MyForm.TxtB.Text))
+
+        IsRunning = True
+        MyForm.Cursor = Cursors.WaitCursor
+
+        'First the Mandelbrot set, if it is not yet drawn
+        If Not IsMandelbrotDrawn Then
+            DSMandelbrot.C = C
+            DSMandelbrot.ResetIteration()
+            If Not Await DrawPicture(DSMandelbrot, MyGeneration) Then
+                Exit Sub
+            End If
+            IsMandelbrotDrawn = True
+        End If
+
+        'Then the Julia set
+        DSJulia.C = C
+        DSJulia.ResetIteration()
+        If Not Await DrawPicture(DSJulia, MyGeneration) Then
+            Exit Sub
+        End If
+
+        IsRunning = False
+        MyForm.Cursor = Cursors.Arrow
 
     End Sub
 
-    Private Async Function PerformIteration(MyDS As IJulia) As Task
+    'Draws the picture of MyDS in a spiral starting in the midpoint
+    'Returns False if a newer drawing has started meanwhile
+    Private Async Function DrawPicture(MyDS As IJulia, MyGeneration As Integer) As Task(Of Boolean)
 
-        'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        If ExaminatedPoints = 0 Then
-            p = CInt(MyDS.PicDiagram.Width / 2)
-            q = CInt(MyDS.PicDiagram.Height / 2)
+        Dim Spiral As New ClsSpiralScan(MyDS.PicDiagram.Width, MyDS.PicDiagram.Height)
+        Dim PixelPoint As Point
+        Dim Count As Integer = 0
 
-            PixelPoint = New Point
+        Do While Spiral.NextPixel(PixelPoint)
 
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            MyDS.IterationStep(PixelPoint)
-        End If
-
-        Do
-            ExaminatedPoints += 1
-
-            IterationLoop(MyDS)
-
-            If p >= MyDS.PicDiagram.Width Or q >= MyDS.PicDiagram.Height Then
-                'If p >= MyForm.PicMandelbrot.Width Or q >= MyForm.PicMandelbrot.Height Then
-
-                IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-                MyDS.PicDiagram.Refresh()
-
+            If MyGeneration <> Generation Then
+                Return False
             End If
 
-            If ExaminatedPoints Mod 1000 = 0 Then
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            MyDS.IterationStep(PixelPoint)
+            Count += 1
+
+            If Count Mod 1000 = 0 Then
+                MyDS.PicDiagram.Refresh()
                 Await Task.Delay(1)
             End If
-
-        Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-
-    End Function
-
-    Private Sub IterationLoop(MyDS As IJulia)
-
-        If ExaminatedPoints Mod 2 = 0 Then
-            Sig = -1
-        Else
-            Sig = 1
-        End If
-        L += 1
-        k = 1
-        Do While k < L
-            p += Sig
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            MyDS.IterationStep(PixelPoint)
-            k += 1
-        Loop
-
-        k = 1
-
-        Do While k < L
-            q += Sig
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            MyDS.IterationStep(PixelPoint)
-            k += 1
         Loop
 
         MyDS.PicDiagram.Refresh()
+        Return MyGeneration = Generation
 
-    End Sub
+    End Function
 
     'SECTOR SET STARTPARAMETER
 
     Public Sub MouseDown(e As MouseEventArgs)
 
-        If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
+        If Not IsRunning Then
 
             MyForm.Cursor = Cursors.Hand
             IsMouseDown = True
@@ -243,7 +181,6 @@ Public Class ClsMandelbrotMapController
     Public Sub MouseMove(e As MouseEventArgs)
 
         If IsMouseDown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
             Dim Mouseposition As New Point With {
             .X = e.X,
             .Y = e.Y
@@ -263,16 +200,12 @@ Public Class ClsMandelbrotMapController
         'Has only an effect, if the Mouse was down
         If IsMouseDown Then
 
-            ExaminatedPoints = 0
-            L = 0
-            DSJulia.ResetIteration()
-
-            'The JuliaSet is generated with the new parameter C
-            Startiteration(DSJulia)
-
             'The Mouse gets its normal behaviour again
             MyForm.Cursor = Cursors.Arrow
             IsMouseDown = False
+
+            'The JuliaSet is generated with the new parameter C
+            DrawPictures()
         End If
     End Sub
 

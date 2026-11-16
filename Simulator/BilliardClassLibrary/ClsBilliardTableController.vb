@@ -110,8 +110,9 @@ Public Class ClsBilliardTableController
             .ValueProtocol = MyForm.LstValueList
             MyForm.TrbParameterC.Minimum = CInt(.DSParameter.Range.A * 100)
             MyForm.TrbParameterC.Maximum = CInt(.DSParameter.Range.B * 100)
-            MyForm.TrbParameterC.Value = CInt(.DSParameter.Range.A + .DSParameter.Range.IntervalWidth * 0.5 * 100)
             .C = .DSParameter.DefaultValue
+            'the track bar shows c
+            MyForm.TrbParameterC.Value = CInt(.C * 100)
         End With
 
         With MyForm.CboBallColor
@@ -493,10 +494,10 @@ Public Class ClsBilliardTableController
 
     Public Sub MouseMove(e As MouseEventArgs)
         If IsMousedown Then
-            'Because the Cursor is "Hand", the Mouse Position is adjusted a bit
+            'e is the position of the hotspot of the cursor: the ball follows the pointer exactly
             Dim Mouseposition As New Point With {
-            .X = e.X + 2,
-            .Y = e.Y - 25
+            .X = e.X,
+            .Y = e.Y
         }
 
             If ActiveBilliardball IsNot Nothing Then
@@ -523,8 +524,8 @@ Public Class ClsBilliardTableController
             'The Position of the Mouse sets the Position of the Ball below
             'e: Mouseposition is relative to PicBilliardTable
             Dim Mouseposition As Point
-            Mouseposition.X = e.X + 2
-            Mouseposition.Y = e.Y - 25
+            Mouseposition.X = e.X
+            Mouseposition.Y = e.Y
 
             If Not ActiveBilliardball.IsStartParameterSet Then
 

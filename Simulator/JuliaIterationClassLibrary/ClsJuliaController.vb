@@ -26,25 +26,10 @@ Public Class ClsJuliaController
 
     Private Property IterationStatus As ClsDynamics.EnIterationStatus
 
-    'Number of examinated points in the complex plane
-    Private ExaminatedPoints As Integer
+    'Spiral through the pixels of the diagram; Nothing if the picture has not started
+    Private Spiral As ClsSpiralScan
 
-    'Coordinates of the pixel with the startvalue
-    Private p As Integer
-    Private q As Integer
-    Private PixelPoint As Point
-
-    'Length of a branche of the spiral
-    'see Sub IterationLoop
-    Private L As Integer = 0
-
-    'Sig = 1 if n odd, = -1 else
-    Private Sig As Integer
-
-    'Parameter k = 1...L
-    Private k As Integer
-
-    'Number of iteration steps per pixelpoint
+    'Number of computed pixels
     Private Steps As Integer
     Private Watch As Stopwatch
 
@@ -235,16 +220,18 @@ Public Class ClsJuliaController
         SetControlsEnabled(True)
         MyForm.BtnStart.Text = LM.GetString("Start")
 
-        ExaminatedPoints = 0
+        Spiral = Nothing
         IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
         MyForm.TxtSteps.Text = "0"
         Steps = 0
         MyForm.TxtTime.Text = "0"
-        L = 0
         Watch.Reset()
 
         DS.ResetIteration()
+
+        'the area can be selected whenever the iteration is not running
+        DiagramAreaSelector.IsActivated = True
     End Sub
 
     Public Sub SetDelta()
@@ -259,7 +246,7 @@ Public Class ClsJuliaController
                     'For the Mandelbrotset, we show the Midpoint of the Selection
                     'and transfer it to c = a + ib
                     DeltaX = CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)
-                    .TxtA.Text = ((CDec(.TxtXMin.Text) + DeltaX) / 2).ToString(CultureInfo.CurrentCulture)
+                    .TxtA.Text = (CDec(.TxtXMin.Text) + DeltaX / 2).ToString(CultureInfo.CurrentCulture)
                 Else
                     'TxtA is not changed
                 End If
@@ -343,7 +330,6 @@ Public Class ClsJuliaController
             'and should start from the beginning
             If IsUserDataOK() And IsCParameterOK() Then
 
-                DiagramAreaSelector.IsActivated = False
                 With DS
                     .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
                     .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
@@ -365,6 +351,7 @@ Public Class ClsJuliaController
         If IterationStatus = ClsDynamics.EnIterationStatus.Ready _
                 Or IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             IterationStatus = ClsDynamics.EnIterationStatus.Running
+            DiagramAreaSelector.IsActivated = False
             SetControlsEnabled(False)
             With MyForm
                 .BtnStart.Text = LM.GetString("Continue")
@@ -388,99 +375,45 @@ Public Class ClsJuliaController
     Private Async Function PerformIteration() As Task
 
         'This algorithm goes through the CPlane in a spiral starting in the midpoint
-        If ExaminatedPoints = 0 Then
-            p = CInt(MyForm.PicDiagram.Width / 2)
-            q = CInt(MyForm.PicDiagram.Height / 2)
-
-            PixelPoint = New Point
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            DS.IterationStep(PixelPoint)
-
-            Steps = 1
-            Watch.Start()
-
+        If Spiral Is Nothing Then
+            Spiral = New ClsSpiralScan(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
+            Steps = 0
         End If
 
+        Watch.Start()
+
+        Dim PixelPoint As Point
+
         Do
-            ExaminatedPoints += 1
+            'Calculates the color of the PixelPoint
+            'and draws it to MapCPlane
+            If Spiral.NextPixel(PixelPoint) Then
+                DS.IterationStep(PixelPoint)
+                Steps += 1
 
-            IterationLoop()
+                If Steps Mod 10000 = 0 Then
+                    MyForm.PicDiagram.Refresh()
+                End If
 
-            If p >= MyForm.PicDiagram.Width Or q >= MyForm.PicDiagram.Height Then
-
+                If Steps Mod 1000 = 0 Then
+                    MyForm.TxtSteps.Text = Steps.ToString
+                    MyForm.TxtTime.Text = (Watch.ElapsedMilliseconds / 1000).ToString("F2")
+                    Await Task.Delay(1)
+                End If
+            Else
+                'every pixel is computed
                 IterationStatus = ClsDynamics.EnIterationStatus.Stopped
-                Watch.Stop()
-                MyForm.PicDiagram.Refresh()
-
-            End If
-
-            If ExaminatedPoints Mod 100 = 0 Then
                 MyForm.TxtSteps.Text = Steps.ToString
                 MyForm.TxtTime.Text = (Watch.ElapsedMilliseconds / 1000).ToString("F2")
-                Await Task.Delay(1)
+                MyForm.PicDiagram.Refresh()
             End If
 
         Loop Until IterationStatus = ClsDynamics.EnIterationStatus.Interrupted _
             Or IterationStatus = ClsDynamics.EnIterationStatus.Stopped
 
+        Watch.Stop()
+
     End Function
-
-    Private Sub IterationLoop()
-
-        If ExaminatedPoints Mod 2 = 0 Then
-            Sig = -1
-        Else
-            Sig = 1
-        End If
-        L += 1
-        k = 1
-        Do While k < L
-            p += Sig
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            DS.IterationStep(PixelPoint)
-
-            If Steps Mod 10000 = 0 Then
-                MyForm.PicDiagram.Refresh()
-            End If
-
-            Steps += 1
-            k += 1
-        Loop
-
-        k = 1
-
-        Do While k < L
-            q += Sig
-
-            With PixelPoint
-                .X = p
-                .Y = q
-            End With
-
-            'Calculates the color of the PixelPoint
-            'and draws it to MapCPlane
-            DS.IterationStep(PixelPoint)
-
-            If Steps Mod 10000 = 0 Then
-                MyForm.PicDiagram.Refresh()
-            End If
-
-            Steps += 1
-            k += 1
-        Loop
-
-    End Sub
 
     Public Sub StopIteration()
         'the iteration was running and is interrupted
@@ -489,6 +422,7 @@ Public Class ClsJuliaController
         MyForm.BtnStart.Enabled = True
         MyForm.BtnReset.Enabled = True
         MyForm.Cursor = Cursors.Arrow
+        DiagramAreaSelector.IsActivated = True
     End Sub
 
     'SECTOR CHECK USERDATA

@@ -312,6 +312,32 @@ Public MustInherit Class ClsUniverseAbstract
         End If
     End Sub
 
+    Public Sub IterationStep(IsPhasePortrait As Boolean) Implements IUniverse.IterationStep
+
+        'One Runge-Kutta step for all stars together:
+        'in each stage, the accelerations of all stars are calculated
+        'with the stage positions of all stars, so the method has order 4
+        For Each aStar As IStar In MyActiveStarCollection
+            aStar.BeginIterationStep()
+        Next
+
+        For Stage As Integer = 0 To 3
+            If Stage > 0 Then
+                For Each aStar As IStar In MyActiveStarCollection
+                    aStar.PrepareStage(Stage)
+                Next
+            End If
+            For Each aStar As IStar In MyActiveStarCollection
+                aStar.CalculateStage(Stage)
+            Next
+        Next
+
+        For Each aStar As IStar In MyActiveStarCollection
+            aStar.FinishIterationStep(IsPhasePortrait)
+        Next
+
+    End Sub
+
     Public Sub ClearDiagrams() Implements IUniverse.ClearDiagrams
         MyBmpGraphics.Clear(Color.Black)
         MyPicDiagram.Refresh()
