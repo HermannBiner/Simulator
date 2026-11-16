@@ -5,9 +5,9 @@
 Public Class ClsVector
 
     'The components
-    Protected MyX As Decimal
-    Protected MyY As Decimal
-    Protected MyZ As Decimal
+    Protected MyX As Double
+    Protected MyY As Double
+    Protected MyZ As Double
     Protected MyMathpoint As ClsMathpoint
 
     Public Sub New()
@@ -18,43 +18,43 @@ Public Class ClsVector
         MyMathpoint = New ClsMathpoint
     End Sub
 
-    Public Sub New(x As Decimal, y As Decimal, z As Decimal)
+    Public Sub New(x As Double, y As Double, z As Double)
         MyX = x
         MyY = y
         MyZ = z
         MyMathpoint = New ClsMathpoint
     End Sub
 
-    Public Sub New(x As Decimal, y As Decimal)
+    Public Sub New(x As Double, y As Double)
         MyX = x
         MyY = y
         MyZ = 0
         MyMathpoint = New ClsMathpoint
     End Sub
 
-    Property X As Decimal
+    Property X As Double
         Get
             X = MyX
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyX = value
         End Set
     End Property
 
-    Property Y As Decimal
+    Property Y As Double
         Get
             Y = MyY
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyY = value
         End Set
     End Property
 
-    Property Z As Decimal
+    Property Z As Double
         Get
             Z = MyZ
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyZ = value
         End Set
     End Property
@@ -82,13 +82,13 @@ Public Class ClsVector
             MyZ -= .Z
         End With
     End Sub
-    Public Sub Mult(aFactor As Decimal)
+    Public Sub Mult(aFactor As Double)
         MyX *= aFactor
         MyY *= aFactor
         MyZ *= aFactor
     End Sub
 
-    Public Function Scalar(aVector As ClsVector) As Decimal
+    Public Function Scalar(aVector As ClsVector) As Double
         With aVector
             Return MyX * .X + MyY * .Y + MyZ * .Z
         End With
@@ -104,16 +104,16 @@ Public Class ClsVector
         Return LocCross
     End Function
 
-    Public Sub TurnInXYPlane(phi As Decimal)
+    Public Sub TurnInXYPlane(phi As Double)
         'Turns the vector projected to the x-y plane
-        Dim OldX As Decimal = MyX
-        MyX = CDec(OldX * Math.Cos(phi) - MyY * Math.Sin(phi))
-        MyY = CDec(OldX * Math.Sin(phi) + MyY * Math.Cos(phi))
+        Dim OldX As Double = MyX
+        MyX = CDbl(OldX * Math.Cos(phi) - MyY * Math.Sin(phi))
+        MyY = CDbl(OldX * Math.Sin(phi) + MyY * Math.Cos(phi))
         'MyZ is not changed
     End Sub
 
-    Public Function Abs() As Decimal
-        Return CDec(Math.Sqrt(MyX * MyX + MyY * MyY + MyZ * MyZ))
+    Public Function Abs() As Double
+        Return CDbl(Math.Sqrt(MyX * MyX + MyY * MyY + MyZ * MyZ))
     End Function
 
     Public Function ToMathPoint() As ClsMathpoint

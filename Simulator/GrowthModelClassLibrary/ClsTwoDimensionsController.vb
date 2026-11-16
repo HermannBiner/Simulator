@@ -30,7 +30,7 @@ Public Class ClsTwoDimensionsController
     Private Const Rastersize As Integer = 5
 
     'Size of a cell in math. units
-    Private DeltaX As Decimal
+    Private DeltaX As Double
 
     'Size of the diagram in Pixels
     Private Diagramsize As Integer
@@ -140,7 +140,7 @@ Public Class ClsTwoDimensionsController
         'Adapting DeltaX to the Iteration.Interval.Width
         'that all type of Iteration Functions have the same Raster
         Diagramsize = Math.Min(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
-        DeltaX = CDec(Rastersize / Diagramsize) * DS.ValueParameter.Range.IntervalWidth
+        DeltaX = CDbl(Rastersize / Diagramsize) * DS.ValueParameter.Range.IntervalWidth
 
         PrepareDiagram()
         SetBrush()
@@ -154,10 +154,11 @@ Public Class ClsTwoDimensionsController
         With MyForm
             'default settings
             .TxtParameter.Text = DS.ChaoticParameterValue.ToString(CultureInfo.CurrentCulture)
-            .TxtX.Text = (DS.ValueParameter.Range.A +
-                (DS.ValueParameter.Range.IntervalWidth * 0.414)).ToString(CultureInfo.CurrentCulture)
-            .TxtY.Text = (DS.ValueParameter.Range.A +
-                (DS.ValueParameter.Range.IntervalWidth * 0.407)).ToString(CultureInfo.CurrentCulture)
+            'rounded to 6 decimals: in Double, e.g. -0.17200000000000004 for the parabola
+            .TxtX.Text = Math.Round(DS.ValueParameter.Range.A +
+                (DS.ValueParameter.Range.IntervalWidth * 0.414), 6).ToString(CultureInfo.CurrentCulture)
+            .TxtY.Text = Math.Round(DS.ValueParameter.Range.A +
+                (DS.ValueParameter.Range.IntervalWidth * 0.407), 6).ToString(CultureInfo.CurrentCulture)
             .CboExperiment.SelectedIndex = 0
             .TxtX.Select()
         End With
@@ -172,12 +173,14 @@ Public Class ClsTwoDimensionsController
         BmpGraphics.Clear(Color.White)
 
         'Counter
-        Dim i As Integer = 0
-
         'Corresponding X- and y-coordinates
-        Dim u As Decimal
+        Dim u As Double
 
-        Do
+        'The lines up to and including the border
+        'In Decimal, DeltaX was rounded down, so "Loop Until i * DeltaX >= Width" drew the border line as well
+        Dim NumberOfLines As Integer = CInt(Math.Round(DS.ValueParameter.Range.IntervalWidth / DeltaX))
+
+        For i As Integer = 0 To NumberOfLines
 
             'lines parallel to the y-aXis
             u = DS.ValueParameter.Range.A + (i * DeltaX)
@@ -190,9 +193,7 @@ Public Class ClsTwoDimensionsController
             Dim Y2 As New ClsMathpoint(DS.ValueParameter.Range.B, u)
             BmpGraphics.DrawLine(Y1, Y2, Color.Aqua, 1)
 
-            i += 1
-
-        Loop Until i * DeltaX >= DS.ValueParameter.Range.IntervalWidth
+        Next
 
         MyForm.PicDiagram.Refresh()
 
@@ -327,8 +328,8 @@ Public Class ClsTwoDimensionsController
                     IsTargetCellMarked = True
                     If IsUserDataOK() Then
                         'Adapt Startpoint for Targetpoint
-                        IterationPoint.X = CDec(MyForm.TxtX.Text)
-                        IterationPoint.Y = CDec(MyForm.TxtY.Text)
+                        IterationPoint.X = CDbl(MyForm.TxtX.Text)
+                        IterationPoint.Y = CDbl(MyForm.TxtY.Text)
                         IterationPoint.X = DS.CalculateStartValueForTargetValue(IterationPoint.X, Math.Round(StoredCell.X + DeltaX / 2, 3))
                         IterationPoint.Y = DS.CalculateStartValueForTargetValue(IterationPoint.Y, Math.Round(StoredCell.Y + DeltaX / 2, 3))
                         With MyForm
@@ -370,9 +371,9 @@ Public Class ClsTwoDimensionsController
             If IsUserDataOK() Then
                 SetBrush()
                 'PrepareDiagram()
-                DS.ParameterA = CDec(MyForm.TxtParameter.Text)
-                IterationPoint.X = CDec(MyForm.TxtX.Text)
-                IterationPoint.Y = CDec(MyForm.TxtY.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameter.Text)
+                IterationPoint.X = CDbl(MyForm.TxtX.Text)
+                IterationPoint.Y = CDbl(MyForm.TxtY.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
                 'Message already generated
@@ -384,9 +385,9 @@ Public Class ClsTwoDimensionsController
         If IterationStatus = ClsDynamics.EnIterationStatus.Interrupted Then
             If IsUserDataOK() Then
                 'the parameter a is read for every new experiment
-                DS.ParameterA = CDec(MyForm.TxtParameter.Text)
-                IterationPoint.X = CDec(MyForm.TxtX.Text)
-                IterationPoint.Y = CDec(MyForm.TxtY.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameter.Text)
+                IterationPoint.X = CDbl(MyForm.TxtX.Text)
+                IterationPoint.Y = CDbl(MyForm.TxtY.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
                 'Message already generated

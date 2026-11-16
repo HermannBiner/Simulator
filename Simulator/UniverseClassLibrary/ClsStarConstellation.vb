@@ -6,13 +6,13 @@
 Public Class ClsStarConstellation
 
     Private MyName As String
-    Private MyProposedStepWidth As Decimal
+    Private MyProposedStepWidth As Double
     Private MyStars As List(Of IStar)
 
     'to show the phaseportrait, we need an individual 
     'factor for the velocity, because it is too small
     'depending on the constellation
-    Private MyVFactor As Decimal
+    Private MyVFactor As Double
 
     Public Sub New()
         MyStars = New List(Of IStar)
@@ -27,11 +27,11 @@ Public Class ClsStarConstellation
         End Set
     End Property
 
-    Property ProposedStepWidth As Decimal
+    Property ProposedStepWidth As Double
         Get
             ProposedStepWidth = MyProposedStepWidth
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyProposedStepWidth = value
         End Set
     End Property
@@ -42,11 +42,11 @@ Public Class ClsStarConstellation
         End Get
     End Property
 
-    Property VFactor As Decimal
+    Property VFactor As Double
         Get
             VFactor = MyVFactor
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyVFactor = value
         End Set
     End Property

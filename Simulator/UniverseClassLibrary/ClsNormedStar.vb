@@ -5,15 +5,15 @@
 Public Class ClsNormedStar
     Inherits ClsNewtonStar
 
-    Protected Overrides ReadOnly Property GravConst As Decimal
+    Protected Overrides ReadOnly Property GravConst As Double
         Get
-            Return CDec(1 * Tau * Tau)
+            Return CDbl(1 * Tau * Tau)
         End Get
     End Property
 
-    Public Overrides ReadOnly Property Tau As Decimal
+    Public Overrides ReadOnly Property Tau As Double
         Get
-            Return CDec(0.05)
+            Return CDbl(0.05)
         End Get
     End Property
 

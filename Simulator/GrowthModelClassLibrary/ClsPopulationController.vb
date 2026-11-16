@@ -18,9 +18,9 @@ Public Class ClsPopulationController
     Private PicDiagramSize As Integer
 
     'Actual value of the iteration
-    Private x As Decimal
+    Private x As Double
     'Size of the population in percent between 0% and 100%
-    Private Percent As Decimal
+    Private Percent As Double
 
     'Diameter of an individuum in pixels
     Private Const D As Integer = 1
@@ -31,11 +31,11 @@ Public Class ClsPopulationController
     Private NumberOfIndividuums As Integer
 
     'Radius of the Circle with Individuums
-    Private R As Decimal
+    Private R As Double
 
     'Polar coordinates of an individuum
-    Private Rho As Decimal
-    Private Alfa As Decimal
+    Private Rho As Double
+    Private Alfa As Double
 
 
     'Status Parameters
@@ -139,7 +139,7 @@ Public Class ClsPopulationController
             x = DS.ValueParameter.DefaultValue
             .TxtStartValue.Text = x.ToString(CultureInfo.CurrentCulture)
 
-            Percent = 100 * CDec((x - DS.ValueParameter.Range.A) / (DS.ValueParameter.Range.B - DS.ValueParameter.Range.A))
+            Percent = 100 * CDbl((x - DS.ValueParameter.Range.A) / (DS.ValueParameter.Range.B - DS.ValueParameter.Range.A))
             .TxtPopulationDensity.Text = Percent.ToString("#.000", CultureInfo.CurrentCulture)
 
             'Set TrabParameterA to the Default of DSParameter.Range
@@ -158,7 +158,7 @@ Public Class ClsPopulationController
 
     Public Sub SetTrbA()
         If IsUserDataOK() Then
-            DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
+            DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
             MyForm.TrbParameterA.Value = CInt((DS.ParameterA - DS.DSParameter.Range.A) * 999 / DS.DSParameter.Range.IntervalWidth + 1)
             PrepareDiagram()
         End If
@@ -175,9 +175,9 @@ Public Class ClsPopulationController
             .LblSteps.Text = "0"
             n = 0
 
-            x = CDec(.TxtStartValue.Text)
+            x = CDbl(.TxtStartValue.Text)
             With DS.ValueParameter.Range
-                Percent = 100 * CDec((x - .A) / (.B - .A))
+                Percent = 100 * CDbl((x - .A) / (.B - .A))
             End With
 
             'Set Population Density
@@ -208,7 +208,7 @@ Public Class ClsPopulationController
         With MyForm
             .PicDiagram.Refresh()
             If IsUserDataOK() Then
-                ShowPopulation(CDec(.TxtStartValue.Text))
+                ShowPopulation(CDbl(.TxtStartValue.Text))
             End If
         End With
     End Sub
@@ -221,8 +221,8 @@ Public Class ClsPopulationController
             If IsUserDataOK() Then
 
                 'Set Ds Parameters
-                DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
-                x = CDec(MyForm.TxtStartValue.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
+                x = CDbl(MyForm.TxtStartValue.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
                 'Message already generated
@@ -242,7 +242,7 @@ Public Class ClsPopulationController
             x = DS.FN(x)
 
             With DS.ValueParameter.Range
-                Percent = 100 * CDec((x - .A) / (.B - .A))
+                Percent = 100 * CDbl((x - .A) / (.B - .A))
             End With
 
             'Set Population Density
@@ -267,8 +267,8 @@ Public Class ClsPopulationController
             If IsUserDataOK() Then
 
                 'Set Ds Parameters
-                DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
-                x = CDec(MyForm.TxtStartValue.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
+                x = CDbl(MyForm.TxtStartValue.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
             Else
                 'Message already generated
@@ -307,7 +307,7 @@ Public Class ClsPopulationController
             'Next step of the iteration
             x = DS.FN(x)
             With DS.ValueParameter.Range
-                Percent = 100 * CDec((x - .A) / (.B - .A))
+                Percent = 100 * CDbl((x - .A) / (.B - .A))
             End With
 
             'Set Population Density
@@ -326,7 +326,7 @@ Public Class ClsPopulationController
 
     End Function
 
-    Private Sub ShowPopulation(x As Decimal)
+    Private Sub ShowPopulation(x As Double)
 
         MyForm.PicDiagram.Refresh()
 
@@ -348,10 +348,10 @@ Public Class ClsPopulationController
             For m = 1 To NumberOfIndividuums
                 'Generate a Random Point
                 'Polarcoordinates
-                Rho = R * CDec(RandomGenerator.NextSingle)
-                Alfa = CDec(2 * Math.PI * RandomGenerator.NextSingle)
-                Individuum.X = (.A + .B) / 2 + Rho * CDec(Math.Cos(Alfa))
-                Individuum.Y = (.A + .B) / 2 + Rho * CDec(Math.Sin(Alfa))
+                Rho = R * CDbl(RandomGenerator.NextSingle)
+                Alfa = CDbl(2 * Math.PI * RandomGenerator.NextSingle)
+                Individuum.X = (.A + .B) / 2 + Rho * CDbl(Math.Cos(Alfa))
+                Individuum.Y = (.A + .B) / 2 + Rho * CDbl(Math.Sin(Alfa))
 
                 PicGraphics.DrawPoint(Individuum, Brushes.Blue, D)
 

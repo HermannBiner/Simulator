@@ -52,8 +52,8 @@ Public Class ClsNumericMethodController
 
     'The X-Position of both Pendulums
     'this is a fixed value
-    Const XPositionA As Decimal = CDec(-0.97)
-    Const XPositionB As Decimal = CDec(-0.94)
+    Const XPositionA As Double = CDbl(-0.97)
+    Const XPositionB As Double = CDbl(-0.94)
 
     'to draw the trace we need:
     Private TraceA As ClsMathpoint
@@ -63,11 +63,11 @@ Public Class ClsNumericMethodController
     Private NextTraceB As ClsMathpoint
 
     'and the step width of the iteration is 
-    Private StepWidthA As Decimal = CDec(0.1)
+    Private StepWidthA As Double = CDbl(0.1)
 
-    'CDec(0.1) is the Standard, but the StepWidthB is calculated
+    'CDbl(0.1) is the Standard, but the StepWidthB is calculated
     'in SetStepWidthB based on TrbStepWidth.value
-    Private StepWidthB As Decimal = CDec(0.1)
+    Private StepWidthB As Double = CDbl(0.1)
 
     'Setting UsereStartPosition
     Private IsMouseDown As Boolean = False
@@ -158,13 +158,13 @@ Public Class ClsNumericMethodController
 
         'all default start parameters are zero
         With DSA
-            .Amplitude = CDec(0.5) 'this sets .ActualParameter(1)
+            .Amplitude = CDbl(0.5) 'this sets .ActualParameter(1)
             .ActualParameter(0) = 0
             .ActualParameter(2) = 0
         End With
 
         With DSB
-            .Amplitude = CDec(0.5) 'this sets .ActualParameter(1)
+            .Amplitude = CDbl(0.5) 'this sets .ActualParameter(1)
             .ActualParameter(0) = 0
             .ActualParameter(2) = 0
         End With
@@ -190,13 +190,13 @@ Public Class ClsNumericMethodController
         'that NumberOfApproxStepsB x StepWidthB = StepWidthA
         'thereby both pendulums are synchronized
 
-        Dim LocStepWidth As Decimal
+        Dim LocStepWidth As Double
         Dim StretchFactor As Integer = MyForm.TrbStepWidth.Value
 
         If StretchFactor > 5 Then
-            LocStepWidth = CDec(Math.Max(0.01 - 0.001 * (StretchFactor - 6), 0.001))
+            LocStepWidth = CDbl(Math.Max(0.01 - 0.001 * (StretchFactor - 6), 0.001))
         Else
-            LocStepWidth = CDec(0.1 - 0.02 * (StretchFactor - 1))
+            LocStepWidth = CDbl(0.1 - 0.02 * (StretchFactor - 1))
         End If
 
         If MyForm.ChkStretched.Checked Then
@@ -210,7 +210,7 @@ Public Class ClsNumericMethodController
 
         Else
             'StepWidthA is set as Standard = 0.1
-            StepWidthA = CDec(0.1)
+            StepWidthA = CDbl(0.1)
 
             'and StepWidthB is equal locStepWidth and adapted
             'so that StepWidthB x NumberOfApproxStepsB = StepWidthA
@@ -357,7 +357,7 @@ Public Class ClsNumericMethodController
                 ShiftedBmpDiagram.Dispose()
 
                 'Coordinate system x-axis
-                BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDec(-0.9), 0), Color.Black, 1)
+                BmpGraphics.DrawLine(New ClsMathpoint(-1, 0), New ClsMathpoint(CDbl(-0.9), 0), Color.Black, 1)
                     Try
                         'update Picdiagram
                         MyForm.PicDiagram.Refresh()
@@ -439,8 +439,8 @@ Public Class ClsNumericMethodController
             Else
                 PrepareDiagram()
                 'Setting the Amplitude sets also the ActualParameter(1)
-                DSA.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDec(-0.95)), CDec(0.95))
-                DSB.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDec(-0.95)), CDec(0.95))
+                DSA.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDbl(-0.95)), CDbl(0.95))
+                DSB.Amplitude = Math.Min(Math.Max(PixelqToMathy(Mouseposition.Y), CDbl(-0.95)), CDbl(0.95))
                 DrawPicPendulums()
             End If
         End If
@@ -475,9 +475,9 @@ Public Class ClsNumericMethodController
         End If
     End Sub
 
-    Private Function PixelqToMathy(q As Integer) As Decimal
+    Private Function PixelqToMathy(q As Integer) As Double
 
-        Dim y As Decimal = MathInterval.B - (q * MathInterval.IntervalWidth _
+        Dim y As Double = MathInterval.B - (q * MathInterval.IntervalWidth _
             / MyForm.PicDiagram.Height)
 
         Return y

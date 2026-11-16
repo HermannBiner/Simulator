@@ -11,20 +11,20 @@ Public Interface IStrangeAttractor
     ReadOnly Property DSParameter As ClsGeneralParameter
 
     'Parameter itself
-    Property DSParameterValue As Decimal
+    Property DSParameterValue As Double
 
     ReadOnly Property XValueParameter As ClsGeneralParameter
     ReadOnly Property YValueParameter As ClsGeneralParameter
     ReadOnly Property ZValueParameter As ClsGeneralParameter
 
-    Property StepWidth As Decimal
+    Property StepWidth As Double
 
     ReadOnly Property StartPointSets As List(Of ClsPointSet)
 
     ReadOnly Property MathInterval As ClsInterval
 
     'Splitpoints of the Hopf-Bifurcation diagram
-    ReadOnly Property Splitpoints As List(Of Decimal)
+    ReadOnly Property Splitpoints As List(Of Double)
 
     Property ActualMathPoint As ClsMathpoint
 

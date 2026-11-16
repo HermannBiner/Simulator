@@ -8,60 +8,60 @@ Public Class ClsNewtonStar
 
     'in our planet system, the given data about planets
     'is not the actual position, but the perihel and its argument
-    Private MyPerihel As Decimal
-    Private MyArgumentPerihel As Decimal
+    Private MyPerihel As Double
+    Private MyArgumentPerihel As Double
 
     'Velocity at the perihel
-    Private MyPerihelVelocity As Decimal
+    Private MyPerihelVelocity As Double
 
     'To sum the Gravity of each other star
     'acting on the calculated star
     Private LocSum As Double
 
-    Protected Overridable ReadOnly Property GravConst As Decimal
+    Protected Overridable ReadOnly Property GravConst As Double
         'see the math. doc. for the gravity constant
         'depending on the chosen units:
         'astronomic unit instead of km
         'years instead of seconds
         'earth mass instead of kg
         Get
-            Return CDec(0.00000000088874 * Tau * Tau)  'see math. doc.
+            Return CDbl(0.00000000088874 * Tau * Tau)  'see math. doc.
         End Get
     End Property
 
-    Public Overridable ReadOnly Property Tau As Decimal
+    Public Overridable ReadOnly Property Tau As Double
         Get
-            Return CDec(1)
+            Return CDbl(1)
         End Get
     End Property
 
-    WriteOnly Property Perihel As Decimal
-        Set(value As Decimal)
+    WriteOnly Property Perihel As Double
+        Set(value As Double)
             MyPerihel = value
         End Set
     End Property
 
-    WriteOnly Property ArgumentPerihel As Decimal
-        Set(value As Decimal)
+    WriteOnly Property ArgumentPerihel As Double
+        Set(value As Double)
             MyArgumentPerihel = value
         End Set
     End Property
 
-    WriteOnly Property PerihelVelocity As Decimal
-        Set(value As Decimal)
+    WriteOnly Property PerihelVelocity As Double
+        Set(value As Double)
             MyPerihelVelocity = value
         End Set
     End Property
 
     Public Sub SetDefaultParameterByPerihelData()
         With MyOriginalStartPosition
-            .X = CDec(MyPerihel * Math.Cos(MyArgumentPerihel))
-            .Y = CDec(MyPerihel * Math.Sin(MyArgumentPerihel))
+            .X = CDbl(MyPerihel * Math.Cos(MyArgumentPerihel))
+            .Y = CDbl(MyPerihel * Math.Sin(MyArgumentPerihel))
             If .Abs > 0 Then
                 v1 = -MyPerihelVelocity * .Y / .Abs
                 v2 = MyPerihelVelocity * .X / .Abs
             Else
-                v1 = MyPerihelVelocity * CDec(Math.Sqrt(2))
+                v1 = MyPerihelVelocity * CDbl(Math.Sqrt(2))
                 v2 = v1
             End If
         End With
@@ -99,48 +99,48 @@ Public Class ClsNewtonStar
             EpsSquare = 1 + 2 * E * Math.Pow(L, 2) * Math.Pow(MyTotalMassOfOtherStars + MyUserMass, 4) /
                 (Math.Pow(GravConst, 2) * Math.Pow(MyUserMass, 3) * Math.Pow(MyTotalMassOfOtherStars, 6))
 
-            Dim Epsilon As Decimal
+            Dim Epsilon As Double
             If EpsSquare >= 0 Then
-                Epsilon = CDec(Math.Sqrt(EpsSquare))
+                Epsilon = CDbl(Math.Sqrt(EpsSquare))
             Else
                 Throw New Exception("NegativeSquareRoot")
             End If
 
-            Dim ArgumentStartPosition As Decimal
+            Dim ArgumentStartPosition As Double
             ArgumentStartPosition = MathHelper.AngleInNullTwoPi(MathHelper.CalculateAngleOfDirection(MyUserStartPosition.X, MyUserStartPosition.Y))
 
-            Dim Rho As Decimal
-            Rho = CDec(p / (1 + Epsilon))
+            Dim Rho As Double
+            Rho = CDbl(p / (1 + Epsilon))
 
             'if the velocity is < the balance between gravitation and 
             'the centrifugal force, the startpoint of the body is not anymore
             'the perihel, but the aphel
             'that means, the orbit is turned by pi
-            Dim CorrectAlfa As Decimal
+            Dim CorrectAlfa As Double
 
-            If MyUserStartVelocity.Abs < CDec(Math.Sqrt(GravConst * MyTotalMassOfOtherStars / MyUserStartPosition.Abs)) Then
+            If MyUserStartVelocity.Abs < CDbl(Math.Sqrt(GravConst * MyTotalMassOfOtherStars / MyUserStartPosition.Abs)) Then
                 CorrectAlfa = -1
             Else
                 CorrectAlfa = 1
             End If
 
-            Dim NumCorrFactor As Decimal
+            Dim NumCorrFactor As Double
             If Rho <> 0 Then
                 NumCorrFactor = MyUserStartPosition.Abs / Rho
             End If
 
             Dim Point = New ClsMathpoint(0, 0)
-            Dim Theta As Decimal
+            Dim Theta As Double
 
             'Theta - MyUserArgumentPerihel should be in [-pi,pi]
 
-            For Theta = ArgumentStartPosition - CDec(Math.PI + 0.01) To _
-               ArgumentStartPosition + CDec(Math.PI - 0.01) Step CDec(0.02)
-                Rho = CDec(p / (1 + CorrectAlfa * Epsilon * Math.Cos(Theta - ArgumentStartPosition)))
+            For Theta = ArgumentStartPosition - CDbl(Math.PI + 0.01) To _
+               ArgumentStartPosition + CDbl(Math.PI - 0.01) Step CDbl(0.02)
+                Rho = CDbl(p / (1 + CorrectAlfa * Epsilon * Math.Cos(Theta - ArgumentStartPosition)))
                 Rho *= (1 + CorrectAlfa * Epsilon) / (1 + Epsilon)
                 If Rho > 0 Then 'otherwise, we are out of the definition range of the e.g. hyperbola
-                    Point.X = NumCorrFactor * MyUniverse.DiagramZoom * Rho * CDec(Math.Cos(Theta))
-                    Point.Y = NumCorrFactor * MyUniverse.DiagramZoom * Rho * CDec(Math.Sin(Theta))
+                    Point.X = NumCorrFactor * MyUniverse.DiagramZoom * Rho * CDbl(Math.Cos(Theta))
+                    Point.Y = NumCorrFactor * MyUniverse.DiagramZoom * Rho * CDbl(Math.Sin(Theta))
 
                     If IsDefinitive Then
                         MyBmpGraphics.DrawPoint(Point, MyStarColor, 1)
@@ -158,28 +158,28 @@ Public Class ClsNewtonStar
 
     End Sub
 
-    Public Overrides Function GetEnergy() As Decimal
+    Public Overrides Function GetEnergy() As Double
         'for debug
         Dim Debug As String
-        Dim LocEKin As Decimal
+        Dim LocEKin As Double
         LocEKin = MyUserMass * (v1 * v1 + v2 * v2) / 2
         Debug = LocEKin.ToString
-        Dim MassFactor As Decimal
-        MassFactor = CDec(GravConst * MyUserMass * Math.Pow(MyTotalMassOfOtherStars, 3) /
+        Dim MassFactor As Double
+        MassFactor = CDbl(GravConst * MyUserMass * Math.Pow(MyTotalMassOfOtherStars, 3) /
                     Math.Pow(MyTotalMassOfOtherStars + MyUserMass, 2))
         Debug = MassFactor.ToString
-        Dim LocEPot As Decimal
-        LocEPot = -CDec(MassFactor / Math.Max(1, Math.Sqrt(u1 * u1 + u2 * u2)))
+        Dim LocEPot As Double
+        LocEPot = -CDbl(MassFactor / Math.Max(1, Math.Sqrt(u1 * u1 + u2 * u2)))
         Debug = LocEPot.ToString
         Return LocEKin + LocEPot
     End Function
 
-    Protected Overrides Function F1(LocZ As ClsNTupel) As Decimal
+    Protected Overrides Function F1(LocZ As ClsNTupel) As Double
         'u1' = v1
         Return LocZ.Component(1)
     End Function
 
-    Protected Overrides Function G1(LocZ As ClsNTupel) As Decimal
+    Protected Overrides Function G1(LocZ As ClsNTupel) As Double
         LocSum = 0
         'Go through all other stars
         'the own position is the stage position LocZ, the other stars are at their stage position as well
@@ -188,15 +188,15 @@ Public Class ClsNewtonStar
                 LocSum += aStar.UserMass * (aStar.StagePosition.X - LocZ.Component(0)) / (Math.Max(0.001, Math.Pow(Distance(aStar.StagePosition, LocZ), 3)))
             End If
         Next
-        Return CDec(LocSum * GravConst)
+        Return CDbl(LocSum * GravConst)
     End Function
 
-    Protected Overrides Function F2(LocZ As ClsNTupel) As Decimal
+    Protected Overrides Function F2(LocZ As ClsNTupel) As Double
         'u2' = v2
         Return LocZ.Component(3)
     End Function
 
-    Protected Overrides Function G2(LocZ As ClsNTupel) As Decimal
+    Protected Overrides Function G2(LocZ As ClsNTupel) As Double
         LocSum = 0
         'Go through all other stars
         'the own position is the stage position LocZ, the other stars are at their stage position as well
@@ -205,13 +205,13 @@ Public Class ClsNewtonStar
                 LocSum += aStar.UserMass * (aStar.StagePosition.Y - LocZ.Component(2)) / (Math.Max(0.001, Math.Pow(Distance(aStar.StagePosition, LocZ), 3)))
             End If
         Next
-        Return CDec(LocSum * GravConst)
+        Return CDbl(LocSum * GravConst)
     End Function
 
-    Private Function Distance(Position1 As ClsVector, LocZ As ClsNTupel) As Decimal
+    Private Function Distance(Position1 As ClsVector, LocZ As ClsNTupel) As Double
         'This is Rij in the math.doc.
         'LocZ.Component(0) and LocZ.Component(2) are the coordinates of the own stage position
-        Return CDec(Math.Sqrt(Math.Pow(Position1.X - LocZ.Component(0), 2) + Math.Pow(Position1.Y - LocZ.Component(2), 2)))
+        Return CDbl(Math.Sqrt(Math.Pow(Position1.X - LocZ.Component(0), 2) + Math.Pow(Position1.Y - LocZ.Component(2), 2)))
     End Function
 
 End Class

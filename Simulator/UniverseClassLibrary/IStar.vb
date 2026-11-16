@@ -18,9 +18,9 @@ Public Interface IStar
     Property PicPhasePortraitGraphics As ClsGraphicTool
 
     'Parameters
-    Property OriginalMass As Decimal 'in #Earth masses, set by default
+    Property OriginalMass As Double 'in #Earth masses, set by default
 
-    Property UserMass As Decimal 'in #earth masses, set by the user
+    Property UserMass As Double 'in #earth masses, set by the user
 
     'The origina Startposition is calculated by the perihel data
     'and not changed. It is allways relative to the original 
@@ -58,7 +58,7 @@ Public Interface IStar
     'is regarded as a two-body problem
     'with the mass of all other stars in the origin
     'of the coordinate system
-    Property TotalMassOfOtherStars As Decimal
+    Property TotalMassOfOtherStars As Double
 
     'other properties
     Property StarColor As Brush
@@ -68,10 +68,10 @@ Public Interface IStar
     'Iteration
     'this is the StepWidth set by the user
     'and used when iterating
-    Property ActualStepWidth As Decimal
+    Property ActualStepWidth As Double
     'this is a proposed stepwidth
     'that the movement and orbit is about what we expect
-    Property ProposedStepWidth As Decimal
+    Property ProposedStepWidth As Double
 
     'each star performs the iteration for its own movement
     'before starting the iteration, the parameters
@@ -113,8 +113,8 @@ Public Interface IStar
     Sub SetUserStartPosition(MousePosition As Point)
 
     'get the supervised data for each star/planet
-    Function GetEnergy() As Decimal
-    Function GetAngularMomentum() As Decimal
+    Function GetEnergy() As Double
+    Function GetAngularMomentum() As Double
     Function GetPulse() As ClsVector
 
 End Interface

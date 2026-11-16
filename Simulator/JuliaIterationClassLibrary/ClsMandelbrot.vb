@@ -21,7 +21,7 @@ Public Class ClsMandelbrot
     'Iteration Parameter
     Private Zi As ClsComplexNumber
     Private Shadows Steps As Integer
-    Private Radius As Decimal
+    Private Radius As Double
     Private ColorIndex As Double
     Private MyBrush As Brush
 
@@ -63,14 +63,14 @@ Public Class ClsMandelbrot
         If MyN = 2 Then
 
             'Size of the Mandelbrot set in case MyN = 2
-            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-2), CDec(0.6)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.3), CDec(1.3)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDbl(-2), CDbl(0.6)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDbl(-1.3), CDbl(1.3)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         Else
 
             'centered
-            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+            MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
         End If
 
         MyActualXRange = MyXValueParameter.Range
@@ -98,7 +98,7 @@ Public Class ClsMandelbrot
         Zi.X = 0
         Zi.Y = 0
 
-        Radius = CDec(Math.Pow(2, 1 / (MyN - 1)))
+        Radius = CDbl(Math.Pow(2, 1 / (MyN - 1)))
 
         Do Until (Zi.AbsoluteValue > Radius) Or (Steps > MaxSteps)
 

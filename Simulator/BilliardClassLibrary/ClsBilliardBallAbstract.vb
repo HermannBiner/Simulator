@@ -27,18 +27,18 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected MyIsProtocol As Boolean
 
     'form of the BilliardTable
-    Protected MyA As Decimal
-    Protected MyB As Decimal
+    Protected MyA As Double
+    Protected MyB As Double
 
     'The class for general mathematical Calculations
     Protected Mathhelper As ClsMathHelperAngles
 
     'Parameter that defines the actual hit point
     'see mathematical documentation
-    Protected T As Decimal
+    Protected T As Double
 
     'This is the angle between the actual moving-direction and the positive x-axis
-    Protected Phi As Decimal
+    Protected Phi As Double
 
     'Properties of the Ball
     Protected MyColor As Brush
@@ -51,8 +51,8 @@ Public MustInherit Class ClsBilliardBallAbstract
     Protected Const p As Integer = 2
 
     'StartParameters
-    Protected MyStartParameter As Decimal
-    Protected MyStartAngle As Decimal
+    Protected MyStartParameter As Double
+    Protected MyStartAngle As Double
 
     'Start Position of the Ball, set by the User
     Protected UserStartposition As ClsMathpoint
@@ -68,7 +68,7 @@ Public MustInherit Class ClsBilliardBallAbstract
     'Startpoint of the actual part of the Orbit
     Protected Startpoint As New ClsMathpoint
     'Parameter of the next Endpoint of the actual part of the Orbit
-    Protected NextT As Decimal
+    Protected NextT As Double
     'and the according EndPoint
     Protected Endpoint As New ClsMathpoint
 
@@ -119,14 +119,14 @@ Public MustInherit Class ClsBilliardBallAbstract
         End Set
     End Property
 
-    WriteOnly Property A As Decimal Implements IBilliardball.A
-        Set(value As Decimal)
+    WriteOnly Property A As Double Implements IBilliardball.A
+        Set(value As Double)
             MyA = value
         End Set
     End Property
 
-    WriteOnly Property B As Decimal Implements IBilliardball.B
-        Set(value As Decimal)
+    WriteOnly Property B As Double Implements IBilliardball.B
+        Set(value As Double)
             MyB = value
         End Set
     End Property
@@ -185,16 +185,16 @@ Public MustInherit Class ClsBilliardBallAbstract
         Endpoint = New ClsMathpoint(0, 0)
     End Sub
 
-    MustOverride Property Startparameter As Decimal Implements IBilliardball.Startparameter
+    MustOverride Property Startparameter As Double Implements IBilliardball.Startparameter
 
-    MustOverride WriteOnly Property Startangle As Decimal Implements IBilliardball.Startangle
+    MustOverride WriteOnly Property Startangle As Double Implements IBilliardball.Startangle
 
     Public MustOverride Sub IterationStep() Implements IBilliardball.IterationStep
 
-    Public MustOverride Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+    Public MustOverride Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Double _
         Implements IBilliardball.SetAndDrawUserStartposition
 
-    Public MustOverride Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+    Public MustOverride Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Double _
         Implements IBilliardball.SetAndDrawUserEndposition
 
     Public MustOverride Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair _
@@ -203,6 +203,6 @@ Public MustInherit Class ClsBilliardBallAbstract
     Public MustOverride Sub DrawFirstUserStartposition() _
         Implements IBilliardball.DrawFirstUserStartposition
 
-    Public MustOverride Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal _
+    Public MustOverride Function CalculateAlfa(t As Double, phi As Double) As Double _
         Implements IBilliardball.CalculateAlfa
 End Class

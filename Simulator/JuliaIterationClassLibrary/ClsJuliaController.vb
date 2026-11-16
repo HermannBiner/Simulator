@@ -237,27 +237,27 @@ Public Class ClsJuliaController
     Public Sub SetDelta()
         With MyForm
 
-            Dim DeltaX As Decimal
-            Dim DeltaY As Decimal
+            Dim DeltaX As Double
+            Dim DeltaY As Double
 
-            If IsNumeric(.TxtXMax.Text) And IsNumeric(.TxtXMin.Text) Then
-                .LblDeltaX.Text = "Delta = " & (CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtXMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtXMin.Text) Then
+                .LblDeltaX.Text = "Delta = " & (CDbl(.TxtXMax.Text) - CDbl(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
                 If DS.IsMandelbrot Then
                     'For the Mandelbrotset, we show the Midpoint of the Selection
                     'and transfer it to c = a + ib
-                    DeltaX = CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)
-                    .TxtA.Text = (CDec(.TxtXMin.Text) + DeltaX / 2).ToString(CultureInfo.CurrentCulture)
+                    DeltaX = CDbl(.TxtXMax.Text) - CDbl(.TxtXMin.Text)
+                    .TxtA.Text = (CDbl(.TxtXMin.Text) + DeltaX / 2).ToString(CultureInfo.CurrentCulture)
                 Else
                     'TxtA is not changed
                 End If
-                If IsNumeric(.TxtYMax.Text) And IsNumeric(.TxtYMin.Text) Then
-                    .LblDeltaY.Text = "Delta = " & (CDec(.TxtYMax.Text) - CDec(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
+                If ClsNumericCheck.IsFiniteNumber(.TxtYMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtYMin.Text) Then
+                    .LblDeltaY.Text = "Delta = " & (CDbl(.TxtYMax.Text) - CDbl(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
                     If DS.IsMandelbrot Then
-                        DeltaY = CDec(.TxtYMax.Text) - CDec(.TxtYMin.Text)
-                        .TxtB.Text = (CDec(.TxtYMin.Text) + DeltaY / 2).ToString(CultureInfo.CurrentCulture)
+                        DeltaY = CDbl(.TxtYMax.Text) - CDbl(.TxtYMin.Text)
+                        .TxtB.Text = (CDbl(.TxtYMin.Text) + DeltaY / 2).ToString(CultureInfo.CurrentCulture)
 
                         'The selection of a+ib is stored to Mandelbrot.C
-                        StoredC = New ClsComplexNumber(CDec(.TxtA.Text), CDec(.TxtB.Text))
+                        StoredC = New ClsComplexNumber(CDbl(.TxtA.Text), CDbl(.TxtB.Text))
                     End If
                 End If
             End If
@@ -331,8 +331,8 @@ Public Class ClsJuliaController
             If IsUserDataOK() And IsCParameterOK() Then
 
                 With DS
-                    .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
-                    .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
+                    .ActualXRange = New ClsInterval(CDbl(MyForm.TxtXMin.Text), CDbl(MyForm.TxtXMax.Text))
+                    .ActualYRange = New ClsInterval(CDbl(MyForm.TxtYMin.Text), CDbl(MyForm.TxtYMax.Text))
                     DiagramAreaSelector.UserXRange = .ActualXRange
                     DiagramAreaSelector.UserYRange = .ActualYRange
                     DS.C = New ClsComplexNumber(CDbl(MyForm.TxtA.Text), CDbl(MyForm.TxtB.Text))

@@ -14,7 +14,7 @@ Public Class ClsGeneralParameter
 
     'The definition interval of the parameter
     Private MyRange As ClsInterval
-    Private MyDefaultValue As Decimal
+    Private MyDefaultValue As Double
     Private MyTypeOfParameter As TypeOfParameterEnum
 
     Public Enum TypeOfParameterEnum
@@ -31,7 +31,7 @@ Public Class ClsGeneralParameter
         MyDefaultValue = 0
     End Sub
 
-    Public Sub New(ID As Integer, Name As String, Range As ClsInterval, TypeOfParameter As TypeOfParameterEnum, DefaultValue As Decimal)
+    Public Sub New(ID As Integer, Name As String, Range As ClsInterval, TypeOfParameter As TypeOfParameterEnum, DefaultValue As Double)
         MyID = ID
         MyName = Name
         MyRange = Range
@@ -61,8 +61,8 @@ Public Class ClsGeneralParameter
         End Set
     End Property
 
-    Property DefaultValue As Decimal
-        Set(value As Decimal)
+    Property DefaultValue As Double
+        Set(value As Double)
             MyDefaultValue = value
         End Set
         Get

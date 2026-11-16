@@ -23,7 +23,7 @@ Public Class ClsHistogramController
     Private IterationStatus As ClsDynamics.EnIterationStatus
 
     'Actual value of the iteration
-    Private x As Decimal
+    Private x As Double
 
     'How many times does the iterated value hit a small interval?
     'NumberOfHits is an array if those intervals
@@ -163,8 +163,8 @@ Public Class ClsHistogramController
             If IsUserDataOK() Then
 
                 'Set Ds Parameters
-                DS.ParameterA = CDec(MyForm.TxtParameter.Text)
-                x = CDec(MyForm.TxtStartValue.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameter.Text)
+                x = CDbl(MyForm.TxtStartValue.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
 
                 If DS.IsBehaviourChaotic() Then

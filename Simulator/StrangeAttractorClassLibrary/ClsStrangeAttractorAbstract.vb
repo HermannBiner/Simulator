@@ -19,19 +19,19 @@ Public MustInherit Class ClsStrangeAttractorAbstract
 
     Protected MyDSParameter As ClsGeneralParameter 'Definition
 
-    Protected MyDSParameterValue As Decimal 'Value
+    Protected MyDSParameterValue As Double 'Value
 
 
     'Constellat ions
     Protected MyStartPointSets As List(Of ClsPointSet)
 
     'Iteration
-    Protected MyStepWidth As Decimal
+    Protected MyStepWidth As Double
 
     Protected MyMathInterval As ClsInterval
 
     'SplitPoints
-    Protected MySplitpoints As List(Of Decimal)
+    Protected MySplitpoints As List(Of Double)
 
     'Iteration
     Protected MyActualMathPoint As ClsMathpoint
@@ -63,20 +63,20 @@ Public MustInherit Class ClsStrangeAttractorAbstract
         End Get
     End Property
 
-    Property DSParameterValue As Decimal Implements IStrangeAttractor.DSParameterValue
+    Property DSParameterValue As Double Implements IStrangeAttractor.DSParameterValue
         Get
             DSParameterValue = MyDSParameterValue
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyDSParameterValue = value
         End Set
     End Property
 
-    Property StepWidth As Decimal Implements IStrangeAttractor.StepWidth
+    Property StepWidth As Double Implements IStrangeAttractor.StepWidth
         Get
             StepWidth = MyStepWidth
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyStepWidth = value
         End Set
     End Property
@@ -87,7 +87,7 @@ Public MustInherit Class ClsStrangeAttractorAbstract
         End Get
     End Property
 
-    ReadOnly Property Splitpoints As List(Of Decimal) Implements IStrangeAttractor.Splitpoints
+    ReadOnly Property Splitpoints As List(Of Double) Implements IStrangeAttractor.Splitpoints
         Get
             Splitpoints = MySplitpoints
         End Get

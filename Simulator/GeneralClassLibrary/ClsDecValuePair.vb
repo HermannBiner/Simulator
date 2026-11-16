@@ -5,30 +5,30 @@
 
 Public Class ClsDecValuePair
 
-    Private MyX As Decimal
-    Private MyY As Decimal
+    Private MyX As Double
+    Private MyY As Double
 
-    Public Sub New(X As Decimal, Y As Decimal)
+    Public Sub New(X As Double, Y As Double)
 
         MyX = X
         MyY = Y
 
     End Sub
 
-    Property X As Decimal
+    Property X As Double
         Get
             X = MyX
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyX = value
         End Set
     End Property
 
-    Property Y As Decimal
+    Property Y As Double
         Get
             Y = MyY
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyY = value
         End Set
     End Property

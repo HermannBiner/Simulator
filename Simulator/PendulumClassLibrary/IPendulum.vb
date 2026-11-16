@@ -58,7 +58,7 @@ Public Interface IPendulum
     ReadOnly Property StartEnergyRange As ClsInterval
 
     'Calculate value od the additional Paremeter by the Trackbar Value
-    Function GetAddParameterValue(TbrValue As Integer) As Decimal
+    Function GetAddParameterValue(TbrValue As Integer) As Double
 
     Sub PrepareDiagram()
 
@@ -74,7 +74,7 @@ Public Interface IPendulum
 
     Sub SetAdditionalParameters()
 
-    Function GetEnergy() As Decimal
+    Function GetEnergy() As Double
 
     Sub IterationStep(IsTestmode As Boolean)
 

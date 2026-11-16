@@ -11,18 +11,18 @@ Public Class ClsLinear
     'see math. doc.
 
     'the real Eigenvalue
-    Private Lambda As Decimal
+    Private Lambda As Double
     'if Beta = 0, then the second real Eigenvalue
     'if Beta <> 0, then the real part of the complex Eigenvalue
     'and in that case must be Delta = Alfa
-    Private Alfa As Decimal
+    Private Alfa As Double
     'if Beta <> 0, then the imaginary part of the complex Eigenvalue
-    Private Beta As Decimal
+    Private Beta As Double
     'if Beta <> 0, then Delta = Alfa
     'else: Delta the third real Eigenvalue
-    Private Delta As Decimal
+    Private Delta As Double
     'Phi is the angle of the rotation
-    Private Phi As Decimal
+    Private Phi As Double
 
     'PointConstellations
     Private Hexagon As ClsPointSet
@@ -42,7 +42,7 @@ Public Class ClsLinear
 
         'Default step width: the bifurcation diagram uses it
         '0.005 is the proposed step width of the start point sets
-        MyStepWidth = CDec(0.005)
+        MyStepWidth = CDbl(0.005)
 
         MyMathInterval = New ClsInterval(-10, 10)
 
@@ -52,11 +52,11 @@ Public Class ClsLinear
 
 
         'not used at the moment
-        MySplitpoints = New List(Of Decimal)
+        MySplitpoints = New List(Of Double)
 
-        MyViewCorrection.Component(0) = CDec(0)
-        MyViewCorrection.Component(1) = CDec(0)
-        MyViewCorrection.Component(2) = CDec(0)
+        MyViewCorrection.Component(0) = CDbl(0)
+        MyViewCorrection.Component(1) = CDbl(0)
+        MyViewCorrection.Component(2) = CDbl(0)
 
     End Sub
 
@@ -69,14 +69,14 @@ Public Class ClsLinear
         Hexagon.AddPoint(New ClsIterationPoint(3, 1, 10, Brushes.LightGreen))
         Hexagon.AddPoint(New ClsIterationPoint(4, 4, 10, Brushes.Orange))
         Hexagon.AddPoint(New ClsIterationPoint(5, 5, 10, Brushes.Red))
-        Hexagon.ProposedStepWidth = CDec(0.005)
+        Hexagon.ProposedStepWidth = CDbl(0.005)
         MyStartPointSets.Add(Hexagon)
 
         'Triangle
         Triangle.AddPoint(New ClsIterationPoint(5, 5, 10, Brushes.Green))
         Triangle.AddPoint(New ClsIterationPoint(1, 3, 10, Brushes.Blue))
         Triangle.AddPoint(New ClsIterationPoint(3, 1, 10, Brushes.Red))
-        Triangle.ProposedStepWidth = CDec(0.005)
+        Triangle.ProposedStepWidth = CDbl(0.005)
         MyStartPointSets.Add(Triangle)
 
 
@@ -84,21 +84,21 @@ Public Class ClsLinear
 
     Public Overrides Sub SetIterationParameters()
         'a sector for the DSParameter
-        Dim Sector As Decimal
-        Sector = CDec(MyDSParameter.Range.IntervalWidth / 2)
+        Dim Sector As Double
+        Sector = CDbl(MyDSParameter.Range.IntervalWidth / 2)
         Select Case True
             Case DSParameterValue <= Sector
-                Lambda = CDec(0.985 + 0.01 * DSParameterValue / Sector)
-                Alfa = CDec(0.985 + 0.02 * DSParameterValue / Sector)
-                Delta = CDec(0.985 + 0.03 * DSParameterValue / Sector)
+                Lambda = CDbl(0.985 + 0.01 * DSParameterValue / Sector)
+                Alfa = CDbl(0.985 + 0.02 * DSParameterValue / Sector)
+                Delta = CDbl(0.985 + 0.03 * DSParameterValue / Sector)
                 Beta = 0
             Case Else
-                Lambda = CDec(0.985 + 0.01 * (DSParameterValue - Sector) / Sector)
-                Phi = CDec(MyStepWidth * Math.PI)
-                Dim a As Decimal = CDec(0.985 + 0.02 * (DSParameterValue - Sector) / Sector)
-                Alfa = CDec(a * Math.Cos(Phi))
+                Lambda = CDbl(0.985 + 0.01 * (DSParameterValue - Sector) / Sector)
+                Phi = CDbl(MyStepWidth * Math.PI)
+                Dim a As Double = CDbl(0.985 + 0.02 * (DSParameterValue - Sector) / Sector)
+                Alfa = CDbl(a * Math.Cos(Phi))
                 Delta = Alfa
-                Beta = CDec(a * Math.Sin(Phi))
+                Beta = CDbl(a * Math.Sin(Phi))
         End Select
 
     End Sub
@@ -112,7 +112,7 @@ Public Class ClsLinear
             'therefore, that is sopped if the values are out of the range
 
             'Y is calculated with the old X
-            Dim OldX As Decimal = .X
+            Dim OldX As Double = .X
 
             .X = Math.Max(-DSParameter.Range.IntervalWidth * 2,
                           Math.Min(DSParameter.Range.IntervalWidth * 2, Alfa * OldX - Beta * .Y))

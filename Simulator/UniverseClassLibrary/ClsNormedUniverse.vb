@@ -28,9 +28,9 @@ Public Class ClsNormedUniverse
         MyVelocityParameter = New ClsGeneralParameter(2, "Velocity",
                     New ClsInterval(-1, 1), ClsGeneralParameter.TypeOfParameterEnum.Variable)
         MyMassParameter = New ClsGeneralParameter(3, "Mass",
-                    New ClsInterval(CDec(0.00001), CDec(2)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+                    New ClsInterval(CDbl(0.00001), CDbl(2)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
-        MyMaxZoom = CDec(1.5)
+        MyMaxZoom = CDbl(1.5)
 
         IA1 = New ClsStarConstellation
         IA2 = New ClsStarConstellation
@@ -75,25 +75,25 @@ Public Class ClsNormedUniverse
     Protected Overrides Sub CreateConstellations()
 
         IA1.Name = "IA1"
-        IA1.ProposedStepWidth = CDec(0.01)
+        IA1.ProposedStepWidth = CDbl(0.01)
         IA1.VFactor = 100
         IA2.Name = "IA2"
-        IA2.ProposedStepWidth = CDec(0.03)
+        IA2.ProposedStepWidth = CDbl(0.03)
         IA2.VFactor = 100
         IA3.Name = "IA3"
-        IA3.ProposedStepWidth = CDec(0.01)
+        IA3.ProposedStepWidth = CDbl(0.01)
         IA3.VFactor = 100
         IB1.Name = "IB1"
-        IB1.ProposedStepWidth = CDec(0.01)
+        IB1.ProposedStepWidth = CDbl(0.01)
         IB1.VFactor = 100
         IB2.Name = "IB2"
-        IB2.ProposedStepWidth = CDec(0.01)
+        IB2.ProposedStepWidth = CDbl(0.01)
         IB2.VFactor = 100
         IIC1.Name = "IIC1"
-        IIC1.ProposedStepWidth = CDec(0.01)
+        IIC1.ProposedStepWidth = CDbl(0.01)
         IIC1.VFactor = 100
         Satellite.Name = LM.GetString("Satellite")
-        Satellite.ProposedStepWidth = CDec(0.02)
+        Satellite.ProposedStepWidth = CDbl(0.02)
         Satellite.VFactor = 100
 
         FillConstellation(IA1)
@@ -137,33 +137,33 @@ Public Class ClsNormedUniverse
             'Velocity
             Select Case True
                 Case LocConstellation Is IA1
-                    ParameterTupel.X = CDec(0.3471168881 * .Tau)
-                    ParameterTupel.Y = CDec(0.5327249454 * .Tau)
+                    ParameterTupel.X = CDbl(0.3471168881 * .Tau)
+                    ParameterTupel.Y = CDbl(0.5327249454 * .Tau)
                     IA1.AddStar(Star1)
                 Case LocConstellation Is IA2
-                    ParameterTupel.X = CDec(0.3068934205 * .Tau)
-                    ParameterTupel.Y = CDec(0.125506567 * .Tau)
+                    ParameterTupel.X = CDbl(0.3068934205 * .Tau)
+                    ParameterTupel.Y = CDbl(0.125506567 * .Tau)
                     IA2.AddStar(Star1)
                 Case LocConstellation Is IA3
-                    ParameterTupel.X = CDec(0.6150407229 * .Tau)
-                    ParameterTupel.Y = CDec(0.5226158545 * .Tau)
+                    ParameterTupel.X = CDbl(0.6150407229 * .Tau)
+                    ParameterTupel.Y = CDbl(0.5226158545 * .Tau)
                     IA3.AddStar(Star1)
                 Case LocConstellation Is IB1
-                    ParameterTupel.X = CDec(0.4644451728 * .Tau)
-                    ParameterTupel.Y = CDec(0.3960600146 * .Tau)
+                    ParameterTupel.X = CDbl(0.4644451728 * .Tau)
+                    ParameterTupel.Y = CDbl(0.3960600146 * .Tau)
                     IB1.AddStar(Star1)
                 Case LocConstellation Is IB2
-                    ParameterTupel.X = CDec(0.4059155671 * .Tau)
-                    ParameterTupel.Y = CDec(0.230163126 * .Tau)
+                    ParameterTupel.X = CDbl(0.4059155671 * .Tau)
+                    ParameterTupel.Y = CDbl(0.230163126 * .Tau)
                     IB2.AddStar(Star1)
                 Case LocConstellation Is IIC1
-                    ParameterTupel.X = CDec(0.2827020949 * .Tau)
-                    ParameterTupel.Y = CDec(0.3272089716 * .Tau)
+                    ParameterTupel.X = CDbl(0.2827020949 * .Tau)
+                    ParameterTupel.Y = CDbl(0.3272089716 * .Tau)
                     IIC1.AddStar(Star1)
                 Case Else
                     'Restricted Three-Body: Star 1
                     ParameterTupel.X = 0
-                    ParameterTupel.Y = CDec(0.8 * .Tau)
+                    ParameterTupel.Y = CDbl(0.8 * .Tau)
                     Satellite.AddStar(Star1)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
@@ -171,7 +171,7 @@ Public Class ClsNormedUniverse
             .ActualVelocity.Equals(ParameterTupel)
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.01)
+            .ProposedStepWidth = CDbl(0.01)
         End With
 
         Dim Star2 As New ClsNormedStar
@@ -195,35 +195,35 @@ Public Class ClsNormedUniverse
             'Velocity
             Select Case True
                 Case LocConstellation Is IA1
-                    ParameterTupel.X = CDec(0.3471168881 * .Tau)
-                    ParameterTupel.Y = CDec(0.5327249454 * .Tau)
+                    ParameterTupel.X = CDbl(0.3471168881 * .Tau)
+                    ParameterTupel.Y = CDbl(0.5327249454 * .Tau)
                     IA1.AddStar(Star2)
                 Case LocConstellation Is IA2
-                    ParameterTupel.X = CDec(0.3068934205 * .Tau)
-                    ParameterTupel.Y = CDec(0.125506567 * .Tau)
+                    ParameterTupel.X = CDbl(0.3068934205 * .Tau)
+                    ParameterTupel.Y = CDbl(0.125506567 * .Tau)
                     IA2.AddStar(Star2)
                 Case LocConstellation Is IA3
-                    ParameterTupel.X = CDec(0.6150407229 * .Tau)
-                    ParameterTupel.Y = CDec(0.5226158545 * .Tau)
+                    ParameterTupel.X = CDbl(0.6150407229 * .Tau)
+                    ParameterTupel.Y = CDbl(0.5226158545 * .Tau)
                     IA3.AddStar(Star2)
                 Case LocConstellation Is IB1
-                    ParameterTupel.X = CDec(0.4644451728 * .Tau)
-                    ParameterTupel.Y = CDec(0.3960600146 * .Tau)
+                    ParameterTupel.X = CDbl(0.4644451728 * .Tau)
+                    ParameterTupel.Y = CDbl(0.3960600146 * .Tau)
                     IB1.AddStar(Star2)
                 Case LocConstellation Is IB2
-                    ParameterTupel.X = CDec(0.4059155671 * .Tau)
-                    ParameterTupel.Y = CDec(0.230163126 * .Tau)
+                    ParameterTupel.X = CDbl(0.4059155671 * .Tau)
+                    ParameterTupel.Y = CDbl(0.230163126 * .Tau)
                     IB2.AddStar(Star2)
                 Case LocConstellation Is IIC1
-                    ParameterTupel.X = CDec(0.2827020949 * .Tau)
-                    ParameterTupel.Y = CDec(0.3272089716 * .Tau)
+                    ParameterTupel.X = CDbl(0.2827020949 * .Tau)
+                    ParameterTupel.Y = CDbl(0.3272089716 * .Tau)
                     IIC1.AddStar(Star2)
                 Case Else
                     'Restricted Three-Body: Star 2
-                    .ActualPosition.X = CDec(0.5)
+                    .ActualPosition.X = CDbl(0.5)
                     .OriginalMass = 2
                     ParameterTupel.X = 0
-                    ParameterTupel.Y = CDec(-0.4 * .Tau)
+                    ParameterTupel.Y = CDbl(-0.4 * .Tau)
                     Satellite.AddStar(Star2)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
@@ -231,7 +231,7 @@ Public Class ClsNormedUniverse
             .ActualVelocity.Equals(ParameterTupel)
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.01)
+            .ProposedStepWidth = CDbl(0.01)
         End With
 
         Dim Star3 As New ClsNormedStar
@@ -255,42 +255,42 @@ Public Class ClsNormedUniverse
             'Velocity
             Select Case True
                 Case LocConstellation Is IA1
-                    ParameterTupel.X = CDec(-2 * 0.3471168881 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.5327249454 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.3471168881 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.5327249454 * .Tau)
                     IA1.AddStar(Star3)
                 Case LocConstellation Is IA2
-                    ParameterTupel.X = CDec(-2 * 0.3068934205 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.125506567 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.3068934205 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.125506567 * .Tau)
                     IA2.AddStar(Star3)
                 Case LocConstellation Is IA3
-                    ParameterTupel.X = CDec(-2 * 0.6150407229 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.5226158545 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.6150407229 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.5226158545 * .Tau)
                     IA3.AddStar(Star3)
                 Case LocConstellation Is IB1
-                    ParameterTupel.X = CDec(-2 * 0.4644451728 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.3960600146 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.4644451728 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.3960600146 * .Tau)
                     IB1.AddStar(Star3)
                 Case LocConstellation Is IB2
-                    ParameterTupel.X = CDec(-2 * 0.4059155671 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.230163126 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.4059155671 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.230163126 * .Tau)
                     IB2.AddStar(Star3)
                 Case LocConstellation Is IIC1
-                    ParameterTupel.X = CDec(-2 * 0.2827020949 * .Tau)
-                    ParameterTupel.Y = CDec(-2 * 0.3272089716 * .Tau)
+                    ParameterTupel.X = CDbl(-2 * 0.2827020949 * .Tau)
+                    ParameterTupel.Y = CDbl(-2 * 0.3272089716 * .Tau)
                     IIC1.AddStar(Star3)
                 Case Else
                     'Restricted Three-Body: Satellite
                     .Name = LM.GetString("Satellite")
                     'Position
-                    ParameterTupel.X = CDec(-0.8)
+                    ParameterTupel.X = CDbl(-0.8)
                     ParameterTupel.Y = 0
                     .OriginalStartPosition.Equal(ParameterTupel)
                     .UserStartPosition.Equal(ParameterTupel)
                     .ActualPosition.Equal(ParameterTupel)
-                    .OriginalMass = CDec(0.0001)
+                    .OriginalMass = CDbl(0.0001)
                     'Velocity
-                    ParameterTupel.X = CDec(0 * .Tau)
-                    ParameterTupel.Y = CDec(0.1 * .Tau)
+                    ParameterTupel.X = CDbl(0 * .Tau)
+                    ParameterTupel.Y = CDbl(0.1 * .Tau)
                     Satellite.AddStar(Star3)
             End Select
             .OriginalStartVelocity.Equal(ParameterTupel)
@@ -298,7 +298,7 @@ Public Class ClsNormedUniverse
             .ActualVelocity.Equals(ParameterTupel)
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.01)
+            .ProposedStepWidth = CDbl(0.01)
         End With
 
     End Sub

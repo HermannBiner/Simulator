@@ -19,7 +19,7 @@ Public Class ClsCheckUserData
     Private MyTxtB As TextBox
 
     'User defined value
-    Private MyX As Decimal
+    Private MyX As Double
 
     'The TargetInterval
     Private MyTargetRange As ClsInterval
@@ -46,8 +46,8 @@ Public Class ClsCheckUserData
         End Set
     End Property
 
-    WriteOnly Property X As Decimal
-        Set(value As Decimal)
+    WriteOnly Property X As Double
+        Set(value As Double)
             MyX = value
         End Set
     End Property
@@ -71,7 +71,7 @@ Public Class ClsCheckUserData
         MyTargetRange = TargetInterval
     End Sub
 
-    Public Sub New(X As Decimal, TargetInterval As ClsInterval)
+    Public Sub New(X As Double, TargetInterval As ClsInterval)
         LM = ClsLanguageManager.LM
         MyX = X
         MyTargetRange = TargetInterval
@@ -83,7 +83,7 @@ Public Class ClsCheckUserData
 
         If MyCheckIsNumeric.IsInputValid() Then
 
-            Dim X As Decimal = MyCheckIsNumeric.NumericValue
+            Dim X As Double = MyCheckIsNumeric.NumericValue
 
             If MyTargetRange.IsNumberInInterval(X) Then
                 Return True

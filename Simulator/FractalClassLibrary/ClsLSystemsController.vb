@@ -524,11 +524,11 @@ Public Class ClsLSystemsController
             With ActualSystem
                 .Name = MyForm.TxtName.Text
                 .Axiom = MyForm.TxtAxiom.Text
-                .ScaleFactor = CDec(MyForm.TxtScaleFactor.Text)
+                .ScaleFactor = CDbl(MyForm.TxtScaleFactor.Text)
                 .AngleLeft = CInt(MyForm.TxtAngleLeft.Text)
                 .AngleRight = CInt(MyForm.TxtAngleRight.Text)
                 .Color = CInt(MyForm.CboColor.SelectedItem.ToString.Split(" ")(0))
-                .StartLength = CDec(MyForm.TxtStartLength.Text)
+                .StartLength = CDbl(MyForm.TxtStartLength.Text)
                 Select Case MyForm.CboScaling.SelectedIndex
                     Case 0
                         .Scaling = ClsLSystemsController.EnScaling.ByIteration
@@ -548,8 +548,8 @@ Public Class ClsLSystemsController
                         .IsBudding = False
                         .Type = ClsLSystem.EnLSystemType.Dragon
                 End Select
-                .StartPositionX = CDec(MyForm.TxtX.Text)
-                .StartPositionY = CDec(MyForm.TxtY.Text)
+                .StartPositionX = CDbl(MyForm.TxtX.Text)
+                .StartPositionY = CDbl(MyForm.TxtY.Text)
 
             End With
 

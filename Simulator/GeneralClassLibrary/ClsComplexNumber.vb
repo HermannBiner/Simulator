@@ -138,7 +138,7 @@ Public Class ClsComplexNumber
     Private Function Divide(c As ClsComplexNumber) As ClsComplexNumber
 
         Dim Nominator = New ClsComplexNumber(c.X * MyX + c.Y * MyY, c.X * MyY - c.Y * MyX)
-        Dim Divisor As Decimal = CDec(Math.Pow(c.AbsoluteValue, 2))
+        Dim Divisor As Double = CDbl(Math.Pow(c.AbsoluteValue, 2))
         Return Nominator.Stretch(1 / Divisor)
 
     End Function

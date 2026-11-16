@@ -7,15 +7,15 @@ Public Class ClsEllipseBilliardTable
     Public Sub New()
 
         'Default
-        MyC = CDec(0.8)
-        MyA = CDec(0.99)
+        MyC = CDbl(0.8)
+        MyA = CDbl(0.99)
         MyB = MyA * MyC
 
         'Set specific parameters and ranges
-        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(Math.PI * 2)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 2))
-        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDec(0.001), CDec(3.13)),
-                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(0.001))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDbl(Math.PI * 2)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 2))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDbl(0.001), CDbl(3.13)),
+                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(0.001))
 
         MyValueParameterList.Add(MyTValueParameter)
         MyValueParameterList.Add(MyAlfaValueParameter)
@@ -53,22 +53,22 @@ Public Class ClsEllipseBilliardTable
         Return BilliardBall
     End Function
 
-    Public Overrides Property C As Decimal
+    Public Overrides Property C As Double
         Get
             C = MyC
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyC = value
 
             If MyC <= 1 Then
 
                 'a > b, , for better visibility a = 0.99 instead of 1
-                MyA = CDec(0.99)
+                MyA = CDbl(0.99)
                 MyB = MyC * MyA
             Else
 
                 'b > a, for better visibility b = 0.99 instead of 1
-                MyB = CDec(0.99)
+                MyB = CDbl(0.99)
                 MyA = MyB / MyC
             End If
         End Set
@@ -86,15 +86,15 @@ Public Class ClsEllipseBilliardTable
             Dim F1 As New ClsMathpoint
             Dim F2 As New ClsMathpoint
 
-            Dim f As Decimal
+            Dim f As Double
             If MyA > B Then
-                f = CDec(Math.Sqrt(MyA * MyA - B * B))
+                f = CDbl(Math.Sqrt(MyA * MyA - B * B))
                 F1.X = f
                 F1.Y = 0
                 F2.X = -f
                 F2.Y = 0
             Else
-                f = CDec(Math.Sqrt(B * B - MyA * MyA))
+                f = CDbl(Math.Sqrt(B * B - MyA * MyA))
                 F1.X = 0
                 F1.Y = f
                 F2.X = 0

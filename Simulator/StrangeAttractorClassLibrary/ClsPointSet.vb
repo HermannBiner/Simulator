@@ -6,7 +6,7 @@
 Public Class ClsPointSet
 
     Private MyName As String
-    Private MyProposedStepWidth As Decimal
+    Private MyProposedStepWidth As Double
     Private MyIterationPoints As List(Of ClsIterationPoint)
 
     Public Sub New(Name As String)
@@ -20,11 +20,11 @@ Public Class ClsPointSet
         End Get
     End Property
 
-    Property ProposedStepWidth As Decimal
+    Property ProposedStepWidth As Double
         Get
             ProposedStepWidth = MyProposedStepWidth
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyProposedStepWidth = value
         End Set
     End Property

@@ -10,10 +10,10 @@ Public Class ClsRealThreadPendulum
 
     'These are the parameters according to the mathematical documentation
     'first the y-substitution component(1)
-    Private u As Decimal
+    Private u As Double
 
     'and the derivated y' substitution component(2)
-    Private v As Decimal
+    Private v As Double
 
     'The Runge Kutta Parameters for u
     Private ReadOnly k As New ClsNTupel(3)
@@ -35,16 +35,16 @@ Public Class ClsRealThreadPendulum
 
                 'the numerical equation is described in the mathematical documentation
                 k.Component(0) = MyH * v
-                l.Component(0) = -MyH * CDec(Math.Sin(u))
+                l.Component(0) = -MyH * CDbl(Math.Sin(u))
 
                 k.Component(1) = MyH * (v + l.Component(0) / 2)
-                l.Component(1) = MyH * (-CDec(Math.Sin(u + k.Component(0) / 2)))
+                l.Component(1) = MyH * (-CDbl(Math.Sin(u + k.Component(0) / 2)))
 
                 k.Component(2) = MyH * (v + l.Component(1) / 2)
-                l.Component(2) = MyH * (-CDec(Math.Sin(u + k.Component(1) / 2)))
+                l.Component(2) = MyH * (-CDbl(Math.Sin(u + k.Component(1) / 2)))
 
                 k.Component(3) = MyH * (v + l.Component(2))
-                l.Component(3) = MyH * (-CDec(Math.Sin(u + k.Component(2))))
+                l.Component(3) = MyH * (-CDbl(Math.Sin(u + k.Component(2))))
 
                 .Component(1) = u + (k.Component(0) + 2 * k.Component(1) + 2 * k.Component(2) + k.Component(3)) / 6
                 .Component(2) = v + (l.Component(0) + 2 * l.Component(1) + 2 * l.Component(2) + l.Component(3)) / 6
@@ -52,7 +52,7 @@ Public Class ClsRealThreadPendulum
             Next
 
             'the Component(0) holds the "time" t with 2*pi period
-            .Component(0) = .Component(0) Mod CDec(2 * Math.PI)
+            .Component(0) = .Component(0) Mod CDbl(2 * Math.PI)
 
         End With
 

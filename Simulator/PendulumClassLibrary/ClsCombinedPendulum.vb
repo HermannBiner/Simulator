@@ -14,15 +14,15 @@ Public Class ClsCombinedPendulum
 
     'Frequency of the Spring Pendulum alone
     'set as additional Parameter
-    Private Omega As Decimal
+    Private Omega As Double
 
     Private Origin As ClsMathpoint
 
     'Length of unstressed Spring - l0 in math.doc.
-    Const L0 As Decimal = CDec(0.5)
+    Const L0 As Double = CDbl(0.5)
 
     'Minimal length of the spring pendulum
-    Const Lmin As Decimal = CDec(0.05)
+    Const Lmin As Double = CDbl(0.05)
 
     Public Sub New()
 
@@ -47,13 +47,13 @@ Public Class ClsCombinedPendulum
         'Inizialize all parameters
         'ID is the Number of the Label in the Pendulum Form
         'L
-        ValueParameter(0) = New ClsGeneralParameter(1, "L", New ClsInterval(Lmin, CDec(2 - Y0)),
+        ValueParameter(0) = New ClsGeneralParameter(1, "L", New ClsInterval(Lmin, CDbl(2 - Y0)),
                                                     ClsGeneralParameter.TypeOfParameterEnum.Variable, L0)
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'Phi
-        ValueParameter(1) = New ClsGeneralParameter(2, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 6))
+        ValueParameter(1) = New ClsGeneralParameter(2, "Phi", New ClsInterval(-CDbl(Math.PI), CDbl(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 6))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'We have two variable parameters: L = MyVariables.Components(0), Phi = MyVariables.components(1)
@@ -67,10 +67,10 @@ Public Class ClsCombinedPendulum
 
     'SECTOR CALCULATION AND DRAWING
 
-    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
+    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Double
 
         'This is to adjust the value of TrbAdditionalParameter
-        Dim Temp As Decimal = AddParameter
+        Dim Temp As Double = AddParameter
         Return Temp
 
     End Function
@@ -81,14 +81,14 @@ Public Class ClsCombinedPendulum
         Dim i As Integer
 
         'Parameters of the polar coordinates
-        Dim r As Decimal
-        Dim t As Decimal
+        Dim r As Double
+        Dim t As Double
         Dim NumberOfSteps As Integer = 500
 
         For i = 0 To NumberOfSteps
-            t = ClsMathHelperPendulum.AngleInMinusPiAndPi(CDec(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
-            r = L0 + CDec(g * Math.Cos(t) / Math.Pow(Omega, 2))
-            MyBmpGraphics.DrawPoint(New ClsMathpoint(r * CDec(Math.Sin(t)), Y0 - r * CDec(Math.Cos(t))), Brushes.Red, 1)
+            t = ClsMathHelperPendulum.AngleInMinusPiAndPi(CDbl(-Math.PI + i * 2 * Math.PI / NumberOfSteps))
+            r = L0 + CDbl(g * Math.Cos(t) / Math.Pow(Omega, 2))
+            MyBmpGraphics.DrawPoint(New ClsMathpoint(r * CDbl(Math.Sin(t)), Y0 - r * CDbl(Math.Cos(t))), Brushes.Red, 1)
         Next
 
         'x-Axis
@@ -113,7 +113,7 @@ Public Class ClsCombinedPendulum
 
             'Pendulum
             .DrawLine(Origin, Position1, MyColor, 2)
-            .FillCircle(Position1, CDec(0.02), MyColor)
+            .FillCircle(Position1, CDbl(0.02), MyColor)
 
         End With
 
@@ -123,8 +123,8 @@ Public Class ClsCombinedPendulum
     Protected Overrides Sub SetPosition()
         'See math. doc.
         With Position1
-            .X = MyCalculationVariables.Component(0) * CDec(Math.Sin(MyCalculationVariables.Component(1)))
-            .Y = -MyCalculationVariables.Component(0) * CDec(Math.Cos(MyCalculationVariables.Component(1))) + Y0
+            .X = MyCalculationVariables.Component(0) * CDbl(Math.Sin(MyCalculationVariables.Component(1)))
+            .Y = -MyCalculationVariables.Component(0) * CDbl(Math.Cos(MyCalculationVariables.Component(1))) + Y0
         End With
 
     End Sub
@@ -135,14 +135,14 @@ Public Class ClsCombinedPendulum
             Case TypeofPhaseportraitEnum.TorusOrCylinder
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": l, Phi. Tangent: l', Phi'"
                 UInterval = New ClsInterval(Lmin, 1)
-                VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                VInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi = 0, l, l'"
                 UInterval = New ClsInterval(Lmin, 2)
                 VInterval = New ClsInterval(-10, 10)
             Case Else 'independent
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: l, l'. Red: Phi, Phi'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
         End Select
 
@@ -151,7 +151,7 @@ Public Class ClsCombinedPendulum
     Protected Overrides Sub SetAdditionalParameters()
 
         Omega = GetAddParameterValue(MyAdditionalParameterValue)
-        Y0 = CDec(g / Math.Pow(Omega, 2) / (1 - L0))
+        Y0 = CDbl(g / Math.Pow(Omega, 2) / (1 - L0))
         Origin = New ClsMathpoint(0, Y0)
 
         If MyIsMainDS Then
@@ -164,11 +164,11 @@ Public Class ClsCombinedPendulum
 
     Protected Overrides Sub SetStartEnergyRange()
 
-        Dim Emin As Decimal
-        Dim Emax As Decimal
+        Dim Emin As Double
+        Dim Emax As Double
 
-        Emin = -CDec(Math.Pow(g / Omega, 2)) / 2
-        Emax = CDec(Math.Pow(Omega * (1 - Y0 - L0), 2)) / 2 + g * (L0 + 1 - Y0)
+        Emin = -CDbl(Math.Pow(g / Omega, 2)) / 2
+        Emax = CDbl(Math.Pow(Omega * (1 - Y0 - L0), 2)) / 2 + g * (L0 + 1 - Y0)
 
         MyStartEnergyRange = New ClsInterval(Emin, Emax)
 
@@ -186,11 +186,11 @@ Public Class ClsCombinedPendulum
             .Y = .Y - Y0
 
             'L
-            Dim LocL = Math.Min(ValueParameter(0).Range.B, CDec(Math.Sqrt(.X * .X + .Y * .Y)))
+            Dim LocL = Math.Min(ValueParameter(0).Range.B, CDbl(Math.Sqrt(.X * .X + .Y * .Y)))
             MyCalculationVariables.Component(0) = LocL
 
             'Phi
-            Dim Phi As Decimal = ClsMathHelperPendulum.GetAngle(.X, .Y)
+            Dim Phi As Double = ClsMathHelperPendulum.GetAngle(.X, .Y)
             Phi = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi)
 
             MyCalculationVariables.Component(1) = Phi
@@ -322,6 +322,7 @@ Public Class ClsCombinedPendulum
         v1 += d * (h1.Component(0) + 2 * h1.Component(1) + 2 * h1.Component(2) + h1.Component(3)) / 6
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
+        ClsNumericCheck.EnsureFinite(u1, v1, u2, v2)
 
         If u1 < Lmin Then
             u1 = Lmin
@@ -382,26 +383,26 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Protected Overrides Function GetEnergy() As Decimal
+    Protected Overrides Function GetEnergy() As Double
 
         'This routine protocols the total Energy of the double pendulum
         'to have a control that it is constant
         'if that is not the case, the error of Runge Kutta Method is too big
         'the Zero level of the potential energy is set to y = -1
-        Dim EKin As Decimal
-        Dim EPot As Decimal
-        Dim ESpring As Decimal
+        Dim EKin As Double
+        Dim EPot As Double
+        Dim ESpring As Double
 
         'we set as norm m = 1
         'kinetic energy of m: (v1^2 + l^2*v2^2)/2
-        EKin = CDec(Math.Pow(v1, 2) + Math.Pow(u1 * v2, 2)) / 2
+        EKin = CDbl(Math.Pow(v1, 2) + Math.Pow(u1 * v2, 2)) / 2
 
         'Potential Energy of m
-        EPot = g * (L0 - CDec(u1 * Math.Cos(u2)))
+        EPot = g * (L0 - CDbl(u1 * Math.Cos(u2)))
 
         'potential energy of Spring Pendulum: see math.doc.
         'Spring constant id D, MyOmega = SQRT(D/m) => D = MyOmega^2
-        ESpring = CDec(Math.Pow(Omega * (u1 - L0), 2)) / 2
+        ESpring = CDbl(Math.Pow(Omega * (u1 - L0), 2)) / 2
 
         Return EKin + EPot + ESpring
 
@@ -426,22 +427,22 @@ Public Class ClsCombinedPendulum
 
     End Sub
 
-    Private Function F1(LocX As ClsNTupel) As Decimal
+    Private Function F1(LocX As ClsNTupel) As Double
 
         'calculates next u1' = v1 = x.component(1)
         Return LocX.Component(1)
 
     End Function
 
-    Private Function G1(LocX As ClsNTupel) As Decimal
+    Private Function G1(LocX As ClsNTupel) As Double
 
-        Dim Temp As Decimal
+        Dim Temp As Double
 
 
         With LocX
             'an overflow is not caught here: it propagates to the controller, which stops the iteration
-            Temp = .Component(0) * CDec(Math.Pow(.Component(3), 2))
-            Temp += CDec(-Math.Pow(Omega, 2) * (.Component(0) - L0) + g * Math.Cos(.Component(2)))
+            Temp = .Component(0) * CDbl(Math.Pow(.Component(3), 2))
+            Temp += CDbl(-Math.Pow(Omega, 2) * (.Component(0) - L0) + g * Math.Cos(.Component(2)))
 
         End With
 
@@ -449,21 +450,21 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function F2(LocX As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Double
 
         'calculates next u2' = v2 = x.component(3)
         Return LocX.Component(3)
     End Function
 
-    Private Function G2(LocX As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Double
 
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
             'see math.doc: (-2*v2*v1-g*sinu2)/u1
             'and: u1 = l > 0
             'an overflow is not caught here: it propagates to the controller, which stops the iteration
-            Temp = (-2 * .Component(3) * .Component(1) - g * CDec(Math.Sin(.Component(2)))) / .Component(0)
+            Temp = (-2 * .Component(3) * .Component(1) - g * CDbl(Math.Sin(.Component(2)))) / .Component(0)
 
         End With
 
@@ -471,14 +472,14 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function G1Test(LocX As ClsNTupel) As Decimal
+    Private Function G1Test(LocX As ClsNTupel) As Double
 
         'This function corresponds to a simple Spring Pendulum (u1 = length)
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = -(.Component(0) - L0) * CDec(Math.Pow(Omega, 2))
+            Temp = -(.Component(0) - L0) * CDbl(Math.Pow(Omega, 2))
 
         End With
 
@@ -486,14 +487,14 @@ Public Class ClsCombinedPendulum
 
     End Function
 
-    Private Function G2Test(LocX As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Double
 
         'This function corresponds to a simple Thread Pendulum of length L0 (u2 = angle)
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(2))) / L0
+            Temp = -g * CDbl(Math.Sin(.Component(2))) / L0
 
         End With
 

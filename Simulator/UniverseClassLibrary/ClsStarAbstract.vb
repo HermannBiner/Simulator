@@ -30,8 +30,8 @@ Public MustInherit Class ClsStarAbstract
     'see interface IStar
 
     'Mass
-    Protected MyOriginalMass As Decimal
-    Protected MyUserMass As Decimal
+    Protected MyOriginalMass As Double
+    Protected MyUserMass As Double
 
     'Positions
     Protected MyOriginalStartPosition As ClsVector
@@ -52,7 +52,7 @@ Public MustInherit Class ClsStarAbstract
     Protected ActualPulse As ClsVector
 
     'To calculate the gravity point
-    Protected MyTotalMassOfOtherStars As Decimal
+    Protected MyTotalMassOfOtherStars As Double
 
     'Other
     Protected MyStarColor As Brush
@@ -60,14 +60,14 @@ Public MustInherit Class ClsStarAbstract
     Protected MySize As Integer
 
     'Iteration
-    Protected MyActualStepWidth As Decimal
-    Protected MyProposedStepWidth As Decimal
+    Protected MyActualStepWidth As Double
+    Protected MyProposedStepWidth As Double
 
     'Runge Kutta Parameters
-    Protected u1 As Decimal 'Position.X
-    Protected v1 As Decimal 'Velocity.X
-    Protected u2 As Decimal 'Position.Y
-    Protected v2 As Decimal 'Velocity.Y
+    Protected u1 As Double 'Position.X
+    Protected v1 As Double 'Velocity.X
+    Protected u2 As Double 'Position.Y
+    Protected v2 As Double 'Velocity.Y
 
     'And additional Parameters for Runge Kutta
     Protected ReadOnly z As ClsNTupel
@@ -166,20 +166,20 @@ Public MustInherit Class ClsStarAbstract
         End Set
     End Property
 
-    Property OriginalMass As Decimal Implements IStar.OriginalMass
+    Property OriginalMass As Double Implements IStar.OriginalMass
         Get
             OriginalMass = MyOriginalMass
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyOriginalMass = value
         End Set
     End Property
 
-    Property UserMass As Decimal Implements IStar.UserMass
+    Property UserMass As Double Implements IStar.UserMass
         Get
             UserMass = MyUserMass
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyUserMass = value
         End Set
     End Property
@@ -211,29 +211,29 @@ Public MustInherit Class ClsStarAbstract
         End Set
     End Property
 
-    Property ProposedStepWidth As Decimal Implements IStar.ProposedStepWidth
+    Property ProposedStepWidth As Double Implements IStar.ProposedStepWidth
         Get
             ProposedStepWidth = MyProposedStepWidth
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyProposedStepWidth = value
         End Set
     End Property
 
-    Property ActualStepWidth As Decimal Implements IStar.ActualStepWidth
+    Property ActualStepWidth As Double Implements IStar.ActualStepWidth
         Get
             ActualStepWidth = MyActualStepWidth
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyActualStepWidth = value
         End Set
     End Property
 
-    Property TotalMassOfOtherStars As Decimal Implements IStar.TotalMassOfOtherStars
+    Property TotalMassOfOtherStars As Double Implements IStar.TotalMassOfOtherStars
         Get
             TotalMassOfOtherStars = MyTotalMassOfOtherStars
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyTotalMassOfOtherStars = value
         End Set
     End Property
@@ -306,7 +306,7 @@ Public MustInherit Class ClsStarAbstract
         MyUserStartVelocity.Equal(MyOriginalStartVelocity)
         MyActualVelocity.Equal(MyUserStartVelocity)
         MyTotalMassOfOtherStars = 0
-        MyActualStepWidth = CDec(MyProposedStepWidth)
+        MyActualStepWidth = CDbl(MyProposedStepWidth)
     End Sub
 
     Public Sub SetUserStartPosition(MousePosition As Point) Implements IStar.SetUserStartPosition
@@ -368,7 +368,7 @@ Public MustInherit Class ClsStarAbstract
 
         'Sets z for the stage 1, 2 or 3 with the slopes of the previous stage
         'Stage 1 and 2: half step, stage 3: full step
-        Dim Factor As Decimal = If(Stage = 3, MyActualStepWidth, MyActualStepWidth / 2)
+        Dim Factor As Double = If(Stage = 3, MyActualStepWidth, MyActualStepWidth / 2)
 
         SetStage(u1 + Factor * k1.Component(Stage - 1),
                  v1 + Factor * h1.Component(Stage - 1),
@@ -377,7 +377,7 @@ Public MustInherit Class ClsStarAbstract
 
     End Sub
 
-    Private Sub SetStage(Stageu1 As Decimal, Stagev1 As Decimal, Stageu2 As Decimal, Stagev2 As Decimal)
+    Private Sub SetStage(Stageu1 As Double, Stagev1 As Double, Stageu2 As Double, Stagev2 As Double)
         With z
             .Component(0) = Stageu1
             .Component(1) = Stagev1
@@ -438,19 +438,19 @@ Public MustInherit Class ClsStarAbstract
     Private Sub DrawPhaseportrait()
 
         'the following scales were found by experiments
-        PhasePortraitPoint.X = CDec(Math.Sqrt(u1 * u1 + u2 * u2)) * MyUniverse.DiagramZoom  'rho
-        PhasePortraitPoint.Y = CDec(Math.Sqrt(v1 * v1 + v2 * v2)) * MyUniverse.VFactor 'vAbs
+        PhasePortraitPoint.X = CDbl(Math.Sqrt(u1 * u1 + u2 * u2)) * MyUniverse.DiagramZoom  'rho
+        PhasePortraitPoint.Y = CDbl(Math.Sqrt(v1 * v1 + v2 * v2)) * MyUniverse.VFactor 'vAbs
         PicPhasePortraitGraphics.DrawPoint(PhasePortraitPoint, MyStarColor, 1)
 
     End Sub
 
-    Public Function GetAngularMomentum() As Decimal Implements IStar.GetAngularMomentum
+    Public Function GetAngularMomentum() As Double Implements IStar.GetAngularMomentum
         Return MyUserMass * (u1 * v2 - u2 * v1)
     End Function
 
     Public Function GetPulse() As ClsVector Implements IStar.GetPulse
-        ActualPulse.X = CDec(MyUserMass * MyActualVelocity.X)
-        ActualPulse.Y = CDec(MyUserMass * MyActualVelocity.Y)
+        ActualPulse.X = CDbl(MyUserMass * MyActualVelocity.X)
+        ActualPulse.Y = CDbl(MyUserMass * MyActualVelocity.Y)
         Return ActualPulse
     End Function
 
@@ -459,12 +459,12 @@ Public MustInherit Class ClsStarAbstract
 
     Public MustOverride Sub DrawOrbit(IsDefinitive As Boolean) Implements IStar.DrawOrbit
 
-    Public MustOverride Function GetEnergy() As Decimal Implements IStar.GetEnergy
+    Public MustOverride Function GetEnergy() As Double Implements IStar.GetEnergy
 
-    Protected MustOverride Function F1(LocZ As ClsNTupel) As Decimal
-    Protected MustOverride Function G1(LocZ As ClsNTupel) As Decimal
-    Protected MustOverride Function F2(LocZ As ClsNTupel) As Decimal
-    Protected MustOverride Function G2(LocZ As ClsNTupel) As Decimal
+    Protected MustOverride Function F1(LocZ As ClsNTupel) As Double
+    Protected MustOverride Function G1(LocZ As ClsNTupel) As Double
+    Protected MustOverride Function F2(LocZ As ClsNTupel) As Double
+    Protected MustOverride Function G2(LocZ As ClsNTupel) As Double
 
 
 End Class

@@ -20,14 +20,14 @@ Public Class ClsJuliaPN
     'Iteration Parameter Instances
     Private Zi As ClsComplexNumber
     Private Shadows Steps As Integer
-    Private Radius As Decimal
+    Private Radius As Double
     Private ColorIndex As Double
     Private MyBrush As Brush
 
     Public Sub New()
 
-        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(0.32))
-        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(0.043))
+        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(0.32))
+        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(0.043))
 
         MyActualXRange = MyXValueParameter.Range
         MyActualYRange = MyYValueParameter.Range
@@ -66,7 +66,7 @@ Public Class ClsJuliaPN
         End With
 
         Steps = 0
-        Radius = CDec(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
+        Radius = CDbl(Math.Max(MyC.AbsoluteValue, Math.Pow(2, 1 / (MyN - 1))))
 
         Do Until (Zi.AbsoluteValue > Radius) Or (Steps > MaxSteps)
             Steps += 1

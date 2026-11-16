@@ -46,7 +46,7 @@ Public Class ClsIterationPoint
         End Set
     End Property
 
-    Public Sub New(x As Decimal, y As Decimal, z As Decimal, Color As Brush)
+    Public Sub New(x As Double, y As Double, z As Double, Color As Brush)
         MyDefaultStartPoint = New ClsMathpoint(x, y, z)
         MyUserStartPoint = New ClsMathpoint(x, y, z)
         MyActualPoint = New ClsMathpoint(x, y, z)

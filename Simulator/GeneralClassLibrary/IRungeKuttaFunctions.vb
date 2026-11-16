@@ -8,9 +8,9 @@
 
 Public Interface IRungeKuttaFunctions
 
-    Function F1(MyX As ClsNTupel) As Decimal
-    Function F2(MyX As ClsNTupel) As Decimal
-    Function G1(MyX As ClsNTupel) As Decimal
-    Function G2(MyX As ClsNTupel) As Decimal
+    Function F1(MyX As ClsNTupel) As Double
+    Function F2(MyX As ClsNTupel) As Double
+    Function G1(MyX As ClsNTupel) As Double
+    Function G2(MyX As ClsNTupel) As Double
 
 End Interface

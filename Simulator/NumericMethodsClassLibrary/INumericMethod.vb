@@ -11,20 +11,20 @@ Public Interface INumericMethod
     'step width for each approximation step
     'this is set before the approximation starts
     'by the User Interface
-    Property h As Decimal
+    Property h As Double
 
     'number of approximation steps before result is returned
     'This number is set by the User Interface
     WriteOnly Property NumberOfApproxSteps As Integer
 
     'The amplitude is constant and set at the startposition
-    WriteOnly Property Amplitude As Decimal
+    WriteOnly Property Amplitude As Double
 
     'The ActualParameter holds the information about the 
     'y-position of the Pendulum in its Component(1)
     'and the "time" t in its Component(0)
     'and additional values like the derivate y' in Component(2)
-    Property ActualParameter(Index As Integer) As Decimal
+    Property ActualParameter(Index As Integer) As Double
 
     'The variable Parameters are changed during the iteration
     'Iteration performs one approximation step

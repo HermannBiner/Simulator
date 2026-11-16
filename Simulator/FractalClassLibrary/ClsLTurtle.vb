@@ -22,12 +22,12 @@ Public Class ClsLTurtle
     'Default variables
     Private MyAngleLeft As Integer
     Private MyAngleRight As Integer
-    Private MyScaleFactor As Decimal
+    Private MyScaleFactor As Double
     Private MyDefaultColor As SolidBrush
     Private MyIsColorFixed As Boolean
     Private MyIsBudding As Boolean
     Private MyScaling As ClsLSystemsController.EnScaling
-    Private MyStartLength As Decimal
+    Private MyStartLength As Double
     Private MyStartPosition As ClsMathpoint
     Private MyColors As ClsColorList
 
@@ -71,8 +71,8 @@ Public Class ClsLTurtle
         End Set
     End Property
 
-    WriteOnly Property ScaleFactor As Decimal
-        Set(value As Decimal)
+    WriteOnly Property ScaleFactor As Double
+        Set(value As Double)
             MyScaleFactor = value
         End Set
     End Property
@@ -146,8 +146,8 @@ Public Class ClsLTurtle
         End Set
     End Property
 
-    WriteOnly Property StartLength As Decimal
-        Set(value As Decimal)
+    WriteOnly Property StartLength As Double
+        Set(value As Double)
             MyStartLength = value
             MyTurtleStatus.StepLength = value
         End Set
@@ -314,8 +314,8 @@ Public Class ClsLTurtle
         NewPos.X = MyTurtleStatus.Position.X
         NewPos.Y = MyTurtleStatus.Position.Y
 
-        NewPos.X += CDec(MyTurtleStatus.StepLength * Math.Cos(CDec(MyTurtleStatus.Angle * Math.PI / 180)))
-        NewPos.Y += CDec(MyTurtleStatus.StepLength * Math.Sin(CDec(MyTurtleStatus.Angle * Math.PI / 180)))
+        NewPos.X += CDbl(MyTurtleStatus.StepLength * Math.Cos(CDbl(MyTurtleStatus.Angle * Math.PI / 180)))
+        NewPos.Y += CDbl(MyTurtleStatus.StepLength * Math.Sin(CDbl(MyTurtleStatus.Angle * Math.PI / 180)))
 
         MyLstDebug.Items.Add("C: " & MyTurtleStatus.Position.X.ToString("N2") &
                              "/" & MyTurtleStatus.Position.Y.ToString("N2") &

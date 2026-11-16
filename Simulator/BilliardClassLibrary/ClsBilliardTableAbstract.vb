@@ -12,11 +12,11 @@ Public MustInherit Class ClsBilliardTableAbstract
     Protected MyValueProtocol As ListBox
 
     'Profile of the BilliardTable
-    Protected MyA As Decimal
-    Protected MyB As Decimal
+    Protected MyA As Double
+    Protected MyB As Double
 
     'Parameter C 
-    Protected MyC As Decimal
+    Protected MyC As Double
 
     'Ranges
     Protected MyMathInterval As New ClsInterval(-1, 1)
@@ -70,13 +70,13 @@ Public MustInherit Class ClsBilliardTableAbstract
         End Get
     End Property
 
-    ReadOnly Property A As Decimal Implements IBilliardTable.A
+    ReadOnly Property A As Double Implements IBilliardTable.A
         Get
             A = MyA
         End Get
     End Property
 
-    ReadOnly Property B As Decimal Implements IBilliardTable.B
+    ReadOnly Property B As Double Implements IBilliardTable.B
         Get
             B = MyB
         End Get
@@ -132,7 +132,7 @@ Public MustInherit Class ClsBilliardTableAbstract
         MyBilliardballCollection = New List(Of IBilliardball)
 
         'The DS Parameter is the same for all Billiard Tables
-        MyDSParameter = New ClsGeneralParameter(3, "Parameter C", New ClsInterval(CDec(0.5), 2), ClsGeneralParameter.TypeOfParameterEnum.DS, CDec(0.8))
+        MyDSParameter = New ClsGeneralParameter(3, "Parameter C", New ClsInterval(CDbl(0.5), 2), ClsGeneralParameter.TypeOfParameterEnum.DS, CDbl(0.8))
 
         MyValueParameterList = New List(Of ClsGeneralParameter)
 
@@ -152,7 +152,7 @@ Public MustInherit Class ClsBilliardTableAbstract
 
     End Sub
 
-    Public MustOverride Property C As Decimal Implements IBilliardTable.C
+    Public MustOverride Property C As Double Implements IBilliardTable.C
 
     Public MustOverride Sub DrawBilliardtable() Implements IBilliardTable.DrawBilliardtable
 

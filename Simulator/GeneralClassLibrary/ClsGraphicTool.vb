@@ -144,7 +144,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawHorizintalLine(Y0 As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawHorizintalLine(Y0 As Double, Color As Color, Wide As Integer)
 
         If MyMathYInterval.IsNumberInInterval(Y0) Then
 
@@ -159,7 +159,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawVerticalLine(X0 As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawVerticalLine(X0 As Double, Color As Color, Wide As Integer)
 
         If MyMathXInterval.IsNumberInInterval(X0) Then
 
@@ -199,8 +199,8 @@ Public Class ClsGraphicTool
         'Draws a line between the points A and B, given in mathematical coordinates
 
         Using Pen As New Pen(DirectCast(Brush, SolidBrush).Color, Wide)
-                Graphs.DrawLine(Pen, MathpointToPixel(New ClsMathpoint(CDec(A.X), CDec(A.Y))),
-                                MathpointToPixel(New ClsMathpoint(CDec(B.X), CDec(B.Y))))
+                Graphs.DrawLine(Pen, MathpointToPixel(New ClsMathpoint(CDbl(A.X), CDbl(A.Y))),
+                                MathpointToPixel(New ClsMathpoint(CDbl(B.X), CDbl(B.Y))))
             End Using
 
     End Sub
@@ -211,7 +211,7 @@ Public Class ClsGraphicTool
         If MyMathXInterval.IsNumberInInterval(MathPoint.X) And
             MyMathYInterval.IsNumberInInterval(MathPoint.Y) Then
 
-            Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+            Dim Size As Double = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
             FillCircle(MathPoint, Size, Brush)
         End If
     End Sub
@@ -231,7 +231,7 @@ Public Class ClsGraphicTool
             MyMathYInterval.IsNumberInInterval(MathPoint.Y) Then
             'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
-            Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+            Dim Size As Double = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
             FillCircle(MathPoint, Size, Brush)
         End If
 
@@ -254,8 +254,8 @@ Public Class ClsGraphicTool
             MyMathYInterval.IsNumberInInterval(Z.Y) Then
             'Draws a point in mathematical coordinates filled with Brush, Wide = 1 is about one pixel
 
-            Dim MathPoint As New ClsMathpoint(CDec(Z.X), CDec(Z.Y))
-            Dim Size As Decimal = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
+            Dim MathPoint As New ClsMathpoint(CDbl(Z.X), CDbl(Z.Y))
+            Dim Size As Double = MyMathXInterval.IntervalWidth * Wide / DiagramCornerpoint.X
             FillCircle(MathPoint, Size, Brush)
         End If
 
@@ -339,7 +339,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Double, Color As Color, Wide As Integer)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -359,7 +359,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As Brush, Wide As Integer)
+    Public Sub DrawCircle(Midpoint As ClsMathpoint, Radius As Double, Brush As Brush, Wide As Integer)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -379,7 +379,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As Brush)
+    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Double, Brush As Brush)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -411,7 +411,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Decimal, Brush As SolidBrush)
+    Public Sub FillCircle(Midpoint As ClsMathpoint, Radius As Double, Brush As SolidBrush)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -443,7 +443,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawEllipse(Midpoint As ClsMathpoint, a As Double, b As Double, Color As Color, Wide As Integer)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -467,7 +467,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Brush As Brush)
+    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Double, b As Double, Brush As Brush)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -488,7 +488,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Decimal, b As Decimal, Brush As SolidBrush)
+    Public Sub FillEllipse(Midpoint As ClsMathpoint, a As Double, b As Double, Brush As SolidBrush)
 
         If MyMathXInterval.IsNumberInInterval(Midpoint.X) And
             MyMathYInterval.IsNumberInInterval(Midpoint.Y) Then
@@ -509,7 +509,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Decimal, Arc As Decimal, ArcLength As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Double, Arc As Double, ArcLength As Double, Color As Color, Wide As Integer)
 
         'Draws a circular arc around MidPoint and Radius in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
@@ -531,7 +531,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Decimal, ArcLength As Decimal, Color As Color, Wide As Integer)
+    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Double, ArcLength As Double, Color As Color, Wide As Integer)
 
         'Draws an elliptic arc contained in a rectangle with left lower corner A
         'and right uppper corner B in mathematical coordinates
@@ -555,7 +555,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Decimal, Arc As Decimal, ArcLength As Decimal, Brush As Brush, Wide As Integer)
+    Public Sub DrawCircleArc(Midpoint As ClsMathpoint, Radius As Double, Arc As Double, ArcLength As Double, Brush As Brush, Wide As Integer)
 
         'Draws a circular arc around MidPoint and Radius in mathematical coordinates
         'The angle starts at StartArc and has the lenghts ArcLangth
@@ -577,7 +577,7 @@ Public Class ClsGraphicTool
 
     End Sub
 
-    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Decimal, ArcLength As Decimal, Brush As Brush, Wide As Integer)
+    Public Sub DrawEllipticArc(A As ClsMathpoint, C As ClsMathpoint, StartArc As Double, ArcLength As Double, Brush As Brush, Wide As Integer)
 
         'Draws an elliptic arc contained in a rectangle with left lower corner A
         'and right uppper corner B in mathematical coordinates
@@ -647,7 +647,7 @@ Public Class ClsGraphicTool
 
     End Function
 
-    Public Function RadiantToDegree(Arc As Decimal) As Integer
+    Public Function RadiantToDegree(Arc As Double) As Integer
 
         'Transformation of Radian into Degree
         Dim Degree As Integer = CInt(180 * Arc / Math.PI)

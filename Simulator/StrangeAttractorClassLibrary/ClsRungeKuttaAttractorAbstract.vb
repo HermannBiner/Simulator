@@ -8,9 +8,9 @@ Public MustInherit Class ClsRungeKuttaAttractorAbstract
 
     'Runge Kutta Parameter
     'Runge Kutta Parameters
-    Protected u As Decimal
-    Protected v As Decimal
-    Protected w As Decimal
+    Protected u As Double
+    Protected v As Double
+    Protected w As Double
 
     'And additional Parameters for Runge Kutta
     Protected ReadOnly z As ClsNTupel
@@ -95,8 +95,8 @@ Public MustInherit Class ClsRungeKuttaAttractorAbstract
         'not used for Runge Kutta Attractors
     End Sub
 
-    Public MustOverride Function F(z As ClsNTupel) As Decimal
-    Public MustOverride Function G(z As ClsNTupel) As Decimal
-    Public MustOverride Function H(z As ClsNTupel) As Decimal
+    Public MustOverride Function F(z As ClsNTupel) As Double
+    Public MustOverride Function G(z As ClsNTupel) As Double
+    Public MustOverride Function H(z As ClsNTupel) As Double
 
 End Class

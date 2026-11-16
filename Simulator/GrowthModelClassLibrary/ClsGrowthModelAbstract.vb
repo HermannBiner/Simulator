@@ -9,7 +9,7 @@ Public MustInherit Class ClsGrowthModelAbstract
 
     'This is the steering parameter for the iteration
     '"a" in the mathematical documentation 
-    Protected MyParameterA As Decimal
+    Protected MyParameterA As Double
 
     'in whitch Interval the Parameter a should be
     Protected MyDSParameter As ClsGeneralParameter
@@ -22,13 +22,13 @@ Public MustInherit Class ClsGrowthModelAbstract
     Protected MyPower As Integer
 
     'SplitPoints
-    Protected MySplitpoints As List(Of Decimal)
+    Protected MySplitpoints As List(Of Double)
 
     'Critical Point
-    Protected MyCriticalPoint As Decimal
+    Protected MyCriticalPoint As Double
 
     'Chaotic Parameter
-    Protected MyChaoticParameterValue As Decimal
+    Protected MyChaoticParameterValue As Double
 
     'SECTOR INITIALISATION
 
@@ -43,11 +43,11 @@ Public MustInherit Class ClsGrowthModelAbstract
         End Set
     End Property
 
-    Overridable Property ParameterA As Decimal Implements IIteration.ParameterA
+    Overridable Property ParameterA As Double Implements IIteration.ParameterA
         Get
             ParameterA = MyParameterA
         End Get
-        Set(Value As Decimal)
+        Set(Value As Double)
             MyParameterA = Value
         End Set
     End Property
@@ -64,19 +64,19 @@ Public MustInherit Class ClsGrowthModelAbstract
         End Get
     End Property
 
-    ReadOnly Property Splitpoints As List(Of Decimal) Implements IIteration.Splitpoints
+    ReadOnly Property Splitpoints As List(Of Double) Implements IIteration.Splitpoints
         Get
             Splitpoints = MySplitpoints
         End Get
     End Property
 
-    ReadOnly Property CriticalPoint As Decimal Implements IIteration.CriticalPoint
+    ReadOnly Property CriticalPoint As Double Implements IIteration.CriticalPoint
         Get
             CriticalPoint = MyCriticalPoint
         End Get
     End Property
 
-    ReadOnly Property ChaoticParameterValue As Decimal Implements IIteration.ChaoticParameterValue
+    ReadOnly Property ChaoticParameterValue As Double Implements IIteration.ChaoticParameterValue
         Get
             ChaoticParameterValue = MyChaoticParameterValue
         End Get
@@ -99,7 +99,7 @@ Public MustInherit Class ClsGrowthModelAbstract
 
     'SECTOR ITERATION
 
-    Public Function FN(x As Decimal) As Decimal _
+    Public Function FN(x As Double) As Double _
         Implements IIteration.FN
 
         'This Function is the
@@ -115,7 +115,7 @@ Public MustInherit Class ClsGrowthModelAbstract
 
     End Function
 
-    Public Overridable Function CalculateStartValueForProtocol(TargetProtocol As String) As Decimal _
+    Public Overridable Function CalculateStartValueForProtocol(TargetProtocol As String) As Double _
         Implements IIteration.CalculateStartValueForProtocol
 
         Dim Mathhelper As New ClsMathhelperUnimodal
@@ -126,7 +126,7 @@ Public MustInherit Class ClsGrowthModelAbstract
                 Mathhelper.ProcotolToTentmapStartValueAsString(TargetProtocol)
 
         'The next step converts the dual startvalue of the tentmap in its according decimal startvalue
-        Dim DecimalTentmapStartvalue As Decimal =
+        Dim DecimalTentmapStartvalue As Double =
             Mathhelper.DualStringToDecimalNumber(BinaryTentmapStartvalue, True)
 
         'Finally, we use the conjugation between the tentmap and the parabola
@@ -134,17 +134,17 @@ Public MustInherit Class ClsGrowthModelAbstract
 
     End Function
 
-    Public Overridable Function CalculateStartValueForTargetValue(StartValue As Decimal, TargetValue As Decimal) As Decimal _
+    Public Overridable Function CalculateStartValueForTargetValue(StartValue As Double, TargetValue As Double) As Double _
         Implements IIteration.CalculateStartValueForTargetValue
 
         Dim Mathhelper As New ClsMathhelperUnimodal
 
         'Startvalue is the original start value 
         'We need the conjugated startvalue of the tentmap
-        Dim TentmapDecimalStartvalue As Decimal = IterationToTentmap(StartValue)
+        Dim TentmapDecimalStartvalue As Double = IterationToTentmap(StartValue)
 
         'As well, we conjugate the targetvalue
-        Dim TentmapDecimalTargetvalue As Decimal = IterationToTentmap(TargetValue)
+        Dim TentmapDecimalTargetvalue As Double = IterationToTentmap(TargetValue)
 
         'Next, we consider the tentmap startvalue in dual string format
         'The conjugates of the iteration chain of the tentmap is identical 
@@ -183,11 +183,11 @@ Public MustInherit Class ClsGrowthModelAbstract
         TentmapDualStartvalue &= TentmapDualTargetvalue
 
         'We transform that dual string into the according decimal value
-        Dim AdjustedTentmapStartvalue As Decimal =
+        Dim AdjustedTentmapStartvalue As Double =
             Mathhelper.DualStringToDecimalNumber(TentmapDualStartvalue, True)
 
         'Finally, we conjugate this value back to the logistic growth
-        Dim AdjustedParabolaStartvalue As Decimal = TentmapToIteration(sign * AdjustedTentmapStartvalue)
+        Dim AdjustedParabolaStartvalue As Double = TentmapToIteration(sign * AdjustedTentmapStartvalue)
 
         Return AdjustedParabolaStartvalue
 
@@ -195,10 +195,10 @@ Public MustInherit Class ClsGrowthModelAbstract
 
     Protected MustOverride Sub InitializeIterator()
 
-    Protected MustOverride Function F(x As Decimal) As Decimal
+    Protected MustOverride Function F(x As Double) As Double
 
-    Protected MustOverride Function IterationToTentmap(x As Decimal) As Decimal
+    Protected MustOverride Function IterationToTentmap(x As Double) As Double
 
-    Protected MustOverride Function TentmapToIteration(u As Decimal) As Decimal
+    Protected MustOverride Function TentmapToIteration(u As Double) As Double
 
 End Class

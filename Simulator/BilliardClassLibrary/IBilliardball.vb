@@ -28,16 +28,16 @@ Public Interface IBilliardball
     WriteOnly Property IsProtocol As Boolean
 
     'The profile of the billiard table is defined by the parameter a,b
-    WriteOnly Property A As Decimal
-    WriteOnly Property B As Decimal
+    WriteOnly Property A As Double
+    WriteOnly Property B As Double
 
     'Properties of the ball
     WriteOnly Property BallColor As Brush
     WriteOnly Property BallSpeed As Integer
 
     'Parameter of the start
-    Property Startparameter As Decimal 'defines the start point
-    WriteOnly Property Startangle As Decimal 'defines the start angle in [0, 2pi[
+    Property Startparameter As Double 'defines the start point
+    WriteOnly Property Startangle As Double 'defines the start angle in [0, 2pi[
     Property IsStartParameterSet As Boolean
     Property IsStartangleSet As Boolean
 
@@ -45,13 +45,13 @@ Public Interface IBilliardball
     'It pulls the ball according to the mouse position on its start position
     'and gives the parameter t back that defines the start position of the Ball
     'see mathematical documentation
-    Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Decimal
+    Function SetAndDrawUserStartposition(Mouseposition As Point, definitive As Boolean) As Double
 
     'The following method receives a mouse position relative to the bitmap
     'It pulls the first hit point of the ball according to the mouse position
     'and gives the parameter phi for the start angle back
     'see mathematical documentation
-    Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Decimal
+    Function SetAndDrawUserEndposition(Mouseposition As Point, definitive As Boolean) As Double
 
     Sub DrawFirstUserStartposition()
 
@@ -64,6 +64,6 @@ Public Interface IBilliardball
 
     'Alfa is the hit angle: that is the angle between the ball orbit
     'and the tangent on the billiard table in the hit point
-    Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal
+    Function CalculateAlfa(t As Double, phi As Double) As Double
 
 End Interface

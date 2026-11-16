@@ -33,7 +33,7 @@ Public Class ClsInversUnitRoots
         UnitRootCollection.Add(New ClsUnitRoot(W, 1))
 
         For k = 2 To MyN
-            UnitRootCollection.Add(New ClsUnitRoot(W.Rotate(CDec(2 * Math.PI * (k - 1) / MyN)), k))
+            UnitRootCollection.Add(New ClsUnitRoot(W.Rotate(CDbl(2 * Math.PI * (k - 1) / MyN)), k))
         Next
 
         IterationDeepness = 60 * MyN

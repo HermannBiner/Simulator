@@ -51,7 +51,7 @@ Public MustInherit Class ClsPendulumAbstract
 
     'For Visibility, the MathInterval is a little bit shrinked
     Protected ShrinkedInterval As ClsInterval
-    Protected Const ShrinkFactor As Decimal = CDec(0.95)
+    Protected Const ShrinkFactor As Double = CDbl(0.95)
 
     Protected MyAdditionalParameter As ClsGeneralParameter
     Protected MyAdditionalParameterValue As Integer
@@ -63,11 +63,11 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MyCalculationVariables As ClsNTupel
 
     'Internal step Width
-    Protected d As Decimal
+    Protected d As Double
     Protected MyLblStepWidth As Label
 
     'Y-Coordinate of the X-Axis
-    Protected Y0 As Decimal
+    Protected Y0 As Double
 
     Protected MathHelper As ClsMathHelperPendulum
 
@@ -82,10 +82,10 @@ Public MustInherit Class ClsPendulumAbstract
     Protected ReadOnly OldPosition2 As ClsMathpoint
 
     'Runge Kutta Parameters
-    Protected u1 As Decimal
-    Protected v1 As Decimal
-    Protected u2 As Decimal
-    Protected v2 As Decimal
+    Protected u1 As Double
+    Protected v1 As Double
+    Protected u2 As Double
+    Protected v2 As Double
 
     'For Poincaré Sections
     Protected IsSignumChanged As Boolean
@@ -102,10 +102,10 @@ Public MustInherit Class ClsPendulumAbstract
     Protected ReadOnly h2 As ClsNTupel
 
     'Global Constants
-    Protected Const StepWidthUnit As Decimal = CDec(0.0005)
+    Protected Const StepWidthUnit As Double = CDbl(0.0005)
 
     'Gravitation acceleration
-    Protected Const g As Decimal = CDec(9.81)
+    Protected Const g As Double = CDbl(9.81)
 
     'StartEnergyRange
     Protected MyStartEnergyRange As ClsInterval
@@ -447,7 +447,7 @@ Public MustInherit Class ClsPendulumAbstract
         End If
     End Sub
 
-    Public MustOverride Function GetAddParameterValue(TbrValue As Integer) As Decimal _
+    Public MustOverride Function GetAddParameterValue(TbrValue As Integer) As Double _
         Implements IPendulum.GetAddParameterValue
     Public MustOverride Sub SetAndDrawStartparameter1(Mouseposition As Point) _
         Implements IPendulum.SetAndDrawStartparameter1
@@ -463,7 +463,7 @@ Public MustInherit Class ClsPendulumAbstract
     Protected MustOverride Sub SetPhasePortraitParameters()
     Protected MustOverride Sub SetAdditionalParameters() Implements IPendulum.SetAdditionalParameters
 
-    Protected MustOverride Function GetEnergy() As Decimal Implements IPendulum.GetEnergy
+    Protected MustOverride Function GetEnergy() As Double Implements IPendulum.GetEnergy
 
     Protected MustOverride Sub SetDefaultUserData() Implements IPendulum.SetDefaultUserData
     Protected MustOverride Sub DrawCoordinateSystem()

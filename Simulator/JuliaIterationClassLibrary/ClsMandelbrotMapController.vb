@@ -84,8 +84,8 @@ Public Class ClsMandelbrotMapController
 
         'These are the parameters for the Seahorse
         With MyForm
-            .TxtA.Text = CDec(0.32).ToString
-            .TxtB.Text = CDec(0.043).ToString
+            .TxtA.Text = CDbl(0.32).ToString
+            .TxtB.Text = CDbl(0.043).ToString
         End With
 
         DrawPictures()
@@ -215,8 +215,8 @@ Public Class ClsMandelbrotMapController
         With MyForm
             'The parameter c has to be in the same area as the z-Values
             'for the MandelbrotMap, the Interval is a little bigger
-            Dim CheckParameterA As New ClsCheckUserData(.TxtA, New ClsInterval(CDec(-1.9), CDec(1.9)))
-            Dim CheckParameterB As New ClsCheckUserData(.TxtB, New ClsInterval(CDec(-1.9), CDec(1.9)))
+            Dim CheckParameterA As New ClsCheckUserData(.TxtA, New ClsInterval(CDbl(-1.9), CDbl(1.9)))
+            Dim CheckParameterB As New ClsCheckUserData(.TxtB, New ClsInterval(CDbl(-1.9), CDbl(1.9)))
 
             Return CheckParameterA.IsTxtValueAllowed And CheckParameterB.IsTxtValueAllowed
         End With

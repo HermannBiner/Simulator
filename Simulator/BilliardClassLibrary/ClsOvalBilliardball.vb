@@ -19,13 +19,13 @@ Public Class ClsOvalBilliardball
 
     'SECTOR INITIALIZATION
 
-    Overrides Property Startparameter As Decimal
+    Overrides Property Startparameter As Double
         Get
             Startparameter = T
         End Get
         'The user can set the Startparameter t also manually (when not setting it by the mouse)
         'and transmit this value to the Ball
-        Set(value As Decimal)
+        Set(value As Double)
             T = value
 
             If IsNothing(UserStartposition) Then
@@ -43,17 +43,17 @@ Public Class ClsOvalBilliardball
         End Set
     End Property
 
-    Overrides WriteOnly Property Startangle As Decimal
+    Overrides WriteOnly Property Startangle As Double
 
         'In addition to the Startparameter t,
         'the angle of the first  reflection is necessary as well
         'to start the movement of the Ball
-        Set(value As Decimal)
-            Dim alfa As Decimal = value
+        Set(value As Double)
+            Dim alfa As Double = value
 
             'first, we calculate the angle between tangent in the hit point
             'and the positive xaxis
-            Dim psi As Decimal = CalculatePsi(T)
+            Dim psi As Double = CalculatePsi(T)
             psi = Mathhelper.AngleInNullTwoPi(psi)
 
             'Now the angle between the next moving-direction and the positive x-axis is:
@@ -61,7 +61,7 @@ Public Class ClsOvalBilliardball
 
             'With these parameters, we can calculate the next Hit Point
             'and its Parameter NextT
-            Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
+            Dim NextT As Double = ParameterOfNextHitPoint(T, Phi)
 
             If IsNothing(UserEndposition) Then
                 UserEndposition = New ClsMathpoint(0, 0)
@@ -83,9 +83,9 @@ Public Class ClsOvalBilliardball
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 
-    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal
+    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Double
 
-        Dim t As Decimal = SetUserStartposition(Mouseposition)
+        Dim t As Double = SetUserStartposition(Mouseposition)
         DrawUserStartposition(IsDefinitive)
 
         'we need t for the Protocol
@@ -93,7 +93,7 @@ Public Class ClsOvalBilliardball
 
     End Function
 
-    Private Function SetUserStartposition(Mouseposition As Point) As Decimal
+    Private Function SetUserStartposition(Mouseposition As Point) As Double
 
         'Position of the Ball in math. coordinates, set by the Mouseposition in Pixel Coordinates
         'this startposition is still at the mouseposition (and not on the border of the Ellipse)
@@ -140,11 +140,11 @@ Public Class ClsOvalBilliardball
         End If
     End Sub
 
-    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Double _
 
 
         'The Endposition is definied by the angle phi of the next moving direction
-        Dim phi As Decimal = SetUserEndposition(Mouseposition)
+        Dim phi As Double = SetUserEndposition(Mouseposition)
 
         DrawUserEndPosition(IsDefinitive)
 
@@ -153,7 +153,7 @@ Public Class ClsOvalBilliardball
 
     End Function
 
-    Private Function SetUserEndposition(Mouseposition As Point) As Decimal
+    Private Function SetUserEndposition(Mouseposition As Point) As Double
 
         'The Endposition of the Ball in math. coordinates
         'is just equal to the Mouseposition in Pixels
@@ -161,15 +161,15 @@ Public Class ClsOvalBilliardball
 
         'TempT is the parameter of the border point in the direction of the mouse
         'seen from the center of the oval (not from (0, 0))
-        Dim TempT As Decimal = CalculateTFromBallPosition(UserEndposition)
+        Dim TempT As Double = CalculateTFromBallPosition(UserEndposition)
         Dim Ballpoint As ClsMathpoint = CalculateBallPositionFromT(TempT)
         UserEndposition.X = Ballpoint.X
         UserEndposition.Y = Ballpoint.Y
 
         'With this Endposition, we calculate the definitive Angle phi
         'that is the Angle of the next moving-direction and the positive x-axis
-        Dim DeltaX As Decimal = UserEndposition.X - UserStartposition.X
-        Dim DeltaY As Decimal = UserEndposition.Y - UserStartposition.Y
+        Dim DeltaX As Double = UserEndposition.X - UserStartposition.X
+        Dim DeltaY As Double = UserEndposition.Y - UserStartposition.Y
         Dim phi = Mathhelper.CalculateAngleOfDirection(DeltaX, DeltaY)
 
         Return phi
@@ -228,17 +228,17 @@ Public Class ClsOvalBilliardball
     Public Overrides Function GetNextValuePair(ActualPoint As ClsDecValuePair) As ClsDecValuePair
 
         T = ActualPoint.X
-        Dim alfa As Decimal = ActualPoint.Y
+        Dim alfa As Double = ActualPoint.Y
 
         'first, we calculate the angle between tangent in the hit point
         'and the positive x-axis
-        Dim psi As Decimal = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
+        Dim psi As Double = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
 
         'Now the angle between the next moving-direction and the positive x-axis is:
         Phi = psi + alfa
 
         'Parameter of the next Enpoint of the actual part of the Orbit
-        Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
+        Dim NextT As Double = ParameterOfNextHitPoint(T, Phi)
 
         'in addition, we calculate the angle of the following movement
         Phi = CalculateNextPhi(NextT, Phi)
@@ -265,7 +265,7 @@ Public Class ClsOvalBilliardball
         Dim i As Integer = 0
 
         'The following Stepwide was defined by an Experiment
-        Dim Stepwide As Decimal = MyMathInterval.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Double = MyMathInterval.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1
@@ -298,7 +298,7 @@ Public Class ClsOvalBilliardball
     Private Function IsBallInOval(Ballposition As ClsMathpoint) As Boolean
 
         Dim IsOK As Boolean
-        Dim m As Decimal = (MyA - MyB) / 2
+        Dim m As Double = (MyA - MyB) / 2
 
         If Ballposition.X >= m Then
 
@@ -314,7 +314,7 @@ Public Class ClsOvalBilliardball
 
     End Function
 
-    Private Function ParameterOfNextHitPoint(t As Decimal, Phi As Decimal) As Decimal
+    Private Function ParameterOfNextHitPoint(t As Double, Phi As Double) As Double
 
         't is the Parameter of the Startpoint of the actual part of the Orbit
         'and Phi the direction of the movement relative to the positive x-axis
@@ -324,9 +324,9 @@ Public Class ClsOvalBilliardball
 
         'u is the Parameter in the Line Equation
         'for the Intersection with the Oval
-        Dim u As Decimal
+        Dim u As Double
 
-        Dim m As Decimal = (MyA - MyB) / 2
+        Dim m As Double = (MyA - MyB) / 2
 
         'The Solution of u gives the next Intersection Point
         Dim IntersectionPoint As New ClsMathpoint
@@ -336,20 +336,20 @@ Public Class ClsOvalBilliardball
         Dim Startpoint As ClsMathpoint = CalculateBallPositionFromT(t)
 
         'Ad hoc to simplify the formulas
-        Dim p As Decimal = Startpoint.X
-        Dim q As Decimal = Startpoint.Y
+        Dim p As Double = Startpoint.X
+        Dim q As Double = Startpoint.Y
 
         'And now according to the mathematical documentation
         'Discriminant
-        Dim DA As Decimal = MyB * MyB
-        Dim DB As Decimal = MyB * MyB * CDec(((p - m) * Math.Cos(Phi) + q * Math.Sin(Phi)))
-        Dim DC As Decimal = MyB * MyB * (CDec(Math.Pow(p - m, 2)) + q * q - MyB * MyB)
+        Dim DA As Double = MyB * MyB
+        Dim DB As Double = MyB * MyB * CDbl(((p - m) * Math.Cos(Phi) + q * Math.Sin(Phi)))
+        Dim DC As Double = MyB * MyB * (CDbl(Math.Pow(p - m, 2)) + q * q - MyB * MyB)
 
         If DB * DB - DA * DC >= 0 Then
 
             'There is an intersection with the Circle
             'Try with the first solution of the quadratic equation
-            u = (-DB + CDec(Math.Sqrt(DB * DB - DA * DC))) / DA
+            u = (-DB + CDbl(Math.Sqrt(DB * DB - DA * DC))) / DA
 
             'Check that u gives not the StartPoint
             If Math.Abs(u) > 0.000001 Then
@@ -365,7 +365,7 @@ Public Class ClsOvalBilliardball
             If Not IsIntersectionFound Then
 
                 'Try with the second solution of the quadratic equation
-                u = (-DB - CDec(Math.Sqrt(DB * DB - DA * DC))) / DA
+                u = (-DB - CDbl(Math.Sqrt(DB * DB - DA * DC))) / DA
 
                 'Check that u gives not the StartPoint
                 If Math.Abs(u) > 0.000001 Then
@@ -387,15 +387,15 @@ Public Class ClsOvalBilliardball
 
             'There must be an intersection with the Ellipse
             'Discriminant
-            DA = CDec(Math.Pow(MyA * Math.Sin(Phi), 2) + Math.Pow(MyB * Math.Cos(Phi), 2))
-            DB = CDec(MyA * MyA * q * Math.Sin(Phi) + MyB * MyB * (p - m) * Math.Cos(Phi))
-            DC = CDec(Math.Pow(MyB * (p - m), 2) + MyA * MyA * (q * q - MyB * MyB))
+            DA = CDbl(Math.Pow(MyA * Math.Sin(Phi), 2) + Math.Pow(MyB * Math.Cos(Phi), 2))
+            DB = CDbl(MyA * MyA * q * Math.Sin(Phi) + MyB * MyB * (p - m) * Math.Cos(Phi))
+            DC = CDbl(Math.Pow(MyB * (p - m), 2) + MyA * MyA * (q * q - MyB * MyB))
 
             If DB * DB - DA * DC >= 0 Then
 
                 'There is an intersection with the Ellipse
                 'Try with the first solution of the quadratic equation
-                u = (-DB + CDec(Math.Sqrt(DB * DB - DA * DC))) / DA
+                u = (-DB + CDbl(Math.Sqrt(DB * DB - DA * DC))) / DA
 
                 'Check that u gives not the StartPoint
                 If Math.Abs(u) > 0.000001 Then
@@ -411,7 +411,7 @@ Public Class ClsOvalBilliardball
                 If Not IsIntersectionFound Then
 
                     'Try with the second solution of the quadratic equation
-                    u = (-DB - CDec(Math.Sqrt(DB * DB - DA * DC))) / DA
+                    u = (-DB - CDbl(Math.Sqrt(DB * DB - DA * DC))) / DA
 
                     'Check that u gives not the StartPoint
                     If Math.Abs(u) > 0.000001 Then
@@ -448,19 +448,19 @@ Public Class ClsOvalBilliardball
 
     End Function
 
-    Private Function CalculateCandidateForIntersection(Startpoint As ClsMathpoint, phi As Decimal, u As Decimal) As ClsMathpoint
+    Private Function CalculateCandidateForIntersection(Startpoint As ClsMathpoint, phi As Double, u As Double) As ClsMathpoint
 
         'the solution of u is set into the line equation
         Dim CandidateForIntersection As New ClsMathpoint With {
-            .X = Startpoint.X + u * CDec(Math.Cos(phi)),
-            .Y = Startpoint.Y + u * CDec(Math.Sin(phi))
+            .X = Startpoint.X + u * CDbl(Math.Cos(phi)),
+            .Y = Startpoint.Y + u * CDbl(Math.Sin(phi))
         }
 
         Return CandidateForIntersection
 
     End Function
 
-    Private Function CalculateNextPhi(t As Decimal, phi As Decimal) As Decimal
+    Private Function CalculateNextPhi(t As Double, phi As Double) As Double
 
         't is the Parameter of the Startpoint of the actual part of the Orbit
         'and Phi the direction of the movement relative to the positive x-axis
@@ -468,17 +468,17 @@ Public Class ClsOvalBilliardball
         'see mathematical documentation
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
-        Dim psi As Decimal = CalculatePsi(t)
+        Dim psi As Double = CalculatePsi(t)
         psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'This gives the angle NextPhi - see math. doc
-        Dim NextPhi As Decimal = 2 * psi - phi
+        Dim NextPhi As Double = 2 * psi - phi
         NextPhi = Mathhelper.AngleInNullTwoPi(NextPhi)
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
 
-        Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
+        Dim Alfa As Double = CalculateAlfa(t, NextPhi)
         If PhaseportraitGraphics IsNot Nothing Then
             PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
             If MyIsProtocol And MyValueProtocol IsNot Nothing Then
@@ -494,23 +494,23 @@ Public Class ClsOvalBilliardball
 
     End Function
 
-    Public Overrides Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal
+    Public Overrides Function CalculateAlfa(t As Double, phi As Double) As Double
 
         'This method calculates the next reflection angle Alfa
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
-        Dim psi As Decimal = CalculatePsi(t)
+        Dim psi As Double = CalculatePsi(t)
         psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'and then - see math. doc.
-        Dim alfa As Decimal = phi - psi
+        Dim alfa As Double = phi - psi
         alfa = Mathhelper.AngleInNullTwoPi(alfa)
 
         Return alfa
 
     End Function
 
-    Private Function CalculatePsi(t As Decimal) As Decimal
+    Private Function CalculatePsi(t As Double) As Double
 
         'This method calculates the angle between tangent in the Hit Point and the positive x-axis
         'and we have different cases
@@ -520,56 +520,56 @@ Public Class ClsOvalBilliardball
         If (0 <= t And t <= Math.PI / 2) Or (3 * Math.PI / 2 <= t And t < 2 * Math.PI) Then
 
             'The TempHitPoint is on the Circle
-            TempHitpoint.X = -MyB * CDec(Math.Sin(t))
+            TempHitpoint.X = -MyB * CDbl(Math.Sin(t))
         Else
 
             'The TempHitPoint is on the Ellipse
-            TempHitpoint.X = -MyA * CDec(Math.Sin(t))
+            TempHitpoint.X = -MyA * CDbl(Math.Sin(t))
         End If
 
         'in both cases
-        TempHitpoint.Y = MyB * CDec(Math.Cos(t))
+        TempHitpoint.Y = MyB * CDbl(Math.Cos(t))
 
-        Dim psi As Decimal = Mathhelper.CalculateAngleOfDirection(TempHitpoint.X, TempHitpoint.Y)
+        Dim psi As Double = Mathhelper.CalculateAngleOfDirection(TempHitpoint.X, TempHitpoint.Y)
 
         Return psi
 
     End Function
 
-    Private Function CalculateBallPositionFromT(t As Decimal) As ClsMathpoint
+    Private Function CalculateBallPositionFromT(t As Double) As ClsMathpoint
 
         'this method calculates the Ball position in math. coordinates
         'if the Parameter t is given
 
         Dim TempMathpoint As New ClsMathpoint
-        Dim m As Decimal = (MyA - MyB) / 2
+        Dim m As Double = (MyA - MyB) / 2
 
         t = Mathhelper.AngleInNullTwoPi(t)
         If (0 <= t And t <= Math.PI / 2) Or (3 * Math.PI / 2 <= t And t < 2 * Math.PI) Then
 
             'The Point is on the Circle
-            TempMathpoint.X = m + MyB * CDec(Math.Cos(t))
+            TempMathpoint.X = m + MyB * CDbl(Math.Cos(t))
         Else
 
             'The Point is on the Ellipse
-            TempMathpoint.X = m + MyA * CDec(Math.Cos(t))
+            TempMathpoint.X = m + MyA * CDbl(Math.Cos(t))
         End If
 
         'in both Cases
-        TempMathpoint.Y = MyB * CDec(Math.Sin(t))
+        TempMathpoint.Y = MyB * CDbl(Math.Sin(t))
 
         Return TempMathpoint
 
     End Function
 
-    Private Function CalculateTFromBallPosition(Mathpoint As ClsMathpoint) As Decimal
+    Private Function CalculateTFromBallPosition(Mathpoint As ClsMathpoint) As Double
 
 
         'this method calculates the parameter t for a given position of the Ball
         'in math. coordinates
 
-        Dim TempT As Decimal
-        Dim m As Decimal = (MyA - MyB) / 2
+        Dim TempT As Double
+        Dim m As Double = (MyA - MyB) / 2
 
         If Mathpoint.X >= m Then
 

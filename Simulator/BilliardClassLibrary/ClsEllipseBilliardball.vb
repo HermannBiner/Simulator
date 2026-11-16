@@ -23,13 +23,13 @@ Public Class ClsEllipseBilliardball
 
     'SECTOR INITIALIZATION
 
-    Overrides Property Startparameter As Decimal
+    Overrides Property Startparameter As Double
         Get
             Startparameter = T
         End Get
         'The user can set the Startparameter t also manually (when not setting it by the mouse)
         'and transmit this value to the Ball
-        Set(value As Decimal)
+        Set(value As Double)
             T = value
 
             If IsNothing(UserStartposition) Then
@@ -37,32 +37,32 @@ Public Class ClsEllipseBilliardball
             End If
 
             'and then, the Startposition according to the mathematical documentation is:
-            UserStartposition.X = CDec(MyA * Math.Cos(T))
-            UserStartposition.Y = CDec(MyB * Math.Sin(T))
+            UserStartposition.X = CDbl(MyA * Math.Cos(T))
+            UserStartposition.Y = CDbl(MyB * Math.Sin(T))
 
             DrawUserStartposition(True)
             MyIsStartParameterSet = True
         End Set
     End Property
 
-    Overrides WriteOnly Property Startangle As Decimal
-        Set(value As Decimal)
+    Overrides WriteOnly Property Startangle As Double
+        Set(value As Double)
 
             'In addition to the Startparameter t,
             'the angle of the first  reflection is necessary as well
             'to start the movement of the Ball
-            Dim alfa As Decimal = value
+            Dim alfa As Double = value
 
             'first, we calculate the angle between the tangent in the hit point
             'and the positive xaxis
-            Dim psi As Decimal = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
+            Dim psi As Double = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
 
             'Now the angle between the next moving-direction and the positive x-axis is:
             Phi = psi + alfa
 
             'With these parameters, we can calculate the next Hit Point
             'and its Parameter NextT
-            Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
+            Dim NextT As Double = ParameterOfNextHitPoint(T, Phi)
 
             If IsNothing(UserEndposition) Then
                 UserEndposition = New ClsMathpoint(0, 0)
@@ -70,8 +70,8 @@ Public Class ClsEllipseBilliardball
 
             'The Position von the next Hit Point is the Endposition
             'of this part of the Ball-Movement
-            UserEndposition.X = CDec(MyA * Math.Cos(NextT))
-            UserEndposition.Y = CDec(MyB * Math.Sin(NextT))
+            UserEndposition.X = CDbl(MyA * Math.Cos(NextT))
+            UserEndposition.Y = CDbl(MyB * Math.Sin(NextT))
             DrawUserEndPosition(True)
 
             MyIsStartAngleSet = True
@@ -82,9 +82,9 @@ Public Class ClsEllipseBilliardball
 
     'SECTOR SETTING STARTPOSITION AND STARTANGLE OF THE BALL
 
-    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal
+    Public Overrides Function SetAndDrawUserStartposition(Mouseposition As Point, IsDefinitive As Boolean) As Double
 
-        Dim LocT As Decimal = SetUserStartposition(Mouseposition)
+        Dim LocT As Double = SetUserStartposition(Mouseposition)
         DrawUserStartposition(IsDefinitive)
 
         'we need t for the Protocol
@@ -92,7 +92,7 @@ Public Class ClsEllipseBilliardball
 
     End Function
 
-    Private Function SetUserStartposition(Mouseposition As Point) As Decimal
+    Private Function SetUserStartposition(Mouseposition As Point) As Double
 
         'Position of the Ball in math. coordinates, set by the Mouseposition in Pixel Coordinates
         'this startposition is still at the mouseposition (and not on the border of the Ellipse)
@@ -102,8 +102,8 @@ Public Class ClsEllipseBilliardball
         T = Mathhelper.CalculateAngleOfDirection(UserStartposition.X, UserStartposition.Y)
 
         'Now, the Startposition is set on the border of the Ellipse
-        UserStartposition.X = CDec(MyA * Math.Cos(T))
-        UserStartposition.Y = CDec(MyB * Math.Sin(T))
+        UserStartposition.X = CDbl(MyA * Math.Cos(T))
+        UserStartposition.Y = CDbl(MyB * Math.Sin(T))
 
         Return T
 
@@ -138,10 +138,10 @@ Public Class ClsEllipseBilliardball
         End If
     End Sub
 
-    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Decimal _
+    Public Overrides Function SetAndDrawUserEndposition(Mouseposition As Point, IsDefinitive As Boolean) As Double _
 
         'The Endposition is definied by the angle phi of the next moving direction
-        Dim Phi As Decimal = SetUserEndposition(Mouseposition)
+        Dim Phi As Double = SetUserEndposition(Mouseposition)
 
         DrawUserEndPosition(IsDefinitive)
 
@@ -150,7 +150,7 @@ Public Class ClsEllipseBilliardball
 
     End Function
 
-    Private Function SetUserEndposition(Mouseposition As Point) As Decimal
+    Private Function SetUserEndposition(Mouseposition As Point) As Double
 
         'The Endposition of the Ball in math. coordinates
         'is just equal to the Mouseposition in Pixels
@@ -158,17 +158,17 @@ Public Class ClsEllipseBilliardball
 
         'With this Endposition, we calculate the Angle phi
         'that is the Angle of the next moving-direction and the positive x-axis
-        Dim DeltaX As Decimal = UserEndposition.X - UserStartposition.X
-        Dim DeltaY As Decimal = UserEndposition.Y - UserStartposition.Y
+        Dim DeltaX As Double = UserEndposition.X - UserStartposition.X
+        Dim DeltaY As Double = UserEndposition.Y - UserStartposition.Y
         Dim phi = Mathhelper.CalculateAngleOfDirection(DeltaX, DeltaY)
 
         'With this Angle, we can calculate the next Hit Point
         'and its Parameter NextT
-        Dim NextT As Decimal = ParameterOfNextHitPoint(T, phi)
+        Dim NextT As Double = ParameterOfNextHitPoint(T, phi)
 
         'and then set the Endposition of the Ball definitively on the Border of the Ellipse
-        UserEndposition.X = CDec(MyA * Math.Cos(NextT))
-        UserEndposition.Y = CDec(MyB * Math.Sin(NextT))
+        UserEndposition.X = CDbl(MyA * Math.Cos(NextT))
+        UserEndposition.Y = CDbl(MyB * Math.Sin(NextT))
 
         Return phi
 
@@ -199,13 +199,13 @@ Public Class ClsEllipseBilliardball
     Public Overrides Sub IterationStep()
 
         'MyT is the Parameter ot the StartPoint of the actual part of the Orbit
-        Startpoint.X = CDec(MyA * Math.Cos(T))
-        Startpoint.Y = CDec(MyB * Math.Sin(T))
+        Startpoint.X = CDbl(MyA * Math.Cos(T))
+        Startpoint.Y = CDbl(MyB * Math.Sin(T))
 
         'NextT is the Parameter of the EndPoint of the actual part of the Orbit
         NextT = ParameterOfNextHitPoint(T, Phi)
-        Endpoint.X = CDec(MyA * Math.Cos(NextT))
-        Endpoint.Y = CDec(MyB * Math.Sin(NextT))
+        Endpoint.X = CDbl(MyA * Math.Cos(NextT))
+        Endpoint.Y = CDbl(MyB * Math.Sin(NextT))
 
         'The Ball moves between these Points
         MoveOnSegment(Startpoint, Endpoint)
@@ -223,17 +223,17 @@ Public Class ClsEllipseBilliardball
     Public Overrides Function GetNextValuePair(ActualPair As ClsDecValuePair) As ClsDecValuePair
 
         T = ActualPair.X
-        Dim alfa As Decimal = ActualPair.Y
+        Dim alfa As Double = ActualPair.Y
 
         'first, we calculate the angle between tangent in the hit point
         'and the positive xaxis
-        Dim psi As Decimal = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
+        Dim psi As Double = Mathhelper.AngleInNullTwoPi(CalculatePsi(T))
 
         'Now the angle between the next moving-direction and the positive x-axis is:
         Phi = psi + alfa
 
         'Parameter of the next Enpoint of the actual part of the Orbit
-        Dim NextT As Decimal = ParameterOfNextHitPoint(T, Phi)
+        Dim NextT As Double = ParameterOfNextHitPoint(T, Phi)
 
         'in addition, we calculate the angle of the following movement
         Phi = CalculateNextPhi(NextT, Phi)
@@ -260,7 +260,7 @@ Public Class ClsEllipseBilliardball
         Dim i As Integer = 0
 
         'The following Stepwide was defined by an Experiment
-        Dim Stepwide As Decimal = MyMathInterval.IntervalWidth * MySpeed / 1000
+        Dim Stepwide As Double = MyMathInterval.IntervalWidth * MySpeed / 1000
 
         Do
             i += 1
@@ -297,7 +297,7 @@ Public Class ClsEllipseBilliardball
 
     End Function
 
-    Private Function ParameterOfNextHitPoint(t As Decimal, phi As Decimal) As Decimal
+    Private Function ParameterOfNextHitPoint(t As Double, phi As Double) As Double
 
         't is the Parameter of the Startpoint of the actual part of the Orbit
         'and Phi the direction of the movement relative to the positive x-axis
@@ -306,23 +306,23 @@ Public Class ClsEllipseBilliardball
         'see mathematical documentation
 
         'Theta is the Parameter of a vector parallel to the direction-angle Phi
-        Dim theta As Decimal = Mathhelper.CalculateAngleOfDirection(CDec(MyB * Math.Cos(phi)), CDec(MyA * Math.Sin(phi)))
+        Dim theta As Double = Mathhelper.CalculateAngleOfDirection(CDbl(MyB * Math.Cos(phi)), CDbl(MyA * Math.Sin(phi)))
 
         'u is the Parameter where the straight line of the Orbit intersects the Ellipse
         'see math. doc.
-        Dim u As Decimal = CDec(-2 * Math.Cos(t - theta))
+        Dim u As Double = CDbl(-2 * Math.Cos(t - theta))
 
         'NextT is calculated and small rounding effects are corrected
-        Dim NextT As Decimal = CDec(Math.Min(1, Math.Cos(t) + u * Math.Cos(theta)))
+        Dim NextT As Double = CDbl(Math.Min(1, Math.Cos(t) + u * Math.Cos(theta)))
         NextT = Math.Max(-1, NextT)
-        NextT = CDec(Math.Acos(NextT))
+        NextT = CDbl(Math.Acos(NextT))
 
         'The solution above is in [0,pi]
         'but there is also another solution in [pi, 2*pi]
         'and we have to control according to the math. doc.
         'which solution is the correct one
         If Math.Sin(t) + u * Math.Sin(theta) <= 0 Then
-            NextT = CDec(2 * Math.PI - NextT)
+            NextT = CDbl(2 * Math.PI - NextT)
         End If
 
         NextT = Mathhelper.AngleInNullTwoPi(NextT)
@@ -331,7 +331,7 @@ Public Class ClsEllipseBilliardball
 
     End Function
 
-    Private Function CalculateNextPhi(t As Decimal, phi As Decimal) As Decimal
+    Private Function CalculateNextPhi(t As Double, phi As Double) As Double
 
         't is the Parameter of the Startpoint of the actual part of the Orbit
         'and Phi the direction of the movement relative to the positive x-axis
@@ -339,17 +339,17 @@ Public Class ClsEllipseBilliardball
         'see mathematical documentation
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
-        Dim psi As Decimal = CalculatePsi(t)
+        Dim psi As Double = CalculatePsi(t)
         psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'This gives the angle NextPhi - see math. doc.
-        Dim NextPhi As Decimal = 2 * psi - phi
+        Dim NextPhi As Double = 2 * psi - phi
         NextPhi = Mathhelper.AngleInNullTwoPi(NextPhi)
 
         'This is the perfect moment to write the protocol
         'of the next part of the Orbit into the Phase Portrait
 
-        Dim Alfa As Decimal = CalculateAlfa(t, NextPhi)
+        Dim Alfa As Double = CalculateAlfa(t, NextPhi)
         If PhaseportraitGraphics IsNot Nothing Then
             PhaseportraitGraphics.DrawPoint(New ClsMathpoint(MyBase.T, Alfa), MyColor, p)
             If MyIsProtocol And MyValueProtocol IsNot Nothing Then
@@ -363,26 +363,26 @@ Public Class ClsEllipseBilliardball
 
     End Function
 
-    Public Overrides Function CalculateAlfa(t As Decimal, phi As Decimal) As Decimal
+    Public Overrides Function CalculateAlfa(t As Double, phi As Double) As Double
 
         'This method calculates the next reflection angle Alfa
 
         'First, we need the angle between tangent in the Hit Point and the positive x-axis
-        Dim psi As Decimal = CalculatePsi(t)
+        Dim psi As Double = CalculatePsi(t)
         psi = Mathhelper.AngleInNullTwoPi(psi)
 
         'and then - see math. doc.
-        Dim alfa As Decimal = phi - psi
+        Dim alfa As Double = phi - psi
         alfa = Mathhelper.AngleInNullTwoPi(alfa)
 
         Return alfa
 
     End Function
 
-    Private Function CalculatePsi(t As Decimal) As Decimal
+    Private Function CalculatePsi(t As Double) As Double
 
         'This method calculates the angle between tangent in the Hit Point and the positive x-axis
-        Dim psi As Decimal = Mathhelper.CalculateAngleOfDirection(CDec(-MyA * Math.Sin(t)), CDec(MyB * Math.Cos(t)))
+        Dim psi As Double = Mathhelper.CalculateAngleOfDirection(CDbl(-MyA * Math.Sin(t)), CDbl(MyB * Math.Cos(t)))
         Return psi
 
     End Function

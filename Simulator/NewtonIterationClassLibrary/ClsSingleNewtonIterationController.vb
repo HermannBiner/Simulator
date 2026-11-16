@@ -25,7 +25,7 @@ Public Class ClsSingleNewtonIterationController
 
     'Iteration
     Private IterationStatus As ClsDynamics.EnIterationStatus
-    Const ConvergenceLimit As Decimal = CDec(0.01)
+    Const ConvergenceLimit As Double = CDbl(0.01)
     Private Steps As Integer
     Const MaxSteps As Integer = 100
 
@@ -42,7 +42,7 @@ Public Class ClsSingleNewtonIterationController
         LM = ClsLanguageManager.LM
         UnitRoots = New List(Of ClsComplexNumber)
 
-        MathInterval = New ClsInterval(CDec(-1.5), CDec(1.5))
+        MathInterval = New ClsInterval(CDbl(-1.5), CDbl(1.5))
         PicGraphics = New ClsGraphicTool(MyForm.PicDiagram, MathInterval, MathInterval)
         BmpDiagram = New Bitmap(MyForm.PicDiagram.Width, MyForm.PicDiagram.Height)
         MyForm.PicDiagram.Image = BmpDiagram
@@ -71,7 +71,7 @@ Public Class ClsSingleNewtonIterationController
         UnitRoots.Add(W)
 
         For k = 2 To N
-            W = W.Rotate(CDec(2 * Math.PI / N))
+            W = W.Rotate(CDbl(2 * Math.PI / N))
             UnitRoots.Add(W)
         Next
     End Sub
@@ -88,8 +88,8 @@ Public Class ClsSingleNewtonIterationController
     Private Sub DrawCoordinateSystem()
 
         'Coordinate System
-        BmpGraphics.DrawLine(New ClsMathpoint(0, CDec(-1.5)), New ClsMathpoint(0, CDec(1.5)), Color.Black, 1)
-        BmpGraphics.DrawLine(New ClsMathpoint(CDec(-1.5), 0), New ClsMathpoint(CDec(1.5), 0), Color.Black, 1)
+        BmpGraphics.DrawLine(New ClsMathpoint(0, CDbl(-1.5)), New ClsMathpoint(0, CDbl(1.5)), Color.Black, 1)
+        BmpGraphics.DrawLine(New ClsMathpoint(CDbl(-1.5), 0), New ClsMathpoint(CDbl(1.5), 0), Color.Black, 1)
 
         'Unit Roots
         BmpGraphics.DrawPoint(UnitRoots(0), Brushes.Red, 3)
@@ -103,16 +103,16 @@ Public Class ClsSingleNewtonIterationController
         Select Case N
             Case 2
                 'Separated by y-axis
-                BmpGraphics.DrawLine(New ClsMathpoint(0, CDec(-1.5)), New ClsMathpoint(0, CDec(1.5)), Color.Magenta, 1)
+                BmpGraphics.DrawLine(New ClsMathpoint(0, CDbl(-1.5)), New ClsMathpoint(0, CDbl(1.5)), Color.Magenta, 1)
             Case 3
                 'separated by 120° lines
                 Dim BP As New ClsComplexNumber(-1.5, 0)
                 Dim ZeroPoint As New ClsMathpoint(0, 0)
-                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDec(BP.X), CDec(BP.Y)), Color.Magenta, 1)
+                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDbl(BP.X), CDbl(BP.Y)), Color.Magenta, 1)
                 BP = BP.Rotate(2 * Math.PI / 3)
-                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDec(BP.X), CDec(BP.Y)), Color.Magenta, 1)
+                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDbl(BP.X), CDbl(BP.Y)), Color.Magenta, 1)
                 BP = BP.Rotate(2 * Math.PI / 3)
-                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDec(BP.X), CDec(BP.Y)), Color.Magenta, 1)
+                BmpGraphics.DrawLine(ZeroPoint, New ClsMathpoint(CDbl(BP.X), CDbl(BP.Y)), Color.Magenta, 1)
         End Select
 
         MyForm.PicDiagram.Refresh()
@@ -135,18 +135,18 @@ Public Class ClsSingleNewtonIterationController
     Private Function IsConvergent() As Boolean
 
         Dim OK As Boolean = False
-        If ActualPoint.Add(UnitRoots(0).Stretch(CDec(-1))).AbsoluteValue < ConvergenceLimit Then
+        If ActualPoint.Add(UnitRoots(0).Stretch(CDbl(-1))).AbsoluteValue < ConvergenceLimit Then
             PicGraphics.DrawPoint(ActualPoint, Brushes.Red, 3)
             PicGraphics.DrawPoint(StartPoint, Brushes.Red, 3)
             OK = True
-        ElseIf ActualPoint.Add(UnitRoots(1).Stretch(CDec(-1))).AbsoluteValue < ConvergenceLimit Then
+        ElseIf ActualPoint.Add(UnitRoots(1).Stretch(CDbl(-1))).AbsoluteValue < ConvergenceLimit Then
             PicGraphics.DrawPoint(ActualPoint, Brushes.Blue, 3)
             PicGraphics.DrawPoint(StartPoint, Brushes.Blue, 3)
             OK = True
         End If
 
         If N = 3 Then
-            If ActualPoint.Add(UnitRoots(2).Stretch(CDec(-1))).AbsoluteValue < ConvergenceLimit Then
+            If ActualPoint.Add(UnitRoots(2).Stretch(CDbl(-1))).AbsoluteValue < ConvergenceLimit Then
                 PicGraphics.DrawPoint(ActualPoint, Brushes.Green, 3)
                 PicGraphics.DrawPoint(StartPoint, Brushes.Green, 3)
                 OK = True

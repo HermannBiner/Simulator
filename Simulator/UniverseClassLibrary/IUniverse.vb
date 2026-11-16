@@ -42,15 +42,15 @@ Public Interface IUniverse
     'the diagramzoom is calculated in sub RedrawUniverse
     'and zooms the diagram so that the view on the stars is
     'optimized. The maximal possible Zoom is the following
-    ReadOnly Property MaxZoom As Decimal
+    ReadOnly Property MaxZoom As Double
 
     'the stars need access to this number when 
     'drawing themselves or drawing their orbit
     'the Actual Zoom is the following
-    Property DiagramZoom As Decimal
+    Property DiagramZoom As Double
 
     'to show the used VFactor - see VFacter in constellation
-    Property VFactor As Decimal
+    Property VFactor As Double
 
     'each universe as a predefined set of constellations
     'and each constellation contains a predefined set of stars/planets
@@ -83,8 +83,8 @@ Public Interface IUniverse
     'One Runge-Kutta step for all stars together
     Sub IterationStep(IsPhasePortrait As Boolean)
 
-    Function StepWidthToTrbValue(locStepWidth As Decimal) As Integer
+    Function StepWidthToTrbValue(locStepWidth As Double) As Integer
 
-    Function TrbValueToStepWidth(locTrbValue As Integer) As Decimal
+    Function TrbValueToStepWidth(locTrbValue As Integer) As Double
 
 End Interface

@@ -16,7 +16,7 @@ Public Class ClsLSystem
     Private MyType As EnLSystemType
 
     Private MyAxiom As String
-    Private MyScaleFactor As Decimal
+    Private MyScaleFactor As Double
     Private MyAngleLeft As Integer
     Private MyAngleRight As Integer
     Private MyColor As Integer
@@ -25,10 +25,10 @@ Public Class ClsLSystem
     Private MyIsExtended As Boolean
     Private MyIsColorFixed As Boolean
     Private MyIsBudding As Boolean
-    Private MyStartLength As Decimal
+    Private MyStartLength As Double
     Private MyScaling As ClsLSystemsController.EnScaling
-    Private MyStartpositionX As Decimal
-    Private MyStartpositionY As Decimal
+    Private MyStartpositionX As Double
+    Private MyStartpositionY As Double
 
     Private MyRules As Dictionary(Of String, String)
 
@@ -68,11 +68,11 @@ Public Class ClsLSystem
         End Set
     End Property
 
-    Public Property ScaleFactor As Decimal
+    Public Property ScaleFactor As Double
         Get
             Return MyScaleFactor
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyScaleFactor = value
         End Set
     End Property
@@ -133,11 +133,11 @@ Public Class ClsLSystem
         End Set
     End Property
 
-    Public Property StartLength As Decimal
+    Public Property StartLength As Double
         Get
             Return MyStartLength
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyStartLength = value
         End Set
     End Property
@@ -151,20 +151,20 @@ Public Class ClsLSystem
         End Set
     End Property
 
-    Public Property StartPositionX As Decimal
+    Public Property StartPositionX As Double
         Get
             Return MyStartpositionX
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyStartpositionX = value
         End Set
     End Property
 
-    Public Property StartPositionY As Decimal
+    Public Property StartPositionY As Double
         Get
             Return MyStartpositionY
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyStartpositionY = value
         End Set
     End Property

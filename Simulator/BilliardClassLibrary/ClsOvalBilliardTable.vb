@@ -7,30 +7,30 @@ Public Class ClsOvalBilliardTable
     Public Sub New()
 
         'Set specific parameters and ranges
-        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(Math.PI * 2)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 2))
-        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDec(0.001), CDec(3.13)),
-                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 30))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDbl(Math.PI * 2)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 2))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDbl(0.001), CDbl(3.13)),
+                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 30))
 
         MyValueParameterList.Add(MyTValueParameter)
         MyValueParameterList.Add(MyAlfaValueParameter)
 
         'Default
-        MyC = CDec(0.5)
-        MyA = CDec(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
+        MyC = CDbl(0.5)
+        MyA = CDbl(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
         MyB = MyC * MyA
 
     End Sub
 
-    Public Overrides Property C As Decimal
+    Public Overrides Property C As Double
         Get
             C = MyC
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyC = value
 
             'for better visibility, a + b is set = 1.9 (instead of 2)
-            MyA = CDec(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
+            MyA = CDbl(1.9 * Math.Min(1 / (1 + MyC), 1 / (2 * MyC)))
             MyB = MyC * MyA
         End Set
     End Property
@@ -47,9 +47,9 @@ Public Class ClsOvalBilliardTable
             'Focal Point of the Ellipse
             Dim Focalpoint As ClsMathpoint
             If MyA >= B Then
-                Focalpoint = New ClsMathpoint(Midpoint.X - CDec(Math.Sqrt(MyA * MyA - B * B)), 0) ''linker Brennpunkt
+                Focalpoint = New ClsMathpoint(Midpoint.X - CDbl(Math.Sqrt(MyA * MyA - B * B)), 0) ''linker Brennpunkt
             Else
-                Focalpoint = New ClsMathpoint(Midpoint.X, CDec(Math.Sqrt(B * B - MyA * MyA)))
+                Focalpoint = New ClsMathpoint(Midpoint.X, CDbl(Math.Sqrt(B * B - MyA * MyA)))
             End If
 
             'Draw these points
@@ -57,7 +57,7 @@ Public Class ClsOvalBilliardTable
             .DrawPoint(Focalpoint, Brushes.Blue, 2)
 
             'Draw half-Circle
-            .DrawCircleArc(Midpoint, B, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(Midpoint, B, CDbl(3 * Math.PI / 2), CDbl(Math.PI), Color.Blue, 1)
 
             'Draw half-Ellipse
             'Rectangle for the Ellipse bottom-left
@@ -66,7 +66,7 @@ Public Class ClsOvalBilliardTable
             'Rectangle for the Ellipse top-right
             Dim TopRight As New ClsMathpoint(Midpoint.X + MyA, B)
 
-            .DrawEllipticArc(BottomLeft, TopRight, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawEllipticArc(BottomLeft, TopRight, CDbl(Math.PI / 2), CDbl(Math.PI), Color.Blue, 1)
         End With
         MyPicDiagram.Refresh()
     End Sub

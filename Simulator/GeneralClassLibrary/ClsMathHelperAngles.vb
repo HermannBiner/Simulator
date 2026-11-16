@@ -5,27 +5,27 @@
 
 Public Class ClsMathHelperAngles
 
-    Public Function CalculateAngleOfDirection(DeltaX As Decimal, DeltaY As Decimal) As Decimal
+    Public Function CalculateAngleOfDirection(DeltaX As Double, DeltaY As Double) As Double
 
         'receives a vector (deltaX, deltaY)
         'return the angle between this vector and the positive x-axis in [0, 2*pi[
 
-        Dim Phi As Decimal
+        Dim Phi As Double
 
         If DeltaX > 0 Then
             If DeltaY >= 0 Then
-                Phi = CDec(Math.Atan(DeltaY / DeltaX))
+                Phi = CDbl(Math.Atan(DeltaY / DeltaX))
             Else
-                Phi = CDec(2 * Math.PI + Math.Atan(DeltaY / DeltaX))
+                Phi = CDbl(2 * Math.PI + Math.Atan(DeltaY / DeltaX))
             End If
         ElseIf DeltaX < 0 Then
-            Phi = CDec(Math.PI + Math.Atan(DeltaY / DeltaX))
+            Phi = CDbl(Math.PI + Math.Atan(DeltaY / DeltaX))
         Else
             'here is DeltaX = 0
             If DeltaY > 0 Then
-                Phi = CDec(Math.PI / 2)
+                Phi = CDbl(Math.PI / 2)
             Else
-                Phi = CDec(Math.PI * 3 / 2)
+                Phi = CDbl(Math.PI * 3 / 2)
             End If
         End If
 
@@ -33,17 +33,17 @@ Public Class ClsMathHelperAngles
 
     End Function
 
-    Public Function AngleInNullTwoPi(Angle As Decimal) As Decimal
+    Public Function AngleInNullTwoPi(Angle As Double) As Double
 
         'makes sure that an angle is in the interval [0, 2*pi[
 
-        Dim Tempangle As Decimal = Angle
+        Dim Tempangle As Double = ClsNumericCheck.ReduceAngle(Angle)
 
         Do Until Tempangle > 0
-            Tempangle = CDec(Tempangle + Math.PI * 2)
+            Tempangle = CDbl(Tempangle + Math.PI * 2)
         Loop
 
-        Tempangle = CDec(Tempangle Mod (Math.PI * 2))
+        Tempangle = CDbl(Tempangle Mod (Math.PI * 2))
 
         Return Tempangle
 

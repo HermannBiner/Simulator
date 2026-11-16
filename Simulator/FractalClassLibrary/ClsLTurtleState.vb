@@ -8,7 +8,7 @@ Public Class ClsLTurtleState
     Private MyPosition As ClsMathpoint
     Private MyAngle As Integer
     Private MyColor As SolidBrush
-    Private MyStepLength As Decimal
+    Private MyStepLength As Double
 
     Public Sub New()
         MyPosition = New ClsMathpoint(0, 0)
@@ -41,11 +41,11 @@ Public Class ClsLTurtleState
         End Set
     End Property
 
-    Public Property StepLength As Decimal
+    Public Property StepLength As Double
         Get
             Return MyStepLength
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyStepLength = value
         End Set
     End Property

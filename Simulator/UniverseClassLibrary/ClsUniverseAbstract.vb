@@ -52,9 +52,9 @@ Public MustInherit Class ClsUniverseAbstract
     Protected LocalCentreOfGravity As New ClsVector
 
     'To show an optimal diagram, the position coordinates are zoomed
-    Protected MyMaxZoom As Decimal
-    Protected MyDiagramZoom As Decimal
-    Protected MyVFactor As Decimal
+    Protected MyMaxZoom As Double
+    Protected MyDiagramZoom As Double
+    Protected MyVFactor As Double
 
     'Each Universe has its own MathInterval, therefore:
     Protected MustOverride Property PicDiagram As PictureBox Implements IUniverse.PicDiagram
@@ -139,26 +139,26 @@ Public MustInherit Class ClsUniverseAbstract
         End Set
     End Property
 
-    ReadOnly Property MaxZoom As Decimal Implements IUniverse.MaxZoom
+    ReadOnly Property MaxZoom As Double Implements IUniverse.MaxZoom
         Get
             MaxZoom = MyMaxZoom
         End Get
     End Property
 
-    Property DiagramZoom As Decimal Implements IUniverse.DiagramZoom
+    Property DiagramZoom As Double Implements IUniverse.DiagramZoom
         Get
             DiagramZoom = MyDiagramZoom
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyDiagramZoom = value
         End Set
     End Property
 
-    Property VFactor As Decimal Implements IUniverse.VFactor
+    Property VFactor As Double Implements IUniverse.VFactor
         Get
             VFactor = MyVFactor
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyVFactor = value
         End Set
     End Property
@@ -193,8 +193,8 @@ Public MustInherit Class ClsUniverseAbstract
 
             'The mass in this formula is independent on the units
             'first, the new gravitiy centre is calculated
-            Dim TotalMass As Decimal = 0
-            Dim NewStarMass As Decimal = 0
+            Dim TotalMass As Double = 0
+            Dim NewStarMass As Double = 0
 
             If NewStar IsNot Nothing Then
                 NewStarMass = NewStar.UserMass
@@ -209,7 +209,7 @@ Public MustInherit Class ClsUniverseAbstract
             If NewStar IsNot Nothing Then
                 With NewStar
                     StarSummand.Equal(.UserStartPosition)
-                    StarSummand.Mult(-CDec(NewStarMass / TotalMass))
+                    StarSummand.Mult(-CDbl(NewStarMass / TotalMass))
                     LocalCentreOfGravity.Add(StarSummand)
                     .TotalMassOfOtherStars = TotalMass - NewStarMass
                 End With
@@ -218,7 +218,7 @@ Public MustInherit Class ClsUniverseAbstract
             For Each aStar In MyActiveStarCollection
                 With aStar
                     StarSummand.Equal(.UserStartPosition)
-                    StarSummand.Mult(-CDec(aStar.UserMass / TotalMass))
+                    StarSummand.Mult(-CDbl(aStar.UserMass / TotalMass))
                     LocalCentreOfGravity.Add(StarSummand)
                     .TotalMassOfOtherStars = TotalMass - aStar.UserMass
                 End With
@@ -247,7 +247,7 @@ Public MustInherit Class ClsUniverseAbstract
             'Finally the zoom is calculated
 
             'MaxDistance should be stretched to MyMatzInterval
-            Dim MaxDistance As Decimal = 0
+            Dim MaxDistance As Double = 0
 
             If NewStar IsNot Nothing Then
                 MaxDistance = NewStar.UserStartPosition.Abs
@@ -344,7 +344,7 @@ Public MustInherit Class ClsUniverseAbstract
         MyPicPhasePortrait.Refresh()
     End Sub
 
-    Protected Overridable Function StepWidthToTrbValue(locStepWidth As Decimal) As Integer _
+    Protected Overridable Function StepWidthToTrbValue(locStepWidth As Double) As Integer _
         Implements IUniverse.StepWidthToTrbValue
         Select Case True
             Case locStepWidth < 0.01
@@ -358,17 +358,17 @@ Public MustInherit Class ClsUniverseAbstract
         End Select
     End Function
 
-    Protected Overridable Function TrbValueToStepWidth(locTrbValue As Integer) As Decimal _
+    Protected Overridable Function TrbValueToStepWidth(locTrbValue As Integer) As Double _
         Implements IUniverse.TrbValueToStepWidth
         Select Case True
             Case locTrbValue < 19
-                Return CDec(0.001 + (locTrbValue - 1) * 0.0005)
+                Return CDbl(0.001 + (locTrbValue - 1) * 0.0005)
             Case locTrbValue < 37
-                Return CDec(0.01 + (locTrbValue - 19) * 0.005)
+                Return CDbl(0.01 + (locTrbValue - 19) * 0.005)
             Case locTrbValue < 55
-                Return CDec(0.1 + (locTrbValue - 37) * 0.05)
+                Return CDbl(0.1 + (locTrbValue - 37) * 0.05)
             Case Else
-                Return CDec(1 + (locTrbValue - 55) * 0.5)
+                Return CDbl(1 + (locTrbValue - 55) * 0.5)
         End Select
     End Function
 

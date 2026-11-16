@@ -38,19 +38,19 @@ Public Class ClsUniverseController
     Private PicPulseGraphics As Graphics
     Private StartPulse As ClsVector
     Private ActualPulse As ClsVector
-    Private Const PulseTolerance As Decimal = CDec(0.1)
+    Private Const PulseTolerance As Double = CDbl(0.1)
 
     'to show the overall Angular Momentum of the universe during the iteration
     Private PicAngularMomentumGraphics As Graphics
     Private StartAngularMomentum As Double
     Private ActualAngularMomentum As Double
-    Private Const AngularMomentumTolerance As Decimal = CDec(0.1)
+    Private Const AngularMomentumTolerance As Double = CDbl(0.1)
 
     'to show the overall Energy of the universe during the iteration
     Private PicEnergyGraphics As Graphics
     Private StartEnergy As Double
     Private ActualEnergy As Double
-    Private Const EnergyTolerance As Decimal = CDec(0.1)
+    Private Const EnergyTolerance As Double = CDbl(0.1)
     Private ConservationBrush As Brush
     Private ConservationValue As Integer
 
@@ -395,10 +395,10 @@ Public Class ClsUniverseController
         If NewStar IsNot Nothing Then
             With NewStar
                 'TrbMass is between -20 and 20, that gives a factor of 0.6 ... 1.4 of the original mass
-                .UserMass = NewStar.OriginalMass * CDec((100 + 2 * MyForm.TrbMass.Value) / 100)
+                .UserMass = NewStar.OriginalMass * CDbl((100 + 2 * MyForm.TrbMass.Value) / 100)
                 'the mass should be in the range
-                .UserMass = CDec(Math.Max(0.05, .UserMass))
-                .UserMass = CDec(Math.Min(500000, .UserMass))
+                .UserMass = CDbl(Math.Max(0.05, .UserMass))
+                .UserMass = CDbl(Math.Min(500000, .UserMass))
                 UpdateTextFields(NewStar)
                 DS.RedrawUniverse(NewStar, IsDiagramZoom)
             End With
@@ -421,8 +421,8 @@ Public Class ClsUniverseController
 
             'Trb.value is between -10 and 10
             'that gives a factor between 0 and 2
-            Dim Factor As Decimal
-            Factor = CDec((0.1 * MyForm.TrbVelocity.Value + 1))
+            Dim Factor As Double
+            Factor = CDbl((0.1 * MyForm.TrbVelocity.Value + 1))
 
             Dim NewVelocity As ClsVector
             With NewStar.OriginalStartVelocity
@@ -431,8 +431,8 @@ Public Class ClsUniverseController
 
             'but it should be in the allowed range
             With DS.VelocityParameter.Range
-                NewVelocity.X = CDec(Math.Min(.B, Math.Max(.A, NewVelocity.X)))
-                NewVelocity.Y = CDec(Math.Min(.B, Math.Max(.A, NewVelocity.Y)))
+                NewVelocity.X = CDbl(Math.Min(.B, Math.Max(.A, NewVelocity.X)))
+                NewVelocity.Y = CDbl(Math.Min(.B, Math.Max(.A, NewVelocity.Y)))
             End With
             NewStar.UserStartVelocity.Equal(NewVelocity)
             NewStar.ActualVelocity.Equal(NewVelocity)
@@ -442,14 +442,14 @@ Public Class ClsUniverseController
     End Sub
 
     Public Sub SetStepWidthFromTrb()
-        Dim LocStepWidth As Decimal = DS.TrbValueToStepWidth(MyForm.TrbStepWidth.Value)
+        Dim LocStepWidth As Double = DS.TrbValueToStepWidth(MyForm.TrbStepWidth.Value)
         MyForm.LblStepWidth.Text = LM.GetString("StepWidth") & ": " & LocStepWidth.ToString
         For Each aStar As IStar In DS.ActiveStarCollection
             aStar.ActualStepWidth = LocStepWidth
         Next
     End Sub
 
-    Public Sub SetTrbFromStepWidth(locStepWidth As Decimal)
+    Public Sub SetTrbFromStepWidth(locStepWidth As Double)
         If locStepWidth > 0 Then
             MyForm.LblStepWidth.Text = LM.GetString("StepWidth") & ": " & locStepWidth.ToString
             MyForm.TrbStepWidth.Value = DS.StepWidthToTrbValue(locStepWidth)
@@ -515,7 +515,7 @@ Public Class ClsUniverseController
 
         ClearUniverse()
 
-        Dim TotalMassofAllStars As Decimal = 0
+        Dim TotalMassofAllStars As Double = 0
         'Fill the diagramm with all stars of the constellation
         For Each aStar As IStar In DS.ActiveConstellation.Stars
             With aStar
@@ -575,7 +575,7 @@ Public Class ClsUniverseController
             NewStar.BmpGraphics = DS.BmpGraphics
 
             '''TotalMassofOtherStars has to be set for each star
-            ''Dim LocTotalmassOfOtherStars As Decimal
+            ''Dim LocTotalmassOfOtherStars As Double
             '''Sum fo the already existing stars
             ''For Each aStar As IStar In DS.ActiveStarCollection
             ''    LocTotalmassOfOtherStars += aStar.UserMass
@@ -645,7 +645,7 @@ Public Class ClsUniverseController
             EnableClearArea()
             EnableNewStarArea(True)
 
-            SetTrbFromStepWidth(CDec(NewStar.ProposedStepWidth))
+            SetTrbFromStepWidth(CDbl(NewStar.ProposedStepWidth))
             NewStar = Nothing
         Else
             'Message already generated
@@ -674,7 +674,7 @@ Public Class ClsUniverseController
                     'Remove Orbits and show only stars
                     DS.ClearDiagrams()
 
-                    Dim LocTotalmassOfOtherStars As Decimal
+                    Dim LocTotalmassOfOtherStars As Double
 
                     For Each aStar As IStar In DS.ActiveStarCollection
                         'Set Iteration to UserStart and draws the star in PicDiagram

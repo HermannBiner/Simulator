@@ -127,7 +127,7 @@ Public Class FrmBilliardtable
 
     Private Sub TrbParameterC_Scroll(sender As Object, e As EventArgs) Handles TrbParameterC.Scroll
         If IsFormLoaded Then
-            TxtParameter.Text = CDec(TrbParameterC.Value * 0.01).ToString
+            TxtParameter.Text = CDbl(TrbParameterC.Value * 0.01).ToString
             FC.SetParameterC()
         End If
     End Sub

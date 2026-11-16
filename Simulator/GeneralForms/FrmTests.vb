@@ -71,16 +71,16 @@ Public Class FrmTests
     Private Sub SetDefaulValues()
 
         'Sin/Cos
-        'XInterval = New ClsInterval(CDec(-2), CDec(2))
-        'YInterval = New ClsInterval(CDec(-1), CDec(1))
+        'XInterval = New ClsInterval(CDbl(-2), CDbl(2))
+        'YInterval = New ClsInterval(CDbl(-1), CDbl(1))
 
         'Parabola
-        'XInterval = New ClsInterval(CDec(0), CDec(2))
-        'YInterval = New ClsInterval(CDec(0), CDec(6))
+        'XInterval = New ClsInterval(CDbl(0), CDbl(2))
+        'YInterval = New ClsInterval(CDbl(0), CDbl(6))
 
         'Epicycle
-        XInterval = New ClsInterval(CDec(-1.5), CDec(1.5))
-        YInterval = New ClsInterval(CDec(-1.5), CDec(1.5))
+        XInterval = New ClsInterval(CDbl(-1.5), CDbl(1.5))
+        YInterval = New ClsInterval(CDbl(-1.5), CDbl(1.5))
 
         MyGraphics = New ClsGraphicTool(PicDiagram, XInterval, YInterval)
 
@@ -117,26 +117,26 @@ Public Class FrmTests
 
     Private Sub DrawEpicycle()
 
-        Dim rMain As Decimal = CDec(0.8)
-        Dim rEpi As Decimal = CDec(0.2)
-        Dim Omega As Decimal = CDec(11)
+        Dim rMain As Double = CDbl(0.8)
+        Dim rEpi As Double = CDbl(0.2)
+        Dim Omega As Double = CDbl(11)
 
-        Dim t As Decimal = 0
-        Const dt As Decimal = CDec(0.001)
+        Dim t As Double = 0
+        Const dt As Double = CDbl(0.001)
 
         Dim Orbit As New ClsMathpoint
 
         Do
             With Orbit
-                .X = CDec(rMain * Math.Cos(t) + rEpi * Math.Cos(Omega * t))
-                .Y = CDec(rMain * Math.Sin(t) + rEpi * Math.Sin(Omega * t))
+                .X = CDbl(rMain * Math.Cos(t) + rEpi * Math.Cos(Omega * t))
+                .Y = CDbl(rMain * Math.Sin(t) + rEpi * Math.Sin(Omega * t))
 
                 MyGraphics.DrawPoint(Orbit, Brushes.Blue, 1)
 
                 t += dt
             End With
 
-        Loop Until t >= CDec(2 * Math.PI)
+        Loop Until t >= CDbl(2 * Math.PI)
 
 
         MyGraphics.DrawCircle(New ClsMathpoint(0, 0), rMain, Brushes.Red, 1)
@@ -146,68 +146,68 @@ Public Class FrmTests
 
     Private Sub ApproxEllipseByEpicycle()
 
-        Dim a As Decimal = CDec(1)
-        Dim b As Decimal = CDec(0.8)
+        Dim a As Double = CDbl(1)
+        Dim b As Double = CDbl(0.8)
 
-        Dim t As Decimal = 0
-        Const dt As Decimal = CDec(0.001)
+        Dim t As Double = 0
+        Const dt As Double = CDbl(0.001)
 
         Dim Orbit As New ClsMathpoint
 
         'DrawEllipse
         Do
             With Orbit
-                .X = CDec(a * Math.Cos(t))
-                .Y = CDec(b * Math.Sin(t))
+                .X = CDbl(a * Math.Cos(t))
+                .Y = CDbl(b * Math.Sin(t))
                 MyGraphics.DrawPoint(Orbit, Brushes.Green, 1)
                 t += dt
             End With
-        Loop Until t >= CDec(2 * Math.PI)
+        Loop Until t >= CDbl(2 * Math.PI)
 
         t = 0
 
         'DrawEpicycle
         Do
             With Orbit
-                .X = CDec((a + b) * Math.Cos(t) / 2 + (a - b) * Math.Cos(3 * t) / 2)
-                .Y = CDec((a + b) * Math.Sin(t) / 2 + (a - b) * Math.Sin(3 * t) / 2)
+                .X = CDbl((a + b) * Math.Cos(t) / 2 + (a - b) * Math.Cos(3 * t) / 2)
+                .Y = CDbl((a + b) * Math.Sin(t) / 2 + (a - b) * Math.Sin(3 * t) / 2)
                 MyGraphics.DrawPoint(Orbit, Brushes.Red, 1)
                 t += dt
             End With
-        Loop Until t >= CDec(2 * Math.PI)
+        Loop Until t >= CDbl(2 * Math.PI)
 
     End Sub
 
     Private Sub DrawCurve()
-        Dim u As Decimal = 0
+        Dim u As Double = 0
         Dim Gamma As New ClsMathpoint
         Dim p As Integer = 5
 
         Do
 
             With Gamma
-                .X = CDec((2 + Math.Sin(u)) * Math.Cos(p * u))
-                .Y = CDec((2 + Math.Sin(u)) * Math.Sin(p * u))
+                .X = CDbl((2 + Math.Sin(u)) * Math.Cos(p * u))
+                .Y = CDbl((2 + Math.Sin(u)) * Math.Sin(p * u))
             End With
             MyGraphics.DrawPoint(Gamma, Brushes.Blue, 1)
 
-            u += CDec(0.001)
+            u += CDbl(0.001)
 
 
-        Loop Until u > CDec(2 * Math.PI)
+        Loop Until u > CDbl(2 * Math.PI)
     End Sub
 
     Private Sub DrawDirectionField()
-        Dim y As Decimal = YInterval.A
-        Dim t As Decimal
-        Dim Deltay As Decimal
-        Dim Deltat As Decimal
+        Dim y As Double = YInterval.A
+        Dim t As Double
+        Dim Deltay As Double
+        Dim Deltat As Double
         'sin cos
-        'Dim h As Decimal = CDec(0.05)
-        'Dim k As Decimal = CDec(0.02)
+        'Dim h As Double = CDbl(0.05)
+        'Dim k As Double = CDbl(0.02)
         'Parabola
-        Dim h As Decimal = CDec(0.06)
-        Dim k As Decimal = CDec(0.05)
+        Dim h As Double = CDbl(0.06)
+        Dim k As Double = CDbl(0.05)
         Dim DrawPoint1 As ClsMathpoint
         Dim DrawPoint2 As ClsMathpoint
 
@@ -217,9 +217,9 @@ Public Class FrmTests
             Do
                 MyGraphics.DrawPoint(New ClsMathpoint(t, y), Brushes.Black, 2)
                 'Deltat = CosArctan(y')*k
-                Deltat = CDec(k / Math.Sqrt(1 + Math.Pow(Derivate(t, y), 2)))
+                Deltat = CDbl(k / Math.Sqrt(1 + Math.Pow(Derivate(t, y), 2)))
                 'Deltay = SinArctan(y')*k
-                Deltay = CDec(Derivate(t, y) * k / Math.Sqrt(1 + Math.Pow(Derivate(t, y), 2)))
+                Deltay = CDbl(Derivate(t, y) * k / Math.Sqrt(1 + Math.Pow(Derivate(t, y), 2)))
                 'Draw Direction at (t,y)
                 DrawPoint1 = New ClsMathpoint(t - Deltat, y - Deltay)
                 DrawPoint2 = New ClsMathpoint(t + Deltat, y + Deltay)
@@ -233,19 +233,19 @@ Public Class FrmTests
         t = XInterval.A
         Do
             MyGraphics.DrawPoint(New ClsMathpoint(t, f(t)), Brushes.Green, 1)
-            t += h * CDec(0.01)
+            t += h * CDbl(0.01)
         Loop Until t > XInterval.B
 
     End Sub
 
-    Private Function Derivate(t As Decimal, y As Decimal) As Decimal
-        'Return CDec(Math.Sin(t * 3))
-        Return CDec(3 * t * t)
+    Private Function Derivate(t As Double, y As Double) As Double
+        'Return CDbl(Math.Sin(t * 3))
+        Return CDbl(3 * t * t)
     End Function
 
-    Private Function f(t As Decimal) As Decimal
-        'Return CDec((1 - Math.Cos(t * 3)) / 3)
-        Return CDec(t * t * t)
+    Private Function f(t As Double) As Double
+        'Return CDbl((1 - Math.Cos(t * 3)) / 3)
+        Return CDbl(t * t * t)
     End Function
 
     Private Sub BtnStop_Click(sender As Object, e As EventArgs) Handles BtnStop.Click

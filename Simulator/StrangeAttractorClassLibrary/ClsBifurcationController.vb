@@ -32,7 +32,7 @@ Public Class ClsBifurcationController
 
     'To draw the circle
     'x is the chosen coordinate
-    Private x As Decimal
+    Private x As Double
 
     'Iteration Parameters
     Private Const RunTimeUntilCycle As Integer = 5000
@@ -53,9 +53,9 @@ Public Class ClsBifurcationController
 
         IterationPointSet = New ClsPointSet
 
-        StartPoint = New ClsIterationPoint(CDec(0.1), CDec(0.1), CDec(0.1), Brushes.Blue)
+        StartPoint = New ClsIterationPoint(CDbl(0.1), CDbl(0.1), CDbl(0.1), Brushes.Blue)
         IterationPointSet.AddPoint(StartPoint)
-        StartPoint = New ClsIterationPoint(CDec(-0.1), CDec(-0.1), CDec(0.1), Brushes.Red)
+        StartPoint = New ClsIterationPoint(CDbl(-0.1), CDbl(-0.1), CDbl(0.1), Brushes.Red)
         IterationPointSet.AddPoint(StartPoint)
 
         CyclePoint = New ClsMathpoint
@@ -207,11 +207,11 @@ Public Class ClsBifurcationController
 
     Public Sub SetDelta()
         With MyForm
-            If IsNumeric(.TxtAMax.Text) And IsNumeric(.TxtAMin.Text) Then
-                .LblDeltaA.Text = "Delta = " & (CDec(.TxtAMax.Text) - CDec(.TxtAMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtAMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtAMin.Text) Then
+                .LblDeltaA.Text = "Delta = " & (CDbl(.TxtAMax.Text) - CDbl(.TxtAMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
-            If IsNumeric(.TxtXMax.Text) And IsNumeric(.TxtXMin.Text) Then
-                .LblDeltaX.Text = "Delta = " & (CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtXMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtXMin.Text) Then
+                .LblDeltaX.Text = "Delta = " & (CDbl(.TxtXMax.Text) - CDbl(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
         End With
     End Sub
@@ -242,9 +242,9 @@ Public Class ClsBifurcationController
                 With MyForm
                     DiagramAreaSelector.IsActivated = False
                     IterationStatus = ClsDynamics.EnIterationStatus.Ready
-                    ActualParameterRange = New ClsInterval(CDec(.TxtAMin.Text), CDec(.TxtAMax.Text))
+                    ActualParameterRange = New ClsInterval(CDbl(.TxtAMin.Text), CDbl(.TxtAMax.Text))
                     BmpGraphics.MathXInterval = ActualParameterRange
-                    ActualValueRange = New ClsInterval(CDec(.TxtXMin.Text), CDec(.TxtXMax.Text))
+                    ActualValueRange = New ClsInterval(CDbl(.TxtXMin.Text), CDbl(.TxtXMax.Text))
                     BmpGraphics.MathYInterval = ActualValueRange
                     DiagramAreaSelector.UserXRange = ActualParameterRange
                     DiagramAreaSelector.UserYRange = ActualValueRange
@@ -347,7 +347,7 @@ Public Class ClsBifurcationController
     Private Sub DrawSplitPoints()
 
         'the first split points are marked by vertical lines
-        Dim Splitpoints As List(Of Decimal) = DS.Splitpoints
+        Dim Splitpoints As List(Of Double) = DS.Splitpoints
         Dim i As Integer
 
         If Splitpoints.Count > 0 Then

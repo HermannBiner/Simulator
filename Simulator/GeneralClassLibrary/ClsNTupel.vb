@@ -4,7 +4,7 @@
 'Status Checked
 
 Public Class ClsNTupel
-    Private ReadOnly MyComponents As Decimal()
+    Private ReadOnly MyComponents As Double()
     Private ReadOnly MyDimension As Integer
 
     Public Sub New(N As Integer)
@@ -12,11 +12,11 @@ Public Class ClsNTupel
         ReDim MyComponents(N)
     End Sub
 
-    Public Property Component(index As Integer) As Decimal
+    Public Property Component(index As Integer) As Double
         Get
             Return MyComponents(index)
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyComponents(index) = value
         End Set
     End Property

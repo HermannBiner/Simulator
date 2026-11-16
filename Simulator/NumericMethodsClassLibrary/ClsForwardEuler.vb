@@ -10,10 +10,10 @@ Public Class ClsForwardEuler
 
     'These are the parameters according to the mathematical documentation
     'first the y-substitution component(1)
-    Private u As Decimal
+    Private u As Double
 
     'and the derivated y' substitution component(2)
-    Private v As Decimal
+    Private v As Double
 
 
     Protected Overrides Sub Iteration()
@@ -38,7 +38,7 @@ Public Class ClsForwardEuler
             Next
 
             'the Component(0) holds the "time" t with 2*pi period
-            .Component(0) = .Component(0) Mod CDec(2 * Math.PI)
+            .Component(0) = .Component(0) Mod CDbl(2 * Math.PI)
 
         End With
 

@@ -61,8 +61,8 @@ Public MustInherit Class ClsNewtonAbstract
 
         LM = ClsLanguageManager.LM
 
-        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
-        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDec(-1.5), CDec(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+        MyXValueParameter = New ClsGeneralParameter(1, "x-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+        MyYValueParameter = New ClsGeneralParameter(1, "y-Values", New ClsInterval(CDbl(-1.5), CDbl(1.5)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyActualXRange = MyXValueParameter.Range
         MyActualYRange = MyYValueParameter.Range
@@ -231,7 +231,7 @@ Public MustInherit Class ClsNewtonAbstract
             Else
                 Col = MyRoot.GetColor(1)
             End If
-            BmpGraphics.DrawPoint(New ClsMathpoint(CDec(MyRoot.X), CDec(MyRoot.Y)), Col, 3)
+            BmpGraphics.DrawPoint(New ClsMathpoint(CDbl(MyRoot.X), CDbl(MyRoot.Y)), Col, 3)
         Next
 
         MyPicDiagram.Refresh()

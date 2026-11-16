@@ -13,14 +13,14 @@ Public MustInherit Class ClsNumericMethodAbstract
     Protected ReadOnly LM As ClsLanguageManager
 
     'Step Width for the approximation
-    Protected MyH As Decimal
+    Protected MyH As Double
 
     'Number of approximation steps before result is returned
     Protected MyNumberOfApproxSteps As Integer
 
     'Amplitude is the Y-Position of the Pendulum
     'at the Start Position
-    Protected MyAmplitude As Decimal
+    Protected MyAmplitude As Double
 
     'Data transfer is here based on a vector
     'ActualParameter(0) is the "time"-Parameter t
@@ -30,11 +30,11 @@ Public MustInherit Class ClsNumericMethodAbstract
     Public Sub New()
         LM = ClsLanguageManager.LM
     End Sub
-    Property h As Decimal Implements INumericMethod.h
+    Property h As Double Implements INumericMethod.h
         Get
             h = MyH
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyH = value
         End Set
     End Property
@@ -45,18 +45,18 @@ Public MustInherit Class ClsNumericMethodAbstract
         End Set
     End Property
 
-    WriteOnly Property Amplitude As Decimal Implements INumericMethod.Amplitude
-        Set(value As Decimal)
+    WriteOnly Property Amplitude As Double Implements INumericMethod.Amplitude
+        Set(value As Double)
             MyAmplitude = value
             MyActualParameter.Component(1) = value
         End Set
     End Property
 
-    Property ActualParameter(index As Integer) As Decimal Implements INumericMethod.ActualParameter
+    Property ActualParameter(index As Integer) As Double Implements INumericMethod.ActualParameter
         Get
             ActualParameter = MyActualParameter.Component(index)
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyActualParameter.Component(index) = value
         End Set
     End Property

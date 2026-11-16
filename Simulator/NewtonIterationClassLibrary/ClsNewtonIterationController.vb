@@ -169,11 +169,11 @@ Public Class ClsNewtonIterationController
 
     Public Sub SetDelta()
         With MyForm
-            If IsNumeric(.TxtXMax.Text) And IsNumeric(.TxtXMin.Text) Then
-                .LblDeltaX.Text = "Delta = " & (CDec(.TxtXMax.Text) - CDec(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtXMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtXMin.Text) Then
+                .LblDeltaX.Text = "Delta = " & (CDbl(.TxtXMax.Text) - CDbl(.TxtXMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
-            If IsNumeric(.TxtYMax.Text) And IsNumeric(.TxtYMin.Text) Then
-                .LblDeltaY.Text = "Delta = " & (CDec(.TxtYMax.Text) - CDec(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtYMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtYMin.Text) Then
+                .LblDeltaY.Text = "Delta = " & (CDbl(.TxtYMax.Text) - CDbl(.TxtYMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
         End With
     End Sub
@@ -260,8 +260,8 @@ Public Class ClsNewtonIterationController
                     Else
                         .N = 3
                     End If
-                    .ActualXRange = New ClsInterval(CDec(MyForm.TxtXMin.Text), CDec(MyForm.TxtXMax.Text))
-                    .ActualYRange = New ClsInterval(CDec(MyForm.TxtYMin.Text), CDec(MyForm.TxtYMax.Text))
+                    .ActualXRange = New ClsInterval(CDbl(MyForm.TxtXMin.Text), CDbl(MyForm.TxtXMax.Text))
+                    .ActualYRange = New ClsInterval(CDbl(MyForm.TxtYMin.Text), CDbl(MyForm.TxtYMax.Text))
                     DiagramAreaSelector.UserXRange = .ActualXRange
                     DiagramAreaSelector.UserYRange = .ActualYRange
                     .IsProtocol = MyForm.ChkProtocol.Checked
@@ -446,8 +446,8 @@ Public Class ClsNewtonIterationController
 
         SetExponent()
 
-        Dim XInterval = New ClsInterval(CDec(0), CDec(2))
-        Dim YInterval = New ClsInterval(CDec(-1), CDec(1))
+        Dim XInterval = New ClsInterval(CDbl(0), CDbl(2))
+        Dim YInterval = New ClsInterval(CDbl(-1), CDbl(1))
         Dim MyGraphics = New ClsGraphicTool(MyForm.PicDiagram, XInterval, YInterval)
 
         Const StepWide As Double = 0.001
@@ -460,11 +460,11 @@ Public Class ClsNewtonIterationController
         MyGraphics.DrawLine(New ClsMathpoint(0, YInterval.A), New ClsMathpoint(0, YInterval.B),
                         Color.Black, 1)
         MyGraphics.DrawCircle(New ClsMathpoint(1, 0), 1, Color.Blue, 1)
-        MyGraphics.DrawCircle(New ClsMathpoint(1, 0), CDec(1 - 1 / Math.Pow(2, 1 / DS.N)),
+        MyGraphics.DrawCircle(New ClsMathpoint(1, 0), CDbl(1 - 1 / Math.Pow(2, 1 / DS.N)),
                                   Color.Green, 1)
         MyGraphics.DrawPoint(New ClsMathpoint(1, 0), Brushes.Black, 2)
 
-        Dim Asymptote As New ClsMathpoint(CDec(2 * Math.Cos(Math.PI / (2 * DS.N))), CDec(2 * Math.Sin(Math.PI / (2 * DS.N))))
+        Dim Asymptote As New ClsMathpoint(CDbl(2 * Math.Cos(Math.PI / (2 * DS.N))), CDbl(2 * Math.Sin(Math.PI / (2 * DS.N))))
         MyGraphics.DrawLine(New ClsMathpoint(0, 0), Asymptote, Color.Green, 1)
         Asymptote.Y = -Asymptote.Y
         MyGraphics.DrawLine(New ClsMathpoint(0, 0), Asymptote, Color.Green, 1)
@@ -480,15 +480,15 @@ Public Class ClsNewtonIterationController
             R = GetR(Phi)
 
             If R < Limit Then
-                MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(R * Math.Sin(Phi))), Brushes.Red, 1)
-                MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(-R * Math.Sin(Phi))), Brushes.Red, 1)
+                MyGraphics.DrawPoint(New ClsMathpoint(CDbl(R * Math.Cos(Phi)), CDbl(R * Math.Sin(Phi))), Brushes.Red, 1)
+                MyGraphics.DrawPoint(New ClsMathpoint(CDbl(R * Math.Cos(Phi)), CDbl(-R * Math.Sin(Phi))), Brushes.Red, 1)
             End If
 
             R = GetApproximativeR(Phi)
 
             If R < Limit Then
-                MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(R * Math.Sin(Phi))), Brushes.Red, 1)
-                MyGraphics.DrawPoint(New ClsMathpoint(CDec(R * Math.Cos(Phi)), CDec(-R * Math.Sin(Phi))), Brushes.Red, 1)
+                MyGraphics.DrawPoint(New ClsMathpoint(CDbl(R * Math.Cos(Phi)), CDbl(R * Math.Sin(Phi))), Brushes.Red, 1)
+                MyGraphics.DrawPoint(New ClsMathpoint(CDbl(R * Math.Cos(Phi)), CDbl(-R * Math.Sin(Phi))), Brushes.Red, 1)
             End If
 
             'This is the result of experiments:

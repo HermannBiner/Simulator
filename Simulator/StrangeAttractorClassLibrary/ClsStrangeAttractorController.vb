@@ -20,8 +20,8 @@ Public Class ClsStrangeAttractorController
     Private N As Integer
 
     'view angles
-    Private Phi As Decimal
-    Private Theta As Decimal
+    Private Phi As Double
+    Private Theta As Double
 
     'when setting the view by the mouse
     Private IsMouseDown As Boolean
@@ -129,8 +129,8 @@ Public Class ClsStrangeAttractorController
 
         'View
         MyForm.Opt3D.Checked = True
-        Phi = CDec(-Math.PI / 15)
-        Theta = CDec(Math.PI / 8)
+        Phi = CDbl(-Math.PI / 15)
+        Theta = CDbl(Math.PI / 8)
         SetAngleText()
         DrawCoordinateCube()
 
@@ -211,9 +211,9 @@ Public Class ClsStrangeAttractorController
 
     Public Sub TakeOverPointSet()
         If IterationPointSet.Count = 1 Then
-            IterationPointSet.Points(0).ActualPoint.X = CDec(MyForm.TxtX.Text)
-            IterationPointSet.Points(0).ActualPoint.Y = CDec(MyForm.TxtY.Text)
-            IterationPointSet.Points(0).ActualPoint.Z = CDec(MyForm.TxtZ.Text)
+            IterationPointSet.Points(0).ActualPoint.X = CDbl(MyForm.TxtX.Text)
+            IterationPointSet.Points(0).ActualPoint.Y = CDbl(MyForm.TxtY.Text)
+            IterationPointSet.Points(0).ActualPoint.Z = CDbl(MyForm.TxtZ.Text)
         End If
         SetStartPointSet()
         DrawStartpointSet()
@@ -249,7 +249,7 @@ Public Class ClsStrangeAttractorController
         ResetIteration()
     End Sub
 
-    Private Sub SetTrbFromDSParameter(LocDSParameter As Decimal)
+    Private Sub SetTrbFromDSParameter(LocDSParameter As Double)
         MyForm.TrbDSParameter.Value = CInt((LocDSParameter - DS.DSParameter.Range.A) * 1000 / (DS.DSParameter.Range.B - DS.DSParameter.Range.A))
         MyForm.TxtDSParameter.Text = LocDSParameter.ToString(CultureInfo.CurrentCulture)
     End Sub
@@ -258,45 +258,45 @@ Public Class ClsStrangeAttractorController
         With DS
             Select Case MyForm.TrbStepWidth.Value
                 Case 1
-                    .StepWidth = CDec(0.00001)
+                    .StepWidth = CDbl(0.00001)
                 Case 2
-                    .StepWidth = CDec(0.00005)
+                    .StepWidth = CDbl(0.00005)
                 Case 3
-                    .StepWidth = CDec(0.0001)
+                    .StepWidth = CDbl(0.0001)
                 Case 4
-                    .StepWidth = CDec(0.0005)
+                    .StepWidth = CDbl(0.0005)
                 Case 5
-                    .StepWidth = CDec(0.001)
+                    .StepWidth = CDbl(0.001)
                 Case 6
-                    .StepWidth = CDec(0.005)
+                    .StepWidth = CDbl(0.005)
                 Case 7
-                    .StepWidth = CDec(0.01)
+                    .StepWidth = CDbl(0.01)
                 Case 8
-                    .StepWidth = CDec(0.05)
+                    .StepWidth = CDbl(0.05)
                 Case Else
-                    .StepWidth = CDec(0.1)
+                    .StepWidth = CDbl(0.1)
             End Select
             MyForm.LblStepWidth.Text = LM.GetString("StepWidth") & ": " & .StepWidth.ToString(CultureInfo.CurrentCulture)
         End With
     End Sub
 
-    Private Sub SetTrbFromStepWidth(LocStepwidth As Decimal)
+    Private Sub SetTrbFromStepWidth(LocStepwidth As Double)
         Select Case LocStepwidth
-            Case CDec(0.00001)
+            Case CDbl(0.00001)
                 MyForm.TrbStepWidth.Value = 1
-            Case CDec(0.00005)
+            Case CDbl(0.00005)
                 MyForm.TrbStepWidth.Value = 2
-            Case CDec(0.0001)
+            Case CDbl(0.0001)
                 MyForm.TrbStepWidth.Value = 3
-            Case CDec(0.0005)
+            Case CDbl(0.0005)
                 MyForm.TrbStepWidth.Value = 4
-            Case CDec(0.001)
+            Case CDbl(0.001)
                 MyForm.TrbStepWidth.Value = 5
-            Case CDec(0.005)
+            Case CDbl(0.005)
                 MyForm.TrbStepWidth.Value = 6
-            Case CDec(0.01)
+            Case CDbl(0.01)
                 MyForm.TrbStepWidth.Value = 7
-            Case CDec(0.05)
+            Case CDbl(0.05)
                 MyForm.TrbStepWidth.Value = 8
             Case Else
                 MyForm.TrbStepWidth.Value = 9
@@ -345,16 +345,16 @@ Public Class ClsStrangeAttractorController
         End If
     End Sub
 
-    Private Sub MouseMoving(X As Decimal, Y As Decimal)
+    Private Sub MouseMoving(X As Double, Y As Double)
 
         'phi is between -pi/2 and PI/2
         With DS.MathInterval
-            Phi = Math.Max(CDec(-(Math.PI / 2)), Math.Min(CDec(Math.PI / 2), CDec(Math.PI) * (X - .A) / (.B - .A) - CDec(Math.PI / 2)))
+            Phi = Math.Max(CDbl(-(Math.PI / 2)), Math.Min(CDbl(Math.PI / 2), CDbl(Math.PI) * (X - .A) / (.B - .A) - CDbl(Math.PI / 2)))
         End With
 
         'Theta is between 1 (visibility) and 0.01
         With DS.MathInterval
-            Theta = Math.Min(1, Math.Max(CDec(0.01), CDec(Math.PI / 2) * ((.B + 2 * .A - 3 * Y) / (.B - .A))))
+            Theta = Math.Min(1, Math.Max(CDbl(0.01), CDbl(Math.PI / 2) * ((.B + 2 * .A - 3 * Y) / (.B - .A))))
         End With
     End Sub
 
@@ -371,7 +371,7 @@ Public Class ClsStrangeAttractorController
 
         'Cornerpoints of the cube - see math.doc.
         'because of visibility: The floor-square has the diagonal of length 2*sqrt(2)
-        Dim e As Decimal = CDec((DS.MathInterval.B - DS.MathInterval.A) / (2 * Math.Sqrt(2)))
+        Dim e As Double = CDbl((DS.MathInterval.B - DS.MathInterval.A) / (2 * Math.Sqrt(2)))
             Dim CornerPoints(9) As ClsMathpoint
         CornerPoints(0) = New ClsMathpoint(e, e, 0)
         CornerPoints(1) = New ClsMathpoint(e, -e, 0)
@@ -456,9 +456,9 @@ Public Class ClsStrangeAttractorController
 
         'rotate see math.doc.
         With RealPoint
-            RotatedPoint.X = CDec(.X * Math.Cos(Phi) - .Y * Math.Sin(Phi) * Math.Cos(Theta) - .Z * Math.Sin(Phi) * Math.Sin(Theta))
-            RotatedPoint.Y = CDec(.X * Math.Sin(Phi) + .Y * Math.Cos(Phi) * Math.Cos(Theta) + .Z * Math.Cos(Phi) * Math.Sin(Theta))
-            RotatedPoint.Z = CDec(- .Y * Math.Sin(Theta) + .Z * Math.Cos(Theta))
+            RotatedPoint.X = CDbl(.X * Math.Cos(Phi) - .Y * Math.Sin(Phi) * Math.Cos(Theta) - .Z * Math.Sin(Phi) * Math.Sin(Theta))
+            RotatedPoint.Y = CDbl(.X * Math.Sin(Phi) + .Y * Math.Cos(Phi) * Math.Cos(Theta) + .Z * Math.Cos(Phi) * Math.Sin(Theta))
+            RotatedPoint.Z = CDbl(- .Y * Math.Sin(Theta) + .Z * Math.Cos(Theta))
         End With
 
         'Projection to plane y = 1, and the x-direction is inverted

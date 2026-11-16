@@ -12,10 +12,10 @@ Public Class ClsShakedPendulum
     Private ReadOnly ValueParameter(3) As ClsGeneralParameter
 
     'Time
-    Private t As Decimal
+    Private t As Double
 
     'Frequency of the shaker
-    Private Omega As Decimal
+    Private Omega As Double
 
     Private ReadOnly Origin As ClsMathpoint
 
@@ -40,25 +40,25 @@ Public Class ClsShakedPendulum
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L
-        ValueParameter(1) = New ClsGeneralParameter(2, "l", New ClsInterval(CDec(0.05), CDec(0.98)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.5))
+        ValueParameter(1) = New ClsGeneralParameter(2, "l", New ClsInterval(CDbl(0.05), CDbl(0.98)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDbl(0.5))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'x - position of the shaker
         ValueParameter(2) = New ClsGeneralParameter(3, "x", ShrinkedInterval,
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(ShrinkFactor / 2))
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(ShrinkFactor / 2))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'Phi
-        ValueParameter(3) = New ClsGeneralParameter(4, "Phi", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 4))
+        ValueParameter(3) = New ClsGeneralParameter(4, "Phi", New ClsInterval(-CDbl(Math.PI), CDbl(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(3))
 
         'The interval for the Additional Parameter sets the range of the TrackBar AdditionalParameter
         'and the Tag its Value of the Additional Parameter as Standard
         MyAdditionalParameterValue = 2  'that means Omega on the left side
         MyAdditionalParameter = New ClsGeneralParameter(MyAdditionalParameterValue,
-                                                      LM.GetString("FrequencyRatio"), New ClsInterval(CDec(0.2), 10),
+                                                      LM.GetString("FrequencyRatio"), New ClsInterval(CDbl(0.2), 10),
                                                       ClsGeneralParameter.TypeOfParameterEnum.DS)
 
         'Vectors
@@ -76,10 +76,10 @@ Public Class ClsShakedPendulum
 
     'SECTOR CALCULATION AND DRAWING
 
-    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
+    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Double
 
         'This is to adjust the value of TrbAdditionalParameter
-        Dim Temp As Decimal = CDec(AddParameter / 5)
+        Dim Temp As Double = CDbl(AddParameter / 5)
         Return Temp
 
     End Function
@@ -104,11 +104,11 @@ Public Class ClsShakedPendulum
 
             'Shaking Pendulum
             .DrawLine(Origin, Position1, Color.Blue, 2)
-            .FillCircle(Position1, CDec(0.02), Brushes.Blue)
+            .FillCircle(Position1, CDbl(0.02), Brushes.Blue)
 
             'Vertical Pendulum
             .DrawLine(Position1, Position2, MyColor, 2)
-            .FillCircle(Position2, CDec(0.02), MyColor)
+            .FillCircle(Position2, CDbl(0.02), MyColor)
 
         End With
 
@@ -124,8 +124,8 @@ Public Class ClsShakedPendulum
         End With
 
         With Position2
-            .X = Position1.X + MyCalculationConstants.Component(1) * CDec(Math.Sin(MyCalculationVariables.Component(1)))
-            .Y = -MyCalculationConstants.Component(1) * CDec(Math.Cos(MyCalculationVariables.Component(1)))
+            .X = Position1.X + MyCalculationConstants.Component(1) * CDbl(Math.Sin(MyCalculationVariables.Component(1)))
+            .Y = -MyCalculationConstants.Component(1) * CDbl(Math.Cos(MyCalculationVariables.Component(1)))
         End With
 
     End Sub
@@ -135,20 +135,20 @@ Public Class ClsShakedPendulum
             Case TypeofPhaseportraitEnum.TorusOrCylinder
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": x, Phi. Tangent: x', Phi'"
                 UInterval = New ClsInterval(-1, 1)
-                VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                VInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": x = 0, Phi, Phi'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
             Case Else 'independent
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: x, x'. Red: Phi, Phi'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
                 VInterval = New ClsInterval(-10, 10)
         End Select
     End Sub
 
     Protected Overrides Sub SetAdditionalParameters()
-        Omega = CDec(GetAddParameterValue(MyAdditionalParameterValue) *
+        Omega = CDbl(GetAddParameterValue(MyAdditionalParameterValue) *
             Math.Sqrt(g / MyCalculationConstants.Component(1)))
 
         If MyIsMainDS Then
@@ -162,8 +162,8 @@ Public Class ClsShakedPendulum
 
     Protected Overrides Sub SetStartEnergyRange()
 
-        Dim Emin As Decimal
-        Dim Emax As Decimal
+        Dim Emin As Double
+        Dim Emax As Double
 
         With MyCalculationConstants
             'after experiments
@@ -181,7 +181,7 @@ Public Class ClsShakedPendulum
 
         With ActualPosition
 
-            Dim A As Decimal = CDec(Math.Max(ShrinkedInterval.A * 0.6, Math.Min(.X, ShrinkedInterval.B * 0.6)))
+            Dim A As Double = CDbl(Math.Max(ShrinkedInterval.A * 0.6, Math.Min(.X, ShrinkedInterval.B * 0.6)))
 
             'Set parameters
             t = 0
@@ -210,21 +210,21 @@ Public Class ClsShakedPendulum
 
         With ActualPosition
 
-            Dim DeltaX As Decimal = .X - Position1.X
-            Dim DeltaY As Decimal = .Y - Position1.Y
+            Dim DeltaX As Double = .X - Position1.X
+            Dim DeltaY As Double = .Y - Position1.Y
 
             'L should be maximal 0.98 to be visible and L minimal 0.1
-            Dim L As Decimal = CDec(Math.Max(0.1, Math.Min(0.98 - MyCalculationConstants.Component(0),
+            Dim L As Double = CDbl(Math.Max(0.1, Math.Min(0.98 - MyCalculationConstants.Component(0),
                                                            Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY))))
 
-            Dim Phi As Decimal = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
+            Dim Phi As Double = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
             MyCalculationVariables.Component(1) = ClsMathHelperPendulum.AngleInMinusPiAndPi(Phi)
 
             'Abs(x + L*sin(Phi)) should be maximal shrinkfactor to be visible
             'for symmetry reasons, we look at abs(phi) and abs(x)
             'and problematic is only the case, when sign(x) = sign(phi)
             If Math.Abs(.X + L * Math.Sin(Phi)) > ShrinkFactor And Math.Sign(Phi) = Math.Sign(u1) Then
-                L = CDec(Math.Min(L, (1 - Math.Abs(u1)) / Math.Sin(Math.Abs(Phi))))
+                L = CDbl(Math.Min(L, (1 - Math.Abs(u1)) / Math.Sin(Math.Abs(Phi))))
             Else
                 'nothing, phi is to small and l < 0.98 is enough
             End If
@@ -380,10 +380,11 @@ Public Class ClsShakedPendulum
         t += d
 
         'Update u1, v1, u2, v2
-        u1 = CDec(MyCalculationConstants.Component(0) * Math.Cos(Omega * t))
-        v1 = -CDec(MyCalculationConstants.Component(0) * Math.Sin(Omega * t))
+        u1 = CDbl(MyCalculationConstants.Component(0) * Math.Cos(Omega * t))
+        v1 = -CDbl(MyCalculationConstants.Component(0) * Math.Sin(Omega * t))
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
+        ClsNumericCheck.EnsureFinite(u2, v2)
 
         u2 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u2)
 
@@ -440,24 +441,24 @@ Public Class ClsShakedPendulum
 
     End Sub
 
-    Protected Overrides Function GetEnergy() As Decimal
+    Protected Overrides Function GetEnergy() As Double
 
         'This routine protocols the total Energy of the shaked pendulum
         'it will normally increase if this pendulum takes over energy from the shaking pendulum
 
-        Dim EKin As Decimal
-        Dim EPot As Decimal
-        Dim Etotal As Decimal
+        Dim EKin As Double
+        Dim EPot As Double
+        Dim Etotal As Double
 
         With MyCalculationConstants
 
-            EKin = CDec(Math.Pow(.Component(0) * Omega * Math.Sin(Omega * t), 2))
-            EKin -= CDec(2 * .Component(0) * Omega * Math.Sin(Omega * t) * .Component(1) * v2 * Math.Cos(u2))
-            EKin += CDec(Math.Pow(.Component(1) * v2, 2))
+            EKin = CDbl(Math.Pow(.Component(0) * Omega * Math.Sin(Omega * t), 2))
+            EKin -= CDbl(2 * .Component(0) * Omega * Math.Sin(Omega * t) * .Component(1) * v2 * Math.Cos(u2))
+            EKin += CDbl(Math.Pow(.Component(1) * v2, 2))
             EKin /= 2
 
             'potential energy: see math.doc.
-            EPot = -g * CDec(Math.Cos(u2)) * .Component(1)
+            EPot = -g * CDbl(Math.Cos(u2)) * .Component(1)
 
             'Etotal in the possible interval of StartEnergyRange
             Etotal = Math.Min(EKin + EPot, StartEnergyRange.B)
@@ -468,21 +469,21 @@ Public Class ClsShakedPendulum
 
     End Function
 
-    Private Function F2(LocX As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Double
 
         'calculates next u2' = v2 = x.component(3)
         Return LocX.Component(3)
     End Function
 
-    Private Function G2(LocX As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Double
 
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = CDec(MyCalculationConstants.Component(0) * Math.Pow(Omega, 2) / MyCalculationConstants.Component(1))
-            Temp *= CDec(Math.Cos(Omega * t) * Math.Cos(.Component(2)))
-            Temp -= CDec(g / MyCalculationConstants.Component(1) * Math.Sin(.Component(2)))
+            Temp = CDbl(MyCalculationConstants.Component(0) * Math.Pow(Omega, 2) / MyCalculationConstants.Component(1))
+            Temp *= CDbl(Math.Cos(Omega * t) * Math.Cos(.Component(2)))
+            Temp -= CDbl(g / MyCalculationConstants.Component(1) * Math.Sin(.Component(2)))
 
         End With
 
@@ -490,14 +491,14 @@ Public Class ClsShakedPendulum
 
     End Function
 
-    Private Function G2Test(LocX As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Double
 
         'This function corresponds to a simple Thread Pendulum
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
+            Temp = -g * CDbl(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
 
         End With
 

@@ -11,7 +11,7 @@ Public Class ClsMathhelperUnimodal
         LM = ClsLanguageManager.LM
     End Sub
 
-    Public Function DualStringToDecimalNumber(DualString As String, IsMidOfInterval As Boolean) As Decimal
+    Public Function DualStringToDecimalNumber(DualString As String, IsMidOfInterval As Boolean) As Double
 
         'The dualstring represents a positive dual number < 1
         'this method calculates the according decimal number
@@ -21,9 +21,9 @@ Public Class ClsMathhelperUnimodal
         'therefore, the possible error of the returned decimal number
         'due to the missing dual digits is as small as possible
 
-        Dim TempDecimalnumber As Decimal = 0 'Contains the decimal number
+        Dim TempDecimalnumber As Double = 0 'Contains the decimal number
         Dim i As Integer 'Position of the actual digit
-        Dim Factor As Decimal = 1 'Power of "2" according to the actual digit position
+        Dim Factor As Double = 1 'Power of "2" according to the actual digit position
 
         For i = 1 To DualString.Length
             Factor /= 2
@@ -47,13 +47,13 @@ Public Class ClsMathhelperUnimodal
     End Function
 
     'Overloading if MidofInterval is not given
-    Public Function DualStringToDecimalNumber(DualString As String) As Decimal
+    Public Function DualStringToDecimalNumber(DualString As String) As Double
 
         Return DualStringToDecimalNumber(DualString, False)
 
     End Function
 
-    Public Function DecimalNumberToDualString(DecNumber As Decimal, NumberOfDigits As Integer) As String
+    Public Function DecimalNumberToDualString(DecNumber As Double, NumberOfDigits As Integer) As String
 
         'Transforms a decimal number to the according dual number in a string format
         'The default number of digits of the dual number behind the comma is 20
@@ -64,17 +64,17 @@ Public Class ClsMathhelperUnimodal
         Dim TempDualstring As String = ""
 
         'Integer part of the decimal number
-        Dim LeadingDecimaldigits As Decimal = Math.Floor(DecNumber)
+        Dim LeadingDecimaldigits As Double = Math.Floor(DecNumber)
 
         'Part behind the comma of the decimal number
-        Dim MinorDecimalpart As Decimal = DecNumber - LeadingDecimaldigits
+        Dim MinorDecimalpart As Double = DecNumber - LeadingDecimaldigits
 
         If MinorDecimalpart > 0 And LeadingDecimaldigits > 0 Then
             TempDualstring = "."
         End If
 
         'Remaining part of the decimal number
-        Dim remainder As Decimal
+        Dim remainder As Double
 
         Do While LeadingDecimaldigits >= 1
             remainder = LeadingDecimaldigits Mod 2
@@ -106,7 +106,7 @@ Public Class ClsMathhelperUnimodal
     End Function
 
     'Overloading if numberofdigits is not given
-    Public Function DecimalNumberToDualString(DecNumber As Decimal) As String
+    Public Function DecimalNumberToDualString(DecNumber As Double) As String
 
         Return DecimalNumberToDualString(DecNumber, 20)
 

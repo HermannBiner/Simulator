@@ -179,11 +179,11 @@ Public Class ClsCDiagramController
 
     Public Sub SetDelta()
         With MyForm
-            If IsNumeric(.TxtCMax.Text) And IsNumeric(.TxtCMin.Text) Then
-                .LblDeltaC.Text = "Delta = " & (CDec(.TxtCMax.Text) - CDec(.TxtCMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtCMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtCMin.Text) Then
+                .LblDeltaC.Text = "Delta = " & (CDbl(.TxtCMax.Text) - CDbl(.TxtCMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
-            If IsNumeric(.TxtVMax.Text) And IsNumeric(.TxtVMin.Text) Then
-                .LblDeltaV.Text = "Delta = " & (CDec(.TxtVMax.Text) - CDec(.TxtVMin.Text)).ToString(CultureInfo.CurrentCulture)
+            If ClsNumericCheck.IsFiniteNumber(.TxtVMax.Text) And ClsNumericCheck.IsFiniteNumber(.TxtVMin.Text) Then
+                .LblDeltaV.Text = "Delta = " & (CDbl(.TxtVMax.Text) - CDbl(.TxtVMin.Text)).ToString(CultureInfo.CurrentCulture)
             End If
         End With
     End Sub
@@ -222,8 +222,8 @@ Public Class ClsCDiagramController
             If IsUserDataOK() Then
                 DiagramAreaSelector.IsActivated = False
                 With MyForm
-                    ActualParameterRange = New ClsInterval(CDec(.TxtCMin.Text), CDec(.TxtCMax.Text))
-                    ActualValueRange = New ClsInterval(CDec(.TxtVMin.Text), CDec(.TxtVMax.Text))
+                    ActualParameterRange = New ClsInterval(CDbl(.TxtCMin.Text), CDbl(.TxtCMax.Text))
+                    ActualValueRange = New ClsInterval(CDbl(.TxtVMin.Text), CDbl(.TxtVMax.Text))
                 End With
                 DiagramAreaSelector.UserXRange = ActualParameterRange
                 DiagramAreaSelector.UserYRange = ActualValueRange

@@ -24,10 +24,10 @@ Public Interface IBilliardTable
     WriteOnly Property ValueProtocol As ListBox
 
     'The parameter defining the form of the Billiardtable
-    Property C As Decimal
+    Property C As Double
 
-    ReadOnly Property A As Decimal
-    ReadOnly Property B As Decimal
+    ReadOnly Property A As Double
+    ReadOnly Property B As Double
 
     'Reset all diagrams and clear all balls
     Sub ResetIteration()

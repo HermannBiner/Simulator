@@ -21,8 +21,8 @@ Public Class ClsSensitivityController
     Private n As Integer
 
     'Actual values of the iteration
-    Private x1 As Decimal
-    Private x2 As Decimal
+    Private x1 As Double
+    Private x2 As Double
 
     Private Const XStretchingDefault As Integer = 2
 
@@ -128,7 +128,7 @@ Public Class ClsSensitivityController
             'default settings
             .TxtParameter.Text = DS.ChaoticParameterValue.ToString(CultureInfo.CurrentCulture)
             .TxtStartValue1.Text = "0.1"
-            .TxtStartValue2.Text = "0.100000000000000000000000001"
+            .TxtStartValue2.Text = "0.100000000001"
             .TxtxStretching.Text = XStretchingDefault.ToString(CultureInfo.CurrentCulture)
         End With
 
@@ -157,10 +157,10 @@ Public Class ClsSensitivityController
         If IsUserDataOK() Then
             With MyForm
                 'Set Ds Parameters
-                DS.ParameterA = CDec(.TxtParameter.Text)
+                DS.ParameterA = CDbl(.TxtParameter.Text)
                 DS.Power = CInt(.CboIterationDepth.SelectedItem)
-                x1 = CDec(.TxtStartValue1.Text)
-                x2 = CDec(.TxtStartValue2.Text)
+                x1 = CDbl(.TxtStartValue1.Text)
+                x2 = CDbl(.TxtStartValue2.Text)
 
                 'The initialization was successful
                 If DS.IsBehaviourChaotic Then
@@ -189,7 +189,7 @@ Public Class ClsSensitivityController
         Dim NextP2 As New ClsMathpoint
 
         'This will be the variable of the x-axis
-        Dim p As Decimal = 0
+        Dim p As Double = 0
 
         'The check, is XStretching is numeric is done by IsUserDataOK
         Dim XStretching As Integer = CInt(MyForm.TxtxStretching.Text)
@@ -235,7 +235,7 @@ Public Class ClsSensitivityController
 
     End Sub
 
-    Private Sub UpdateListboxes(u1 As Decimal, u2 As Decimal)
+    Private Sub UpdateListboxes(u1 As Double, u2 As Double)
         With MyForm
             'LstValueList1 and 2 are filled with the actual iteration value
             .LstValueList1.Items.Add(u1.ToString(CultureInfo.CurrentCulture))
@@ -247,7 +247,7 @@ Public Class ClsSensitivityController
     End Sub
 
     'Overloading if u2 is not relevant
-    Private Sub UpdateListboxes(u1 As Decimal)
+    Private Sub UpdateListboxes(u1 As Double)
         UpdateListboxes(u1, -1)
     End Sub
 

@@ -7,10 +7,10 @@ Public Class ClsStadiumBilliardTable
     Public Sub New()
 
         'Set specific parameters and ranges
-        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDec(0.95 * (2 + Math.PI))),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(0.95) / (1 + MyC))
-        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDec(0.01), CDec(3.13)),
-                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 30))
+        MyTValueParameter = New ClsGeneralParameter(1, "Parameter t", New ClsInterval(0, CDbl(0.95 * (2 + Math.PI))),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(0.95) / (1 + MyC))
+        MyAlfaValueParameter = New ClsGeneralParameter(2, "Angle Alfa", New ClsInterval(CDbl(0.01), CDbl(3.13)),
+                                                       ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 30))
 
         MyValueParameterList.Add(MyTValueParameter)
         MyValueParameterList.Add(MyAlfaValueParameter)
@@ -19,21 +19,21 @@ Public Class ClsStadiumBilliardTable
 
         'Default
         MyC = 2
-        MyA = CDec(0.95) / (1 + MyC)
+        MyA = CDbl(0.95) / (1 + MyC)
         MyB = MyC * MyA
 
     End Sub
 
-    Public Overrides Property C As Decimal
+    Public Overrides Property C As Double
         Get
             C = MyC
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
 
             MyC = value
 
             'Because of better visibility we set a = 0.95 (instead of 1)
-            MyA = CDec(0.95) / (1 + MyC)
+            MyA = CDbl(0.95) / (1 + MyC)
             MyB = MyC * MyA
 
         End Set
@@ -49,9 +49,9 @@ Public Class ClsStadiumBilliardTable
             .DrawLine(New ClsMathpoint(-MyA, B), New ClsMathpoint(MyA, B), Color.Blue, 1)
 
             'Draw the half-circles including their midpoints
-            .DrawCircleArc(New ClsMathpoint(-MyA, 0), B, CDec(Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(New ClsMathpoint(-MyA, 0), B, CDbl(Math.PI / 2), CDbl(Math.PI), Color.Blue, 1)
             .DrawPoint(New ClsMathpoint(-MyA, 0), Brushes.Blue, 2)
-            .DrawCircleArc(New ClsMathpoint(MyA, 0), B, CDec(3 * Math.PI / 2), CDec(Math.PI), Color.Blue, 1)
+            .DrawCircleArc(New ClsMathpoint(MyA, 0), B, CDbl(3 * Math.PI / 2), CDbl(Math.PI), Color.Blue, 1)
             .DrawPoint(New ClsMathpoint(MyA, 0), Brushes.Blue, 2)
         End With
         MyPicDiagram.Refresh()

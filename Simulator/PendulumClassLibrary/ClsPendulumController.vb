@@ -31,11 +31,11 @@ Public Class ClsPendulumController
 
     'MyEnergy
     Private ReadOnly PicEnergyGraphics As Graphics
-    Private StartEnergy As Decimal
+    Private StartEnergy As Double
 
-    Private Const EnergyTolerance As Decimal = CDec(0.01)
+    Private Const EnergyTolerance As Double = CDbl(0.01)
 
-    Private Const DeltaShadowDS As Decimal = CDec(0.005)
+    Private Const DeltaShadowDS As Double = CDbl(0.005)
 
     'SECTOR INITIALIZATION
 
@@ -382,7 +382,7 @@ Public Class ClsPendulumController
     Public Async Function IterationLoop(IsTestmode As Boolean) As Task
 
         'This is the main Iteraion Loop
-        Dim ActualEnergy As Decimal
+        Dim ActualEnergy As Double
         Dim MyBrush As Brush
         Dim Value As Integer
 
@@ -592,7 +592,7 @@ Public Class ClsPendulumController
                     ConstantsDimension = .CalculationConstants.Dimension
                     'Constants
                     For i = 0 To .CalculationConstants.Dimension
-                        LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
+                        LocVector.Component(i) = CDbl(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 1)).Text)
                     Next
                     .CalculationConstants = LocVector
                 Else
@@ -603,7 +603,7 @@ Public Class ClsPendulumController
 
                 'Variables
                 For i = 0 To .CalculationVariables.Dimension
-                    LocVector.Component(i) = CDec(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
+                    LocVector.Component(i) = CDbl(MyForm.GrpStartParameter.Controls.Item("TxtP" & (i + 2 + ConstantsDimension)).Text)
                 Next
                 .CalculationVariables = LocVector
                 .IsStartparameter1Set = True

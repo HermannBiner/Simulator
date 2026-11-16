@@ -10,13 +10,13 @@ Public Class ClsCheckIsInterval
     Private ReadOnly MyTextboxA As TextBox
 
     'Left interval border
-    Private MyA As Decimal
+    Private MyA As Double
 
     'Textbox containing the right interval border
     Private ReadOnly MyTextboxB As TextBox
 
     'Right interval border
-    Private MyB As Decimal
+    Private MyB As Double
 
     Public Sub New(TextboxA As TextBox, TextboxB As TextBox)
         LM = ClsLanguageManager.LM
@@ -24,13 +24,13 @@ Public Class ClsCheckIsInterval
         MyTextboxB = TextboxB
     End Sub
 
-    ReadOnly Property A As Decimal
+    ReadOnly Property A As Double
         Get
             Return MyA
         End Get
     End Property
 
-    ReadOnly Property B As Decimal
+    ReadOnly Property B As Double
         Get
             Return MyB
         End Get
@@ -41,14 +41,14 @@ Public Class ClsCheckIsInterval
         Dim IsAValid As Boolean
         Dim IsBValid As Boolean
 
-        If Not IsNumeric(MyTextboxA.Text) Then
+        If Not ClsNumericCheck.IsFiniteNumber(MyTextboxA.Text) Then
             MessageBox.Show(LM.GetString("NumericValue"))
             MyTextboxA.Text = ""
             MyTextboxA.Select()
             IsAValid = False
         Else
             Try
-                MyA = CDec(MyTextboxA.Text)
+                MyA = CDbl(MyTextboxA.Text)
                 IsAValid = True
             Catch ex As ArgumentException
                 MessageBox.Show(ex.Message)
@@ -59,14 +59,14 @@ Public Class ClsCheckIsInterval
         End If
 
         If IsAValid Then
-            If Not IsNumeric(MyTextboxB.Text) Then
+            If Not ClsNumericCheck.IsFiniteNumber(MyTextboxB.Text) Then
                 MessageBox.Show(LM.GetString("NumericValue"))
                 MyTextboxB.Text = ""
                 MyTextboxB.Select()
                 IsBValid = False
             Else
                 Try
-                    MyB = CDec(MyTextboxB.Text)
+                    MyB = CDbl(MyTextboxB.Text)
                     IsBValid = True
                 Catch ex As ArgumentException
                     MessageBox.Show(ex.Message)

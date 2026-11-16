@@ -169,13 +169,13 @@ Public Class ClsBilliardTableController
     End Sub
 
     Public Sub SetParameterC()
-        DS.C = CDec(MyForm.TxtParameter.Text)
+        DS.C = CDbl(MyForm.TxtParameter.Text)
         ResetIteration()
     End Sub
 
     Public Sub SetTrbC()
         If IsParameterOK() Then
-            DS.C = CDec(MyForm.TxtParameter.Text)
+            DS.C = CDbl(MyForm.TxtParameter.Text)
             MyForm.TrbParameterC.Value = CInt(DS.C * 100)
             ResetIteration()
         End If
@@ -259,11 +259,11 @@ Public Class ClsBilliardTableController
             End If
 
             'Parameter of the Start Point
-            Dim t As Decimal = CDec(MyForm.TxtT.Text)
+            Dim t As Double = CDbl(MyForm.TxtT.Text)
             ActiveBilliardball.Startparameter = t
 
             'Start Angle
-            Dim alfa As Decimal = CDec(MyForm.TxtAlfa.Text)
+            Dim alfa As Double = CDbl(MyForm.TxtAlfa.Text)
             ActiveBilliardball.Startangle = alfa
             DS.BilliardBallCollection.Add(ActiveBilliardball)
         Else
@@ -287,8 +287,8 @@ Public Class ClsBilliardTableController
             Dim i As Integer
 
             'Startparameter
-            Dim t As Decimal
-            Dim Alfa As Decimal
+            Dim t As Double
+            Dim Alfa As Double
 
             Dim LocBilliardBall As IBilliardball
             'First Billardball to prepare general parameters
@@ -297,7 +297,7 @@ Public Class ClsBilliardTableController
 
             'the next start parameters are chosen that the phaseportrait gets a nice image
             If DS.C < 1 Then
-                t = CDec(Math.PI / 2)
+                t = CDbl(Math.PI / 2)
             Else
                 t = 0
             End If
@@ -317,7 +317,7 @@ Public Class ClsBilliardTableController
 
             For i = 0 To NumberOfBilliardBalls
                 LocBilliardBall = DS.GetBilliardBall()
-                Alfa += CDec(Math.PI / NumberOfBilliardBalls)
+                Alfa += CDbl(Math.PI / NumberOfBilliardBalls)
                 If Alfa < Math.PI Then
                     With LocBilliardBall
                         Select Case i Mod 5
@@ -532,7 +532,7 @@ Public Class ClsBilliardTableController
                 'This is the first Time that the MouseUp event happens
                 'and the Position of the Mouse sets the Start Position of the Ball
                 'This Start Position is defined by the according Parameter t
-                Dim t As Decimal = ActiveBilliardball.SetAndDrawUserStartposition(Mouseposition, True)
+                Dim t As Double = ActiveBilliardball.SetAndDrawUserStartposition(Mouseposition, True)
                 MyForm.TxtT.Text = t.ToString(CultureInfo.CurrentCulture)
 
                 't is as well transmitted to the Ball
@@ -545,7 +545,7 @@ Public Class ClsBilliardTableController
                 'and the Position of the first Hit is set
                 'This is defined by the Angle Phi,
                 'that is the Angle between the Direction of the first Ball Movement and the x-Axis
-                Dim phi As Decimal = ActiveBilliardball.SetAndDrawUserEndposition(Mouseposition, True)
+                Dim phi As Double = ActiveBilliardball.SetAndDrawUserEndposition(Mouseposition, True)
 
                 'For the PhasePortrait, we need the Hit-Angle Alfa as well
                 Dim alfa = ActiveBilliardball.CalculateAlfa(ActiveBilliardball.Startparameter, phi)

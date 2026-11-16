@@ -15,10 +15,10 @@ Public Class ClsDoublePendulum
     Private ReadOnly ValueParameter(3) As ClsGeneralParameter
 
     'Mass ratio M: m2 = MyM*m1
-    Private M As Decimal
+    Private M As Double
 
     'and ratio Mu: Mu = MyM/(1+MyM)
-    Private Mu As Decimal
+    Private Mu As Double
 
     'Size of Pendulums
     Private ReadOnly PendulumSize As ClsNTupel
@@ -38,23 +38,23 @@ Public Class ClsDoublePendulum
         'Inizialize all parameters
         'Tag is the Number of the Label in the Pendulum Form
         'L1
-        ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDec(0.1), ShrinkedInterval.B),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.7))
+        ValueParameter(0) = New ClsGeneralParameter(1, "L1", New ClsInterval(CDbl(0.1), ShrinkedInterval.B),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDbl(0.7))
         MyValueParameterDefinition.Add(ValueParameter(0))
 
         'L2
-        ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDec(0.1), ShrinkedInterval.B),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDec(0.2))
+        ValueParameter(1) = New ClsGeneralParameter(2, "L2", New ClsInterval(CDbl(0.1), ShrinkedInterval.B),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Constant, CDbl(0.2))
         MyValueParameterDefinition.Add(ValueParameter(1))
 
         'Phi1
-        ValueParameter(2) = New ClsGeneralParameter(3, "Phi 1", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 4))
+        ValueParameter(2) = New ClsGeneralParameter(3, "Phi 1", New ClsInterval(-CDbl(Math.PI), CDbl(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 4))
         MyValueParameterDefinition.Add(ValueParameter(2))
 
         'Phi2
-        ValueParameter(3) = New ClsGeneralParameter(4, "Phi 2", New ClsInterval(-CDec(Math.PI), CDec(Math.PI)),
-                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDec(Math.PI / 6))
+        ValueParameter(3) = New ClsGeneralParameter(4, "Phi 2", New ClsInterval(-CDbl(Math.PI), CDbl(Math.PI)),
+                                                    ClsGeneralParameter.TypeOfParameterEnum.Variable, CDbl(Math.PI / 6))
         MyValueParameterDefinition.Add(ValueParameter(3))
 
         'Labels
@@ -84,10 +84,10 @@ Public Class ClsDoublePendulum
 
     'SECTOR CALCULATION AND DRAWING
 
-    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Decimal
+    Public Overrides Function GetAddParameterValue(AddParameter As Integer) As Double
 
         'This is to adjust the value of TrbAdditionalParameter
-        Dim Temp As Decimal = CDec(Math.Pow(2, AddParameter - 2))
+        Dim Temp As Double = CDbl(Math.Pow(2, AddParameter - 2))
         Return Temp
 
     End Function
@@ -127,13 +127,13 @@ Public Class ClsDoublePendulum
 
         'See math. doc.
         With Position1
-            .X = MyCalculationConstants.Component(0) * CDec(Math.Sin(MyCalculationVariables.Component(0)))
-            .Y = -MyCalculationConstants.Component(0) * CDec(Math.Cos(MyCalculationVariables.Component(0)))
+            .X = MyCalculationConstants.Component(0) * CDbl(Math.Sin(MyCalculationVariables.Component(0)))
+            .Y = -MyCalculationConstants.Component(0) * CDbl(Math.Cos(MyCalculationVariables.Component(0)))
         End With
 
         With Position2
-            .X = Position1.X + MyCalculationConstants.Component(1) * CDec(Math.Sin(MyCalculationVariables.Component(1)))
-            .Y = Position1.Y - MyCalculationConstants.Component(1) * CDec(Math.Cos(MyCalculationVariables.Component(1)))
+            .X = Position1.X + MyCalculationConstants.Component(1) * CDbl(Math.Sin(MyCalculationVariables.Component(1)))
+            .Y = Position1.Y - MyCalculationConstants.Component(1) * CDbl(Math.Cos(MyCalculationVariables.Component(1)))
         End With
 
     End Sub
@@ -143,16 +143,16 @@ Public Class ClsDoublePendulum
         Select Case TypeofPhasePortrait
             Case TypeofPhaseportraitEnum.TorusOrCylinder
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi1, Phi2. Tangent: Phi1', Phi2'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                VInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
+                VInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
             Case TypeofPhaseportraitEnum.PoincareSection
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Phi1 = 0, Phi2, Phi2'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                VInterval = New ClsInterval(CDec(-10), CDec(10))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
+                VInterval = New ClsInterval(CDbl(-10), CDbl(10))
             Case Else 'independent
                 MyLabelPhasePortrait = LM.GetString("PhasePortrait") & ": Blue: Phi1, Phi1'. Red: Phi2, Phi2'"
-                UInterval = New ClsInterval(CDec(-Math.PI), CDec(Math.PI))
-                VInterval = New ClsInterval(CDec(-10), CDec(10))
+                UInterval = New ClsInterval(CDbl(-Math.PI), CDbl(Math.PI))
+                VInterval = New ClsInterval(CDbl(-10), CDbl(10))
         End Select
 
     End Sub
@@ -175,8 +175,8 @@ Public Class ClsDoublePendulum
 
     Protected Overrides Sub SetStartEnergyRange()
 
-        Dim Emin As Decimal
-        Dim Emax As Decimal
+        Dim Emin As Double
+        Dim Emax As Double
 
         'Emin = g*((1-l1)*(1+MyM)-MyM*l2)
         'Emax = g*((1+l1)*(1+MyM)+MyM*l2)
@@ -195,10 +195,10 @@ Public Class ClsDoublePendulum
         'and m2 = MyM*m1
         With PendulumSize
             If M >= 1 Then
-                .Component(0) = CDec(0.01)
+                .Component(0) = CDbl(0.01)
                 .Component(1) = M * .Component(0)
             Else
-                .Component(1) = CDec(0.01)
+                .Component(1) = CDbl(0.01)
                 .Component(0) = .Component(1) / M
             End If
         End With
@@ -215,13 +215,13 @@ Public Class ClsDoublePendulum
             Dim LocRange As ClsInterval
             'L1
             LocRange = New ClsInterval(MyValueParameterDefinition.Item(0).Range.A, MyValueParameterDefinition.Item(0).Range.B)
-            Dim L1 As Decimal = CDec(Math.Max(LocRange.A, Math.Min(Math.Sqrt(.X * .X + .Y * .Y), LocRange.B)))
+            Dim L1 As Double = CDbl(Math.Max(LocRange.A, Math.Min(Math.Sqrt(.X * .X + .Y * .Y), LocRange.B)))
 
             'L2 standard
-            Dim L2 As Decimal = CDec(Math.Min(MyCalculationConstants.Component(1), ShrinkFactor - L1))
+            Dim L2 As Double = CDbl(Math.Min(MyCalculationConstants.Component(1), ShrinkFactor - L1))
 
             'Phi1
-            Dim Phi1 As Decimal = ClsMathHelperPendulum.GetAngle(.X, .Y)
+            Dim Phi1 As Double = ClsMathHelperPendulum.GetAngle(.X, .Y)
 
             'Set parameters
             MyCalculationConstants.Component(0) = L1
@@ -249,17 +249,17 @@ Public Class ClsDoublePendulum
 
         With ActualPosition
 
-            Dim DeltaX As Decimal = .X - Position1.X
-            Dim DeltaY As Decimal = .Y - Position1.Y
+            Dim DeltaX As Double = .X - Position1.X
+            Dim DeltaY As Double = .Y - Position1.Y
 
             'L1 + L2 should be maximal 0.95 to be visible and minimal 0.01
             'because of the divisor in the Differential Equation
             Dim LocRange As ClsInterval
             'L2
             LocRange = New ClsInterval(MyValueParameterDefinition.Item(1).Range.A, MyValueParameterDefinition.Item(1).Range.B)
-            Dim L2 As Decimal = CDec(Math.Max(LocRange.A, (Math.Min(Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY),
+            Dim L2 As Double = CDbl(Math.Max(LocRange.A, (Math.Min(Math.Sqrt(DeltaX * DeltaX + DeltaY * DeltaY),
                                                                     0.95 - MyCalculationConstants.Component(0)))))
-            Dim Phi2 As Decimal = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
+            Dim Phi2 As Double = ClsMathHelperPendulum.GetAngle(DeltaX, DeltaY)
 
             'Set parameters
             MyCalculationConstants.Component(1) = L2
@@ -418,6 +418,7 @@ Public Class ClsDoublePendulum
         v1 += d * (h1.Component(0) + 2 * h1.Component(1) + 2 * h1.Component(2) + h1.Component(3)) / 6
         u2 += d * (k2.Component(0) + 2 * k2.Component(1) + 2 * k2.Component(2) + k2.Component(3)) / 6
         v2 += d * (h2.Component(0) + 2 * h2.Component(1) + 2 * h2.Component(2) + h2.Component(3)) / 6
+        ClsNumericCheck.EnsureFinite(u1, v1, u2, v2)
 
         u1 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u1)
         u2 = ClsMathHelperPendulum.AngleInMinusPiAndPi(u2)
@@ -473,28 +474,28 @@ Public Class ClsDoublePendulum
 
     End Sub
 
-    Protected Overrides Function GetEnergy() As Decimal
+    Protected Overrides Function GetEnergy() As Double
 
         'This routine protocols the total Energy of the double pendulum
         'to have a control that it is constant
         'if that is not the case, the error of Runge Kutta Method is too big
         'the Zero level of the potential energy is set to y = -1
-        Dim EKin As Decimal
-        Dim EPot As Decimal
-        Dim Etotal As Decimal
+        Dim EKin As Double
+        Dim EPot As Double
+        Dim Etotal As Double
 
         With MyCalculationConstants
             'we set as norm m1 = 1, m2 = M
             'kinetic energy of m1: L1^2*v1^2/2
-            EKin = CDec(Math.Pow(.Component(0) * v1, 2) / 2)
+            EKin = CDbl(Math.Pow(.Component(0) * v1, 2) / 2)
 
             'kinetic energy of m2: see math. doc.
-            EKin += CDec(M * (Math.Pow(.Component(0) * v1, 2) +
+            EKin += CDbl(M * (Math.Pow(.Component(0) * v1, 2) +
                 2 * .Component(0) * v1 * .Component(1) * v2 * Math.Cos(u1 - u2) +
                 Math.Pow(.Component(1) * v2, 2)) / 2)
 
             'potential energy of m1 and m2: see math.doc.
-            EPot = g * CDec((1 - .Component(0) * Math.Cos(u1)) * (1 + M) - M * .Component(1) * Math.Cos(u2))
+            EPot = g * CDbl((1 - .Component(0) * Math.Cos(u1)) * (1 + M) - M * .Component(1) * Math.Cos(u2))
 
             'Etotal in the possible interval of StartEnergyRange
             Etotal = Math.Min(EKin + EPot, StartEnergyRange.B)
@@ -505,85 +506,85 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function F1(LocX As ClsNTupel) As Decimal
+    Private Function F1(LocX As ClsNTupel) As Double
 
         'calculates next u1' = v1 = x.component(1)
         Return LocX.Component(1)
 
     End Function
 
-    Private Function G1(LocX As ClsNTupel) As Decimal
+    Private Function G1(LocX As ClsNTupel) As Double
 
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
             'DeltaU = u1-u2
-            Dim DeltaU As Decimal = .Component(0) - .Component(2)
+            Dim DeltaU As Double = .Component(0) - .Component(2)
 
             'L2*V2*V2 + L1*cos(DeltaU)*V1*V1
-            Temp = CDec(MyCalculationConstants.Component(1) * Math.Pow(.Component(3), 2) +
+            Temp = CDbl(MyCalculationConstants.Component(1) * Math.Pow(.Component(3), 2) +
                 MyCalculationConstants.Component(0) * Math.Cos(DeltaU) * Math.Pow(.Component(1), 2))
 
             '*-Mu*sin(deltaU)
-            Temp *= -Mu * CDec(Math.Sin(DeltaU))
+            Temp *= -Mu * CDbl(Math.Sin(DeltaU))
 
             '+g*(Mu*cos(Deltau)*sin(U2)-sin(U1))
-            Temp += g * CDec(Mu * Math.Cos(DeltaU) * Math.Sin(.Component(2)) - Math.Sin(.Component(0)))
+            Temp += g * CDbl(Mu * Math.Cos(DeltaU) * Math.Sin(.Component(2)) - Math.Sin(.Component(0)))
 
-            Dim Check1 As Decimal = CDec(Math.Cos(DeltaU) * Math.Sin(.Component(2)))
-            Dim Check2 As Decimal = CDec(Math.Sin(.Component(0)))
+            Dim Check1 As Double = CDbl(Math.Cos(DeltaU) * Math.Sin(.Component(2)))
+            Dim Check2 As Double = CDbl(Math.Sin(.Component(0)))
 
             'Divisor L1*(1-Mu*cos2(Deltau))
-            Temp /= MyCalculationConstants.Component(0) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
+            Temp /= MyCalculationConstants.Component(0) * (1 - Mu * CDbl(Math.Pow(Math.Cos(DeltaU), 2)))
         End With
 
         Return Temp
 
     End Function
 
-    Private Function F2(LocX As ClsNTupel) As Decimal
+    Private Function F2(LocX As ClsNTupel) As Double
 
         'calculates next u2' = v2 = x.component(3)
         Return LocX.Component(3)
     End Function
 
-    Private Function G2(LocX As ClsNTupel) As Decimal
+    Private Function G2(LocX As ClsNTupel) As Double
 
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
             'calculates next v2' = see math.doc.
-            Dim DeltaU As Decimal = .Component(0) - .Component(2)
+            Dim DeltaU As Double = .Component(0) - .Component(2)
 
             'L1*V1*V1 + Mu*L2*cos(DeltaU)*V2*V2
-            Temp = CDec(MyCalculationConstants.Component(0) * Math.Pow(.Component(1), 2) +
+            Temp = CDbl(MyCalculationConstants.Component(0) * Math.Pow(.Component(1), 2) +
                 Mu * MyCalculationConstants.Component(1) * Math.Cos(DeltaU) * Math.Pow(.Component(3), 2))
 
             '*sin(deltaU)
-            Temp *= CDec(Math.Sin(DeltaU))
+            Temp *= CDbl(Math.Sin(DeltaU))
 
             '+g*(Mu*cos(Deltau)*sin(U1)-sin(U2))
-            Temp += g * CDec(Math.Cos(DeltaU) * Math.Sin(.Component(0)) - Math.Sin(.Component(2)))
+            Temp += g * CDbl(Math.Cos(DeltaU) * Math.Sin(.Component(0)) - Math.Sin(.Component(2)))
 
-            Dim Check1 As Decimal = CDec(Math.Cos(DeltaU) * Math.Sin(.Component(2)))
-            Dim Check2 As Decimal = CDec(Math.Sin(.Component(0)))
+            Dim Check1 As Double = CDbl(Math.Cos(DeltaU) * Math.Sin(.Component(2)))
+            Dim Check2 As Double = CDbl(Math.Sin(.Component(0)))
 
             'Divisor L2*(1-Mu*cos2(Deltau))
-            Temp /= MyCalculationConstants.Component(1) * (1 - Mu * CDec(Math.Pow(Math.Cos(DeltaU), 2)))
+            Temp /= MyCalculationConstants.Component(1) * (1 - Mu * CDbl(Math.Pow(Math.Cos(DeltaU), 2)))
         End With
 
         Return Temp
 
     End Function
 
-    Private Function G1Test(LocX As ClsNTupel) As Decimal
+    Private Function G1Test(LocX As ClsNTupel) As Double
 
         'This function corresponds to a simple Thread Pendulum
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(0)) / MyCalculationConstants.Component(0))
+            Temp = -g * CDbl(Math.Sin(.Component(0)) / MyCalculationConstants.Component(0))
 
         End With
 
@@ -591,14 +592,14 @@ Public Class ClsDoublePendulum
 
     End Function
 
-    Private Function G2Test(LocX As ClsNTupel) As Decimal
+    Private Function G2Test(LocX As ClsNTupel) As Double
 
         'This function corresponds to a simple Thread Pendulum
-        Dim Temp As Decimal
+        Dim Temp As Double
 
         With LocX
 
-            Temp = -g * CDec(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
+            Temp = -g * CDbl(Math.Sin(.Component(2)) / MyCalculationConstants.Component(1))
 
         End With
 

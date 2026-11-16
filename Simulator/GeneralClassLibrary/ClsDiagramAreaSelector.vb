@@ -159,10 +159,10 @@ Public Class ClsDiagramAreaSelector
 
                 'The corners are converted with the same transformation as the picture was drawn with
                 '(see ClsGraphicTool.PixelToMathpoint), so the selected range is the drawn rectangle
-                Dim x1 As Decimal = PixelToX(UserSelectionStartpoint.X)
-                Dim x2 As Decimal = PixelToX(UserSelectionEndpoint.X)
-                Dim y1 As Decimal = PixelToY(UserSelectionStartpoint.Y)
-                Dim y2 As Decimal = PixelToY(UserSelectionEndpoint.Y)
+                Dim x1 As Double = PixelToX(UserSelectionStartpoint.X)
+                Dim x2 As Double = PixelToX(UserSelectionEndpoint.X)
+                Dim y1 As Double = PixelToY(UserSelectionStartpoint.Y)
+                Dim y2 As Double = PixelToY(UserSelectionEndpoint.Y)
 
                 'convert the selection to the mathematical coordinate x
                 MyTxtXMin.Text = Math.Max(Math.Min(x1, x2), MyXRange.A).ToString(CultureInfo.CurrentCulture)
@@ -177,18 +177,18 @@ Public Class ClsDiagramAreaSelector
 
     End Sub
 
-    Private Function PixelToX(p As Integer) As Decimal
+    Private Function PixelToX(p As Integer) As Double
 
         'calculates the x-value of the pixel coordinate p, as ClsGraphicTool.PixelToMathpoint
-        Dim x As Decimal = MyUserXRange.A + ((p - 1) * MyUserXRange.IntervalWidth / Math.Max(1, MyPicDiagram.Width - 1))
+        Dim x As Double = MyUserXRange.A + ((p - 1) * MyUserXRange.IntervalWidth / Math.Max(1, MyPicDiagram.Width - 1))
         Return x
 
     End Function
 
-    Private Function PixelToY(q As Integer) As Decimal
+    Private Function PixelToY(q As Integer) As Double
 
         'calculates the y-value of the pixel coordinate q (counted from the top), as ClsGraphicTool.PixelToMathpoint
-        Dim y As Decimal = MyUserYRange.B - ((q - 1) * MyUserYRange.IntervalWidth / Math.Max(1, MyPicDiagram.Height - 1))
+        Dim y As Double = MyUserYRange.B - ((q - 1) * MyUserYRange.IntervalWidth / Math.Max(1, MyPicDiagram.Height - 1))
         Return y
 
     End Function

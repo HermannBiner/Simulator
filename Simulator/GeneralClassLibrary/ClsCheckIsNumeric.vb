@@ -7,7 +7,7 @@ Public Class ClsCheckIsNumeric
     Private ReadOnly LM As ClsLanguageManager
 
     Private MyTextbox As TextBox
-    Private MyNumericValue As Decimal
+    Private MyNumericValue As Double
 
     Public Sub New(Textbox As TextBox)
         LM = ClsLanguageManager.LM
@@ -20,7 +20,7 @@ Public Class ClsCheckIsNumeric
         End Set
     End Property
 
-    ReadOnly Property NumericValue As Decimal
+    ReadOnly Property NumericValue As Double
         Get
             Return MyNumericValue
         End Get
@@ -30,14 +30,14 @@ Public Class ClsCheckIsNumeric
 
         Dim IsValid As Boolean
 
-        If Not IsNumeric(MyTextbox.Text) Then
+        If Not ClsNumericCheck.IsFiniteNumber(MyTextbox.Text) Then
             MessageBox.Show(LM.GetString("NumericValue"))
             MyTextbox.Text = ""
             MyTextbox.Select()
             IsValid = False
         Else
             Try
-                MyNumericValue = CDec(MyTextbox.Text)
+                MyNumericValue = CDbl(MyTextbox.Text)
                 IsValid = True
             Catch ex As ArgumentException
                 MessageBox.Show(ex.Message)

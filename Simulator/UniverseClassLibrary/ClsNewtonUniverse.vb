@@ -29,7 +29,7 @@ Public Class ClsNewtonUniverse
         MyVelocityParameter = New ClsGeneralParameter(2, "Velocity",
                   New ClsInterval(-1, 1), ClsGeneralParameter.TypeOfParameterEnum.Variable)
         MyMassParameter = New ClsGeneralParameter(3, "Mass",
-                  New ClsInterval(CDec(0.05), CDec(500000)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
+                  New ClsInterval(CDbl(0.05), CDbl(500000)), ClsGeneralParameter.TypeOfParameterEnum.Variable)
 
         MyMaxZoom = 25
 
@@ -80,18 +80,18 @@ Public Class ClsNewtonUniverse
 
         'Our Planetsystem
         OurPlanetSystem.Name = LM.GetString("OurPlanetSystem")
-        OurPlanetSystem.ProposedStepWidth = CDec(1.2)
+        OurPlanetSystem.ProposedStepWidth = CDbl(1.2)
         OurPlanetSystem.VFactor = 500
         OurPlanetSystemDisturbed.Name = LM.GetString("OurPlanetSystemDisturbed")
-        OurPlanetSystemDisturbed.ProposedStepWidth = CDec(2)
+        OurPlanetSystemDisturbed.ProposedStepWidth = CDbl(2)
         OurPlanetSystemDisturbed.VFactor = 500
 
         'Inner Planets whitout Mercury
         InnerPlanets.Name = LM.GetString("InnerPlanets")
-        InnerPlanets.ProposedStepWidth = CDec(0.05)
+        InnerPlanets.ProposedStepWidth = CDbl(0.05)
         InnerPlanets.VFactor = 500
         InnerPlanetsDisturbed.Name = LM.GetString("InnerPlanetsDisturbed")
-        InnerPlanetsDisturbed.ProposedStepWidth = CDec(1)
+        InnerPlanetsDisturbed.ProposedStepWidth = CDbl(1)
         InnerPlanetsDisturbed.VFactor = 500
 
         FillOurPlanetSystem()
@@ -102,49 +102,49 @@ Public Class ClsNewtonUniverse
 
         '3 symmetric bodies
         ThreeSymmetricBodies.Name = LM.GetString("3SymmetricBodies")
-        ThreeSymmetricBodies.ProposedStepWidth = CDec(1.5)
+        ThreeSymmetricBodies.ProposedStepWidth = CDbl(1.5)
         ThreeSymmetricBodies.VFactor = 1000
         Fill3SymmetricBodies(False)
         MyConstellations.Add(ThreeSymmetricBodies)
 
         '3 symmetric bodies disturbed
         ThreeSymmetricBodiesDisturbed.Name = LM.GetString("3SymmetricBodiesDisturbed")
-        ThreeSymmetricBodiesDisturbed.ProposedStepWidth = CDec(2)
+        ThreeSymmetricBodiesDisturbed.ProposedStepWidth = CDbl(2)
         ThreeSymmetricBodiesDisturbed.VFactor = 1000
         Fill3SymmetricBodies(True)
         MyConstellations.Add(ThreeSymmetricBodiesDisturbed)
 
         '4 symmetric bodies
         FourSymmetricBodies.Name = LM.GetString("4SymmetricBodies")
-        FourSymmetricBodies.ProposedStepWidth = CDec(3)
+        FourSymmetricBodies.ProposedStepWidth = CDbl(3)
         FourSymmetricBodies.VFactor = 1000
         Fill4SymmetricBodies(False)
         MyConstellations.Add(FourSymmetricBodies)
 
         '4 symmetric bodies disturbed
         FourSymmetricBodiesDisturbed.Name = LM.GetString("4SymmetricBodiesDisturbed")
-        FourSymmetricBodiesDisturbed.ProposedStepWidth = CDec(7)
+        FourSymmetricBodiesDisturbed.ProposedStepWidth = CDbl(7)
         FourSymmetricBodiesDisturbed.VFactor = 1000
         Fill4SymmetricBodies(True)
         MyConstellations.Add(FourSymmetricBodiesDisturbed)
 
         '6 symmetric bodies
         SixSymmetricBodies.Name = LM.GetString("6SymmetricBodies")
-        SixSymmetricBodies.ProposedStepWidth = CDec(3)
+        SixSymmetricBodies.ProposedStepWidth = CDbl(3)
         SixSymmetricBodies.VFactor = 1000
         Fill6SymmetricBodies(False)
         MyConstellations.Add(SixSymmetricBodies)
 
         '6 symmetric bodies disturbed
         SixSymmetricBodiesDisturbed.Name = LM.GetString("6SymmetricBodiesDisturbed")
-        SixSymmetricBodiesDisturbed.ProposedStepWidth = CDec(4)
+        SixSymmetricBodiesDisturbed.ProposedStepWidth = CDbl(4)
         SixSymmetricBodiesDisturbed.VFactor = 1000
         Fill6SymmetricBodies(True)
         MyConstellations.Add(SixSymmetricBodiesDisturbed)
 
         'Netflix 3 body
         Netflix3Body.Name = LM.GetString("Netflix3Body")
-        Netflix3Body.ProposedStepWidth = CDec(1.5)
+        Netflix3Body.ProposedStepWidth = CDbl(1.5)
         Netflix3Body.VFactor = 1000
         FillNetflix3Body()
         MyConstellations.Add(Netflix3Body)
@@ -169,11 +169,11 @@ Public Class ClsNewtonUniverse
             .Size = 5
             .Perihel = 15
             .ArgumentPerihel = 0
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             ThreeSymmetricBodiesDisturbed.AddStar(Sun1)
@@ -196,12 +196,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 333000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(2 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .ArgumentPerihel = CDbl(2 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             ThreeSymmetricBodiesDisturbed.AddStar(Sun2)
@@ -222,11 +222,11 @@ Public Class ClsNewtonUniverse
             .Name = LM.GetString("Sun") & " 3"
             .OriginalMass = 333000
             .Size = 5
-            .ArgumentPerihel = CDec(4 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .ArgumentPerihel = CDbl(4 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             If IsDisturbed Then
                 .StarColor = Brushes.GreenYellow
-                .Perihel = CDec(14.999999)
+                .Perihel = CDbl(14.999999)
             Else
                 .StarColor = Brushes.Gold
                 .Perihel = 15
@@ -234,7 +234,7 @@ Public Class ClsNewtonUniverse
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             ThreeSymmetricBodiesDisturbed.AddStar(Sun3)
@@ -262,11 +262,11 @@ Public Class ClsNewtonUniverse
             .Size = 5
             .Perihel = 20
             .ArgumentPerihel = 0
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(4)
+            .ProposedStepWidth = CDbl(4)
         End With
         If IsDisturbed Then
             FourSymmetricBodiesDisturbed.AddStar(Sun1)
@@ -289,12 +289,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 333000
             .Size = 5
             .Perihel = 20
-            .ArgumentPerihel = CDec(Math.PI / 2)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(Math.PI / 2)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(4)
+            .ProposedStepWidth = CDbl(4)
         End With
         If IsDisturbed Then
             FourSymmetricBodiesDisturbed.AddStar(Sun2)
@@ -317,12 +317,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 333000
             .Size = 5
             .Perihel = 20
-            .ArgumentPerihel = CDec(Math.PI)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(Math.PI)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(4)
+            .ProposedStepWidth = CDbl(4)
         End With
         If IsDisturbed Then
             FourSymmetricBodiesDisturbed.AddStar(Sun3)
@@ -343,19 +343,19 @@ Public Class ClsNewtonUniverse
             .Name = LM.GetString("Sun") & " 4"
             .OriginalMass = 333000
             .Size = 5
-            .ArgumentPerihel = CDec(3 * Math.PI / 2)
-            .PerihelVelocity = CDec(0.003185)
+            .ArgumentPerihel = CDbl(3 * Math.PI / 2)
+            .PerihelVelocity = CDbl(0.003185)
             If IsDisturbed Then
                 .StarColor = Brushes.GreenYellow
-                .Perihel = CDec(19.99999 * .Tau)
+                .Perihel = CDbl(19.99999 * .Tau)
             Else
                 .StarColor = Brushes.Gold
-                .Perihel = CDec(20)
+                .Perihel = CDbl(20)
             End If
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(4)
+            .ProposedStepWidth = CDbl(4)
         End With
         If IsDisturbed Then
             FourSymmetricBodiesDisturbed.AddStar(Sun4)
@@ -383,11 +383,11 @@ Public Class ClsNewtonUniverse
             .Size = 5
             .Perihel = 15
             .ArgumentPerihel = 0
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun1)
@@ -410,12 +410,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 165000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(Math.PI / 3)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(Math.PI / 3)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun2)
@@ -438,12 +438,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 165000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(2 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(2 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun3)
@@ -466,12 +466,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 165000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(Math.PI)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(Math.PI)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun4)
@@ -494,12 +494,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 165000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(4 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(4 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun5)
@@ -520,19 +520,19 @@ Public Class ClsNewtonUniverse
             .Name = LM.GetString("Sun") & " 6"
             .OriginalMass = 165000
             .Size = 5
-            .ArgumentPerihel = CDec(5 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.003185 * .Tau)
+            .ArgumentPerihel = CDbl(5 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.003185 * .Tau)
             If IsDisturbed Then
                 .StarColor = Brushes.GreenYellow
-                .Perihel = CDec(14.999999)
+                .Perihel = CDbl(14.999999)
             Else
                 .StarColor = Brushes.Gold
-                .Perihel = CDec(15)
+                .Perihel = CDbl(15)
             End If
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         If IsDisturbed Then
             SixSymmetricBodiesDisturbed.AddStar(Sun6)
@@ -563,7 +563,7 @@ Public Class ClsNewtonUniverse
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         OurPlanetSystem.AddStar(Sun)
         OurPlanetSystemDisturbed.AddStar(Sun)
@@ -582,15 +582,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Mercury")
             .StarColor = Brushes.LightGray
-            .OriginalMass = CDec(0.055)
+            .OriginalMass = CDbl(0.055)
             .Size = 1
-            .Perihel = CDec(0.3075)
-            .ArgumentPerihel = CDec(1.3519)
-            .PerihelVelocity = CDec(0.034063 * .Tau)
+            .Perihel = CDbl(0.3075)
+            .ArgumentPerihel = CDbl(1.3519)
+            .PerihelVelocity = CDbl(0.034063 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.01)
+            .ProposedStepWidth = CDbl(0.01)
         End With
         InnerPlanets.AddStar(Mercury)
         InnerPlanetsDisturbed.AddStar(Mercury)
@@ -607,15 +607,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Venus")
             .StarColor = Brushes.Yellow
-            .OriginalMass = CDec(0.815)
+            .OriginalMass = CDbl(0.815)
             .Size = 2
-            .Perihel = CDec(0.7184)
-            .ArgumentPerihel = CDec(2.2956)
-            .PerihelVelocity = CDec(0.020364 * .Tau)
+            .Perihel = CDbl(0.7184)
+            .ArgumentPerihel = CDbl(2.2956)
+            .PerihelVelocity = CDbl(0.020364 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.02)
+            .ProposedStepWidth = CDbl(0.02)
         End With
         OurPlanetSystem.AddStar(Venus)
         OurPlanetSystemDisturbed.AddStar(Venus)
@@ -634,15 +634,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Earth")
             .StarColor = Brushes.SkyBlue
-            .OriginalMass = CDec(0.9833)
+            .OriginalMass = CDbl(0.9833)
             .Size = 2
-            .Perihel = CDec(0.9833)
-            .ArgumentPerihel = CDec(1.7967)
-            .PerihelVelocity = CDec(0.017494 * .Tau)
+            .Perihel = CDbl(0.9833)
+            .ArgumentPerihel = CDbl(1.7967)
+            .PerihelVelocity = CDbl(0.017494 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.03)
+            .ProposedStepWidth = CDbl(0.03)
         End With
         OurPlanetSystem.AddStar(Earth)
         OurPlanetSystemDisturbed.AddStar(Earth)
@@ -661,15 +661,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Mars")
             .StarColor = Brushes.Red
-            .OriginalMass = CDec(0.107)
+            .OriginalMass = CDbl(0.107)
             .Size = 2
-            .Perihel = CDec(1.3814)
-            .ArgumentPerihel = CDec(5.865)
-            .PerihelVelocity = CDec(0.015305 * .Tau)
+            .Perihel = CDbl(1.3814)
+            .ArgumentPerihel = CDbl(5.865)
+            .PerihelVelocity = CDbl(0.015305 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.04)
+            .ProposedStepWidth = CDbl(0.04)
         End With
         OurPlanetSystem.AddStar(Mars)
         OurPlanetSystemDisturbed.AddStar(Mars)
@@ -688,15 +688,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Jupiter")
             .StarColor = Brushes.GreenYellow
-            .OriginalMass = CDec(317.8)
+            .OriginalMass = CDbl(317.8)
             .Size = 3
-            .Perihel = CDec(4.9501)
-            .ArgumentPerihel = CDec(0.2575)
-            .PerihelVelocity = CDec(0.007924 * .Tau)
+            .Perihel = CDbl(4.9501)
+            .ArgumentPerihel = CDbl(0.2575)
+            .PerihelVelocity = CDbl(0.007924 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.5)
+            .ProposedStepWidth = CDbl(0.5)
         End With
         OurPlanetSystem.AddStar(Jupiter)
 
@@ -712,15 +712,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Jupiter")
             .StarColor = Brushes.GreenYellow
-            .OriginalMass = CDec(31800)
+            .OriginalMass = CDbl(31800)
             .Size = 4
-            .Perihel = CDec(5)
-            .ArgumentPerihel = CDec(0.7)
-            .PerihelVelocity = CDec(0.004813 * .Tau)
+            .Perihel = CDbl(5)
+            .ArgumentPerihel = CDbl(0.7)
+            .PerihelVelocity = CDbl(0.004813 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(0.5)
+            .ProposedStepWidth = CDbl(0.5)
         End With
 
         OurPlanetSystemDisturbed.AddStar(StrangeJupiter)
@@ -738,15 +738,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Saturn")
             .StarColor = Brushes.Tomato
-            .OriginalMass = CDec(95.2)
+            .OriginalMass = CDbl(95.2)
             .Size = 3
-            .Perihel = CDec(9.0481)
-            .ArgumentPerihel = CDec(1.6132)
-            .PerihelVelocity = CDec(0.005879 * .Tau)
+            .Perihel = CDbl(9.0481)
+            .ArgumentPerihel = CDbl(1.6132)
+            .PerihelVelocity = CDbl(0.005879 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1.5)
+            .ProposedStepWidth = CDbl(1.5)
         End With
         OurPlanetSystem.AddStar(Saturn)
         OurPlanetSystemDisturbed.AddStar(Saturn)
@@ -763,15 +763,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Uranus")
             .StarColor = Brushes.Orange
-            .OriginalMass = CDec(14.5)
+            .OriginalMass = CDbl(14.5)
             .Size = 3
-            .Perihel = CDec(18.3755)
-            .ArgumentPerihel = CDec(2.9839)
-            .PerihelVelocity = CDec(0.004106 * .Tau)
+            .Perihel = CDbl(18.3755)
+            .ArgumentPerihel = CDbl(2.9839)
+            .PerihelVelocity = CDbl(0.004106 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(3)
+            .ProposedStepWidth = CDbl(3)
         End With
         OurPlanetSystem.AddStar(Uranus)
         OurPlanetSystemDisturbed.AddStar(Uranus)
@@ -788,15 +788,15 @@ Public Class ClsNewtonUniverse
             .PicPhasePortraitGraphics = MyPicPhasePortraitGraphics
             .Name = LM.GetString("Neptune")
             .StarColor = Brushes.Cyan
-            .OriginalMass = CDec(16.8)
+            .OriginalMass = CDbl(16.8)
             .Size = 3
-            .Perihel = CDec(29.7667)
-            .ArgumentPerihel = CDec(0.7849)
-            .PerihelVelocity = CDec(0.003176 * .Tau)
+            .Perihel = CDbl(29.7667)
+            .ArgumentPerihel = CDbl(0.7849)
+            .PerihelVelocity = CDbl(0.003176 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(5)
+            .ProposedStepWidth = CDbl(5)
         End With
         OurPlanetSystem.AddStar(Neptune)
         OurPlanetSystemDisturbed.AddStar(Neptune)
@@ -823,11 +823,11 @@ Public Class ClsNewtonUniverse
             .Size = 5
             .Perihel = 15
             .ArgumentPerihel = 0
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         Netflix3Body.AddStar(Sun1)
 
@@ -847,12 +847,12 @@ Public Class ClsNewtonUniverse
             .OriginalMass = 333000
             .Size = 5
             .Perihel = 15
-            .ArgumentPerihel = CDec(2 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .ArgumentPerihel = CDbl(2 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         Netflix3Body.AddStar(Sun2)
 
@@ -870,14 +870,14 @@ Public Class ClsNewtonUniverse
             .Name = LM.GetString("Sun") & " 3"
             .OriginalMass = 333000
             .Size = 5
-            .ArgumentPerihel = CDec(4 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.002389 * .Tau)
+            .ArgumentPerihel = CDbl(4 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.002389 * .Tau)
             .StarColor = Brushes.Gold
             .Perihel = 15
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         Netflix3Body.AddStar(Sun3)
 
@@ -894,14 +894,14 @@ Public Class ClsNewtonUniverse
             .Name = LM.GetString("Planet")
             .OriginalMass = 1
             .Size = 4
-            .ArgumentPerihel = CDec(2 * Math.PI / 3)
-            .PerihelVelocity = CDec(0.01 * .Tau)
+            .ArgumentPerihel = CDbl(2 * Math.PI / 3)
+            .PerihelVelocity = CDbl(0.01 * .Tau)
             .StarColor = Brushes.LightBlue
             .Perihel = 13
             .SetDefaultParameterByPerihelData()
             .SetDefaultUserData()
             .Universe = Me
-            .ProposedStepWidth = CDec(1)
+            .ProposedStepWidth = CDbl(1)
         End With
         Netflix3Body.AddStar(Planet)
 

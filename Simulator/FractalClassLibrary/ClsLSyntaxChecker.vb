@@ -76,11 +76,11 @@ Public Class ClsLSyntaxChecker
             End If
 
             'Check if the scale factor is a number in [0,1]
-            If Not IsNumeric(.TxtScaleFactor.Text) Then
+            If Not ClsNumericCheck.IsFiniteNumber(.TxtScaleFactor.Text) Then
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("ScaleFactorMissing"))
             Else
-                If CDec(.TxtScaleFactor.Text) <= 0 Or CDec(.TxtScaleFactor.Text) > 1 Then
+                If CDbl(.TxtScaleFactor.Text) <= 0 Or CDbl(.TxtScaleFactor.Text) > 1 Then
                     IsOK = False
                     ErrorMessage.AppendLine(LM.GetString("ScaleFactorIn0to1"))
                 End If
@@ -88,36 +88,36 @@ Public Class ClsLSyntaxChecker
 
 
             'Check if the StartLength is a number in [0,13]
-            If Not IsNumeric(.TxtStartLength.Text) Then
+            If Not ClsNumericCheck.IsFiniteNumber(.TxtStartLength.Text) Then
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("StartLengthMissing"))
             Else
-                If CDec(.TxtStartLength.Text) <= 0 Or CDec(.TxtStartLength.Text) > 13 Then
+                If CDbl(.TxtStartLength.Text) <= 0 Or CDbl(.TxtStartLength.Text) > 13 Then
                     IsOK = False
                     ErrorMessage.AppendLine(LM.GetString("InvalidStartLength"))
                 End If
             End If
 
             'Check if the start position is in [0,13] x [0,13]
-            If Not IsNumeric(.TxtX.Text) Or Not IsNumeric(.TxtY.Text) Then
+            If Not ClsNumericCheck.IsFiniteNumber(.TxtX.Text) Or Not ClsNumericCheck.IsFiniteNumber(.TxtY.Text) Then
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("StartPositionIn0to13"))
-            ElseIf CDec(.TxtX.Text) < 0 Or CDec(.TxtX.Text) > 13 Or
-                CDec(.TxtY.Text) < 0 Or CDec(.TxtY.Text) > 13 Then
+            ElseIf CDbl(.TxtX.Text) < 0 Or CDbl(.TxtX.Text) > 13 Or
+                CDbl(.TxtY.Text) < 0 Or CDbl(.TxtY.Text) > 13 Then
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("StartPositionIn0to13"))
             End If
 
             'Check if the angle is a number in [0, 360[
-            If Not IsNumeric(.TxtAngleLeft.Text) Or Not IsNumeric(.TxtAngleRight.Text) Then
+            If Not ClsNumericCheck.IsFiniteNumber(.TxtAngleLeft.Text) Or Not ClsNumericCheck.IsFiniteNumber(.TxtAngleRight.Text) Then
                 IsOK = False
                 ErrorMessage.AppendLine(LM.GetString("AngleMissing"))
             Else
-                If CDec(.TxtAngleLeft.Text) < 0 Or CDec(.TxtAngleLeft.Text) > 360 Then
+                If CDbl(.TxtAngleLeft.Text) < 0 Or CDbl(.TxtAngleLeft.Text) > 360 Then
                     IsOK = False
                     ErrorMessage.AppendLine(LM.GetString("AngleIn0to360"))
                 End If
-                If CDec(.TxtAngleRight.Text) < 0 Or CDec(.TxtAngleRight.Text) > 360 Then
+                If CDbl(.TxtAngleRight.Text) < 0 Or CDbl(.TxtAngleRight.Text) > 360 Then
                     IsOK = False
                     ErrorMessage.AppendLine(LM.GetString("AngleIn0to360"))
                 End If

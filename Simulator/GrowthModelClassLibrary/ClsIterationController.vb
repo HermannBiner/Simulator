@@ -24,7 +24,7 @@ Public Class ClsIterationController
     Private ReadOnly MathHelper As New ClsMathhelperUnimodal
 
     'Actual value of the iteration
-    Private X As Decimal
+    Private X As Double
 
     'How os the Protocol defined
     Private SignProtocol As Integer
@@ -37,8 +37,8 @@ Public Class ClsIterationController
     Private Const XStretchingDefault As Integer = 2
 
     'Neighborhood of TargetValue
-    Private Const TargetValuePrecision As Decimal = CDec(0.001)
-    Private TargetValue As Decimal
+    Private Const TargetValuePrecision As Double = CDbl(0.001)
+    Private TargetValue As Double
 
     'Iterationstatus
     Private IterationStatus As ClsDynamics.EnIterationStatus
@@ -236,7 +236,7 @@ Public Class ClsIterationController
 
         'Draw function graph
         'The step-wide in X-direction is:
-        Dim deltaX As Decimal = DS.ValueParameter.Range.IntervalWidth / PicDiagramSize
+        Dim deltaX As Double = DS.ValueParameter.Range.IntervalWidth / PicDiagramSize
 
         'actual mathpoint
         Dim X As New ClsMathpoint
@@ -278,7 +278,7 @@ Public Class ClsIterationController
 
     Public Sub SetTrbA()
         If IsUserDataOK() Then
-            DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
+            DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
             MyForm.TrbParameterA.Value = CInt((DS.ParameterA - DS.DSParameter.Range.A) * 999 / DS.DSParameter.Range.IntervalWidth + 1)
             If MyForm.OptFunctionGraph.Checked Then
                 DrawFunctionGraph()
@@ -301,7 +301,7 @@ Public Class ClsIterationController
 
             ResetIteration()
 
-            DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
+            DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
 
             'Initialization was successful
             If DS.IsBehaviourChaotic Then
@@ -341,7 +341,7 @@ Public Class ClsIterationController
 
             ResetIteration()
 
-            DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
+            DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
 
             'Initialization was succesful
             If DS.IsBehaviourChaotic Then
@@ -353,8 +353,8 @@ Public Class ClsIterationController
             'The power should be = 1 to produce the iteration to the target value
             MyForm.CboIterationDepth.SelectedIndex = 0
             DS.Power = 1
-            X = CDec(MyForm.TxtStartValue.Text)
-            TargetValue = CDec(MyForm.TxtTargetValue.Text)
+            X = CDbl(MyForm.TxtStartValue.Text)
+            TargetValue = CDbl(MyForm.TxtTargetValue.Text)
             MyForm.TxtStartValue.Text = DS.CalculateStartValueForTargetValue(X, TargetValue).ToString(CultureInfo.CurrentCulture)
         Else
             'There is already a message generated
@@ -372,8 +372,8 @@ Public Class ClsIterationController
         If IterationStatus = ClsDynamics.EnIterationStatus.Stopped Then
 
             If IsUserDataOK() Then
-                DS.ParameterA = CDec(MyForm.TxtParameterA.Text)
-                X = CDec(MyForm.TxtStartValue.Text)
+                DS.ParameterA = CDbl(MyForm.TxtParameterA.Text)
+                X = CDbl(MyForm.TxtStartValue.Text)
                 IterationStatus = ClsDynamics.EnIterationStatus.Ready
                 PrepareDiagram()
             Else
@@ -456,10 +456,10 @@ Public Class ClsIterationController
         End If
 
         'The variable in x-direction starts at the left interval border
-        Dim u As Decimal = DS.ValueParameter.Range.A
+        Dim u As Double = DS.ValueParameter.Range.A
 
         'this is the step-wide in x-direction
-        Dim deltaU As Decimal = DS.ValueParameter.Range.IntervalWidth * CInt(MyForm.TxtXStretching.Text) / PicDiagramSize
+        Dim deltaU As Double = DS.ValueParameter.Range.IntervalWidth * CInt(MyForm.TxtXStretching.Text) / PicDiagramSize
 
         'and there are the two points of the graph to be connented
         Dim P As New ClsMathpoint(u, X)
@@ -500,7 +500,7 @@ Public Class ClsIterationController
 
     End Sub
 
-    Private Sub UpdateListboxes(u As Decimal)
+    Private Sub UpdateListboxes(u As Double)
 
         With MyForm
             'LstValueList is filled with the actual iteration value

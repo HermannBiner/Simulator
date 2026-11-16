@@ -6,11 +6,11 @@
 Public Class ClsMathpoint
 
     'These Variables should be accessible as well for inerhited classes
-    Protected MyX As Decimal
-    Protected MyY As Decimal
-    Protected MyZ As Decimal
+    Protected MyX As Double
+    Protected MyY As Double
+    Protected MyZ As Double
 
-    Public Sub New(x As Decimal, y As Decimal)
+    Public Sub New(x As Double, y As Double)
 
         'If the math. coordinates of the point are set when initializing
         MyX = x
@@ -24,35 +24,35 @@ Public Class ClsMathpoint
 
     End Sub
 
-    Public Sub New(x As Decimal, y As Decimal, z As Decimal)
+    Public Sub New(x As Double, y As Double, z As Double)
         MyX = x
         MyY = y
         MyZ = z
     End Sub
 
-    Public Property X As Decimal
+    Public Property X As Double
         Get
             X = MyX
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyX = value
         End Set
     End Property
 
-    Public Property Y As Decimal
+    Public Property Y As Double
         Get
             Y = MyY
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyY = value
         End Set
     End Property
 
-    Public Property Z As Decimal
+    Public Property Z As Double
         Get
             Z = MyZ
         End Get
-        Set(value As Decimal)
+        Set(value As Double)
             MyZ = value
         End Set
     End Property
